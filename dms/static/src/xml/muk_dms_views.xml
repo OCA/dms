@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+   <t t-name="DMSTreeView">
+        <div class="oe-control-panel">
+			<div class="container-fluid">
+				<div class="row">
+				   <div class="oe-cp-title col-md-6">
+                    	<ol class="oe-view-title breadcrumb"><li class="active"><t t-esc="widget.name" /></li></ol>
+                    </div>
+                    <div class="oe-cp-search-view col-md-6">
+						<div class="oe_searchview form-control input-sm">
+						    <div class="oe_searchview_search oe_dms_searchview_search fa fa-lg fa-search" title="Search"></div>
+						    <div class="oe_searchview_facets oe_dms_searchview_facets">
+						        <input id="tree_search" class="oe_searchview_input oe_dms_searchview_input" />
+						    </div>
+						    <div class="oe_dms_searchview_info fa fa-lg fa-info-circle" data-toggle="tooltip" data-placement="left"
+						        title="Tip: It is also possible to serach by using regular expressions like ^[a-zA-Z]*.pdf" />
+						</div>	
+					</div>
+                </div>
+                <div class="row">
+					<div class="col-md-6 oe-button-column">
+						<div class="oe-cp-buttons">
+						    <button accesskey="O" class="open btn btn-sm btn-primary" type="button">
+			                    Open
+			                </button>
+			                <button accesskey="E" class="edit btn btn-sm btn-default" type="button">
+			                    Edit
+			                </button>
+			                 <button accesskey="F" class="create_directory btn btn-sm btn-default" type="button">
+			                    Create Direcotry
+			                </button>
+			                 <button accesskey="D" class="create_file btn btn-sm btn-default" type="button">
+			                    Create File
+			                </button>
+						</div>
+						<div class="oe-cp-sidebar">
+						</div>
+					</div>
+					<div class="col-md-6">
+					    <div class="oe-search-options btn-group"/>
+					    <div class="oe-right-toolbar">
+					        <div class="oe-cp-pager">
+					            <div>
+    								<span class="btn-group btn-group-sm">
+								        <button type="button" class="refresh fa fa-refresh btn btn-icon" />
+									</span>
+								</div>
+							</div>
+					        <div class="oe-cp-switch-buttons btn-group btn-group-sm">
+					            <button type="button" class="show_preview btn btn-default fa fa-file-o oe-cp-switch-list" />
+					            <button type="button" class="hide_preview btn btn-default fa fa-ban oe-cp-switch-list active" />
+							</div>
+                        </div>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="oe-view-manager-content oe_document_content">
+            <div class="container-fluid oe_document_container">
+                <div class="row oe_document_row">
+	            	<div class="oe_document_col oe_document_col_tree">
+            			<div class="oe_document_tree"/>
+            		</div>
+            		<div class="oe_document_col oe_document_col_preview">
+            			<div class="oe_document_preview"/>
+            		</div>
+            	</div>
+            </div>
+        </div>
+	</t>
+	
+	
+</templates>
