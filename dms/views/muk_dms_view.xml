@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<template id="assets_backend" name="muk_dms_assets"
+			inherit_id="web.assets_backend">
+			<xpath expr="." position="inside">
+			    <link rel="stylesheet" href="/muk_dms/static/lib/highlight/styles/default.css" />
+				<script type="text/javascript" src="/muk_dms/static/lib/highlight/highlight.pack.js" />
+				<script type="text/javascript" src="/muk_dms/static/lib/highlight_line_numbers/highlight_line_numbers.min.js" />
+			    
+				<link rel="stylesheet" href="/muk_dms/static/lib/jsTree/themes/default/style.min.css" />
+			    <script type="text/javascript" src="/muk_dms/static/lib/jsTree/jstree.min.js" />
+				
+			    <script type="text/javascript" src="/muk_dms/static/lib/handlebars/handlebars.js" />
+			    <script type="text/javascript" src="/muk_dms/static/lib/typeahead/typeahead.bundle.min.js" />
+			    
+			    <script type="text/javascript" src="/muk_dms/static/lib/FileSaver/FileSaver.min.js" />
+			    
+			    <link rel="stylesheet" href="/muk_dms/static/lib/jquery_splitter/css/jquery.splitter.css" />
+			    <script type="text/javascript" src="/muk_dms/static/lib/jquery_splitter/js/jquery.splitter.js" />
+			    
+				<script type="text/javascript" src="/muk_dms/static/src/js/muk_dms.js" />
+			    <script type="text/javascript" src="/muk_dms/static/src/js/muk_dms_jquery.js" />
+				
+				<link rel="stylesheet" href="/muk_dms/static/src/less/muk_dms.less" />
+				<script type="text/javascript" src="/muk_dms/static/src/js/muk_dms_preview.js" />
+				<script type="text/javascript" src="/muk_dms/static/src/js/muk_dms_widgets.js" />
+				<script type="text/javascript" src="/muk_dms/static/src/js/muk_dms_tree_view.js" />
+			</xpath>
+		</template>
+
+		<template id="qunit_suite" inherit_id="web.qunit_suite">
+			<xpath expr="//head" position="inside">
+				<script src="/muk_dms/static/test/test_muk_dms_widgets.js" type="text/javascript" />
+			</xpath>
+		</template>
+		
+		<menuitem id="main_menu_muk_dms" name="Documents" web_icon="muk_dms,static/description/icon.png" />
+
+		<menuitem id="cat_menu_muk_dms" name="Document Management"
+			parent="main_menu_muk_dms" />
+		<menuitem id="cat_menu_muk_dms_config" name="Configuration"
+			parent="main_menu_muk_dms" />
+		<menuitem id="cat_menu_muk_dms_models" name="Models"
+			parent="main_menu_muk_dms" />
+		<menuitem id="cat_menu_muk_dms_files" name="Files"
+			groups="base.group_no_one" parent="main_menu_muk_dms" />
+		<menuitem id="cat_menu_muk_dms_locks" name="Locks"
+			groups="base.group_no_one" parent="main_menu_muk_dms" />
+	</data>
+</openerp>
