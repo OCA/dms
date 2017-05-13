@@ -91,22 +91,29 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 	var PreviewFieldBinaryFile = core.form_widget_registry.get("binary").extend({
 		template: 'PreviewFieldBinaryFile',
 		initialize_content: function() {
-			var self = this;
-	        this.$('input.o_form_input_file').change(this.on_file_change);
-	        this.$('.oe_form_binary_file_clear').click(this.on_clear);
-	        this.$('.oe_form_binary_file_edit').click(function() {
-	            self.$('input.o_form_input_file').click();
+	        var self = this;
+	        this.$inputFile = this.$('.o_form_input_file');
+	        this.$inputFile.change(this.on_file_change);
+	        var self = this;
+	        this.$('.o_select_file_button').click(function() {
+	            self.$inputFile.click();
 	        });
+	        this.$('.o_clear_file_button').click(this.on_clear);
+	        if (!this.get("effective_readonly")) {
+	        	this.$input = this.$('.o_form_input').eq(0);
+	            this.$input.on('click', function() {
+	                self.$inputFile.click();
+	            });
+	        }
 	    },
 	    render_value: function() {
 	    	var self = this;
-	    	
 	        if (!this.get("effective_readonly")) {
 	        	self._super();
 	        } else {
 	        	self.$el.find('#link').text(_t("Download"));
 	        	self.$el.find('#link').attr("href", self.view.datarecord.link_download);
-	        	self.$el.find('.oe-binary-preview').click(function() {
+	        	self.$el.find('.o_binary_preview').click(function() {
 	        		Preview.PreviewViewer.handleClick(self, self.view.datarecord.id, self.view.datarecord.file_size,
 	        				self.view.datarecord.filename, self.view.datarecord.file_extension,
 	        				self.view.datarecord.mime_type, self.view.datarecord.link_preview, '.oe-binary-preview');
@@ -250,6 +257,10 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 			var self = this;
 			this._super(field_manager, node);
 			this.downloadOnly = !!this.node.attrs.downloadonly;
+			this.hideinfo = !!this.node.attrs.hideinfo;
+			this.hidepreview = !!this.node.attrs.hidepreview;
+			this.hidecheckout = !!this.node.attrs.hidecheckout;
+			this.hidelink = !!this.node.attrs.hidelink;
 			this.max_upload_size = 50 * 1024 * 1024;
 			this.file_base64 = false;
 			this.delete_file = false;
@@ -262,6 +273,18 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 	    		if(this.downloadOnly) {
 	    			this.$el.find('.oe_info_button').hide();
 	    			this.$el.find('.oe_checkout_button').hide();
+	    			this.$el.find('.oe_link_button').hide();
+	    		}
+	    		if(this.hideinfo) {
+	    			this.$el.find('.oe_info_button').hide();
+	    		}
+	    		if(this.hidepreview) {
+	    			this.$el.find('.oe_preview_button').hide();
+	    		}
+	    		if(this.hidecheckout) {
+	    			this.$el.find('.oe_checkout_button').hide();
+	    		}
+	    		if(this.hidelink) {
 	    			this.$el.find('.oe_link_button').hide();
 	    		}
 	    	} else {
@@ -336,9 +359,12 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 		        		Directories.query(["name"]).filter([['id', '=', directory_ref[1]]]).first().then(function(directory) {
 		        			self.$el.find('.oe_dms_form_input_many2one').val(directory.name);
 		        			self.$el.find('.oe_dms_form_input_many2one').data("id", directory.id);
+		        			self.$el.find('.oe_dir_cm_button').hide();
 			    		});
 		        	});
-	        	} 
+	        	} else {
+	        		self.$el.find('.oe_dir_cm_button').show();
+	        	}
 	        	if (value) {
 	        		Files.call("check_lock", [value[0]]).then(function (lock) {
 		    			if(!lock || lock && lock[1] == session.uid) {
@@ -535,7 +561,7 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 		    }
 	    	if(input.get(0).files[0]) {
 	    		if(self.max_upload_size < input.get(0).files[0].size) {
-	    			self.do_warn(_t("Upload..."), _t("The file is to big!"));
+	    			self.do_warn(_t("Upload..."), _t("The file is too big!"));
 	    		} else {
 	    			reader.readAsDataURL(input.get(0).files[0]);
 	    		}
@@ -551,75 +577,85 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 	    },
 	    commit_value: function() {
 	    	var self = this;
+	    	var invalid = false;
 	    	var value = this.get('value');
 	    	var commited_value = $.Deferred();
-	    	if (value && value instanceof Array && this.delete_file) {
-	    		Files.call("check_lock", [value[0]]).then(function (lock) {
-	    	    	var unlocked = $.Deferred();
-	    			if(lock && lock[1] == session.uid) {
-	    				Files.call("user_unlock", [self.get('value')[0]]).then(function (lock) {
-	    					unlocked.resolve();
-	    				});
-	    			} else {
-	    				unlocked.resolve();
-	    			}
-	    			$.when(unlocked).done(function ( ) {
-	    				Files.call("unlink", [value[0]])
-	    		    	.done(function () {
-	    		    		self.set({'value': false});
-	    				})
-	    				.fail(function(xhr, status, text) {
-	    					self.do_warn(_t("Delete..."), _t("An error occurred during delete!"));
-	    				})
-	    				.always(function() {
-	    					commited_value.resolve();
-	    				});
-	    			});
-	    			
-	    		});
+	    	_.each(self.field_manager.fields, function (f) {
+	    		if (!f.is_valid()) {
+	    			invalid = true;
+                }
+            });
+	    	if(self.commited || invalid) {
+	    		commited_value.resolve();
 	    	} else {
-    			var directory_id = self.$el.find('.oe_dms_form_input_many2one').data("id");
-    			var file_base64 = self.file_base64;
-    			var filename = self.$el.find('.oe_dms_binary_input').val();
-    			if(self.view && self.node.attrs.filename && self.view.fields[self.node.attrs.filename]) {	    				
-    				var filename_field_value = self.view.fields[self.node.attrs.filename].get('value');
-    				if(filename_field_value) {
-    					filename = filename_field_value;
-    				}
-    			}
-	    		if (value && value instanceof Array) {
-	    			var values = {};
-	    			if(directory_id) values.directory = directory_id;
-	    			if(filename) values.filename = filename;
-	    			if(file_base64) values.file = file_base64;
-	    			Files.call("write", [value[0], values])
-    				.fail(function(xhr, status, text) {
-    					self.do_warn(_t("Write..."), _t("An error occurred during write!"));
-    				})
-    				.always(function() {
-    					commited_value.resolve();
-    				});
-	    		} else if(!value) {
-	    			if(directory_id && filename && file_base64) {
-	    				Files.call("create", [{directory: directory_id, filename: filename, file: file_base64}])
-	    				.done(function (result) {
-	    					self.internal_set_value(result);
-	    				})
+		    	if (value && value instanceof Array && this.delete_file) {
+		    		Files.call("check_lock", [value[0]]).then(function (lock) {
+		    	    	var unlocked = $.Deferred();
+		    			if(lock && lock[1] == session.uid) {
+		    				Files.call("user_unlock", [self.get('value')[0]]).then(function (lock) {
+		    					unlocked.resolve();
+		    				});
+		    			} else {
+		    				unlocked.resolve();
+		    			}
+		    			$.when(unlocked).done(function ( ) {
+		    				Files.call("unlink", [value[0]])
+		    		    	.done(function () {
+		    		    		self.set({'value': false});
+		    				})
+		    				.fail(function(xhr, status, text) {
+		    					self.do_warn(_t("Delete..."), _t("An error occurred during delete!"));
+		    				})
+		    				.always(function() {
+		    					commited_value.resolve();
+		    				});
+		    			});
+		    			
+		    		});
+		    	} else {
+	    			var directory_id = self.$el.find('.oe_dms_form_input_many2one').data("id");
+	    			var file_base64 = self.file_base64;
+	    			var filename = self.$el.find('.oe_dms_binary_input').val();
+	    			if(self.view && self.node.attrs.filename && self.view.fields[self.node.attrs.filename]) {	    				
+	    				var filename_field_value = self.view.fields[self.node.attrs.filename].get('value');
+	    				if(filename_field_value) {
+	    					filename = filename_field_value;
+	    				}
+	    			}
+		    		if (value && value instanceof Array) {
+		    			var values = {};
+		    			if(directory_id) values.directory = directory_id;
+		    			if(filename) values.filename = filename;
+		    			if(file_base64) values.file = file_base64;
+		    			Files.call("write", [value[0], values])
 	    				.fail(function(xhr, status, text) {
-	    					self.do_warn(_t("Create..."), _t("An error occurred during create!"));
+	    					self.do_warn(_t("Write..."), _t("An error occurred during write!"));
 	    				})
 	    				.always(function() {
 	    					commited_value.resolve();
 	    				});
-	    			} else if(!file_base64) {
-	    				commited_value.resolve();
-	    			} else {
-	    				self.do_warn(_t("Save/Create..."), _t("Some fields are empty!"));
-	    				commited_value.resolve();
-	    			}
-	    		} else {
-	    			commited_value.resolve();
-	    		}
+		    		} else if(!value) {
+		    			if(directory_id && filename && file_base64) {
+		    				Files.call("create", [{directory: directory_id, filename: filename, file: file_base64}])
+		    				.done(function (result) {
+		    					self.internal_set_value(result);
+		    				})
+		    				.fail(function(xhr, status, text) {
+		    					self.do_warn(_t("Create..."), _t("An error occurred during create!"));
+		    				})
+		    				.always(function() {
+		    					commited_value.resolve();
+		    				});
+		    			} else if(!file_base64) {
+		    				commited_value.resolve();
+		    			} else {
+		    				self.do_warn(_t("Save/Create..."), _t("Some fields are empty!"));
+		    				commited_value.resolve();
+		    			}
+		    		} else {
+		    			commited_value.resolve();
+		    		}
+		    	}
 	    	}
 	        return $.when(commited_value);
 	    },

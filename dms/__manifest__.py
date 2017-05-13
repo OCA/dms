@@ -24,8 +24,8 @@
 {
     'name': "MuK Documents",
     'summary': """Document Management System""",
-    'version': '1.0.0',   
-    'category': 'Documents',   
+    'version': '10.0.1.0.1',
+    'category': 'Document Management',
     'license': 'AGPL-3',    
     'author': "MuK IT",
     'website': "http://www.mukit.at",
@@ -46,12 +46,15 @@
         'views/muk_dms_view_file.xml',
         'views/muk_dms_view_data.xml',
         'views/muk_dms_view_lock.xml',
+        'views/muk_dms_config.xml',
         'views/muk_dms_template_update.xml',
-        'views/res_config.xml',
         'data/muk_dms_data.xml',
     ],
     'qweb': [
         'static/src/xml/*.xml'
+    ],
+    'test': [
+        'static/test/test_muk_dms_widgets.js'
     ],
     'demo': [
         'demo/muk_dms_demo_directory.xml',
@@ -63,4 +66,7 @@
     ],
     'installable': True,
     'application': True,
+    'external_dependencies': {
+        'python': ['mammoth']
+    },
 }
