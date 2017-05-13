@@ -27,4 +27,4 @@ from . import muk_dms_directory
 from . import muk_dms_file
 from . import muk_dms_data
 from . import muk_dms_lock
-from . import res_config
+from . import muk_dms_config

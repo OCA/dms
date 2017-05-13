@@ -6,54 +6,31 @@
 	</t>
 	
 	<t t-name="PreviewFieldBinaryFile">
-	    <t t-if="!widget.get('effective_readonly')">
-	        <table class="oe_form_field oe_form_field_binary" cellpadding="0" cellspacing="0" border="0" t-att-style="widget.node.attrs.style">
-	        <tr>
-	            <td class="oe_dms_binary">
-	                <input type="text" size="1" readonly="readonly"
-	                    t-att-name="widget.name"
-	                    t-att-tabindex="widget.node.attrs.tabindex"
-	                    t-att-autofocus="widget.node.attrs.autofocus"
-	                    class="field_binary oe_dms_binary_input"
-	                />
-	            </td>
-	            <td class="oe_form_binary" nowrap="true">
-	                <table cellspacing="0" cellpadding="0" border="0">
-	                <tr>
-	                    <td>
-	                        <t t-call="HiddenInputFile">
-	                            <t t-set="fileupload_id" t-value="widget.fileupload_id"/>
-	                            <t t-set="fileupload_style" t-translation="off">overflow-x: hidden</t>
-	                            <button class="oe_button oe_field_button" type="button">
-	                                <img t-att-src='_s + "/web/static/src/img/icons/STOCK_DIRECTORY.png"'/>
-	                                <span>Select</span>
-	                            </button>
-	                        </t>
-	                    </td>
-	                    <td>
-	                        <button class="oe_button oe_form_binary_file_clear" type="button" title="Clear">
-	                            <img t-att-src='_s + "/web/static/src/img/icons/STOCK_MISSING_IMAGE.png"'/>
-	                            <span>Clear</span>
-	                        </button>
-	                    </td>
-	                </tr>
-	                </table>
-	            </td>
-	            <td class="oe_form_binary_progress" style="display: none" nowrap="true">
-	                <img t-att-src='_s + "/web/static/src/img/throbber.gif"' width="16" height="16"/>
-	                <b>Uploading ...</b>
-	            </td>
-	        </tr>
-	        </table>
-	    </t>
 	    <t t-if="widget.get('effective_readonly')">
 	        <span t-att-style="widget.node.attrs.style">
 	            <a id="link" href="#" target="_blank" class="oe_form_uri"/>
-	            <span class="oe-binary-preview">
+	            <span class="o_binary_preview">
 	             	<i class="fa fa-file-text-o" aria-hidden="true"></i>
 	            </span>
 	        </span>
 	    </t>
+	    <div t-if="!widget.get('effective_readonly')" class="o_form_field_binary_file">
+	        <input type="text" class="o_form_input"
+	            readonly="readonly"
+	            t-att-name="widget.name"
+	            t-att-tabindex="widget.node.attrs.tabindex"
+	            t-att-autofocus="widget.node.attrs.autofocus"/>
+	
+	        <button type="button" class="btn btn-sm btn-primary o_select_file_button" title="Select">Upload your file</button>
+	        <button type="button" class="btn btn-sm btn-default fa fa-pencil o_select_file_button" title="Select"/>
+	        <button type="button" class="btn btn-sm btn-default fa fa-trash-o o_clear_file_button" title="Clear"/>
+	
+	        <span class="o_form_binary_progress">Uploading...</span>
+	        <t t-call="HiddenInputFile">
+	            <t t-set="fileupload_id" t-value="widget.fileupload_id"/>
+	            <t t-set="fileupload_style" t-translation="off">overflow-x: hidden</t>
+	        </t>
+	    </div>
 	</t>
 	
 	<t t-name="DMSFieldBinary">
@@ -80,18 +57,17 @@
 			                <table cellspacing="0" cellpadding="0" border="0">
 			                <tr>
 			                    <td>
-									<button class="oe_button oe_field_button" type="button">
-		                                <label>
-		                                    <img t-att-src='_s + "/web/static/src/img/icons/STOCK_DIRECTORY.png"'/>
-		                                    <span>Select</span>
-		                                	<input type="file" style="display: none;" class="field_binary_hidden"/>
-										</label>
-		                            </button>
+									<div class="oe_dms_binary_button btn btn-primary oe_button oe_field_button">
+										<label>
+											<span><i class="fa fa-pencil" aria-hidden="true"></i> Select</span>
+			                                <input type="file" style="display: none;" class="btn btn-primary field_binary_hidden"/>
+		                                </label>
+		                            </div>
 			                    </td>
 			                    <td>
-			                        <button class="oe_button oe_form_binary_file_clear" type="button" title="Clear">
-			                            <img t-att-src='_s + "/web/static/src/img/icons/STOCK_MISSING_IMAGE.png"'/>
-			                            <span>Delete</span>
+			                        <button class="oe_dms_binary_button btn btn-danger oe_button oe_form_binary_file_clear fa fa-trash-o" 
+			                        	type="button" title="Delete">
+			                        	Delete
 			                        </button>
 			                    </td>
 			                </tr>
