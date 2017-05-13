@@ -21,16 +21,20 @@
 #
 ###################################################################################
 
-from openerp import models, fields
+from odoo import models, fields
 
 class DMSConfigSettings(models.TransientModel):
-
     _name = 'muk_dms.config.settings'
     _inherit = 'res.config.settings'
 
     module_muk_dms_file = fields.Boolean('File System Support',
         help='Save Documents to a local file system.\n'
         '- This installs the module muk_dms_file.'
+    )
+    
+    module_muk_dms_attachment = fields.Boolean('Attachment Support',
+        help='Adds support for Odoo attachments.\n'
+        '- This installs the module muk_dms_attachment.'
     )
     
     module_muk_dms_finder = fields.Boolean('Document Finder',
