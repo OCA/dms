@@ -25,8 +25,8 @@ import os
 import base64
 import unittest
 
-from openerp import _
-from openerp.tests import common
+from odoo import _
+from odoo.tests import common
 
 from . import muk_dms_test as dms_test
 
