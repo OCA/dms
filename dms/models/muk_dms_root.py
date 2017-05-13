@@ -23,9 +23,9 @@
 
 import logging
 
-from openerp import _
-from openerp import models, api, fields
-from openerp.exceptions import ValidationError
+from odoo import _
+from odoo import models, api, fields
+from odoo.exceptions import ValidationError
 
 from . import muk_dms_base as base
 
@@ -51,6 +51,8 @@ class Root(base.DMSModel):
                                  required=True)
     
     root_directory = fields.Many2one('muk_dms.directory', string="Directory", required=True)
+    
+    is_created = fields.Boolean("Record is created", readonly=True)
     
     #----------------------------------------------------------
     # Local
@@ -88,7 +90,7 @@ class Root(base.DMSModel):
            
     @api.onchange('save_type') 
     def _onchange_save_type(self):
-        if len(self.root_directory) != 0:
+        if self.is_created:
             warning = {'title': (_('Warning')),
                        'message': (_('Changing the save type can cause a heavy migration process.')),}
             return {'warning':warning} 
@@ -107,3 +109,8 @@ class Root(base.DMSModel):
         if root.id != self.id and root.check_existence():
             raise ValidationError(_("The selected directory has already a root. " +
                                   "Every directory tree can only have one corresponding root."))
+            
+    def _append_values_create(self, values):
+        super(Root, self)._append_values_create(values)
+        values['is_created'] = True
+        return values

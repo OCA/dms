@@ -25,15 +25,15 @@ import os
 import base64
 import unittest
 
-from openerp import _
-from openerp.tests import common
+from odoo import _
+from odoo.tests import common
 
 _path = os.path.dirname(os.path.dirname(__file__))
 
 class DMSTestCase(common.TransactionCase):
     
-    at_install = False
-    post_install = True
+    at_install = True
+    post_install = False
     
     def setUp(self):
         super(DMSTestCase, self).setUp()
