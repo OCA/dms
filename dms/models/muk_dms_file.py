@@ -25,12 +25,14 @@ import os
 import base64
 import json
 import urllib
+import StringIO
+import cStringIO
 import mimetypes
 import logging
 
-from openerp import _
-from openerp import models, api, fields
-from openerp.exceptions import ValidationError, AccessError
+from odoo import _
+from odoo import models, api, fields
+from odoo.exceptions import ValidationError, AccessError
 
 from . import muk_dms_base as base
 from . import muk_dms_data as data
@@ -42,7 +44,7 @@ class File(base.DMSModel):
     _name = 'muk_dms.file'
     _description = "File"
     
-    _inherit = ['mail.thread']
+    _inherit = ['muk_dms.access', 'mail.thread']
     
     #----------------------------------------------------------
     # Database
@@ -73,11 +75,6 @@ class File(base.DMSModel):
     
     is_locked_flag = fields.Boolean(compute='_compute_is_locked', string="Locked")
     is_editor = fields.Boolean(compute='_compute_is_editor', string="Editor")
-    
-    perm_create = fields.Boolean(compute='_compute_perm_create', string="Create")
-    perm_read = fields.Boolean(compute='_compute_perm_read', string="Read")
-    perm_write = fields.Boolean(compute='_compute_perm_write', string="Write")
-    perm_unlink = fields.Boolean(compute='_compute_perm_unlink', string="Delete")
     
     #----------------------------------------------------------
     # Local
@@ -216,22 +213,6 @@ class File(base.DMSModel):
     def _compute_is_editor(self):
         self.is_editor = self.is_locked_by() == self.env.user
     
-    @api.one
-    def _compute_perm_create(self):
-        self.perm_create = self.check_access_rights('create', raise_exception=False) and self.check_access_rule(operation='write') == None
-    
-    @api.one
-    def _compute_perm_read(self):
-        self.perm_read = self.check_access_rights('read', raise_exception=False) and self.check_access_rule(operation='read') == None
-    
-    @api.one
-    def _compute_perm_write(self):
-        self.perm_write = self.check_access_rights('write', raise_exception=False) and self.check_access_rule(operation='write') == None
-    
-    @api.one
-    def _compute_perm_unlink(self):
-        self.perm_unlink = self.check_access_rights('unlink', raise_exception=False) and self.check_access_rule(operation='unlink') == None
-    
     def _append_field_values(self, index, result):
         result = super(File, self)._append_field_values(index, result)
         result[index]['file'] = "0 KB"
@@ -261,7 +242,7 @@ class File(base.DMSModel):
         super(File, self)._validate_values(values)
         _logger.debug("Checking the filename attribute...")
         if 'filename' in values:
-          if not set(base.VALID_NAME_CHARS).issuperset(values['filename']):
+          if not self.check_name(values['filename']):
               raise ValidationError(_("Some characters in the filename attribute are invalid."))
            
     def _append_values_create(self, values):
@@ -272,6 +253,12 @@ class File(base.DMSModel):
         if not rec_root.check_existence():
             raise ValidationError(_("The file structure needs to have a root node to create files."))
         
+        if not 'file' in values:
+            empty_file = StringIO.StringIO()
+            empty_file.write(' ')
+            values['file'] = base64.b64encode(empty_file.getvalue())
+            empty_file.close()
+        
         rec_file = self._create_file(values, rec_dir, rec_root)
         values['file_ref'] = rec_file._name + ',' + str(rec_file.id)
         
@@ -280,6 +267,7 @@ class File(base.DMSModel):
         return values
 
     def _onchange_values(self, values):
+        super(File, self)._onchange_values(values)
         self.lock()
         
     def _append_values_wirte(self, values):
@@ -293,6 +281,7 @@ class File(base.DMSModel):
         return values
     
     def _follow_operation(self, values):
+        super(File, self)._follow_operation(values)
         self.unlock()
     
     def _set_filename_values(self, values, filename):
@@ -307,17 +296,26 @@ class File(base.DMSModel):
         values['file_size'] = len(decode_file)
         return values
 
+    @api.multi
     @api.returns('self', lambda value: value.id)
-    def copy(self, cr, uid, id, default=None, context=None):
-        if context is None:
-            context = {}
-        context = context.copy()
-        data = self.copy_data(cr, uid, id, default, context)
-        record = self.browse(cr, uid, id, context)
-        data['filename'] = _("Copy of ") + str(data['filename'])
-        data['file'] = record._get_file()
-        new_id = self.create(cr, uid, data, context)
-        self.copy_translations(cr, uid, id, new_id, context)
+    def copy(self, default=None):
+        self.ensure_one()
+        i = 1
+        filename = self.name + " " + str(i) + self.file_extension
+        while len(self.directory.files.filtered(lambda r: r.filename == filename)) > 0:
+            i = i + 1
+            filename = self.name + " " + str(i) + self.file_extension
+        return self.copy_to(self.directory, default, filename)
+    
+    def copy_to(self, newparent, default=None, filename=False):
+        if not filename:
+            filename = self.filename
+        data = self.copy_data(default)[0]
+        data['filename'] = filename
+        data['file'] = self._get_file()
+        data['directory'] = newparent.id
+        new_id = self.with_context(lang=None).create(data)
+        self.copy_translations(new_id)
         return new_id
 
     #----------------------------------------------------------

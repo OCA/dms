@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_muk_dms_config" model="ir.ui.view">
+        <field name="name">Configure MuK Documents</field>
+        <field name="model">muk_dms.config.settings</field>
+        <field name="arch" type="xml">
+            <form string="Configure Documents" class= "oe_form_configuration">
+                <header>
+                    <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                </header>
+                <separator string="MuK Documents Management System"/>
+                <group>
+                    <label for="id" string="Data Extensions"/>
+                    <div>
+                        <div>
+                            <field name="module_muk_dms_file" class="oe_inline"/>
+                            <label for="module_muk_dms_file"/>
+                        </div>
+                        <div>
+                            <field name="module_muk_dms_attachment" class="oe_inline"/>
+                            <label for="module_muk_dms_attachment"/>
+                        </div>
+                    </div>
+                    <label for="id" string="User Extensions"/>
+                    <div>
+                        <div>
+                            <field name="module_muk_dms_finder" class="oe_inline"/>
+                            <label for="module_muk_dms_finder"/>
+                        </div>
+                        <div>
+                            <field name="module_muk_dms_search" class="oe_inline"/>
+                            <label for="module_muk_dms_search"/>
+                        </div>
+                    </div>
+                     <label for="id" string="Documents Extensions"/>
+                    <div>
+                        <div>
+                            <field name="module_muk_dms_access" class="oe_inline"/>
+                            <label for="module_muk_dms_access"/>
+                        </div>
+                    </div>
+                </group>
+            </form>
+        </field>
+    </record>                            
+    <record id="action_muk_dms_config" model="ir.actions.act_window">
+        <field name="name">Configure MuK Documents</field>
+        <field name="res_model">muk_dms.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+    <menuitem id="menu_muk_dms_config" name="General Settings" parent="cat_menu_muk_dms_config" 
+        groups="group_muk_dms_manager,base.group_system" action="action_muk_dms_config"/>
+</odoo>

@@ -24,10 +24,10 @@
 import json
 import logging
 
-from openerp import _
-from openerp import models, api, fields
-from openerp.osv import osv
-from openerp.exceptions import ValidationError, AccessError
+from odoo import _
+from odoo import models, api, fields
+from odoo.osv import osv
+from odoo.exceptions import ValidationError, AccessError
 
 from . import muk_dms_base as base
 
@@ -42,7 +42,7 @@ class Directory(base.DMSModel):
     _parent_order = 'parent_left'
     _order = 'parent_left'
 
-    _inherit = ['mail.thread']
+    _inherit = ['muk_dms.access', 'mail.thread']
     
     #----------------------------------------------------------
     # Database
@@ -50,11 +50,11 @@ class Directory(base.DMSModel):
     
     name = fields.Char(string="Name", required=True)
 
-    parent_id = fields.Many2one('muk_dms.directory', string="Parent", select=True,
+    parent_id = fields.Many2one('muk_dms.directory', string="Parent", index=True,
                              help="Every directory has a parent accept the root.")
     child_id = fields.One2many('muk_dms.directory', 'parent_id', string="Subdirectories")
-    parent_left = fields.Integer(string='Left Parent', select=1)
-    parent_right = fields.Integer(string='Right Parent', select=1)
+    parent_left = fields.Integer(string='Left Parent', index=True)
+    parent_right = fields.Integer(string='Right Parent', index=True)
         
     files = fields.One2many('muk_dms.file', 'directory', string="Files")
     
@@ -68,11 +68,6 @@ class Directory(base.DMSModel):
     count_files = fields.Char(compute='_compute_count_files', string="Files")
     
     size = fields.Integer(compute='_compute_size', string="Size")
-    
-    perm_create = fields.Boolean(compute='_compute_perm_create', string="Create")
-    perm_read = fields.Boolean(compute='_compute_perm_read', string="Read")
-    perm_write = fields.Boolean(compute='_compute_perm_write', string="Write")
-    perm_unlink = fields.Boolean(compute='_compute_perm_unlink', string="Delete")
     
     #----------------------------------------------------------
     # Functions
@@ -92,6 +87,18 @@ class Directory(base.DMSModel):
         if not self.is_root_direcotry():
             parents.extend(self.parent_id.get_parent_list())
         return parents
+    
+    def get_child_list(self):
+        childs = self.child_id
+        for child in self.child_id:
+            childs |= child.get_child_list()
+        return childs
+    
+    def get_recursive_file_list(self):
+        files = self.files
+        for child in self.child_id:
+            files |= child.get_recursive_file_list()
+        return files
     
     def get_size(self):
         size = 0
@@ -194,22 +201,6 @@ class Directory(base.DMSModel):
         self.count_files = len(self.files)
     
     @api.one
-    def _compute_perm_create(self):
-        self.perm_create = self.check_access_rights('create', raise_exception=False) and self.check_access_rule(operation='write') == None
-    
-    @api.one
-    def _compute_perm_read(self):
-        self.perm_read = self.check_access_rights('read', raise_exception=False) and self.check_access_rule(operation='read') == None
-    
-    @api.one
-    def _compute_perm_write(self):
-        self.perm_write = self.check_access_rights('write', raise_exception=False) and self.check_access_rule(operation='write') == None
-    
-    @api.one
-    def _compute_perm_unlink(self):
-        self.perm_unlink = self.check_access_rights('unlink', raise_exception=False) and self.check_access_rule(operation='unlink') == None
-    
-    @api.one
     @api.depends('child_id', 'files')
     def _compute_size(self):
         self.path_text = self.get_path()
@@ -243,19 +234,38 @@ class Directory(base.DMSModel):
         super(Directory, self)._validate_values(values)
         _logger.debug("Checking the name attribute...")
         if 'name' in values:
-          if not set(base.VALID_NAME_CHARS).issuperset(values['name']):
+          if not self.check_name(values['name']):
               raise ValidationError(_("Some characters in the name attribute are invalid."))
           
     def _onchange_values(self, values):
+        super(Directory, self)._onchange_values(values)
         self.lock_tree()
         
     def _follow_operation(self, values):
+        super(Directory, self)._follow_operation(values)
         self.unlock_tree()
         
     @api.returns('self', lambda value: value.id)
-    def copy(self, cr, uid, id, default=None, context=None):
-        raise AccessError(_('It is not possible to duplicate a directory, please create a new one.'))
+    def copy(self):
+        self.ensure_one()
+        newparent = self.parent_id
+        i = 1
+        dirname = self.name + " " + str(i)
+        while len(self.parent_id.child_id.filtered(lambda r: r.name == dirname)) > 0:
+            i = i + 1
+            dirname = self.name + " " + str(i)
+        return self.copy_to(newparent,dirname)
     
+    def copy_to(self, newparent,dirname=False):
+        if not dirname:
+            dirname = self.name
+        new_id = self.with_context(lang=None).create({'name': dirname,'parent_id': newparent.id})
+        for file in self.files:
+            file.copy_to(new_id)
+        for dir in self.child_id:
+            dir.copy_to(new_id)
+        return new_id
+        
     #----------------------------------------------------------
     # Delete
     #----------------------------------------------------------

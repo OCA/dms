@@ -23,7 +23,7 @@
 
 import unittest
 
-from openerp.tests import common
+from odoo.tests import common
 
 class JSTestCase(common.HttpCase):
 
