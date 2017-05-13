@@ -60,8 +60,9 @@ odoo.define('muk_dms.tree_view', function(require) {
 	}
 	
 	var context_menu_items = function(node, cp) {
-		var items = {
-        	open: {
+		var items = {}
+		if(node.data.perm_read) {
+			items.open = {
 				separator_before: false,
 				separator_after: false,
 				_disabled: false,
@@ -72,8 +73,10 @@ odoo.define('muk_dms.tree_view', function(require) {
 					var	obj = inst.get_node(data.reference);
 					open(inst.settings.widget, obj.data.odoo_model, obj.data.odoo_id);
 				}
-			},
-			edit: {
+			};
+		}
+		if(node.data.perm_write) {
+			items.edit = {
 				separator_before: false,
 				separator_after: false,
 				_disabled: false,
@@ -84,9 +87,9 @@ odoo.define('muk_dms.tree_view', function(require) {
 					var	obj = inst.get_node(data.reference);
 					edit(inst.settings.widget, obj.data.odoo_model, obj.data.odoo_id);
 				}
-			},
-        }
-		if(node.data.odoo_model == "muk_dms.file") {
+			};
+		}
+		if(node.data.odoo_model == "muk_dms.file" && node.data.perm_read) {
 			items.download = {
 				separator_before: false,
 				separator_after: false,
@@ -116,7 +119,7 @@ odoo.define('muk_dms.tree_view', function(require) {
 		        	});
 				}
 			};
-		} else if(node.data.odoo_model == "muk_dms.directory") {
+		} else if(node.data.odoo_model == "muk_dms.directory" && node.data.perm_create) {
 			items.create = {
 				separator_before: false,
 				icon: "fa fa-plus-circle",
@@ -174,10 +177,12 @@ odoo.define('muk_dms.tree_view', function(require) {
         },
         refresh: function() {
         	var self = this;
-        	$.when(self.load_directories(self), self.load_files(self)).done(function (directories, files) {
-        		var data = directories.concat(files);
-            	self.$el.find('.oe_document_tree').jstree(true).settings.core.data = data;
-            	self.$el.find('.oe_document_tree').jstree(true).refresh();
+        	$.when(self.load_directories(self)).done(function (directories, directory_ids) {
+        		$.when(self.load_files(self, directory_ids)).done(function (files) {
+	        		var data = directories.concat(files);
+	            	self.$el.find('.oe_document_tree').jstree(true).settings.core.data = data;
+	            	self.$el.find('.oe_document_tree').jstree(true).refresh();
+        		});
         	});
         },
         show_preview: function(ev) {
@@ -208,32 +213,65 @@ odoo.define('muk_dms.tree_view', function(require) {
         },
         load_directories: function(self) {
         	var directories_query = $.Deferred();	
-        	Directories.query(['name', 'parent_id']).all().then(function(directories) {
+        	Directories.query(['name', 'parent_id', 'perm_read', 'perm_create',
+        					   'perm_write', 'perm_unlink']).all().then(function(directories) {
         		var data = [];
-        		_.each(directories, function(value, key, list) {	        		
+        		var directory_ids = _.map(directories, function(directory, index) { 
+        			return directory.id; 
+        		});
+        		_.each(directories, function(value, key, list) {
 	        		data.push({
 	        			id: "directory_" + value.id,
-	        			parent: (value.parent_id ? "directory_" + value.parent_id[0] : "#"),
+	        			parent: (value.parent_id && $.inArray(value.parent_id[0], directory_ids) !== -1 ? "directory_" + value.parent_id[0] : "#"),
 	        			text: value.name,
 	        			icon: "fa fa-folder-o",
 	        			type: "directory",
 	        			data: {
+	        				container: false,
 	        				odoo_id: value.id,
 	        				odoo_parent_id: value.parent_id[0],
 	        				odoo_model: "muk_dms.directory",
+	        				perm_read: value.perm_read,
+	        				perm_create: value.perm_create,
+	        				perm_write: value.perm_write,
+	        				perm_unlink: value.perm_unlink,
 	        			}
 	        		});
 	        	});
-        		directories_query.resolve(data);
+        		directories_query.resolve(data, directory_ids);
         	});
         	return directories_query;
         },
-        load_files: function(self) {
-        	var files_query = $.Deferred();     	
+        add_container_directory: function(self, directory_id, directory_name) {
+        	return {
+    			id: "directory_" + directory_id,
+    			parent: "#",
+    			text: directory_name,
+    			icon: "fa fa-folder-o",
+    			type: "directory",
+    			data: {
+    				container: true,
+    				odoo_id: directory_id,
+    				odoo_parent_id: false,
+    				odoo_model: "muk_dms.directory",
+    				perm_read: false,
+    				perm_create: false,
+    				perm_write: false,
+    				perm_unlink: false,
+    			}
+        	};
+        },
+        load_files: function(self, directory_ids) {
+        	var files_query = $.Deferred();
         	Files.query(['filename', 'mime_type', 'file_extension', 'directory',
-        	             'link_preview', 'link_download', 'file_size']).all().then(function(files) {
+        	             'link_preview', 'link_download', 'file_size', 'perm_read',
+        	             'perm_create', 'perm_write', 'perm_unlink']).all().then(function(files) {
         		var data = [];
-        		_.each(files, function(value, key, list) {	 
+        		_.each(files, function(value, key, list) {
+        			if(!($.inArray(value.directory[0], directory_ids) !== -1)) {
+        				directory_ids.push(value.directory[0]);
+        				data.push(self.add_container_directory(self, value.directory[0], value.directory[1]));
+        			}
 	        		data.push({
 	        			id: "file," + value.id,
 	        			parent: "directory_" + value.directory[0],
@@ -250,6 +288,10 @@ odoo.define('muk_dms.tree_view', function(require) {
 	        				download_link: value.link_download,
 	        				file_extension: value.file_extension,
 	        				mime_type: value.mime_type,
+	        				perm_read: value.perm_read,
+	        				perm_create: value.perm_create,
+	        				perm_write: value.perm_write,
+	        				perm_unlink: value.perm_unlink,
 	        			}
 	        		});
 	        	});
@@ -259,62 +301,71 @@ odoo.define('muk_dms.tree_view', function(require) {
         },
         load_view: function() {
         	var self = this;
-        	$.when(self.load_directories(self), self.load_files(self)).done(function (directories, files) {
-        		var data = directories.concat(files);
-        		self.$el.find('.oe_document_tree').jstree({
-        			'widget': self,
-		        	'core': {
-		        		'animation': 0,
-		        		'multiple': false,
-		        	    'check_callback': true,
-		        	    'themes': { "stripes": true },
-		        		'data': data
-		        	},
-		        	'plugins': [
-		        	    "contextmenu", "search", "sort", "state", "wholerow", "types"
-    	            ],
-		        	'search': {
-		        	    'case_insensitive': false,
-		        	    'show_only_matches': true,
-		        	    'search_callback': function (str, node) {
-		        	    	try {
-		        	    		return node.text.match(new RegExp(str)); 
-		        	    	} catch(ex) {
-		        	    		return false; 
-		        	    	} 
-		        	    }
-		        	},
-		        	'contextmenu': {
-    	                items: context_menu_items
-    	            },
-	        	}).on('open_node.jstree', function (e, data) {
-	        		data.instance.set_icon(data.node, "fa fa-folder-open-o"); 
-	        	}).on('close_node.jstree', function (e, data) { 
-	        		data.instance.set_icon(data.node, "fa fa-folder-o"); 
-	        	}).bind('loaded.jstree', function(e, data) {
-	        		self.show_preview();
-	        	}).on('changed.jstree', function (e, data) {
-	        		if(data.node) {
-	        			self.selected_node = data.node;
-	        			if(self.show_preview_active && data.node.data.odoo_model == "muk_dms.file") {
-		        			$.when(Preview.PreviewHTML.getPreviewHTML(data.node.data.odoo_id, data.node.data.file_size,
-		        					data.node.data.filename, data.node.data.file_extension, data.node.data.mime_type,
-		        					data.node.data.preview_link)).done(function(result) {
-			        				self.$el.find('.oe_document_preview').html(result);
-			        		});	        		
+        	$.when(self.load_directories(self)).done(function (directories, directory_ids) {
+        		$.when(self.load_files(self, directory_ids)).done(function (files) {
+	        		var data = directories.concat(files);
+	        		self.$el.find('.oe_document_tree').jstree({
+	        			'widget': self,
+			        	'core': {
+			        		'animation': 0,
+			        		'multiple': false,
+			        	    'check_callback': true,
+			        	    'themes': { "stripes": true },
+			        		'data': data
+			        	},
+			        	'plugins': [
+			        	    "contextmenu", "search", "sort", "state", "wholerow", "types"
+	    	            ],
+			        	'search': {
+			        	    'case_insensitive': false,
+			        	    'show_only_matches': true,
+			        	    'search_callback': function (str, node) {
+			        	    	try {
+			        	    		return node.text.match(new RegExp(str)); 
+			        	    	} catch(ex) {
+			        	    		return false; 
+			        	    	} 
+			        	    }
+			        	},
+			        	'contextmenu': {
+	    	                items: context_menu_items
+	    	            },
+		        	}).on('open_node.jstree', function (e, data) {
+		        		data.instance.set_icon(data.node, "fa fa-folder-open-o"); 
+		        	}).on('close_node.jstree', function (e, data) { 
+		        		data.instance.set_icon(data.node, "fa fa-folder-o"); 
+		        	}).bind('loaded.jstree', function(e, data) {
+		        		self.show_preview();
+		        	}).on('changed.jstree', function (e, data) {
+		        		if(data.node) {
+		        			self.selected_node = data.node;
+		        			self.$el.find('button.open').prop('disabled', !self.selected_node.data.perm_read);
+		        			self.$el.find('button.edit').prop('disabled', !self.selected_node.data.perm_write);
+		        			self.$el.find('button.create_file').prop('disabled',
+		        					self.selected_node.data.odoo_model != "muk_dms.directory" || !self.selected_node.data.perm_create);
+		        			self.$el.find('button.create_directory').prop('disabled',
+		        					self.selected_node.data.odoo_model != "muk_dms.directory" || !self.selected_node.data.perm_create);
+		        			$("#menuContinenti").prop('disabled', function (_, val) { return ! val; });
+		        			if(self.show_preview_active && data.node.data.odoo_model == "muk_dms.file") {
+			        			$.when(Preview.PreviewHTML.getPreviewHTML(data.node.data.odoo_id, data.node.data.file_size,
+			        					data.node.data.filename, data.node.data.file_extension, data.node.data.mime_type,
+			        					data.node.data.preview_link)).done(function(result) {
+				        				self.$el.find('.oe_document_preview').html(result);
+				        		});	        		
+			        		}
 		        		}
-	        		}
-	        	});
-        		var timeout = false;
-        		self.$el.find('#tree_search').keyup(function() {
-	        	    if(timeout) {
-	        	    	clearTimeout(timeout); 
-	        	    }
-	        	    timeout = setTimeout(function() {
-	        	    	var v = self.$el.find('#tree_search').val();
-	        	    	self.$('.oe_document_tree').jstree(true).search(v);
-	        	    }, 250);
-        	   });
+		        	});
+	        		var timeout = false;
+	        		self.$el.find('#tree_search').keyup(function() {
+		        	    if(timeout) {
+		        	    	clearTimeout(timeout); 
+		        	    }
+		        	    timeout = setTimeout(function() {
+		        	    	var v = self.$el.find('#tree_search').val();
+		        	    	self.$('.oe_document_tree').jstree(true).search(v);
+		        	    }, 250);
+	        	   });
+        		});
         	});
         },
         open: function() {
