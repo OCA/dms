@@ -46,6 +46,15 @@ odoo.define('muk_dms.preview', function(require) {
 		}
 	}
 
+	var MarkdownViewer = {
+		checkExtension: function(extension) {
+			return extension === '.md';
+		},
+		createMarkdownTag: function(data) {
+			return new showdown.Converter().makeHtml(data);
+		}
+	}
+
 	var EmailViewer = {
 		checkExtension: function(extension) {
 			return extension == '.eml';
@@ -104,6 +113,12 @@ odoo.define('muk_dms.preview', function(require) {
     			    hljs.lineNumbersBlock($('#oe_modal_viewer .oe_preview_text')[0]);
 				});
     			showModal = true;
+			} else if(MarkdownViewer.checkExtension(file_extension)) {
+				$.get(link_preview, function(data) {
+					$('#oe_modal_viewer .oe_modal_viewer_title').text(_t("Markdown Viewer"));
+					$('#oe_modal_viewer .oe_modal_viewer_body').html(MarkdownViewer.createMarkdownTag(data));
+				});
+				showModal = true;
     		} else if(EmailViewer.checkExtension(file_extension)) {
     			$.get('/dms/parse/mail?id='+id, function(data) {
     				$('#oe_modal_viewer .oe_modal_viewer_title').text(_t("Mail Viewer"));
@@ -185,6 +200,12 @@ odoo.define('muk_dms.preview', function(require) {
 	    			    hljs.lineNumbersBlock($(container).find('.oe_preview_text')[0]);
 	    			    result.resolve(container);
 					});
+				} else if(MarkdownViewer.checkExtension(file_extension)) {
+					$.get(link_preview, function(data) {
+					var container = $('<div>')
+					container.html(MarkdownViewer.createMarkdownTag(data));
+					result.resolve(container);
+				});
 	    		} else if(EmailViewer.checkExtension(file_extension)) {
 	    			$.get('/dms/parse/mail?id='+id, function(data) {
 	    				var container = $('<div>')
