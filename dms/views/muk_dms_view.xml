@@ -18,6 +18,8 @@
 		    <link rel="stylesheet" href="/muk_dms/static/lib/jquery_splitter/css/jquery.splitter.css" />
 		    <script type="text/javascript" src="/muk_dms/static/lib/jquery_splitter/js/jquery.splitter.js" />
 		    
+			<script type="text/javascript" src="/muk_dms/static/lib/showdown/showdown.js" />
+
 			<script type="text/javascript" src="/muk_dms/static/src/js/muk_dms.js" />
 		    <script type="text/javascript" src="/muk_dms/static/src/js/muk_dms_jquery.js" />
 			
