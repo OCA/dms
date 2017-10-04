@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-	<record id="action_muk_dms_views_tree_view" model="ir.actions.client">
-		<field name="name">DMSTreeViewWidget</field>
-		<field name="tag">muk_dms.tree_view</field>
-	</record>
-	<menuitem id="muk_muk_dms_tree_view" name="Document Tree"
-		parent="cat_menu_muk_dms" action="action_muk_dms_views_tree_view" />
-</odoo>
