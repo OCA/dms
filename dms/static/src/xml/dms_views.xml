@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<templates xml:space="preserve">
+	<t t-name="muk_dms.DocumentTreeView">
+        <div class="muk_treeview">
+            <div class="container-fluid oe_document_container ">
+                <div class="row oe_document_row">
+	            	<div class="oe_document_col oe_document_col_tree">
+            			<div class="oe_document_tree" />
+            		</div>
+            		<div class="oe_document_col oe_document_col_preview">
+            			<div class="oe_document_preview" />
+            		</div>
+            	</div>
+            </div>
+        </div>
+    </t>
+    
+    <t t-name="muk_dms.DocumentTreeViewButtons">
+    	<div class="o_list_buttons">
+			<button accesskey="O" class="open btn btn-sm btn-primary" type="button">
+	             Open
+	         </button>
+	         <button accesskey="E" class="edit btn btn-sm btn-default" type="button">
+	             Edit
+	         </button>
+        </div>
+    </t>
+
+	<t t-name="muk_dms.DocumentTreeViewActions">
+		<span class="btn-group btn-group-sm">
+	        <button type="button" class="refresh fa fa-refresh btn btn-icon" 
+	        	data-toggle="tooltip" data-placement="bottom" title="Refresh" />
+	        <button type="button" class="auto_refresh fa fa-ban btn btn-icon" 
+	        	data-toggle="tooltip" data-placement="bottom" title="Disable Refresh" />
+		</span>
+		<span class="btn-group btn-group-sm">
+	        <button type="button" class="action_dialog fa fa-window-restore btn btn-icon" 
+	        	data-toggle="tooltip" data-placement="bottom" title="Enable Dialog Mode" />
+		</span>
+	</t>
+
+	<t t-name="muk_dms.DocumentTreeViewOptions">
+		<button type="button" class="show_preview btn btn-default fa fa-file-o o_cp_switch_list " 
+	        	data-toggle="tooltip" data-placement="bottom" title="Show Preview" />
+		<button type="button" class="hide_preview btn btn-default fa fa-ban o_cp_switch_list active"
+	        	data-toggle="tooltip" data-placement="bottom" title="Hide Preview" />
+	</t>
+	
+	<t t-name="muk_dms.DocumentTreeViewSearch">
+		<div class="o_searchview">
+			<input id="tree_search" class="o_searchview_input" placeholder="Search..." type="text" />
+			<div class="oe_dms_searchview_info fa fa-lg fa-info" data-toggle="tooltip" data-placement="left"
+			        title="Tip: It is also possible to serach by using regular expressions like ^[a-zA-Z]*.pdf" />	
+		</div>
+	</t>
+	
+	<t t-name="muk_dms.DocumentTreeViewDirectoryPreview">
+		<div class="o_preview_directory">
+			<div class="o_preview_directory_header">
+				<h3><t t-esc="directory.name"/></h3>
+			</div>
+			<div class="o_preview_directory_body">
+				<div class="col-sm-3 o_preview_directory_icon" align="center"> 
+	            	<img src="/muk_dms/static/src/img/folder.png" />
+	            </div>
+	            <div class=" col-sm-9"> 
+	            	<table class="table o_preview_directory_table">
+	            		<tbody>
+		                     <tr>
+		                       <td>Name:</td>
+		                       <td><t t-esc="directory.name"/></td>
+		                     </tr>
+		                     <tr>
+		                       <td>Size:</td>
+		                       <td><t t-esc="directory.size"/></td>
+		                     </tr>
+		                     <tr>
+		                       <td>Directories:</td>
+		                       <td><t t-esc="directory.directories"/></td>
+		                     </tr>
+		                     <tr>
+		                       <td>Files:</td>
+		                       <td><t t-esc="directory.files"/></td>
+		                     </tr>
+	                   </tbody>
+	            	</table>
+	        	</div>
+			</div>
+		</div>
+	</t>
+</templates>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+
+<menuitem id="main_menu_muk_dms" name="Documents"
+	web_icon="muk_dms,static/description/icon.png"
+	groups="group_dms_user" />
+
+<menuitem id="cat_menu_muk_dms_documents" 
+	name="Document Management"
+	parent="main_menu_muk_dms"
+	sequence="1" />
+<menuitem id="cat_menu_muk_dms_config" 
+	name="Configuration"
+	groups="muk_dms.group_dms_manager"
+	parent="main_menu_muk_dms" />
+<menuitem id="cat_menu_muk_dms_models" 
+	name="Data"
+	parent="main_menu_muk_dms" />
+<menuitem id="cat_menu_muk_dms_files" 
+	name="System Data" 
+	groups="muk_dms.group_dms_admin,base.group_system"
+	parent="main_menu_muk_dms" />
+<menuitem id="cat_menu_muk_dms_locks" 
+	name="Locks" 
+	groups="muk_dms.group_dms_admin,base.group_system"
+	parent="main_menu_muk_dms" />
+<menuitem id="cat_menu_muk_dms_settings" 
+	name="Settings" 
+	groups="muk_dms.group_dms_admin,base.group_system"
+	parent="main_menu_muk_dms"
+	sequence="100" />
+	
+</odoo>

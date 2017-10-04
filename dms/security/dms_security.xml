@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+
+<record  id="category_dms_security" model="ir.module.category">
+	<field name="name">Documents</field>
+</record>
+
+<record id="group_dms_user" model="res.groups">
+	<field name="name">User</field>
+	<field name="category_id" ref="category_dms_security" />
+</record>
+
+<record id="group_dms_manager" model="res.groups">
+	<field name="name">Manager</field>
+	<field name="implied_ids" eval="[(4, ref('group_dms_user'))]" />
+	<field name="category_id" ref="category_dms_security" />
+</record>
+
+<record id="group_dms_admin" model="res.groups">
+	<field name="name">Administrator</field>
+	<field name="implied_ids" eval="[(4, ref('group_dms_manager'))]" />
+	<field name="category_id" ref="category_dms_security" />
+	<field name="users" eval="[(4, ref('base.user_root'))]"/>
+</record>
+	
+</odoo>
+

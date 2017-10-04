@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+
+<record id="search_dms_file" model="ir.ui.view">
+	<field name="name">muk_dms_file.search</field>
+	<field name="model">muk_dms.file</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="name" />
+			<field name="path" />
+			<group expand="0" string="Group By">
+				<filter string="Extension" domain="[]" context="{'group_by':'extension'}" />
+			</group>
+		</search>
+	</field>
+</record>
+
+<record id="view_dms_file_kanban" model="ir.ui.view">
+	<field name="name">muk_dms_file.kanban</field>
+	<field name="model">muk_dms.file</field>
+	<field name="arch" type="xml">
+		<kanban class="dms_file_kanban">
+			<field name="id" />
+			<field name="name" />
+			<field name="thumbnail" />
+			<templates>
+				<t t-name="kanban-box">
+					<div class="muk_kanban_file">
+					    <div class="muk_image text-center" t-attf-data-id="#{record.id.raw_value}">
+							<img t-attf-src="data:image/*;base64,{{record.thumbnail.raw_value}}" />
+						</div>
+						<div class="muk_filename text-center" t-attf-data-id="#{record.id.raw_value}">
+							<t name="name" t-esc="record.name.value" />
+						</div>
+					</div>
+				</t>
+			</templates>
+		</kanban>
+	</field>
+</record>
+
+<record id="view_dms_file_tree" model="ir.ui.view">
+	<field name="name">muk_dms_file.tree</field>
+	<field name="model">muk_dms.file</field>
+	<field name="arch" type="xml">
+		<tree string="Files">
+			<field name="locked" invisible="1" />
+			<field name="perm_create" invisible="1" />
+			<field name="perm_write" invisible="1" />
+			<field name="perm_unlink" invisible="1" />
+			<field name="name" />
+			<field name="mimetype" />
+			<field name="size" widget="dms_size" />
+			<field name="write_date" />
+			<field name="path" widget="dms_path" />
+		</tree>
+	</field>
+</record>
+
+<record id="view_dms_file_form" model="ir.ui.view">
+	<field name="name">muk_dms_file.form</field>
+	<field name="model">muk_dms.file</field>
+	<field name="arch" type="xml">
+		<form string="Files">
+			<header>
+				<button class="oe_highlight" 
+					name="user_lock" 
+					type="object"
+					string="Lock (Edit)" 
+					attrs="{'invisible':['|',('locked', '!=', False), ('perm_write', '=', False)]}" />
+				<button class="oe_highlight" 
+					name="user_unlock" 
+					type="object"
+					string="Unlock (Release)"
+					attrs="{'invisible':['|',('locked', '=', False), ('editor', '=', False)]}" />
+			</header>
+			<sheet>
+				<field name="locked" invisible="1" />
+				<field name="editor" invisible="1" />
+				<div class="oe_button_box" name="button_box">
+                </div>
+				<field name="thumbnail" 
+					widget="image" 
+					class="oe_avatar oe_read_only" 
+					options="{'size': [90, 90]}"/>
+				<field name="custom_thumbnail" 
+					widget="image" 
+					class="oe_avatar oe_edit_only" 
+					options="{'size': [90, 90]}"/>
+				<div class="oe_title">
+					<label for="name" class="oe_edit_only" />
+					<h1>
+						<field name="name" />
+					</h1>
+				</div>
+ 				<group>
+ 					<field name="relational_path" widget="dms_relpath" />
+				</group>
+				<group string="Data">
+					<group>
+						<field name="content" filename="name" widget="dms_binary" />
+						<field name="size" widget="dms_size" />
+					</group>
+					<group>
+						<field name="extension" />
+						<field name="mimetype" />
+					</group>
+				</group>
+				<group string="Settings">
+					<group>
+						<field name="settings" readonly="1" />
+					</group>
+					<group>
+						<field name="directory" 
+							widget="dms_directory"
+							options="{'quick_create': False}" />
+					</group>
+				</group>
+				<notebook>
+					<page string="Access Information">
+						<group>
+							<group>
+								<field name="perm_read" readonly="1" />
+							</group>
+							<group>
+								<field name="perm_create" readonly="1" />
+								<field name="perm_write" readonly="1" />
+								<field name="perm_unlink" readonly="1" />
+							</group>
+						</group>
+					</page>
+					<page string="Meta Information" groups="muk_dms.group_dms_admin,base.group_system">
+						<group>
+							<group>
+								<field name="id" />
+							</group>
+							<group>
+								<field name="locked_by" />
+							</group>
+						</group>
+						<group>
+							<group>
+								<field name="create_date" readonly="1" />
+								<field name="create_uid" readonly="1" />
+							</group>
+							<group>
+								<field name="write_date" readonly="1" />
+								<field name="write_uid" readonly="1" />
+							</group>
+						</group>
+					</page>
+					<page string="Technical Information" groups="muk_dms.group_dms_admin,base.group_system">
+						<group>
+							<group>
+								<field name="reference" />
+							</group>
+						</group>
+						<group string="Indexed Content">
+							<field name="index_content" nolabel="1" />
+						</group>
+					</page>
+				</notebook>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record id="action_dms_file" model="ir.actions.act_window">
+	<field name="name">Document Files</field>
+	<field name="res_model">muk_dms.file</field>
+	<field name="view_mode">kanban,tree,form</field>
+	<field name="help" type="html">
+	    <p class="oe_view_nocontent_create">
+	      	Click to add a new file.
+	    </p>
+	    <p>
+			Files are used to save content directly in Odoo.
+	    </p>
+    </field>
+</record>
+
+<menuitem id="menu_dms_file" name="Files"
+	parent="cat_menu_muk_dms_models" action="action_dms_file" />
+
+</odoo>

@@ -1,6 +1,11 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-muk_dms_root_manager,muk_dms.root_manager,model_muk_dms_root,group_muk_dms_manager,1,1,1,1
-muk_dms_lock_manager,muk_dms.lock_manager,model_muk_dms_lock,group_muk_dms_manager,1,0,0,0
-muk_dms_data_database_manager,muk_dms.data_manager,model_muk_dms_database_data,group_muk_dms_manager,1,0,0,0
-muk_dms_directories_all,muk_dms.directories_all,model_muk_dms_directory,,1,1,1,1
-muk_dms_files_all,muk_dms.files_all,model_muk_dms_file,,1,1,1,1
+
+access_dms_settings_user,dms_settings_user,model_muk_dms_settings,group_dms_user,1,0,0,0
+access_dms_directory_user,dms_directory_user,model_muk_dms_directory,group_dms_user,1,1,1,1
+access_dms_file_user,dms_file_user,model_muk_dms_file,group_dms_user,1,1,1,1
+
+access_dms_data_database_manager,dms_data_database_manager,model_muk_dms_data_database,group_dms_manager,1,0,0,0
+
+access_dms_settings_admin,dms_settings_admin,model_muk_dms_settings,group_dms_admin,1,1,1,1
+access_dms_data_database_admin,dms_data_database_admin,model_muk_dms_data_database,group_dms_admin,1,1,1,1
+access_dms_lock_admin,dms_lock_admin,model_muk_dms_lock,group_dms_admin,1,0,0,1

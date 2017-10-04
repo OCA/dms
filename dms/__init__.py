@@ -2,8 +2,6 @@
 
 ###################################################################################
 # 
-#    MuK Document Management System
-#
 #    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,5 +19,5 @@
 #
 ###################################################################################
 
-import controllers
-import models
+from . import controllers
+from . import models
