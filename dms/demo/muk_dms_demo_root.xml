@@ -1,7 +1,0 @@
-<odoo>
-	<record model="muk_dms.root" id="database_root0">
-		<field name="name">Database Settings</field>
-		<field name="root_directory" ref="database_directory0" />
-		<field name="save_type">database</field>
-	</record>>
-</odoo>
