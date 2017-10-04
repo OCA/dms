@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+
+<record id="view_dms_lock_tree" model="ir.ui.view">
+	<field name="name">muk_dms_lock.tree</field>
+	<field name="model">muk_dms.lock</field>
+	<field name="arch" type="xml">
+		<tree string="Locks">
+			<field name="id" />
+			<field name="lock_ref" />
+			<field name="locked_by" />
+			<field name="token" />
+			<field name="operation" />
+		</tree>
+	</field>
+</record>
+
+<record id="action_dms_lock" model="ir.actions.act_window">
+	<field name="name">Lock</field>
+	<field name="res_model">muk_dms.lock</field>
+	<field name="view_mode">tree</field>
+</record>
+
+<menuitem id="menu_dms_lock" name="Locks"
+	parent="cat_menu_muk_dms_locks" action="action_dms_lock" />
+
+</odoo>
