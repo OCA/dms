@@ -2,8 +2,6 @@
 
 ###################################################################################
 # 
-#    MuK Document Management System
-#
 #    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,4 +19,4 @@
 #
 ###################################################################################
 
-from . import muk_dms_main
+from . import main
