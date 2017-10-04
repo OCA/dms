@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="partner_dmsuser_demo" model="res.partner">
+            <field name="name">Documents User</field>
+            <field name="customer" eval="False"/>
+            <field name="email">muk@mukit.at</field>
+            <field name="street">Boxhagener Str. 33</field>
+            <field name="city">Vienna</field>
+            <field name="zip">1030</field>
+            <field name="country_id" ref="base.at"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="user_dmsuser_demo" model="res.users">
+            <field name="partner_id" ref="muk_dms.partner_dmsuser_demo"/>
+            <field name="login">dmsuser</field>
+            <field name="password">dmsuser</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('muk_dms.group_dms_user')])]"/>
+            <field name="image" type="base64" file="muk_dms/demo/data/img/dmsuser.png"/>
+        </record>
+        
+        <record id="partner_dmsmanager_demo" model="res.partner">
+            <field name="name">Documents Manager</field>
+            <field name="customer" eval="False"/>
+            <field name="email">muk@mukit.at</field>
+            <field name="street">Genterstrasse 23</field>
+            <field name="city">Vienna</field>
+            <field name="zip">1030</field>
+            <field name="country_id" ref="base.at"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="user_dmsmanager_demo" model="res.users">
+            <field name="partner_id" ref="muk_dms.partner_dmsmanager_demo"/>
+            <field name="login">dmsmanager</field>
+            <field name="password">dmsmanager</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user'), ref('muk_dms.group_dms_manager')])]"/>
+            <field name="image" type="base64" file="muk_dms/demo/data/img/dmsmanager.png"/>
+        </record>
+        
+	</data>
+</odoo>

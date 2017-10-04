@@ -1,0 +1,1 @@
+DELETE FROM muk_dms_lock;

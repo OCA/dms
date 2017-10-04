@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+	
+	<record id="settings_demo" model="muk_dms.settings">
+	    <field name="name">Documents Settings</field>
+	    <field name="save_type">database</field>
+	</record>
+        
+	</data>
+</odoo>
