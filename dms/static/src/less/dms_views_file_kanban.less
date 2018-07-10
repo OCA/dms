@@ -1,0 +1,176 @@
+/**********************************************************************************
+* 
+*    Copyright (C) 2017 MuK IT GmbH
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Affero General Public License as
+*    published by the Free Software Foundation, either version 3 of the
+*    License, or (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Affero General Public License for more details.
+*
+*    You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+**********************************************************************************/
+
+.mk_dms_file_sidebar { 
+	float: left;
+    height: 100%;
+    width: 220px;
+    overflow: auto;
+    position: fixed;
+    background-color: @odoo-control-panel-background-color;
+    border-right: 1px solid darken(@odoo-control-panel-background-color, 20%);
+    .mk_dms_file_sidebar_directories {
+    	ul {
+		    margin: 0;
+		    padding: 0;
+		    border: 0;
+    		position: relative;
+    		list-style: none;
+		    background-color: @odoo-control-panel-background-color;
+	        li {
+	            min-height: 1px;
+	            line-height: 1em;
+	            vertical-align: middle;
+	            width: 100%;
+	            border-bottom: 1px solid @odoo-color-silver-darker;
+	            border-left: 3px solid @odoo-color-silver-darker;
+	            &.active, &:hover {
+	            	background: darken(@odoo-control-panel-background-color, 10%);
+		            border-left: 3px solid @odoo-brand-primary;
+		            .directory_badge_square {
+			            background-color: @odoo-brand-primary;
+			        }
+		        }
+		        a {
+		        	.o-flex-display();
+		        	color: #848889;
+		            text-decoration: none;
+		            font-weight: 300;
+		            padding: 10px 20px;
+			        .directory_content {
+			        	.o-flex(1, 1, auto);
+			        	margin-right: 15px;
+					    overflow: hidden;
+					    text-overflow: ellipsis;
+					    white-space: nowrap;
+				    }
+			        .directory_badge {
+			        	.o-flex(0, 0, auto);
+			            display: inline-block;
+			            padding: .25em .4em;
+			            font-size: 75%;
+			            font-weight: 700;
+			            line-height: 1;
+			            text-align: center;
+			            white-space: nowrap;
+			            vertical-align: baseline;
+			            float: right;
+			            width: 20%;
+			        }
+			        .directory_badge_square {
+			            color: #fff;
+			            background-color: @odoo-color-silver-darker;
+			        }
+		        }
+	        }
+    	}
+    }
+}
+
+.mk_dms_file_sidebar + .mk_dms_file_kanban {
+	padding-left: 220px !important;
+}
+
+.mk_dms_file_kanban {
+	.o_kanban_record {
+		padding: 0;
+		height: 72px;
+		width: 250px ! important;
+		.mk_dms_file_main {
+	    	height: 100%;
+			.oe_kanban_content {
+		    	height: 70px;
+				.mk_dms_file_thumbnail {	
+     				position: relative;	
+			     	float: left;    
+			     	width: 71px;
+			    	height: 70px;
+			    	border-right: solid 1px @odoo-color-silver-darker;
+			    	img {
+					    top: 0;  
+					    bottom: 0;  
+					    left: 0;  
+					    right: 0;  
+					    position: absolute;  
+			    		max-height: 100%;  
+					    max-width: 100%; 
+					    width: auto;
+					    height: auto;
+					    margin: auto;
+			    	}
+					&:hover::before {
+						z-index: 99;
+						width: 70px;
+						height: 70px;
+						opacity: 0.7;
+						content: " ";
+						position: absolute;
+						background-size: contain;
+						background-position: center;
+						background-repeat: no-repeat;
+						background-color: #cccccc;
+						background-image: url('/muk_dms/static/src/img/eye.png');
+					}
+				}
+				.o_kanban_record_top {
+     				padding-top: 5px;
+     				padding-right: 5px;
+					padding-left: 10px;
+			    	.mk_dms_file_name {
+						margin-right: 5px;
+						font-size: 15px;
+					    font-weight: bold;
+						overflow: hidden;
+				    	position: relative;
+						white-space: nowrap;
+				    	text-overflow: ellipsis;
+					}
+					.o_dropdown_kanban {
+						.dropdown-toggle {
+							margin: -6px -6px 0 0;
+						}
+						.dropdown-menu {
+							right: -6px;
+						}
+					}
+				}
+				.o_kanban_record_body {
+					height: 12px;
+					overflow: hidden;
+    			    padding-right: 5px;
+					padding-left: 10px;
+			    	.o_kanban_tags {
+						line-height: 1.2;
+					}
+				}
+				.o_kanban_record_bottom {
+     				padding-right: 5px;
+					padding-left: 10px;
+			    	.o_field_date {
+						margin-top: 5px;  
+						color: @gray-light;
+					}
+					.oe_kanban_avatar {
+						margin: 0;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -22,23 +20,24 @@
 {
     "name": "MuK Documents",
     "summary": """Document Management System""",
-    "description": """ 
-        MuK Documents is a module to create, manage and view files
-        directly within Odoo. By installing module extensions
-        additional features can be enabled.
-    """,
-    "version": '11.0.1.3.5',   
+    "version": '11.0.2.1.5',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
-        "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
     ],
     "depends": [
+        "web",
+        "mail",
+        "base_setup",
+        "muk_utils",
+        "muk_security",
         "muk_web_utils",
         "muk_web_preview",
+        "muk_web_client",
         "muk_web_client_refresh",
     ],
     "data": [
@@ -46,16 +45,19 @@
         "security/ir.model.access.csv",
         "template/assets.xml",
         "views/dms_menu.xml",
-        "views/dms_actions.xml",
+        "views/dms_documents_view.xml",
+        "views/dms_tag_view.xml",
+        "views/dms_category_view.xml",
         "views/dms_settings_view.xml",
         "views/dms_directory_view.xml",
         "views/dms_file_view.xml",
         "views/dms_data_view.xml",
-        "views/dms_lock_view.xml",
-        "views/res_config_view.xml",
+        "views/res_config_settings_view.xml",
     ],
     "demo": [
         "demo/dms_user_demo.xml",
+        "demo/dms_tag_demo.xml",
+        "demo/dms_category_demo.xml",
         "demo/dms_settings_demo.xml",
         "demo/dms_directory_demo.xml",
         "demo/dms_file_demo.xml",
