@@ -40,6 +40,28 @@
 	<field name="category_id" ref="category_dms_security" />
 	<field name="users" eval="[(4, ref('base.user_root'))]"/>
 </record>
-	
+
+<record id="rule_dms_settings_manager" model="ir.rule">
+    <field name="name">Manager can only edit and delete their own settings.</field>
+    <field name="model_id" ref="model_muk_dms_settings"/>
+    <field name="groups" eval="[(4, ref('muk_dms.group_dms_manager'))]"/>
+    <field name="perm_read" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_unlink" eval="1" />
+    <field name="domain_force">[('create_uid','=',user.id)]</field>
+</record>
+
+<record id="rule_dms_settings_admin" model="ir.rule">
+     <field name="name">Admins can edit and delete all settings.</field>
+    <field name="model_id" ref="model_muk_dms_settings"/>
+    <field name="groups" eval="[(4, ref('muk_dms.group_dms_admin'))]"/>
+    <field name="perm_read" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_unlink" eval="1" />
+    <field name="domain_force">[(1 ,'=', 1)]</field>
+</record>
+
 </odoo>
 

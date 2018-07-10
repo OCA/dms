@@ -22,23 +22,20 @@ odoo.define('muk_dms_client_refresh.channel', function (require) {
 
 var WebClient = require('web.WebClient');
 var session = require('web.session');	
-var bus = require('bus.bus')	
+var bus = require('bus.bus');	
 
 WebClient.include({
     refresh: function(message) {
-    	this._super(message);
-    	var action = this.action_manager.inner_action;
-    	var widget = this.action_manager.inner_widget;
-    	if (message instanceof Array && message.length === 3) {
-        	var user = message[2];
-        	var message = message[1];
-			if((message === 'muk_dms.file' || message === 'muk_dms.directory') &&
-					widget && action.action_descr.tag === "muk_dms_views.documents" &&
-					user !== session.uid) {
-				widget.refresh(true, 10000);
-			}
+    	this._super.apply(this, arguments);
+    	var action = this.action_manager && this.action_manager.inner_action;
+    	var widget = this.action_manager && this.action_manager.inner_widget;
+    	if(session.uid !== message.uid && widget && action && 
+    			action.action_descr.tag === "muk_dms_views.documents" && (
+    			message.model === 'muk_dms.directory' ||
+    			message.model === 'muk_dms.file')) {
+    		widget.refresh(message);
     	}
-    }
+    },
 });
-    
+
 });

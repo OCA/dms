@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+
+<record id="res_config_settings_view_form" model="ir.ui.view">
+	<field name="name">res.config.settings.view.form.inherit.muk_dms</field>
+	<field name="model">res.config.settings</field>
+	<field name="priority" eval="20"/>
+	<field name="inherit_id" ref="base.res_config_settings_view_form"/>
+	<field name="arch" type="xml">
+	    <xpath expr="//div[hasclass('settings')]" position="inside">
+            <div class="app_settings_block" data-string="Documents" data-key="muk_dms" groups="muk_dms.group_dms_admin,base.group_system">
+            	<div name="muk_dms_settings">
+	            	<h2>Base Extensions</h2>
+	                <div class="row mt16 o_settings_container">
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_access"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_access"/>
+	                            <div class="text-muted">
+	                                Allows the creation of groups to define access rights.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_widget"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_widget"/>
+	                            <div class="text-muted">
+	                                Allows the user to use DMS documents as input for any binary field.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_archive"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_archive"/>
+	                            <div class="text-muted">
+	                                Allows to download directories as a archive file.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_thumbnails"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_thumbnails"/>
+	                            <div class="text-muted">
+	                                Allows the creation of thumbnails for files.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_export"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_export"/>
+	                            <div class="text-muted">
+	                                Allows the conversion of existing files.
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>Attachment Extensions</h2>
+	                <div class="row mt16 o_settings_container">
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_attachment"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_attachment"/>
+	                            <div class="text-muted">
+	                                Allows attachments to be stored inside of MuK Documents.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_attachment_rules"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_attachment_rules"/>
+	                            <div class="text-muted">
+	                                Allows attachments to be automatically placed in the right directory.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_attachment_wizard"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_attachment_wizard"/>
+	                            <div class="text-muted">
+	                                Allows documents to be used as attachments.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_attachment_automation"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_attachment_automation"/>
+	                            <div class="text-muted">
+	                                Allows you to create rule templates to create attachment rules.
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>Client Extensions</h2>
+	                <div class="row mt16 o_settings_container">
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_finder"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_finder"/>
+	                            <div class="text-muted">
+	                                Enables the Document Finder.
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>Storage Extensions</h2>
+	                <div class="row mt16 o_settings_container">
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_file"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_file"/>
+	                            <div class="text-muted">
+	                                Enables a new save option to store files into a file store.
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_lobject"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_lobject"/>
+	                            <div class="text-muted">
+	                                Enables a new save option to store files into large objects.
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>File</h2>
+	                <div class="row mt16 o_settings_container" name="file">
+	                    <div class="col-xs-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_right_pane">
+	                            <label string="File Upload"/>
+	                            <div class="text-muted">
+	                                Defines the maximum upload size and forbidden file extensions.
+	                            </div>
+	                            <div class="content-group">
+		                            <div class="row mt16">
+		                                <label class="col-md-3 o_light_label" for="max_upload_size"/>
+		                                <field name="max_upload_size"/>
+		                            </div>
+		                            <div class="row">
+		                                <label class="col-md-3 o_light_label" for="forbidden_extensions"/>
+		                                <field name="forbidden_extensions" placeholder=".exe,.msi"/>
+		                            </div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+    	</xpath>
+    </field>
+</record>
+
+<record id="action_dms_settings_general" model="ir.actions.act_window">
+    <field name="name">General Settings</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.config.settings</field>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+    <field name="context">{'module' : 'muk_dms'}</field>
+</record>
+
+<menuitem id="menu_dms_settings_general" name="General Settings" 
+	parent="main_menu_muk_dms"
+   	sequence="100" 
+   	action="action_dms_settings_general" 
+   	groups="muk_dms.group_dms_admin,base.group_system"/>
+            
+</odoo>
+

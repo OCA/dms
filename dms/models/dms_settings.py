@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -23,16 +21,15 @@ import logging
 
 from odoo import _
 from odoo import models, api, fields
-from odoo.exceptions import ValidationError, AccessError
-
-from odoo.addons.muk_dms.models import dms_base
 
 _logger = logging.getLogger(__name__)
 
-class Settings(dms_base.DMSModel):
+class Settings(models.Model):
+    
     _name = 'muk_dms.settings'
     _description = "MuK Documents Settings"
-
+    _inherit = 'muk_dms.model'
+    
     #----------------------------------------------------------
     # Database
     #----------------------------------------------------------
@@ -42,16 +39,11 @@ class Settings(dms_base.DMSModel):
         required=True)
     
     save_type = fields.Selection(
-        selection=[("database", _('Database'))] , 
+        selection=[("database", _('Database'))], 
         string="Save Type", 
         default="database", 
         required=True,
         help="The save type is used to determine how a file is saved to the system.")
-    
-    index_files = fields.Boolean(
-        string="Index Files", 
-        default=True,
-        help="Indicates if the file data should be indexed to allow faster and better search results.")
     
     system_locks = fields.Boolean(
         string="System Locks", 
@@ -61,93 +53,125 @@ class Settings(dms_base.DMSModel):
     show_tree = fields.Boolean(
         string="Show Structure", 
         default=True,
-        help="Indicates if directories inside of this settings object should be visible on document tree views.")
+        help="Indicates if directories inside of this settings object are visible on document views.")
     
     settings_directories = fields.One2many(
-        'muk_dms.directory', 
-        'settings',
-         string="Directories",
-         copy=False, 
-         readonly=True)
+        comodel_name='muk_dms.directory', 
+        inverse_name='settings',
+        string="Directories",
+        copy=False, 
+        readonly=True)
     
     settings_files = fields.One2many(
-        'muk_dms.file', 
-        'settings',
-         string="Files",
-         copy=False, 
-         readonly=True)
+        comodel_name='muk_dms.file', 
+        inverse_name='settings',
+        string="Files",
+        copy=False, 
+        readonly=True)
+    
+    count_settings_directories = fields.Integer(
+        compute='_compute_count_settings_directories',
+        string="Directories")
+    
+    count_settings_files = fields.Integer(
+        compute='_compute_count_settings_files',
+        string="Files")
     
     root_directories = fields.One2many(
-        'muk_dms.directory',
-         string="Root Directories",
-         compute='_compute_root_directories')
+        comodel_name='muk_dms.directory',
+        inverse_name='settings',
+        string="Root Directories",
+        domain=[['is_root_directory', '=', True]])
     
     top_directories = fields.One2many(
-        'muk_dms.directory',
-         string="Top Directories",
-         compute='_compute_top_directories',
-         help="Directories which have no parent or the user has no access right to those parents.")
+        comodel_name='muk_dms.directory',
+        compute='_compute_top_directories',
+        search='_search_top_directories',
+        string="Top Directories",
+        help="Directories which have no parent or the user has no access right to those parents.")
     
     top_files = fields.One2many(
-        'muk_dms.file',
-         string="Top Directories",
-         compute='_compute_top_files',
-         help="Files which parent aren't readable by the user.")
+        comodel_name='muk_dms.file',
+        string="Top Files",
+        compute='_compute_top_files',
+        search='_search_top_files',
+        help="Files which parent aren't readable by the user.")
         
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
     
-    def notify_change(self, values, refresh=False, operation=None):
-        super(Settings, self).notify_change(values, refresh, operation)
-        if self.system_locks:
-                self.settings_directories.lock_tree(refresh=refresh, operation=operation)
-        for directory in self.settings_directories:
-            directory.with_context(operation=operation).notify_change(values)
-        self.settings_directories.unlock_tree(refresh=refresh)
+    @api.multi
+    def notify_change(self, values, *largs, **kwargs):
+        super(Settings, self).notify_change(values, *largs, **kwargs)
+        for record in self:
+            directories = record.root_directories
+            operation = directories.generate_operation_key()
+            if record.system_locks:
+                directories.lock_tree(operation=operation, refresh=True)
+            for directory in directories:
+                directory.with_context(operation=operation).notify_change(values)
+            if record.system_locks:
+                directories.unlock_operation(operation=operation, refresh=True)
+    
+    #----------------------------------------------------------
+    # Search
+    #----------------------------------------------------------
+    
+    @api.model
+    def _search_top_directories(self, operator, operand):
+        directories = self.env['muk_dms.directory'].search([('name', operator, operand)])
+        directories = directories.filtered(
+            lambda d: d.is_root_directory or
+            not d.parent_directory.check_access('read'))
+        return [('id', 'in', directories.mapped('settings.id'))]
+    
+    @api.model
+    def _search_top_files(self, operator, operand):
+        files = self.env['muk_dms.file'].search([('name', operator, operand)])
+        files = files.filtered(lambda f: not f.directory.check_access('read'))
+        return [('id', 'in', files.mapped('settings.id'))]
     
     #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------
     
-    @api.multi
-    def _compute_root_directories(self):
-        for record in self: 
-            record.root_directories = record.sudo().settings_directories.filtered(
-                lambda r: r.is_root_directory == True)
+    @api.depends('settings_directories')
+    def _compute_count_settings_directories(self):
+        for record in self:
+            record.count_settings_directories = len(record.settings_directories)
     
-    @api.multi
+    @api.depends('settings_files')
+    def _compute_count_settings_files(self):
+        for record in self:
+            record.count_settings_files = len(record.settings_files)
+    
+    @api.depends('settings_directories')
     def _compute_top_directories(self):
         for record in self: 
             record.top_directories = record.settings_directories.filtered(
                 lambda d: d.is_root_directory or not d.parent_directory.check_access('read'))
     
-    @api.multi        
+    @api.depends('settings_files')
     def _compute_top_files(self):
         for record in self: 
             record.top_files = record.settings_files.filtered(
                 lambda f: not f.directory.check_access('read'))
         
     #----------------------------------------------------------
-    # Create, Update
+    # Create, Update, Delete
     #----------------------------------------------------------
            
-    @api.onchange('save_type', 'index_files') 
+    @api.onchange('save_type') 
     def _onchange_save_type(self):
         if self._origin.id:
             warning = {
                 'title': (_('Information')),
-                'message': (_('Changing the settings can cause a heavy migration process.'))
+                'message': (_('Changing the save settings can cause a heavy migration process.'))
             }
             return {'warning': warning} 
-        
-    def _after_write_record(self, vals, operation):
-        vals = super(Settings, self)._after_write_record(vals, operation)
-        self._check_notification(vals, operation)
-        return vals
     
-    def _check_notification(self, values, operation):
-        if 'save_type' in values:
-            self.notify_change({'save_type': values['save_type']}, operation=operation)
-        if 'index_files' in values:
-            self.notify_change({'index_files': values['index_files']}, operation=operation)
+    @api.multi
+    def _check_notification(self, vals, *largs, **kwargs):
+        if 'save_type' in vals:
+            self.suspend_security().notify_change({'save_type': vals['save_type']})
