@@ -1,0 +1,103 @@
+/**********************************************************************************
+* 
+*    Copyright (C) 2017 MuK IT GmbH
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Affero General Public License as
+*    published by the Free Software Foundation, either version 3 of the
+*    License, or (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Affero General Public License for more details.
+*
+*    You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+**********************************************************************************/
+
+.mk_dms_directory_kanban {
+	.o_kanban_card_content {
+		width: 100%;
+		.mk_dms_directory_thumbnail {
+			position: relative;	
+		    width: 90px;
+			height: 90px;
+			float: left;
+			img {
+			    top: 0;  
+			    bottom: 0;  
+			    left: 0;  
+			    right: 0;  
+			    position: absolute;  
+	    		max-height: 100%;  
+			    max-width: 100%; 
+			    width: auto;
+			    height: auto;
+			    margin: auto;
+	    	}
+		}
+		.muk_dms_directory_info_panel {
+			position: relative;
+			padding-left: 95px;
+			padding-right: 5px;
+			.mk_dms_directory_info_name {
+				margin-right: 5px;
+				font-size: 15px;
+			    font-weight: bold;
+				overflow: hidden;
+		    	position: relative;
+				white-space: nowrap;
+		    	text-overflow: ellipsis;
+			}
+			.mk_dms_directory_info_tags {
+				height: 20px;
+			    overflow: hidden;
+				.o_kanban_tags {
+					line-height: 1.5;
+				}
+			}
+			.mk_dms_directory_info_buttons {
+				.mk_dms_directory_info_files, .mk_dms_directory_info_directories {
+				    width: 48%;
+				    margin-top: 2px;
+				    height: 35px;
+				    text-align: center;
+				    font-size: 20px;
+				    padding-top: 2px;
+				    display: inline-block;
+				    background-color: @odoo-brand-lightsecondary;
+				    i, span {
+				    	vertical-align: middle;
+				    }
+				    i {
+				    	padding-right: 10px;
+				    }
+				}
+				.mk_dms_directory_info_directories  {
+					margin-left: 2px;
+				}
+			}
+		}
+	}
+	.o_kanban_card_manage_section {
+		span {
+	 		padding-left: 5px;
+		}
+	}
+	.o_kanban_record_bottom {
+		.o_favorite {
+			padding: 0;
+			position: relative;
+			.fa  {
+				margin-top: 1px;
+				font-size: 18px;
+			}
+		}
+		.o_field_date {
+			margin-top: 5px;
+			color: @gray-light;
+		}
+	}
+}

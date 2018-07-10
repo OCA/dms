@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Copyright (C) 2017 MuK IT GmbH This program is free software: you can 
+	redistribute it and/or modify it under the terms of the GNU Affero General 
+	Public License as published by the Free Software Foundation, either version 
+	3 of the License, or (at your option) any later version. This program is 
+	distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+	PURPOSE. See the GNU Affero General Public License for more details. You 
+	should have received a copy of the GNU Affero General Public License along 
+	with this program. If not, see <http://www.gnu.org/licenses/>. -->
+
+<templates xml:space="preserve">
+    
+    <t t-name="muk_dms.DocumentDialog">
+        <div class="mk_treedialog">
+        	<div class="mk_document_controls ">
+        		<t t-call="muk_dms.DocumentTreeViewSearch" />
+        	</div>
+            <div class="mk_document_container ">
+                <div class="mk_treeview" />
+            </div>
+        </div>
+    </t>
+    
+    <t t-name="muk_dms.DocumentDropFileDialog">
+    	<div class="mk_dropdialog">
+        	<form t-att-action="url" class="dropzone" id="mk_document_replace">
+				<div class="fallback">
+			    	<input name="file" type="file" />
+			  	</div>
+			  	<input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
+			</form>
+        </div>
+    </t>
+    
+    <t t-name="muk_dms.DocumentDropFilesDialog">
+    	<div class="mk_dropdialog">
+        	<form t-att-action="url" class="dropzone" id="mk_document_upload">
+				<div class="fallback">
+			    	<input name="file" type="file" />
+			  	</div>
+			  	<input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
+			</form>
+        </div>
+    </t>
+    
+    <t t-name="muk_dms.DocumentFileInfoDialog">
+		<div class="o_info_file">
+			<div class="col-sm-3 hidden-xs o_info_file_icon" align="center"> 
+            	<img t-attf-src="data:image/*;base64,{{record.thumbnail}}" />
+            </div>
+            <div class=" col-sm-9"> 
+            	<table class="table o_info_file_table">
+            		<tbody>
+	                     <tr>
+	                       <td>Name:</td>
+	                       <td><t t-esc="record.name"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Mimetype:</td>
+	                       <td><t t-esc="record.mimetype"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Size:</td>
+	                       <td><t t-esc="record.size"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Last Updated on:</td>
+	                       <td><t t-esc="record.write_date"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Last Updated by:</td>
+	                       <td><t t-esc="record.write_uid"/></td>
+	                     </tr>
+                   </tbody>
+            	</table>
+        	</div>
+		</div>
+	</t>
+    
+    <t t-name="muk_dms.DocumentDirectoryInfoDialog">
+		<div class="o_info_directory">
+			<div class="col-sm-3 hidden-xs o_info_directory_icon" align="center"> 
+            	<img t-attf-src="data:image/*;base64,{{record.thumbnail}}" />
+            </div>
+            <div class=" col-sm-9"> 
+            	<table class="table o_info_directory_table">
+            		<tbody>
+	                     <tr>
+	                       <td>Name:</td>
+	                       <td><t t-esc="record.name"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Size:</td>
+	                       <td><t t-esc="record.size"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Last Updated on:</td>
+	                       <td><t t-esc="record.write_date"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Last Updated by:</td>
+	                       <td><t t-esc="record.write_uid"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Directories:</td>
+	                       <td><t t-esc="record.count_total_directories"/></td>
+	                     </tr>
+	                     <tr>
+	                       <td>Files:</td>
+	                       <td><t t-esc="record.count_total_files"/></td>
+	                     </tr>
+                   </tbody>
+            	</table>
+        	</div>
+		</div>
+	</t>
+    
+    <t t-name="muk_dms.DocumentHelpDialogContent">
+        <div class="mk_document_help">
+        	<div class="mk_document_help_info row">
+        		<div class="mk_document_help_shortcut_info col-sm-6">
+        			<h3>Keyboard Shortcuts</h3>
+		        	<ul>
+		        		<li class="mk_document_help_shortcut">
+		        			<div class="row">
+		        				<div class="col-xs-3">
+									<h5 class="mk_document_help_shortcut_icon">
+										<i class="fa fa-arrow-up"></i>
+									</h5>
+								</div>
+		        				<div class="col-xs-9">
+									<span class="mk_document_help_shortcut_text">
+										Move up one node
+									</span>
+								</div>
+							</div>
+						</li>
+						<li class="mk_document_help_shortcut">
+							<div class="row">
+		        				<div class="col-xs-3">
+									<h5 class="mk_document_help_shortcut_icon">
+										<i class="fa fa-arrow-left"></i>
+									</h5>							
+								</div>
+	        					<div class="col-xs-9">
+									<span class="mk_document_help_shortcut_text">
+										Close the selected node
+									</span>
+								</div>
+							</div>
+						</li>
+						<li class="mk_document_help_shortcut">	        			
+							<div class="row">
+		        				<div class="col-xs-3">
+									<h5 class="mk_document_help_shortcut_icon">
+										<i class="fa fa-arrow-right"></i>
+									</h5>							
+								</div>
+		        				<div class="col-xs-9">
+									<span class="mk_document_help_shortcut_text">
+										Open the selected node
+									</span>
+								</div>
+							</div>
+						</li>
+						<li class="mk_document_help_shortcut">	        			
+							<div class="row">
+		        				<div class="col-xs-3">
+									<h5 class="mk_document_help_shortcut_icon">
+										<i class="fa fa-arrow-down"></i>
+									</h5>							
+								</div>
+		        				<div class="col-xs-9">
+									<span class="mk_document_help_shortcut_text">
+										Move down one node
+									</span>
+								</div>
+							</div>
+						</li>
+						<li class="mk_document_help_shortcut">	        			
+							<div class="row">
+		        				<div class="col-xs-3">
+									<h5 class="mk_document_help_shortcut_icon">
+										<i class="fa fa-times"></i>
+									</h5>							
+								</div>
+		        				<div class="col-xs-9">
+									<span class="mk_document_help_shortcut_text">
+										Open all nodes
+									</span>
+								</div>
+							</div>
+						</li>
+						<li class="mk_document_help_shortcut">	        			
+							<div class="row">
+		        				<div class="col-xs-3">
+									<h5 class="mk_document_help_shortcut_icon">
+										F2
+									</h5>							
+								</div>
+		        				<div class="col-xs-9">
+									<span class="mk_document_help_shortcut_text">
+										Edit the selected node
+									</span>
+								</div>
+							</div>
+						</li>
+						<li class="mk_document_help_shortcut">	        			
+							<div class="row">
+		        				<div class="col-xs-3">
+									<h5 class="mk_document_help_shortcut_icon">
+										HOME
+									</h5>							
+								</div>
+		        				<div class="col-xs-9">
+									<span class="mk_document_help_shortcut_text">
+										Jump to the top
+									</span>
+								</div>
+							</div>
+						</li>
+						<li class="mk_document_help_shortcut">	        			
+							<div class="row">
+		        				<div class="col-xs-3">
+									<h5 class="mk_document_help_shortcut_icon">
+										END
+									</h5>							
+								</div>
+		        				<div class="col-xs-9">
+									<span class="mk_document_help_shortcut_text">
+										Jump to the bottom
+									</span>
+								</div>
+							</div>
+						</li>
+		        	</ul>
+		        </div>
+		        <div class="mk_document_help_fuction_info col-sm-6">
+        			<h3>Context Menu</h3>
+        			<p>
+						You can open a context menu by right-clicking on any node. This
+						contains further options for interacting with the node.
+					</p>
+        			<h3>Drag and Drop</h3>
+        			<p>
+						You can change the structure by moving nodes. It is also possible 
+						to create new nodes by dragging files and even entire folder
+						structures on the view.
+					</p>
+					<h3>Action Buttons</h3>
+        			<p>
+						The action button at the top of the view can be used to open,
+						create, edit or delete a node.
+					</p>
+        		</div>
+	        </div>
+        	<div class="mk_document_help_project">
+	        	<p class="text-center mk_document_help_project_app">
+	            	<a href="https://mukit.at" target="_blank">MuK Documents 2.0</a>
+	        	</p>
+	        	<p class="text-center mk_document_help_project_info">
+	                <a href="https://github.com/muk-it/muk_dms" target="_blank">Project</a>
+	                <span>-</span>
+	                <a href="https://github.com/muk-it/muk_dms/issues" target="_blank">Issues</a>
+	        	</p>
+	        </div>
+        </div>
+    </t>
+    
+</templates>

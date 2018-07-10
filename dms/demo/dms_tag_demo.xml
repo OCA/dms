@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo noupdate="1">
+
+	<record id="tag_01_demo" model="muk_dms.tag">
+        <field name="name">Customer</field>
+        <field name="color">1</field>
+    </record>
+    
+    <record id="tag_02_demo" model="muk_dms.tag">
+        <field name="name">Partner</field>
+        <field name="color">2</field>
+    </record>
+    
+    <record id="tag_03_demo" model="muk_dms.tag">
+        <field name="name">Project</field>
+        <field name="color">3</field>
+    </record>
+    
+    <record id="tag_04_demo" model="muk_dms.tag">
+        <field name="name">Accounting</field>
+        <field name="color">4</field>
+    </record>
+    
+    <record id="tag_05_demo" model="muk_dms.tag">
+        <field name="name">Sales</field>
+        <field name="color">5</field>
+    </record>
+    
+    <record id="tag_06_demo" model="muk_dms.tag">
+        <field name="name">Portal</field>
+        <field name="color">6</field>
+    </record>
+        
+    <record id="tag_07_demo" model="muk_dms.tag">
+        <field name="name">Apps</field>
+        <field name="color">7</field>
+    </record>
+    
+</odoo>
