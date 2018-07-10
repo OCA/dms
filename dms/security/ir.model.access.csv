@@ -1,11 +1,11 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 
-access_dms_settings_user,dms_settings_user,model_muk_dms_settings,group_dms_user,1,0,0,0
+access_dms_tag_user,dms_tag_user,model_muk_dms_tag,group_dms_user,1,1,1,1
+access_dms_category_user,dms_category_user,model_muk_dms_category,group_dms_user,1,1,1,1
 access_dms_directory_user,dms_directory_user,model_muk_dms_directory,group_dms_user,1,1,1,1
 access_dms_file_user,dms_file_user,model_muk_dms_file,group_dms_user,1,1,1,1
 
-access_dms_data_database_manager,dms_data_database_manager,model_muk_dms_data_database,group_dms_manager,1,0,0,0
+access_dms_settings_user,dms_settings_user,model_muk_dms_settings,group_dms_user,1,0,0,0
+access_dms_settings_manager,dms_settings_manager,model_muk_dms_settings,group_dms_manager,1,1,1,1
 
-access_dms_settings_admin,dms_settings_admin,model_muk_dms_settings,group_dms_admin,1,1,1,1
 access_dms_data_database_admin,dms_data_database_admin,model_muk_dms_data_database,group_dms_admin,1,1,1,1
-access_dms_lock_admin,dms_lock_admin,model_muk_dms_lock,group_dms_admin,1,0,0,1

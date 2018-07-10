@@ -1,0 +1,94 @@
+/**********************************************************************************
+* 
+*    Copyright (C) 2017 MuK IT GmbH
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Affero General Public License as
+*    published by the Free Software Foundation, either version 3 of the
+*    License, or (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Affero General Public License for more details.
+*
+*    You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+**********************************************************************************/
+
+.mk_treeview {
+	height: 100%;
+
+	.mk_document_container {
+		height: 100%;
+		
+		.mk_document_row {
+			height: 100% ! important;
+			
+			.mk_document_col {
+				padding: 0;
+			}
+		}
+	}
+}
+
+.mk_document_controls {
+    padding: 5px 0 10px 0;
+}
+
+.mk_document_preview {
+	height: 100% ! important;
+}
+
+.splitter_panel .vsplitter {
+	width: 3px ! important;
+}
+
+.vakata-context {
+	z-index: 9999;
+	
+	.vakata-context-parent + ul {
+	    list-style: none;
+	    left: 100%;
+	    margin-top: -2.58em;
+	    margin-left: 2px;
+	}
+}
+
+.mk_document_help {
+    padding: 0 16px;
+	    
+	.mk_document_help_info ul { 
+		padding-left: 10px;
+		padding-right: 10px;
+		list-style-type: none;
+		line-height: 30px;
+
+		.mk_document_help_shortcut_icon {
+			background-color: @odoo-brand-primary;
+		    color: white;
+		    padding: 3px 10px;
+		    text-transform: uppercase;
+		    display: inline-block;
+		    margin: 0;
+		}
+		
+		.mk_document_help_shortcut_text {
+			padding-left: 20px;
+		}
+	}
+	.mk_document_help_project {
+	    padding-top: 8px;
+	    border-top: solid @odoo-brand-lightsecondary 2px;
+	    
+	    .mk_document_help_project_app {
+	    	font-size: 16px;
+	    }
+	    
+	    .mk_document_help_project_info {
+	    	font-size: 15px;
+	    }
+	}
+}
+

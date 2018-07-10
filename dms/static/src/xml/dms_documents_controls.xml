@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<templates xml:space="preserve">
+
+	<t t-name="muk_dms.DocumentTreeViewSearch">
+		<div class="o_searchview">
+			<input id="mk_searchview_input" class="o_searchview_input" placeholder="Search..." type="text" />
+			<div class="mk_searchview_info fa fa-lg fa-info" data-toggle="tooltip" data-placement="left"
+			        title="Tip: An underscore _ in the pattern matches any single character. A percent sign % matches any string of zero or more characters." />	
+		</div>
+	</t>
+	
+	<t t-name="muk_dms.DocumentTreeViewButtons">
+    	<div class="o_list_buttons">
+			<button accesskey="O" class="mk_open btn btn-sm btn-primary" type="button">
+	         	<i class="fa fa-external-link"></i>
+	            <span>Open</span>
+	         </button>
+	         <button accesskey="C" class="mk_create btn btn-sm btn-warning" type="button">
+	         	<i class="fa fa-plus-circle"></i>
+	            <span>Create</span>
+	         </button>
+	         <button accesskey="E" class="mk_edit btn btn-sm btn-info" type="button">
+	         	<i class="fa fa-pencil-square-o"></i>
+	            <span>Edit</span>
+	         </button>
+	         <button accesskey="D" class="mk_delete btn btn-sm btn-danger" type="button">
+	         	<i class="fa fa-trash-o"></i>
+	            <span>Delete</span>
+	         </button>
+        </div>
+    </t>
+
+	<t t-name="muk_dms.DocumentTreeViewActions">
+		<span class="btn-group btn-group-sm">
+	        <button type="button" class="mk_action_help fa fa-question btn btn-icon" 
+	        	data-toggle="tooltip" data-placement="bottom" title="Show Help" />
+		</span>
+		<span class="btn-group btn-group-sm">
+	        <button type="button" class="mk_refresh fa fa-refresh btn btn-icon" 
+	        	data-toggle="tooltip" data-placement="bottom" title="Refresh" />
+	        <button type="button" class="mk_auto_refresh fa fa-ban btn btn-icon" 
+	        	data-toggle="tooltip" data-placement="bottom" title="Disable Refresh" />
+		</span>
+		<span class="btn-group btn-group-sm">
+	        <button type="button" class="mk_action_dialog fa fa-window-restore btn btn-icon" 
+	        	data-toggle="tooltip" data-placement="bottom" title="Enable Dialog Mode" />
+		</span>
+	</t>
+
+	<t t-name="muk_dms.DocumentTreeViewOptions">
+		<button type="button" class="mk_show_preview btn btn-default fa fa-file-o o_cp_switch_list " 
+	        	data-toggle="tooltip" data-placement="bottom" title="Show Preview" />
+		<button type="button" class="mk_hide_preview btn btn-default fa fa-ban o_cp_switch_list active"
+	        	data-toggle="tooltip" data-placement="bottom" title="Hide Preview" />
+	</t>
+
+</templates>

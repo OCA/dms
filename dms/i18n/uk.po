@@ -1086,4 +1086,3 @@ msgstr "Ваш браузер не підтримує перетягування
 #: model:ir.model,name:muk_dms.model_res_config_settings
 msgid "res.config.settings"
 msgstr "res.config.settings"
-

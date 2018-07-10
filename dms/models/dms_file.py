@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -20,29 +18,30 @@
 ###################################################################################
 
 import os
-import re
 import json
 import base64
 import logging
 import mimetypes
+import itertools
 
 from odoo import _
-from odoo import models, api, fields
-from odoo.tools import ustr
+from odoo import models, api, fields, tools
 from odoo.tools.mimetypes import guess_mimetype
-from odoo.exceptions import ValidationError, AccessError
-
-from odoo.addons.muk_dms.models import dms_base
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
 _img_path = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static/src/img'))
 
-class File(dms_base.DMSModel):
+class File(models.Model):
+    
     _name = 'muk_dms.file'
     _description = "File"
-    
-    _inherit = 'muk_dms.access'
+    _inherit = [
+        'muk_dms.locking',
+        'muk_dms.access',
+        'mail.thread',
+        'mail.activity.mixin']
     
     #----------------------------------------------------------
     # Database
@@ -50,15 +49,48 @@ class File(dms_base.DMSModel):
     
     name = fields.Char(
         string="Filename", 
-        required=True)
+        required=True,
+        index=True)
+    
+    active = fields.Boolean(
+        string="Archived", 
+        default=True,
+        help="If a file is set to archived, it is not displayed, but still exists.")
+    
+    is_top_file = fields.Boolean(
+        string="Top Directory", 
+        compute='_compute_is_top_file',
+        search='_search_is_top_file')
     
     settings = fields.Many2one(
-        'muk_dms.settings', 
+        comodel_name='muk_dms.settings', 
         string="Settings",
         store=True,
         auto_join=True,
         ondelete='restrict', 
         compute='_compute_settings')
+    
+    show_tree = fields.Boolean(
+        string="Show Structure", 
+        related="settings.show_tree",
+        readonly=True)
+    
+    color = fields.Integer(
+        string="Color")
+    
+    tags = fields.Many2many(
+        comodel_name='muk_dms.tag',
+        relation='muk_dms_file_tag_rel', 
+        column1='fid',
+        column2='tid',
+        string='Tags')
+    
+    category = fields.Many2one(
+        string="Category",
+        comodel_name='muk_dms.category', 
+        related="directory.category",
+        readonly=True,
+        store=True)
     
     content = fields.Binary(
         string='Content', 
@@ -72,8 +104,9 @@ class File(dms_base.DMSModel):
         readonly=True)
     
     directory = fields.Many2one(
-        'muk_dms.directory', 
+        comodel_name='muk_dms.directory', 
         string="Directory",
+        domain="[('permission_create', '=', True)]",
         ondelete='restrict',  
         auto_join=True,
         required=True)
@@ -94,16 +127,10 @@ class File(dms_base.DMSModel):
         string='Size', 
         readonly=True)
     
-    custom_thumbnail = fields.Binary(
-        string="Custom Thumbnail")
-    
-    thumbnail = fields.Binary(
-        compute='_compute_thumbnail',
-        string="Thumbnail")
-    
     path = fields.Char(
         string="Path",
         store=True,
+        index=True,
         readonly=True,
         compute='_compute_path')
     
@@ -113,60 +140,96 @@ class File(dms_base.DMSModel):
         readonly=True,
         compute='_compute_relational_path')
     
-    index_content = fields.Text(
-        string='Indexed Content',
-        compute='_compute_index',
-        readonly=True,
-        store=True,
-        prefetch=False)
+    custom_thumbnail = fields.Binary(
+        string="Custom Thumbnail")
     
-    locked_by = fields.Reference(
-        string='Locked by',
-        related='locked.locked_by_ref')
+    custom_thumbnail_medium = fields.Binary(
+        string="Medium Custom Thumbnail")
     
+    custom_thumbnail_small = fields.Binary(
+        string="Small Custom Thumbnail")
+    
+    thumbnail = fields.Binary(
+        compute='_compute_thumbnail',
+        string="Thumbnail")
+
+    thumbnail_medium = fields.Binary(
+        compute='_compute_thumbnail_medium',
+        string="Medium Thumbnail")
+    
+    thumbnail_small = fields.Binary(
+        compute='_compute_thumbnail_small',
+        string="Small Thumbnail")
+
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
     
-    def notify_change(self, values, refresh=False, operation=None):
-        super(File, self).notify_change(values, refresh, operation)
-        if "index_files" in values:
-            self._compute_index()
+    @api.multi
+    def notify_change(self, values, *largs, **kwargs):
+        super(File, self).notify_change(values, *largs, **kwargs)
         if "save_type" in values:
             self._update_reference_type()
             
-    
-    def trigger_computation_up(self, fields):
-        self.directory.trigger_computation(fields)
+    @api.multi  
+    def trigger_computation_up(self, fields, *largs, **kwargs):
+        if("no_trigger_computation_up" not in self.env.context):
+            self.mapped('directory').suspend_security().with_context(is_parent=True).trigger_computation(fields)
         
-    def trigger_computation(self, fields, refresh=True, operation=None):
-        super(File, self).trigger_computation(fields, refresh, operation)
-        values = {}
-        if "settings" in fields:
-            values.update(self.with_context(operation=operation)._compute_settings(write=False)) 
-        if "path" in fields:
-            values.update(self.with_context(operation=operation)._compute_path(write=False)) 
-            values.update(self.with_context(operation=operation)._compute_relational_path(write=False)) 
-        if "extension" in fields:
-            values.update(self.with_context(operation=operation)._compute_extension(write=False)) 
-        if "mimetype" in fields:
-            values.update(self.with_context(operation=operation)._compute_mimetype(write=False)) 
-        if "index_content" in fields:
-            values.update(self.with_context(operation=operation)._compute_index(write=False)) 
-        if values:
-            self.write(values);     
+    @api.multi
+    def trigger_computation(self, fields, *largs, **kwargs):        
+        super(File, self).trigger_computation(fields, refresh=True, *largs, **kwargs)
+        for record in self:
+            values = {}
             if "settings" in fields:
-                self.notify_change({'save_type': self.settings.save_type})
+                values.update(record._compute_settings(write=False)) 
+            if "path" in fields:
+                values.update(record._compute_path(write=False)) 
+                values.update(record._compute_relational_path(write=False)) 
+            if "extension" in fields:
+                values.update(record._compute_extension(write=False)) 
+            if "mimetype" in fields:
+                values.update(record._compute_mimetype(write=False)) 
+            if values:
+                record.write(values)    
+                if "settings" in fields:
+                    record.notify_change({'save_type': record.settings.save_type})
     
     @api.model
     def max_upload_size(self):
-        config_parameter = self.env['ir.config_parameter'].sudo()
-        return config_parameter.get_param('muk_dms.max_upload_size', default=25)
-            
+        params = self.env['ir.config_parameter'].sudo()
+        return int(params.get_param('muk_dms.max_upload_size', default=25))
+    
+    @api.model
+    def forbidden_extensions(self):
+        params = self.env['ir.config_parameter'].sudo()
+        forbidden_extensions = params.get_param('muk_dms.forbidden_extensions', default="")
+        return [x.strip() for x in forbidden_extensions.split(',')]
+    
+    #----------------------------------------------------------
+    # Search
+    #----------------------------------------------------------
+    
+    @api.model
+    def _search_permission_create(self, operator, operand):
+        res = super(File, self)._search_permission_create(operator, operand)
+        records = self.browse(res[0][2]).filtered(lambda r: r.directory.check_access('create'))
+        if operator == '=' and operand:
+            return [('id', 'in', records.mapped('id'))]
+        return [('id', 'not in', records.mapped('id'))]
+    
+    @api.model
+    def _search_is_top_file(self, operator, operand):
+        files = self.search([]).filtered(lambda f: not f.directory.check_access('read'))
+        if operator == '=' and operand:
+            return [('id', 'in', files.mapped('id'))]
+        return [('id', 'not in', files.mapped('id'))]
+    
     #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------
         
+    @api.multi
     def _compute_settings(self, write=True):
         if write:
             for record in self:
@@ -174,7 +237,8 @@ class File(dms_base.DMSModel):
         else:
             self.ensure_one()
             return {'settings': self.directory.settings.id}         
-                 
+    
+    @api.multi    
     def _compute_extension(self, write=True):
         if write:
             for record in self:
@@ -182,7 +246,8 @@ class File(dms_base.DMSModel):
         else:
             self.ensure_one()
             return {'extension': os.path.splitext(self.name)[1]}
-                          
+    
+    @api.multi            
     def _compute_mimetype(self, write=True):
         def get_mimetype(record):
             mimetype = mimetypes.guess_type(record.name)[0]
@@ -195,7 +260,8 @@ class File(dms_base.DMSModel):
         else:
             self.ensure_one()
             return {'mimetype': get_mimetype(self)}   
-                    
+    
+    @api.multi      
     def _compute_path(self, write=True):
         if write:
             for record in self:
@@ -203,7 +269,8 @@ class File(dms_base.DMSModel):
         else:
             self.ensure_one()
             return {'path': "%s%s" % (self.directory.path, self.name)}   
-            
+    
+    @api.multi
     def _compute_relational_path(self, write=True):
         def get_relational_path(record):
             path = json.loads(record.directory.relational_path)
@@ -219,25 +286,21 @@ class File(dms_base.DMSModel):
             self.ensure_one()
             return {'relational_path': get_relational_path(self)}   
     
-    def _compute_index(self, write=True):
-        def get_index(record):
-            type = record.mimetype.split('/')[0] if record.mimetype else record._compute_mimetype(write=False)['mimetype']  
-            index_files = record.settings.index_files if record.settings else record.directory.settings.index_files
-            if type and type.split('/')[0] == 'text' and record.content and index_files:
-                words = re.findall(b"[\x20-\x7E]{4,}", base64.b64decode(record.content) if record.content else b'')
-                return b"\n".join(words).decode('ascii')
-            else:
-                return None   
-        if write:
-            for record in self:
-                record.index_content = get_index(record)
-        else:
-            self.ensure_one()
-            return {'index_content': get_index(self)}   
-                    
+    @api.multi      
     def _compute_content(self):
         for record in self:
             record.content = record._get_content()
+    
+    @api.multi
+    def _compute_permissions(self):
+        super(File, self)._compute_permissions()
+        for record in self:
+            record.permission_create = record.permission_create and record.directory.check_access('create')
+
+    @api.depends('directory')
+    def _compute_is_top_file(self):
+        for record in self:
+            record.is_top_file = record.directory.check_access('read') 
             
     @api.depends('custom_thumbnail')
     def _compute_thumbnail(self):
@@ -251,17 +314,32 @@ class File(dms_base.DMSModel):
                     path = os.path.join(_img_path, "file_unkown.png")
                 with open(path, "rb") as image_file:
                     record.thumbnail = base64.b64encode(image_file.read())
-    
-    @api.one
-    def _compute_perm_create(self):
-        try:
-            result = super(File, self)._compute_perm_create()
-            if self.directory:
-                self.perm_create = result and self.directory.check_access('create')
+                    
+    @api.depends('custom_thumbnail_medium')
+    def _compute_thumbnail_medium(self):
+        for record in self:
+            if record.custom_thumbnail_medium:
+                record.thumbnail_medium = record.with_context({}).custom_thumbnail_medium        
             else:
-                self.perm_create = result
-        except AccessError:
-             self.perm_create = False    
+                extension = record.extension and record.extension.strip(".") or ""
+                path = os.path.join(_img_path, "file_%s_128x128.png" % extension)
+                if not os.path.isfile(path):
+                    path = os.path.join(_img_path, "file_unkown_128x128.png")
+                with open(path, "rb") as image_file:
+                    record.thumbnail_medium = base64.b64encode(image_file.read())
+    
+    @api.depends('custom_thumbnail_small')
+    def _compute_thumbnail_small(self):
+        for record in self:
+            if record.custom_thumbnail_small:
+                record.thumbnail_small = record.with_context({}).custom_thumbnail_small        
+            else:
+                extension = record.extension and record.extension.strip(".") or ""
+                path = os.path.join(_img_path, "file_%s_64x64.png" % extension)
+                if not os.path.isfile(path):
+                    path = os.path.join(_img_path, "file_unkown_64x64.png")
+                with open(path, "rb") as image_file:
+                    record.thumbnail_small = base64.b64encode(image_file.read())
         
     #----------------------------------------------------------
     # Create, Update, Delete
@@ -270,7 +348,7 @@ class File(dms_base.DMSModel):
     @api.constrains('name')
     def _check_name(self):
         if not self.check_name(self.name):
-            raise ValidationError("The file name is invalid.")
+            raise ValidationError(_("The file name is invalid."))
         childs = self.sudo().directory.files.mapped(lambda rec: [rec.id, rec.name])
         duplicates = [rec for rec in childs if rec[1] == self.name and rec[0] != self.id]
         if duplicates:
@@ -278,72 +356,76 @@ class File(dms_base.DMSModel):
         
     @api.constrains('name')
     def _check_extension(self):
-        config_parameter = self.env['ir.config_parameter'].sudo()
-        forbidden_extensions = config_parameter.get_param('muk_dms.forbidden_extensions', default="")
-        forbidden_extensions = [x.strip() for x in forbidden_extensions.split(',')]
+        forbidden_extensions = self.forbidden_extensions()
         file_extension = self._compute_extension(write=False)['extension']
         if file_extension and file_extension in forbidden_extensions:
             raise ValidationError(_("The file has a forbidden file extension."))
         
     @api.constrains('content')
     def _check_size(self):
-        config_parameter = self.env['ir.config_parameter'].sudo()
-        max_upload_size = config_parameter.get_param('muk_dms.max_upload_size', default=25)
-        try:
-            max_upload_size = int(max_upload_size)
-        except ValueError:
-            max_upload_size = 25
-        if max_upload_size * 1024 * 1024 < len(base64.b64decode(self.content)):
+        max_upload_size = self.max_upload_size()
+        if (max_upload_size * 1024 * 1024) < len(base64.b64decode(self.content)):
             raise ValidationError(_("The maximum upload size is %s MB).") % max_upload_size)
     
-    def _before_create(self, vals):
-        if 'directory' in vals and vals['directory']:
-            directory = self.browse(vals['directory'])
-            directory.check_access('create', raise_exception=True)
-        return super(File, self)._before_create(vals)
+    @api.constrains('directory')
+    def _check_directory_access(self):
+        for record in self:
+            record.directory.check_access('create', raise_exception=True)
     
-    def _after_create(self, vals):
-        record = super(File, self)._after_create(vals)
-        record._check_recomputation(vals)
-        return record
-        
-    def _after_write_record(self, vals, operation):
-        vals = super(File, self)._after_write_record(vals, operation)
-        self._check_recomputation(vals, operation)
-        return vals
-    
-    def _check_recomputation(self, values, operation=None):
-        fields = []
-        if 'name' in values:
-            fields.extend(['extension', 'mimetype', 'path'])
-        if 'directory' in values:
-            fields.extend(['settings', 'path'])
-        if 'content' in values:
-            fields.extend(['index_content'])
-        if fields:
-            self.trigger_computation(fields)
-        self._check_reference_values(values)
-        if 'size' in values:
-            self.trigger_computation_up(['size'])
-                
+    @api.multi
     def _inverse_content(self):
         for record in self:
             if record.content:
                 content = record.content
-                directory = record.directory
-                settings = record.settings if record.settings else directory.settings
+                size = len(base64.b64decode(content))
                 reference = record.reference
                 if reference:
-                    record._update_reference_content(content)
+                    record._update_reference_values({'content': content})
+                    record.write({'size': size})
                 else:
+                    directory = record.directory
+                    settings = record.settings if record.settings else directory.settings
                     reference = record._create_reference(
                         settings, directory.path, record.name, content)
-                reference = "%s,%s" % (reference._name, reference.id)
-                size = len(base64.b64decode(content))
-                record.write({'reference': reference, 'size': size})
+                    reference = "%s,%s" % (reference._name, reference.id)
+                    record.write({'reference': reference, 'size': size})
             else:
                 record._unlink_reference()
                 record.reference = None
+    
+    @api.model
+    def _before_create(self, vals, *largs, **kwargs):
+        tools.image_resize_images(
+            vals, big_name='custom_thumbnail',
+            medium_name='custom_thumbnail_medium',
+            small_name='custom_thumbnail_small')
+        return super(File, self)._before_create(vals, *largs, **kwargs)
+
+    @api.multi
+    def _before_write(self, vals, *largs, **kwargs):
+        tools.image_resize_images(
+            vals, big_name='custom_thumbnail',
+            medium_name='custom_thumbnail_medium',
+            small_name='custom_thumbnail_small')
+        return super(File, self)._before_write(vals, *largs, **kwargs)
+
+    @api.multi
+    def _before_unlink(self, *largs, **kwargs):
+        info = super(File, self)._before_unlink(*largs, **kwargs)
+        references = [
+            list((k, list(map(lambda rec: rec.reference.id, v)))) 
+               for k, v in itertools.groupby(
+                   self.sorted(key=lambda rec: rec.reference._name),
+                   lambda rec: rec.reference._name)]
+        info['references'] = references
+        return info
+    
+    @api.multi
+    def _after_unlink(self, result, info, infos, *largs, **kwargs):
+        super(File, self)._after_unlink(result, info, infos, *largs, **kwargs)
+        if 'references' in info and info['references']:
+            for tuple in info['references']:
+                self.env[tuple[0]].sudo().browse(list(filter(None, tuple[1]))).unlink()
     
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
@@ -364,65 +446,70 @@ class File(dms_base.DMSModel):
         new = self.with_context(lang=None).create(vals)
         self.copy_translations(new)
         return new
-        
-    def _before_unlink(self, operation):
-        info = super(File, self)._before_unlink(operation)
-        references = set(record.reference for record in self if record.reference)
-        directories = set(record.directory for record in self if record.directory)
-        info['references'] = references
-        info['directories'] = directories
-        return info
     
-    def _after_unlink(self, result, info, infos, operation):
-        super(File, self)._after_unlink(result, info, infos, operation)
-        if 'references' in info:
-            for reference in info['references']:
-                reference.sudo().delete()
-                reference.sudo().unlink()
-        if 'directories' in info:
-            for directory in info['directories']:
-                directory.trigger_computation(['size'])
-                
+    @api.multi
+    def _check_recomputation(self, vals, olds, *largs, **kwargs):
+        super(File, self)._check_recomputation(vals, olds, *largs, **kwargs)
+        fields = []
+        if 'name' in vals:
+            fields.extend(['extension', 'mimetype', 'path'])
+        if 'directory' in vals:
+            fields.extend(['settings', 'path'])
+        if 'content' in vals:
+            fields.extend(['index_content'])
+        if fields:
+            self.trigger_computation(fields)
+        self._check_reference_values(vals)
+    
     #----------------------------------------------------------
     # Reference
     #----------------------------------------------------------
     
+    @api.multi
     def _create_reference(self, settings, path, filename, content):
         self.ensure_one()
         self.check_access('create', raise_exception=True)
         if settings.save_type == 'database':
             return self.env['muk_dms.data_database'].sudo().create({'data': content})
-        return None # TODO ERROR Change Order
+        return None
     
-    def _update_reference_content(self, content):
-        self.ensure_one()     
+    @api.multi
+    def _update_reference_values(self, values):
         self.check_access('write', raise_exception=True)
-        self.reference.sudo().update({'content': content})
+        references = self.sudo().mapped('reference')
+        if references:
+            references.sudo().update(values)
     
+    @api.multi
     def _update_reference_type(self):
-        self.ensure_one()     
         self.check_access('write', raise_exception=True)
-        if self.reference and self.settings.save_type != self.reference.type():
-            reference = self._create_reference(self.settings, self.directory.path, self.name, self.content)
-            self._unlink_reference()
-            self.reference = "%s,%s" % (reference._name, reference.id)
+        for record in self:
+            if record.reference and record.settings.save_type != record.reference.type():
+                reference = record._create_reference(
+                    record.settings, record.directory.path, record.name, record.content)
+                record._unlink_reference()
+                record.reference = "%s,%s" % (reference._name, reference.id)
     
+    @api.multi
     def _check_reference_values(self, values):
-        self.ensure_one()
         self.check_access('write', raise_exception=True)
         if 'content' in values:
-            self._update_reference_content(values['content'])
+            self._update_reference_values({'content': values['content']})
         if 'settings' in values:
             self._update_reference_type()
-    
+            
+    @api.multi
     def _get_content(self):
         self.ensure_one()
         self.check_access('read', raise_exception=True)
         return self.reference.sudo().content() if self.reference else None
     
+    @api.multi
     def _unlink_reference(self):
-        self.ensure_one()
         self.check_access('unlink', raise_exception=True)
-        if self.reference:
-            self.reference.sudo().delete()
-            self.reference.sudo().unlink()
+        for tuple in [
+            list((k, list(map(lambda rec: rec.reference.id, v)))) 
+               for k, v in itertools.groupby(
+                   self.sorted(key=lambda rec: rec.reference._name),
+                   lambda rec: rec.reference._name)]:
+            self.env[tuple[0]].sudo().browse(list(filter(None, tuple[1]))).unlink()

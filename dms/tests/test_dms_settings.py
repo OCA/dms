@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -20,13 +18,8 @@
 ###################################################################################
 
 import os
-import base64
 import logging
-import unittest
 import collections
-
-from odoo import _
-from odoo.tests import common
 
 from odoo.addons.muk_dms.tests import dms_case
 
@@ -37,21 +30,12 @@ _compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
 
 class SettingsTestCase(dms_case.DMSTestCase):
     
-    def setUp(self):
-        super(SettingsTestCase, self).setUp()
+    def test_top_directories(self):
+        settings = self.browse_ref("muk_dms.settings_demo")
+        directories = self.directory.sudo().search([('is_top_directory', '=', True)]) 
+        self.assertTrue(_compare(directories, settings.sudo().top_directories))
         
-    def tearDown(self):
-        super(SettingsTestCase, self).tearDown()
-    
-    def test_compute_root_top_directories(self):
-        settings = self.browse_ref("muk_dms.settings_demo").sudo()
-        root_top_directories = settings.root_directories.filtered(
-                lambda r: r.is_root_directory == True)
-        self.assertTrue(_compare(root_top_directories, settings.top_directories))
-        
-    def test_change_index_files(self):
-        settings = self.browse_ref("muk_dms.settings_demo").sudo()
-        file = self.browse_ref("muk_dms.file_13_demo").sudo()
-        self.assertTrue(file.index_content)
-        settings.index_files = False
-        self.assertFalse(file.index_content)
+    def test_top_files(self):
+        settings = self.browse_ref("muk_dms.settings_demo")
+        files = self.file.sudo().search([('is_top_file', '=', True)]) 
+        self.assertTrue(_compare(files, settings.sudo().top_files))
