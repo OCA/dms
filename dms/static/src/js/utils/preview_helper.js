@@ -26,7 +26,6 @@ var session = require('web.session');
 var PreviewGenerator = require('muk_preview.PreviewGenerator');
 var PreviewDialog = require('muk_preview.PreviewDialog');
 
-
 var QWeb = core.qweb;
 var _t = core._t;
 
