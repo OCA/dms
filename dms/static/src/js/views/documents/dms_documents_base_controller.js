@@ -324,6 +324,8 @@ var DocumentsController = Widget.extend({
 		    	                context: _.extend({}, {
 		    	                	mail_create_nosubscribe: true,
 		    	                	mail_create_nolog: true,
+									mail_notrack: true,
+									tracking_disable: true
 		    	                }, session.user_context),
 						    }).then(function (id) {
 						        progress--;
@@ -351,6 +353,8 @@ var DocumentsController = Widget.extend({
 			                context: _.extend({}, {
 	    	                	mail_create_nosubscribe: true,
 			                	mail_create_nolog: true,
+								mail_notrack: true,
+								tracking_disable: true
 			                }, session.user_context),
 						}).done(function(id) {
 							for (var i = 0; i < item.files.length; i++) {
