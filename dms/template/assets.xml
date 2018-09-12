@@ -1,68 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--     
-	Copyright (C) 2017 MuK IT GmbH
-	
+<!--
+
+    Copyright (c) 2017-2019 MuK IT GmbH.
+
+    This file is part of MuK Documents 
+    (see https://mukit.at).
+
     This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of the
-    License, or (at your option) any later version.
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
+    GNU Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
--->
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  -->
 
 <odoo>
 
 <template id="assets_backend" name="muk_dms_assets" inherit_id="web.assets_backend">
 	<xpath expr="//link[last()]" position="after">
-		<link rel="stylesheet" href="/muk_dms/static/src/less/dms_views_file_kanban.less" />
-		<link rel="stylesheet" href="/muk_dms/static/src/less/dms_views_directory_kanban.less" />
-		<link rel="stylesheet" href="/muk_dms/static/src/less/dms_views_documents_base.less" />
-		<link rel="stylesheet" href="/muk_dms/static/src/less/dms_views_documents_main.less" />
-		<link rel="stylesheet" href="/muk_dms/static/src/less/dms_views_documents_preview.less" />
-		<link rel="stylesheet" href="/muk_dms/static/src/less/dms_dialogs_file_info.less" />
-		<link rel="stylesheet" href="/muk_dms/static/src/less/dms_dialogs_directory_info.less" />
+		<link rel="stylesheet" href="/muk_dms/static/src/scss/variables.scss" />
+		<link rel="stylesheet" href="/muk_dms/static/src/scss/directory_kanban.scss" />
+		<link rel="stylesheet" href="/muk_dms/static/src/scss/file_kanban.scss" />
 	</xpath>
 	<xpath expr="//script[last()]" position="after">
-		<script type="text/javascript" src="/muk_dms/static/src/js/utils/client_refresh.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/utils/preview_helper.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/widgets/dms_binary.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/widgets/dms_settings.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/widgets/dms_directory.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/widgets/dms_size.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/widgets/dms_path.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/directory/form/dms_directory_form_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/directory/form/dms_directory_form_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/dms_file_form_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/dms_file_form_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/dms_file_kanban_record.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/dms_file_kanban_column.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/dms_file_kanban_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/dms_file_kanban_renderer.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/dms_file_kanban_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/documents/dms_documents_base_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/documents/dms_documents_base_renderer.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/documents/dms_documents_base_model.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/documents/dms_documents_view_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/documents/dms_documents_dialog_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/documents/dms_documents_base_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/documents/dms_documents_dialog_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/documents/dms_documents_main_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_selection_dialog.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_selection_file_dialog.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_selection_directory_dialog.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_info_dialog.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_info_file_dialog.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_info_directory_dialog.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_drop_dialog.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_drop_file_dialog.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/chrome/dms_drop_files_dialog.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/mixins/file_upload.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/directory/form/directory_form_controller.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/directory/form/directory_form_view.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/file_form_controller.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/file_form_view.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/list/file_list_controller.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/list/file_list_view.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_model.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_record.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_searchpanel.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_renderer.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_view.js" />
+		
 	</xpath>
 </template>
 

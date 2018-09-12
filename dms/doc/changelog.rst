@@ -1,3 +1,33 @@
+`2.7.0`
+-------
+
+- Added Kanban Search Panel
+
+`2.6.0`
+-------
+
+- Added Kanban Mega Menu
+
+`2.5.0`
+-------
+
+- Added Onboarding
+
+`2.4.0`
+-------
+
+- Added migration view
+
+`2.3.0`
+-------
+
+- Restructuring
+
+`2.2.0`
+-------
+
+- Moved document view to a separate module
+
 `2.1.0`
 -------
 
