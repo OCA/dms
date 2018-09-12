@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+    Copyright (c) 2017-2019 MuK IT GmbH.
+
+    This file is part of MuK Documents 
+    (see https://mukit.at).
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  -->
+
+<odoo>
+
+<record id="res_config_settings_view_form" model="ir.ui.view">
+	<field name="name">res.config.settings.view.form.inherit.muk_dms</field>
+	<field name="model">res.config.settings</field>
+	<field name="priority" eval="20"/>
+	<field name="inherit_id" ref="base.res_config_settings_view_form"/>
+	<field name="arch" type="xml">
+	    <xpath expr="//div[hasclass('settings')]" position="inside">
+            <div class="app_settings_block" data-string="Documents" data-key="muk_dms" groups="base.group_system">
+            	<div name="muk_dms_settings">
+	            	<h2>Extensions</h2>
+	            	<div class="row mt16 o_settings_container" name="extensions">
+	            		<div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_access"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_access"/>
+	                            <div class="text-muted">
+	                                Allows the creation of groups to define access rights
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_access','=',False)]}" id="msg_module_muk_dms_access">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_mail"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_mail"/>
+	                            <div class="text-muted">
+	                                Adds support for messages and activities on directories and files
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_mail','=',False)]}" id="msg_module_muk_dms_mail">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_version"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_version"/>
+	                            <div class="text-muted">
+	                                Enables version control for files
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_version','=',False)]}" id="msg_module_muk_dms_version">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_trash"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_trash"/>
+	                            <div class="text-muted">
+	                                Activates a file trash to restore deleted files
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_trash','=',False)]}" id="msg_module_muk_dms_trash">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_thumbnails"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_thumbnails"/>
+	                            <div class="text-muted">
+	                                Automatically create file thumbnails based on the content
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_thumbnails','=',False)]}" id="msg_module_muk_dms_thumbnails">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_index"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_index"/>
+	                            <div class="text-muted">
+	                                Automatically create a file index based on the content
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_index','=',False)]}" id="msg_module_muk_dms_index">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_widget"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_widget"/>
+	                            <div class="text-muted">
+	                                Allows the user to use documents as input for any binary field
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_archive"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_archive"/>
+	                            <div class="text-muted">
+	                                Allows to download directories as a archive file
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>Views</h2>
+	            	<div class="row mt16 o_settings_container" name="views">
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_preview"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_preview"/>
+	                            <div class="text-muted">
+	                                Activates the preview function on files
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_view"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_view"/>
+	                            <div class="text-muted">
+	                                Activates the documents tree view
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_finder"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_finder"/>
+	                            <div class="text-muted">
+	                                Enables the Document Finder
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>Storage</h2>
+	            	<div class="row mt16 o_settings_container" name="storages">
+	            		<div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_lobject"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_lobject"/>
+	                            <div class="text-muted">
+	                                Enables a new save option to store files into large objects
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_lobject','=',False)]}" id="msg_module_muk_dms_lobject">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	            		<div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_file"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_file"/>
+	                            <div class="text-muted">
+	                                Enables a new save option to store files into a filestore
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_file','=',False)]}" id="msg_module_muk_dms_file">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>Attachments</h2>
+	            	<div class="row mt16 o_settings_container" name="attachments">
+	            		<div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_attachment"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_attachment"/>
+	                            <div class="text-muted">
+	                                Allows attachments to be stored inside of Documents
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_attachment','=',False)]}" id="msg_module_muk_dms_attachment">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	            		<div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_attachment_wizard"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_attachment_wizard"/>
+	                            <div class="text-muted">
+	                                Allows documents to be used as attachments
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_attachment_rules"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_attachment_rules"/>
+	                            <div class="text-muted">
+	                                Allows to placed attachments in the right directory
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_attachment_rules','=',False)]}" id="msg_module_muk_dms_attachment_rules">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_attachment_automation"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_attachment_automation"/>
+	                            <div class="text-muted">
+	                                Allows you to create rule templates to create attachment rules
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_attachment_automation','=',False)]}" id="msg_module_muk_dms_attachment_automation">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>Integrations</h2>
+	            	<div class="row mt16 o_settings_container" name="integrations">
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_actions"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_actions"/>
+	                            <div class="text-muted">
+	                                Create custom file operations
+	                            </div>
+		                        <div class="content-group" attrs="{'invisible': [('module_muk_dms_actions','=',False)]}" id="msg_module_muk_dms_actions">
+		                            <div class="text-warning mt16"><strong>Save</strong> this page and come back here to set up the feature.</div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-lg-6 o_setting_box">
+	                        <div class="o_setting_left_pane">
+	                            <field name="module_muk_dms_users"/>
+	                        </div>
+	                        <div class="o_setting_right_pane">
+	                            <label for="module_muk_dms_users"/>
+	                            <div class="text-muted">
+	                                Automatic creation of user directories
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <h2>File Upload</h2>
+	                <div class="row mt16 o_settings_container" name="file">
+	                    <div class="col-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_right_pane">
+	                            <span class="o_form_label">File Size</span>
+	                            <div class="text-muted">
+	                                Define the maximum upload size of a file in MB
+	                            </div>
+	                            <div class="content-group">
+		                            <div class="row mt16">
+		                                <label class="col-md-3 o_light_label" for="documents_binary_max_size"/>
+		                                <field name="documents_binary_max_size"/>
+		                            </div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-12 col-md-6 o_setting_box">
+	                        <div class="o_setting_right_pane">
+	                            <span class="o_form_label">File Extensions</span>
+	                            <div class="text-muted">
+	                                Define forbidden file extensions
+	                            </div>
+	                            <div class="content-group">
+		                            <div class="row mt16">
+		                                <label class="col-md-3 o_light_label" for="documents_forbidden_extensions"/>
+		                                <field name="documents_forbidden_extensions" placeholder="exe,msi"/>
+		                            </div>
+		                        </div>
+	                        </div>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+    	</xpath>
+    </field>
+</record>
+
+<record id="action_dms_settings_general" model="ir.actions.act_window">
+    <field name="name">General Settings</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.config.settings</field>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+    <field name="context">{'module' : 'muk_dms'}</field>
+</record>
+
+<menuitem id="menu_dms_settings_general" name="General Settings" 
+	parent="main_menu_muk_dms"
+   	sequence="100" 
+   	action="action_dms_settings_general" 
+   	groups="base.group_system"/>
+            
+</odoo>
+

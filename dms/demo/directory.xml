@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+
+    Copyright (c) 2017-2019 MuK IT GmbH.
+
+    This file is part of MuK Documents 
+    (see https://mukit.at).
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  -->
+
+<odoo noupdate="1">
+	
+	<record id="directory_01_demo" model="muk_dms.directory">
+	    <field name="name">Documents</field>
+	    <field name="is_root_directory" eval="True"/>
+	    <field name="color" eval="1"/>
+	    <field name="root_storage" ref="muk_dms.storage_demo" />
+	    <field name="category" ref="muk_dms.category_01_demo" />
+	    <field name="tags" eval="[(6, 0, [ref('muk_dms.tag_01_demo'), ref('muk_dms.tag_05_demo')])]" />
+	</record>
+    
+    <record id="directory_02_demo" model="muk_dms.directory">
+	    <field name="name">Media</field>
+	    <field name="is_root_directory" eval="True"/>
+	    <field name="color" eval="2"/>
+	    <field name="root_storage" ref="muk_dms.storage_demo" />
+	    <field name="tags" eval="[(6, 0, [ref('muk_dms.tag_01_demo'), ref('muk_dms.tag_03_demo')])]" />
+	</record>
+	
+	<record id="directory_03_demo" model="muk_dms.directory">
+	    <field name="name">Sheets</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="1"/>
+	    <field name="parent_directory" ref="muk_dms.directory_01_demo" />
+	    <field name="tags" eval="[(6, 0, [ref('muk_dms.tag_01_demo'), ref('muk_dms.tag_04_demo')])]" />
+	</record>
+	
+	<record id="directory_04_demo" model="muk_dms.directory">
+	    <field name="name">Templates</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="1"/>
+	    <field name="parent_directory" ref="muk_dms.directory_01_demo" />
+	    <field name="category" ref="muk_dms.category_01_demo" />
+	    <field name="tags" eval="[(6, 0, [ref('muk_dms.tag_07_demo')])]" />
+	</record>
+	
+	<record id="directory_05_demo" model="muk_dms.directory">
+	    <field name="name">Photos</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="2"/>
+	    <field name="category" ref="muk_dms.category_02_demo" />
+	    <field name="parent_directory" ref="muk_dms.directory_02_demo" />
+	</record>
+	
+	<record id="directory_06_demo" model="muk_dms.directory">
+	    <field name="name">2017</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="2"/>
+	    <field name="parent_directory" ref="muk_dms.directory_05_demo" />
+	    <field name="tags" eval="[(6, 0, [ref('muk_dms.tag_02_demo'), ref('muk_dms.tag_03_demo')])]" />
+	</record>
+	
+	<record id="directory_07_demo" model="muk_dms.directory">
+	    <field name="name">2018</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="2"/>
+	    <field name="parent_directory" ref="muk_dms.directory_05_demo" />
+	    <field name="tags" eval="[(6, 0, [ref('muk_dms.tag_02_demo'), ref('muk_dms.tag_06_demo')])]" />
+	</record>
+        
+    <record id="directory_08_demo" model="muk_dms.directory">
+	    <field name="name">Videos</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="2"/>
+	    <field name="parent_directory" ref="muk_dms.directory_02_demo" />
+	</record>
+	
+	<record id="directory_09_demo" model="muk_dms.directory">
+	    <field name="name">Music</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="2"/>
+	    <field name="parent_directory" ref="muk_dms.directory_02_demo" />
+	</record>
+	
+	<record id="directory_10_demo" model="muk_dms.directory">
+	    <field name="name">Graphics</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="parent_directory" ref="muk_dms.directory_02_demo" />
+	</record>
+	
+	<record id="directory_11_demo" model="muk_dms.directory">
+	    <field name="name">Mails</field>
+	    <field name="is_root_directory" eval="True"/>
+	    <field name="color" eval="3"/>
+	    <field name="root_storage" ref="muk_dms.storage_demo" />
+	    <field name="tags" eval="[(6, 0, [ref('muk_dms.tag_04_demo'), ref('muk_dms.tag_05_demo')])]" />
+	</record>
+	
+	<record id="directory_12_demo" model="muk_dms.directory">
+	    <field name="name">Data</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="1"/>
+	    <field name="parent_directory" ref="muk_dms.directory_01_demo" />
+	    <field name="tags" eval="[(6, 0, [ref('muk_dms.tag_06_demo'), ref('muk_dms.tag_07_demo')])]" />
+	</record>
+	
+	<record id="directory_13_demo" model="muk_dms.directory">
+	    <field name="name">Code</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="color" eval="1"/>
+	    <field name="category" ref="muk_dms.category_01_demo" />
+	    <field name="parent_directory" ref="muk_dms.directory_01_demo" />
+	</record>
+	
+	<record id="directory_14_demo" model="muk_dms.directory">
+	    <field name="name">Slides</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="category" ref="muk_dms.category_01_demo" />
+	    <field name="parent_directory" ref="muk_dms.directory_01_demo" />
+	</record>
+        
+</odoo>

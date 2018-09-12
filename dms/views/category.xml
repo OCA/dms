@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+    Copyright (c) 2017-2019 MuK IT GmbH.
+
+    This file is part of MuK Documents 
+    (see https://mukit.at).
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  -->
+
+<odoo>
+
+<record id="view_dms_category_search" model="ir.ui.view">
+	<field name="name">muk_dms_category.search</field>
+	<field name="model">muk_dms.category</field>
+    <field name="arch" type="xml">
+        <search string="Categories">
+            <field name="name" filter_domain="[('name', 'ilike', self)]" />
+            <filter string="All" name="all" domain="['|', ('active', '=', False), ('active', '=', True)]" />
+        </search>
+    </field>
+</record>
+
+<record id="view_dms_category_tree" model="ir.ui.view">
+	<field name="name">muk_dms_category.tree</field>
+	<field name="model">muk_dms.category</field>
+	<field name="arch" type="xml">
+		<tree string="Categories" decoration-muted="(not active)">
+			<field name="active" />
+			<field name="name" />
+			<field name="parent_category" />
+			<field name="tags" />
+		</tree>
+	</field>
+</record>
+
+<record id="view_dms_category_form" model="ir.ui.view">
+	<field name="name">muk_dms_category.form</field>
+	<field name="model">muk_dms.category</field>
+	<field name="arch" type="xml">
+		<form string="Category">
+        	<sheet>
+			    <div class="oe_button_box" name="button_box">
+			        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-bell">
+			            <field name="active" widget="boolean_button"/>
+			        </button>
+			    </div>
+		        <div class="oe_title">
+		            <label for="name" class="oe_edit_only"/>
+		            <h1>
+		            	<field name="name" placeholder="Invoices"/>
+		            </h1>
+		        </div>
+		        <group>
+			        <group>
+						<field name="parent_category" />
+			        </group>
+			        <group>
+						<field name="count_categories" string="Subcategories" />
+			        </group>
+		        </group>
+		        <group>
+			        <group>
+						<field name="count_tags" string="Tags" />
+			        </group>
+			        <group>
+						<field name="count_files" string="Files" />
+						<field name="count_directories" string="Directories" />
+			        </group>
+		        </group>
+		        <notebook>
+		        	<page string="Tags">
+		        		<field name="tags" widget="one2many" mode="kanban" context="{'default_category': active_id}" />
+		        	</page>
+		        	<page string="Subcategories">
+		        		<field name="child_categories" widget="one2many" mode="tree" context="{'default_parent_category': active_id}" />
+		        	</page>
+		        </notebook>
+        	</sheet>
+        </form> 
+	</field>
+</record>
+
+<record id="action_dms_category" model="ir.actions.act_window">
+	<field name="name">Categories</field>
+	<field name="res_model">muk_dms.category</field>
+	<field name="view_mode">tree,form</field>
+	<field name="context">{'search_default_all': 1}</field>
+	<field name="help" type="html">
+	    <p class="o_view_nocontent_smiling_face">
+	      	Create a new Category.
+	    </p>
+	    <p>
+			Categories are used to categorize Documents. 
+	    </p>
+    </field>
+</record>
+
+<menuitem id="menu_dms_category" name="Categories"
+	parent="cat_menu_muk_dms_config_organizing" 
+	action="action_dms_category" />
+
+</odoo>
