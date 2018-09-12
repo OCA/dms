@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+    Copyright (c) 2017-2019 MuK IT GmbH.
+
+    This file is part of MuK Documents 
+    (see https://mukit.at).
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  -->
+
+<odoo>
+
+<record id="action_dms_directories_directory" model="ir.actions.act_window">
+    <field name="name">Subdirectories</field>
+    <field name="view_type">form</field>
+	<field name="res_model">muk_dms.directory</field>
+	<field name="view_mode">kanban,tree,form</field>
+	<field name="domain">
+		[
+			("parent_directory", "=",  active_id),
+			("is_hidden", "=",  False),
+		]
+	</field>
+	<field name="context">
+		{
+			'default_parent_directory': active_id,
+		}
+    </field>
+	<field name="help" type="html">
+	    <p class="o_view_nocontent_smiling_face">
+	      	Click to add a new directory.
+	    </p>
+	    <p>
+			Directories can be used to structure and organize
+			files directly in Odoo.
+	    </p>
+    </field>
+</record>
+
+<record id="action_dms_files_directory" model="ir.actions.act_window">
+    <field name="name">Files</field>
+    <field name="view_type">form</field>
+	<field name="res_model">muk_dms.file</field>
+	<field name="view_mode">kanban,tree,graph,pivot,form</field>
+	<field name="domain">
+		[
+			("directory", "=",  active_id),
+			("is_hidden", "=",  False),
+		]
+	</field>
+	<field name="context">
+		{
+			'default_directory': active_id,
+		}
+    </field>
+	<field name="help" type="html">
+	    <p class="o_view_nocontent_smiling_face">
+	      	Click to add a new file.
+	    </p>
+	    <p>
+			Files are used to save content directly in Odoo.
+	    </p>
+    </field>
+</record>
+
+<record id="action_dms_directories_all_directory" model="ir.actions.act_window">
+    <field name="name">Subdirectories</field>
+    <field name="view_type">form</field>
+	<field name="res_model">muk_dms.directory</field>
+	<field name="view_mode">kanban,tree,form</field>
+	<field name="domain">
+		[
+			("parent_directory", "child_of",  active_id),
+			("is_hidden", "=",  False),
+			("id", "!=",  active_id),
+		]
+	</field>
+	<field name="context">
+		{
+			'default_parent_directory': active_id,
+		}
+    </field>
+	<field name="help" type="html">
+	    <p class="o_view_nocontent_smiling_face">
+	      	Click to add a new directory.
+	    </p>
+	    <p>
+			Directories can be used to structure and organize
+			files directly in Odoo.
+	    </p>
+    </field>
+</record>
+
+<record id="action_dms_files_all_directory" model="ir.actions.act_window">
+    <field name="name">Files</field>
+    <field name="view_type">form</field>
+	<field name="res_model">muk_dms.file</field>
+	<field name="view_mode">kanban,tree,graph,pivot,form</field>
+	<field name="domain">
+		[
+			("directory", "child_of",  active_id),
+			("is_hidden", "=",  False),
+		]
+	</field>
+	<field name="context">
+		{
+			'default_directory': active_id,
+		}
+    </field>
+	<field name="help" type="html">
+	    <p class="o_view_nocontent_smiling_face">
+	      	Click to add a new file.
+	    </p>
+	    <p>
+			Files are used to save content directly in Odoo.
+	    </p>
+    </field>
+</record>
+
+<record id="search_dms_directory" model="ir.ui.view">
+	<field name="name">muk_dms_directory.search</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="name" filter_domain="['|', ('name','ilike',self), ('parent_path_names','ilike',self)]"/>
+			<filter string="My Directories" name="filter_user" domain="[('create_uid', '=', uid)]"/>
+			<filter string="Starred Directories" name="filter_starred" domain="[('starred', '=', True)]" />
+			<separator/>
+			<filter string="Root Directories" name="filter_root" domain="[('is_root_directory', '=', True)]" />
+			<separator/>
+			<filter string="Creation Date" name="filter_create" date="create_date"/>
+			<filter string="Modification Date" name="filter_write" date="write_date"/>
+			<group expand="0" string="Group By">
+				<filter name="group_color" string="Color" domain="[]" context="{'group_by':'color'}" />
+				<filter name="group_category" string="Category" domain="[]" context="{'group_by':'category'}" />
+				<separator/>
+				<filter name="group_storage" string="Storage" domain="[]" context="{'group_by':'storage'}" />
+			</group>
+		</search>
+	</field>
+</record>
+
+<record id="view_dms_directory_kanban" model="ir.ui.view">
+	<field name="name">muk_dms_directory.kanban</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="arch" type="xml">
+		<kanban class="mk_directory_kanban_view o_kanban_small_column align-content-start" 
+				banner_route="/dms/document_onboarding/directory">
+			<field name="id"/>
+			<field name="tags"/>
+			<field name="name"/>
+			<field name="color"/>
+			<field name="starred"/>
+            <field name="create_uid"/>
+            <field name="write_date"/>
+			<field name="permission_write"/>
+			<field name="permission_unlink"/>
+			<field name="count_directories"/>
+			<field name="count_files"/>
+			<templates>
+				<t t-name="kanban-box">
+				 	<div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+				 		<div class="o_dropdown_kanban dropdown">
+						    <a class="dropdown-toggle o-no-caret btn" href="#" role="button" data-toggle="dropdown" aria-label="Dropdown menu" title="Dropdown menu">
+						        <span class="fa fa-ellipsis-v"/>
+						    </a>
+						    <div class="dropdown-menu" role="menu">
+						    	<div class="row">
+							    	<div class="col-6 mk_directory_kanban_views">
+										<h6 class="dropdown-header">Views</h6>
+								        <a type="action" name="%(muk_dms.action_dms_directories_all_directory)d" role="menuitem" class="dropdown-item">
+											<i class="fa fa-folder-o" /> Directories
+										</a>
+										<a type="action" name="%(muk_dms.action_dms_files_all_directory)d" role="menuitem" class="dropdown-item">
+											<i class="fa fa-file-o" /> Files
+										</a>
+									</div>
+									<div class="col-6 border-left mk_directory_kanban_actions">
+										<h6 class="dropdown-header">Actions</h6>
+								        <a role="menuitem" type="open" class="dropdown-item">
+											<i class="fa fa-external-link" /> Open
+										</a>
+								        <a t-if="record.permission_write.raw_value" role="menuitem" type="edit" class="dropdown-item">
+											<i class="fa fa-pencil-square-o" /> Edit
+										</a>
+								        <a t-if="record.permission_unlink.raw_value" role="menuitem" type="delete" class="dropdown-item">
+											<i class="fa fa-trash-o" /> Delete
+										</a>
+									</div>
+								</div>
+								<div t-if="record.permission_write.raw_value" class="row">
+									<div role="menuitem" class="col-12">
+										<ul class="oe_kanban_colorpicker" data-field="color"/>
+									</div>
+								</div>
+						    </div>
+						</div>
+						<div class="oe_kanban_content">
+							<div class="mk_directory_kanban_actions">
+								<div class="mk_directory_kanban_actions_wrapper">
+									<a type="action" name="%(muk_dms.action_dms_directories_directory)d" role="button"
+										class="btn btn-sm btn-outline-primary mk_directory_kanban_directories" 
+										t-att-title="record.count_directories.raw_value">
+										<i class="fa fa-lg fa-folder"></i>
+									</a>
+									<a type="action" name="%(muk_dms.action_dms_files_directory)d" role="button"
+	                                	class="btn btn-sm btn-outline-primary mk_directory_kanban_files"
+	                                	t-att-title="record.count_files.raw_value">
+										<i class="fa fa-lg fa-file"></i>
+									</a>
+								</div>
+							</div>
+							<div class="o_kanban_image">
+								<div class="o_kanban_image_wrapper">
+									<img t-att-src="kanban_image('muk_dms.directory', 'thumbnail_medium', record.id.raw_value)" alt="Thumbnail"/>
+								</div>
+							</div>
+							<div class="o_kanban_details">
+								<div class="o_kanban_details_wrapper">
+									<div class="o_kanban_record_title o_text_overflow">
+                                        <field name="name"/>
+                                    </div>
+									<div class="o_kanban_record_body">
+		                                <field name="tags" widget="many2many_tags" options="{'color_field': 'color'}"/>
+									</div>
+									<div class="o_kanban_record_bottom">
+								    	<div class="oe_kanban_bottom_left">
+											<field name="write_date" widget="date"/>
+								     	</div>
+										<div class="oe_kanban_bottom_right">
+											<a role="button" type="object" name="toggle_starred" 
+												t-attf-class="fa fa-lg fa-star#{record.starred.raw_value ? '  favorite_sign_button_enabled' : '-o'} favorite_sign_button"/>
+											<img t-att-src="kanban_image('res.users', 'image_small', record.create_uid.raw_value)" 
+												t-att-alt="record.create_uid.value" class="oe_kanban_avatar"/>
+									    </div>
+									</div>
+								</div>
+                            </div>
+						</div> 
+					</div>
+				</t>
+			</templates>
+            <searchpanel>
+                <field name="parent_directory" string="Starred"  domain="[['is_hidden', '=', False], ['starred', '=', True]]" select="multi" icon="fa-star"/>
+                <field name="category" select="multi" icon="fa-users"/>
+                <field name="tags" select="multi" icon="fa-tag" groupby="category" />
+            </searchpanel>
+		</kanban>
+	</field>
+</record>
+
+<record id="view_dms_directory_tree" model="ir.ui.view">
+	<field name="name">muk_dms_directory.tree</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="arch" type="xml">
+		<tree string="Directories">
+			<field name="name" />
+			<field name="write_date" />
+			<field name="count_files" string="Files" />
+			<field name="count_directories" string="Directories" />
+			<field name="parent_path_names" widget="path_names" string="Path" />
+			<field name="storage" groups="muk_dms.group_dms_manager" />
+		</tree>
+	</field>
+</record>
+
+<record id="view_dms_directory_form" model="ir.ui.view">
+	<field name="name">muk_dms_directory.form</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="arch" type="xml">
+ 		<form string="Directory" js_class="directory_form">
+			<header>
+			</header>
+			<sheet>
+				<div class="oe_button_box" name="button_box">
+					<button  type="action" name="%(muk_dms.action_dms_directories_all_directory)d" 
+						class="oe_stat_button" icon="fa-folder-open-o" >
+		                <field string="Subdirectories" name="count_total_directories" widget="statinfo"/>
+	 				</button>     
+	 				<button  type="action" name="%(muk_dms.action_dms_files_all_directory)d" 
+	 					class="oe_stat_button" icon="fa-file-text-o" >
+		                <field string="Files" name="count_total_files" widget="statinfo"/>
+	 				</button>    
+	 				<button name="toggle_starred" type="object" class="oe_stat_button" icon="fa-star">
+                    	<field name="starred" widget="boolean_button" 
+                    		options='{"terminology": {"string_true": "Starred", "string_false": "Not Starred", "hover_true": "Unstar", "hover_false": "Star"}}'/>
+                    </button> 
+                </div>
+				<field name="thumbnail" widget="image" class="oe_avatar oe_read_only" 
+                	options="{'preview_image': 'thumbnail_medium', 'size': [90, 90]}" />
+				<field name="custom_thumbnail" widget="image" class="oe_avatar oe_edit_only" 
+					options="{'preview_image': 'custom_thumbnail_medium', 'size': [90, 90]}" />
+				<div class="oe_title">
+					<label for="name" class="oe_edit_only" />
+					<h1>
+						<field name="name" placeholder="My Documents" />
+					</h1>
+					<h4>
+ 						<field name="parent_path_json" widget="path_json" 
+ 							options="{'prefix': True, 'suffix': True}" />
+					</h4>
+				</div>
+				<group name="settings">
+					<group>
+						<field name="is_root_directory" invisible="1"/>
+						<field name="storage" options="{'no_open': True}"
+							attrs="{'invisible':['|', ('is_root_directory','=',True), ('parent_directory','=',False)]}"/>
+						<field name="root_storage" options="{'no_open': True}" readonly="1"
+							attrs="{'invisible':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"/>
+					</group>
+					<group>
+						<field name="parent_directory" options="{'no_quick_create': True}"
+							attrs="{'invisible':[('is_root_directory','=',True)], 'required':[('is_root_directory','=',False)]}"/>
+					</group>
+				</group>
+				<group name="data">
+ 					<group>
+						<field name="size" widget="binary_size"/>
+						<field name="count_elements" string="Elements"/>
+					</group>
+					<group>
+ 						<field name="category" placeholder="Internal / Human Resource"
+ 							options="{'no_open': True, 'no_create': True}" />
+ 						<field name="tags" widget="many2many_tags" placeholder="Tags..."
+ 							options="{'color_field': 'color', 'no_create_edit': True}" />
+					</group>
+				</group>
+				<notebook>
+					<page name="page_directories" string="Subdirectories">
+						<field name="child_directories" 
+							context="{'default_parent_directory': active_id, 'mail_create_nolog': True}" 
+							attrs="{'readonly':[('permission_create','=',False)]}">
+							<tree string="Subdirectories" limit="10">
+								<field name="name" />
+								<field name="count_directories" string="Directories" />
+								<field name="count_files" string="Files" />
+								<field name="size" widget="binary_size"/>
+							</tree>
+						</field>
+					</page>
+					<page name="page_files" string="Files">
+						<field name="files" 
+							context="{'default_directory': active_id, 'mail_create_nolog': True}"
+							attrs="{'readonly':[('permission_create','=',False)]}">
+							<tree string="Files" limit="10">
+								<field name="name" />
+								<field name="mimetype" />
+								<field name="size" widget="binary_size"/>
+								<field name="write_date" readonly="1" />
+							</tree>
+						</field>
+					</page>
+					<page name="page_meta" string="Meta Information">
+						<group>
+							<group>
+								<field name="create_date" readonly="1" />
+								<field name="create_uid" readonly="1" />
+							</group>
+							<group>
+								<field name="write_date" readonly="1" />
+								<field name="write_uid" readonly="1" />
+							</group>
+						</group>
+					</page>
+					<page name="page_access" string="Access Information">
+						<group name="permissions">
+							<group>
+								<field name="permission_read" readonly="1" />
+								<field name="permission_create" readonly="1" />
+							</group>
+							<group>
+								<field name="permission_write" readonly="1" />
+								<field name="permission_unlink" readonly="1" />
+							</group>
+						</group>
+					</page>
+				</notebook>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record id="view_dms_directory_manager_form" model="ir.ui.view">
+	<field name="name">muk_dms_directory.form</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="inherit_id" ref="view_dms_directory_form" />
+    <field name="groups_id" eval="[(6, 0, [ref('muk_dms.group_dms_manager')])]"/>
+	<field name="arch" type="xml">
+		<field name="is_root_directory" position="attributes">
+	 		<attribute name="invisible">0</attribute>
+		</field>
+		<field name="root_storage" position="attributes">
+	 		<attribute name="readonly">0</attribute>
+	 		<attribute name="options">{'no_quick_create': True}</attribute>
+		</field>
+		<field name="storage" position="attributes">
+	 		<attribute name="options">{}</attribute>
+		</field>
+    </field>
+</record>
+
+<record id="action_dms_directory" model="ir.actions.act_window">
+	<field name="name">Directories</field>
+	<field name="res_model">muk_dms.directory</field>
+    <field name="view_type">form</field>
+	<field name="view_mode">kanban,tree,form</field>
+	<field name="domain">[("is_hidden", "=",  False)]</field>
+	<field name="help" type="html">
+	    <p class="o_view_nocontent_smiling_face">
+	      	Add a new Directory.
+	    </p>
+	    <p>
+			Directories can be used to structure and organize
+			files directly in Odoo.
+	    </p>
+    </field>
+</record>
+
+<menuitem id="menu_dms_directory" name="Directories" sequence="30"
+	parent="main_menu_muk_dms" action="action_dms_directory" />
+	
+<record id="view_dms_directory_new_form" model="ir.ui.view">
+	<field name="name">muk_dms_directory.form</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="inherit_id" ref="view_dms_directory_form" />
+    <field name="mode">primary</field>
+	<field name="arch" type="xml">
+		<xpath expr="//header" position="replace" />
+		<xpath expr="//sheet//div[hasclass('oe_button_box')]" position="replace" />
+		<xpath expr="//sheet//group[@name='settings']" position="replace" />
+		<xpath expr="//sheet//group[@name='data']" position="replace" >
+			<group>
+				<group>
+					<field name="is_root_directory" readonly="1" />
+					<field name="root_storage" options="{'no_quick_create': True}" />
+				</group>
+				<group>
+					<field name="category" placeholder="Internal / Human Resource"
+ 						options="{'no_open': True, 'no_create': True}" />
+					<field name="tags" widget="many2many_tags" placeholder="Tags..."
+ 						options="{'color_field': 'color', 'no_create_edit': True}" />
+				</group>
+			</group>
+		</xpath>
+		<form position="inside">
+	        <footer position="replace">
+	            <button class="btn btn-primary" type="object" string="Create" 
+	            	name="action_save_onboarding_directory_step" />
+	            <button special="cancel" string="Cancel" />
+	        </footer>
+	    </form>
+    </field>
+</record>
+
+<record id="action_dms_directory_new" model="ir.actions.act_window">
+	<field name="name">New Root Directory</field>
+	<field name="res_model">muk_dms.directory</field>
+	<field name="view_mode">form</field>
+    <field name="view_type">form</field>
+	<field name="target">new</field>
+    <field name="view_id" ref="view_dms_directory_new_form" />
+</record>
+
+</odoo>

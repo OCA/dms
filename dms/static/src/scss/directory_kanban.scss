@@ -1,0 +1,103 @@
+/**********************************************************************************
+*
+*    Copyright (c) 2017-2019 MuK IT GmbH.
+*
+*    This file is part of MuK Documents 
+*    (see https://mukit.at).
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Lesser General Public License as published by
+*    the Free Software Foundation, either version 3 of the License, or
+*    (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Lesser General Public License for more details.
+*
+*    You should have received a copy of the GNU Lesser General Public License
+*    along with this program. If not, see <http://www.gnu.org/licenses/>.
+*
+**********************************************************************************/
+
+.mk_directory_kanban_view {
+	height: 100%;
+	.o_kanban_record {
+		padding: 0;
+		max-height: $o-kanban-image-width + 1;
+		.mk_directory_kanban_actions {
+			float: left;
+			border-right: solid 1px $gray-400;
+			.mk_directory_kanban_actions_wrapper {
+				min-height: $o-kanban-image-width;
+				.btn-outline-primary {
+					display: flex;
+					border-radius: 0;
+					align-items: center;
+					justify-content: center;
+	    			border-color: transparent;
+					min-width: $o-kanban-image-width / 2;
+					min-height: $o-kanban-image-width / 2;
+					&.mk_directory_kanban_directories {
+						border-bottom: solid 1px $gray-400;
+					}
+				}
+			}
+		}
+		.o_kanban_image {
+			width: $o-kanban-image-width + 1;
+			border-right: solid 1px $gray-400;
+			+ div {
+	            padding-left: $o-kanban-image-width + $o-kanban-inside-hgutter + $o-kanban-image-width / 2;
+	            @include media-breakpoint-down(sm) {
+	                padding-left: $o-kanban-image-width + $o-kanban-inside-hgutter-mobile + $o-kanban-image-width / 2;
+	            }
+	        }
+		}
+		.o_kanban_details .o_kanban_details_wrapper {
+			padding: 4px 4px 4px 0;
+			.o_kanban_record_title {
+				font-weight: bold;
+				padding-right: 16px;
+			}
+			.o_kanban_record_body {
+				max-height: 12px;
+				.o_kanban_tags {
+					@include o-text-overflow;
+				}
+			}			
+			.oe_kanban_avatar {
+			    margin-left: 0px;
+			}
+			.favorite_sign_button {
+				margin-top: 1px;
+				font-size: 1.5rem;
+			    line-height: 20px;
+			    margin-right: 6px;
+			}
+		}
+		.o_dropdown_kanban {
+	        .dropdown-menu {
+	            min-width: 22rem;
+	            .mk_directory_kanban_views {
+		            padding-right: 8px;
+	            }
+	            .mk_directory_kanban_actions {
+				    padding-left: 8px;
+				    border-right: none;
+	            }
+	            .fa {
+		           	min-width: 12px;
+		           	padding-right: 2px;
+				    text-align: center;
+	            }
+		        .oe_kanban_colorpicker {
+		            max-width: none;    
+		            margin: 5px 5px;
+	    			padding: 10px 0 0 25px;
+		            border-top: 1px solid gray('300');
+		        }
+	        }
+	    }
+	}
+}

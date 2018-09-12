@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+    Copyright (c) 2017-2019 MuK IT GmbH.
+
+    This file is part of MuK Documents 
+    (see https://mukit.at).
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+  -->
+
+<templates xml:space="preserve">
+
+	<t t-name="muk_dms.FileSiebar">
+		<div id="mk_file_kanban_sidebar" class="border-right">
+        	<div id="mk_file_kanban_sidebar_starred" class="mk_file_kanban_sidebar_section show">
+	            <div class="mk_file_kanban_sidebar_header text-uppercase">
+					<a href="#mk_file_kanban_sidebar_starred">
+				        <i class="text-primary fa fa-star mr-1" />
+					    <b>Starred</b>
+					</a>
+	            </div>
+	            <div class="mb-1 mk_file_kanban_sidebar_list" />
+	        </div>
+	        <div id="mk_file_kanban_sidebar_directories" class="d-none mk_file_kanban_sidebar_section">
+	            <div class="mk_file_kanban_sidebar_header text-uppercase">
+					<a href="#mk_file_kanban_sidebar_directories">
+				        <i class="text-info fa fa-folder mr-1" />
+					    <b>Directories</b>
+					</a>
+	            </div>
+	            <div class="mb-1 mk_file_kanban_sidebar_list" />
+	        </div>
+	        <div id="mk_file_kanban_sidebar_categories" class="mk_file_kanban_sidebar_section">
+	            <div class="mk_file_kanban_sidebar_header text-uppercase">
+					<a href="#mk_file_kanban_sidebar_categories">
+				        <i class="text-success fa fa-th-list mr-1" />
+					    <b>Categories</b>
+					</a>
+	            </div>
+	            <div class="mb-1 mk_file_kanban_sidebar_list" />
+	        </div>
+	        <div id="mk_file_kanban_sidebar_tags" class="mk_file_kanban_sidebar_section">
+	            <div class="mk_file_kanban_sidebar_header text-uppercase">
+					<a href="#mk_file_kanban_sidebar_tags">
+				        <i class="text-warning fa fa-tag mr-1" />
+					    <b>Tags</b>
+					</a>
+	            </div>
+	            <div class="mb-1 mk_file_kanban_sidebar_list" />
+	        </div>
+		</div>
+	</t>
+	
+	<t t-name="muk_dms.FileSiebarStarred">
+		<ul class="list-group d-block w-100">
+			<t t-foreach="starred" t-as="directory"> 
+	        	<li class="border-0 list-group-item list-group-item-action" t-att-data-id="directory.id">
+	        		<t t-esc="directory.name"/>
+				</li>
+	        </t>
+		</ul>
+	</t>
+	
+	<t t-name="muk_dms.FileSiebarDirectories">
+		<ul class="list-group d-block w-100">
+			<t t-foreach="directories" t-as="directory"> 
+	        	<li class="border-0 list-group-item list-group-item-action" t-att-data-id="directory.id">
+	        		<i t-if="directory.count_directories > 0" class="pull-right fa fa-fw fa-caret-down"/>
+	        		<t t-esc="directory.name"/>
+				</li>
+	        </t>
+		</ul>
+	</t>
+	
+	<t t-name="muk_dms.FileSiebarCategories">
+		<ol class="list-group d-block">
+			<t t-foreach="categories" t-as="category"> 
+	        	<li class="border-0 list-group-item" t-att-data-id="category.id">
+	                <div class="custom-control custom-checkbox">
+	                    <t t-set="checkboxID" t-value="_.uniqueId('category_')"/>
+	                    <input type="checkbox" t-att-name="checkboxID" t-att-id="checkboxID" class="custom-control-input"/>
+	                    <label t-att-for="checkboxID" class="custom-control-label d-block">
+	                        <t t-esc="category.name"/>
+	                    </label>
+	                </div>
+	        	</li>
+	        </t>
+		</ol>
+	</t>
+	
+	<t t-name="muk_dms.FileSiebarTags">
+		<ol class="list-group d-block">
+			<t t-foreach="tags" t-as="tag"> 
+	        	<li class="border-0 list-group-item" t-att-data-id="tag.id">
+	                <div class="custom-control custom-checkbox">
+	                    <t t-set="checkboxID" t-value="_.uniqueId('tag_')"/>
+	                    <input type="checkbox" t-att-name="checkboxID" t-att-id="checkboxID" class="custom-control-input"/>
+	                    <label t-att-for="checkboxID" class="custom-control-label d-block">
+	                        <t t-esc="tag.name"/>
+	                    </label>
+	                </div>
+                </li>
+	        </t>
+		</ol>
+	</t>
+	
+</templates>
