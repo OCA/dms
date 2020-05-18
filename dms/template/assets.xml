@@ -1,88 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
-    Copyright (c) 2017-2019 MuK IT GmbH.
-
-    This file is part of MuK Documents
-    (see https://mukit.at).
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
 <odoo>
     <template id="assets_backend" name="dms_assets" inherit_id="web.assets_backend">
         <xpath expr="//link[last()]" position="after">
             <link rel="stylesheet" href="/dms/static/src/scss/variables.scss" />
-            <link
-                rel="stylesheet"
-                href="/dms/static/src/scss/directory_kanban.scss"
-            />
             <link rel="stylesheet" href="/dms/static/src/scss/file_kanban.scss" />
         </xpath>
         <xpath expr="//script[last()]" position="after">
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/mixins/file_upload.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/directory/form/directory_form_controller.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/directory/form/directory_form_view.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/form/file_form_controller.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/form/file_form_view.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/list/file_list_controller.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/list/file_list_view.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/kanban/file_kanban_model.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/kanban/file_kanban_record.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/kanban/file_kanban_searchpanel.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/kanban/file_kanban_controller.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/kanban/file_kanban_renderer.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms/static/src/js/views/file/kanban/file_kanban_view.js"
-            />
+            <script type="text/javascript" src="/dms/static/src/js/fields/path.js" />
         </xpath>
     </template>
 </odoo>
