@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
     Copyright (c) 2017-2019 MuK IT GmbH.
 
-    This file is part of MuK Documents 
+    This file is part of MuK Documents
     (see https://mukit.at).
 
     This program is free software: you can redistribute it and/or modify
@@ -21,31 +20,69 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
   -->
-
 <odoo>
-
-<template id="assets_backend" name="muk_dms_assets" inherit_id="web.assets_backend">
-	<xpath expr="//link[last()]" position="after">
-		<link rel="stylesheet" href="/muk_dms/static/src/scss/variables.scss" />
-		<link rel="stylesheet" href="/muk_dms/static/src/scss/directory_kanban.scss" />
-		<link rel="stylesheet" href="/muk_dms/static/src/scss/file_kanban.scss" />
-	</xpath>
-	<xpath expr="//script[last()]" position="after">
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/mixins/file_upload.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/directory/form/directory_form_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/directory/form/directory_form_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/file_form_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/file_form_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/list/file_list_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/list/file_list_view.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_model.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_record.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_searchpanel.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_renderer.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_view.js" />
-		
-	</xpath>
-</template>
-
+    <template id="assets_backend" name="muk_dms_assets" inherit_id="web.assets_backend">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" href="/muk_dms/static/src/scss/variables.scss" />
+            <link
+                rel="stylesheet"
+                href="/muk_dms/static/src/scss/directory_kanban.scss"
+            />
+            <link rel="stylesheet" href="/muk_dms/static/src/scss/file_kanban.scss" />
+        </xpath>
+        <xpath expr="//script[last()]" position="after">
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/mixins/file_upload.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/directory/form/directory_form_controller.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/directory/form/directory_form_view.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/form/file_form_controller.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/form/file_form_view.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/list/file_list_controller.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/list/file_list_view.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_model.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_record.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_searchpanel.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_renderer.js"
+            />
+            <script
+                type="text/javascript"
+                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_view.js"
+            />
+        </xpath>
+    </template>
 </odoo>
