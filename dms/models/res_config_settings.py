@@ -31,25 +31,25 @@ class ResConfigSettings(models.TransientModel):
     # Base Addons
     # ----------------------------------------------------------
 
-    module_muk_dms_access = fields.Boolean(
+    module_dms_access = fields.Boolean(
         string="Access Control",
         help="Allows the creation of groups to define access rights.",
     )
 
-    module_muk_dms_mail = fields.Boolean(
+    module_dms_mail = fields.Boolean(
         string="Mail Support",
         help="Adds support for messages and activities on directories and files.",
     )
 
-    module_muk_dms_version = fields.Boolean(
+    module_dms_version = fields.Boolean(
         string="Versioning", help="Enables version control for files."
     )
 
-    module_muk_dms_trash = fields.Boolean(
+    module_dms_trash = fields.Boolean(
         string="Restore Files", help="Activates a file trash to restore deleted files."
     )
 
-    module_muk_dms_widget = fields.Boolean(
+    module_dms_widget = fields.Boolean(
         string="Binary Widget Support",
         help="Allows the user to use documents as input for any binary field.",
     )
@@ -59,12 +59,12 @@ class ResConfigSettings(models.TransientModel):
         help="Allows to download directories as a archive file.",
     )
 
-    module_muk_dms_thumbnails = fields.Boolean(
+    module_dms_thumbnails = fields.Boolean(
         string="File Thumbnails",
         help="Automatically create file thumbnails based on the content.",
     )
 
-    module_muk_dms_index = fields.Boolean(
+    module_dms_index = fields.Boolean(
         string="File Indexation",
         help="Automatically create a file index based on the content.",
     )
@@ -73,15 +73,15 @@ class ResConfigSettings(models.TransientModel):
     # Views
     # ----------------------------------------------------------
 
-    module_muk_dms_preview = fields.Boolean(
+    module_dms_preview = fields.Boolean(
         string="File Preview", help="Activates the preview function on files."
     )
 
-    module_muk_dms_view = fields.Boolean(
+    module_dms_view = fields.Boolean(
         string="Tree View", help="Activates the documents tree view."
     )
 
-    module_muk_dms_finder = fields.Boolean(
+    module_dms_finder = fields.Boolean(
         string="Finder", help="Enables the Document Finder."
     )
 
@@ -89,12 +89,12 @@ class ResConfigSettings(models.TransientModel):
     # Storage Addons
     # ----------------------------------------------------------
 
-    module_muk_dms_lobject = fields.Boolean(
+    module_dms_lobject = fields.Boolean(
         string="Large Objects Storage",
         help="Enables a new save option to store files into large objects.",
     )
 
-    module_muk_dms_file = fields.Boolean(
+    module_dms_file = fields.Boolean(
         string="Filestore Storage",
         help="Enables a new save option to store files into a filestore.",
     )
@@ -103,22 +103,22 @@ class ResConfigSettings(models.TransientModel):
     # Attachment Addons
     # ----------------------------------------------------------
 
-    module_muk_dms_attachment = fields.Boolean(
+    module_dms_attachment = fields.Boolean(
         string="Documents Storage Location",
         help="Allows attachments to be stored inside of Documents.",
     )
 
-    module_muk_dms_attachment_rules = fields.Boolean(
+    module_dms_attachment_rules = fields.Boolean(
         string="Documents Storage Rules",
         help="Allows attachments to be automatically placed in the right directory.",
     )
 
-    module_muk_dms_attachment_automation = fields.Boolean(
+    module_dms_attachment_automation = fields.Boolean(
         string="Attachment Rule Automation",
         help="Allows you to create rule templates to create attachment rules.",
     )
 
-    module_muk_dms_attachment_wizard = fields.Boolean(
+    module_dms_attachment_wizard = fields.Boolean(
         string="Attachment Wizard", help="Allows documents to be used as attachments."
     )
 
@@ -126,11 +126,11 @@ class ResConfigSettings(models.TransientModel):
     # Integrations
     # ----------------------------------------------------------
 
-    module_muk_dms_actions = fields.Boolean(
+    module_dms_actions = fields.Boolean(
         string="Document Actions", help="Create custom file operations."
     )
 
-    module_muk_dms_users = fields.Boolean(
+    module_dms_users = fields.Boolean(
         string="Personal Documents", help="Automatic creation of user directories."
     )
 
@@ -138,12 +138,12 @@ class ResConfigSettings(models.TransientModel):
     # ... Addons
     # ----------------------------------------------------------
 
-    module_muk_dms_thumbnails = fields.Boolean(
+    module_dms_thumbnails = fields.Boolean(
         string="Automatic Thumbnails",
         help="Allows the creation of thumbnails for files.",
     )
 
-    module_muk_dms_export = fields.Boolean(
+    module_dms_export = fields.Boolean(
         string="Export Files", help="Allows the conversion of existing files."
     )
 
@@ -170,7 +170,7 @@ class ResConfigSettings(models.TransientModel):
         param = self.env["ir.config_parameter"].sudo()
         param.set_param("muk_web_utils.binary_max_size", self.documents_binary_max_size)
         param.set_param(
-            "muk_dms.forbidden_extensions", self.documents_forbidden_extensions
+            "dms.forbidden_extensions", self.documents_forbidden_extensions
         )
         return res
 
@@ -183,7 +183,7 @@ class ResConfigSettings(models.TransientModel):
                 params.get_param("muk_web_utils.binary_max_size", default=25)
             ),
             documents_forbidden_extensions=params.get_param(
-                "muk_dms.forbidden_extensions", default=""
+                "dms.forbidden_extensions", default=""
             ),
         )
         return res

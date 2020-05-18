@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.FileSearchPanel", function(require) {
+odoo.define("dms.FileSearchPanel", function(require) {
     "use strict";
 
     var core = require("web.core");

@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.FileListView", function(require) {
+odoo.define("dms.FileListView", function(require) {
     "use strict";
 
     var core = require("web.core");
@@ -28,7 +28,7 @@ odoo.define("muk_dms.FileListView", function(require) {
 
     var ListView = require("web.ListView");
 
-    var FileListController = require("muk_dms.FileListController");
+    var FileListController = require("dms.FileListController");
 
     var _t = core._t;
     var QWeb = core.qweb;

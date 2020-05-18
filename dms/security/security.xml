@@ -39,7 +39,7 @@
     </record>
     <record id="rule_multi_company_storage" model="ir.rule">
         <field name="name">DMS Storage multi-company</field>
-        <field name="model_id" ref="model_muk_dms_storage" />
+        <field name="model_id" ref="model_dms_storage" />
         <field name="global" eval="True" />
         <field
             name="domain_force"
@@ -47,7 +47,7 @@
     </record>
     <record id="rule_multi_company_directory" model="ir.rule">
         <field name="name">DMS Directory multi-company</field>
-        <field name="model_id" ref="model_muk_dms_directory" />
+        <field name="model_id" ref="model_dms_directory" />
         <field name="global" eval="True" />
         <field
             name="domain_force"
@@ -55,7 +55,7 @@
     </record>
     <record id="rule_multi_company_file" model="ir.rule">
         <field name="name">File multi-company</field>
-        <field name="model_id" ref="model_muk_dms_file" />
+        <field name="model_id" ref="model_dms_file" />
         <field name="global" eval="True" />
         <field
             name="domain_force"

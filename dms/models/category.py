@@ -29,7 +29,7 @@ _logger = logging.getLogger(__name__)
 
 class Category(models.Model):
 
-    _name = "muk_dms.category"
+    _name = "dms.category"
     _description = "Document Category"
 
     _inherit = [
@@ -58,7 +58,7 @@ class Category(models.Model):
     )
 
     parent_category = fields.Many2one(
-        comodel_name="muk_dms.category",
+        comodel_name="dms.category",
         context="{'dms_category_show_path': True}",
         string="Parent Category",
         ondelete="cascade",
@@ -66,7 +66,7 @@ class Category(models.Model):
     )
 
     child_categories = fields.One2many(
-        comodel_name="muk_dms.category",
+        comodel_name="dms.category",
         inverse_name="parent_category",
         string="Child Categories",
     )
@@ -74,18 +74,18 @@ class Category(models.Model):
     parent_path = fields.Char(string="Parent Path", index=True)
 
     tags = fields.One2many(
-        comodel_name="muk_dms.tag", inverse_name="category", string="Tags"
+        comodel_name="dms.tag", inverse_name="category", string="Tags"
     )
 
     directories = fields.One2many(
-        comodel_name="muk_dms.directory",
+        comodel_name="dms.directory",
         inverse_name="category",
         string="Directories",
         readonly=True,
     )
 
     files = fields.One2many(
-        comodel_name="muk_dms.file",
+        comodel_name="dms.file",
         inverse_name="category",
         string="Files",
         readonly=True,
