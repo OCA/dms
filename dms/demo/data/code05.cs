@@ -1,7 +1,7 @@
 //
 // Copyright (c) 2017-2019 MuK IT GmbH.
 //
-// This file is part of MuK Documents 
+// This file is part of MuK Documents
 // (see https://mukit.at).
 //
 // This program is free software: you can redistribute it and/or modify

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
     Copyright (c) 2017-2019 MuK IT GmbH.
 
-    This file is part of MuK Documents 
+    This file is part of MuK Documents
     (see https://mukit.at).
 
     This program is free software: you can redistribute it and/or modify
@@ -21,15 +20,12 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
   -->
-
 <odoo>
-
-<record id="action_dms_attachment_migrate" model="ir.actions.server">
-	<field name="name">Migrate</field>
-	<field name="model_id" ref="model_muk_dms_file" />
-	<field name="binding_model_id" ref="muk_dms.model_muk_dms_file" />
-	<field name="state">code</field>
-	<field name="code">records.action_migrate()</field>
-</record>
-	
+    <record id="action_dms_attachment_migrate" model="ir.actions.server">
+        <field name="name">Migrate</field>
+        <field name="model_id" ref="model_muk_dms_file" />
+        <field name="binding_model_id" ref="muk_dms.model_muk_dms_file" />
+        <field name="state">code</field>
+        <field name="code">records.action_migrate()</field>
+    </record>
 </odoo>
