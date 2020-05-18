@@ -22,28 +22,28 @@
   -->
 <odoo>
     <menuitem
-        id="main_menu_muk_dms"
+        id="main_menu_dms"
         name="Documents"
-        web_icon="muk_dms,static/description/icon.png"
+        web_icon="dms,static/description/icon.png"
         groups="group_dms_user"
     />
     <menuitem
-        id="cat_menu_muk_dms_config"
+        id="cat_menu_dms_config"
         name="Configuration"
-        parent="main_menu_muk_dms"
+        parent="main_menu_dms"
         sequence="50"
     />
     <menuitem
-        id="cat_menu_muk_dms_config_organizing"
+        id="cat_menu_dms_config_organizing"
         name="Organizing"
-        parent="cat_menu_muk_dms_config"
+        parent="cat_menu_dms_config"
         sequence="5"
     />
     <menuitem
-        id="cat_menu_muk_dms_config_system"
+        id="cat_menu_dms_config_system"
         name="System"
-        groups="muk_dms.group_dms_manager"
-        parent="cat_menu_muk_dms_config"
+        groups="dms.group_dms_manager"
+        parent="cat_menu_dms_config"
         sequence="25"
     />
 </odoo>
