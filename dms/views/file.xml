@@ -22,8 +22,8 @@
   -->
 <odoo>
     <record id="search_dms_file" model="ir.ui.view">
-        <field name="name">muk_dms_file.search</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.search</field>
+        <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" filter_domain="[('name','ilike',self)]" />
@@ -85,8 +85,8 @@
         </field>
     </record>
     <record id="view_dms_file_kanban" model="ir.ui.view">
-        <field name="name">muk_dms_file.kanban</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.kanban</field>
+        <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <kanban
                 class="mk_file_kanban_view o_kanban_small_column align-content-start"
@@ -166,7 +166,7 @@
                                             <a
                                                 role="menuitem"
                                                 class="dropdown-item"
-                                                t-attf-href="/web/content?id=#{record.id.raw_value}&amp;field=content&amp;model=muk_dms.file&amp;filename_field=name&amp;download=true"
+                                                t-attf-href="/web/content?id=#{record.id.raw_value}&amp;field=content&amp;model=dms.file&amp;filename_field=name&amp;download=true"
                                             >
 		                                	<i class="fa fa-download" /> Download
 		                                </a>
@@ -217,7 +217,7 @@
                                 <div class="o_kanban_image">
                                     <div class="o_kanban_image_wrapper">
                                         <img
-                                            t-att-src="kanban_image('muk_dms.file', 'thumbnail_medium', record.id.raw_value)"
+                                            t-att-src="kanban_image('dms.file', 'thumbnail_medium', record.id.raw_value)"
                                             alt="Thumbnail"
                                         />
                                     </div>
@@ -290,8 +290,8 @@
         </field>
     </record>
     <record id="view_dms_file_tree" model="ir.ui.view">
-        <field name="name">muk_dms_file.tree</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.tree</field>
+        <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <tree
                 string="Files"
@@ -311,8 +311,8 @@
         </field>
     </record>
     <record id="view_dms_file_graph" model="ir.ui.view">
-        <field name="name">muk_dms_file.graph</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.graph</field>
+        <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <graph type="pie">
                 <field name="directory" type="row" />
@@ -321,8 +321,8 @@
         </field>
     </record>
     <record id="view_dms_file_pivot" model="ir.ui.view">
-        <field name="name">muk_dms_file.pivot</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.pivot</field>
+        <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <pivot display_quantity="true">
                 <field name="storage" type="row" />
@@ -332,8 +332,8 @@
         </field>
     </record>
     <record id="view_dms_file_form" model="ir.ui.view">
-        <field name="name">muk_dms_file.form</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.form</field>
+        <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <form string="Files" js_class="file_form">
                 <header>
@@ -454,7 +454,7 @@
                             name="page_technical"
                             string="Technical Information"
                             invisible="1"
-                            groups="muk_dms.group_dms_manager,base.group_no_one"
+                            groups="dms.group_dms_manager,base.group_no_one"
                         >
                             <group name="technical">
                                 <group name="technical_left">
@@ -469,10 +469,10 @@
         </field>
     </record>
     <record id="view_dms_file_manager_form" model="ir.ui.view">
-        <field name="name">muk_dms_file.form</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.form</field>
+        <field name="model">dms.file</field>
         <field name="inherit_id" ref="view_dms_file_form" />
-        <field name="groups_id" eval="[(6, 0, [ref('muk_dms.group_dms_manager')])]" />
+        <field name="groups_id" eval="[(6, 0, [ref('dms.group_dms_manager')])]" />
         <field name="arch" type="xml">
             <field name="storage" position="attributes">
                 <attribute name="options">{}</attribute>
@@ -481,7 +481,7 @@
     </record>
     <record id="action_dms_file" model="ir.actions.act_window">
         <field name="name">Files</field>
-        <field name="res_model">muk_dms.file</field>
+        <field name="res_model">dms.file</field>
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">[("is_hidden", "=",  False)]</field>
         <field name="help" type="html">
@@ -497,12 +497,12 @@
         id="menu_dms_file"
         name="Files"
         sequence="20"
-        parent="main_menu_muk_dms"
+        parent="main_menu_dms"
         action="action_dms_file"
     />
     <record id="search_dms_file_migration" model="ir.ui.view">
-        <field name="name">muk_dms_file.search</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.search</field>
+        <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" filter_domain="[('name','ilike',self)]" />
@@ -518,8 +518,8 @@
         </field>
     </record>
     <record id="view_dms_file_migration_tree" model="ir.ui.view">
-        <field name="name">muk_dms_file.tree</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.tree</field>
+        <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <tree string="Files" decoration-muted="(is_locked and not is_lock_editor)">
                 <field name="is_locked" invisible="1" />
@@ -535,7 +535,7 @@
     </record>
     <record id="action_dms_file_migration" model="ir.actions.act_window">
         <field name="name">Files</field>
-        <field name="res_model">muk_dms.file</field>
+        <field name="res_model">dms.file</field>
         <field name="view_mode">tree</field>
         <field name="search_view_id" ref="search_dms_file_migration" />
         <field
@@ -558,13 +558,13 @@
     <menuitem
         id="menu_dms_file_migration"
         name="Migration"
-        parent="cat_menu_muk_dms_config_system"
+        parent="cat_menu_dms_config_system"
         action="action_dms_file_migration"
         sequence="8"
     />
     <record id="view_dms_file_new_form" model="ir.ui.view">
-        <field name="name">muk_dms_file.form</field>
-        <field name="model">muk_dms.file</field>
+        <field name="name">dms_file.form</field>
+        <field name="model">dms.file</field>
         <field name="inherit_id" ref="view_dms_file_form" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
@@ -585,7 +585,7 @@
     </record>
     <record id="action_dms_file_new" model="ir.actions.act_window">
         <field name="name">New Root Directory</field>
-        <field name="res_model">muk_dms.file</field>
+        <field name="res_model">dms.file</field>
         <field name="view_mode">form</field>
         <field name="view_type">form</field>
         <field name="target">new</field>

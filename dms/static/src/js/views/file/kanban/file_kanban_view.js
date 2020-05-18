@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.FileKanbanView", function(require) {
+odoo.define("dms.FileKanbanView", function(require) {
     "use strict";
 
     var core = require("web.core");
@@ -28,10 +28,10 @@ odoo.define("muk_dms.FileKanbanView", function(require) {
 
     var KanbanView = require("web.KanbanView");
 
-    var FileKanbanModel = require("muk_dms.FileKanbanModel");
-    var FileKanbanRenderer = require("muk_dms.FileKanbanRenderer");
-    var FileKanbanController = require("muk_dms.FileKanbanController");
-    var FileSearchPanel = require("muk_dms.FileSearchPanel");
+    var FileKanbanModel = require("dms.FileKanbanModel");
+    var FileKanbanRenderer = require("dms.FileKanbanRenderer");
+    var FileKanbanController = require("dms.FileKanbanController");
+    var FileSearchPanel = require("dms.FileSearchPanel");
 
     var _t = core._t;
     var QWeb = core.qweb;

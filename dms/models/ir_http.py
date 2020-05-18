@@ -72,7 +72,7 @@ class IrHttp(models.AbstractModel):
         )
         if res_status == 200:
             env = env or request.env
-            if model == "muk_dms.file" and field != "content":
+            if model == "dms.file" and field != "content":
                 obj = (
                     cls._xmlid_to_obj(env, xmlid)
                     if xmlid

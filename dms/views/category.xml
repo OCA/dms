@@ -22,8 +22,8 @@
   -->
 <odoo>
     <record id="view_dms_category_search" model="ir.ui.view">
-        <field name="name">muk_dms_category.search</field>
-        <field name="model">muk_dms.category</field>
+        <field name="name">dms_category.search</field>
+        <field name="model">dms.category</field>
         <field name="arch" type="xml">
             <search string="Categories">
                 <field name="name" filter_domain="[('name', 'ilike', self)]" />
@@ -36,8 +36,8 @@
         </field>
     </record>
     <record id="view_dms_category_tree" model="ir.ui.view">
-        <field name="name">muk_dms_category.tree</field>
-        <field name="model">muk_dms.category</field>
+        <field name="name">dms_category.tree</field>
+        <field name="model">dms.category</field>
         <field name="arch" type="xml">
             <tree string="Categories" decoration-muted="(not active)">
                 <field name="active" />
@@ -48,8 +48,8 @@
         </field>
     </record>
     <record id="view_dms_category_form" model="ir.ui.view">
-        <field name="name">muk_dms_category.form</field>
-        <field name="model">muk_dms.category</field>
+        <field name="name">dms_category.form</field>
+        <field name="model">dms.category</field>
         <field name="arch" type="xml">
             <form string="Category">
                 <sheet>
@@ -110,7 +110,7 @@
     </record>
     <record id="action_dms_category" model="ir.actions.act_window">
         <field name="name">Categories</field>
-        <field name="res_model">muk_dms.category</field>
+        <field name="res_model">dms.category</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{'search_default_all': 1}</field>
         <field name="help" type="html">
@@ -125,7 +125,7 @@
     <menuitem
         id="menu_dms_category"
         name="Categories"
-        parent="cat_menu_muk_dms_config_organizing"
+        parent="cat_menu_dms_config_organizing"
         action="action_dms_category"
     />
 </odoo>

@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.DirectoryFormController", function(require) {
+odoo.define("dms.DirectoryFormController", function(require) {
     "use strict";
 
     var core = require("web.core");

@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.FileKanbanRecord", function(require) {
+odoo.define("dms.FileKanbanRecord", function(require) {
     "use strict";
 
     var core = require("web.core");

@@ -29,11 +29,11 @@ class OnboardingController(http.Controller):
     def document_onboarding_directory(self):
         company = request.env.user.company_id
         closed = company.documents_onboarding_state == "closed"
-        check = request.env.user.has_group("muk_dms.group_dms_manager")
+        check = request.env.user.has_group("dms.group_dms_manager")
         if check and not closed:
             return {
                 "html": request.env.ref(
-                    "muk_dms.document_onboarding_directory_panel"
+                    "dms.document_onboarding_directory_panel"
                 ).render(
                     {
                         "state": company.get_and_update_documents_onboarding_state(),
@@ -47,11 +47,11 @@ class OnboardingController(http.Controller):
     def document_onboarding_file(self):
         company = request.env.user.company_id
         closed = company.documents_onboarding_state == "closed"
-        check = request.env.user.has_group("muk_dms.group_dms_manager")
+        check = request.env.user.has_group("dms.group_dms_manager")
         if check and not closed:
             return {
                 "html": request.env.ref(
-                    "muk_dms.document_onboarding_file_panel"
+                    "dms.document_onboarding_file_panel"
                 ).render(
                     {
                         "state": company.get_and_update_documents_onboarding_state(),
