@@ -1,18 +1,12 @@
-import base64
-import binascii
-import hashlib
-import io
-import logging
+# Copyright 2020 Antoni Romera
+# Copyright 2017-2019 MuK IT GmbH
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
 import mimetypes
 import os
-import re
 import shutil
-import sys
 import tempfile
-import unicodedata
-import urllib
 
-from odoo.tools import human_size
 from odoo.tools.mimetypes import guess_mimetype
 
 
@@ -36,7 +30,7 @@ def compute_name(name, suffix, escape_suffix):
 
 
 def unique_name(name, names, escape_suffix=False):
-    if not name in names:
+    if name not in names:
         return name
     else:
         suffix = 1

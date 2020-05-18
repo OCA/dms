@@ -1,39 +1,17 @@
-###################################################################################
-#
-#    Copyright (c) 2017-2019 MuK IT GmbH.
-#
-#    This file is part of MuK Documents
-#    (see https://mukit.at).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Lesser General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Lesser General Public License for more details.
-#
-#    You should have received a copy of the GNU Lesser General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-###################################################################################
+# Copyright 2017-2019 MuK IT GmbH.
+# Copyright 2020 Creu Blanca
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-import functools
 import logging
 import os
-import threading
-import time
 import unittest
 
-from odoo import SUPERUSER_ID
-from odoo.modules.module import get_module_resource, get_resource_path
+from odoo.modules.module import get_module_resource
 from odoo.tests import common, tagged
-from odoo.tools import config, convert_file
+from odoo.tools import convert_file
 from odoo.tools.profiler import profile
 
-from odoo.addons.muk_utils.tests.common import multi_users, track_function
+from .common import track_function
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
@@ -77,12 +55,12 @@ class BenchmarkTestCase(common.SavepointCase):
 
     def _benchmark_table(self, data):
         columns = len(data[0]) - 1
-        format = "{:7}" + "| {:28}" * columns
+        formt = "{:7}" + "| {:28}" * columns
 
-        result = format.format(*data[0]) + "\n"
+        result = formt.format(*data[0]) + "\n"
         result += ("-" * 7) + (("+" + ("-") * 29) * columns) + "\n"
         for row in data[1:]:
-            result += format.format(*row) + "\n"
+            result += formt.format(*row) + "\n"
         return result
 
     def _benchmark_function(self, func, args_list):
@@ -133,10 +111,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.sudo(admin_uid).search, args
+            model.with_user(admin_uid).search, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.sudo(demo_uid).search, args
+            model.with_user(demo_uid).search, args
         )
 
         info_message = "\n\nSearching files with bin_size = True | "
@@ -168,10 +146,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search_read, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.sudo(admin_uid).search_read, args
+            model.with_user(admin_uid).search_read, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.sudo(demo_uid).search_read, args
+            model.with_user(demo_uid).search_read, args
         )
 
         info_message = "\n\nSearching and reading all fields with bin_size = True | "
@@ -202,8 +180,8 @@ class BenchmarkTestCase(common.SavepointCase):
             return model.search([], limit=limit).name_get()
 
         model_super = model.sudo()
-        model_admin = model.sudo(admin_uid)
-        model_demo = model.sudo(demo_uid)
+        model_admin = model.with_user(admin_uid)
+        model_demo = model.with_user(demo_uid)
         args_super = [
             [[model_super, 1]],
             [[model_super, 800]],
@@ -259,9 +237,9 @@ class BenchmarkTestCase(common.SavepointCase):
         kanban_fields = self._file_kanban_fields()
 
         def test_function(model, kanban_fields, limit=80):
-            model.search_panel_select_range("directory")
-            model.search_panel_select_multi_range("directory")
-            model.search_panel_select_multi_range("tags")
+            model.search_panel_select_range("directory_id")
+            model.search_panel_select_multi_range("directory_id")
+            model.search_panel_select_multi_range("tag_ids")
             model.search_read(fields=kanban_fields, limit=limit)
 
         def function_args(args, kwargs):
@@ -269,10 +247,10 @@ class BenchmarkTestCase(common.SavepointCase):
 
         args_super = function_args([model.sudo(), kanban_fields], [1, 80, 500, None])
         args_admin = function_args(
-            [model.sudo(admin_uid), kanban_fields], [1, 80, 500, None]
+            [model.with_user(admin_uid), kanban_fields], [1, 80, 500, None]
         )
         args_demo = function_args(
-            [model.sudo(demo_uid), kanban_fields], [1, 80, 500, None]
+            [model.with_user(demo_uid), kanban_fields], [1, 80, 500, None]
         )
 
         benchmark_data_super = ["Super"] + self._benchmark_function(
@@ -324,10 +302,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.sudo(admin_uid).search, args
+            model.with_user(admin_uid).search, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.sudo(demo_uid).search, args
+            model.with_user(demo_uid).search, args
         )
 
         info_message = "\n\nSearching directories with bin_size = True | "
@@ -364,10 +342,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search_parents, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.sudo(admin_uid).search_parents, args
+            model.with_user(admin_uid).search_parents, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.sudo(demo_uid).search_parents, args
+            model.with_user(demo_uid).search_parents, args
         )
 
         info_message = "\n\nSearching directory parents with bin_size = True | "
@@ -399,10 +377,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search_read, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.sudo(admin_uid).search_read, args
+            model.with_user(admin_uid).search_read, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.sudo(demo_uid).search_read, args
+            model.with_user(demo_uid).search_read, args
         )
 
         info_message = "\n\nSearching and reading all fields with bin_size = True | "
@@ -436,5 +414,5 @@ class BenchmarkTestCase(common.SavepointCase):
             model.search_read([])
 
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["dms.file"].sudo(admin_uid)
+        model = self.env["dms.file"].with_user(admin_uid)
         profile_function(model.with_context(bin_size=True))

@@ -1,127 +1,108 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
-    Copyright (c) 2017-2019 MuK IT GmbH.
-
-    This file is part of MuK Documents
-    (see https://mukit.at).
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
 <odoo>
     <record id="action_dms_directories_directory" model="ir.actions.act_window">
         <field name="name">Subdirectories</field>
-        <field name="view_type">form</field>
         <field name="res_model">dms.directory</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
-		[
-			("parent_directory", "=",  active_id),
-			("is_hidden", "=",  False),
-		]
-	</field>
+            [
+            ("parent_id", "=", active_id),
+            ("is_hidden", "=", False),
+            ]
+        </field>
         <field name="context">
-		{
-			'default_parent_directory': active_id,
-		}
-    </field>
+            {
+            'default_parent_id': active_id,
+            }
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Click to add a new directory.
-	    </p>
+                Click to add a new directory.
+            </p>
             <p>
-			Directories can be used to structure and organize
-			files directly in Odoo.
-	    </p>
+                Directories can be used to structure and organize
+                files directly in Odoo.
+            </p>
         </field>
     </record>
     <record id="action_dms_files_directory" model="ir.actions.act_window">
         <field name="name">Files</field>
-        <field name="view_type">form</field>
         <field name="res_model">dms.file</field>
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
-		[
-			("directory", "=",  active_id),
-			("is_hidden", "=",  False),
-		]
-	</field>
+            [
+            ("directory_id", "=", active_id),
+            ("is_hidden", "=", False),
+            ]
+        </field>
         <field name="context">
-		{
-			'default_directory': active_id,
-		}
-    </field>
+            {
+            'default_directory': active_id,
+            }
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Click to add a new file.
-	    </p>
+                Click to add a new file.
+            </p>
             <p>
-			Files are used to save content directly in Odoo.
-	    </p>
+                Files are used to save content directly in Odoo.
+            </p>
         </field>
     </record>
     <record id="action_dms_directories_all_directory" model="ir.actions.act_window">
         <field name="name">Subdirectories</field>
-        <field name="view_type">form</field>
         <field name="res_model">dms.directory</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
-		[
-			("parent_directory", "child_of",  active_id),
-			("is_hidden", "=",  False),
-			("id", "!=",  active_id),
-		]
-	</field>
+            [
+            ("parent_id", "child_of", active_id),
+            ("is_hidden", "=", False),
+            ("id", "!=", active_id),
+            ]
+        </field>
         <field name="context">
-		{
-			'default_parent_directory': active_id,
-		}
-    </field>
+            {
+            'default_parent_id': active_id,
+            }
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Click to add a new directory.
-	    </p>
+                Click to add a new directory.
+            </p>
             <p>
-			Directories can be used to structure and organize
-			files directly in Odoo.
-	    </p>
+                Directories can be used to structure and organize
+                files directly in Odoo.
+            </p>
         </field>
     </record>
     <record id="action_dms_files_all_directory" model="ir.actions.act_window">
         <field name="name">Files</field>
-        <field name="view_type">form</field>
         <field name="res_model">dms.file</field>
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
-		[
-			("directory", "child_of",  active_id),
-			("is_hidden", "=",  False),
-		]
-	</field>
+            [
+            ("directory_id", "child_of", active_id),
+            ("is_hidden", "=", False),
+            ]
+        </field>
         <field name="context">
-		{
-			'default_directory': active_id,
-		}
-    </field>
+            {
+            'default_directory_id': active_id,
+            }
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Click to add a new file.
-	    </p>
+                Click to add a new file.
+            </p>
             <p>
-			Files are used to save content directly in Odoo.
-	    </p>
+                Files are used to save content directly in Odoo.
+            </p>
         </field>
     </record>
     <record id="search_dms_directory" model="ir.ui.view">
@@ -129,10 +110,7 @@
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <search>
-                <field
-                    name="name"
-                    filter_domain="['|', ('name','ilike',self), ('parent_path_names','ilike',self)]"
-                />
+                <field name="complete_name" />
                 <filter
                     string="My Directories"
                     name="filter_user"
@@ -171,14 +149,14 @@
                         name="group_category"
                         string="Category"
                         domain="[]"
-                        context="{'group_by':'category'}"
+                        context="{'group_by':'category_id'}"
                     />
                     <separator />
                     <filter
                         name="group_storage"
                         string="Storage"
                         domain="[]"
-                        context="{'group_by':'storage'}"
+                        context="{'group_by':'storage_id'}"
                     />
                 </group>
             </search>
@@ -193,7 +171,7 @@
                 banner_route="/dms/document_onboarding/directory"
             >
                 <field name="id" />
-                <field name="tags" />
+                <field name="tag_ids" />
                 <field name="name" />
                 <field name="color" />
                 <field name="starred" />
@@ -222,51 +200,59 @@
                                 <div class="dropdown-menu" role="menu">
                                     <div class="row">
                                         <div class="col-6 mk_directory_kanban_views">
-                                            <h6 class="dropdown-header">Views</h6>
+                                            <h6 class="dropdown-header">Views
+                                            </h6>
                                             <a
                                                 type="action"
                                                 name="%(dms.action_dms_directories_all_directory)d"
                                                 role="menuitem"
                                                 class="dropdown-item"
                                             >
-											<i class="fa fa-folder-o" /> Directories
-										</a>
+                                                <i class="fa fa-folder-o" />
+                                                Directories
+                                            </a>
                                             <a
                                                 type="action"
                                                 name="%(dms.action_dms_files_all_directory)d"
                                                 role="menuitem"
                                                 class="dropdown-item"
                                             >
-											<i class="fa fa-file-o" /> Files
-										</a>
+                                                <i class="fa fa-file-o" />
+                                                Files
+                                            </a>
                                         </div>
                                         <div
                                             class="col-6 border-left mk_directory_kanban_actions"
                                         >
-                                            <h6 class="dropdown-header">Actions</h6>
+                                            <h6 class="dropdown-header">
+                                                Actions
+                                            </h6>
                                             <a
                                                 role="menuitem"
                                                 type="open"
                                                 class="dropdown-item"
                                             >
-											<i class="fa fa-external-link" /> Open
-										</a>
+                                                <i class="fa fa-external-link" />
+                                                Open
+                                            </a>
                                             <a
                                                 t-if="record.permission_write.raw_value"
                                                 role="menuitem"
                                                 type="edit"
                                                 class="dropdown-item"
                                             >
-											<i class="fa fa-pencil-square-o" /> Edit
-										</a>
+                                                <i class="fa fa-pencil-square-o" />
+                                                Edit
+                                            </a>
                                             <a
                                                 t-if="record.permission_unlink.raw_value"
                                                 role="menuitem"
                                                 type="delete"
                                                 class="dropdown-item"
                                             >
-											<i class="fa fa-trash-o" /> Delete
-										</a>
+                                                <i class="fa fa-trash-o" />
+                                                Delete
+                                            </a>
                                         </div>
                                     </div>
                                     <div
@@ -322,7 +308,7 @@
                                         </div>
                                         <div class="o_kanban_record_body">
                                             <field
-                                                name="tags"
+                                                name="tag_ids"
                                                 widget="many2many_tags"
                                                 options="{'color_field': 'color'}"
                                             />
@@ -356,18 +342,18 @@
                 </templates>
                 <searchpanel>
                     <field
-                        name="parent_directory"
+                        name="parent_id"
                         string="Starred"
                         domain="[['is_hidden', '=', False], ['starred', '=', True]]"
                         select="multi"
                         icon="fa-star"
                     />
-                    <field name="category" select="multi" icon="fa-users" />
+                    <field name="category_id" select="multi" icon="fa-users" />
                     <field
-                        name="tags"
+                        name="tag_ids"
                         select="multi"
                         icon="fa-tag"
-                        groupby="category"
+                        groupby="category_id"
                     />
                 </searchpanel>
             </kanban>
@@ -382,8 +368,8 @@
                 <field name="write_date" />
                 <field name="count_files" string="Files" />
                 <field name="count_directories" string="Directories" />
-                <field name="parent_path_names" widget="path_names" string="Path" />
-                <field name="storage" groups="dms.group_dms_manager" />
+                <field name="complete_name" />
+                <field name="storage_id" groups="dms.group_dms_manager" />
             </tree>
         </field>
     </record>
@@ -391,9 +377,9 @@
         <field name="name">dms_directory.form</field>
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
-            <form string="Directory" js_class="directory_form">
+            <form string="Directory">
                 <header>
-			</header>
+                </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
@@ -451,23 +437,19 @@
                             <field name="name" placeholder="My Documents" />
                         </h1>
                         <h4>
-                            <field
-                                name="parent_path_json"
-                                widget="path_json"
-                                options="{'prefix': True, 'suffix': True}"
-                            />
+                            <field name="complete_name" />
                         </h4>
                     </div>
                     <group name="settings">
                         <group>
                             <field name="is_root_directory" invisible="1" />
                             <field
-                                name="storage"
+                                name="storage_id"
                                 options="{'no_open': True}"
-                                attrs="{'invisible':['|', ('is_root_directory','=',True), ('parent_directory','=',False)]}"
+                                attrs="{'invisible':['|', ('is_root_directory','=',True), ('parent_id','=',False)]}"
                             />
                             <field
-                                name="root_storage"
+                                name="root_storage_id"
                                 options="{'no_open': True}"
                                 readonly="1"
                                 attrs="{'invisible':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
@@ -475,7 +457,7 @@
                         </group>
                         <group>
                             <field
-                                name="parent_directory"
+                                name="parent_id"
                                 options="{'no_quick_create': True}"
                                 attrs="{'invisible':[('is_root_directory','=',True)], 'required':[('is_root_directory','=',False)]}"
                             />
@@ -483,17 +465,17 @@
                     </group>
                     <group name="data">
                         <group>
-                            <field name="size" widget="binary_size" />
+                            <field name="size" />
                             <field name="count_elements" string="Elements" />
                         </group>
                         <group>
                             <field
-                                name="category"
+                                name="category_id"
                                 placeholder="Internal / Human Resource"
                                 options="{'no_open': True, 'no_create': True}"
                             />
                             <field
-                                name="tags"
+                                name="tag_ids"
                                 widget="many2many_tags"
                                 placeholder="Tags..."
                                 options="{'color_field': 'color', 'no_create_edit': True}"
@@ -503,8 +485,8 @@
                     <notebook>
                         <page name="page_directories" string="Subdirectories">
                             <field
-                                name="child_directories"
-                                context="{'default_parent_directory': active_id, 'mail_create_nolog': True}"
+                                name="child_directory_ids"
+                                context="{'default_parent_id': active_id, 'mail_create_nolog': True}"
                                 attrs="{'readonly':[('permission_create','=',False)]}"
                             >
                                 <tree string="Subdirectories" limit="10">
@@ -514,20 +496,20 @@
                                         string="Directories"
                                     />
                                     <field name="count_files" string="Files" />
-                                    <field name="size" widget="binary_size" />
+                                    <field name="size" />
                                 </tree>
                             </field>
                         </page>
                         <page name="page_files" string="Files">
                             <field
-                                name="files"
-                                context="{'default_directory': active_id, 'mail_create_nolog': True}"
+                                name="file_ids"
+                                context="{'default_directory_id': active_id, 'mail_create_nolog': True}"
                                 attrs="{'readonly':[('permission_create','=',False)]}"
                             >
                                 <tree string="Files" limit="10">
                                     <field name="name" />
                                     <field name="mimetype" />
-                                    <field name="size" widget="binary_size" />
+                                    <field name="content" />
                                     <field name="write_date" readonly="1" />
                                 </tree>
                             </field>
@@ -570,11 +552,11 @@
             <field name="is_root_directory" position="attributes">
                 <attribute name="invisible">0</attribute>
             </field>
-            <field name="root_storage" position="attributes">
+            <field name="root_storage_id" position="attributes">
                 <attribute name="readonly">0</attribute>
                 <attribute name="options">{'no_quick_create': True}</attribute>
             </field>
-            <field name="storage" position="attributes">
+            <field name="storage_id" position="attributes">
                 <attribute name="options">{}</attribute>
             </field>
         </field>
@@ -582,17 +564,16 @@
     <record id="action_dms_directory" model="ir.actions.act_window">
         <field name="name">Directories</field>
         <field name="res_model">dms.directory</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[("is_hidden", "=",  False)]</field>
+        <field name="domain">[("is_hidden", "=", False)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Add a new Directory.
-	    </p>
+                Add a new Directory.
+            </p>
             <p>
-			Directories can be used to structure and organize
-			files directly in Odoo.
-	    </p>
+                Directories can be used to structure and organize
+                files directly in Odoo.
+            </p>
         </field>
     </record>
     <menuitem
@@ -608,26 +589,35 @@
         <field name="inherit_id" ref="view_dms_directory_form" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <xpath expr="//header" position="replace" />
-            <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="replace" />
-            <xpath expr="//sheet//group[@name='settings']" position="replace" />
-            <xpath expr="//sheet//group[@name='data']" position="replace">
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//group[@name='settings']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//group[@name='data']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//group[@name='data']" position="after">
                 <group>
                     <group>
                         <field name="is_root_directory" readonly="1" />
                         <field
-                            name="root_storage"
+                            name="root_storage_id"
                             options="{'no_quick_create': True}"
                         />
                     </group>
                     <group>
                         <field
-                            name="category"
+                            name="category_id"
                             placeholder="Internal / Human Resource"
                             options="{'no_open': True, 'no_create': True}"
                         />
                         <field
-                            name="tags"
+                            name="tag_ids"
                             widget="many2many_tags"
                             placeholder="Tags..."
                             options="{'color_field': 'color', 'no_create_edit': True}"
@@ -636,7 +626,7 @@
                 </group>
             </xpath>
             <form position="inside">
-                <footer position="replace">
+                <footer>
                     <button
                         class="btn btn-primary"
                         type="object"
@@ -652,7 +642,6 @@
         <field name="name">New Root Directory</field>
         <field name="res_model">dms.directory</field>
         <field name="view_mode">form</field>
-        <field name="view_type">form</field>
         <field name="target">new</field>
         <field name="view_id" ref="view_dms_directory_new_form" />
     </record>

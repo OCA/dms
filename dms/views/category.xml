@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
-    Copyright (c) 2017-2019 MuK IT GmbH.
-
-    This file is part of MuK Documents
-    (see https://mukit.at).
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
 <odoo>
@@ -26,7 +11,10 @@
         <field name="model">dms.category</field>
         <field name="arch" type="xml">
             <search string="Categories">
-                <field name="name" filter_domain="[('name', 'ilike', self)]" />
+                <field
+                    name="name"
+                    filter_domain="['|', ('name', 'ilike', self), ('parent_id', 'child_of', raw_value)]"
+                />
                 <filter
                     string="All"
                     name="all"
@@ -42,8 +30,8 @@
             <tree string="Categories" decoration-muted="(not active)">
                 <field name="active" />
                 <field name="name" />
-                <field name="parent_category" />
-                <field name="tags" />
+                <field name="parent_id" />
+                <field name="tag_ids" />
             </tree>
         </field>
     </record>
@@ -53,25 +41,17 @@
         <field name="arch" type="xml">
             <form string="Category">
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button
-                            name="toggle_active"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-bell"
-                        >
-                            <field name="active" widget="boolean_button" />
-                        </button>
-                    </div>
+                    <div class="oe_button_box" name="button_box" />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
                         <h1>
                             <field name="name" placeholder="Invoices" />
+                            <field name="active" invisible="1" />
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="parent_category" />
+                            <field name="parent_id" />
                         </group>
                         <group>
                             <field name="count_categories" string="Subcategories" />
@@ -89,18 +69,17 @@
                     <notebook>
                         <page string="Tags">
                             <field
-                                name="tags"
-                                widget="one2many"
+                                name="tag_ids"
                                 mode="kanban"
-                                context="{'default_category': active_id}"
+                                context="{'default_category_id': active_id}"
                             />
                         </page>
                         <page string="Subcategories">
                             <field
-                                name="child_categories"
+                                name="child_category_ids"
                                 widget="one2many"
                                 mode="tree"
-                                context="{'default_parent_category': active_id}"
+                                context="{'default_parent_id': active_id}"
                             />
                         </page>
                     </notebook>
@@ -115,11 +94,11 @@
         <field name="context">{'search_default_all': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Create a new Category.
-	    </p>
+                Create a new Category.
+            </p>
             <p>
-			Categories are used to categorize Documents.
-	    </p>
+                Categories are used to categorize Documents.
+            </p>
         </field>
     </record>
     <menuitem
