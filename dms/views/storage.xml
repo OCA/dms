@@ -24,7 +24,7 @@
     <record id="action_dms_directories_storage" model="ir.actions.act_window">
         <field name="name">Directories</field>
         <field name="view_type">form</field>
-        <field name="res_model">muk_dms.directory</field>
+        <field name="res_model">dms.directory</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
 		[
@@ -51,7 +51,7 @@
     <record id="action_dms_files_storage" model="ir.actions.act_window">
         <field name="name">Files</field>
         <field name="view_type">form</field>
-        <field name="res_model">muk_dms.file</field>
+        <field name="res_model">dms.file</field>
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
 		[
@@ -70,7 +70,7 @@
     </record>
     <record id="action_dms_file_storage_migration" model="ir.actions.act_window">
         <field name="name">Files</field>
-        <field name="res_model">muk_dms.file</field>
+        <field name="res_model">dms.file</field>
         <field name="view_mode">tree</field>
         <field name="search_view_id" ref="search_dms_file_migration" />
         <field name="domain">
@@ -93,8 +93,8 @@
         </field>
     </record>
     <record id="view_dms_storage_search" model="ir.ui.view">
-        <field name="name">muk_dms_storage.search</field>
-        <field name="model">muk_dms.storage</field>
+        <field name="name">dms_storage.search</field>
+        <field name="model">dms.storage</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
@@ -110,8 +110,8 @@
         </field>
     </record>
     <record id="view_dms_storage_tree" model="ir.ui.view">
-        <field name="name">muk_dms_storage.tree</field>
-        <field name="model">muk_dms.storage</field>
+        <field name="name">dms_storage.tree</field>
+        <field name="model">dms.storage</field>
         <field name="arch" type="xml">
             <tree string="Storages">
                 <field name="name" />
@@ -122,8 +122,8 @@
         </field>
     </record>
     <record id="view_dms_storage_form" model="ir.ui.view">
-        <field name="name">muk_dms_storage.form</field>
-        <field name="model">muk_dms.storage</field>
+        <field name="name">dms_storage.form</field>
+        <field name="model">dms.storage</field>
         <field name="arch" type="xml">
             <form string="Storage">
                 <header>
@@ -134,7 +134,7 @@
                     />
                     <button
                         type="action"
-                        name="%(muk_dms.action_dms_file_storage_migration)d"
+                        name="%(dms.action_dms_file_storage_migration)d"
                         class="oe_stat_button"
                         string="Manual File Migration"
                     />
@@ -143,7 +143,7 @@
                     <div class="oe_button_box" name="button_box">
                         <button
                             type="action"
-                            name="%(muk_dms.action_dms_directories_storage)d"
+                            name="%(dms.action_dms_directories_storage)d"
                             class="oe_stat_button"
                             icon="fa-folder-open-o"
                         >
@@ -155,7 +155,7 @@
                         </button>
                         <button
                             type="action"
-                            name="%(muk_dms.action_dms_files_storage)d"
+                            name="%(dms.action_dms_files_storage)d"
                             class="oe_stat_button"
                             icon="fa-file-text-o"
                         >
@@ -191,7 +191,7 @@
                         <page name="page_roots" string="Root Directories">
                             <field
                                 name="root_directories"
-                                groups="muk_dms.group_dms_manager"
+                                groups="dms.group_dms_manager"
                                 context="{'default_root_storage': active_id, 'default_is_root_directory': True}"
                             >
                                 <tree string="Root Directories">
@@ -209,7 +209,7 @@
     </record>
     <record id="action_dms_storage" model="ir.actions.act_window">
         <field name="name">Storages</field>
-        <field name="res_model">muk_dms.storage</field>
+        <field name="res_model">dms.storage</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -223,13 +223,13 @@
     <menuitem
         id="menu_dms_storage"
         name="Storages"
-        parent="cat_menu_muk_dms_config_system"
+        parent="cat_menu_dms_config_system"
         action="action_dms_storage"
         sequence="5"
     />
     <record id="view_dms_storage_new_form" model="ir.ui.view">
-        <field name="name">muk_dms_storage.form</field>
-        <field name="model">muk_dms.storage</field>
+        <field name="name">dms_storage.form</field>
+        <field name="model">dms.storage</field>
         <field name="inherit_id" ref="view_dms_storage_form" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
@@ -250,7 +250,7 @@
     </record>
     <record id="action_dms_storage_new" model="ir.actions.act_window">
         <field name="name">New Storage</field>
-        <field name="res_model">muk_dms.storage</field>
+        <field name="res_model">dms.storage</field>
         <field name="view_mode">form</field>
         <field name="view_type">form</field>
         <field name="target">new</field>

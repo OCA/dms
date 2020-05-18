@@ -23,8 +23,8 @@
 <odoo>
     <record id="action_dms_attachment_migrate" model="ir.actions.server">
         <field name="name">Migrate</field>
-        <field name="model_id" ref="model_muk_dms_file" />
-        <field name="binding_model_id" ref="muk_dms.model_muk_dms_file" />
+        <field name="model_id" ref="model_dms_file" />
+        <field name="binding_model_id" ref="dms.model_dms_file" />
         <field name="state">code</field>
         <field name="code">records.action_migrate()</field>
     </record>

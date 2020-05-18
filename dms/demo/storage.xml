@@ -21,7 +21,7 @@
 
   -->
 <odoo noupdate="1">
-    <record id="storage_demo" model="muk_dms.storage">
+    <record id="storage_demo" model="dms.storage">
         <field name="name">Documents Storage</field>
         <field name="save_type">database</field>
     </record>

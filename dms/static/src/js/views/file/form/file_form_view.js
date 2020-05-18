@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.FileFormView", function(require) {
+odoo.define("dms.FileFormView", function(require) {
     "use strict";
 
     var core = require("web.core");
@@ -28,7 +28,7 @@ odoo.define("muk_dms.FileFormView", function(require) {
 
     var FormView = require("web.FormView");
 
-    var FileFormController = require("muk_dms.FileFormController");
+    var FileFormController = require("dms.FileFormController");
 
     var _t = core._t;
     var QWeb = core.qweb;

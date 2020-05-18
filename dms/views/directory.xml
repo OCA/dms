@@ -24,7 +24,7 @@
     <record id="action_dms_directories_directory" model="ir.actions.act_window">
         <field name="name">Subdirectories</field>
         <field name="view_type">form</field>
-        <field name="res_model">muk_dms.directory</field>
+        <field name="res_model">dms.directory</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
 		[
@@ -50,7 +50,7 @@
     <record id="action_dms_files_directory" model="ir.actions.act_window">
         <field name="name">Files</field>
         <field name="view_type">form</field>
-        <field name="res_model">muk_dms.file</field>
+        <field name="res_model">dms.file</field>
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
 		[
@@ -75,7 +75,7 @@
     <record id="action_dms_directories_all_directory" model="ir.actions.act_window">
         <field name="name">Subdirectories</field>
         <field name="view_type">form</field>
-        <field name="res_model">muk_dms.directory</field>
+        <field name="res_model">dms.directory</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
 		[
@@ -102,7 +102,7 @@
     <record id="action_dms_files_all_directory" model="ir.actions.act_window">
         <field name="name">Files</field>
         <field name="view_type">form</field>
-        <field name="res_model">muk_dms.file</field>
+        <field name="res_model">dms.file</field>
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
 		[
@@ -125,8 +125,8 @@
         </field>
     </record>
     <record id="search_dms_directory" model="ir.ui.view">
-        <field name="name">muk_dms_directory.search</field>
-        <field name="model">muk_dms.directory</field>
+        <field name="name">dms_directory.search</field>
+        <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <search>
                 <field
@@ -185,8 +185,8 @@
         </field>
     </record>
     <record id="view_dms_directory_kanban" model="ir.ui.view">
-        <field name="name">muk_dms_directory.kanban</field>
-        <field name="model">muk_dms.directory</field>
+        <field name="name">dms_directory.kanban</field>
+        <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <kanban
                 class="mk_directory_kanban_view o_kanban_small_column align-content-start"
@@ -225,7 +225,7 @@
                                             <h6 class="dropdown-header">Views</h6>
                                             <a
                                                 type="action"
-                                                name="%(muk_dms.action_dms_directories_all_directory)d"
+                                                name="%(dms.action_dms_directories_all_directory)d"
                                                 role="menuitem"
                                                 class="dropdown-item"
                                             >
@@ -233,7 +233,7 @@
 										</a>
                                             <a
                                                 type="action"
-                                                name="%(muk_dms.action_dms_files_all_directory)d"
+                                                name="%(dms.action_dms_files_all_directory)d"
                                                 role="menuitem"
                                                 class="dropdown-item"
                                             >
@@ -287,7 +287,7 @@
                                     <div class="mk_directory_kanban_actions_wrapper">
                                         <a
                                             type="action"
-                                            name="%(muk_dms.action_dms_directories_directory)d"
+                                            name="%(dms.action_dms_directories_directory)d"
                                             role="button"
                                             class="btn btn-sm btn-outline-primary mk_directory_kanban_directories"
                                             t-att-title="record.count_directories.raw_value"
@@ -296,7 +296,7 @@
                                         </a>
                                         <a
                                             type="action"
-                                            name="%(muk_dms.action_dms_files_directory)d"
+                                            name="%(dms.action_dms_files_directory)d"
                                             role="button"
                                             class="btn btn-sm btn-outline-primary mk_directory_kanban_files"
                                             t-att-title="record.count_files.raw_value"
@@ -308,7 +308,7 @@
                                 <div class="o_kanban_image">
                                     <div class="o_kanban_image_wrapper">
                                         <img
-                                            t-att-src="kanban_image('muk_dms.directory', 'thumbnail_medium', record.id.raw_value)"
+                                            t-att-src="kanban_image('dms.directory', 'thumbnail_medium', record.id.raw_value)"
                                             alt="Thumbnail"
                                         />
                                     </div>
@@ -374,8 +374,8 @@
         </field>
     </record>
     <record id="view_dms_directory_tree" model="ir.ui.view">
-        <field name="name">muk_dms_directory.tree</field>
-        <field name="model">muk_dms.directory</field>
+        <field name="name">dms_directory.tree</field>
+        <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <tree string="Directories">
                 <field name="name" />
@@ -383,13 +383,13 @@
                 <field name="count_files" string="Files" />
                 <field name="count_directories" string="Directories" />
                 <field name="parent_path_names" widget="path_names" string="Path" />
-                <field name="storage" groups="muk_dms.group_dms_manager" />
+                <field name="storage" groups="dms.group_dms_manager" />
             </tree>
         </field>
     </record>
     <record id="view_dms_directory_form" model="ir.ui.view">
-        <field name="name">muk_dms_directory.form</field>
-        <field name="model">muk_dms.directory</field>
+        <field name="name">dms_directory.form</field>
+        <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <form string="Directory" js_class="directory_form">
                 <header>
@@ -398,7 +398,7 @@
                     <div class="oe_button_box" name="button_box">
                         <button
                             type="action"
-                            name="%(muk_dms.action_dms_directories_all_directory)d"
+                            name="%(dms.action_dms_directories_all_directory)d"
                             class="oe_stat_button"
                             icon="fa-folder-open-o"
                         >
@@ -410,7 +410,7 @@
                         </button>
                         <button
                             type="action"
-                            name="%(muk_dms.action_dms_files_all_directory)d"
+                            name="%(dms.action_dms_files_all_directory)d"
                             class="oe_stat_button"
                             icon="fa-file-text-o"
                         >
@@ -562,10 +562,10 @@
         </field>
     </record>
     <record id="view_dms_directory_manager_form" model="ir.ui.view">
-        <field name="name">muk_dms_directory.form</field>
-        <field name="model">muk_dms.directory</field>
+        <field name="name">dms_directory.form</field>
+        <field name="model">dms.directory</field>
         <field name="inherit_id" ref="view_dms_directory_form" />
-        <field name="groups_id" eval="[(6, 0, [ref('muk_dms.group_dms_manager')])]" />
+        <field name="groups_id" eval="[(6, 0, [ref('dms.group_dms_manager')])]" />
         <field name="arch" type="xml">
             <field name="is_root_directory" position="attributes">
                 <attribute name="invisible">0</attribute>
@@ -581,7 +581,7 @@
     </record>
     <record id="action_dms_directory" model="ir.actions.act_window">
         <field name="name">Directories</field>
-        <field name="res_model">muk_dms.directory</field>
+        <field name="res_model">dms.directory</field>
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">[("is_hidden", "=",  False)]</field>
@@ -599,12 +599,12 @@
         id="menu_dms_directory"
         name="Directories"
         sequence="30"
-        parent="main_menu_muk_dms"
+        parent="main_menu_dms"
         action="action_dms_directory"
     />
     <record id="view_dms_directory_new_form" model="ir.ui.view">
-        <field name="name">muk_dms_directory.form</field>
-        <field name="model">muk_dms.directory</field>
+        <field name="name">dms_directory.form</field>
+        <field name="model">dms.directory</field>
         <field name="inherit_id" ref="view_dms_directory_form" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
@@ -650,7 +650,7 @@
     </record>
     <record id="action_dms_directory_new" model="ir.actions.act_window">
         <field name="name">New Root Directory</field>
-        <field name="res_model">muk_dms.directory</field>
+        <field name="res_model">dms.directory</field>
         <field name="view_mode">form</field>
         <field name="view_type">form</field>
         <field name="target">new</field>

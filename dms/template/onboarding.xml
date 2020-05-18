@@ -68,20 +68,20 @@
             <t t-set="classes">o_onboarding_orange</t>
             <t
                 t-set="bg_image"
-            >/muk_dms/static/src/img/banner/documents_onboarding_directory.png</t>
+            >/dms/static/src/img/banner/documents_onboarding_directory.png</t>
             <t t-set="close_method">action_close_documents_onboarding</t>
             <t t-set="close_model">res.company</t>
             <t t-set="text_completed">The configuration is done!</t>
             <t
-                t-call="muk_dms.onboarding_storage_step"
+                t-call="dms.onboarding_storage_step"
                 name="documents_onboarding_storage_state"
             />
             <t
-                t-call="muk_dms.onboarding_directory_step"
+                t-call="dms.onboarding_directory_step"
                 name="documents_onboarding_directory_state"
             />
             <t
-                t-call="muk_dms.onboarding_file_step"
+                t-call="dms.onboarding_file_step"
                 name="documents_onboarding_file_state"
             />
         </t>
@@ -91,20 +91,20 @@
             <t t-set="classes">o_onboarding_blue</t>
             <t
                 t-set="bg_image"
-            >/muk_dms/static/src/img/banner/documents_onboarding_file.png</t>
+            >/dms/static/src/img/banner/documents_onboarding_file.png</t>
             <t t-set="close_method">action_close_documents_onboarding</t>
             <t t-set="close_model">res.company</t>
             <t t-set="text_completed">The configuration is done!</t>
             <t
-                t-call="muk_dms.onboarding_storage_step"
+                t-call="dms.onboarding_storage_step"
                 name="documents_onboarding_storage_state"
             />
             <t
-                t-call="muk_dms.onboarding_directory_step"
+                t-call="dms.onboarding_directory_step"
                 name="documents_onboarding_directory_state"
             />
             <t
-                t-call="muk_dms.onboarding_file_step"
+                t-call="dms.onboarding_file_step"
                 name="documents_onboarding_file_state"
             />
         </t>
