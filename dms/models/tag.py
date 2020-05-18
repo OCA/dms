@@ -29,7 +29,7 @@ _logger = logging.getLogger(__name__)
 
 class Tag(models.Model):
 
-    _name = "muk_dms.tag"
+    _name = "dms.tag"
     _description = "Document Tag"
 
     # ----------------------------------------------------------
@@ -44,7 +44,7 @@ class Tag(models.Model):
     )
 
     category = fields.Many2one(
-        comodel_name="muk_dms.category",
+        comodel_name="dms.category",
         context="{'dms_category_show_path': True}",
         string="Category",
         ondelete="set null",
@@ -53,8 +53,8 @@ class Tag(models.Model):
     color = fields.Integer(string="Color Index", default=10)
 
     directories = fields.Many2many(
-        comodel_name="muk_dms.directory",
-        relation="muk_dms_directory_tag_rel",
+        comodel_name="dms.directory",
+        relation="dms_directory_tag_rel",
         column1="tid",
         column2="did",
         string="Directories",
@@ -62,8 +62,8 @@ class Tag(models.Model):
     )
 
     files = fields.Many2many(
-        comodel_name="muk_dms.file",
-        relation="muk_dms_file_tag_rel",
+        comodel_name="dms.file",
+        relation="dms_file_tag_rel",
         column1="tid",
         column2="fid",
         string="Files",

@@ -23,7 +23,7 @@
 import logging
 import os
 
-from odoo.addons.muk_dms.tests.common import DocumentsBaseCase, setup_data_function
+from odoo.addons.dms.tests.common import DocumentsBaseCase, setup_data_function
 from odoo.addons.muk_utils.tests.common import multi_users
 
 _path = os.path.dirname(os.path.dirname(__file__))
@@ -33,7 +33,7 @@ _logger = logging.getLogger(__name__)
 class StorageTestCase(DocumentsBaseCase):
     def _setup_test_data(self):
         super(StorageTestCase, self)._setup_test_data()
-        self.storage_demo = self.browse_ref("muk_dms.storage_demo")
+        self.storage_demo = self.browse_ref("dms.storage_demo")
 
     @multi_users(lambda self: self.multi_users(demo=False))
     @setup_data_function(setup_func="_setup_test_data")
