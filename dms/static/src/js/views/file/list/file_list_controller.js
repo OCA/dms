@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.FileListController", function(require) {
+odoo.define("dms.FileListController", function(require) {
     "use strict";
 
     var core = require("web.core");
