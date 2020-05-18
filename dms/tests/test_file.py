@@ -23,7 +23,7 @@
 import logging
 import os
 
-from odoo.addons.muk_dms.tests.common import DocumentsBaseCase, setup_data_function
+from odoo.addons.dms.tests.common import DocumentsBaseCase, setup_data_function
 from odoo.addons.muk_utils.tests.common import multi_users
 
 _path = os.path.dirname(os.path.dirname(__file__))
@@ -33,16 +33,16 @@ _logger = logging.getLogger(__name__)
 class FileTestCase(DocumentsBaseCase):
     def _setup_test_data(self):
         super(FileTestCase, self)._setup_test_data()
-        self.directory_root_demo_01 = self.browse_ref("muk_dms.directory_01_demo")
-        self.directory_root_demo_02 = self.browse_ref("muk_dms.directory_02_demo")
-        self.directory_root_demo_03 = self.browse_ref("muk_dms.directory_03_demo")
-        self.directory_sub_demo_01 = self.browse_ref("muk_dms.directory_11_demo")
-        self.directory_sub_demo_02 = self.browse_ref("muk_dms.directory_12_demo")
-        self.file_demo_01 = self.browse_ref("muk_dms.file_01_demo")
-        self.file_demo_02 = self.browse_ref("muk_dms.file_02_demo")
-        self.file_demo_03 = self.browse_ref("muk_dms.file_03_demo")
-        self.file_demo_04 = self.browse_ref("muk_dms.file_04_demo")
-        self.file_demo_05 = self.browse_ref("muk_dms.file_05_demo")
+        self.directory_root_demo_01 = self.browse_ref("dms.directory_01_demo")
+        self.directory_root_demo_02 = self.browse_ref("dms.directory_02_demo")
+        self.directory_root_demo_03 = self.browse_ref("dms.directory_03_demo")
+        self.directory_sub_demo_01 = self.browse_ref("dms.directory_11_demo")
+        self.directory_sub_demo_02 = self.browse_ref("dms.directory_12_demo")
+        self.file_demo_01 = self.browse_ref("dms.file_01_demo")
+        self.file_demo_02 = self.browse_ref("dms.file_02_demo")
+        self.file_demo_03 = self.browse_ref("dms.file_03_demo")
+        self.file_demo_04 = self.browse_ref("dms.file_04_demo")
+        self.file_demo_05 = self.browse_ref("dms.file_05_demo")
         self.new_storage = self.create_storage(sudo=True)
         self.new_root_directory = self.create_directory(storage=self.new_storage)
         self.new_sub_directory = self.create_directory(
