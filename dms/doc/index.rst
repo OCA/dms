@@ -4,7 +4,7 @@ MuK Document Management System
 
 MuK Documents is a module to create, manage and view files directly within Odoo.
 In addition to views for files and folders, it offers its own all in one view
-to make working with documents easier. This module is only the basis for an 
+to make working with documents easier. This module is only the basis for an
 entire ecosystem of apps that extend and seamlessly integrate with the document
 management system.
 
@@ -31,7 +31,7 @@ command:
 The module name consists of the Odoo version and the module name, where
 underscores are replaced by a dash.
 
-**Module:** 
+**Module:**
 
 ``odoo<version>-addon-<module_name>``
 
@@ -40,7 +40,7 @@ underscores are replaced by a dash.
 ``sudo -H pip3 install --extra-index-url https://nexus.mukit.at/repository/odoo/simple odoo11-addon-muk-utils``
 
 Once the installation has been successfully completed, the app is already in the
-correct folder. Log on to your Odoo server and go to the Apps menu. Trigger the 
+correct folder. Log on to your Odoo server and go to the Apps menu. Trigger the
 debug mode and update the list by clicking on the "Update Apps List" link. Now
 install the module by clicking on the install button.
 
@@ -49,7 +49,7 @@ using the "pip" command. To do this, enter the following command in your console
 
 ``pip install --upgrade --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
 
-When the process is finished, restart your server and update the application in 
+When the process is finished, restart your server and update the application in
 Odoo. The steps are the same as for the installation only the button has changed
 from "Install" to "Upgrade".
 
@@ -75,7 +75,7 @@ module in the same way. Just type the following command into the console:
 
 ``pip install --upgrade --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
 
-When the process is finished, restart your server and update the application in 
+When the process is finished, restart your server and update the application in
 Odoo, just like you would normally.
 
 Configuration
