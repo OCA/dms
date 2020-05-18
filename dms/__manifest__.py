@@ -1,36 +1,15 @@
-###################################################################################
-#
-#    Copyright (c) 2017-2019 MuK IT GmbH.
-#
-#    This file is part of MuK Documents
-#    (see https://mukit.at).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Lesser General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Lesser General Public License for more details.
-#
-#    You should have received a copy of the GNU Lesser General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-###################################################################################
+# Copyright 2017-2019 MuK IT GmbH
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 {
-    "name": "MuK Documents",
+    "name": "DMS",
     "summary": """Document Management System""",
-    "version": "12.0.3.0.6",
+    "version": "13.0.1.0.0",
     "category": "Document Management",
     "license": "LGPL-3",
-    "website": "http://www.mukit.at",
-    "live_test_url": "https://mukit.at/r/SgN",
-    "author": "MuK IT",
-    "contributors": ["Mathias Markl <mathias.markl@mukit.at>",],
-    "depends": ["muk_security", "muk_web_searchpanel",],
+    "website": "http://github.com/OCA/dms",
+    "author": "MuK IT,Odoo Community Association (OCA)",
+    "depends": ["web"],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
@@ -40,7 +19,7 @@
         "views/menu.xml",
         "views/tag.xml",
         "views/category.xml",
-        "views/file.xml",
+        "views/dms_file.xml",
         "views/directory.xml",
         "views/storage.xml",
         "views/res_config_settings.xml",
@@ -53,9 +32,6 @@
         "demo/directory.xml",
         "demo/file.xml",
     ],
-    "qweb": ["static/src/xml/*.xml",],
     "images": ["static/description/banner.png"],
-    "external_dependencies": {"python": [], "bin": [],},
     "application": True,
-    "installable": True,
 }

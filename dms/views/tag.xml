@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
-    Copyright (c) 2017-2019 MuK IT GmbH.
-
-    This file is part of MuK Documents
-    (see https://mukit.at).
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
 <odoo>
@@ -37,7 +22,7 @@
                         name="group_by_category"
                         string="Category"
                         domain="[]"
-                        context="{'group_by': 'category'}"
+                        context="{'group_by': 'category_id'}"
                     />
                     <filter
                         name="group_by_color"
@@ -80,22 +65,25 @@
                                         type="open"
                                         class="dropdown-item"
                                     >
-									<i class="fa fa-external-link" /> Open
-								</a>
+                                        <i class="fa fa-external-link" />
+                                        Open
+                                    </a>
                                     <a
                                         role="menuitem"
                                         type="edit"
                                         class="dropdown-item"
                                     >
-									<i class="fa fa-pencil-square-o" /> Edit
-								</a>
+                                        <i class="fa fa-pencil-square-o" />
+                                        Edit
+                                    </a>
                                     <a
                                         role="menuitem"
                                         type="delete"
                                         class="dropdown-item"
                                     >
-									<i class="fa fa-trash-o" /> Delete
-								</a>
+                                        <i class="fa fa-trash-o" />
+                                        Delete
+                                    </a>
                                     <ul
                                         class="oe_kanban_colorpicker"
                                         data-field="color"
@@ -116,7 +104,7 @@
             <tree string="Tags">
                 <field name="active" />
                 <field name="name" />
-                <field name="category" />
+                <field name="category_id" />
                 <field name="color" widget="color_index" />
             </tree>
         </field>
@@ -127,25 +115,17 @@
         <field name="arch" type="xml">
             <form string="Tag">
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button
-                            name="toggle_active"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-bell"
-                        >
-                            <field name="active" widget="boolean_button" />
-                        </button>
-                    </div>
+                    <div class="oe_button_box" name="button_box" />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
                         <h1>
                             <field name="name" placeholder="Customer" />
+                            <field name="active" invisible="1" />
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="category" />
+                            <field name="category_id" />
                             <field name="color" widget="color_index" />
                         </group>
                         <group>
@@ -155,10 +135,10 @@
                     </group>
                     <notebook>
                         <page string="Directories">
-                            <field name="directories" widget="one2many" mode="tree" />
+                            <field name="directory_ids" widget="one2many" mode="tree" />
                         </page>
                         <page string="Files">
-                            <field name="files" widget="one2many" mode="tree" />
+                            <field name="file_ids" widget="one2many" mode="tree" />
                         </page>
                     </notebook>
                 </sheet>
@@ -172,11 +152,11 @@
         <field name="context">{'search_default_group_by_category': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Click to create a new tag.
-	    </p>
+                Click to create a new tag.
+            </p>
             <p>
-			Tags are used to categorize Documents.
-	    </p>
+                Tags are used to categorize Documents.
+            </p>
         </field>
     </record>
     <menuitem
