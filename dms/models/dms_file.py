@@ -1,24 +1,6 @@
-###################################################################################
-#
-#    Copyright (c) 2017-2019 MuK IT GmbH.
-#
-#    This file is part of MuK Documents
-#    (see https://mukit.at).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Lesser General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Lesser General Public License for more details.
-#
-#    You should have received a copy of the GNU Lesser General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-###################################################################################
+# Copyright 2020 Antoni Romera
+# Copyright 2017-2019 MuK IT GmbH
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
 import functools
@@ -38,8 +20,7 @@ from odoo.exceptions import AccessError, ValidationError
 from odoo.osv import expression
 from odoo.tools.mimetypes import guess_mimetype
 
-from odoo.addons.muk_security.tools.security import NoSecurityUid
-from odoo.addons.muk_utils.tools import file
+from odoo.addons.dms.tools import NoSecurityUid, file
 
 _logger = logging.getLogger(__name__)
 
@@ -50,8 +31,7 @@ class File(models.Model):
     _description = "File"
 
     _inherit = [
-        "muk_security.mixins.access_rights",
-        "muk_security.mixins.locking",
+        "dms.security.mixins",
         "dms.mixins.thumbnail",
     ]
 
@@ -69,7 +49,7 @@ class File(models.Model):
         help="If a file is set to archived, it is not displayed, but still exists.",
     )
 
-    directory = fields.Many2one(
+    directory_id = fields.Many2one(
         comodel_name="dms.directory",
         string="Directory",
         domain="[('permission_create', '=', True)]",
@@ -80,8 +60,8 @@ class File(models.Model):
         index=True,
     )
 
-    storage = fields.Many2one(
-        related="directory.storage",
+    storage_id = fields.Many2one(
+        related="directory_id.storage",
         comodel_name="dms.storage",
         string="Storage",
         auto_join=True,
@@ -93,7 +73,7 @@ class File(models.Model):
         string="Storage is Hidden", related="storage.is_hidden", readonly=True
     )
 
-    company = fields.Many2one(
+    company_id = fields.Many2one(
         related="storage.company",
         comodel_name="res.company",
         string="Company",
@@ -112,13 +92,13 @@ class File(models.Model):
 
     color = fields.Integer(string="Color", default=0)
 
-    category = fields.Many2one(
+    category_id = fields.Many2one(
         comodel_name="dms.category",
         context="{'dms_category_show_path': True}",
         string="Category",
     )
 
-    tags = fields.Many2many(
+    tag_ids = fields.Many2many(
         comodel_name="dms.tag",
         relation="dms_file_tag_rel",
         column1="fid",
@@ -191,7 +171,7 @@ class File(models.Model):
     @api.model
     def _get_binary_max_size(self):
         get_param = self.env["ir.config_parameter"].sudo().get_param
-        return int(get_param("muk_web_utils.binary_max_size", default=25))
+        return int(get_param("dms_web_utils.binary_max_size", default=25))
 
     @api.model
     def _get_forbidden_extensions(self):
@@ -199,7 +179,6 @@ class File(models.Model):
         extensions = get_param("dms.forbidden_extensions", default="")
         return [extension.strip() for extension in extensions.split(",")]
 
-    @api.multi
     def _get_thumbnail_placeholder_name(self):
         return self.extension and "file_%s.svg" % self.extension or ""
 
@@ -207,7 +186,6 @@ class File(models.Model):
     # Actions
     # ----------------------------------------------------------
 
-    @api.multi
     def action_migrate(self, logging=True):
         record_count = len(self)
         for index, file in enumerate(self):
@@ -218,7 +196,6 @@ class File(models.Model):
                 {"content": file.with_context({}).content}
             )
 
-    @api.multi
     def action_save_onboarding_file_step(self):
         self.env.user.company_id.set_onboarding_step_done(
             "documents_onboarding_file_state"
@@ -302,7 +279,7 @@ class File(models.Model):
     # Read
     # ----------------------------------------------------------
 
-    @api.depends("name", "directory", "directory.parent_path")
+    @api.depends("name", "directory_id", "directory_id.parent_path")
     def _compute_path(self):
         records_with_directory = self - self.filtered(lambda rec: not rec.directory)
         if records_with_directory:
@@ -369,7 +346,7 @@ class File(models.Model):
         for record in self:
             record.save_type = "database"
 
-    @api.depends("storage", "storage.save_type")
+    @api.depends("storage_id", "storage_id.save_type")
     def _compute_migration(self):
         storage_model = self.env["dms.storage"]
         save_field = storage_model._fields["save_type"]
@@ -384,7 +361,6 @@ class File(models.Model):
             else:
                 record.migration = selection.get(storage_type)
 
-    @api.multi
     def read(self, fields=None, load="_classic_read"):
         self.check_directory_access("read", {}, True)
         return super(File, self).read(fields, load=load)
@@ -393,7 +369,7 @@ class File(models.Model):
     # View
     # ----------------------------------------------------------
 
-    @api.onchange("category")
+    @api.onchange("category_id")
     def _change_category(self):
         res = {"domain": {"tags": [("category", "=", False)]}}
         if self.category:
@@ -474,7 +450,6 @@ class File(models.Model):
             file_ids -= set(directory.sudo().mapped("files").ids)
         return len(file_ids) if count else list(file_ids)
 
-    @api.multi
     def _filter_access(self, operation):
         records = super(File, self)._filter_access(operation)
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
@@ -484,7 +459,6 @@ class File(models.Model):
             records -= self.browse(directory.sudo().mapped("files").ids)
         return records
 
-    @api.multi
     def check_access(self, operation, raise_exception=False):
         res = super(File, self).check_access(operation, raise_exception)
         try:
@@ -494,7 +468,6 @@ class File(models.Model):
                 raise
             return False
 
-    @api.multi
     def check_directory_access(self, operation, vals={}, raise_exception=False):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return None
@@ -539,7 +512,7 @@ class File(models.Model):
                     % self._get_binary_max_size()
                 )
 
-    @api.constrains("directory")
+    @api.constrains("directory_id")
     def _check_directory_access(self):
         for record in self:
             if not record.directory.check_access("create", raise_exception=False):
@@ -551,7 +524,6 @@ class File(models.Model):
     # Create, Update, Delete
     # ----------------------------------------------------------
 
-    @api.multi
     def _inverse_content(self):
         updates = defaultdict(set)
         for record in self:
@@ -567,7 +539,6 @@ class File(models.Model):
                 self.browse(ids).write(dict(vals))
         self.recompute()
 
-    @api.multi
     @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
@@ -583,12 +554,63 @@ class File(models.Model):
         self.check_directory_access("create", default, True)
         return super(File, self).copy(default)
 
-    @api.multi
     def write(self, vals):
         self.check_directory_access("write", vals, True)
+        self.check_lock()
         return super(File, self).write(vals)
 
-    @api.multi
     def unlink(self):
         self.check_directory_access("unlink", {}, True)
+        self.check_lock()
         return super(File, self).unlink()
+
+    # ----------------------------------------------------------
+    # Locking fields and functions
+    # ----------------------------------------------------------
+
+    locked_by = fields.Many2one(comodel_name="res.users", string="Locked by")
+
+    is_locked = fields.Boolean(compute="_compute_locked", string="Locked")
+
+    is_lock_editor = fields.Boolean(compute="_compute_locked", string="Editor")
+
+    # ----------------------------------------------------------
+    # Locking
+    # ----------------------------------------------------------
+
+    def lock(self):
+        self.write({"locked_by": self.env.uid})
+
+    def unlock(self):
+        self.write({"locked_by": None})
+
+    @api.model
+    def _check_lock_editor(self, lock_uid):
+        return lock_uid in (self.env.uid, SUPERUSER_ID) or isinstance(
+            self.env.uid, NoSecurityUid
+        )
+
+    def check_lock(self):
+        for record in self:
+            if record.locked_by.exists() and not self._check_lock_editor(
+                record.locked_by.id
+            ):
+                message = _("The record (%s [%s]) is locked, by an other user.")
+                raise AccessError(message % (record._description, record.id))
+
+    # ----------------------------------------------------------
+    # Read, View
+    # ----------------------------------------------------------
+
+    @api.depends("locked_by")
+    def _compute_locked(self):
+        for record in self:
+            if record.locked_by.exists():
+                record.update(
+                    {
+                        "is_locked": True,
+                        "is_lock_editor": record.locked_by.id == record.env.uid,
+                    }
+                )
+            else:
+                record.update({"is_locked": False, "is_lock_editor": False})

@@ -65,20 +65,20 @@
                         name="group_category"
                         string="Category"
                         domain="[]"
-                        context="{'group_by':'category'}"
+                        context="{'group_by':'category_id'}"
                     />
                     <separator />
                     <filter
                         name="group_storage"
                         string="Storage"
                         domain="[]"
-                        context="{'group_by':'storage'}"
+                        context="{'group_by':'storage_id'}"
                     />
                     <filter
                         name="group_directory"
                         string="Directories"
                         domain="[]"
-                        context="{'group_by':'directory'}"
+                        context="{'group_by':'directory_id'}"
                     />
                 </group>
             </search>
@@ -94,7 +94,7 @@
                 js_class="file_kanban"
             >
                 <field name="id" />
-                <field name="tags" />
+                <field name="tag_ids" />
                 <field name="name" />
                 <field name="color" />
                 <field name="active" />
@@ -231,7 +231,7 @@
                                         </div>
                                         <div class="o_kanban_record_body">
                                             <field
-                                                name="tags"
+                                                name="tag_ids"
                                                 widget="many2many_tags"
                                                 options="{'color_field': 'color'}"
                                             />
@@ -268,19 +268,19 @@
                 </templates>
                 <searchpanel>
                     <field
-                        name="directory"
+                        name="directory_id"
                         domain="[['is_hidden', '=', False]]"
                         icon="fa-folder"
                     />
                     <field
-                        name="directory"
+                        name="directory_id"
                         string="Starred"
                         domain="[['is_hidden', '=', False], ['starred', '=', True]]"
                         select="multi"
                         icon="fa-star"
                     />
                     <field
-                        name="tags"
+                        name="tag_ids"
                         select="multi"
                         icon="fa-tag"
                         groupby="category"
@@ -315,7 +315,7 @@
         <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <graph type="pie">
-                <field name="directory" type="row" />
+                <field name="directory_id" type="row" />
                 <field name="size" type="measure" />
             </graph>
         </field>
@@ -325,8 +325,8 @@
         <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <pivot display_quantity="true">
-                <field name="storage" type="row" />
-                <field name="directory" type="row" />
+                <field name="storage_id" type="row" />
+                <field name="directory_id" type="row" />
                 <field name="size" type="measure" widget="binary_size" />
             </pivot>
         </field>
@@ -405,19 +405,19 @@
                     <group name="settings">
                         <group>
                             <field
-                                name="directory"
+                                name="directory_id"
                                 options="{'no_quick_create': True}"
                             />
                             <field name="storage" options="{'no_open': True}" />
                         </group>
                         <group>
                             <field
-                                name="category"
+                                name="category_id"
                                 placeholder="Internal / Human Resource"
                                 options="{'no_open': True, 'no_create': True}"
                             />
                             <field
-                                name="tags"
+                                name="tag_ids"
                                 widget="many2many_tags"
                                 placeholder="Tags..."
                                 options="{'color_field': 'color', 'no_create_edit': True}"
@@ -511,7 +511,7 @@
                         name="group_storage"
                         string="Storage"
                         domain="[]"
-                        context="{'group_by':'storage'}"
+                        context="{'group_by':'storage_id'}"
                     />
                 </group>
             </search>
@@ -528,7 +528,7 @@
                 <field name="write_date" />
                 <field name="size" widget="binary_size" />
                 <field name="mimetype" />
-                <field name="storage" />
+                <field name="storage_id" />
                 <field name="migration" />
             </tree>
         </field>
