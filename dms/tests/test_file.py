@@ -1,30 +1,11 @@
-###################################################################################
-#
-#    Copyright (c) 2017-2019 MuK IT GmbH.
-#
-#    This file is part of MuK Documents
-#    (see https://mukit.at).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Lesser General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Lesser General Public License for more details.
-#
-#    You should have received a copy of the GNU Lesser General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-###################################################################################
+# Copyright 2017-2019 MuK IT GmbH.
+# Copyright 2020 Creu Blanca
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
 import os
 
-from odoo.addons.dms.tests.common import DocumentsBaseCase, setup_data_function
-from odoo.addons.muk_utils.tests.common import multi_users
+from .common import DocumentsBaseCase, multi_users, setup_data_function
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
@@ -43,7 +24,7 @@ class FileTestCase(DocumentsBaseCase):
         self.file_demo_03 = self.browse_ref("dms.file_03_demo")
         self.file_demo_04 = self.browse_ref("dms.file_04_demo")
         self.file_demo_05 = self.browse_ref("dms.file_05_demo")
-        self.new_storage = self.create_storage(sudo=True)
+        self.new_storage = self.create_storage(with_user=True)
         self.new_root_directory = self.create_directory(storage=self.new_storage)
         self.new_sub_directory = self.create_directory(
             directory=self.new_root_directory
@@ -57,63 +38,64 @@ class FileTestCase(DocumentsBaseCase):
     @setup_data_function(setup_func="_setup_test_data")
     def test_create_file(self):
         root_directory = self.create_directory(storage=self.new_storage)
+        self.create_file(root_directory)
         sub_directory = self.create_directory(directory=root_directory)
-        file_root_directory = self.create_file(directory=root_directory)
-        file_sub_directory = self.create_file(directory=sub_directory)
-        self.assertTrue(root_directory.count_total_files == 2)
-        self.assertTrue(sub_directory.count_files == 1)
+        self.create_file(sub_directory)
+        self.assertEqual(root_directory.count_total_files, 2)
+        self.assertEqual(sub_directory.count_files, 1)
 
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func="_setup_test_data")
     def test_lock_file(self):
-        file = self.create_file(sudo=True)
-        file.sudo(self.env.uid).lock()
+        file = self.create_file(with_user=True)
+        file.with_user(self.env.uid).lock()
         self.assertTrue(file.is_locked)
-        file.sudo(self.env.uid).unlock()
+        file.with_user(self.env.uid).unlock()
         self.assertFalse(file.is_locked)
 
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func="_setup_test_data")
     def test_copy_file(self):
         copy_file = self.file_demo_01.copy()
-        self.assertTrue(self.file_demo_01.storage.id == copy_file.storage.id)
-        self.assertTrue(self.file_demo_01.content == copy_file.content)
+        self.assertEqual(self.file_demo_01.storage_id, copy_file.storage_id)
+        self.assertEqual(self.file_demo_01.content, copy_file.content)
 
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func="_setup_test_data")
     def test_rename_file(self):
-        file = self.create_file(sudo=True)
+        file = self.create_file(with_user=True)
         extension = file.extension
-        file.sudo(self.env.uid).write({"name": "Test.jpg"})
-        self.assertFalse(file.extension == extension)
+        file.with_user(self.env.uid).write({"name": "Test.jpg"})
+        self.assertNotEqual(file.extension, extension)
 
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func="_setup_test_data")
     def test_move_file(self):
         path_names = self.file_demo_01.path_names
-        self.file_demo_01.write(
-            {"directory": self.directory_root_demo_01.id,}
-        )
-        self.assertFalse(path_names == self.file_demo_01.path_names)
+        self.file_demo_01.write({"directory_id": self.directory_root_demo_01.id})
+        self.file_demo_01.flush()
+        self.assertNotEqual(path_names, self.file_demo_01.path_names)
 
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func="_setup_test_data")
     def test_move_directory(self):
-        path_names = self.directory_root_demo_03.files[0].path_names
+        path_names = self.directory_root_demo_03.file_ids[0].path_names
         self.directory_root_demo_01.write(
             {
-                "root_storage": False,
+                "root_storage_id": False,
                 "is_root_directory": False,
-                "parent_directory": self.directory_root_demo_02.id,
+                "parent_id": self.directory_root_demo_02.id,
             }
         )
-        self.assertFalse(path_names == self.directory_root_demo_03.files[0].path_names)
+        self.assertNotEqual(
+            path_names, self.directory_root_demo_03.file_ids[0].path_names
+        )
 
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func="_setup_test_data")
     def test_unlink_file(self):
-        file = self.create_file(sudo=True)
-        file.sudo(self.env.uid).unlink()
+        file = self.create_file(with_user=True)
+        file.with_user(self.env.uid).unlink()
         self.assertFalse(file.exists())
 
     @multi_users(lambda self: self.multi_users())
@@ -176,6 +158,6 @@ class FileTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func="_setup_test_data")
     def test_search_panel(self):
-        self.assertTrue(self.file.search_panel_select_range("directory"))
-        self.assertTrue(self.file.search_panel_select_multi_range("directory"))
-        self.assertTrue(self.file.search_panel_select_multi_range("tags"))
+        self.assertTrue(self.file.search_panel_select_range("directory_id"))
+        self.assertTrue(self.file.search_panel_select_multi_range("directory_id"))
+        self.assertTrue(self.file.search_panel_select_multi_range("tag_ids"))

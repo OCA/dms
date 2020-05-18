@@ -1,25 +1,5 @@
-###################################################################################
-#
-#    Copyright (c) 2017-2019 MuK IT GmbH.
-#
-#    This file is part of MuK Documents
-#    (see https://mukit.at).
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Lesser General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Lesser General Public License for more details.
-#
-#    You should have received a copy of the GNU Lesser General Public License
-#    along with this program. If not, see <http://www.gnu.org/licenses/>.
-#
-###################################################################################
-
+# Copyright 2017-2019 MuK IT GmbH
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 from odoo import http
 from odoo.http import request
 
@@ -50,9 +30,7 @@ class OnboardingController(http.Controller):
         check = request.env.user.has_group("dms.group_dms_manager")
         if check and not closed:
             return {
-                "html": request.env.ref(
-                    "dms.document_onboarding_file_panel"
-                ).render(
+                "html": request.env.ref("dms.document_onboarding_file_panel").render(
                     {
                         "state": company.get_and_update_documents_onboarding_state(),
                         "company": company,
@@ -60,3 +38,12 @@ class OnboardingController(http.Controller):
                 )
             }
         return {}
+
+    @http.route("/config/dms.forbidden_extensions", type="json", auth="user")
+    def forbidden_extensions(self, **_kwargs):
+        params = request.env["ir.config_parameter"].sudo()
+        return {
+            "forbidden_extensions": params.get_param(
+                "dms.forbidden_extensions", default=""
+            )
+        }
