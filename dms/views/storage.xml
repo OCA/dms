@@ -1,71 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
-    Copyright (c) 2017-2019 MuK IT GmbH.
-
-    This file is part of MuK Documents
-    (see https://mukit.at).
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Lesser General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
 <odoo>
     <record id="action_dms_directories_storage" model="ir.actions.act_window">
         <field name="name">Directories</field>
-        <field name="view_type">form</field>
         <field name="res_model">dms.directory</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
-		[
-			("storage", "=",  active_id),
-			("is_hidden", "=",  False),
-		]
-	</field>
+            [
+            ("storage_id", "=", active_id),
+            ("is_hidden", "=", False),
+            ]
+        </field>
         <field name="context">
-		{
-			'default_root_storage': active_id,
-			'default_is_root_directory': True,
-		}
-    </field>
+            {
+            'default_root_storage': active_id,
+            'default_is_root_directory': True,
+            }
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Click to add a new directory.
-	    </p>
+                Click to add a new directory.
+            </p>
             <p>
-			Directories can be used to structure and organize
-			files directly in Odoo.
-	    </p>
+                Directories can be used to structure and organize
+                files directly in Odoo.
+            </p>
         </field>
     </record>
     <record id="action_dms_files_storage" model="ir.actions.act_window">
         <field name="name">Files</field>
-        <field name="view_type">form</field>
         <field name="res_model">dms.file</field>
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
-		[
-			("storage", "=",  active_id),
-			("is_hidden", "=",  False),
-		]
-	</field>
+            [
+            ("storage_id", "=", active_id),
+            ("is_hidden", "=", False),
+            ]
+        </field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Click to add a new file.
-	    </p>
+                Click to add a new file.
+            </p>
             <p>
-			Files are used to save content directly in Odoo.
-	    </p>
+                Files are used to save content directly in Odoo.
+            </p>
         </field>
     </record>
     <record id="action_dms_file_storage_migration" model="ir.actions.act_window">
@@ -74,22 +57,22 @@
         <field name="view_mode">tree</field>
         <field name="search_view_id" ref="search_dms_file_migration" />
         <field name="domain">
-		[
-			"&amp;", ("storage", "=",  active_id),
-			"|",("active", "=",  False), ("active", "!=",  False)
-		]
-	</field>
+            [
+            "&amp;", ("storage_id", "=", active_id),
+            "|",("active", "=", False), ("active", "!=", False)
+            ]
+        </field>
         <field
             name="view_ids"
             eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_dms_file_migration_tree')})]"
         />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Add a new File.
-	    </p>
+                Add a new File.
+            </p>
             <p>
-			Files are used to save content directly in Odoo.
-	    </p>
+                Files are used to save content directly in Odoo.
+            </p>
         </field>
     </record>
     <record id="view_dms_storage_search" model="ir.ui.view">
@@ -117,7 +100,7 @@
                 <field name="name" />
                 <field name="save_type" />
                 <field name="is_hidden" />
-                <field name="company" />
+                <field name="company_id" />
             </tree>
         </field>
     </record>
@@ -177,20 +160,20 @@
                             <field name="save_type" />
                         </group>
                         <group name="save_storage_right">
-					</group>
+                        </group>
                     </group>
                     <group name="data_storage">
                         <group>
                             <field name="is_hidden" />
                         </group>
                         <group>
-                            <field name="company" />
+                            <field name="company_id" />
                         </group>
                     </group>
                     <notebook>
                         <page name="page_roots" string="Root Directories">
                             <field
-                                name="root_directories"
+                                name="root_directory_ids"
                                 groups="dms.group_dms_manager"
                                 context="{'default_root_storage': active_id, 'default_is_root_directory': True}"
                             >
@@ -198,7 +181,7 @@
                                     <field name="name" />
                                     <field name="count_total_directories" />
                                     <field name="count_total_files" />
-                                    <field name="size" widget="binary_size" />
+                                    <field name="size" />
                                 </tree>
                             </field>
                         </page>
@@ -206,18 +189,18 @@
                 </sheet>
             </form>
         </field>
-    </record>
+    </record>º
     <record id="action_dms_storage" model="ir.actions.act_window">
         <field name="name">Storages</field>
         <field name="res_model">dms.storage</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-	      	Create a new Storage object.
-	    </p>
+                Create a new Storage object.
+            </p>
             <p>
-			Storages are used to configure your Documents.
-	    </p>
+                Storages are used to configure your Documents.
+            </p>
         </field>
     </record>
     <menuitem
@@ -233,10 +216,14 @@
         <field name="inherit_id" ref="view_dms_storage_form" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <xpath expr="//header" position="replace" />
-            <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="replace" />
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
             <form position="inside">
-                <footer position="replace">
+                <footer>
                     <button
                         class="btn btn-primary"
                         type="object"
@@ -252,7 +239,6 @@
         <field name="name">New Storage</field>
         <field name="res_model">dms.storage</field>
         <field name="view_mode">form</field>
-        <field name="view_type">form</field>
         <field name="target">new</field>
         <field name="view_id" ref="view_dms_storage_new_form" />
     </record>

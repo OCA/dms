@@ -1,6 +1,6 @@
 # Copyright 2020 RGB Consulting
 # Copyright 2017-2019 MuK IT GmbH
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
 
@@ -32,7 +32,6 @@ class Tag(models.Model):
         column2="did",
         string="Directories",
         readonly=True,
-        oldname="directories",
     )
     file_ids = fields.Many2many(
         comodel_name="dms.file",
@@ -48,15 +47,15 @@ class Tag(models.Model):
     count_files = fields.Integer(compute="_compute_count_files", string="Count Files")
 
     _sql_constraints = [
-        ("name_uniq", "unique (name, category)", "Tag name already exists!"),
+        ("name_uniq", "unique (name, category_id)", "Tag name already exists!"),
     ]
 
-    @api.depends("directories")
+    @api.depends("directory_ids")
     def _compute_count_directories(self):
         for rec in self:
-            rec.count_directories = len(rec.directories)
+            rec.count_directories = len(rec.directory_ids)
 
-    @api.depends("files")
+    @api.depends("file_ids")
     def _compute_count_files(self):
         for rec in self:
-            rec.count_files = len(rec.files)
+            rec.count_files = len(rec.file_ids)

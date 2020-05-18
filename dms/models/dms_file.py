@@ -1,18 +1,14 @@
 # Copyright 2020 Antoni Romera
 # Copyright 2017-2019 MuK IT GmbH
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
 import functools
 import hashlib
-import io
-import itertools
 import json
 import logging
 import mimetypes
 import operator
-import os
-import tempfile
 from collections import defaultdict
 
 from odoo import SUPERUSER_ID, _, api, fields, models, tools
@@ -20,7 +16,7 @@ from odoo.exceptions import AccessError, ValidationError
 from odoo.osv import expression
 from odoo.tools.mimetypes import guess_mimetype
 
-from odoo.addons.dms.tools import NoSecurityUid, file
+from ..tools import file
 
 _logger = logging.getLogger(__name__)
 
@@ -31,7 +27,7 @@ class File(models.Model):
     _description = "File"
 
     _inherit = [
-        "dms.security.mixins",
+        "dms.security.mixin",
         "dms.mixins.thumbnail",
     ]
 
@@ -61,7 +57,7 @@ class File(models.Model):
     )
 
     storage_id = fields.Many2one(
-        related="directory_id.storage",
+        related="directory_id.storage_id",
         comodel_name="dms.storage",
         string="Storage",
         auto_join=True,
@@ -70,11 +66,11 @@ class File(models.Model):
     )
 
     is_hidden = fields.Boolean(
-        string="Storage is Hidden", related="storage.is_hidden", readonly=True
+        string="Storage is Hidden", related="storage_id.is_hidden", readonly=True
     )
 
     company_id = fields.Many2one(
-        related="storage.company",
+        related="storage_id.company_id",
         comodel_name="res.company",
         string="Company",
         readonly=True,
@@ -188,12 +184,12 @@ class File(models.Model):
 
     def action_migrate(self, logging=True):
         record_count = len(self)
-        for index, file in enumerate(self):
+        for index, dms_file in enumerate(self):
             if logging:
-                info = (index + 1, record_count, file.migration)
+                info = (index + 1, record_count, dms_file.migration)
                 _logger.info(_("Migrate File %s of %s [ %s ]") % info)
-            file.with_context(migration=True).write(
-                {"content": file.with_context({}).content}
+            dms_file.with_context(migration=True).write(
+                {"content": dms_file.with_context({}).content}
             )
 
     def action_save_onboarding_file_step(self):
@@ -213,25 +209,27 @@ class File(models.Model):
             return "=", category_domain[0][2]
         if search_domain and len(search_domain):
             for domain in search_domain[0]:
-                if domain[0] == "directory":
+                if domain[0] == "directory_id":
                     return domain[1], domain[2]
         return None, None
 
     @api.model
-    def _search_panel_domain(self, field, operator, directory_id, comodel_domain=[]):
-        files_ids = self.search([("directory", operator, directory_id)]).ids
+    def _search_panel_domain(self, field, operator, directory_id, comodel_domain=False):
+        if not comodel_domain:
+            comodel_domain = []
+        files_ids = self.search([("directory_id", operator, directory_id)]).ids
         return expression.AND([comodel_domain, [(field, "in", files_ids)]])
 
     @api.model
     def search_panel_select_range(self, field_name, **kwargs):
         operator, directory_id = self._search_panel_directory(**kwargs)
-        if directory_id and field_name == "directory":
-            domain = [("parent_directory", operator, directory_id)]
+        if directory_id and field_name == "directory_id":
+            domain = [("parent_id", operator, directory_id)]
             values = self.env["dms.directory"].search_read(
-                domain, ["display_name", "parent_directory"]
+                domain, ["display_name", "parent_id"]
             )
             return {
-                "parent_field": "parent_directory",
+                "parent_field": "parent_id",
                 "values": values if len(values) > 1 else [],
             }
         return super(File, self).search_panel_select_range(field_name, **kwargs)
@@ -239,12 +237,12 @@ class File(models.Model):
     @api.model
     def search_panel_select_multi_range(self, field_name, **kwargs):
         operator, directory_id = self._search_panel_directory(**kwargs)
-        if field_name == "tags":
+        if field_name == "tag_ids":
             sql_query = """
                 SELECT t.name AS name, t.id AS id, c.name AS group_name,
                     c.id AS group_id, COUNT(r.fid) AS count
                 FROM dms_tag t
-                JOIN dms_category c ON t.category = c.id
+                JOIN dms_category c ON t.category_id = c.id
                 LEFT JOIN dms_file_tag_rel r ON t.id = r.tid
                 {directory_where_clause}
                 GROUP BY c.name, c.id, t.name, t.id
@@ -253,7 +251,7 @@ class File(models.Model):
             where_clause = ""
             if directory_id:
                 directory_where_clause = "WHERE r.fid = ANY (VALUES {ids})"
-                file_ids = self.search([("directory", operator, directory_id)]).ids
+                file_ids = self.search([("directory_id", operator, directory_id)]).ids
                 where_clause = (
                     ""
                     if not file_ids
@@ -265,7 +263,7 @@ class File(models.Model):
                 sql_query.format(directory_where_clause=where_clause), []
             )
             return self.env.cr.dictfetchall()
-        if directory_id and field_name in ["directory", "category"]:
+        if directory_id and field_name in ["directory_id", "category_id"]:
             comodel_domain = kwargs.pop("comodel_domain", [])
             directory_comodel_domain = self._search_panel_domain(
                 "files", operator, directory_id, comodel_domain
@@ -281,28 +279,32 @@ class File(models.Model):
 
     @api.depends("name", "directory_id", "directory_id.parent_path")
     def _compute_path(self):
-        records_with_directory = self - self.filtered(lambda rec: not rec.directory)
+        records_with_directory = self - self.filtered(lambda rec: not rec.directory_id)
         if records_with_directory:
             paths = [
-                list(map(int, rec.directory.parent_path.split("/")[:-1]))
+                list(map(int, rec.directory_id.parent_path.split("/")[:-1]))
                 for rec in records_with_directory
             ]
             model = self.env["dms.directory"].with_context(
                 dms_directory_show_path=False
             )
             directories = model.browse(set(functools.reduce(operator.concat, paths)))
-            data = dict(directories._filter_access("read").name_get())
+            data = dict({d.id: d for d in directories._filter_access("read")})
             for record in self:
                 path_names = []
                 path_json = []
-                for id in reversed(
-                    list(map(int, record.directory.parent_path.split("/")[:-1]))
+                for directory_id in reversed(
+                    list(map(int, record.directory_id.parent_path.split("/")[:-1]))
                 ):
-                    if id not in data:
+                    if directory_id not in data:
                         break
-                    path_names.append(data[id])
+                    path_names.append(data[directory_id].name)
                     path_json.append(
-                        {"model": model._name, "name": data[id], "id": id,}
+                        {
+                            "model": model._name,
+                            "name": data[directory_id].name,
+                            "id": directory_id,
+                        }
                     )
                 path_names.reverse()
                 path_json.reverse()
@@ -353,7 +355,7 @@ class File(models.Model):
         values = save_field._description_selection(self.env)
         selection = {value[0]: value[1] for value in values}
         for record in self:
-            storage_type = record.storage.save_type
+            storage_type = record.storage_id.save_type
             if storage_type != record.save_type:
                 storage_label = selection.get(storage_type)
                 file_label = selection.get(record.save_type)
@@ -371,21 +373,21 @@ class File(models.Model):
 
     @api.onchange("category_id")
     def _change_category(self):
-        res = {"domain": {"tags": [("category", "=", False)]}}
+        res = {"domain": {"tags": [("category_id", "=", False)]}}
         if self.category:
             res.update(
                 {
                     "domain": {
                         "tags": [
                             "|",
-                            ("category", "=", False),
-                            ("category", "child_of", self.category.id),
+                            ("category_id", "=", False),
+                            ("category_id", "child_of", self.category.id),
                         ]
                     }
                 }
             )
         tags = self.tags.filtered(
-            lambda rec: not rec.category or rec.category == self.category
+            lambda rec: not rec.category_id or rec.category_id == self.category
         )
         self.tags = tags
         return res
@@ -398,20 +400,11 @@ class File(models.Model):
     def _get_directories_from_database(self, file_ids):
         if not file_ids:
             return self.env["dms.directory"]
-        sql_query = """
-            SELECT directory
-            FROM dms_file
-            WHERE id = ANY (VALUES {ids});
-        """.format(
-            ids=", ".join(map(lambda id: "(%s)" % id, file_ids))
-        )
-        self.env.cr.execute(sql_query, [])
-        result = {val[0] for val in self.env.cr.fetchall()}
-        return self.env["dms.directory"].browse(result)
+        return self.env["dms.file"].browse(file_ids).mapped("directory_id")
 
     @api.model
     def _read_group_process_groupby(self, gb, query):
-        if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
+        if self.env.user.id == SUPERUSER_ID:
             return super(File, self)._read_group_process_groupby(gb, query)
         directories = (
             self.env["dms.directory"].with_context(prefetch_fields=False).search([])
@@ -419,7 +412,7 @@ class File(models.Model):
         if directories:
             where_clause = '"{table}"."{field}" = ANY (VALUES {ids})'.format(
                 table=self._table,
-                field="directory",
+                field="directory_id",
                 ids=", ".join(map(lambda id: "(%s)" % id, directories.ids)),
             )
             query.where_clause += [where_clause]
@@ -440,19 +433,19 @@ class File(models.Model):
         result = super(File, self)._search(
             args, offset, limit, order, False, access_rights_uid
         )
-        if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
+        if self.env.user.id == SUPERUSER_ID:
             return len(result) if count else result
         if not result:
             return 0 if count else []
         file_ids = set(result)
         directories = self._get_directories_from_database(result)
         for directory in directories - directories._filter_access("read"):
-            file_ids -= set(directory.sudo().mapped("files").ids)
+            file_ids -= set(directory.sudo().mapped("file_idgs").ids)
         return len(file_ids) if count else list(file_ids)
 
     def _filter_access(self, operation):
         records = super(File, self)._filter_access(operation)
-        if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
+        if self.env.user.id == SUPERUSER_ID:
             return records
         directories = self._get_directories_from_database(records.ids)
         for directory in directories - directories._filter_access("read"):
@@ -462,17 +455,19 @@ class File(models.Model):
     def check_access(self, operation, raise_exception=False):
         res = super(File, self).check_access(operation, raise_exception)
         try:
-            return res and self.check_directory_access(operation) == None
+            return res and self.check_directory_access(operation) is None
         except AccessError:
             if raise_exception:
                 raise
             return False
 
-    def check_directory_access(self, operation, vals={}, raise_exception=False):
-        if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
+    def check_directory_access(self, operation, vals=False, raise_exception=False):
+        if not vals:
+            vals = {}
+        if self.env.user.id == SUPERUSER_ID:
             return None
-        if "directory" in vals and vals["directory"]:
-            records = self.env["dms.directory"].browse(vals["directory"])
+        if "directory_id" in vals and vals["directory_id"]:
+            records = self.env["dms.directory"].browse(vals["directory_id"])
         else:
             records = self._get_directories_from_database(self.ids)
         return records.check_access(operation, raise_exception)
@@ -486,7 +481,7 @@ class File(models.Model):
         for record in self:
             if not file.check_name(record.name):
                 raise ValidationError(_("The file name is invalid."))
-            files = record.sudo().directory.files.name_get()
+            files = record.sudo().directory_id.file_ids.name_get()
             if list(
                 filter(
                     lambda file: file[1] == record.name and file[0] != record.id, files
@@ -515,7 +510,7 @@ class File(models.Model):
     @api.constrains("directory_id")
     def _check_directory_access(self):
         for record in self:
-            if not record.directory.check_access("create", raise_exception=False):
+            if not record.directory_id.check_access("create", raise_exception=False):
                 raise ValidationError(
                     _("The directory has to have the permission to create files.")
                 )
@@ -530,9 +525,7 @@ class File(models.Model):
             values = self._get_content_inital_vals()
             binary = base64.b64decode(record.content or "")
             values = self._update_content_vals(record, values, binary)
-            values.update(
-                {"content_binary": record.content,}
-            )
+            values.update({"content_binary": record.content})
             updates[tools.frozendict(values)].add(record.id)
         with self.env.norecompute():
             for vals, ids in updates.items():
@@ -544,12 +537,12 @@ class File(models.Model):
         self.ensure_one()
         default = dict(default or [])
         names = []
-        if "directory" in default:
+        if "directory_id" in default:
             model = self.env["dms.directory"]
-            directory = model.browse(default["directory"])
-            names = directory.sudo().files.mapped("name")
+            directory = model.browse(default["directory_id"])
+            names = directory.sudo().file_ids.mapped("name")
         else:
-            names = self.sudo().directory.files.mapped("name")
+            names = self.sudo().directory_id.file_ids.mapped("name")
         default.update({"name": file.unique_name(self.name, names, self.extension)})
         self.check_directory_access("create", default, True)
         return super(File, self).copy(default)
@@ -586,9 +579,7 @@ class File(models.Model):
 
     @api.model
     def _check_lock_editor(self, lock_uid):
-        return lock_uid in (self.env.uid, SUPERUSER_ID) or isinstance(
-            self.env.uid, NoSecurityUid
-        )
+        return lock_uid in (self.env.uid, SUPERUSER_ID)
 
     def check_lock(self):
         for record in self:
