@@ -39,13 +39,13 @@ _logger = logging.getLogger(__name__)
 
 class Directory(models.Model):
 
-    _name = "muk_dms.directory"
+    _name = "dms.directory"
     _description = "Directory"
 
     _inherit = [
         "muk_utils.mixins.hierarchy",
         "muk_security.mixins.access_rights",
-        "muk_dms.mixins.thumbnail",
+        "dms.mixins.thumbnail",
     ]
 
     _order = "name asc"
@@ -72,12 +72,12 @@ class Directory(models.Model):
     )
 
     root_storage = fields.Many2one(
-        comodel_name="muk_dms.storage", string="Root Storage", ondelete="restrict"
+        comodel_name="dms.storage", string="Root Storage", ondelete="restrict"
     )
 
     storage = fields.Many2one(
         compute="_compute_storage",
-        comodel_name="muk_dms.storage",
+        comodel_name="dms.storage",
         string="Storage",
         ondelete="restrict",
         auto_join=True,
@@ -86,7 +86,7 @@ class Directory(models.Model):
     )
 
     parent_directory = fields.Many2one(
-        comodel_name="muk_dms.directory",
+        comodel_name="dms.directory",
         domain="""[('permission_create', '=', True)]""",
         context="{'dms_directory_show_path': True}",
         string="Parent Directory",
@@ -96,7 +96,7 @@ class Directory(models.Model):
     )
 
     child_directories = fields.One2many(
-        comodel_name="muk_dms.directory",
+        comodel_name="dms.directory",
         inverse_name="parent_directory",
         string="Subdirectories",
         auto_join=False,
@@ -119,14 +119,14 @@ class Directory(models.Model):
     color = fields.Integer(string="Color", default=0)
 
     category = fields.Many2one(
-        comodel_name="muk_dms.category",
+        comodel_name="dms.category",
         context="{'dms_category_show_path': True}",
         string="Category",
     )
 
     tags = fields.Many2many(
-        comodel_name="muk_dms.tag",
-        relation="muk_dms_directory_tag_rel",
+        comodel_name="dms.tag",
+        relation="dms_directory_tag_rel",
         domain="""[
             '|', ['category', '=', False],
             ['category', 'child_of', category]]
@@ -138,7 +138,7 @@ class Directory(models.Model):
 
     user_stars = fields.Many2many(
         comodel_name="res.users",
-        relation="muk_dms_directory_star_rel",
+        relation="dms_directory_star_rel",
         column1="did",
         column2="uid",
         string="Stars",
@@ -152,7 +152,7 @@ class Directory(models.Model):
     )
 
     files = fields.One2many(
-        comodel_name="muk_dms.file",
+        comodel_name="dms.file",
         inverse_name="directory",
         string="Files",
         auto_join=False,
@@ -228,9 +228,9 @@ class Directory(models.Model):
             sql_query = """
                 SELECT t.name AS name, t.id AS id, c.name AS group_name,
                     c.id AS group_id, COUNT(r.did) AS count
-                FROM muk_dms_tag t
-                JOIN muk_dms_category c ON t.category = c.id
-                LEFT JOIN muk_dms_directory_tag_rel r ON t.id = r.tid
+                FROM dms_tag t
+                JOIN dms_category c ON t.category = c.id
+                LEFT JOIN dms_directory_tag_rel r ON t.id = r.tid
                 {directory_where_clause}
                 GROUP BY c.name, c.id, t.name, t.id
                 ORDER BY c.name, c.id, t.name, t.id;
@@ -323,7 +323,7 @@ class Directory(models.Model):
 
     @api.multi
     def _compute_count_total_files(self):
-        model = self.env["muk_dms.file"]
+        model = self.env["dms.file"]
         for record in self:
             record.count_total_files = model.search_count(
                 [("directory", "child_of", record.id)]
@@ -338,7 +338,7 @@ class Directory(models.Model):
 
     @api.multi
     def _compute_size(self):
-        sudo_model = self.env["muk_dms.file"].sudo()
+        sudo_model = self.env["dms.file"].sudo()
         for record in self:
             recs = sudo_model.search_read(
                 domain=[("directory", "child_of", record.id)], fields=["size"],
@@ -424,8 +424,8 @@ class Directory(models.Model):
 
     @api.multi
     def _inverse_starred(self):
-        starred_records = self.env["muk_dms.directory"].sudo()
-        not_starred_records = self.env["muk_dms.directory"].sudo()
+        starred_records = self.env["dms.directory"].sudo()
+        not_starred_records = self.env["dms.directory"].sudo()
         for record in self:
             if not record.starred and self.env.user in record.user_stars:
                 starred_records |= record
@@ -441,7 +441,7 @@ class Directory(models.Model):
         default = dict(default or [])
         names = []
         if "root_storage" in default:
-            storage = self.env["muk_dms.storage"].browse(default["root_storage"])
+            storage = self.env["dms.storage"].browse(default["root_storage"])
             names = storage.sudo().root_directories.mapped("name")
         elif "parent_directory" in default:
             parent_directory = self.browse(default["parent_directory"])
@@ -483,9 +483,9 @@ class Directory(models.Model):
                 ("locked_by", "!=", self.env.uid),
                 ("locked_by", "!=", False),
             ]
-            if self.env["muk_dms.file"].sudo().search(domain):
+            if self.env["dms.file"].sudo().search(domain):
                 raise AccessError(_("A file is locked, the folder cannot be deleted."))
-            self.env["muk_dms.file"].sudo().search(
+            self.env["dms.file"].sudo().search(
                 [("directory", "child_of", self.ids)]
             ).unlink()
             return super(

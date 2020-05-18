@@ -33,7 +33,7 @@ from odoo.modules.module import get_resource_path
 
 class Thumbnail(models.AbstractModel):
 
-    _name = "muk_dms.mixins.thumbnail"
+    _name = "dms.mixins.thumbnail"
     _description = "Thumbnail Mixin"
 
     # ----------------------------------------------------------
@@ -86,9 +86,9 @@ class Thumbnail(models.AbstractModel):
     @api.model
     def _get_thumbnail_path(self, size, name):
         folders = ["static", "src", "img", "thumbnails"]
-        path = get_resource_path("muk_dms", *folders, name)
+        path = get_resource_path("dms", *folders, name)
         if not os.path.isfile(path):
-            path = get_resource_path("muk_dms", *folders, "file_unkown.svg")
+            path = get_resource_path("dms", *folders, "file_unkown.svg")
         return path
 
     @api.multi

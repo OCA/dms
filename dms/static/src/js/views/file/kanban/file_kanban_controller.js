@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.FileKanbanController", function(require) {
+odoo.define("dms.FileKanbanController", function(require) {
     "use strict";
 
     var core = require("web.core");
@@ -32,7 +32,7 @@ odoo.define("muk_dms.FileKanbanController", function(require) {
     var Domain = require("web.Domain");
     var KanbanController = require("web.KanbanController");
 
-    var FileUpload = require("muk_dms_mixins.FileUpload");
+    var FileUpload = require("dms_mixins.FileUpload");
 
     var _t = core._t;
     var QWeb = core.qweb;
@@ -47,7 +47,7 @@ odoo.define("muk_dms.FileKanbanController", function(require) {
             var context = record.getContext();
             if (directoryID) {
                 return directoryID;
-            } else if (context.active_model === "muk_dms.directory") {
+            } else if (context.active_model === "dms.directory") {
                 return context.active_id;
             }
         },

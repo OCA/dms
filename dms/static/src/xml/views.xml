@@ -21,7 +21,7 @@
 
   -->
 <templates xml:space="preserve">
-    <t t-name="muk_dms.FileSiebar">
+    <t t-name="dms.FileSiebar">
         <div id="mk_file_kanban_sidebar" class="border-right">
             <div
                 id="mk_file_kanban_sidebar_starred"
@@ -73,7 +73,7 @@
             </div>
         </div>
     </t>
-    <t t-name="muk_dms.FileSiebarStarred">
+    <t t-name="dms.FileSiebarStarred">
         <ul class="list-group d-block w-100">
             <t t-foreach="starred" t-as="directory">
                 <li
@@ -85,7 +85,7 @@
             </t>
         </ul>
     </t>
-    <t t-name="muk_dms.FileSiebarDirectories">
+    <t t-name="dms.FileSiebarDirectories">
         <ul class="list-group d-block w-100">
             <t t-foreach="directories" t-as="directory">
                 <li
@@ -101,7 +101,7 @@
             </t>
         </ul>
     </t>
-    <t t-name="muk_dms.FileSiebarCategories">
+    <t t-name="dms.FileSiebarCategories">
         <ol class="list-group d-block">
             <t t-foreach="categories" t-as="category">
                 <li class="border-0 list-group-item" t-att-data-id="category.id">
@@ -124,7 +124,7 @@
             </t>
         </ol>
     </t>
-    <t t-name="muk_dms.FileSiebarTags">
+    <t t-name="dms.FileSiebarTags">
         <ol class="list-group d-block">
             <t t-foreach="tags" t-as="tag">
                 <li class="border-0 list-group-item" t-att-data-id="tag.id">

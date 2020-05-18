@@ -21,67 +21,67 @@
 
   -->
 <odoo>
-    <template id="assets_backend" name="muk_dms_assets" inherit_id="web.assets_backend">
+    <template id="assets_backend" name="dms_assets" inherit_id="web.assets_backend">
         <xpath expr="//link[last()]" position="after">
-            <link rel="stylesheet" href="/muk_dms/static/src/scss/variables.scss" />
+            <link rel="stylesheet" href="/dms/static/src/scss/variables.scss" />
             <link
                 rel="stylesheet"
-                href="/muk_dms/static/src/scss/directory_kanban.scss"
+                href="/dms/static/src/scss/directory_kanban.scss"
             />
-            <link rel="stylesheet" href="/muk_dms/static/src/scss/file_kanban.scss" />
+            <link rel="stylesheet" href="/dms/static/src/scss/file_kanban.scss" />
         </xpath>
         <xpath expr="//script[last()]" position="after">
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/mixins/file_upload.js"
+                src="/dms/static/src/js/views/mixins/file_upload.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/directory/form/directory_form_controller.js"
+                src="/dms/static/src/js/views/directory/form/directory_form_controller.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/directory/form/directory_form_view.js"
+                src="/dms/static/src/js/views/directory/form/directory_form_view.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/form/file_form_controller.js"
+                src="/dms/static/src/js/views/file/form/file_form_controller.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/form/file_form_view.js"
+                src="/dms/static/src/js/views/file/form/file_form_view.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/list/file_list_controller.js"
+                src="/dms/static/src/js/views/file/list/file_list_controller.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/list/file_list_view.js"
+                src="/dms/static/src/js/views/file/list/file_list_view.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_model.js"
+                src="/dms/static/src/js/views/file/kanban/file_kanban_model.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_record.js"
+                src="/dms/static/src/js/views/file/kanban/file_kanban_record.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_searchpanel.js"
+                src="/dms/static/src/js/views/file/kanban/file_kanban_searchpanel.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js"
+                src="/dms/static/src/js/views/file/kanban/file_kanban_controller.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_renderer.js"
+                src="/dms/static/src/js/views/file/kanban/file_kanban_renderer.js"
             />
             <script
                 type="text/javascript"
-                src="/muk_dms/static/src/js/views/file/kanban/file_kanban_view.js"
+                src="/dms/static/src/js/views/file/kanban/file_kanban_view.js"
             />
         </xpath>
     </template>

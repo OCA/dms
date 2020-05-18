@@ -62,11 +62,11 @@ class DocumentsBaseCase(common.TransactionCase):
         self.super_uid = SUPERUSER_ID
         self.admin_uid = self.browse_ref("base.user_admin").id
         self.demo_uid = self.browse_ref("base.user_demo").id
-        self.storage = self.env["muk_dms.storage"]
-        self.directory = self.env["muk_dms.directory"]
-        self.file = self.env["muk_dms.file"]
-        self.category = self.env["muk_dms.category"]
-        self.tag = self.env["muk_dms.tag"]
+        self.storage = self.env["dms.storage"]
+        self.directory = self.env["dms.directory"]
+        self.file = self.env["dms.file"]
+        self.category = self.env["dms.category"]
+        self.tag = self.env["dms.tag"]
 
     def _setup_test_data(self):
         self.storage = self.storage.sudo(self.env.uid)
@@ -78,7 +78,7 @@ class DocumentsBaseCase(common.TransactionCase):
     def _load(self, module, *args):
         convert_file(
             self.cr,
-            "muk_dms",
+            "dms",
             get_module_resource(module, *args),
             {},
             "init",

@@ -49,16 +49,16 @@ class BenchmarkTestCase(common.SavepointCase):
 
     @classmethod
     def _clean_existing_records(cls):
-        cls.env["muk_dms.category"].search([]).unlink()
-        cls.env["muk_dms.directory"].search([]).unlink()
-        cls.env["muk_dms.storage"].search([]).unlink()
-        cls.env["muk_dms.tag"].search([]).unlink()
+        cls.env["dms.category"].search([]).unlink()
+        cls.env["dms.directory"].search([]).unlink()
+        cls.env["dms.storage"].search([]).unlink()
+        cls.env["dms.tag"].search([]).unlink()
 
     @classmethod
     def _load(cls, module, *args):
         convert_file(
             cls.cr,
-            "muk_dms",
+            "dms",
             get_module_resource(module, *args),
             {},
             "init",
@@ -69,11 +69,11 @@ class BenchmarkTestCase(common.SavepointCase):
 
     @classmethod
     def _setup_benchmark_data(cls):
-        cls._load("muk_dms", "tests", "data", "muk_dms.category.csv")
-        cls._load("muk_dms", "tests", "data", "muk_dms.storage.csv")
-        cls._load("muk_dms", "tests", "data", "muk_dms.tag.csv")
-        cls._load("muk_dms", "tests", "data", "muk_dms.directory.csv")
-        cls._load("muk_dms", "tests", "data", "muk_dms.file.csv")
+        cls._load("dms", "tests", "data", "dms.category.csv")
+        cls._load("dms", "tests", "data", "dms.storage.csv")
+        cls._load("dms", "tests", "data", "dms.tag.csv")
+        cls._load("dms", "tests", "data", "dms.directory.csv")
+        cls._load("dms", "tests", "data", "dms.file.csv")
 
     def _benchmark_table(self, data):
         columns = len(data[0]) - 1
@@ -121,7 +121,7 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_file_search_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["muk_dms.file"].with_context(bin_size=True)
+        model = self.env["dms.file"].with_context(bin_size=True)
         args = [
             [[[]], {"limit": 1}],
             [[[]], {"limit": 80}],
@@ -161,7 +161,7 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_file_search_read_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["muk_dms.file"].with_context(bin_size=True)
+        model = self.env["dms.file"].with_context(bin_size=True)
         args = [[[], {"limit": 1}], [[], {"limit": 80}], [[], {"limit": 500}], [[]]]
 
         benchmark_data_super = ["Super"] + self._benchmark_function(
@@ -196,7 +196,7 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_file_search_name_get_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["muk_dms.file"].with_context(bin_size=True)
+        model = self.env["dms.file"].with_context(bin_size=True)
 
         def test_function(model, limit):
             return model.search([], limit=limit).name_get()
@@ -255,7 +255,7 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_file_kanban_backend_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["muk_dms.file"].with_context(bin_size=True)
+        model = self.env["dms.file"].with_context(bin_size=True)
         kanban_fields = self._file_kanban_fields()
 
         def test_function(model, kanban_fields, limit=80):
@@ -312,7 +312,7 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_directory_search_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["muk_dms.directory"].with_context(bin_size=True)
+        model = self.env["dms.directory"].with_context(bin_size=True)
         args = [
             [[[]], {"limit": 1}],
             [[[]], {"limit": 80}],
@@ -352,7 +352,7 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_directory_search_parents_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["muk_dms.directory"].with_context(bin_size=True)
+        model = self.env["dms.directory"].with_context(bin_size=True)
         args = [
             [[[]], {"limit": 1}],
             [[[]], {"limit": 80}],
@@ -392,7 +392,7 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_directory_search_read_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["muk_dms.directory"].with_context(bin_size=True)
+        model = self.env["dms.directory"].with_context(bin_size=True)
         args = [[[], {"limit": 1}], [[], {"limit": 80}], [[], {"limit": 500}], [[]]]
 
         benchmark_data_super = ["Super"] + self._benchmark_function(
@@ -436,5 +436,5 @@ class BenchmarkTestCase(common.SavepointCase):
             model.search_read([])
 
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["muk_dms.file"].sudo(admin_uid)
+        model = self.env["dms.file"].sudo(admin_uid)
         profile_function(model.with_context(bin_size=True))

@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.FileKanbanRenderer", function(require) {
+odoo.define("dms.FileKanbanRenderer", function(require) {
     "use strict";
 
     var core = require("web.core");
@@ -30,7 +30,7 @@ odoo.define("muk_dms.FileKanbanRenderer", function(require) {
     var dropzone = require("muk_web_utils.dropzone");
 
     var KanbanRenderer = require("web.KanbanRenderer");
-    var FileKanbanRecord = require("muk_dms.FileKanbanRecord");
+    var FileKanbanRecord = require("dms.FileKanbanRecord");
 
     var _t = core._t;
     var QWeb = core.qweb;

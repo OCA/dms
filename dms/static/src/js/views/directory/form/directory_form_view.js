@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms.DirectoryFormView", function(require) {
+odoo.define("dms.DirectoryFormView", function(require) {
     "use strict";
 
     var core = require("web.core");
@@ -28,7 +28,7 @@ odoo.define("muk_dms.DirectoryFormView", function(require) {
 
     var FormView = require("web.FormView");
 
-    var DirectoryFormController = require("muk_dms.DirectoryFormController");
+    var DirectoryFormController = require("dms.DirectoryFormController");
 
     var _t = core._t;
     var QWeb = core.qweb;

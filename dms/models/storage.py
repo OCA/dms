@@ -31,7 +31,7 @@ _logger = logging.getLogger(__name__)
 
 class Storage(models.Model):
 
-    _name = "muk_dms.storage"
+    _name = "dms.storage"
     _description = "Storage"
 
     # ----------------------------------------------------------
@@ -63,7 +63,7 @@ class Storage(models.Model):
     )
 
     root_directories = fields.One2many(
-        comodel_name="muk_dms.directory",
+        comodel_name="dms.directory",
         inverse_name="root_storage",
         string="Root Directories",
         auto_join=False,
@@ -72,7 +72,7 @@ class Storage(models.Model):
     )
 
     storage_directories = fields.One2many(
-        comodel_name="muk_dms.directory",
+        comodel_name="dms.directory",
         inverse_name="storage",
         string="Directories",
         auto_join=False,
@@ -81,7 +81,7 @@ class Storage(models.Model):
     )
 
     storage_files = fields.One2many(
-        comodel_name="muk_dms.file",
+        comodel_name="dms.file",
         inverse_name="storage",
         string="Files",
         auto_join=False,
@@ -103,9 +103,9 @@ class Storage(models.Model):
 
     @api.multi
     def action_storage_migrate(self):
-        if not self.env.user.has_group("muk_dms.group_dms_manager"):
+        if not self.env.user.has_group("dms.group_dms_manager"):
             raise AccessError(_("Only managers can execute this action."))
-        files = self.env["muk_dms.file"].with_context(active_test=False).sudo()
+        files = self.env["dms.file"].with_context(active_test=False).sudo()
         for record in self:
             domain = ["&", ("content_binary", "=", False), ("storage", "=", record.id)]
             files |= files.search(domain)
