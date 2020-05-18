@@ -26,21 +26,21 @@
     </record>
     <record id="category_02_demo" model="dms.category">
         <field name="name">Human Resource</field>
-        <field name="parent_category" ref="dms.category_01_demo" />
+        <field name="parent_id" ref="dms.category_01_demo" />
     </record>
     <record id="category_03_demo" model="dms.category">
         <field name="name">Contracts</field>
-        <field name="parent_category" ref="dms.category_02_demo" />
+        <field name="parent_id" ref="dms.category_02_demo" />
     </record>
     <record id="category_04_demo" model="dms.category">
         <field name="name">Traveling</field>
-        <field name="parent_category" ref="dms.category_02_demo" />
+        <field name="parent_id" ref="dms.category_02_demo" />
     </record>
     <record id="category_05_demo" model="dms.category">
         <field name="name">External</field>
     </record>
     <record id="category_06_demo" model="dms.category">
         <field name="name">News</field>
-        <field name="parent_category" ref="dms.category_05_demo" />
+        <field name="parent_id" ref="dms.category_05_demo" />
     </record>
 </odoo>
