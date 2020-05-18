@@ -20,7 +20,7 @@
  *
  **********************************************************************************/
 
-odoo.define("muk_dms_mixins.FileUpload", function(require) {
+odoo.define("dms_mixins.FileUpload", function(require) {
     var core = require("web.core");
     var session = require("web.session");
 
@@ -37,7 +37,7 @@ odoo.define("muk_dms_mixins.FileUpload", function(require) {
                 file,
                 function(upload) {
                     this._rpc({
-                        model: "muk_dms.file",
+                        model: "dms.file",
                         method: "create",
                         args: [
                             {
@@ -56,7 +56,7 @@ odoo.define("muk_dms_mixins.FileUpload", function(require) {
         },
         _createUploadDirectory: function(name, parent_id) {
             return this._rpc({
-                model: "muk_dms.directory",
+                model: "dms.directory",
                 method: "create",
                 args: [
                     {
