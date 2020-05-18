@@ -2,7 +2,7 @@
 #
 #    Copyright (c) 2017-2019 MuK IT GmbH.
 #
-#    This file is part of MuK Documents 
+#    This file is part of MuK Documents
 #    (see https://mukit.at).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,21 +21,16 @@
 ###################################################################################
 
 {
-    "name": "MuK Documents", 
+    "name": "MuK Documents",
     "summary": """Document Management System""",
-    "version": '12.0.3.0.6',  
-    "category": 'Document Management',   
+    "version": "12.0.3.0.6",
+    "category": "Document Management",
     "license": "LGPL-3",
     "website": "http://www.mukit.at",
-    'live_test_url': 'https://mukit.at/r/SgN',
+    "live_test_url": "https://mukit.at/r/SgN",
     "author": "MuK IT",
-    "contributors": [
-        "Mathias Markl <mathias.markl@mukit.at>",
-    ],
-    "depends": [
-        "muk_security",
-        "muk_web_searchpanel",
-    ],
+    "contributors": ["Mathias Markl <mathias.markl@mukit.at>",],
+    "depends": ["muk_security", "muk_web_searchpanel",],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
@@ -58,16 +53,9 @@
         "demo/directory.xml",
         "demo/file.xml",
     ],
-    "qweb": [
-        "static/src/xml/*.xml",
-    ],
-    "images": [
-        'static/description/banner.png'
-    ],
-    "external_dependencies": {
-        "python": [],
-        "bin": [],
-    },
+    "qweb": ["static/src/xml/*.xml",],
+    "images": ["static/description/banner.png"],
+    "external_dependencies": {"python": [], "bin": [],},
     "application": True,
     "installable": True,
 }

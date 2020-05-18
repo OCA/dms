@@ -2,7 +2,7 @@
 #
 #    Copyright (c) 2017-2019 MuK IT GmbH.
 #
-#    This file is part of MuK Documents 
+#    This file is part of MuK Documents
 #    (see https://mukit.at).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,80 +22,78 @@
 
 import logging
 
-from odoo import models, api, fields
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
+
 class Tag(models.Model):
-    
-    _name = 'muk_dms.tag'
+
+    _name = "muk_dms.tag"
     _description = "Document Tag"
-    
-    #----------------------------------------------------------
+
+    # ----------------------------------------------------------
     # Database
-    #----------------------------------------------------------
-    
-    name = fields.Char(
-        string='Name', 
-        required=True, 
-        translate=True)
-    
+    # ----------------------------------------------------------
+
+    name = fields.Char(string="Name", required=True, translate=True)
+
     active = fields.Boolean(
-        default=True, 
-        help="The active field allows you to hide the tag without removing it.")
-    
+        default=True,
+        help="The active field allows you to hide the tag without removing it.",
+    )
+
     category = fields.Many2one(
-        comodel_name='muk_dms.category', 
+        comodel_name="muk_dms.category",
         context="{'dms_category_show_path': True}",
-        string='Category',
-        ondelete='set null')
-    
-    color = fields.Integer(
-        string='Color Index', 
-        default=10)
+        string="Category",
+        ondelete="set null",
+    )
+
+    color = fields.Integer(string="Color Index", default=10)
 
     directories = fields.Many2many(
-        comodel_name='muk_dms.directory',
-        relation='muk_dms_directory_tag_rel', 
-        column1='tid',
-        column2='did',
-        string='Directories',
-        readonly=True)
-    
+        comodel_name="muk_dms.directory",
+        relation="muk_dms_directory_tag_rel",
+        column1="tid",
+        column2="did",
+        string="Directories",
+        readonly=True,
+    )
+
     files = fields.Many2many(
-        comodel_name='muk_dms.file',
-        relation='muk_dms_file_tag_rel', 
-        column1='tid',
-        column2='fid',
-        string='Files',
-        readonly=True)
-    
+        comodel_name="muk_dms.file",
+        relation="muk_dms_file_tag_rel",
+        column1="tid",
+        column2="fid",
+        string="Files",
+        readonly=True,
+    )
+
     count_directories = fields.Integer(
-        compute='_compute_count_directories',
-        string="Count Directories")
-    
-    count_files = fields.Integer(
-        compute='_compute_count_files',
-        string="Count Files")
-    
-    #----------------------------------------------------------
+        compute="_compute_count_directories", string="Count Directories"
+    )
+
+    count_files = fields.Integer(compute="_compute_count_files", string="Count Files")
+
+    # ----------------------------------------------------------
     # Constrains
-    #----------------------------------------------------------
+    # ----------------------------------------------------------
 
     _sql_constraints = [
-        ('name_uniq', 'unique (name, category)', "Tag name already exists!"),
+        ("name_uniq", "unique (name, category)", "Tag name already exists!"),
     ]
-    
-    #----------------------------------------------------------
+
+    # ----------------------------------------------------------
     # Read
-    #----------------------------------------------------------
-    
-    @api.depends('directories')
+    # ----------------------------------------------------------
+
+    @api.depends("directories")
     def _compute_count_directories(self):
         for record in self:
             record.count_directories = len(record.directories)
-    
-    @api.depends('files')
+
+    @api.depends("files")
     def _compute_count_files(self):
         for record in self:
             record.count_files = len(record.files)
