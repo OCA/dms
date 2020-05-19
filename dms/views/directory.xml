@@ -12,13 +12,13 @@
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
             [
-            ("parent_id", "=", active_id),
             ("is_hidden", "=", False),
             ]
         </field>
         <field name="context">
             {
-            'default_parent_id': active_id,
+                'default_parent_id': active_id,
+                'searchpanel_default_parent_id': active_id
             }
         </field>
         <field name="help" type="html">
@@ -37,13 +37,13 @@
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
             [
-            ("directory_id", "=", active_id),
             ("is_hidden", "=", False),
             ]
         </field>
         <field name="context">
             {
-            'default_directory_id': active_id,
+                'default_directory_id': active_id,
+                'searchpanel_default_directory_id': active_id
             }
         </field>
         <field name="help" type="html">
@@ -159,6 +159,20 @@
                         context="{'group_by':'storage_id'}"
                     />
                 </group>
+                <searchpanel>
+                    <field
+                        name="parent_id"
+                        icon="fa-folder"
+                        context="{'directory_short_name': True}"
+                    />
+                    <field name="category_id" select="multi" icon="fa-users" />
+                    <field
+                        name="tag_ids"
+                        select="multi"
+                        icon="fa-tag"
+                        groupby="category_id"
+                    />
+                </searchpanel>
             </search>
         </field>
     </record>
@@ -181,6 +195,8 @@
                 <field name="permission_unlink" />
                 <field name="count_directories" />
                 <field name="count_files" />
+                <field name="count_directories_title" />
+                <field name="count_files_title" />
                 <templates>
                     <t t-name="kanban-box">
                         <div
@@ -276,7 +292,7 @@
                                             name="%(dms.action_dms_directories_directory)d"
                                             role="button"
                                             class="btn btn-sm btn-outline-primary mk_directory_kanban_directories"
-                                            t-att-title="record.count_directories.raw_value"
+                                            t-att-title="record.count_directories_title.raw_value"
                                         >
                                             <i class="fa fa-lg fa-folder" />
                                         </a>
@@ -285,7 +301,7 @@
                                             name="%(dms.action_dms_files_directory)d"
                                             role="button"
                                             class="btn btn-sm btn-outline-primary mk_directory_kanban_files"
-                                            t-att-title="record.count_files.raw_value"
+                                            t-att-title="record.count_files_title.raw_value"
                                         >
                                             <i class="fa fa-lg fa-file" />
                                         </a>
@@ -340,22 +356,6 @@
                         </div>
                     </t>
                 </templates>
-                <searchpanel>
-                    <field
-                        name="parent_id"
-                        string="Starred"
-                        domain="[['is_hidden', '=', False], ['starred', '=', True]]"
-                        select="multi"
-                        icon="fa-star"
-                    />
-                    <field name="category_id" select="multi" icon="fa-users" />
-                    <field
-                        name="tag_ids"
-                        select="multi"
-                        icon="fa-tag"
-                        groupby="category_id"
-                    />
-                </searchpanel>
             </kanban>
         </field>
     </record>
@@ -406,18 +406,6 @@
                                 widget="statinfo"
                             />
                         </button>
-                        <button
-                            name="toggle_starred"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-star"
-                        >
-                            <field
-                                name="starred"
-                                widget="boolean_button"
-                                options='{"terminology": {"string_true": "Starred", "string_false": "Not Starred", "hover_true": "Unstar", "hover_false": "Star"}}'
-                            />
-                        </button>
                     </div>
                     <field
                         name="thumbnail"
@@ -452,11 +440,12 @@
                                 name="root_storage_id"
                                 options="{'no_open': True}"
                                 readonly="1"
+                                invisible="context.get('hide_root_storage', False)"
                                 attrs="{'invisible':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
                             />
                         </group>
                         <group>
-                            <field name="inherit_groups" />
+                            <field name="inherit_group_ids" />
                             <field
                                 name="parent_id"
                                 options="{'no_quick_create': True}"
@@ -481,6 +470,7 @@
                                 placeholder="Tags..."
                                 options="{'color_field': 'color', 'no_create_edit': True}"
                             />
+                            <field name="starred" widget="boolean_favorite" />
                         </group>
                     </group>
                     <notebook>
@@ -509,7 +499,7 @@
                             >
                                 <tree string="Files" limit="10">
                                     <field name="name" />
-                                    <field name="mimetype" />
+                                    <field name="res_mimetype" />
                                     <field name="content" />
                                     <field name="write_date" readonly="1" />
                                 </tree>
@@ -540,7 +530,7 @@
                             </group>
                         </page>
                         <page string="Groups">
-                            <field name="groups">
+                            <field name="group_ids">
                                 <tree string="Groups">
                                     <field name="name" />
                                     <field name="perm_read" />
@@ -551,7 +541,7 @@
                             </field>
                         </page>
                         <page string="Complete Groups">
-                            <field name="complete_groups">
+                            <field name="complete_group_ids">
                                 <tree string="Complete Groups">
                                     <field name="name" />
                                     <field name="perm_read" />

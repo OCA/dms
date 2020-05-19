@@ -89,20 +89,9 @@ class Storage(models.Model):
             raise AccessError(_("Only managers can execute this action."))
         files = self.env["dms.file"].with_context(active_test=False).sudo()
 
-        records = self.filtered(lambda rec: rec.save_type == "file")
-        for record in records:
-            domain = ["&", ("content_file", "=", False), ("storage_id", "=", record.id)]
-            files |= files.search(domain)
-        files.action_migrate()
-
         for record in self:
-            domain = [
-                "&",
-                ("content_binary", "=", False),
-                ("storage_id", "=", record.id),
-            ]
-            files |= files.search(domain)
-        files.action_migrate()
+            domain = [("require_migration", "=", True), ("storage_id", "=", record.id)]
+            files.search(domain).action_migrate()
 
     def action_save_onboarding_storage_step(self):
         self.env.user.company_id.set_onboarding_step_done(
