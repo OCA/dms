@@ -456,6 +456,7 @@
                             />
                         </group>
                         <group>
+                            <field name="inherit_groups" />
                             <field
                                 name="parent_id"
                                 options="{'no_quick_create': True}"
@@ -537,6 +538,28 @@
                                     <field name="permission_unlink" readonly="1" />
                                 </group>
                             </group>
+                        </page>
+                        <page string="Groups">
+                            <field name="groups">
+                                <tree string="Groups">
+                                    <field name="name" />
+                                    <field name="perm_read" />
+                                    <field name="perm_create" />
+                                    <field name="perm_write" />
+                                    <field name="perm_unlink" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Complete Groups">
+                            <field name="complete_groups">
+                                <tree string="Complete Groups">
+                                    <field name="name" />
+                                    <field name="perm_read" />
+                                    <field name="perm_create" />
+                                    <field name="perm_write" />
+                                    <field name="perm_unlink" />
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
