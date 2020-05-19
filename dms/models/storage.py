@@ -22,7 +22,7 @@ class Storage(models.Model):
     name = fields.Char(string="Name", required=True)
 
     save_type = fields.Selection(
-        selection=[("database", _("Database"))],
+        selection=[("database", _("Database")), ("file", _("Filestore"))],
         string="Save Type",
         default="database",
         required=True,
@@ -88,6 +88,13 @@ class Storage(models.Model):
         if not self.env.user.has_group("dms.group_dms_manager"):
             raise AccessError(_("Only managers can execute this action."))
         files = self.env["dms.file"].with_context(active_test=False).sudo()
+
+        records = self.filtered(lambda rec: rec.save_type == "file")
+        for record in records:
+            domain = ["&", ("content_file", "=", False), ("storage", "=", record.id)]
+            files |= files.search(domain)
+        files.action_migrate()
+
         for record in self:
             domain = [
                 "&",
