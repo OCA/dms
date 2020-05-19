@@ -142,9 +142,17 @@ class File(models.Model):
         prefetch=False,
     )
 
+    content_file = file.File(string="Content File", prefetch=False, invisible=True)
+
     # ----------------------------------------------------------
     # Helper
     # ----------------------------------------------------------
+
+    @api.model
+    def _get_content_inital_vals(self):
+        res = super(File, self)._get_content_inital_vals()
+        res.update({"content_file": False})
+        return res
 
     @api.model
     def _get_checksum(self, binary):
@@ -339,12 +347,22 @@ class File(models.Model):
 
     @api.depends("content_binary")
     def _compute_content(self):
-        for record in self:
+        bin_size = self._check_context_bin_size("content")
+        bin_recs = self.with_context({"bin_size": True})
+        records = bin_recs.filtered(lambda rec: bool(rec.content_file))
+        for record in self & records:
+            context = {"human_size": True} if bin_size else {"base64": True}
+            record.content = record.with_context(context).content_file
+        for record in self - records:
             record.content = record.content_binary
 
-    @api.depends("content_binary")
+    @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
-        for record in self:
+        bin_recs = self.with_context({"bin_size": True})
+        records = bin_recs.filtered(lambda rec: bool(rec.content_file))
+        for record in records.with_context(self.env.context):
+            record.save_type = "file"
+        for record in self - records:
             record.save_type = "database"
 
     @api.depends("storage_id", "storage_id.save_type")
@@ -519,8 +537,21 @@ class File(models.Model):
     # ----------------------------------------------------------
 
     def _inverse_content(self):
+        records = self.filtered(lambda rec: rec.storage.save_type == "file")
         updates = defaultdict(set)
-        for record in self:
+        for record in records:
+            values = self._get_content_inital_vals()
+            binary = base64.b64decode(record.content or "")
+            values = self._update_content_vals(record, values, binary)
+            values.update(
+                {"content_file": record.content and binary,}
+            )
+            updates[tools.frozendict(values)].add(record.id)
+        with self.env.norecompute():
+            for vals, ids in updates.items():
+                self.browse(ids).write(dict(vals))
+        updates = defaultdict(set)
+        for record in self - records:
             values = self._get_content_inital_vals()
             binary = base64.b64decode(record.content or "")
             values = self._update_content_vals(record, values, binary)
