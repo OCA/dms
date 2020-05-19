@@ -13,6 +13,26 @@
         </xpath>
         <xpath expr="//script[last()]" position="after">
             <script type="text/javascript" src="/dms/static/src/js/fields/path.js" />
+            <script
+                type="text/javascript"
+                src="/dms/static/src/js/views/many_drop_target.js"
+            />
+            <script
+                type="text/javascript"
+                src="/dms/static/src/js/views/file_list_controller.js"
+            />
+            <script
+                type="text/javascript"
+                src="/dms/static/src/js/views/file_list_view.js"
+            />
+            <script
+                type="text/javascript"
+                src="/dms/static/src/js/views/file_kanban_controller.js"
+            />
+            <script
+                type="text/javascript"
+                src="/dms/static/src/js/views/file_kanban_view.js"
+            />
         </xpath>
     </template>
 </odoo>
