@@ -66,6 +66,19 @@
                         context="{'group_by':'directory_id'}"
                     />
                 </group>
+                <searchpanel>
+                    <field
+                        name="directory_id"
+                        icon="fa-folder"
+                        context="{'directory_short_name': True}"
+                    />
+                    <field
+                        name="tag_ids"
+                        select="multi"
+                        icon="fa-tag"
+                        groupby="category_id"
+                    />
+                </searchpanel>
             </search>
         </field>
     </record>
@@ -83,7 +96,7 @@
                 <field name="name" />
                 <field name="color" />
                 <field name="active" />
-                <field name="mimetype" />
+                <field name="res_mimetype" />
                 <field name="create_uid" />
                 <field name="write_date" />
                 <field name="locked_by" />
@@ -127,7 +140,7 @@
                                             <a
                                                 t-if="record.is_locked.raw_value  and record.is_lock_editor.raw_value"
                                                 role="menuitem"
-                                                name="lock"
+                                                name="unlock"
                                                 type="object"
                                                 class="dropdown-item"
                                             >
@@ -224,6 +237,10 @@
                                         <div
                                             class="o_kanban_record_title o_text_overflow"
                                         >
+                                            <a
+                                                class="o_kanban_dms_file_preview fa fa-search"
+                                                t-att-data-id="widget.db_id"
+                                            />
                                             <field name="name" />
                                         </div>
                                         <div class="o_kanban_record_body">
@@ -263,26 +280,6 @@
                         </div>
                     </t>
                 </templates>
-                <searchpanel>
-                    <field
-                        name="directory_id"
-                        domain="[['is_hidden', '=', False]]"
-                        icon="fa-folder"
-                    />
-                    <field
-                        name="directory_id"
-                        string="Starred"
-                        domain="[['is_hidden', '=', False], ['starred', '=', True]]"
-                        select="multi"
-                        icon="fa-star"
-                    />
-                    <field
-                        name="tag_ids"
-                        select="multi"
-                        icon="fa-tag"
-                        groupby="category"
-                    />
-                </searchpanel>
             </kanban>
         </field>
     </record>
@@ -302,7 +299,7 @@
                 <field name="name" />
                 <field name="write_date" />
                 <field name="content" />
-                <field name="mimetype" />
+                <field name="res_mimetype" />
                 <field name="path_names" widget="path_names" string="Path" />
             </tree>
         </field>
@@ -374,16 +371,21 @@
                                 name="path_json"
                                 widget="path_json"
                                 options="{'prefix': True, 'suffix': False}"
+                                attrs="{'invisible': ['|', ('name', '=', False), ('directory_id', '=', False)]}"
                             />
                         </h4>
                     </div>
                     <group name="content">
                         <group>
-                            <field name="content" filename="name" />
+                            <field
+                                name="content"
+                                filename="name"
+                                widget="preview_binary"
+                            />
                         </group>
                         <group>
                             <field name="extension" />
-                            <field name="mimetype" />
+                            <field name="res_mimetype" />
                         </group>
                     </group>
                     <group name="settings">
@@ -510,13 +512,18 @@
         <field name="name">dms_file.tree</field>
         <field name="model">dms.file</field>
         <field name="arch" type="xml">
-            <tree string="Files" decoration-muted="(is_locked and not is_lock_editor)">
+            <tree
+                string="Files"
+                decoration-muted="(is_locked and not is_lock_editor)"
+                create="0"
+                delete="0"
+            >
                 <field name="is_locked" invisible="1" />
                 <field name="is_lock_editor" invisible="1" />
                 <field name="name" />
                 <field name="write_date" />
                 <field name="content" />
-                <field name="mimetype" />
+                <field name="res_mimetype" />
                 <field name="storage_id" />
                 <field name="migration" />
             </tree>
@@ -527,7 +534,9 @@
         <field name="res_model">dms.file</field>
         <field name="view_mode">tree</field>
         <field name="search_view_id" ref="search_dms_file_migration" />
-        <field name="domain">['|',('active', '=', False), ('active', '!=', False)]
+        <field
+            name="domain"
+        >[('require_migration', '=', True), '|',('active', '=', False), ('active', '!=', False)]
         </field>
         <field name="context">{'search_default_group_storage': 1}</field>
         <field
