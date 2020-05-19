@@ -9,7 +9,7 @@ import threading
 import time
 import uuid
 
-from odoo import SUPERUSER_ID
+from odoo import SUPERUSER_ID, _
 from odoo.modules.module import get_module_resource
 from odoo.tests import common
 from odoo.tools import convert_file
@@ -22,12 +22,7 @@ _logger = logging.getLogger(__name__)
 # ----------------------------------------------------------
 
 
-def multi_users(
-    users=False, reset=True, raise_exception=True,
-):
-    if not users:
-        users = [["base.user_root", True], ["base.user_admin", True]]
-
+def multi_users(users=False, reset=True, raise_exception=True, callback=False):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(self, *args, **kwargs):
@@ -40,6 +35,10 @@ def multi_users(
                         self.uid = self.ref(user[0])
                     else:
                         self.uid = user[0]
+                    if hasattr(self, callback):
+                        callb = getattr(self, callback)
+                        if callable(callb):
+                            callb()
                     func(self, *args, **kwargs)
                 except Exception as error:
                     test_results.append(
@@ -78,8 +77,10 @@ def multi_users(
                 message = "{} out of {} tests failed".format(
                     len(test_fails), len(test_results),
                 )
-                if raise_exception:
+                if raise_exception and test_fails[0]["error"]:
                     raise test_fails[0]["error"]
+                elif raise_exception:
+                    raise Exception(_("Error has not been raised"))
                 else:
                     _logger.info(message)
             return test_results
@@ -131,18 +132,6 @@ def track_function(
             if return_tracking:
                 return result, tracking_parameters
             return result
-
-        return wrapper
-
-    return decorator
-
-
-def setup_data_function(setup_func="_setup_test_data"):
-    def decorator(func):
-        @functools.wraps(func)
-        def wrapper(self, *args, **kwargs):
-            getattr(self, setup_func)()
-            return func(self, *args, **kwargs)
 
         return wrapper
 
