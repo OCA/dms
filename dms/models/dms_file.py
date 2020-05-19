@@ -262,6 +262,7 @@ class File(models.Model):
                 where_clause = "WHERE r.fid in %s"
                 file_ids = self.search([("directory_id", operator, directory_id)]).ids
                 params.append(tuple(file_ids))
+            # pylint: disable=sql-injection
             final_query = sql_query.format(directory_where_clause=where_clause)
             self.env.cr.execute(final_query, params)
             return self.env.cr.dictfetchall()
