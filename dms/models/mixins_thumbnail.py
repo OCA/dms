@@ -14,10 +14,6 @@ class Thumbnail(models.AbstractModel):
     _name = "dms.mixins.thumbnail"
     _description = "Thumbnail Mixin"
 
-    # ----------------------------------------------------------
-    # Database
-    # ----------------------------------------------------------
-
     custom_thumbnail = fields.Image(
         string="Custom Thumbnail",
         max_width=2048,
@@ -30,8 +26,6 @@ class Thumbnail(models.AbstractModel):
         related="custom_thumbnail",
         max_width=512,
         max_height=512,
-        store=True,
-        attachment=False,
         prefetch=False,
     )
     custom_thumbnail_small = fields.Image(
@@ -39,8 +33,6 @@ class Thumbnail(models.AbstractModel):
         related="custom_thumbnail",
         max_width=512,
         max_height=512,
-        store=True,
-        attachment=False,
         prefetch=False,
     )
 
@@ -49,9 +41,7 @@ class Thumbnail(models.AbstractModel):
         string="Thumbnail",
         max_width=2048,
         max_height=2048,
-        attachment=False,
         prefetch=False,
-        store=True,
     )
 
     thumbnail_medium = fields.Image(
@@ -59,8 +49,6 @@ class Thumbnail(models.AbstractModel):
         related="thumbnail",
         max_width=512,
         max_height=512,
-        store=True,
-        attachment=False,
         prefetch=False,
     )
 
@@ -69,8 +57,6 @@ class Thumbnail(models.AbstractModel):
         related="thumbnail",
         max_width=512,
         max_height=512,
-        store=True,
-        attachment=False,
         prefetch=False,
     )
 
@@ -86,7 +72,7 @@ class Thumbnail(models.AbstractModel):
 
     @api.model
     def _get_thumbnail_path(self, size, name):
-        folders = ["static", "src", "img", "thumbnails"]
+        folders = ["static", "lib", "img", "thumbnails"]
         path = get_resource_path("dms", *folders, name)
         if not os.path.isfile(path):
             path = get_resource_path("dms", *folders, "file_unkown.svg")
@@ -94,10 +80,6 @@ class Thumbnail(models.AbstractModel):
 
     def _get_thumbnail_placeholder_name(self):
         return "folder.svg"
-
-    # ----------------------------------------------------------
-    # Read
-    # ----------------------------------------------------------
 
     @api.depends("custom_thumbnail")
     def _compute_thumbnail(self):
@@ -107,26 +89,4 @@ class Thumbnail(models.AbstractModel):
             else:
                 record.thumbnail = self._get_thumbnail_placeholder_image(
                     "original", record._get_thumbnail_placeholder_name()
-                )
-
-    @api.depends("custom_thumbnail_medium")
-    def _compute_thumbnail_medium(self):
-        for record in self:
-            if record.custom_thumbnail_medium:
-                record.thumbnail_medium = record.custom_thumbnail_medium
-            else:
-                record.thumbnail_medium = self._get_thumbnail_placeholder(
-                    "thumbnail_medium",
-                    "medium",
-                    record._get_thumbnail_placeholder_name(),
-                )
-
-    @api.depends("custom_thumbnail_small")
-    def _compute_thumbnail_small(self):
-        for record in self:
-            if record.custom_thumbnail_small:
-                record.thumbnail_small = record.custom_thumbnail_small
-            else:
-                record.thumbnail_small = self._get_thumbnail_placeholder(
-                    "thumbnail_small", "small", record._get_thumbnail_placeholder_name()
                 )

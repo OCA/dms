@@ -3,12 +3,10 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
-import functools
 import hashlib
 import json
 import logging
 import mimetypes
-import operator
 from collections import defaultdict
 
 from odoo import SUPERUSER_ID, _, api, fields, models, tools
@@ -118,7 +116,7 @@ class File(models.Model):
         compute="_compute_extension", string="Extension", readonly=True, store=True
     )
 
-    mimetype = fields.Char(
+    res_mimetype = fields.Char(
         compute="_compute_mimetype", string="Type", readonly=True, store=True
     )
 
@@ -142,6 +140,10 @@ class File(models.Model):
         string="Migration Status",
         readonly=True,
         prefetch=False,
+        compute_sudo=True,
+    )
+    require_migration = fields.Boolean(
+        compute="_compute_migration", store=True, compute_sudo=True,
     )
 
     content_file = fields.Binary(
@@ -176,8 +178,11 @@ class File(models.Model):
 
     @api.model
     def _get_binary_max_size(self):
-        get_param = self.env["ir.config_parameter"].sudo().get_param
-        return int(get_param("dms_web_utils.binary_max_size", default=25))
+        return int(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("dms.binary_max_size", default=25)
+        )
 
     @api.model
     def _get_forbidden_extensions(self):
@@ -194,13 +199,13 @@ class File(models.Model):
 
     def action_migrate(self, logging=True):
         record_count = len(self)
-        for index, dms_file in enumerate(self):
+        index = 1
+        for dms_file in self:
             if logging:
-                info = (index + 1, record_count, dms_file.migration)
+                info = (index, record_count, dms_file.migration)
                 _logger.info(_("Migrate File %s of %s [ %s ]") % info)
-            dms_file.with_context(migration=True).write(
-                {"content": dms_file.with_context({}).content}
-            )
+                index += 1
+            dms_file.write({"content": dms_file.with_context({}).content})
 
     def action_save_onboarding_file_step(self):
         self.env.user.company_id.set_onboarding_step_done(
@@ -235,14 +240,21 @@ class File(models.Model):
         operator, directory_id = self._search_panel_directory(**kwargs)
         if directory_id and field_name == "directory_id":
             domain = [("parent_id", operator, directory_id)]
-            values = self.env["dms.directory"].search_read(
-                domain, ["display_name", "parent_id"]
+            values = (
+                self.env["dms.directory"]
+                .with_context(directory_short_name=True)
+                .search_read(domain, ["display_name", "parent_id"])
             )
             return {
                 "parent_field": "parent_id",
                 "values": values if len(values) > 1 else [],
             }
-        return super(File, self).search_panel_select_range(field_name, **kwargs)
+        context = {}
+        if field_name == "directory_id":
+            context["directory_short_name"] = True
+        return super(File, self.with_context(**context)).search_panel_select_range(
+            field_name, **kwargs
+        )
 
     @api.model
     def search_panel_select_multi_range(self, field_name, **kwargs):
@@ -261,9 +273,12 @@ class File(models.Model):
             where_clause = ""
             params = []
             if directory_id:
-                where_clause = "WHERE r.fid in %s"
                 file_ids = self.search([("directory_id", operator, directory_id)]).ids
-                params.append(tuple(file_ids))
+                if file_ids:
+                    where_clause = "WHERE r.fid in %s"
+                    params.append(tuple(file_ids))
+                else:
+                    where_clause = "WHERE 1 = 0"
             # pylint: disable=sql-injection
             final_query = sql_query.format(directory_where_clause=where_clause)
             self.env.cr.execute(final_query, params)
@@ -271,12 +286,16 @@ class File(models.Model):
         if directory_id and field_name in ["directory_id", "category_id"]:
             comodel_domain = kwargs.pop("comodel_domain", [])
             directory_comodel_domain = self._search_panel_domain(
-                "files", operator, directory_id, comodel_domain
+                "file_ids", operator, directory_id, comodel_domain
             )
-            return super(File, self).search_panel_select_multi_range(
+            return super(
+                File, self.with_context(directory_short_name=True)
+            ).search_panel_select_multi_range(
                 field_name, comodel_domain=directory_comodel_domain, **kwargs
             )
-        return super(File, self).search_panel_select_multi_range(field_name, **kwargs)
+        return super(
+            File, self.with_context(directory_short_name=True)
+        ).search_panel_select_multi_range(field_name, **kwargs)
 
     # ----------------------------------------------------------
     # Read
@@ -284,23 +303,19 @@ class File(models.Model):
 
     @api.depends("name", "directory_id", "directory_id.parent_path")
     def _compute_path(self):
-        records_with_directory = self.filtered(lambda rec: rec.directory_id)
-        if records_with_directory:
-            paths = [
-                list(map(int, rec.directory_id.parent_path.split("/")[:-1]))
-                for rec in records_with_directory
-            ]
-            model = self.env["dms.directory"]
-            directories = model.browse(set(functools.reduce(operator.concat, paths)))
-            data = dict({d.id: d for d in directories._filter_access("read")})
-            for record in self:
-                path_names = []
-                path_json = []
+        model = self.env["dms.directory"]
+        data = {}
+        for record in self:
+            path_names = []
+            path_json = []
+            if record.directory_id.parent_path:
                 for directory_id in reversed(
                     list(map(int, record.directory_id.parent_path.split("/")[:-1]))
                 ):
-                    if directory_id not in data:
+                    if not directory_id:
                         break
+                    if directory_id not in data:
+                        data[directory_id] = model.browse(directory_id)
                     path_names.append(data[directory_id].name)
                     path_json.append(
                         {
@@ -309,38 +324,37 @@ class File(models.Model):
                             "id": directory_id,
                         }
                     )
-
-                path_names.reverse()
-                path_json.reverse()
-                name = record.name_get()
-                path_names.append(name[0][1])
-                path_json.append(
-                    {
-                        "model": record._name,
-                        "name": name[0][1],
-                        "id": isinstance(record.id, int) and record.id or 0,
-                    }
-                )
-                record.update(
-                    {
-                        "path_names": "/".join(path_names),
-                        "path_json": json.dumps(path_json),
-                    }
-                )
+            path_names.reverse()
+            path_json.reverse()
+            name = record.name_get()
+            path_names.append(name[0][1])
+            path_json.append(
+                {
+                    "model": record._name,
+                    "name": name[0][1],
+                    "id": isinstance(record.id, int) and record.id or 0,
+                }
+            )
+            record.update(
+                {
+                    "path_names": "/".join(path_names),
+                    "path_json": json.dumps(path_json),
+                }
+            )
 
     @api.depends("name")
     def _compute_extension(self):
         for record in self:
             record.extension = file.guess_extension(record.name)
 
-    @api.depends("name")
+    @api.depends("name", "content")
     def _compute_mimetype(self):
         for record in self:
             mimetype = record.name and mimetypes.guess_type(record.name)[0]
-            if not mimetype:
+            if not mimetype and record.content:
                 binary = base64.b64decode(record.with_context({}).content or "")
                 mimetype = guess_mimetype(binary, default="application/octet-stream")
-            record.mimetype = mimetype
+            record.res_mimetype = mimetype
 
     @api.depends("content_binary", "content_file")
     def _compute_content(self):
@@ -350,7 +364,7 @@ class File(models.Model):
                 context = {"human_size": True} if bin_size else {"base64": True}
                 record.content = record.with_context(context).content_file
             else:
-                record.content = record.content_binary
+                record.content = base64.b64encode(record.content_binary)
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
@@ -372,8 +386,10 @@ class File(models.Model):
                 storage_label = selection.get(storage_type)
                 file_label = selection.get(record.save_type)
                 record.migration = "{} > {}".format(file_label, storage_label)
+                record.require_migration = True
             else:
                 record.migration = selection.get(storage_type)
+                record.require_migration = False
 
     def read(self, fields=None, load="_classic_read"):
         self.check_directory_access("read", {}, True)
@@ -544,7 +560,6 @@ class File(models.Model):
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
 
-    @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])

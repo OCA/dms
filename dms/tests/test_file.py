@@ -29,6 +29,6 @@ class FileFilestoreTestCase(FileTestCase):
         lobject_file.with_context(show_content=True).write(
             {"content": base64.b64encode(b"\xff new content")}
         )
-        self.assertTrue(oid != lobject_file.with_context({"oid": True}).content_file)
+        self.assertNotEqual(oid, lobject_file.with_context({"oid": True}).content_file)
         self.assertTrue(lobject_file.export_data(["content"]))
         lobject_file.unlink()

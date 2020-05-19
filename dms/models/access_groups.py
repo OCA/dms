@@ -6,11 +6,11 @@ from odoo import api, fields, models
 
 
 class DmsAccessGroups(models.Model):
-    _name = "dms.access_groups"
+    _name = "dms.access.group"
     _description = "Record Access Groups"
 
     _parent_store = True
-    _parent_name = "parent_group"
+    _parent_name = "parent_group_id"
 
     name = fields.Char(string="Group Name", required=True, translate=True)
     parent_path = fields.Char(string="Parent Path", index=True)
@@ -18,7 +18,7 @@ class DmsAccessGroups(models.Model):
     perm_create = fields.Boolean(string="Create Access")
     perm_write = fields.Boolean(string="Write Access")
     perm_unlink = fields.Boolean(string="Unlink Access")
-    directories = fields.Many2many(
+    directory_ids = fields.Many2many(
         comodel_name="dms.directory",
         relation="dms_directory_groups_rel",
         string="Directories",
@@ -31,10 +31,10 @@ class DmsAccessGroups(models.Model):
         compute="_compute_count_directories", string="Count Directories"
     )
 
-    @api.depends("directories")
+    @api.depends("directory_ids")
     def _compute_count_directories(self):
         for record in self:
-            record.count_directories = len(record.directories)
+            record.count_directories = len(record.directory_ids)
 
     @api.model
     def _add_magic_fields(self):
@@ -45,7 +45,7 @@ class DmsAccessGroups(models.Model):
                 self._add_field(name, field)
 
         add(
-            "parent_group",
+            "parent_group_id",
             fields.Many2one(
                 _module=self._module,
                 comodel_name=self._name,
@@ -57,17 +57,17 @@ class DmsAccessGroups(models.Model):
             ),
         )
         add(
-            "child_groups",
+            "child_group_ids",
             fields.One2many(
                 _module=self._module,
                 comodel_name=self._name,
-                inverse_name="parent_group",
+                inverse_name="parent_group_id",
                 string="Child Groups",
                 automatic=True,
             ),
         )
         add(
-            "groups",
+            "group_ids",
             fields.Many2many(
                 _module=self._module,
                 comodel_name="res.groups",
@@ -79,7 +79,7 @@ class DmsAccessGroups(models.Model):
             ),
         )
         add(
-            "explicit_users",
+            "explicit_user_ids",
             fields.Many2many(
                 _module=self._module,
                 comodel_name="res.users",
@@ -113,18 +113,22 @@ class DmsAccessGroups(models.Model):
     def default_get(self, fields_list):
         res = super(DmsAccessGroups, self).default_get(fields_list)
         if not self.env.context.get("groups_no_autojoin"):
-            if "explicit_users" in res and res["explicit_users"]:
-                res["explicit_users"] = res["explicit_users"] + [self.env.uid]
+            if "explicit_user_ids" in res and res["explicit_user_ids"]:
+                res["explicit_user_ids"] = res["explicit_user_ids"] + [self.env.uid]
             else:
-                res["explicit_users"] = [self.env.uid]
+                res["explicit_user_ids"] = [self.env.uid]
         return res
 
     @api.depends(
-        "parent_group", "parent_group.users", "groups", "groups.users", "explicit_users"
+        "parent_group_id",
+        "parent_group_id.users",
+        "group_ids",
+        "group_ids.users",
+        "explicit_user_ids",
     )
     def _compute_users(self):
         for record in self:
-            users = record.mapped("groups.users")
-            users |= record.mapped("explicit_users")
-            users |= record.mapped("parent_group.users")
+            users = record.mapped("group_ids.users")
+            users |= record.mapped("explicit_user_ids")
+            users |= record.mapped("parent_group_id.users")
             record.update({"users": users, "count_users": len(users)})
