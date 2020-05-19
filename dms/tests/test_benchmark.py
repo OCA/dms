@@ -3,7 +3,6 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
-import os
 import unittest
 
 from odoo.modules.module import get_module_resource
@@ -13,10 +12,10 @@ from odoo.tools.profiler import profile
 
 from .common import track_function
 
-_path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
 
+# This tests will only be executed if --test-tags benchmark is defined
 @tagged("-standard", "benchmark")
 class BenchmarkTestCase(common.SavepointCase):
     @classmethod
@@ -81,7 +80,7 @@ class BenchmarkTestCase(common.SavepointCase):
     def _file_kanban_fields(self):
         return [
             "id",
-            "tags",
+            "tag_ids",
             "name",
             "color",
             "active",
@@ -309,46 +308,6 @@ class BenchmarkTestCase(common.SavepointCase):
         )
 
         info_message = "\n\nSearching directories with bin_size = True | "
-        info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
-        info_message += self._benchmark_table(
-            [
-                [
-                    "User",
-                    "Search Limit 1",
-                    "Search Limit 80",
-                    "Search Limit 500",
-                    "Search No Limit",
-                ],
-                benchmark_data_super,
-                benchmark_data_admin,
-                benchmark_data_demo,
-            ]
-        )
-        info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
-        _logger.info(info_message)
-
-    def test_directory_search_parents_benchmark(self):
-        demo_uid = self.browse_ref("base.user_demo").id
-        admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["dms.directory"].with_context(bin_size=True)
-        args = [
-            [[[]], {"limit": 1}],
-            [[[]], {"limit": 80}],
-            [[[]], {"limit": 500}],
-            [[[]]],
-        ]
-
-        benchmark_data_super = ["Super"] + self._benchmark_function(
-            model.sudo().search_parents, args
-        )
-        benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search_parents, args
-        )
-        benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search_parents, args
-        )
-
-        info_message = "\n\nSearching directory parents with bin_size = True | "
         info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
         info_message += self._benchmark_table(
             [
