@@ -22,6 +22,7 @@
         "views/dms_file.xml",
         "views/directory.xml",
         "views/storage.xml",
+        "views/dms_access_groups_views.xml",
         "views/res_config_settings.xml",
     ],
     "demo": [

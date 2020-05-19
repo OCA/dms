@@ -2,7 +2,9 @@
 # Copyright 2020 Creu Blanca
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+import functools
 import logging
+import operator
 from collections import defaultdict
 
 from odoo import _, api, fields, models, tools
@@ -152,6 +154,8 @@ class DmsDirectory(models.Model):
 
     size = fields.Integer(compute="_compute_size", string="Size")
 
+    inherit_groups = fields.Boolean(string="Inherit Groups", default=True)
+
     # ----------------------------------------------------------
     # Functions
     # ----------------------------------------------------------
@@ -264,10 +268,36 @@ class DmsDirectory(models.Model):
     def _compute_size(self):
         sudo_model = self.env["dms.file"].sudo()
         for record in self:
+            # Avoid NewId
+            if not record.id:
+                record.size = 0
+                continue
             recs = sudo_model.search_read(
                 domain=[("directory_id", "child_of", record.id)], fields=["size"],
             )
             record.size = sum(rec.get("size", 0) for rec in recs)
+
+    @api.depends("inherit_groups", "parent_path")
+    def _compute_groups(self):
+        records = self.filtered(lambda record: record.parent_path)
+        paths = [list(map(int, rec.parent_path.split("/")[:-1])) for rec in records]
+        ids = paths and set(functools.reduce(operator.concat, paths)) or []
+        read = self.browse(ids).read(["inherit_groups", "groups"])
+        data = {entry.pop("id"): entry for entry in read}
+        for record in records:
+            complete_group_ids = set()
+            for id in reversed(list(map(int, record.parent_path.split("/")[:-1]))):
+                if id in data:
+                    complete_group_ids |= set(data[id].get("groups", []))
+                    if not data[id].get("inherit_groups"):
+                        break
+            record.update({"complete_groups": [(6, 0, list(complete_group_ids))]})
+        for record in self - records:
+            if record.parent_id and record.inherit_groups:
+                complete_groups = record.parent_id.complete_groups
+                record.complete_groups = record.groups | complete_groups
+            else:
+                record.complete_groups = record.groups
 
     # ----------------------------------------------------------
     # View
@@ -390,7 +420,17 @@ class DmsDirectory(models.Model):
         return super().create(vals_list)
 
     def write(self, vals):
-        res = super().write(vals)
+        # Groups part
+        if any(key in vals for key in ["groups", "inherit_groups"]):
+            with self.env.norecompute():
+                res = super(DmsDirectory, self).write(vals)
+                domain = [("id", "child_of", self.ids)]
+                records = self.sudo().search(domain)
+                records.modified(["groups"])
+            records.recompute()
+        else:
+            res = super().write(vals)
+
         if self and any(
             field for field in vals if field in ["root_storage_id", "parent_id"]
         ):
