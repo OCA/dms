@@ -282,7 +282,7 @@ class DmsDirectory(models.Model):
 
     @api.onchange("category_id")
     def _change_category(self):
-        tags = self.tags_ids.filtered(
+        tags = self.tag_ids.filtered(
             lambda rec: not rec.category_id or rec.category_id == self.category_id
         )
         self.tag_ids = tags
