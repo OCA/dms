@@ -91,7 +91,7 @@ class Storage(models.Model):
 
         records = self.filtered(lambda rec: rec.save_type == "file")
         for record in records:
-            domain = ["&", ("content_file", "=", False), ("storage", "=", record.id)]
+            domain = ["&", ("content_file", "=", False), ("storage_id", "=", record.id)]
             files |= files.search(domain)
         files.action_migrate()
 

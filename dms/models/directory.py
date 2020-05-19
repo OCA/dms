@@ -43,7 +43,13 @@ class DmsDirectory(models.Model):
     )
 
     root_storage_id = fields.Many2one(
-        comodel_name="dms.storage", string="Root Storage", ondelete="restrict"
+        comodel_name="dms.storage",
+        string="Root Storage",
+        ondelete="restrict",
+        compute="_compute_directory_type",
+        store=True,
+        readonly=False,
+        copy=True,
     )
 
     storage_id = fields.Many2one(
@@ -54,6 +60,7 @@ class DmsDirectory(models.Model):
         auto_join=True,
         readonly=True,
         store=True,
+        copy=True,
     )
 
     parent_id = fields.Many2one(
@@ -63,6 +70,10 @@ class DmsDirectory(models.Model):
         ondelete="restrict",
         auto_join=True,
         index=True,
+        store=True,
+        readonly=False,
+        compute="_compute_directory_type",
+        copy=True,
     )
 
     complete_name = fields.Char(
@@ -105,6 +116,9 @@ class DmsDirectory(models.Model):
         column1="did",
         column2="tid",
         string="Tags",
+        compute="_compute_tags",
+        readonly=False,
+        store=True,
     )
 
     user_star_ids = fields.Many2many(
@@ -286,10 +300,12 @@ class DmsDirectory(models.Model):
         data = {entry.pop("id"): entry for entry in read}
         for record in records:
             complete_group_ids = set()
-            for id in reversed(list(map(int, record.parent_path.split("/")[:-1]))):
-                if id in data:
-                    complete_group_ids |= set(data[id].get("groups", []))
-                    if not data[id].get("inherit_groups"):
+            for directory_id in reversed(
+                list(map(int, record.parent_path.split("/")[:-1]))
+            ):
+                if directory_id in data:
+                    complete_group_ids |= set(data[directory_id].get("groups", []))
+                    if not data[directory_id].get("inherit_groups"):
                         break
             record.update({"complete_groups": [(6, 0, list(complete_group_ids))]})
         for record in self - records:
@@ -303,19 +319,21 @@ class DmsDirectory(models.Model):
     # View
     # ----------------------------------------------------------
 
-    @api.onchange("is_root_directory")
-    def _onchange_directory_type(self):
-        if self.is_root_directory:
-            self.parent_id = None
-        else:
-            self.root_storage_id = None
+    @api.depends("is_root_directory")
+    def _compute_directory_type(self):
+        for record in self:
+            if record.is_root_directory:
+                record.parent_id = None
+            else:
+                record.root_storage_id = None
 
-    @api.onchange("category_id")
-    def _change_category(self):
-        tags = self.tag_ids.filtered(
-            lambda rec: not rec.category_id or rec.category_id == self.category_id
-        )
-        self.tag_ids = tags
+    @api.depends("category_id")
+    def _compute_tags(self):
+        for record in self:
+            tags = record.tag_ids.filtered(
+                lambda rec: not rec.category_id or rec.category_id == record.category_id
+            )
+            record.tag_ids = tags
 
     # ----------------------------------------------------------
     # Constrains
