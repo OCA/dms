@@ -9,7 +9,7 @@
     "license": "LGPL-3",
     "website": "http://github.com/OCA/dms",
     "author": "MuK IT,Odoo Community Association (OCA)",
-    "depends": ["web_drop_target"],
+    "depends": ["web_drop_target", "mail"],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",

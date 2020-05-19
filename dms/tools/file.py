@@ -4,10 +4,21 @@
 
 import mimetypes
 import os
+import re
 import shutil
 import tempfile
+import unicodedata
 
 from odoo.tools.mimetypes import guess_mimetype
+
+
+def slugify(value, lower=True):
+    value = unicodedata.normalize("NFKD", value)
+    value = value.encode("ascii", "ignore").decode("ascii")
+    value = value.lower() if lower else value
+    value = re.sub(r"[^\w\s-]", "", value)
+    value = re.sub(r"[-\s]+", "-", value)
+    return value.strip()
 
 
 def check_name(name):
