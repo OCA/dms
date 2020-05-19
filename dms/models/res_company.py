@@ -106,7 +106,7 @@ class ResCompany(models.Model):
         action = self.env.ref("dms.action_dms_file_new").read()[0]
         action["context"] = {
             **self.env.context,
-            **{"default_directory": directory and directory.id},
+            **{"default_directory_id": directory and directory.id},
         }
         return action
 

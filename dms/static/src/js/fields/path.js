@@ -17,7 +17,7 @@ odoo.define("dms.fields_path", function(require) {
         },
         _renderReadonly: function() {
             var show_value = this._formatValue(this.value);
-            var text_witdh = $.fn.textWidth(show_value);
+            var text_witdh = show_value.length;
             if (text_witdh >= this.max_width) {
                 var ratio_start = (1 - this.max_width / text_witdh) * show_value.length;
                 show_value =

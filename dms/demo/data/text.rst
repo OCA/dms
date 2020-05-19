@@ -19,8 +19,7 @@ __
    http://docutils.sourceforge.net/docs/user/rst/quickref.html
 
 .. Note:: This document is an informal introduction to
-   reStructuredText.  The `What Next?`_ section below has links to
-   further resources, including a formal reference.
+   reStructuredText.
 
 
 Structure
@@ -125,8 +124,8 @@ after a blank line.
 
     a. lower-case letters
 
-       3. with a sub-list starting at a different number
-       4. make sure the numbers are in the correct sequence though!
+       1. with a sub-list starting at a different number
+       2. make sure the numbers are in the correct sequence though!
 
     I. upper-case roman numerals
 
@@ -149,8 +148,8 @@ after a blank line.
 
   a. lower-case letters
 
-     3. with a sub-list starting at a different number
-     4. make sure the numbers are in the correct sequence though!
+     1. with a sub-list starting at a different number
+     2. make sure the numbers are in the correct sequence though!
 
   I. upper-case roman numerals
 
@@ -381,24 +380,3 @@ See the full `image directive documentation`__ for more info.
 
 __ ../../ref/rst/directives.html
 __ ../../ref/rst/directives.html#images
-
-
-What Next?
-----------
-
-This primer introduces the most common features of reStructuredText,
-but there are a lot more to explore.  The `Quick reStructuredText`_
-user reference is a good place to go next.  For complete details, the
-`reStructuredText Markup Specification`_ is the place to go [#]_.
-
-Users who have questions or need assistance with Docutils or
-reStructuredText should post a message to the Docutils-users_ mailing
-list.
-
-.. [#] If that relative link doesn't work, try the master document:
-   http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html.
-
-.. _reStructuredText Markup Specification:
-   ../../ref/rst/restructuredtext.html
-.. _Docutils-users: ../mailing-lists.html#docutils-users
-.. _Docutils project web site: http://docutils.sourceforge.net/
