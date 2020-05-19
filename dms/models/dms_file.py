@@ -450,7 +450,7 @@ class File(models.Model):
         file_ids = set(result)
         directories = self._get_directories_from_database(result)
         for directory in directories - directories._filter_access("read"):
-            file_ids -= set(directory.sudo().mapped("file_idgs").ids)
+            file_ids -= set(directory.with_user(SUPERUSER_ID).mapped("file_ids").ids)
         return len(file_ids) if count else list(file_ids)
 
     def _filter_access(self, operation):
@@ -459,7 +459,7 @@ class File(models.Model):
             return records
         directories = self._get_directories_from_database(records.ids)
         for directory in directories - directories._filter_access("read"):
-            records -= self.browse(directory.sudo().mapped("files").ids)
+            records -= self.browse(directory.with_user(SUPERUSER_ID).mapped("file_ids").ids)
         return records
 
     def check_access(self, operation, raise_exception=False):

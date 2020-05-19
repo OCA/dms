@@ -98,8 +98,8 @@
     <menuitem
         id="menu_dms_settings_general"
         name="General Settings"
-        parent="main_menu_dms"
-        sequence="100"
+        parent="cat_menu_dms_config"
+        sequence="0"
         action="action_dms_settings_general"
         groups="base.group_system"
     />
