@@ -142,17 +142,13 @@ class File(models.Model):
         prefetch=False,
     )
 
-    content_file = file.File(string="Content File", prefetch=False, invisible=True)
+    content_file = fields.Binary(
+        attachment=True, string="Content File", prefetch=False, invisible=True
+    )
 
     # ----------------------------------------------------------
     # Helper
     # ----------------------------------------------------------
-
-    @api.model
-    def _get_content_inital_vals(self):
-        res = super(File, self)._get_content_inital_vals()
-        res.update({"content_file": False})
-        return res
 
     @api.model
     def _get_checksum(self, binary):
@@ -160,17 +156,21 @@ class File(models.Model):
 
     @api.model
     def _get_content_inital_vals(self):
-        return {"content_binary": False}
+        return {"content_binary": False, "content_file": False}
 
-    @api.model
-    def _update_content_vals(self, file, vals, binary):
-        vals.update(
+    def _update_content_vals(self, vals, binary):
+        new_vals = vals.copy()
+        new_vals.update(
             {
                 "checksum": self._get_checksum(binary),
                 "size": binary and len(binary) or 0,
             }
         )
-        return vals
+        if self.storage_id.save_type == "file":
+            new_vals["content_file"] = self.content
+        elif self.storage_id.save_type == "database":
+            new_vals["content_binary"] = self.content and binary
+        return new_vals
 
     @api.model
     def _get_binary_max_size(self):
@@ -257,19 +257,13 @@ class File(models.Model):
                 ORDER BY c.name, c.id, t.name, t.id;
             """
             where_clause = ""
+            params = []
             if directory_id:
-                directory_where_clause = "WHERE r.fid = ANY (VALUES {ids})"
+                where_clause = "WHERE r.fid in %s"
                 file_ids = self.search([("directory_id", operator, directory_id)]).ids
-                where_clause = (
-                    ""
-                    if not file_ids
-                    else directory_where_clause.format(
-                        ids=", ".join(map(lambda id: "(%s)" % id, file_ids))
-                    )
-                )
-            self.env.cr.execute(
-                sql_query.format(directory_where_clause=where_clause), []
-            )
+                params.append(tuple(file_ids))
+            final_query = sql_query.format(directory_where_clause=where_clause)
+            self.env.cr.execute(final_query, params)
             return self.env.cr.dictfetchall()
         if directory_id and field_name in ["directory_id", "category_id"]:
             comodel_domain = kwargs.pop("comodel_domain", [])
@@ -345,25 +339,23 @@ class File(models.Model):
                 mimetype = guess_mimetype(binary, default="application/octet-stream")
             record.mimetype = mimetype
 
-    @api.depends("content_binary")
+    @api.depends("content_binary", "content_file")
     def _compute_content(self):
-        bin_size = self._check_context_bin_size("content")
-        bin_recs = self.with_context({"bin_size": True})
-        records = bin_recs.filtered(lambda rec: bool(rec.content_file))
-        for record in self & records:
-            context = {"human_size": True} if bin_size else {"base64": True}
-            record.content = record.with_context(context).content_file
-        for record in self - records:
-            record.content = record.content_binary
+        bin_size = self.env.context.get("bin_size", False)
+        for record in self:
+            if record.content_file:
+                context = {"human_size": True} if bin_size else {"base64": True}
+                record.content = record.with_context(context).content_file
+            else:
+                record.content = record.content_binary
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
-        bin_recs = self.with_context({"bin_size": True})
-        records = bin_recs.filtered(lambda rec: bool(rec.content_file))
-        for record in records.with_context(self.env.context):
-            record.save_type = "file"
-        for record in self - records:
-            record.save_type = "database"
+        for record in self:
+            if record.content_file:
+                record.save_type = "file"
+            else:
+                record.save_type = "database"
 
     @api.depends("storage_id", "storage_id.save_type")
     def _compute_migration(self):
@@ -537,36 +529,20 @@ class File(models.Model):
     # ----------------------------------------------------------
 
     def _inverse_content(self):
-        records = self.filtered(lambda rec: rec.storage.save_type == "file")
         updates = defaultdict(set)
-        for record in records:
+        for record in self:
             values = self._get_content_inital_vals()
             binary = base64.b64decode(record.content or "")
-            values = self._update_content_vals(record, values, binary)
-            values.update(
-                {"content_file": record.content and binary,}
-            )
+            values = record._update_content_vals(values, binary)
             updates[tools.frozendict(values)].add(record.id)
         with self.env.norecompute():
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
-        updates = defaultdict(set)
-        for record in self - records:
-            values = self._get_content_inital_vals()
-            binary = base64.b64decode(record.content or "")
-            values = self._update_content_vals(record, values, binary)
-            values.update({"content_binary": record.content})
-            updates[tools.frozendict(values)].add(record.id)
-        with self.env.norecompute():
-            for vals, ids in updates.items():
-                self.browse(ids).write(dict(vals))
-        self.recompute()
 
     @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
-        names = []
         if "directory_id" in default:
             model = self.env["dms.directory"]
             directory = model.browse(default["directory_id"])
