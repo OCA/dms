@@ -74,6 +74,7 @@
         <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <kanban
+                js_class="file_kanban"
                 class="mk_file_kanban_view o_kanban_small_column align-content-start"
                 banner_route="/dms/document_onboarding/file"
             >
@@ -291,6 +292,7 @@
         <field name="arch" type="xml">
             <tree
                 string="Files"
+                js_class="file_list"
                 decoration-warning="not active"
                 decoration-muted="(is_locked and not is_lock_editor)"
             >
