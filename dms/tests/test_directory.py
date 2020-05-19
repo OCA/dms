@@ -13,7 +13,7 @@ class DirectoryTestCase(DocumentsBaseCase):
         self.directory_root_demo_03 = self.browse_ref("dms.directory_11_demo")
         self.directory_sub_demo_01 = self.browse_ref("dms.directory_03_demo")
         self.directory_sub_demo_02 = self.browse_ref("dms.directory_12_demo")
-        self.new_storage = self.create_storage(with_user=True)
+        self.new_storage = self.create_storage(sudo=True)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_create_directory(self):
@@ -80,7 +80,7 @@ class DirectoryTestCase(DocumentsBaseCase):
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_storage(self):
-        new_storage = self.create_storage(with_user=True)
+        new_storage = self.create_storage(sudo=True)
         root_directory = self.create_directory(storage=self.new_storage)
         sub_directory = self.create_directory(directory=root_directory)
         self.assertEqual(sub_directory.storage_id.id, self.new_storage.id)
