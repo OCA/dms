@@ -29,6 +29,8 @@ class File(models.Model):
     _inherit = [
         "dms.security.mixin",
         "dms.mixins.thumbnail",
+        "mail.thread",
+        "mail.activity.mixin",
     ]
 
     _order = "name asc"
@@ -459,7 +461,9 @@ class File(models.Model):
             return records
         directories = self._get_directories_from_database(records.ids)
         for directory in directories - directories._filter_access("read"):
-            records -= self.browse(directory.with_user(SUPERUSER_ID).mapped("file_ids").ids)
+            records -= self.browse(
+                directory.with_user(SUPERUSER_ID).mapped("file_ids").ids
+            )
         return records
 
     def check_access(self, operation, raise_exception=False):
@@ -560,9 +564,12 @@ class File(models.Model):
         return super(File, self).write(vals)
 
     def unlink(self):
+        self.check_access_rights("unlink")
         self.check_directory_access("unlink", {}, True)
         self.check_lock()
-        return super(File, self).unlink()
+        # We need to do sudo because we don't know when the related groups
+        # will be deleted
+        return super(File, self.sudo()).unlink()
 
     # ----------------------------------------------------------
     # Locking fields and functions

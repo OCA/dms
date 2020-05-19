@@ -561,8 +561,45 @@
                                 </tree>
                             </field>
                         </page>
+                        <page name="mail_alias" string="Email Alias">
+                            <group>
+                                <group>
+                                    <field
+                                        name="alias_contact"
+                                        string="Accept Emails from"
+                                    />
+                                    <field name="alias_process" />
+                                </group>
+                                <group>
+                                    <label for="alias_name" string="Email Alias" />
+                                    <div>
+                                        <field name="alias_name" class="oe_inline" />
+                                        <span class="oe_read_only">@</span>
+                                        <span class="oe_edit_only"> @ </span>
+                                        <field
+                                            name="alias_domain"
+                                            placeholder="mail.catchall.domain"
+                                            class="oe_inline"
+                                            readonly="1"
+                                        />
+                                    </div>
+                                    <field
+                                        name="alias_id"
+                                        readonly="1"
+                                        required="0"
+                                        groups="base.group_no_one"
+                                        string="Alias Setting"
+                                    />
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
             </form>
         </field>
     </record>

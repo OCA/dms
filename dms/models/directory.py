@@ -2,6 +2,7 @@
 # Copyright 2020 Creu Blanca
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+import base64
 import functools
 import logging
 import operator
@@ -10,7 +11,7 @@ from collections import defaultdict
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import AccessError, ValidationError
 
-from ..tools.file import check_name, unique_name
+from ..tools.file import check_name, slugify, unique_name
 
 _logger = logging.getLogger(__name__)
 
@@ -23,6 +24,9 @@ class DmsDirectory(models.Model):
     _inherit = [
         "dms.security.mixin",
         "dms.mixins.thumbnail",
+        "mail.thread",
+        "mail.activity.mixin",
+        "mail.alias.mixin",
     ]
 
     _rec_name = "complete_name"
@@ -169,6 +173,21 @@ class DmsDirectory(models.Model):
     size = fields.Integer(compute="_compute_size", string="Size")
 
     inherit_groups = fields.Boolean(string="Inherit Groups", default=True)
+
+    alias_process = fields.Selection(
+        selection=[("files", "Single Files"), ("directory", "Subdirectory")],
+        required=True,
+        default="directory",
+        string="Unpack Emails as",
+        help="""\
+                Define how incoming emails are processed:\n
+                - Single Files: The email gets attached to the directory and
+                all attachments are created as files.\n
+                - Subdirectory: A new subdirectory is created for each email
+                and the mail is attached to this subdirectory. The attachments
+                are created as files of the subdirectory.
+                """,
+    )
 
     # ----------------------------------------------------------
     # Functions
@@ -425,6 +444,53 @@ class DmsDirectory(models.Model):
         for record in self.child_directory_ids:
             record.copy({"parent_id": new.id})
         return new
+
+    @api.model
+    def get_alias_model_name(self, vals):
+        return vals.get("alias_model", "dms.directory")
+
+    def get_alias_values(self):
+        values = super().get_alias_values()
+        values["alias_defaults"] = {"parent_id": self.id}
+        return values
+
+    @api.model
+    def message_new(self, msg_dict, custom_values=None):
+        custom_values = custom_values if custom_values is not None else {}
+        parent_directory_id = custom_values.get("parent_id", None)
+        parent_directory = self.sudo().browse(parent_directory_id)
+        if not parent_directory_id or not parent_directory.exists():
+            raise ValueError("No directory could be found!")
+        if parent_directory.alias_process == "files":
+            parent_directory._process_message(msg_dict)
+            return parent_directory
+        names = parent_directory.child_directory_ids.mapped("name")
+        subject = slugify(
+            msg_dict.get("subject", _("Alias-Mail-Extraction")), lower=False
+        )
+        defaults = dict(
+            {"name": unique_name(subject, names, escape_suffix=True)}, **custom_values
+        )
+        directory = super().message_new(msg_dict, custom_values=defaults)
+        directory._process_message(msg_dict)
+        return directory
+
+    def message_update(self, msg_dict, update_vals=None):
+        self._process_message(msg_dict, extra_values=update_vals)
+        return super().message_update(msg_dict, update_vals=update_vals)
+
+    def _process_message(self, msg_dict, extra_values=False):
+        names = self.sudo().file_ids.mapped("name")
+        for attachment in msg_dict["attachments"]:
+            uname = unique_name(attachment.fname, names, escape_suffix=True)
+            self.env["dms.file"].sudo().create(
+                {
+                    "content": base64.b64encode(attachment.content),
+                    "directory_id": self.id,
+                    "name": uname,
+                }
+            )
+            names.append(uname)
 
     @api.model_create_multi
     def create(self, vals_list):
