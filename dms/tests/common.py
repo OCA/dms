@@ -184,14 +184,14 @@ class DocumentsBaseCase(common.TransactionCase):
     def content_base64(self):
         return base64.b64encode(b"\xff data")
 
-    def create_storage(self, save_type="database", with_user=False):
-        model = self.storage.sudo() if with_user else self.storage
+    def create_storage(self, save_type="database", sudo=False):
+        model = self.storage.sudo() if sudo else self.storage
         return model.create({"name": "Test Storage", "save_type": save_type})
 
-    def create_directory(self, storage=False, directory=False, with_user=False):
-        model = self.directory.sudo() if with_user else self.directory
+    def create_directory(self, storage=False, directory=False, sudo=False):
+        model = self.directory.sudo() if sudo else self.directory
         if not storage and not directory:
-            storage = self.create_storage(with_user=with_user)
+            storage = self.create_storage(sudo=sudo)
         if directory:
             return model.create(
                 {
@@ -208,12 +208,10 @@ class DocumentsBaseCase(common.TransactionCase):
             }
         )
 
-    def create_file(
-        self, directory=False, content=False, storage=False, with_user=False
-    ):
-        model = self.file.sudo() if with_user else self.file
+    def create_file(self, directory=False, content=False, storage=False, sudo=False):
+        model = self.file.sudo() if sudo else self.file
         if not directory:
-            directory = self.create_directory(storage=storage, with_user=with_user)
+            directory = self.create_directory(storage=storage, sudo=sudo)
         return model.create(
             {
                 "name": uuid.uuid4().hex,
