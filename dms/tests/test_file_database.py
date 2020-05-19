@@ -101,7 +101,7 @@ class FileTestCase(DocumentsBaseCase):
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_compute_mimetype(self):
-        self.assertTrue(self.file_demo_01.mimetype)
+        self.assertTrue(self.file_demo_01.res_mimetype)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_compute_extension(self):
@@ -116,14 +116,13 @@ class FileTestCase(DocumentsBaseCase):
         self.assertTrue(self.file_demo_01.checksum)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
-    def test_compute_content_bin_size(self):
-        file = self.file_demo_01.with_context(bin_size=True)
-        self.assertTrue(file.content)
-
-    @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
-    def test_compute_content_base64(self):
-        file = self.file_demo_01.with_context(bin_size=False)
-        self.assertTrue(file.content)
+    def test_compute_content(self):
+        self.assertTrue(self.file_demo_01.with_context(bin_size=True).content)
+        self.assertTrue(self.file_demo_01.with_context(bin_size=False).content)
+        self.assertNotEqual(
+            self.file_demo_01.with_context(bin_size=False).content,
+            self.file_demo_01.with_context(bin_size=True).content,
+        )
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_compute_save_type(self):

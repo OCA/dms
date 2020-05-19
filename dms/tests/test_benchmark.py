@@ -84,7 +84,7 @@ class BenchmarkTestCase(common.SavepointCase):
             "name",
             "color",
             "active",
-            "mimetype",
+            "res_mimetype",
             "create_uid",
             "write_date",
             "locked_by",
