@@ -39,6 +39,9 @@ class DmsSecurityMixin(models.AbstractModel):
             return self._filter_access_rules(operation)
         return self.env[self._name]
 
+    def _filter_access_ids(self, operation):
+        return self._filter_access(operation).ids
+
     @api.model
     def _search_permission_read(self, operator, operand):
         if operator == "=" and operand:

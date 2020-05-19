@@ -306,6 +306,7 @@ class File(models.Model):
                             "id": directory_id,
                         }
                     )
+
                 path_names.reverse()
                 path_json.reverse()
                 name = record.name_get()
@@ -373,23 +374,23 @@ class File(models.Model):
 
     @api.onchange("category_id")
     def _change_category(self):
-        res = {"domain": {"tags": [("category_id", "=", False)]}}
-        if self.category:
+        res = {"domain": {"tag_ids": [("category_id", "=", False)]}}
+        if self.category_id:
             res.update(
                 {
                     "domain": {
-                        "tags": [
+                        "tag_ids": [
                             "|",
                             ("category_id", "=", False),
-                            ("category_id", "child_of", self.category.id),
+                            ("category_id", "child_of", self.category_id.id),
                         ]
                     }
                 }
             )
-        tags = self.tags.filtered(
-            lambda rec: not rec.category_id or rec.category_id == self.category
+        tags = self.tag_ids.filtered(
+            lambda rec: not rec.category_id or rec.category_id == self.category_id
         )
-        self.tags = tags
+        self.tag_ids = tags
         return res
 
     # ----------------------------------------------------------
