@@ -1,4 +1,4 @@
-id,name,parent_category/id
+id,name,parent_id/id
 dms.category_001_benchmark,C_001,
 dms.category_002_benchmark,C_002,dms.category_001_benchmark
 dms.category_003_benchmark,C_003,dms.category_002_benchmark
