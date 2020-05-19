@@ -1,3 +1,4 @@
+from . import access_groups
 from . import mixins_thumbnail
 from . import dms_security_mixin
 
