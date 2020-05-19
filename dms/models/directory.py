@@ -11,7 +11,9 @@ from collections import defaultdict
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import AccessError, ValidationError
 
-from ..tools.file import check_name, slugify, unique_name
+from odoo.addons.http_routing.models.ir_http import slugify
+
+from ..tools.file import check_name, unique_name
 
 _logger = logging.getLogger(__name__)
 
@@ -37,7 +39,7 @@ class DmsDirectory(models.Model):
 
     name = fields.Char(string="Name", required=True, index=True)
 
-    parent_path = fields.Char()
+    parent_path = fields.Char(index=True)
     is_root_directory = fields.Boolean(
         string="Is Root Directory",
         default=False,
@@ -62,9 +64,7 @@ class DmsDirectory(models.Model):
         string="Storage",
         ondelete="restrict",
         auto_join=True,
-        readonly=True,
         store=True,
-        copy=True,
     )
 
     parent_id = fields.Many2one(
@@ -149,10 +149,20 @@ class DmsDirectory(models.Model):
     )
 
     count_directories = fields.Integer(
+        compute="_compute_count_directories", string="Count Subdirectories Title"
+    )
+
+    count_files = fields.Integer(
+        compute="_compute_count_files", string="Count Files Title"
+    )
+
+    count_directories_title = fields.Char(
         compute="_compute_count_directories", string="Count Subdirectories"
     )
 
-    count_files = fields.Integer(compute="_compute_count_files", string="Count Files")
+    count_files_title = fields.Char(
+        compute="_compute_count_files", string="Count Files"
+    )
 
     count_elements = fields.Integer(
         compute="_compute_count_elements", string="Count Elements"
@@ -172,7 +182,7 @@ class DmsDirectory(models.Model):
 
     size = fields.Integer(compute="_compute_size", string="Size")
 
-    inherit_groups = fields.Boolean(string="Inherit Groups", default=True)
+    inherit_group_ids = fields.Boolean(string="Inherit Groups", default=True)
 
     alias_process = fields.Selection(
         selection=[("files", "Single Files"), ("directory", "Subdirectory")],
@@ -189,9 +199,12 @@ class DmsDirectory(models.Model):
                 """,
     )
 
-    # ----------------------------------------------------------
-    # Functions
-    # ----------------------------------------------------------
+    @api.depends("name", "complete_name")
+    def _compute_display_name(self):
+        if not self.env.context.get("directory_short_name", False):
+            return super()._compute_display_name()
+        for record in self:
+            record.display_name = record.name
 
     def toggle_starred(self):
         updates = defaultdict(set)
@@ -235,10 +248,6 @@ class DmsDirectory(models.Model):
             return [("user_star_ids", "in", [self.env.uid])]
         return [("user_star_ids", "not in", [self.env.uid])]
 
-    # ----------------------------------------------------------
-    # Read
-    # ----------------------------------------------------------
-
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
         for category in self:
@@ -253,9 +262,9 @@ class DmsDirectory(models.Model):
     def _compute_storage(self):
         for record in self:
             if record.is_root_directory:
-                record.storage = record.root_storage_id
+                record.storage_id = record.root_storage_id
             else:
-                record.storage = record.parent_id.storage_id
+                record.storage_id = record.parent_id.storage_id
 
     @api.depends("user_star_ids")
     def _compute_starred(self):
@@ -265,12 +274,16 @@ class DmsDirectory(models.Model):
     @api.depends("child_directory_ids")
     def _compute_count_directories(self):
         for record in self:
-            record.count_directories = len(record.child_directory_ids)
+            directories = len(record.child_directory_ids)
+            record.count_directories = directories
+            record.count_directories_title = _("%s Subdirectories") % directories
 
     @api.depends("file_ids")
     def _compute_count_files(self):
         for record in self:
-            record.count_files = len(record.file_ids)
+            files = len(record.file_ids)
+            record.count_files = files
+            record.count_files_title = _("%s Files") % files
 
     @api.depends("child_directory_ids", "file_ids")
     def _compute_count_elements(self):
@@ -310,12 +323,12 @@ class DmsDirectory(models.Model):
             )
             record.size = sum(rec.get("size", 0) for rec in recs)
 
-    @api.depends("inherit_groups", "parent_path")
+    @api.depends("inherit_group_ids", "parent_path")
     def _compute_groups(self):
         records = self.filtered(lambda record: record.parent_path)
         paths = [list(map(int, rec.parent_path.split("/")[:-1])) for rec in records]
         ids = paths and set(functools.reduce(operator.concat, paths)) or []
-        read = self.browse(ids).read(["inherit_groups", "groups"])
+        read = self.browse(ids).read(["inherit_group_ids", "group_ids"])
         data = {entry.pop("id"): entry for entry in read}
         for record in records:
             complete_group_ids = set()
@@ -323,16 +336,16 @@ class DmsDirectory(models.Model):
                 list(map(int, record.parent_path.split("/")[:-1]))
             ):
                 if directory_id in data:
-                    complete_group_ids |= set(data[directory_id].get("groups", []))
-                    if not data[directory_id].get("inherit_groups"):
+                    complete_group_ids |= set(data[directory_id].get("group_ids", []))
+                    if not data[directory_id].get("inherit_group_ids"):
                         break
-            record.update({"complete_groups": [(6, 0, list(complete_group_ids))]})
+            record.update({"complete_group_ids": [(6, 0, list(complete_group_ids))]})
         for record in self - records:
-            if record.parent_id and record.inherit_groups:
-                complete_groups = record.parent_id.complete_groups
-                record.complete_groups = record.groups | complete_groups
+            if record.parent_id and record.inherit_group_ids:
+                complete_groups = record.parent_id.complete_group_ids
+                record.complete_group_ids = record.group_ids | complete_groups
             else:
-                record.complete_groups = record.groups
+                record.complete_group_ids = record.group_ids
 
     # ----------------------------------------------------------
     # View
@@ -423,7 +436,6 @@ class DmsDirectory(models.Model):
         not_starred_records.write({"user_star_ids": [(4, self.env.uid)]})
         starred_records.write({"user_star_ids": [(3, self.env.uid)]})
 
-    @api.returns("self", lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
@@ -465,9 +477,7 @@ class DmsDirectory(models.Model):
             parent_directory._process_message(msg_dict)
             return parent_directory
         names = parent_directory.child_directory_ids.mapped("name")
-        subject = slugify(
-            msg_dict.get("subject", _("Alias-Mail-Extraction")), lower=False
-        )
+        subject = slugify(msg_dict.get("subject", _("Alias-Mail-Extraction")))
         defaults = dict(
             {"name": unique_name(subject, names, escape_suffix=True)}, **custom_values
         )
@@ -505,12 +515,12 @@ class DmsDirectory(models.Model):
 
     def write(self, vals):
         # Groups part
-        if any(key in vals for key in ["groups", "inherit_groups"]):
+        if any(key in vals for key in ["group_ids", "inherit_group_ids"]):
             with self.env.norecompute():
                 res = super(DmsDirectory, self).write(vals)
                 domain = [("id", "child_of", self.ids)]
                 records = self.sudo().search(domain)
-                records.modified(["groups"])
+                records.modified(["group_ids"])
             records.recompute()
         else:
             res = super().write(vals)
