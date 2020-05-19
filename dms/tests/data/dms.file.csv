@@ -1,4 +1,4 @@
-id,name,directory/id,category/id,tags/id,content
+id,name,directory_id/id,category_id/id,tag_ids/id,content
 dms.file_0001_benchmark,F_0001.txt,dms.directory_152_benchmark,dms.category_041_benchmark,dms.tag_042_benchmark,I2luY2x1ZGUgPHN0ZGlvLmg+DQoNCmludCBtYWluKHZvaWQpDQp7DQogICAgcHJpbnRmKCJoZWxsbywgd29ybGRcbiIpOw0KfQ==
 dms.file_0002_benchmark,F_0002.txt,dms.directory_456_benchmark,dms.category_021_benchmark,dms.tag_140_benchmark,I2luY2x1ZGUgPHN0ZGlvLmg+DQoNCmludCBtYWluKHZvaWQpDQp7DQogICAgcHJpbnRmKCJoZWxsbywgd29ybGRcbiIpOw0KfQ==
 dms.file_0003_benchmark,F_0003.txt,dms.directory_183_benchmark,dms.category_017_benchmark,dms.tag_017_benchmark,I2luY2x1ZGUgPHN0ZGlvLmg+DQoNCmludCBtYWluKHZvaWQpDQp7DQogICAgcHJpbnRmKCJoZWxsbywgd29ybGRcbiIpOw0KfQ==

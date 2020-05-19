@@ -279,15 +279,13 @@ class File(models.Model):
 
     @api.depends("name", "directory_id", "directory_id.parent_path")
     def _compute_path(self):
-        records_with_directory = self - self.filtered(lambda rec: not rec.directory_id)
+        records_with_directory = self.filtered(lambda rec: rec.directory_id)
         if records_with_directory:
             paths = [
                 list(map(int, rec.directory_id.parent_path.split("/")[:-1]))
                 for rec in records_with_directory
             ]
-            model = self.env["dms.directory"].with_context(
-                dms_directory_show_path=False
-            )
+            model = self.env["dms.directory"]
             directories = model.browse(set(functools.reduce(operator.concat, paths)))
             data = dict({d.id: d for d in directories._filter_access("read")})
             for record in self:
