@@ -19,8 +19,8 @@ class DirectoryTestCase(DocumentsBaseCase):
     def test_create_directory(self):
         root_directory = self.create_directory(storage=self.new_storage)
         sub_directory = self.create_directory(directory=root_directory)
-        self.assertTrue(sub_directory.storage_id.id == self.new_storage.id)
-        self.assertTrue(root_directory.count_directories == 1)
+        self.assertEqual(sub_directory.storage_id.id, self.new_storage.id)
+        self.assertEqual(root_directory.count_directories, 1)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_copy_root_directory(self):
@@ -92,8 +92,8 @@ class DirectoryTestCase(DocumentsBaseCase):
         self.directory_root_demo_01.toggle_starred()
         self.directory_root_demo_02.write({"starred": True})
         starred = self.directory.search([("starred", "=", True)])
-        self.assertTrue(self.directory_root_demo_01.id in starred.ids)
-        self.assertTrue(self.directory_root_demo_02.id in starred.ids)
+        self.assertIn(self.directory_root_demo_01.id, starred.ids)
+        self.assertIn(self.directory_root_demo_02.id, starred.ids)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_count_directories(self):

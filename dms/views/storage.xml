@@ -18,7 +18,7 @@
         </field>
         <field name="context">
             {
-            'default_root_storage': active_id,
+            'default_root_storage_id': active_id,
             'default_is_root_directory': True,
             }
         </field>
@@ -58,7 +58,8 @@
         <field name="search_view_id" ref="search_dms_file_migration" />
         <field name="domain">
             [
-            "&amp;", ("storage_id", "=", active_id),
+            ("storage_id", "=", active_id),
+            ("require_migration", "=", True),
             "|",("active", "=", False), ("active", "!=", False)
             ]
         </field>
@@ -171,11 +172,15 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="page_roots" string="Root Directories">
+                        <page
+                            name="page_roots"
+                            string="Root Directories"
+                            attrs="{'invisible': [('id', '=', False)]}"
+                        >
                             <field
                                 name="root_directory_ids"
                                 groups="dms.group_dms_manager"
-                                context="{'default_root_storage': active_id, 'default_is_root_directory': True}"
+                                context="{'hide_root_storage': True,'default_root_storage_id': active_id, 'default_is_root_directory': True}"
                             >
                                 <tree string="Root Directories">
                                     <field name="name" />

@@ -1,3 +1,8 @@
+/** ********************************************************************************
+    Copyright 2020 Creu Blanca
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+ **********************************************************************************/
+
 /* global Uint8Array base64js*/
 odoo.define("dms.DragDrop", function(require) {
     "use strict";
@@ -5,8 +10,13 @@ odoo.define("dms.DragDrop", function(require) {
     var DropTargetMixin = require("web_drop_target");
     var core = require("web.core");
     var qweb = core.qweb;
+    var _t = core._t;
 
     return _.extend(DropTargetMixin.DropTargetMixin, {
+        init: function() {
+            this._super.apply(this, arguments);
+            this.directory_id = false;
+        },
         _get_drop_items: function(e) {
             var self = this,
                 dataTransfer = e.originalEvent.dataTransfer,
@@ -55,9 +65,26 @@ odoo.define("dms.DragDrop", function(require) {
                 o_content.append(this._drop_overlay);
             }
         },
+        _onSearchPanelDomainUpdated: function(ev) {
+            var directory_id = false;
+            _.each(ev.data.domain, function(domain) {
+                if (domain[0] === "directory_id" && domain[1] === "child_of") {
+                    directory_id = domain[2];
+                }
+            });
+            this.directory_id = directory_id;
+            return this._super.apply(this, arguments);
+        },
         _create_file: function(file, reader, event, model) {
             // Helper to upload an attachment and update the sidebar
             var self = this;
+            var ctx = this.model.get(this.handle, {raw: true}).getContext();
+            if (this.directory_id) {
+                ctx.default_directory_id = this.directory_id;
+            }
+            if (ctx.default_directory_id === undefined) {
+                return this.do_warn(_t("You must select a directory first"));
+            }
             return this._rpc({
                 model: model,
                 method: "create",
@@ -68,7 +95,7 @@ odoo.define("dms.DragDrop", function(require) {
                     },
                 ],
                 kwargs: {
-                    context: this.model.get(this.handle, {raw: true}).getContext(),
+                    context: ctx,
                 },
             }).then(function() {
                 self.reload();

@@ -49,7 +49,6 @@ odoo.define("dms.fields_path", function(require) {
                 _.clone(path).reverse(),
                 function(index, element) {
                     text_width_measure += element.name + "/";
-                    console.log(text_width_measure);
                     if (text_width_measure.length >= this.max_width) {
                         this.$el.prepend($("<span/>").text(".."));
                     } else if (index === 0) {
@@ -79,6 +78,7 @@ odoo.define("dms.fields_path", function(require) {
             );
         },
         _onNodeClicked: function(event) {
+            event.preventDefault();
             this.do_action({
                 type: "ir.actions.act_window",
                 res_model: $(event.currentTarget).data("model"),

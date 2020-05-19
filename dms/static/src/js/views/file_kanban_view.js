@@ -13,9 +13,12 @@ odoo.define("dms.FileKanbanView", function(require) {
 
     var FileKanbanController = require("dms.FileKanbanController");
 
+    var FileKanbanRenderer = require("dms.FileKanbanRenderer");
+
     var FileKanbanView = KanbanView.extend({
         config: _.extend({}, KanbanView.prototype.config, {
             Controller: FileKanbanController,
+            Renderer: FileKanbanRenderer,
         }),
     });
 

@@ -56,10 +56,10 @@ class DmsSecurityMixin(models.AbstractModel):
                 self._add_field(name, field)
 
         add(
-            "groups",
+            "group_ids",
             fields.Many2many(
                 _module=self._module,
-                comodel_name="dms.access_groups",
+                comodel_name="dms.access.group",
                 relation="%s_groups_rel" % (self._table),
                 column1="aid",
                 column2="gid",
@@ -69,10 +69,10 @@ class DmsSecurityMixin(models.AbstractModel):
             ),
         )
         add(
-            "complete_groups",
+            "complete_group_ids",
             fields.Many2many(
                 _module=self._module,
-                comodel_name="dms.access_groups",
+                comodel_name="dms.access.group",
                 relation="%s_complete_groups_rel" % (self._table),
                 column1="aid",
                 column2="gid",
@@ -103,8 +103,8 @@ class DmsSecurityMixin(models.AbstractModel):
             "{table}".id IN (
                 SELECT r.aid
                 FROM {table}_complete_groups_rel r
-                JOIN dms_access_groups g ON r.gid = g.id
-                JOIN dms_access_groups_users_rel u ON r.gid = u.gid
+                JOIN dms_access_group g ON r.gid = g.id
+                JOIN dms_access_group_users_rel u ON r.gid = u.gid
                 WHERE u.uid = %s AND g.perm_{mode} = true
             )
         """.format(
@@ -115,7 +115,7 @@ class DmsSecurityMixin(models.AbstractModel):
                 NOT EXISTS (
                     SELECT 1
                         FROM {table}_complete_groups_rel r
-                        JOIN dms_access_groups g ON r.gid = g.id
+                        JOIN dms_access_group g ON r.gid = g.id
                         WHERE r.aid = "{table}".id {groups_mode}
                 )
             """
@@ -144,7 +144,7 @@ class DmsSecurityMixin(models.AbstractModel):
             WHERE NOT EXISTS (
                 SELECT 1
                 FROM {table}_complete_groups_rel r
-                JOIN dms_access_groups g ON r.gid = g.id
+                JOIN dms_access_group g ON r.gid = g.id
                 WHERE r.aid = a.id {subset} {groups_mode}
             );
         """
@@ -237,8 +237,8 @@ class DmsSecurityMixin(models.AbstractModel):
             sql_query = """
                 SELECT r.aid, perm_{operation}
                 FROM {table}_complete_groups_rel r
-                JOIN dms_access_groups g ON r.gid = g.id
-                JOIN dms_access_groups_users_rel u ON r.gid = u.gid
+                JOIN dms_access_group g ON r.gid = g.id
+                JOIN dms_access_group_users_rel u ON r.gid = u.gid
                 WHERE r.aid = ANY (VALUES {ids}) AND u.uid = %s;
             """.format(
                 operation=operation,
@@ -272,8 +272,8 @@ class DmsSecurityMixin(models.AbstractModel):
             sql_query = """
                 SELECT r.aid
                 FROM {table}_complete_groups_rel r
-                JOIN dms_access_groups g ON r.gid = g.id
-                JOIN dms_access_groups_users_rel u ON r.gid = u.gid
+                JOIN dms_access_group g ON r.gid = g.id
+                JOIN dms_access_group_users_rel u ON r.gid = u.gid
                 WHERE r.aid = ANY (VALUES {ids})
                       AND u.uid = %s AND g.perm_{operation} = true;
             """.format(
@@ -293,7 +293,7 @@ class DmsSecurityMixin(models.AbstractModel):
         self.check_access_groups("unlink")
         return super(DmsSecurityMixin, self).unlink()
 
-    @api.depends("groups")
+    @api.depends("group_ids")
     def _compute_groups(self):
         for record in self:
-            record.complete_groups = record.groups
+            record.complete_group_ids = record.group_ids
