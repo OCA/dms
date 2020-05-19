@@ -155,6 +155,7 @@ class DmsSecurityMixin(models.AbstractModel):
             self._access_groups_mode
             and "AND g.perm_{operation} = true".format(operation=operation)
         )
+        # pylint: disable=sql-injection
         sql_query = sql_query.format(
             table=self._table, subset=subset or "", groups_mode=groups_mode or "",
         )
@@ -232,6 +233,7 @@ class DmsSecurityMixin(models.AbstractModel):
             return None
         group_ids = set(self.ids) - set(self._get_ids_without_access_groups(operation))
         if group_ids:
+            # pylint: disable=sql-injection
             sql_query = """
                 SELECT r.aid, perm_{operation}
                 FROM {table}_complete_groups_rel r
@@ -266,6 +268,7 @@ class DmsSecurityMixin(models.AbstractModel):
         ids_with_access = self._get_ids_without_access_groups(operation)
         group_ids = set(self.ids) - set(ids_with_access)
         if group_ids:
+            # pylint: disable=sql-injection
             sql_query = """
                 SELECT r.aid
                 FROM {table}_complete_groups_rel r
