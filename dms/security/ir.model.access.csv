@@ -1,0 +1,12 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+
+access_dms_tag_user,dms_tag_user,model_dms_tag,group_dms_user,1,1,1,1
+access_dms_category_user,dms_category_user,model_dms_category,group_dms_user,1,1,1,1
+
+access_dms_storage_user,dms_storage_user,model_dms_storage,group_dms_user,1,0,0,0
+access_dms_storage_manager,dms_storage_manager,model_dms_storage,group_dms_manager,1,1,1,1
+
+access_dms_directory_user,dms_directory_user,model_dms_directory,group_dms_user,1,1,1,1
+access_dms_file_user,dms_file_user,model_dms_file,group_dms_user,1,1,1,1
+
+access_security_access_groups_user,access_security_access_groups_user,model_dms_access_group,base.group_user,1,1,1,1

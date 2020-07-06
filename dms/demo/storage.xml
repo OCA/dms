@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo noupdate="1">
+    <record id="storage_demo" model="dms.storage">
+        <field name="name">Documents Storage</field>
+        <field name="save_type">database</field>
+    </record>
+</odoo>
