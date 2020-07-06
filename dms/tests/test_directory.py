@@ -25,7 +25,6 @@ class DirectoryTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_copy_root_directory(self):
         copy_root_directory = self.directory_root_demo_03.copy()
-        copy_root_directory.flush()
         self.assertEqual(
             self.directory_root_demo_03.storage_id.id, copy_root_directory.storage_id.id
         )
@@ -37,7 +36,7 @@ class DirectoryTestCase(DocumentsBaseCase):
             self.directory_root_demo_03.count_files, copy_root_directory.count_files
         )
 
-    @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
+    @multi_users(lambda self: self.multi_users(demo=False), callback="_setup_test_data")
     def test_copy_sub_directory(self):
         copy_sub_directory = self.directory_sub_demo_01.copy()
         self.assertEqual(

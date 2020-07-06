@@ -156,11 +156,11 @@ class DocumentsBaseCase(common.TransactionCase):
         self.tag = self.env["dms.tag"]
 
     def _setup_test_data(self):
-        self.storage = self.storage.with_user(self.env.uid)
-        self.directory = self.directory.with_user(self.env.uid)
-        self.file = self.file.with_user(self.env.uid)
-        self.category = self.category.with_user(self.env.uid)
-        self.tag = self.tag.with_user(self.env.uid)
+        self.storage = self.storage.sudo(self.env.uid)
+        self.directory = self.directory.sudo(self.env.uid)
+        self.file = self.file.sudo(self.env.uid)
+        self.category = self.category.sudo(self.env.uid)
+        self.tag = self.tag.sudo(self.env.uid)
 
     def _load(self, module, *args):
         convert_file(

@@ -66,19 +66,6 @@
                         context="{'group_by':'directory_id'}"
                     />
                 </group>
-                <searchpanel>
-                    <field
-                        name="directory_id"
-                        icon="fa-folder"
-                        context="{'directory_short_name': True}"
-                    />
-                    <field
-                        name="tag_ids"
-                        select="multi"
-                        icon="fa-tag"
-                        groupby="category_id"
-                    />
-                </searchpanel>
             </search>
         </field>
     </record>
@@ -280,6 +267,19 @@
                         </div>
                     </t>
                 </templates>
+                <searchpanel>
+                    <field
+                        name="directory_id"
+                        icon="fa-folder"
+                        context="{'directory_short_name': True}"
+                    />
+                    <field
+                        name="tag_ids"
+                        select="multi"
+                        icon="fa-tag"
+                        groupby="category_id"
+                    />
+                </searchpanel>
             </kanban>
         </field>
     </record>

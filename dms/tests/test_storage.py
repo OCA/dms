@@ -9,7 +9,7 @@ from .test_storage_database import StorageTestCase
 class StorageLObjectTestCase(StorageTestCase):
     @multi_users(lambda self: self.multi_users(demo=False), callback="_setup_test_data")
     def test_file_migrate(self):
-        storage = self.create_storage(sudo=False).with_user(self.uid)
+        storage = self.create_storage(sudo=False).sudo(self.uid)
         file_01 = self.create_file(storage=storage)
         self.assertEqual(file_01.storage_id, storage)
         self.assertEqual(file_01.storage_id.save_type, "database")

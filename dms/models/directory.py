@@ -52,9 +52,6 @@ class DmsDirectory(models.Model):
         comodel_name="dms.storage",
         string="Root Storage",
         ondelete="restrict",
-        compute="_compute_directory_type",
-        store=True,
-        readonly=False,
         copy=True,
     )
 
@@ -74,9 +71,6 @@ class DmsDirectory(models.Model):
         ondelete="restrict",
         auto_join=True,
         index=True,
-        store=True,
-        readonly=False,
-        compute="_compute_directory_type",
         copy=True,
     )
 
@@ -91,7 +85,10 @@ class DmsDirectory(models.Model):
         copy=False,
     )
     is_hidden = fields.Boolean(
-        string="Storage is Hidden", related="storage_id.is_hidden", readonly=True
+        string="Storage is Hidden",
+        related="storage_id.is_hidden",
+        readonly=True,
+        search="_search_is_hidden",
     )
     company_id = fields.Many2one(
         related="storage_id.company_id",
@@ -120,9 +117,6 @@ class DmsDirectory(models.Model):
         column1="did",
         column2="tid",
         string="Tags",
-        compute="_compute_tags",
-        readonly=False,
-        store=True,
     )
 
     user_star_ids = fields.Many2many(
@@ -198,6 +192,10 @@ class DmsDirectory(models.Model):
                 are created as files of the subdirectory.
                 """,
     )
+
+    @api.model
+    def _search_is_hidden(self, operator, value):
+        return [("storage_id.is_hidden", operator, value)]
 
     @api.depends("name", "complete_name")
     def _compute_display_name(self):
@@ -351,16 +349,16 @@ class DmsDirectory(models.Model):
     # View
     # ----------------------------------------------------------
 
-    @api.depends("is_root_directory")
-    def _compute_directory_type(self):
+    @api.onchange("is_root_directory")
+    def _onchange_directory_type(self):
         for record in self:
             if record.is_root_directory:
                 record.parent_id = None
             else:
                 record.root_storage_id = None
 
-    @api.depends("category_id")
-    def _compute_tags(self):
+    @api.onchange("category_id")
+    def _onchange_category(self):
         for record in self:
             tags = record.tag_ids.filtered(
                 lambda rec: not rec.category_id or rec.category_id == record.category_id

@@ -40,9 +40,9 @@ class FileTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_lock_file(self):
         file = self.create_file(sudo=True)
-        file.with_user(self.env.uid).lock()
+        file.sudo(self.env.uid).lock()
         self.assertTrue(file.is_locked)
-        file.with_user(self.env.uid).unlock()
+        file.sudo(self.env.uid).unlock()
         self.assertFalse(file.is_locked)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
@@ -55,14 +55,13 @@ class FileTestCase(DocumentsBaseCase):
     def test_rename_file(self):
         file = self.create_file(sudo=True)
         extension = file.extension
-        file.with_user(self.env.uid).write({"name": "Test.jpg"})
+        file.sudo(self.env.uid).write({"name": "Test.jpg"})
         self.assertNotEqual(file.extension, extension)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_move_file(self):
         path_names = self.file_demo_01.path_names
         self.file_demo_01.write({"directory_id": self.directory_root_demo_01.id})
-        self.file_demo_01.flush()
         self.assertNotEqual(path_names, self.file_demo_01.path_names)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
@@ -76,7 +75,6 @@ class FileTestCase(DocumentsBaseCase):
                 "parent_id": self.directory_root_demo_02.id,
             }
         )
-        self.directory_root_demo_01.flush()
         # We need to refresh as the field is not stored
         file.refresh()
         self.assertNotEqual(path_names, file.path_names)
@@ -84,7 +82,7 @@ class FileTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_unlink_file(self):
         file = self.create_file(sudo=True)
-        file.with_user(self.env.uid).unlink()
+        file.sudo(self.env.uid).unlink()
         self.assertFalse(file.exists())
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")

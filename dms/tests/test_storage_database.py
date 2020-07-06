@@ -11,7 +11,7 @@ class StorageTestCase(DocumentsBaseCase):
 
     @multi_users(lambda self: self.multi_users(demo=False), callback="_setup_test_data")
     def test_action_storage_migrate(self):
-        self.storage_demo.with_user(self.uid).action_storage_migrate()
+        self.storage_demo.sudo(self.uid).action_storage_migrate()
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_count_storage_directories(self):

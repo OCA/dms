@@ -191,7 +191,7 @@ class File(models.Model):
         return [extension.strip() for extension in extensions.split(",")]
 
     def _get_thumbnail_placeholder_name(self):
-        return self.extension and "file_%s.svg" % self.extension or ""
+        return self.extension and "file_%s.png" % self.extension or ""
 
     # ----------------------------------------------------------
     # Actions
@@ -363,8 +363,12 @@ class File(models.Model):
             if record.content_file:
                 context = {"human_size": True} if bin_size else {"base64": True}
                 record.content = record.with_context(context).content_file
-            else:
-                record.content = base64.b64encode(record.content_binary)
+            elif record.content_binary:
+                record.content = (
+                    record.content_binary
+                    if bin_size
+                    else base64.b64encode(record.content_binary)
+                )
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
@@ -428,7 +432,14 @@ class File(models.Model):
     def _get_directories_from_database(self, file_ids):
         if not file_ids:
             return self.env["dms.directory"]
-        return self.env["dms.file"].browse(file_ids).mapped("directory_id")
+        sql_query = """
+            SELECT directory_id
+            FROM dms_file
+            WHERE id in %s;
+        """
+        self.env.cr.execute(sql_query, (tuple(fid for fid in file_ids),))
+        result = {val[0] for val in self.env.cr.fetchall()}
+        return self.env["dms.directory"].browse(result)
 
     @api.model
     def _read_group_process_groupby(self, gb, query):
@@ -468,7 +479,7 @@ class File(models.Model):
         file_ids = set(result)
         directories = self._get_directories_from_database(result)
         for directory in directories - directories._filter_access("read"):
-            file_ids -= set(directory.with_user(SUPERUSER_ID).mapped("file_ids").ids)
+            file_ids -= set(directory.sudo(SUPERUSER_ID).mapped("file_ids").ids)
         return len(file_ids) if count else list(file_ids)
 
     def _filter_access(self, operation):
@@ -477,9 +488,7 @@ class File(models.Model):
             return records
         directories = self._get_directories_from_database(records.ids)
         for directory in directories - directories._filter_access("read"):
-            records -= self.browse(
-                directory.with_user(SUPERUSER_ID).mapped("file_ids").ids
-            )
+            records -= self.browse(directory.sudo(SUPERUSER_ID).mapped("file_ids").ids)
         return records
 
     def check_access(self, operation, raise_exception=False):

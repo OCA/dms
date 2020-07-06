@@ -110,10 +110,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search, args
+            model.sudo(admin_uid).search, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search, args
+            model.sudo(demo_uid).search, args
         )
 
         info_message = "\n\nSearching files with bin_size = True | "
@@ -145,10 +145,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search_read, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search_read, args
+            model.sudo(admin_uid).search_read, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search_read, args
+            model.sudo(demo_uid).search_read, args
         )
 
         info_message = "\n\nSearching and reading all fields with bin_size = True | "
@@ -179,8 +179,8 @@ class BenchmarkTestCase(common.SavepointCase):
             return model.search([], limit=limit).name_get()
 
         model_super = model.sudo()
-        model_admin = model.with_user(admin_uid)
-        model_demo = model.with_user(demo_uid)
+        model_admin = model.sudo(admin_uid)
+        model_demo = model.sudo(demo_uid)
         args_super = [
             [[model_super, 1]],
             [[model_super, 800]],
@@ -246,10 +246,10 @@ class BenchmarkTestCase(common.SavepointCase):
 
         args_super = function_args([model.sudo(), kanban_fields], [1, 80, 500, None])
         args_admin = function_args(
-            [model.with_user(admin_uid), kanban_fields], [1, 80, 500, None]
+            [model.sudo(admin_uid), kanban_fields], [1, 80, 500, None]
         )
         args_demo = function_args(
-            [model.with_user(demo_uid), kanban_fields], [1, 80, 500, None]
+            [model.sudo(demo_uid), kanban_fields], [1, 80, 500, None]
         )
 
         benchmark_data_super = ["Super"] + self._benchmark_function(
@@ -301,10 +301,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search, args
+            model.sudo(admin_uid).search, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search, args
+            model.sudo(demo_uid).search, args
         )
 
         info_message = "\n\nSearching directories with bin_size = True | "
@@ -336,10 +336,10 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search_read, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search_read, args
+            model.sudo(admin_uid).search_read, args
         )
         benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search_read, args
+            model.sudo(demo_uid).search_read, args
         )
 
         info_message = "\n\nSearching and reading all fields with bin_size = True | "
@@ -373,5 +373,5 @@ class BenchmarkTestCase(common.SavepointCase):
             model.search_read([])
 
         admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["dms.file"].with_user(admin_uid)
+        model = self.env["dms.file"].sudo(admin_uid)
         profile_function(model.with_context(bin_size=True))
