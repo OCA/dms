@@ -80,8 +80,20 @@ def migrate(env, version):
     cr = env.cr
     if openupgrade.table_exists(cr, "muk_dms_file"):
         openupgrade.rename_models(cr, _model_renames)
-        openupgrade.rename_tables(cr, _table_renames)
-        openupgrade.rename_fields(env, _field_renames)
+        for table in _table_renames:
+            if openupgrade.table_exists(cr, table[0]):
+                openupgrade.rename_tables(cr, [table])
+        for field in _field_renames:
+            if openupgrade.table_exists(cr, field[1]) and openupgrade.column_exists(
+                cr, field[1], field[2]
+            ):
+                openupgrade.rename_fields(env, [field])
+        if not openupgrade.table_exists(cr, "dms_storage"):
+            openupgrade.rename_models(cr, [("muk_dms.settings", "dms.storage")])
+            openupgrade.rename_tables(cr, [("muk_dms_settings", "dms_storage")])
+            openupgrade.rename_fields(
+                env, [("dms.directory", "dms_directory", "settings", "root_storage_id")]
+            )
         openupgrade.add_fields(env, _field_add)
         for key in _config_parameters:
             env["ir.config_parameter"].search([("key", "=", key)]).write(
