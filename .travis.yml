@@ -20,6 +20,7 @@ stages:
 jobs:
   include:
     - stage: linting
+      python: 3.6
       name: "pre-commit"
       before_install:
       install: pip install pre-commit
