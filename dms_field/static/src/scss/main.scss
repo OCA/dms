@@ -1,0 +1,45 @@
+.dms_document_controls {
+    padding: 5px 0 10px 0;
+}
+
+.dms_document_preview {
+    height: 100% !important;
+}
+
+.dms_treeview {
+    height: 100%;
+    .dms_document_container {
+        height: 100%;
+        .dms_document_row {
+            height: 100% !important;
+            .dms_document_col {
+                padding: 0;
+                width: 50% !important;
+            }
+            .dms_document_col_tree > div {
+                height: 100%;
+                border-right-width: 3px;
+                border-right-style: solid;
+                border-right-color: #888;
+                .dms_document_tree {
+                    height: 100%;
+                    .dms_content,
+                    .dms_tree {
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.vakata-context {
+    z-index: 9999;
+
+    .vakata-context-parent + ul {
+        list-style: none;
+        left: 100%;
+        margin-top: -2.58em;
+        margin-left: 2px;
+    }
+}
