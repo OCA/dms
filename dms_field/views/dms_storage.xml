@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="dms_storage_dms_tree_view">
+        <field name="name">dms.storage.dms_tree (in dms_field)</field>
+        <field name="model">dms.storage</field>
+        <field name="arch" type="xml">
+            <dms_tree>
+                <field name="name" />
+            </dms_tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="dms_storage_act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">dms.storage</field>
+        <field name="view_mode">dms_tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record model="ir.ui.menu" id="dms_storage_menu">
+        <field name="name">Documents</field>
+        <field name="parent_id" ref="dms.main_menu_dms" />
+        <field name="action" ref="dms_storage_act_window" />
+        <field name="sequence" eval="5" />
+    </record>
+    <record model="ir.ui.view" id="dms_storage_dms_tree_view">
+        <field name="name">dms.storage.dms_tree (in dms_field)</field>
+        <field name="model">dms.storage</field>
+        <field name="arch" type="xml">
+            <dms_tree>
+                <field name="name" />
+            </dms_tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="dms_directory_act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">dms.storage</field>
+        <field name="view_mode">dms_tree,form</field>
+    </record>
+</odoo>
