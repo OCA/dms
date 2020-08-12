@@ -51,7 +51,7 @@ odoo.define("dms.FileKanbanController", function(require) {
                         "/" +
                         fieldName +
                         "/" +
-                        "datas" +
+                        record.data.name +
                         "?download=true";
                 }
             },
