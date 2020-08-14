@@ -150,6 +150,13 @@ class File(models.Model):
         attachment=True, string="Content File", prefetch=False, invisible=True
     )
 
+    attachment_id = fields.Many2one(
+        comodel_name='ir.attachment',
+        string='Attachment File',
+        prefetch=False,
+        invisible=True
+    )
+
     # ----------------------------------------------------------
     # Helper
     # ----------------------------------------------------------
@@ -172,6 +179,8 @@ class File(models.Model):
         )
         if self.storage_id.save_type == "file":
             new_vals["content_file"] = self.content
+        elif self.storage_id.save_type == "attachment":
+            new_vals['attachment_id'] = self.content
         elif self.storage_id.save_type == "database":
             new_vals["content_binary"] = self.content and binary
         return new_vals
@@ -356,15 +365,20 @@ class File(models.Model):
                 mimetype = guess_mimetype(binary, default="application/octet-stream")
             record.res_mimetype = mimetype
 
-    @api.depends("content_binary", "content_file")
+    @api.depends("content_binary", "content_file", "attachment_id")
     def _compute_content(self):
         bin_size = self.env.context.get("bin_size", False)
         for record in self:
             if record.content_file:
                 context = {"human_size": True} if bin_size else {"base64": True}
                 record.content = record.with_context(context).content_file
-            else:
+            elif record.content_binary:
                 record.content = base64.b64encode(record.content_binary)
+            else:
+                context = {"human_size": True} if bin_size else {
+                    "base64": True}
+                record.content = \
+                    record.with_context(context).attachment_id.datas
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):

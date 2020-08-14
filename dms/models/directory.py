@@ -199,6 +199,13 @@ class DmsDirectory(models.Model):
                 """,
     )
 
+    ir_model_id = fields.Many2one(
+        comodel_name='ir.model',
+        string='Attachment Model',
+        required=False
+    )
+
+
     @api.depends("name", "complete_name")
     def _compute_display_name(self):
         if not self.env.context.get("directory_short_name", False):

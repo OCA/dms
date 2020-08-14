@@ -473,6 +473,9 @@
                             <field name="starred" widget="boolean_favorite" />
                         </group>
                     </group>
+                    <group>
+                        <field name="ir_model_id"/>
+                    </group>
                     <notebook>
                         <page name="page_directories" string="Subdirectories">
                             <field

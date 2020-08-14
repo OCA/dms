@@ -22,7 +22,8 @@ class Storage(models.Model):
     name = fields.Char(string="Name", required=True)
 
     save_type = fields.Selection(
-        selection=[("database", _("Database")), ("file", _("Filestore"))],
+        selection=[("database", _("Database")), ("file", _("Filestore")),
+                   ("attachment", _("Attachment"))],
         string="Save Type",
         default="database",
         required=True,
