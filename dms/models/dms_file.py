@@ -154,7 +154,8 @@ class File(models.Model):
         comodel_name='ir.attachment',
         string='Attachment File',
         prefetch=False,
-        invisible=True
+        invisible=True,
+        ondelete = "cascade"
     )
 
     # ----------------------------------------------------------

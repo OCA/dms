@@ -205,6 +205,12 @@ class DmsDirectory(models.Model):
         required=False
     )
 
+    record_sub_directory = fields.Boolean(
+        string='Record Sub Directoty',
+        required=False,
+        default=True,
+    )
+
 
     @api.depends("name", "complete_name")
     def _compute_display_name(self):

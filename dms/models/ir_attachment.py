@@ -8,13 +8,29 @@ class IrAttachment(models.Model):
     @api.model
     def create(self, vals):
         attachment_id = super(IrAttachment, self).create(vals)
-        category_id = self.env['dms.directory'].search([
+        directory_id = self.env['dms.directory'].search([
             ('ir_model_id', '=', vals['res_model'])])
 
-        if category_id:
+        if directory_id and directory_id.record_sub_directory:
+            save_directory_id = self.env['dms.directory'].search([
+                ('name', '=', attachment_id.res_name)])
+            if not save_directory_id:
+                save_directory_id = self.env['dms.directory'].create({
+                    'name': attachment_id.res_name.replace('/','-'),
+                    'parent_id': directory_id.id,
+                    'storage_id': directory_id.root_storage_id.id,
+                })
+
             self.env['dms.file'].create({
                 'name': vals['name'],
-                'directory_id': category_id.id,
+                'directory_id': save_directory_id.id,
+                'attachment_id': attachment_id.id,
+            })
+
+        elif directory_id:
+            self.env['dms.file'].create({
+                'name': vals['name'],
+                'directory_id': directory_id.id,
                 'attachment_id': attachment_id.id,
             })
 
