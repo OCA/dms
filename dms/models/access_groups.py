@@ -30,80 +30,47 @@ class DmsAccessGroups(models.Model):
     count_directories = fields.Integer(
         compute="_compute_count_directories", string="Count Directories"
     )
+    parent_group_id = fields.Many2one(
+        comodel_name="dms.access.group",
+        string="Parent Group",
+        ondelete="cascade",
+        auto_join=True,
+        index=True,
+    )
+
+    child_group_ids = fields.One2many(
+        comodel_name="dms.access.group",
+        inverse_name="parent_group_id",
+        string="Child Groups",
+    )
+    group_ids = fields.Many2many(
+        comodel_name="res.groups",
+        relation="dms_access_group_groups_rel",
+        column1="gid",
+        column2="rid",
+        string="Groups",
+    )
+    explicit_user_ids = fields.Many2many(
+        comodel_name="res.users",
+        relation="dms_access_group_explicit_users_rel",
+        column1="gid",
+        column2="uid",
+        string="Explicit Users",
+    )
+    users = fields.Many2many(
+        comodel_name="res.users",
+        relation="dms_access_group_users_rel",
+        column1="gid",
+        column2="uid",
+        string="Group Users",
+        compute="_compute_users",
+        store=True,
+    )
 
     @api.depends("directory_ids")
     def _compute_count_directories(self):
         for record in self:
             record.count_directories = len(record.directory_ids)
-
-    @api.model
-    def _add_magic_fields(self):
-        super(DmsAccessGroups, self)._add_magic_fields()
-
-        def add(name, field):
-            if name not in self._fields:
-                self._add_field(name, field)
-
-        add(
-            "parent_group_id",
-            fields.Many2one(
-                _module=self._module,
-                comodel_name=self._name,
-                string="Parent Group",
-                ondelete="cascade",
-                auto_join=True,
-                index=True,
-                automatic=True,
-            ),
-        )
-        add(
-            "child_group_ids",
-            fields.One2many(
-                _module=self._module,
-                comodel_name=self._name,
-                inverse_name="parent_group_id",
-                string="Child Groups",
-                automatic=True,
-            ),
-        )
-        add(
-            "group_ids",
-            fields.Many2many(
-                _module=self._module,
-                comodel_name="res.groups",
-                relation="%s_groups_rel" % (self._table),
-                column1="gid",
-                column2="rid",
-                string="Groups",
-                automatic=True,
-            ),
-        )
-        add(
-            "explicit_user_ids",
-            fields.Many2many(
-                _module=self._module,
-                comodel_name="res.users",
-                relation="%s_explicit_users_rel" % (self._table),
-                column1="gid",
-                column2="uid",
-                string="Explicit Users",
-                automatic=True,
-            ),
-        )
-        add(
-            "users",
-            fields.Many2many(
-                _module=self._module,
-                comodel_name="res.users",
-                relation="%s_users_rel" % (self._table),
-                column1="gid",
-                column2="uid",
-                string="Group Users",
-                compute="_compute_users",
-                store=True,
-                automatic=True,
-            ),
-        )
 
     _sql_constraints = [
         ("name_uniq", "unique (name)", "The name of the group must be unique!")
