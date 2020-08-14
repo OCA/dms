@@ -22,7 +22,11 @@ class Storage(models.Model):
     name = fields.Char(string="Name", required=True)
 
     save_type = fields.Selection(
-        selection=[("database", _("Database")), ("file", _("Filestore"))],
+        selection=[
+            ("database", _("Database")),
+            ("file", _("Filestore")),
+            ("attachment", _("Attachment")),
+        ],
         string="Save Type",
         default="database",
         required=True,
@@ -79,6 +83,8 @@ class Storage(models.Model):
     count_storage_files = fields.Integer(
         compute="_compute_count_storage_files", string="Count Files"
     )
+
+    model_id = fields.Many2one("ir.model", auto_join=True)
 
     # ----------------------------------------------------------
     # Actions

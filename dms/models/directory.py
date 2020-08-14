@@ -271,6 +271,9 @@ class DmsDirectory(models.Model):
         if self.env.user.has_group("base.group_public"):
             res = True
         return res
+    record_ref = fields.Reference(
+        string="Record Referenced", selection="_select_reference", readonly=True,
+    )
 
     @api.model
     def _search_is_hidden(self, operator, value):
@@ -654,3 +657,7 @@ class DmsDirectory(models.Model):
                 DmsDirectory, self.sudo().search([("id", "child_of", self.ids)])
             ).unlink()
         return super().unlink()
+
+    def _select_reference(self):
+        model_ids = self.env["ir.model"].search([])
+        return [(r["model"], r["name"]) for r in model_ids] + [("", "")]

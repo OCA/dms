@@ -479,6 +479,12 @@
                             <field name="starred" widget="boolean_favorite" />
                         </group>
                     </group>
+                    <group>
+                        <field
+                            name="record_ref"
+                            attrs="{'invisible': [('file_ids', '=', [])]}"
+                        />
+                    </group>
                     <notebook>
                         <page name="page_directories" string="Subdirectories">
                             <field

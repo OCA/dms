@@ -416,6 +416,9 @@
                             />
                         </group>
                     </group>
+                    <group>
+                        <field name="record_ref" />
+                    </group>
                     <notebook>
                         <page name="page_meta" string="Meta Information">
                             <group>

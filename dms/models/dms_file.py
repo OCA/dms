@@ -186,6 +186,17 @@ class File(models.Model):
                         if directory_item.id == self.directory_id.id:
                             return True
         return res
+    attachment_id = fields.Many2one(
+        comodel_name="ir.attachment",
+        string="Attachment File",
+        prefetch=False,
+        invisible=True,
+        ondelete="cascade",
+    )
+
+    record_ref = fields.Reference(
+        string="Record Referenced", selection="_select_reference", readonly=True,
+    )
 
     # ----------------------------------------------------------
     # Helper
@@ -209,6 +220,8 @@ class File(models.Model):
         )
         if self.storage_id.save_type == "file":
             new_vals["content_file"] = self.content
+        elif self.storage_id.save_type == "attachment":
+            new_vals["attachment_id"] = self.content
         elif self.storage_id.save_type == "database":
             new_vals["content_binary"] = self.content and binary
         return new_vals
@@ -393,7 +406,7 @@ class File(models.Model):
                 mimetype = guess_mimetype(binary, default="application/octet-stream")
             record.res_mimetype = mimetype
 
-    @api.depends("content_binary", "content_file")
+    @api.depends("content_binary", "content_file", "attachment_id")
     def _compute_content(self):
         bin_size = self.env.context.get("bin_size", False)
         for record in self:
@@ -406,6 +419,9 @@ class File(models.Model):
                     if bin_size
                     else base64.b64encode(record.content_binary)
                 )
+            else:
+                context = {"human_size": True} if bin_size else {"base64": True}
+                record.content = record.with_context(context).attachment_id.datas
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
@@ -617,6 +633,43 @@ class File(models.Model):
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
 
+    def _create_model_attachment(self, vals):
+
+        if "default_directory_id" in self._context:
+            default_directory_id = (
+                self.env["dms.directory"]
+                .with_user(SUPERUSER_ID)
+                .browse(self._context["default_directory_id"])
+            )
+
+            vals["directory_id"] = default_directory_id.id
+
+        directory_id = (
+            self.env["dms.directory"]
+            .with_user(SUPERUSER_ID)
+            .browse(vals["directory_id"])
+        )
+
+        if directory_id and directory_id.record_ref:
+
+            if directory_id.record_ref:
+                model_name = directory_id.record_ref._name
+                model_id = directory_id.record_ref.id
+
+                attachment_id = self.env["ir.attachment"].create(
+                    {
+                        "name": vals["name"],
+                        "datas": vals["content"],
+                        "res_model": model_name,
+                        "res_id": model_id,
+                        "dms_file": True,
+                    }
+                )
+
+                vals["attachment_id"] = attachment_id.id
+                vals["record_ref"] = "{},{}".format(model_name, model_id)
+                del vals["content"]
+
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
@@ -642,6 +695,13 @@ class File(models.Model):
         # We need to do sudo because we don't know when the related groups
         # will be deleted
         return super(File, self.sudo()).unlink()
+
+    @api.model
+    def create(self, vals):
+        if "record_ref" not in vals:
+            self._create_model_attachment(vals)
+
+        return super(File, self).create(vals)
 
     # ----------------------------------------------------------
     # Locking fields and functions
@@ -691,3 +751,7 @@ class File(models.Model):
                 )
             else:
                 record.update({"is_locked": False, "is_lock_editor": False})
+
+    def _select_reference(self):
+        model_ids = self.env["ir.model"].search([])
+        return [(r["model"], r["name"]) for r in model_ids] + [("", "")]
