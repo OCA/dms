@@ -155,7 +155,7 @@ class File(models.Model):
         string='Attachment File',
         prefetch=False,
         invisible=True,
-        ondelete = "cascade"
+        ondelete="cascade"
     )
 
     # ----------------------------------------------------------
