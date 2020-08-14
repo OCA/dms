@@ -53,7 +53,7 @@
             <t t-set="classes">o_onboarding_orange</t>
             <t
                 t-set="bg_image"
-            >/dms/static/src/img/banner/documents_onboarding_directory.png</t>
+            >/dms/static/lib/img/banner/documents_onboarding_directory.png</t>
             <t t-set="close_method">action_close_documents_onboarding</t>
             <t t-set="close_model">res.company</t>
             <t t-set="text_completed">The configuration is done!</t>
@@ -76,7 +76,7 @@
             <t t-set="classes">o_onboarding_blue</t>
             <t
                 t-set="bg_image"
-            >/dms/static/src/img/banner/documents_onboarding_file.png</t>
+            >/dms/static/lib/img/banner/documents_onboarding_file.png</t>
             <t t-set="close_method">action_close_documents_onboarding</t>
             <t t-set="close_model">res.company</t>
             <t t-set="text_completed">The configuration is done!</t>
