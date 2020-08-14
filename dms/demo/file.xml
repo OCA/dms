@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo noupdate="1">
+    <record id="file_01_demo" model="dms.file">
+        <field name="name">Sydney.jpg</field>
+        <field name="color" eval="1" />
+        <field name="directory_id" ref="dms.directory_06_demo" />
+        <field name="content" type="base64" file="dms/demo/data/image01.jpg" />
+        <field
+            name="tag_ids"
+            eval="[(6, 0, [ref('dms.tag_01_demo'), ref('dms.tag_05_demo')])]"
+        />
+    </record>
+    <record id="file_02_demo" model="dms.file">
+        <field name="name">Logo_01.jpg</field>
+        <field name="color" eval="1" />
+        <field name="directory_id" ref="dms.directory_07_demo" />
+        <field name="content" type="base64" file="dms/demo/data/image02.jpg" />
+    </record>
+    <record id="file_03_demo" model="dms.file">
+        <field name="name">Logo_02.jpg</field>
+        <field name="color" eval="1" />
+        <field name="directory_id" ref="dms.directory_07_demo" />
+        <field name="category_id" ref="dms.category_02_demo" />
+        <field name="content" type="base64" file="dms/demo/data/image03.jpg" />
+    </record>
+    <record id="file_04_demo" model="dms.file">
+        <field name="name">Logo_03.jpg</field>
+        <field name="color" eval="1" />
+        <field name="directory_id" ref="dms.directory_07_demo" />
+        <field name="content" type="base64" file="dms/demo/data/image04.jpg" />
+    </record>
+    <record id="file_05_demo" model="dms.file">
+        <field name="name">Logo.svg</field>
+        <field name="color" eval="1" />
+        <field name="directory_id" ref="dms.directory_10_demo" />
+        <field name="category_id" ref="dms.category_03_demo" />
+        <field name="content" type="base64" file="dms/demo/data/vector.svg" />
+    </record>
+    <record id="file_06_demo" model="dms.file">
+        <field name="name">Loop_01.wav</field>
+        <field name="color" eval="1" />
+        <field name="directory_id" ref="dms.directory_09_demo" />
+        <field name="content" type="base64" file="dms/demo/data/audio01.wav" />
+        <field
+            name="tag_ids"
+            eval="[(6, 0, [ref('dms.tag_01_demo'), ref('dms.tag_03_demo')])]"
+        />
+    </record>
+    <record id="file_07_demo" model="dms.file">
+        <field name="name">Loop_02.wav</field>
+        <field name="color" eval="2" />
+        <field name="directory_id" ref="dms.directory_09_demo" />
+        <field name="content" type="base64" file="dms/demo/data/audio02.wav" />
+        <field
+            name="tag_ids"
+            eval="[(6, 0, [ref('dms.tag_01_demo'), ref('dms.tag_03_demo')])]"
+        />
+    </record>
+    <record id="file_08_demo" model="dms.file">
+        <field name="name">Loop_03.mp3</field>
+        <field name="color" eval="2" />
+        <field name="directory_id" ref="dms.directory_09_demo" />
+        <field name="content" type="base64" file="dms/demo/data/audio03.mp3" />
+        <field
+            name="tag_ids"
+            eval="[(6, 0, [ref('dms.tag_01_demo'), ref('dms.tag_03_demo')])]"
+        />
+    </record>
+    <record id="file_09_demo" model="dms.file">
+        <field name="name">Loop_04.mp3</field>
+        <field name="color" eval="2" />
+        <field name="directory_id" ref="dms.directory_09_demo" />
+        <field name="content" type="base64" file="dms/demo/data/audio04.mp3" />
+        <field
+            name="tag_ids"
+            eval="[(6, 0, [ref('dms.tag_01_demo'), ref('dms.tag_03_demo')])]"
+        />
+    </record>
+    <record id="file_10_demo" model="dms.file">
+        <field name="name">Video.mp4</field>
+        <field name="color" eval="3" />
+        <field name="directory_id" ref="dms.directory_08_demo" />
+        <field name="content" type="base64" file="dms/demo/data/video.mp4" />
+        <field
+            name="tag_ids"
+            eval="[(6, 0, [ref('dms.tag_02_demo'), ref('dms.tag_03_demo')])]"
+        />
+    </record>
+    <record id="file_11_demo" model="dms.file">
+        <field name="name">Mail_01.eml</field>
+        <field name="color" eval="4" />
+        <field name="directory_id" ref="dms.directory_11_demo" />
+        <field name="content" type="base64" file="dms/demo/data/mail01.eml" />
+        <field name="category_id" ref="dms.category_03_demo" />
+    </record>
+    <record id="file_12_demo" model="dms.file">
+        <field name="name">Mail_02.eml</field>
+        <field name="color" eval="4" />
+        <field name="directory_id" ref="dms.directory_11_demo" />
+        <field name="content" type="base64" file="dms/demo/data/mail02.eml" />
+    </record>
+    <record id="file_13_demo" model="dms.file">
+        <field name="name">Text.txt</field>
+        <field name="directory_id" ref="dms.directory_12_demo" />
+        <field name="content" type="base64" file="dms/demo/data/text.txt" />
+        <field
+            name="tag_ids"
+            eval="[(6, 0, [ref('dms.tag_05_demo'), ref('dms.tag_06_demo')])]"
+        />
+    </record>
+    <record id="file_14_demo" model="dms.file">
+        <field name="name">ASPECTJ.aj</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code01.aj" />
+        <field name="category_id" ref="dms.category_01_demo" />
+    </record>
+    <record id="file_15_demo" model="dms.file">
+        <field name="name">Bash.sh</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code02.sh" />
+    </record>
+    <record id="file_16_demo" model="dms.file">
+        <field name="name">C.c</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code03.c" />
+    </record>
+    <record id="file_17_demo" model="dms.file">
+        <field name="name">Cplusplus.cc</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code04.cc" />
+    </record>
+    <record id="file_18_demo" model="dms.file">
+        <field name="name">CSharp.cs</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code05.cs" />
+    </record>
+    <record id="file_19_demo" model="dms.file">
+        <field name="name">COBOL.cbl</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code06.cbl" />
+    </record>
+    <record id="file_20_demo" model="dms.file">
+        <field name="name">CoffeeScript.coffee</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code07.coffee" />
+    </record>
+    <record id="file_21_demo" model="dms.file">
+        <field name="name">Fortran.f</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code08.f" />
+    </record>
+    <record id="file_22_demo" model="dms.file">
+        <field name="name">Go.go</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code09.go" />
+    </record>
+    <record id="file_23_demo" model="dms.file">
+        <field name="name">Groovy.groovy</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code10.groovy" />
+    </record>
+    <record id="file_24_demo" model="dms.file">
+        <field name="name">Java.java</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code11.java" />
+    </record>
+    <record id="file_25_demo" model="dms.file">
+        <field name="name">Scala.sc</field>
+        <field name="directory_id" ref="dms.directory_13_demo" />
+        <field name="content" type="base64" file="dms/demo/data/code12.sc" />
+    </record>
+    <record id="file_26_demo" model="dms.file">
+        <field name="name">Sample.md</field>
+        <field name="directory_id" ref="dms.directory_04_demo" />
+        <field name="content" type="base64" file="dms/demo/data/markdown.md" />
+    </record>
+    <record id="file_27_demo" model="dms.file">
+        <field name="name">Document_05.pdf</field>
+        <field name="color" eval="1" />
+        <field name="directory_id" ref="dms.directory_12_demo" />
+        <field name="content" type="base64" file="dms/demo/data/document01.pdf" />
+    </record>
+    <record id="file_28_demo" model="dms.file">
+        <field name="name">Slide_01.odp</field>
+        <field name="directory_id" ref="dms.directory_14_demo" />
+        <field name="content" type="base64" file="dms/demo/data/slide01.odp" />
+    </record>
+    <record id="file_29_demo" model="dms.file">
+        <field name="name">Slide_02.ppt</field>
+        <field name="directory_id" ref="dms.directory_14_demo" />
+        <field name="content" type="base64" file="dms/demo/data/slide02.ppt" />
+    </record>
+    <record id="file_30_demo" model="dms.file">
+        <field name="name">Document_02.doc</field>
+        <field name="color" eval="5" />
+        <field name="directory_id" ref="dms.directory_12_demo" />
+        <field name="content" type="base64" file="dms/demo/data/document02.doc" />
+    </record>
+    <record id="file_31_demo" model="dms.file">
+        <field name="name">Document_03.odt</field>
+        <field name="color" eval="5" />
+        <field name="directory_id" ref="dms.directory_12_demo" />
+        <field name="content" type="base64" file="dms/demo/data/document03.odt" />
+    </record>
+    <record id="file_32_demo" model="dms.file">
+        <field name="name">Sheet_01.xls</field>
+        <field name="color" eval="6" />
+        <field name="directory_id" ref="dms.directory_03_demo" />
+        <field name="content" type="base64" file="dms/demo/data/sheet01.xls" />
+    </record>
+    <record id="file_33_demo" model="dms.file">
+        <field name="name">Sheet_02.csv</field>
+        <field name="color" eval="6" />
+        <field name="directory_id" ref="dms.directory_03_demo" />
+        <field name="content" type="base64" file="dms/demo/data/sheet02.csv" />
+    </record>
+    <record id="file_34_demo" model="dms.file">
+        <field name="name">Sheet_03.ods</field>
+        <field name="color" eval="6" />
+        <field name="directory_id" ref="dms.directory_03_demo" />
+        <field name="content" type="base64" file="dms/demo/data/sheet03.ods" />
+    </record>
+    <record id="file_35_demo" model="dms.file">
+        <field name="name">Document_04.rtf</field>
+        <field name="color" eval="6" />
+        <field name="directory_id" ref="dms.directory_03_demo" />
+        <field name="content" type="base64" file="dms/demo/data/document04.rtf" />
+    </record>
+    <record id="file_36_demo" model="dms.file">
+        <field name="name">Text.rst</field>
+        <field name="color" eval="3" />
+        <field name="directory_id" ref="dms.directory_02_demo" />
+        <field name="content" type="base64" file="dms/demo/data/text.rst" />
+    </record>
+</odoo>

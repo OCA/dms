@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    Copyright 2020 Creu Blanca
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo>
+    <record id="category_dms_security" model="ir.module.category">
+        <field name="name">Documents</field>
+    </record>
+    <record id="group_dms_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="category_dms_security" />
+    </record>
+    <record id="group_dms_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="implied_ids" eval="[(4, ref('group_dms_user'))]" />
+        <field name="category_id" ref="category_dms_security" />
+        <field
+            name="users"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+    </record>
+    <record id="rule_multi_company_storage" model="ir.rule">
+        <field name="name">DMS Storage multi-company</field>
+        <field name="model_id" ref="model_dms_storage" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+    <record id="rule_multi_company_directory" model="ir.rule">
+        <field name="name">DMS Directory multi-company</field>
+        <field name="model_id" ref="model_dms_directory" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+    <record id="rule_multi_company_file" model="ir.rule">
+        <field name="name">File multi-company</field>
+        <field name="model_id" ref="model_dms_file" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+    <record id="rule_security_groups_user" model="ir.rule">
+        <field name="name">User can only edit and delete their own groups.</field>
+        <field name="model_id" ref="model_dms_access_group" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field name="domain_force">[('create_uid','=',user.id)]</field>
+    </record>
+    <record id="rule_security_groups_manager" model="ir.rule">
+        <field name="name">Admins can edit and delete all groups.</field>
+        <field name="model_id" ref="model_dms_access_group" />
+        <field name="groups" eval="[(4, ref('base.group_erp_manager'))]" />
+        <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field name="domain_force">[(1 ,'=', 1)]</field>
+    </record>
+</odoo>

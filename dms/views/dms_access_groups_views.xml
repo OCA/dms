@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo>
+    <record id="view_dms_access_groups_tree" model="ir.ui.view">
+        <field name="name">dms_access_groups.tree</field>
+        <field name="model">dms.access.group</field>
+        <field name="arch" type="xml">
+            <tree string="Groups">
+                <field name="name" />
+                <field name="perm_read" />
+                <field name="perm_create" />
+                <field name="perm_write" />
+                <field name="perm_unlink" />
+                <field name="count_users" />
+                <field name="count_directories" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_dms_access_groups_form" model="ir.ui.view">
+        <field name="name">dms_access.group.form</field>
+        <field name="model">dms.access.group</field>
+        <field name="arch" type="xml">
+            <form string="Group">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="group" string="Group">
+                        <group>
+                            <field name="parent_group_id" />
+                        </group>
+                        <group>
+                            <field name="count_users" />
+                        </group>
+                    </group>
+                    <group string="Settings">
+                        <group>
+                            <field name="perm_create" />
+                            <field name="perm_read" />
+                        </group>
+                        <group>
+                            <field name="perm_write" />
+                            <field name="perm_unlink" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="users" string="Users">
+                            <field name="users">
+                                <tree string="Users">
+                                    <field name="name" />
+                                    <field name="login" />
+                                    <field name="lang" />
+                                    <field name="login_date" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="groups" string="Groups">
+                            <field name="group_ids">
+                                <tree string="Groups">
+                                    <field name="name" />
+                                    <field name="comment" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="extra_users" string="Explicit Users">
+                            <field name="explicit_user_ids">
+                                <tree string="Explicit Users">
+                                    <field name="name" />
+                                    <field name="login" />
+                                    <field name="lang" />
+                                    <field name="login_date" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="childs" string="Child Groups">
+                            <field name="child_group_ids">
+                                <tree string="Groups">
+                                    <field name="name" />
+                                    <field name="perm_read" />
+                                    <field name="perm_create" />
+                                    <field name="perm_write" />
+                                    <field name="perm_unlink" />
+                                    <field name="count_users" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Directories">
+                            <field name="directory_ids">
+                                <tree string="Directories">
+                                    <field name="name" />
+                                    <field
+                                        name="count_directories"
+                                        string="Directories"
+                                    />
+                                    <field name="count_files" string="Files" />
+                                    <field name="size" widget="binary_size" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_dms_access_groups" model="ir.actions.act_window">
+        <field name="name">Access Groups</field>
+        <field name="res_model">dms.access.group</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_dms_access_groups_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_dms_access_groups_form')})]"
+        />
+    </record>
+    <menuitem
+        id="menu_dms_access_groups"
+        name="Access Groups"
+        parent="dms.cat_menu_dms_config_system"
+        action="action_dms_access_groups"
+    />
+</odoo>
