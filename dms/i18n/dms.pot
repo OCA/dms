@@ -41,12 +41,12 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
-msgid "/dms/static/src/img/banner/documents_onboarding_directory.png"
+msgid "/dms/static/lib/img/banner/documents_onboarding_directory.png"
 msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
-msgid "/dms/static/src/img/banner/documents_onboarding_file.png"
+msgid "/dms/static/lib/img/banner/documents_onboarding_file.png"
 msgstr ""
 
 #. module: dms
