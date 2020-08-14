@@ -178,6 +178,30 @@ class File(models.Model):
                             return True
         return res
 
+    attachment_id = fields.Many2one(
+        comodel_name="ir.attachment",
+        string="Attachment File",
+        prefetch=False,
+        invisible=True,
+        ondelete="cascade",
+    )
+    res_model = fields.Char(string="Linked attachments model")
+    res_id = fields.Integer(string="Linked attachments record ID")
+    record_ref = fields.Reference(
+        string="Record Referenced",
+        compute="_compute_record_ref",
+        selection=[],
+        readonly=True,
+        store=False,
+    )
+    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
+
+    @api.depends("res_model", "res_id")
+    def _compute_record_ref(self):
+        for record in self:
+            if record.res_model and record.res_id:
+                record.record_ref = "{},{}".format(record.res_model, record.res_id)
+
     def get_human_size(self):
         return human_size(self.size)
 
@@ -207,9 +231,9 @@ class File(models.Model):
                 "size": binary and len(binary) or 0,
             }
         )
-        if self.storage_id.save_type == "file":
+        if self.storage_id.save_type in ["file", "attachment"]:
             new_vals["content_file"] = self.content
-        elif self.storage_id.save_type == "database":
+        else:
             new_vals["content_binary"] = self.content and binary
         return new_vals
 
@@ -393,15 +417,22 @@ class File(models.Model):
                 mimetype = guess_mimetype(binary, default="application/octet-stream")
             record.res_mimetype = mimetype
 
-    @api.depends("content_binary", "content_file")
+    @api.depends("content_binary", "content_file", "attachment_id")
     def _compute_content(self):
         bin_size = self.env.context.get("bin_size", False)
         for record in self:
             if record.content_file:
                 context = {"human_size": True} if bin_size else {"base64": True}
                 record.content = record.with_context(context).content_file
-            else:
-                record.content = base64.b64encode(record.content_binary)
+            elif record.content_binary:
+                record.content = (
+                    record.content_binary
+                    if bin_size
+                    else base64.b64encode(record.content_binary)
+                )
+            elif record.attachment_id:
+                context = {"human_size": True} if bin_size else {"base64": True}
+                record.content = record.with_context(context).attachment_id.datas
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
@@ -509,7 +540,7 @@ class File(models.Model):
         file_ids = set(result)
         directories = self._get_directories_from_database(result)
         for directory in directories - directories._filter_access("read"):
-            file_ids -= set(directory.with_user(SUPERUSER_ID).mapped("file_ids").ids)
+            file_ids -= set(directory.sudo().mapped("file_ids").ids)
         return len(file_ids) if count else list(file_ids)
 
     def _filter_access(self, operation):
@@ -518,9 +549,13 @@ class File(models.Model):
             return records
         directories = self._get_directories_from_database(records.ids)
         for directory in directories - directories._filter_access("read"):
+<<<<<<< HEAD
             records -= self.browse(
                 directory.with_user(SUPERUSER_ID).mapped("file_ids").ids
             )
+=======
+            records -= self.browse(directory.sudo().mapped("file_ids").ids)
+>>>>>>> [IMP] dms: Attachment integration
         return records
 
     def check_access(self, operation, raise_exception=False):
@@ -608,6 +643,28 @@ class File(models.Model):
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
 
+    def _create_model_attachment(self, vals):
+        res_vals = vals.copy()
+        directory = self.env["dms.directory"].sudo().browse(res_vals["directory_id"])
+        if directory and directory.res_model and directory.res_id:
+            attachment = (
+                self.env["ir.attachment"]
+                .with_context(dms_file=True)
+                .create(
+                    {
+                        "name": vals["name"],
+                        "datas": vals["content"],
+                        "res_model": directory.res_model,
+                        "res_id": directory.res_id,
+                    }
+                )
+            )
+            res_vals["attachment_id"] = attachment.id
+            res_vals["res_model"] = attachment.res_model
+            res_vals["res_id"] = attachment.res_id
+            del res_vals["content"]
+        return res_vals
+
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
@@ -633,6 +690,15 @@ class File(models.Model):
         # We need to do sudo because we don't know when the related groups
         # will be deleted
         return super(File, self.sudo()).unlink()
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        new_vals_list = []
+        for vals in vals_list:
+            if "res_model" not in vals and "res_id" not in vals:
+                vals = self._create_model_attachment(vals)
+            new_vals_list.append(vals)
+        return super(File, self).create(new_vals_list)
 
     # ----------------------------------------------------------
     # Locking fields and functions
