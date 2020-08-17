@@ -476,6 +476,7 @@
                     <group>
                         <field name="ir_model_id"/>
                         <field name="record_sub_directory"/>
+                        <field name="record_ref"/>
                     </group>
                     <notebook>
                         <page name="page_directories" string="Subdirectories">

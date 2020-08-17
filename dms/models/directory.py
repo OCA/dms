@@ -211,6 +211,12 @@ class DmsDirectory(models.Model):
         default=True,
     )
 
+    record_ref = fields.Reference(
+        string='Record',
+        selection='_select_reference',
+        readonly=True,
+    )
+
 
     @api.depends("name", "complete_name")
     def _compute_display_name(self):
@@ -570,3 +576,7 @@ class DmsDirectory(models.Model):
                 DmsDirectory, self.sudo().search([("id", "child_of", self.ids)])
             ).unlink()
         return super().unlink()
+
+    def _select_reference(self):
+        model_ids = self.env['ir.model'].search([])
+        return [(r['model'], r['name']) for r in model_ids] + [('', '')]

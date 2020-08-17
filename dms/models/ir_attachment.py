@@ -19,6 +19,8 @@ class IrAttachment(models.Model):
                     'name': attachment_id.res_name.replace('/','-'),
                     'parent_id': directory_id.id,
                     'storage_id': directory_id.root_storage_id.id,
+                    'record_ref': "{},{}".format(
+                        attachment_id.res_model, attachment_id.res_id),
                 })
 
             self.env['dms.file'].create({
