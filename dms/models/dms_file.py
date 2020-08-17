@@ -158,6 +158,12 @@ class File(models.Model):
         ondelete="cascade"
     )
 
+    record_ref = fields.Reference(
+        string='Record',
+        selection='_select_reference',
+        readonly=True,
+    )
+
     # ----------------------------------------------------------
     # Helper
     # ----------------------------------------------------------
@@ -649,3 +655,7 @@ class File(models.Model):
                 )
             else:
                 record.update({"is_locked": False, "is_lock_editor": False})
+
+    def _select_reference(self):
+        model_ids = self.env['ir.model'].search([])
+        return [(r['model'], r['name']) for r in model_ids] + [('', '')]

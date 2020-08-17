@@ -25,6 +25,8 @@ class IrAttachment(models.Model):
                 'name': vals['name'],
                 'directory_id': save_directory_id.id,
                 'attachment_id': attachment_id.id,
+                'record_ref': "{},{}".format(
+                    attachment_id.res_model, attachment_id.res_id),
             })
 
         elif directory_id:
@@ -32,6 +34,8 @@ class IrAttachment(models.Model):
                 'name': vals['name'],
                 'directory_id': directory_id.id,
                 'attachment_id': attachment_id.id,
+                'record_ref': "{},{}".format(
+                    attachment_id.res_model, attachment_id.res_id),
             })
 
         return attachment_id
