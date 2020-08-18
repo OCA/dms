@@ -474,9 +474,18 @@
                         </group>
                     </group>
                     <group>
-                        <field name="ir_model_id"/>
-                        <field name="record_sub_directory"/>
-                        <field name="record_ref"/>
+                        <field
+                            name="ir_model_id"
+                            attrs="{'invisible': [('record_ref', '!=', False)]}"
+                        />
+                        <field
+                            name="record_sub_directory"
+                            attrs="{'invisible': [('ir_model_id', '=', False)]}"
+                        />
+                        <field
+                            name="record_ref"
+                            attrs="{'invisible': [('file_ids', '=', [])]}"
+                        />
                     </group>
                     <notebook>
                         <page name="page_directories" string="Subdirectories">
