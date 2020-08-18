@@ -21,42 +21,57 @@ class IrAttachment(models.Model):
 
     @api.model
     def create(self, vals):
-        attachment_id = super(IrAttachment, self).create(vals)
-        directory_id = self.env['dms.directory'].search([
-            ('ir_model_id', '=', vals['res_model'])])
+        if "dms_file" in vals and vals["dms_file"]:
+            del vals["dms_file"]
+            return super(IrAttachment, self).create(vals)
+        else:
+            attachment_id = super(IrAttachment, self).create(vals)
+            directory_id = self.env["dms.directory"].search(
+                [("ir_model_id", "=", vals["res_model"])]
+            )
 
-        if directory_id and directory_id.record_sub_directory:
-            save_directory_id = self.env['dms.directory'].search([
-                ('name', '=', attachment_id.res_name)])
-            if not save_directory_id:
-                save_directory_id = self.env['dms.directory'].create({
-                    'name': attachment_id.res_name.replace('/', '-'),
-                    'parent_id': directory_id.id,
-                    'storage_id': directory_id.root_storage_id.id,
-                    'record_ref': "{},{}".format(
-                        attachment_id.res_model, attachment_id.res_id),
-                })
+            if directory_id and directory_id.record_sub_directory:
+                save_directory_id = self.env["dms.directory"].search(
+                    [("name", "=", attachment_id.res_name.replace("/", "-"))]
+                )
+                if not save_directory_id:
+                    save_directory_id = self.env["dms.directory"].create(
+                        {
+                            "name": attachment_id.res_name.replace("/", "-"),
+                            "parent_id": directory_id.id,
+                            "storage_id": directory_id.root_storage_id.id,
+                            "record_ref": "{},{}".format(
+                                attachment_id.res_model, attachment_id.res_id
+                            ),
+                        }
+                    )
 
-            file_name = self._dms_file_name(save_directory_id, vals['name'])
+                file_name = self._dms_file_name(save_directory_id, vals["name"])
 
-            self.env['dms.file'].create({
-                'name': file_name,
-                'directory_id': save_directory_id.id,
-                'attachment_id': attachment_id.id,
-                'record_ref': "{},{}".format(
-                    attachment_id.res_model, attachment_id.res_id),
-            })
+                self.env["dms.file"].create(
+                    {
+                        "name": file_name,
+                        "directory_id": save_directory_id.id,
+                        "attachment_id": attachment_id.id,
+                        "record_ref": "{},{}".format(
+                            attachment_id.res_model, attachment_id.res_id
+                        ),
+                    }
+                )
 
-        elif directory_id:
+            elif directory_id:
 
-            file_name = self._dms_file_name(directory_id, vals['name'])
+                file_name = self._dms_file_name(directory_id, vals["name"])
 
-            self.env['dms.file'].create({
-                'name': file_name,
-                'directory_id': directory_id.id,
-                'attachment_id': attachment_id.id,
-                'record_ref': "{},{}".format(
-                    attachment_id.res_model, attachment_id.res_id),
-            })
+                self.env["dms.file"].create(
+                    {
+                        "name": file_name,
+                        "directory_id": directory_id.id,
+                        "attachment_id": attachment_id.id,
+                        "record_ref": "{},{}".format(
+                            attachment_id.res_model, attachment_id.res_id
+                        ),
+                    }
+                )
 
-        return attachment_id
+            return attachment_id

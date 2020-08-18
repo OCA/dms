@@ -581,6 +581,31 @@ class File(models.Model):
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
 
+    def _create_model_attachment(self, vals):
+        directory_id = self.env["dms.directory"].search(
+            [("id", "=", vals["directory_id"])]
+        )
+
+        if directory_id and directory_id.record_ref:
+
+            if directory_id.record_ref:
+                model_name = directory_id.record_ref._name
+                model_id = directory_id.record_ref.id
+
+                attachment_id = self.env["ir.attachment"].create(
+                    {
+                        "name": vals["name"],
+                        "datas": vals["content"],
+                        "res_model": model_name,
+                        "res_id": model_id,
+                        "dms_file": True,
+                    }
+                )
+
+                vals["attachment_id"] = attachment_id.id
+                vals["record_ref"] = "{},{}".format(model_name, model_id)
+                del vals["content"]
+
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
@@ -606,6 +631,13 @@ class File(models.Model):
         # We need to do sudo because we don't know when the related groups
         # will be deleted
         return super(File, self.sudo()).unlink()
+
+    @api.model
+    def create(self, vals):
+        if not "record_ref" in vals:
+            self._create_model_attachment(vals)
+
+        return super(File, self).create(vals)
 
     # ----------------------------------------------------------
     # Locking fields and functions

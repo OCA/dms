@@ -200,23 +200,16 @@ class DmsDirectory(models.Model):
     )
 
     ir_model_id = fields.Many2one(
-        comodel_name='ir.model',
-        string='Attachment Model',
-        required=False
+        comodel_name="ir.model", string="Attachment Model", required=False
     )
 
     record_sub_directory = fields.Boolean(
-        string='Record Sub Directoty',
-        required=False,
-        default=True,
+        string="Create Sub Directory for Record", required=False, default=True,
     )
 
     record_ref = fields.Reference(
-        string='Record',
-        selection='_select_reference',
-        readonly=True,
+        string="Record Referenced", selection="_select_reference", readonly=True,
     )
-
 
     @api.depends("name", "complete_name")
     def _compute_display_name(self):
@@ -578,5 +571,5 @@ class DmsDirectory(models.Model):
         return super().unlink()
 
     def _select_reference(self):
-        model_ids = self.env['ir.model'].search([])
-        return [(r['model'], r['name']) for r in model_ids] + [('', '')]
+        model_ids = self.env["ir.model"].search([])
+        return [(r["model"], r["name"]) for r in model_ids] + [("", "")]
