@@ -159,9 +159,7 @@ class File(models.Model):
     )
 
     record_ref = fields.Reference(
-        string='Record',
-        selection='_select_reference',
-        readonly=True,
+        string="Record Referenced", selection="_select_reference", readonly=True,
     )
 
     # ----------------------------------------------------------
