@@ -151,11 +151,11 @@ class File(models.Model):
     )
 
     attachment_id = fields.Many2one(
-        comodel_name='ir.attachment',
-        string='Attachment File',
+        comodel_name="ir.attachment",
+        string="Attachment File",
         prefetch=False,
         invisible=True,
-        ondelete="cascade"
+        ondelete="cascade",
     )
 
     record_ref = fields.Reference(
@@ -185,7 +185,7 @@ class File(models.Model):
         if self.storage_id.save_type == "file":
             new_vals["content_file"] = self.content
         elif self.storage_id.save_type == "attachment":
-            new_vals['attachment_id'] = self.content
+            new_vals["attachment_id"] = self.content
         elif self.storage_id.save_type == "database":
             new_vals["content_binary"] = self.content and binary
         return new_vals
@@ -380,10 +380,8 @@ class File(models.Model):
             elif record.content_binary:
                 record.content = base64.b64encode(record.content_binary)
             else:
-                context = {"human_size": True} if bin_size else {
-                    "base64": True}
-                record.content = \
-                    record.with_context(context).attachment_id.datas
+                context = {"human_size": True} if bin_size else {"base64": True}
+                record.content = record.with_context(context).attachment_id.datas
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
@@ -632,7 +630,7 @@ class File(models.Model):
 
     @api.model
     def create(self, vals):
-        if not "record_ref" in vals:
+        if "record_ref" not in vals:
             self._create_model_attachment(vals)
 
         return super(File, self).create(vals)
@@ -687,5 +685,5 @@ class File(models.Model):
                 record.update({"is_locked": False, "is_lock_editor": False})
 
     def _select_reference(self):
-        model_ids = self.env['ir.model'].search([])
-        return [(r['model'], r['name']) for r in model_ids] + [('', '')]
+        model_ids = self.env["ir.model"].search([])
+        return [(r["model"], r["name"]) for r in model_ids] + [("", "")]

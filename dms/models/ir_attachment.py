@@ -1,6 +1,6 @@
 import re
 
-from odoo import api, models, fields, tools
+from odoo import api, models
 
 
 class IrAttachment(models.Model):
@@ -11,13 +11,12 @@ class IrAttachment(models.Model):
         count = 1
         for file in directory_id.file_ids:
 
-            dms_file_name = re.sub(r' \([0-9]*\)', '', file.name)
+            dms_file_name = re.sub(r" \([0-9]*\)", "", file.name)
             if dms_file_name == file_name:
                 count += 1
 
-        file, ext = re.split(r'\.', file_name)
+        file, ext = re.split(r"\.", file_name)
         return file + " ({}).".format(count) + ext if count > 1 else file_name
-
 
     @api.model
     def create(self, vals):
