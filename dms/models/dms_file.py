@@ -578,6 +578,14 @@ class File(models.Model):
                 self.browse(ids).write(dict(vals))
 
     def _create_model_attachment(self, vals):
+
+        if "default_directory_id" in self._context:
+            default_directory_id = self.env["dms.directory"].search(
+                [("id", "=", self._context["default_directory_id"])]
+            )
+
+            vals["directory_id"] = default_directory_id.id
+
         directory_id = self.env["dms.directory"].search(
             [("id", "=", vals["directory_id"])]
         )
