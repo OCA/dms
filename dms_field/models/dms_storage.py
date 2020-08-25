@@ -28,7 +28,4 @@ class DmsStorage(models.Model):
 
     @api.model
     def get_js_tree_data(self):
-        initial_data = []
-        for record in self.search([]):
-            initial_data.append(record._build_documents_storage(record))
-        return initial_data
+        return [record._build_documents_storage(record) for record in self.search([])]
