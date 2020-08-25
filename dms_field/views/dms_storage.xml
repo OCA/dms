@@ -14,7 +14,7 @@
     <record model="ir.actions.act_window" id="dms_storage_act_window">
         <field name="name">Documents</field>
         <field name="res_model">dms.storage</field>
-        <field name="view_mode">dms_tree,form</field>
+        <field name="view_mode">dms_tree</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
@@ -24,18 +24,17 @@
         <field name="action" ref="dms_storage_act_window" />
         <field name="sequence" eval="5" />
     </record>
-    <record model="ir.ui.view" id="dms_storage_dms_tree_view">
-        <field name="name">dms.storage.dms_tree (in dms_field)</field>
+    <record id="view_dms_storage_form" model="ir.ui.view">
+        <field name="name">dms_storage.form</field>
         <field name="model">dms.storage</field>
+        <field name="inherit_id" ref="dms.view_dms_storage_form" />
         <field name="arch" type="xml">
-            <dms_tree>
-                <field name="name" />
-            </dms_tree>
+            <field name="company_id" position="after">
+                <field
+                    name="model_id"
+                    attrs="{'readonly': [('count_storage_directories', '>', 0)]}"
+                />
+            </field>
         </field>
-    </record>
-    <record model="ir.actions.act_window" id="dms_directory_act_window">
-        <field name="name">Documents</field>
-        <field name="res_model">dms.storage</field>
-        <field name="view_mode">dms_tree,form</field>
     </record>
 </odoo>
