@@ -16,15 +16,6 @@
                 type="text/javascript"
                 src="/dms_field/static/src/js/fields/utils.js"
             />
-            <script type="text/javascript" src="/dms_field/static/lib/js/jquery.js" />
-            <script
-                type="text/javascript"
-                src="/dms_field/static/lib/js/scrollbar.js"
-            />
-            <script
-                type="text/javascript"
-                src="/dms_field/static/lib/js/underscore.js"
-            />
             <script
                 type="text/javascript"
                 src="/dms_field/static/src/js/base/dms_tree_controller.js"

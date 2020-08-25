@@ -5,6 +5,7 @@
         padding-top: 25px;
     }
     .o_preview_directory_icon {
+        margin-right: 25px;
         img {
             width: 100%;
             height: 100%;
@@ -25,5 +26,9 @@
 
     .o_preview_directory_table > tbody > tr > td {
         border-top: 0;
+    }
+
+    .btn-primary {
+        margin: 0.1em;
     }
 }

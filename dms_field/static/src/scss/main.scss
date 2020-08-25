@@ -4,23 +4,48 @@
 
 .dms_document_preview {
     height: 100% !important;
+    .o_preview_directory_body {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -16px;
+        margin-left: -16px;
+        .o_preview_directory_icon {
+            flex: 0 1 auto;
+        }
+        .o_preview_directory_table_body {
+            flex: 1 1 auto;
+        }
+    }
 }
 
 .dms_treeview {
     height: 100%;
     .dms_document_container {
         height: 100%;
-        .dms_document_row {
-            height: 100% !important;
+        .dms_document_col {
+            padding: 0;
+            width: 50%;
+        }
+        @media (max-width: 768px) {
+            width: 100%;
             .dms_document_col {
-                padding: 0;
-                width: 50% !important;
+                width: 100%;
             }
+            .dms_document_col_preview {
+                display: none !important;
+            }
+        }
+        @media (min-width: 769px) {
             .dms_document_col_tree > div {
-                height: 100%;
                 border-right-width: 3px;
                 border-right-style: solid;
                 border-right-color: #888;
+            }
+        }
+        .dms_document_row {
+            height: 100% !important;
+            .dms_document_col_tree > div {
+                height: 100%;
                 .dms_document_tree {
                     height: 100%;
                     .dms_content,

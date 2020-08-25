@@ -11,7 +11,6 @@ odoo.define("dms.DmsTreeView", function(require) {
 
     var DmsTreeView = BasicView.extend({
         display_name: _lt("DMS"),
-        icon: "fa-tachometer",
         template: "dms.DocumentTree",
         viewType: "dms_tree",
         config: _.extend({}, BasicView.prototype.config, {

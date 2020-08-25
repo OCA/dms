@@ -11,6 +11,11 @@ class DmsDirectory(models.Model):
 
     res_id = fields.Integer()
     res_model = fields.Char(related="root_storage_id.model_id.model")
+    parent_id = fields.Many2one(default=lambda self: self._default_parent())
+
+    @api.model
+    def _default_parent(self):
+        return self.env.context.get("default_parent_directory_id", False)
 
     @api.constrains("res_id", "is_root_directory", "root_storage_id")
     def _check_resource(self):
@@ -62,7 +67,6 @@ class DmsDirectory(models.Model):
             "children": directory.count_elements > 0,
         }
 
-    @api.multi
     def _build_documents_view_initial(self):
         if len(self) == 1:
             return [self._build_documents_view_directory(self)]
@@ -91,7 +95,10 @@ class DmsDirectory(models.Model):
 
             :param domain: a search domain <reference/orm/domains> (default: empty list)
             :param fields: a list of fields to read (default: all fields of the model)
-            :param order: a string to define the sort order of the query (default: none)
+            :param offset: the number of results to ignore (default: none)
+            :param limit: maximum number of records to return (default: all)
+            :param order: a string to define the sort order of the query
+                 (default: none)
             :returns: the top level elements for the given search query
         """
         if not domain:
@@ -117,7 +124,12 @@ class DmsDirectory(models.Model):
             hierarchy for a given search query.
 
             :param domain: a search domain <reference/orm/domains> (default: empty list)
-            :param order: a string to define the sort order of the query (default: none)
+            :param offset: the number of results to ignore (default: none)
+            :param limit: maximum number of records to return (default: all)
+            :param order: a string to define the sort order of the query
+                 (default: none)
+            :param count: counts and returns the number of matching records
+                 (default: False)
             :returns: the top level elements for the given search query
         """
         if not domain:

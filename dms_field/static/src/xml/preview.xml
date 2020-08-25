@@ -7,15 +7,15 @@
                     <t t-esc="dms_object.data.name" />
                 </h3>
             </div>
-            <div class="o_preview_directory_body row">
-                <div class="col-sm-3 o_preview_directory_icon row" align="center">
-                    <div class="col-sm-12">
+            <div class="o_preview_directory_body">
+                <div class="o_preview_directory_icon" align="center">
+                    <div>
                         <img
                             class="h-100 w-100"
                             t-att-src="dms_object.data.thumbnail_link"
                         />
                     </div>
-                    <div class="col-sm-12">
+                    <div>
                         <button
                             class="btn btn-primary o_preview_file"
                             t-if="dms_object.model === 'dms.file'"
@@ -24,7 +24,7 @@
                             Preview/download
                         </button>
                     </div>
-                    <div class="col-sm-12">
+                    <div>
                         <button
                             class="btn btn-primary o_open_file"
                             t-att-data-id="dms_object.id"
@@ -33,7 +33,7 @@
                         </button>
                     </div>
                 </div>
-                <div class=" col-sm-9">
+                <div class="o_preview_directory_table_body">
                     <table class="table o_preview_directory_table">
                         <tbody>
                             <tr>
