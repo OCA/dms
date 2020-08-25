@@ -3,6 +3,12 @@
     <t t-name="dms.DocumentTree">
         <div class="dms_treeview">
             <div class="container-fluid dms_document_container ">
+                <div class="row o_dms_header btn-group">
+                    <button
+                        class="btn btn-secondary o_dms_add_directory fa fa-database o_hidden"
+                    />
+                    <div class="o_dms_extra_actions btn-group" />
+                </div>
                 <div class="row dms_document_row">
                     <div class="dms_document_col dms_document_col_tree">
                         <div class="dms_document_tree">

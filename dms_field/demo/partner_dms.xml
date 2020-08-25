@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="storage_demo" model="dms.storage">
+        <field name="name">Partner Storage</field>
+        <field name="save_type">database</field>
+        <field name="model_id" ref="base.model_res_partner" />
+    </record>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="dms" string="DMS">
+                    <field name="dms_directory_ids" mode="dms_tree" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
