@@ -9,7 +9,10 @@ odoo.define("dms.preview", function(require) {
 
     var basic_fields = require("web.basic_fields");
     var registry = require("web.field_registry");
+    var core = require("web.core");
     var DocumentViewer = require("mail.DocumentViewer");
+
+    var QWeb = core.qweb;
 
     var FieldPreviewViewer = DocumentViewer.extend({
         template: "FieldBinaryPreview",
@@ -18,18 +21,32 @@ odoo.define("dms.preview", function(require) {
             this.modelName = model;
             this.fieldName = field;
         },
+        /*
+            We need to overwrite this function in order to ensure that the
+            correct template is used
+        */
+        _updateContent: function() {
+            this.$(".o_viewer_content").html(
+                QWeb.render("FieldBinaryPreview.Content", {widget: this})
+            );
+            this.$(".o_viewer_img").on("load", _.bind(this._onImageLoaded, this));
+            this.$('[data-toggle="tooltip"]').tooltip({delay: 0});
+            this._reset();
+        },
         _onDownload: function(e) {
             e.preventDefault();
-            window.location =
+            var url = new URL(
                 "/web/content/" +
-                this.modelName +
-                "/" +
-                this.activeAttachment.id +
-                "/" +
-                this.fieldName +
-                "/" +
-                "datas" +
-                "?download=true";
+                    this.modelName +
+                    "/" +
+                    this.activeAttachment.id +
+                    "/" +
+                    this.fieldName,
+                window.location.href
+            );
+            url.searchParams.set("download", true);
+            url.searchParams.set("filename", this.activeAttachment.name);
+            window.location = url.href;
         },
     });
 
@@ -47,7 +64,7 @@ odoo.define("dms.preview", function(require) {
                         mimetype: this.recordData.res_mimetype,
                         id: this.res_id,
                         fileType: this.recordData.res_mimetype,
-                        name: this.filename,
+                        name: this.filename_value,
                     },
                 ],
                 this.res_id,

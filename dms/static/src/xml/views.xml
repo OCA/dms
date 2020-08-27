@@ -19,6 +19,9 @@
         </div>
     </t>
     <t t-name="FieldBinaryPreview.Content" t-extend="DocumentViewer.Content">
+        <!-- We need to replace in order to change all the called options,
+            the new item will contain the same elements than the original one
+        -->
         <t t-jquery=".o_viewer_zoomer" t-operation="replace">
             <div class="o_viewer_zoomer">
                 <div
@@ -70,6 +73,7 @@
         </t>
     </t>
     <t t-name="FieldBinaryPreview" t-extend="DocumentViewer">
+        <!-- We need to replace in order to change the called options-->
         <t t-jquery=".o_document_viewer_content_call" t-operation="replace">
             <t
                 class="o_document_viewer_content_call"
