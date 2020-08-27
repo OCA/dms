@@ -34,7 +34,7 @@ odoo.define("dms.FileKanbanController", function(require) {
                                 mimetype: record.data.res_mimetype,
                                 id: record.data.id,
                                 fileType: record.data.res_mimetype,
-                                name: record.name,
+                                name: record.data.name,
                             },
                         ],
                         record.data.id,
