@@ -19,10 +19,13 @@
         </div>
     </t>
     <t t-name="FieldBinaryPreview.Content" t-extend="DocumentViewer.Content">
+        <!-- We need to replace in order to change all the called options,
+            the new item will contain the same elements than the original one
+        -->
         <t t-jquery=".o_viewer_zoomer" t-operation="replace">
             <div class="o_viewer_zoomer">
                 <div
-                    t-if="widget.activeAttachment.fileType == 'image'"
+                    t-if="widget.activeAttachment.type == 'image'"
                     class="o_loading_img text-center"
                 >
                     <i
@@ -33,20 +36,20 @@
                     />
                 </div>
                 <img
-                    t-if="widget.activeAttachment.fileType === 'image'"
+                    t-if="widget.activeAttachment.type === 'image'"
                     class="o_viewer_img"
-                    t-attf-src="/web/image/#{model}/#{widget.activeAttachment.id}/#{widget.fieldName}?unique=1&amp;signature=#{widget.activeAttachment.checksum}&amp;model=#{model}"
+                    t-attf-src="/web/image/#{widget.modelName}/#{widget.activeAttachment.id}/#{widget.fieldName}"
                     alt="Viewer"
                 />
                 <iframe
                     t-if="widget.activeAttachment.fileType == 'application/pdf'"
                     class="mt32 o_viewer_pdf"
-                    t-attf-src="/web/static/lib/pdfjs/web/viewer.html?file=/web/content/#{model}/#{widget.activeAttachment.id}/#{widget.fieldName}"
+                    t-attf-src="/web/static/lib/pdfjs/web/viewer.html?file=/web/content/#{widget.modelName}/#{widget.activeAttachment.id}/#{widget.fieldName}"
                 />
                 <iframe
                     t-if="(widget.activeAttachment.fileType || '').indexOf('text') !== -1"
                     class="mt32 o_viewer_text"
-                    t-attf-src="/web/content/#{model}/#{widget.activeAttachment.id}/#{widget.fieldName}"
+                    t-attf-src="/web/content/#{widget.modelName}/#{widget.activeAttachment.id}/#{widget.fieldName}"
                 />
                 <iframe
                     t-if="widget.activeAttachment.fileType == 'youtu'"
@@ -57,12 +60,12 @@
                     t-attf-src="https://www.youtube.com/embed/#{widget.activeAttachment.youtube}"
                 />
                 <video
-                    t-if="widget.activeAttachment.fileType == 'video'"
+                    t-if="widget.activeAttachment.type == 'video'"
                     class="o_viewer_video"
                     controls="controls"
                 >
                     <source
-                        t-attf-src="/web/image/#{model}/#{widget.activeAttachment.id}/#{widget.fieldName}"
+                        t-attf-src="/web/image/#{widget.modelName}/#{widget.activeAttachment.id}/#{widget.fieldName}"
                         t-att-data-type="widget.activeAttachment.mimetype"
                     />
                 </video>
@@ -70,11 +73,9 @@
         </t>
     </t>
     <t t-name="FieldBinaryPreview" t-extend="DocumentViewer">
-        <t t-jquery=".o_document_viewer_content_call" t-operation="replace">
-            <t
-                class="o_document_viewer_content_call"
-                t-call="FieldBinaryPreview.Content"
-            />
+        <!-- We need to replace in order to change the called options-->
+        <t t-jquery="[t-call='DocumentViewer.Content']" t-operation="replace">
+            <t t-call="FieldBinaryPreview.Content" />
         </t>
     </t>
 </templates>
