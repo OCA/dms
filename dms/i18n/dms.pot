@@ -1077,7 +1077,7 @@ msgstr ""
 
 #. module: dms
 #. openerp-web
-#: code:addons/dms/static/src/xml/views.xml:33
+#: code:addons/dms/static/src/xml/views.xml:36
 #, python-format
 msgid "Loading"
 msgstr ""
@@ -1789,7 +1789,7 @@ msgstr ""
 
 #. module: dms
 #. openerp-web
-#: code:addons/dms/static/src/xml/views.xml:40
+#: code:addons/dms/static/src/xml/views.xml:43
 #, python-format
 msgid "Viewer"
 msgstr ""
