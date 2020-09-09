@@ -25,9 +25,10 @@ class IrAttachment(models.Model):
             return super(IrAttachment, self).create(vals)
         else:
             attachment_id = super(IrAttachment, self).create(vals)
-            directory_id = self.env["dms.directory"].search(
-                [("ir_model_id", "=", vals["res_model"])]
-            )
+            if 'res_model' in vals:
+                directory_id = self.env["dms.directory"].search(
+                    [("ir_model_id", "=", vals["res_model"])]
+                )
 
             if directory_id and directory_id.record_sub_directory:
                 save_directory_id = self.env["dms.directory"].search(
