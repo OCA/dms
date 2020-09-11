@@ -6,7 +6,6 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
     var ajax = require("web.ajax");
     var dialogs = require("web.view_dialogs");
 
-    var crash_manager = require("web.crash_manager");
     var framework = require("web.framework");
     var session = require("web.session");
     var QWeb = core.qweb;
@@ -325,6 +324,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             return menu;
         },
         _loadContextMenuFile: function($jstree, node, menu) {
+            let self = this;
             menu.download = {
                 separator_before: false,
                 separator_after: false,
@@ -343,7 +343,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                             filename: node.data.data.filename,
                         },
                         complete: framework.unblockUI,
-                        error: crash_manager.rpc_error.bind(crash_manager),
+                         error: () => self.call('crash_manager', 'rpc_error', ...arguments),
                     });
                 },
             };
