@@ -84,6 +84,8 @@ class Storage(models.Model):
         compute="_compute_count_storage_files", string="Count Files"
     )
 
+    model_id = fields.Many2one("ir.model", auto_join=True)
+
     # ----------------------------------------------------------
     # Actions
     # ----------------------------------------------------------
