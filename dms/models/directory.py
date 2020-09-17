@@ -199,14 +199,6 @@ class DmsDirectory(models.Model):
                 """,
     )
 
-    ir_model_id = fields.Many2one(
-        comodel_name="ir.model", string="Attachment Model", required=False
-    )
-
-    record_sub_directory = fields.Boolean(
-        string="Create Sub Directory for Record", required=False, default=True,
-    )
-
     record_ref = fields.Reference(
         string="Record Referenced", selection="_select_reference", readonly=True,
     )

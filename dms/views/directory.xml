@@ -475,14 +475,6 @@
                     </group>
                     <group>
                         <field
-                            name="ir_model_id"
-                            attrs="{'invisible': [('record_ref', '!=', False)]}"
-                        />
-                        <field
-                            name="record_sub_directory"
-                            attrs="{'invisible': [('ir_model_id', '=', False)]}"
-                        />
-                        <field
                             name="record_ref"
                             attrs="{'invisible': [('file_ids', '=', [])]}"
                         />
