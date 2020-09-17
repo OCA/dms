@@ -17,7 +17,9 @@ class DmsAddDirectory(models.TransientModel):
     def create_directory(self):
         self.ensure_one()
         record = self.env[self.storage_id.model_id.model].browse(self.res_id)
-        already_created = self.env["dms.directory"].search([('name', '=', record.display_name)])
+        already_created = self.env["dms.directory"].search(
+            [("name", "=", record.display_name)]
+        )
         if already_created:
             return
         return self._create_directory().ids

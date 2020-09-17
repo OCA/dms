@@ -324,7 +324,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             return menu;
         },
         _loadContextMenuFile: function($jstree, node, menu) {
-            let self = this;
+            const self = this;
             menu.download = {
                 separator_before: false,
                 separator_after: false,
@@ -343,7 +343,8 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                             filename: node.data.data.filename,
                         },
                         complete: framework.unblockUI,
-                         error: () => self.call('crash_manager', 'rpc_error', ...arguments),
+                        error: () =>
+                            self.call("crash_manager", "rpc_error", ...arguments),
                     });
                 },
             };
