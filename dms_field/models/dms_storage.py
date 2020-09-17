@@ -8,8 +8,6 @@ class DmsStorage(models.Model):
 
     _inherit = "dms.storage"
 
-    model_id = fields.Many2one("ir.model", auto_join=True)
-
     @api.model
     def _build_documents_storage(self, storage):
         storage_directories = []
