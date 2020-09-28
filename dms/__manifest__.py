@@ -15,6 +15,7 @@
         "web_view_searchpanel",
         "http_routing",
         "portal",
+        "mail_preview_base",
     ],
     "data": [
         "security/security.xml",
