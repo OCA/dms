@@ -9,7 +9,13 @@
     "license": "LGPL-3",
     "website": "http://github.com/OCA/dms",
     "author": "MuK IT, Tecnativa, Odoo Community Association (OCA)",
-    "depends": ["web_drop_target", "mail", "http_routing", "portal"],
+    "depends": [
+        "web_drop_target",
+        "mail",
+        "http_routing",
+        "portal",
+        "mail_preview_base",
+    ],
     "data": [
         "security/security.xml",
         "security/ir.model.access.csv",
