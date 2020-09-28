@@ -11,7 +11,7 @@ class DirectoryTestCase(DocumentsBaseCase):
         self.directory_root_demo_01 = self.browse_ref("dms.directory_01_demo")
         self.directory_root_demo_02 = self.browse_ref("dms.directory_02_demo")
         self.directory_root_demo_03 = self.browse_ref("dms.directory_11_demo")
-        self.directory_sub_demo_01 = self.browse_ref("dms.directory_03_demo")
+        self.directory_sub_demo_01 = self.browse_ref("dms.directory_04_demo")
         self.directory_sub_demo_02 = self.browse_ref("dms.directory_12_demo")
         self.new_storage = self.create_storage(sudo=True)
 
@@ -36,7 +36,7 @@ class DirectoryTestCase(DocumentsBaseCase):
             self.directory_root_demo_03.count_files, copy_root_directory.count_files
         )
 
-    @multi_users(lambda self: self.multi_users(demo=False), callback="_setup_test_data")
+    @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_copy_sub_directory(self):
         copy_sub_directory = self.directory_sub_demo_01.copy()
         self.assertEqual(
