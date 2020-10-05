@@ -1,5 +1,4 @@
-import re
-
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 from odoo import api, models
 
 
@@ -7,79 +6,57 @@ class IrAttachment(models.Model):
 
     _inherit = "ir.attachment"
 
-    def _dms_file_name(self, directory_id, file_name):
-        count = 1
-        for file in directory_id.file_ids:
+    def _get_dms_directories(self, res_model, res_id):
+        return self.env["dms.directory"].search(
+            [("res_model", "=", res_model), ("res_id", "=", res_id)]
+        )
 
-            dms_file_name = re.sub(r" \([0-9]*\)", "", file.name)
-            if dms_file_name == file_name:
-                count += 1
+    def _dms_directories_create(self):
+        items = self._get_dms_directories(self.res_model, False)
+        for item in items:
+            model_item = self.env[self.res_model].sudo().browse(self.res_id)
+            ir_model_item = self.env["ir.model"].search(
+                [("model", "=", self.res_model)]
+            )
+            self.env["dms.directory"].create(
+                {
+                    "name": model_item.display_name,
+                    "model_id": ir_model_item.id,
+                    "res_model": self.res_model,
+                    "res_id": self.res_id,
+                    "parent_id": item.id,
+                    "storage_id": item.storage_id.id,
+                }
+            )
 
-        file, ext = re.split(r"\.", file_name)
-        return file + " ({}).".format(count) + ext if count > 1 else file_name
-
-    def _create_record_dir(self, storage_id, attachment_id):
-        dms_field = self.env["ir.module.module"].search([("name", "=", "dms_field")])
-
-        directory_fields = {
-            "name": attachment_id.res_name.replace("/", "-"),
-            "is_root_directory": True,
-            "parent_id": False,
-            "root_storage_id": storage_id.id,
-        }
-
-        if dms_field and dms_field.state == "installed":
-            directory_fields["res_id"] = attachment_id.res_id
-
-        return self.env["dms.directory"].create(directory_fields)
-
-    @api.model
-    def create(self, vals):
-        if "dms_file" in vals and vals["dms_file"]:
-            del vals["dms_file"]
-            return super(IrAttachment, self).create(vals)
-        else:
-            attachment_id = super(IrAttachment, self).create(vals)
-            if "res_model" in vals:
-                storage_id = self.env["dms.storage"].search(
-                    [("model_id", "=", vals["res_model"])]
+    def _dms_operations(self):
+        for attachment in self:
+            if not attachment.res_model or not attachment.res_id:
+                continue
+            directories = self._get_dms_directories(
+                attachment.res_model, attachment.res_id
+            )
+            if not directories:
+                attachment._dms_directories_create()
+                # Get dms_directories again (with items previously created)
+                directories = self._get_dms_directories(
+                    attachment.res_model, attachment.res_id
+                )
+            # Auto-create_files
+            for directory in directories:
+                self.env["dms.file"].create(
+                    {
+                        "name": attachment.name,
+                        "directory_id": directory.id,
+                        "attachment_id": attachment.id,
+                        "res_model": attachment.res_model,
+                        "res_id": attachment.res_id,
+                    }
                 )
 
-                if storage_id and storage_id.save_type == "attachment":
-                    record_directory = self.env["dms.directory"].search(
-                        [("complete_name", "=", attachment_id.res_name)]
-                    )
-                    if not record_directory:
-                        record_directory = self._create_record_dir(
-                            storage_id, attachment_id
-                        )
-
-                    attachments_dir_id = record_directory.child_directory_ids.filtered(
-                        lambda r: r.name == "Attachments"
-                    )
-
-                    if not attachments_dir_id:
-                        attachments_dir_id = self.env["dms.directory"].create(
-                            {
-                                "name": "Attachments",
-                                "parent_id": record_directory.id,
-                                "storage_id": storage_id.id,
-                                "record_ref": "{},{}".format(
-                                    attachment_id.res_model, attachment_id.res_id
-                                ),
-                            }
-                        )
-                    file_name = self._dms_file_name(attachments_dir_id, vals["name"])
-
-                    self.env["dms.file"].create(
-                        {
-                            "name": file_name,
-                            "directory_id": attachments_dir_id.id,
-                            "attachment_id": attachment_id.id,
-                            "record_ref": "{},{}".format(
-                                attachment_id.res_model, attachment_id.res_id
-                            ),
-                        }
-                    )
-
-            return attachment_id
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        if not self.env.context.get("dms_file"):
+            records._dms_operations()
+        return records

@@ -170,8 +170,8 @@
                         <group>
                             <field name="company_id" />
                             <field
-                                name="model_id"
-                                attrs="{'readonly': [('count_storage_directories', '>', 0)]}"
+                                name="model_ids"
+                                attrs="{'invisible': [('save_type', '!=', 'attachment')]}"
                             />
                         </group>
                     </group>

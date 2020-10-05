@@ -186,6 +186,7 @@ class File(models.Model):
                         if directory_item.id == self.directory_id.id:
                             return True
         return res
+
     attachment_id = fields.Many2one(
         comodel_name="ir.attachment",
         string="Attachment File",
@@ -193,10 +194,22 @@ class File(models.Model):
         invisible=True,
         ondelete="cascade",
     )
-
+    res_model = fields.Char(string="Linked attachments model")
+    res_id = fields.Integer(string="Linked attachments record ID")
     record_ref = fields.Reference(
-        string="Record Referenced", selection="_select_reference", readonly=True,
+        string="Record Referenced",
+        compute="_compute_record_ref",
+        selection=[],
+        readonly=True,
+        store=False,
     )
+    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
+
+    @api.depends("res_model", "res_id")
+    def _compute_record_ref(self):
+        for record in self:
+            if record.res_model and record.res_id:
+                record.record_ref = "{},{}".format(record.res_model, record.res_id)
 
     # ----------------------------------------------------------
     # Helper
@@ -218,11 +231,9 @@ class File(models.Model):
                 "size": binary and len(binary) or 0,
             }
         )
-        if self.storage_id.save_type == "file":
+        if self.storage_id.save_type in ["file", "attachment"]:
             new_vals["content_file"] = self.content
-        elif self.storage_id.save_type == "attachment":
-            new_vals["attachment_id"] = self.content
-        elif self.storage_id.save_type == "database":
+        else:
             new_vals["content_binary"] = self.content and binary
         return new_vals
 
@@ -419,7 +430,7 @@ class File(models.Model):
                     if bin_size
                     else base64.b64encode(record.content_binary)
                 )
-            else:
+            elif record.attachment_id:
                 context = {"human_size": True} if bin_size else {"base64": True}
                 record.content = record.with_context(context).attachment_id.datas
 
@@ -536,7 +547,7 @@ class File(models.Model):
         file_ids = set(result)
         directories = self._get_directories_from_database(result)
         for directory in directories - directories._filter_access("read"):
-            file_ids -= set(directory.sudo(SUPERUSER_ID).mapped("file_ids").ids)
+            file_ids -= set(directory.sudo().mapped("file_ids").ids)
         return len(file_ids) if count else list(file_ids)
 
     def _filter_access(self, operation):
@@ -545,7 +556,7 @@ class File(models.Model):
             return records
         directories = self._get_directories_from_database(records.ids)
         for directory in directories - directories._filter_access("read"):
-            records -= self.browse(directory.sudo(SUPERUSER_ID).mapped("file_ids").ids)
+            records -= self.browse(directory.sudo().mapped("file_ids").ids)
         return records
 
     def check_access(self, operation, raise_exception=False):
@@ -634,41 +645,26 @@ class File(models.Model):
                 self.browse(ids).write(dict(vals))
 
     def _create_model_attachment(self, vals):
-
-        if "default_directory_id" in self._context:
-            default_directory_id = (
-                self.env["dms.directory"]
-                .with_user(SUPERUSER_ID)
-                .browse(self._context["default_directory_id"])
-            )
-
-            vals["directory_id"] = default_directory_id.id
-
-        directory_id = (
-            self.env["dms.directory"]
-            .with_user(SUPERUSER_ID)
-            .browse(vals["directory_id"])
-        )
-
-        if directory_id and directory_id.record_ref:
-
-            if directory_id.record_ref:
-                model_name = directory_id.record_ref._name
-                model_id = directory_id.record_ref.id
-
-                attachment_id = self.env["ir.attachment"].create(
+        res_vals = vals.copy()
+        directory = self.env["dms.directory"].sudo().browse(res_vals["directory_id"])
+        if directory and directory.res_model and directory.res_id:
+            attachment = (
+                self.env["ir.attachment"]
+                .with_context(dms_file=True)
+                .create(
                     {
                         "name": vals["name"],
                         "datas": vals["content"],
-                        "res_model": model_name,
-                        "res_id": model_id,
-                        "dms_file": True,
+                        "res_model": directory.res_model,
+                        "res_id": directory.res_id,
                     }
                 )
-
-                vals["attachment_id"] = attachment_id.id
-                vals["record_ref"] = "{},{}".format(model_name, model_id)
-                del vals["content"]
+            )
+            res_vals["attachment_id"] = attachment.id
+            res_vals["res_model"] = attachment.res_model
+            res_vals["res_id"] = attachment.res_id
+            del res_vals["content"]
+        return res_vals
 
     def copy(self, default=None):
         self.ensure_one()
@@ -696,12 +692,14 @@ class File(models.Model):
         # will be deleted
         return super(File, self.sudo()).unlink()
 
-    @api.model
-    def create(self, vals):
-        if "record_ref" not in vals:
-            self._create_model_attachment(vals)
-
-        return super(File, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        new_vals_list = []
+        for vals in vals_list:
+            if "res_model" not in vals and "res_id" not in vals:
+                vals = self._create_model_attachment(vals)
+            new_vals_list.append(vals)
+        return super(File, self).create(new_vals_list)
 
     # ----------------------------------------------------------
     # Locking fields and functions
@@ -751,7 +749,3 @@ class File(models.Model):
                 )
             else:
                 record.update({"is_locked": False, "is_lock_editor": False})
-
-    def _select_reference(self):
-        model_ids = self.env["ir.model"].search([])
-        return [(r["model"], r["name"]) for r in model_ids] + [("", "")]

@@ -417,7 +417,21 @@
                         </group>
                     </group>
                     <group>
-                        <field name="record_ref" />
+                        <field name="storage_id_save_type" invisible="True" />
+                        <field
+                            name="res_model"
+                            readonly="True"
+                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                        />
+                        <field
+                            name="res_id"
+                            readonly="True"
+                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                        />
+                        <field
+                            name="record_ref"
+                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                        />
                     </group>
                     <notebook>
                         <page name="page_meta" string="Meta Information">
