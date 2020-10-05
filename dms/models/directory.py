@@ -24,6 +24,7 @@ class DmsDirectory(models.Model):
     _description = "Directory"
 
     _inherit = [
+        "portal.mixin",
         "dms.security.mixin",
         "dms.mixins.thumbnail",
         "mail.thread",
@@ -193,6 +194,47 @@ class DmsDirectory(models.Model):
                 """,
     )
 
+    def _compute_access_url(self):
+        for record in self:
+            record.access_url = "/my/dms/directory/{}".format(record.id)
+
+    @api.model
+    def _get_parent_categories(self):
+        self.ensure_one()
+        directories = [self]
+        current_directory = self
+        while current_directory.parent_id and current_directory.parent_id.check_access(
+            "read", False
+        ):
+            directories.append(current_directory.parent_id)
+            current_directory = current_directory.parent_id
+        return directories[::-1]
+
+    def _get_own_root_directories(self, user_id):
+        ids = []
+        items = (
+            self.env["dms.directory"].sudo(user_id).search([("is_hidden", "=", False)])
+        )
+        for item in items:
+            current_directory = item
+            while (
+                current_directory.parent_id
+                and current_directory.parent_id.check_access("read", False)
+            ):
+                current_directory = current_directory.parent_id
+
+            if current_directory.id not in ids:
+                ids.append(current_directory.id)
+
+        return ids
+
+    def check_access(self, operation, raise_exception=False):
+        res = super(DmsDirectory, self).check_access(operation, raise_exception)
+        if self.env.user.has_group("base.group_portal"):
+            if self.id in self._get_ids_without_access_groups(operation):
+                res = False
+        return res
+
     @api.model
     def _search_is_hidden(self, operator, value):
         return [("storage_id.is_hidden", operator, value)]
@@ -239,6 +281,26 @@ class DmsDirectory(models.Model):
     # ----------------------------------------------------------
     # Search
     # ----------------------------------------------------------
+    @api.model
+    def _search(
+        self,
+        args,
+        offset=0,
+        limit=None,
+        order=None,
+        count=False,
+        access_rights_uid=None,
+    ):
+        result = super(DmsDirectory, self)._search(
+            args, offset, limit, order, False, access_rights_uid
+        )
+        if result:
+            directory_ids = set(result)
+            if self.env.user.has_group("base.group_portal"):
+                exclude_ids = self._get_ids_without_access_groups("read")
+                directory_ids -= set(exclude_ids)
+                return directory_ids
+        return result
 
     @api.model
     def _search_starred(self, operator, operand):
