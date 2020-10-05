@@ -30,6 +30,8 @@ within Odoo.
 This module is only the basis for an entire ecosystem of apps that extend and
 seamlessly integrate with the document management system.
 
+This module adds portal functionality for directories and files for allowed users, both portal or internal users. You can get as well a tokenized link from a directory or a file for sharing it with any anonymous user.
+
 **Table of contents**
 
 .. contents::
@@ -73,6 +75,19 @@ Usage
 The best way to manage the documents is to switch to the Documents view.
 Existing documents can be managed there and new documents can be created.
 
+Portal functionality
+~~~~~~~~~~~~~~~~~~~~
+
+You can add any portal user to DMS access groups, and then allow that group in directories, so they will see in the portal such directories and their files.
+Another possibility is to click on "Share" button inside a directory or a file for obtaining a tokenized link for single access to that resource, no matter if logged or not.
+
+Known issues / Roadmap
+======================
+
+- Files preview in portal
+- Allow to download folder in portal and create zip file with all content
+- Save in cache own_root directories and update in every create/write/unlink function
+
 Bug Tracker
 ===========
 
@@ -90,6 +105,7 @@ Authors
 ~~~~~~~
 
 * MuK IT
+* Tecnativa
 
 Contributors
 ~~~~~~~~~~~~
@@ -98,6 +114,11 @@ Contributors
 * Enric Tobella <etobella@creublanca.es>
 * Antoni Romera
 * Gelu Boros <gelu.boros@rgbconsulting.com>
+
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Víctor Martínez
+  * Pedro M. Baeza
 
 Other credits
 ~~~~~~~~~~~~~
