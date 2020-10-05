@@ -99,6 +99,10 @@ class DmsSecurityMixin(models.AbstractModel):
     def _apply_access_groups(self, query, mode="read"):
         if self.env.user.id == SUPERUSER_ID:
             return None
+        # Fix access directory and files with share button (public)
+        if self.env.user.has_group("base.group_public"):
+            return None
+
         where_clause = """
             "{table}".id IN (
                 SELECT r.aid
