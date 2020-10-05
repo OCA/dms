@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="access_group_01_demo" model="dms.access.group">
+        <field name="name">Admin</field>
+        <field name="perm_read">True</field>
+        <field name="perm_create">True</field>
+        <field name="perm_write">True</field>
+        <field name="perm_unlink">True</field>
+        <field
+            name="explicit_user_ids"
+            eval="[(6, 0, [ref('base.user_admin'), ref('base.user_demo')])]"
+        />
+    </record>
+    <record id="access_group_02_demo" model="dms.access.group">
+        <field name="name">Demo</field>
+        <field name="perm_read">True</field>
+        <field name="group_ids" eval="[(6, 0, [ref('base.group_portal')])]" />
+    </record>
+</odoo>
