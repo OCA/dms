@@ -379,6 +379,12 @@
         <field name="arch" type="xml">
             <form string="Directory">
                 <header>
+                    <button
+                        name="%(portal.portal_share_action)d"
+                        string="Share"
+                        type="action"
+                        class="oe_highlight oe_read_only"
+                    />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
