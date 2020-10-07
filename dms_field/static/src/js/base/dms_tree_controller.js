@@ -9,7 +9,7 @@ odoo.define("dms.DmsTreeController", function(require) {
     var Domain = require("web.Domain");
     var BasicController = require("web.BasicController");
     var FormController = require("web.FormController");
-    var preview = require("dms.preview");
+    var preview = require("mail_preview_base.preview");
     var FieldPreviewViewer = preview.FieldPreviewViewer;
     var dialogs = require("web.view_dialogs");
     var core = require("web.core");
@@ -39,7 +39,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                     ["child_directory_ids", "in", params.initialState.res_ids],
                 ];
             } else {
-                storage_domain = [["model_id.model", "=", model]];
+                storage_domain = [["model_ids.model", "=", model]];
                 autocompute_directory = true;
                 show_storage = false;
             }
@@ -508,6 +508,7 @@ odoo.define("dms.DmsTreeController", function(require) {
             }).open();
         },
         _onDMSEmptyStorages: function(event) {
+            event.data.data.model = this.modelName;
             event.data.data.empty_storages = this.empty_storages;
             event.data.data.res_id = this.renderer.state.res_id;
         },
