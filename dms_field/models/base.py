@@ -11,6 +11,9 @@ class Base(models.AbstractModel):
         "dms.directory",
         "res_id",
         string="DMS Directories",
-        domain=lambda self: [("res_model", "=", self._name)],
+        domain=lambda self: [
+            ("res_model", "=", self._name),
+            ("storage_id.save_type", "!=", "attachment"),
+        ],
         auto_join=True,
     )

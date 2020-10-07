@@ -9,6 +9,7 @@ class DmsAddDirectory(models.TransientModel):
     _description = "Add Directory to a DMS Record"
 
     res_id = fields.Integer()
+    res_model = fields.Char()
     storage_ids = fields.Many2many(
         "dms.storage", store=False, string="Possible storages"
     )
@@ -22,10 +23,11 @@ class DmsAddDirectory(models.TransientModel):
         return self.env["dms.directory"].create(self._create_directory_vals())
 
     def _create_directory_vals(self):
-        record = self.env[self.storage_id.model_id.model].browse(self.res_id)
+        record = self.env[self.res_model].browse(self.res_id)
         return {
             "root_storage_id": self.storage_id.id,
             "res_id": self.res_id,
+            "res_model": self.res_model,
             "is_root_directory": True,
             "name": record.display_name,
         }
