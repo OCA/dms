@@ -27,6 +27,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
         }),
         template: "dms.DocumentTree",
         init: function(parent, params) {
+            // eslint-disable-next-line no-param-reassign
             params = _.defaults({}, params, {
                 viewType: "dms_tree",
             });
@@ -50,7 +51,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 "types",
                 "contextmenu",
             ];
-            var config = {
+            var tree_config = {
                 core: {
                     widget: this,
                     animation: this.params.animation || 0,
@@ -73,7 +74,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                     this.params.conditionalselect || this._checkSelect.bind(this),
                 plugins: plugins,
             };
-            return config;
+            return tree_config;
         },
         _loadData: function(node, callback) {
             this.trigger_up("dms_load", {
@@ -432,6 +433,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             this.trigger_up("dms_empty_storages", {data: data});
             var context = {
                 default_res_id: data.res_id,
+                default_res_model: data.model,
                 default_storage_ids: [],
             };
             _.each(data.empty_storages, function(storage) {

@@ -8,7 +8,7 @@
     "version": "12.0.1.0.0",
     "license": "AGPL-3",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
-    "website": "http://github.com/OCA/dms",
+    "website": "https://github.com/OCA/dms",
     "depends": ["dms"],
     "data": [
         "wizards/dms_add_directory_record.xml",
