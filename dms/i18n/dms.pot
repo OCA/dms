@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 08:34+0000\n"
-"PO-Revision-Date: 2020-10-05 08:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,13 +27,13 @@ msgid "                Define how incoming emails are processed:\n"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:353
+#: code:addons/dms/models/directory.py:346
 #, python-format
 msgid "%s Files"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:346
+#: code:addons/dms/models/directory.py:339
 #, python-format
 msgid "%s Subdirectories"
 msgstr ""
@@ -161,37 +159,37 @@ msgid "A Python dictionary that will be evaluated to provide default values when
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:458
+#: code:addons/dms/models/directory.py:451
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:453
+#: code:addons/dms/models/directory.py:446
 #, python-format
 msgid "A directory has to have a parent directory."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:488
+#: code:addons/dms/models/directory.py:481
 #, python-format
 msgid "A directory with the same name already exists."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:619
+#: code:addons/dms/models/directory.py:612
 #, python-format
 msgid "A file is locked, the folder cannot be deleted."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:552
+#: code:addons/dms/models/dms_file.py:550
 #, python-format
 msgid "A file with the same name already exists."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:451
+#: code:addons/dms/models/directory.py:444
 #, python-format
 msgid "A root directory has to have a root storage."
 msgstr ""
@@ -298,7 +296,7 @@ msgid "Alias domain"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:547
+#: code:addons/dms/models/directory.py:540
 #, python-format
 msgid "Alias-Mail-Extraction"
 msgstr ""
@@ -830,7 +828,7 @@ msgid "Error! You cannot create recursive categories."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:444
+#: code:addons/dms/models/directory.py:437
 #, python-format
 msgid "Error! You cannot create recursive directories."
 msgstr ""
@@ -1197,7 +1195,7 @@ msgid "Migrate"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:229
+#: code:addons/dms/models/dms_file.py:220
 #, python-format
 msgid "Migrate File %s of %s [ %s ]"
 msgstr ""
@@ -1240,8 +1238,7 @@ msgstr ""
 
 #. module: dms
 #: code:addons/dms/controllers/portal.py:79
-#: code:addons/dms/controllers/portal.py:89
-#: code:addons/dms/controllers/portal.py:92
+#: code:addons/dms/controllers/portal.py:86
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
@@ -1399,8 +1396,6 @@ msgstr ""
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
-#: model:ir.model.fields,field_description:dms.field_dms_directory__partner_id
-#: model:ir.model.fields,field_description:dms.field_dms_file__partner_id
 msgid "Partner"
 msgstr ""
 
@@ -1690,31 +1685,31 @@ msgid "The configuration is done!"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:577
+#: code:addons/dms/models/dms_file.py:575
 #, python-format
 msgid "The directory has to have the permission to create files."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:476
+#: code:addons/dms/models/directory.py:469
 #, python-format
 msgid "The directory name is invalid."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:561
+#: code:addons/dms/models/dms_file.py:559
 #, python-format
 msgid "The file has a forbidden file extension."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:545
+#: code:addons/dms/models/dms_file.py:543
 #, python-format
 msgid "The file name is invalid."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:568
+#: code:addons/dms/models/dms_file.py:566
 #, python-format
 msgid "The maximum upload size is %s MB)."
 msgstr ""
@@ -1740,13 +1735,13 @@ msgid "The owner of records created upon receiving emails on this alias. If this
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:466
+#: code:addons/dms/models/directory.py:459
 #, python-format
 msgid "The parent directory has to have the permission to create directories."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:650
+#: code:addons/dms/models/dms_file.py:648
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
 msgstr ""
