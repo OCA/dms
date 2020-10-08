@@ -9,9 +9,12 @@ import logging
 import mimetypes
 from collections import defaultdict
 
+from werkzeug.urls import url_encode
+
 from odoo import SUPERUSER_ID, _, api, fields, models, tools
 from odoo.exceptions import AccessError, ValidationError
 from odoo.osv import expression
+from odoo.tools import human_size
 from odoo.tools.mimetypes import guess_mimetype
 
 from ..tools import file
@@ -25,6 +28,7 @@ class File(models.Model):
     _description = "File"
 
     _inherit = [
+        "portal.mixin",
         "dms.security.mixin",
         "dms.mixins.thumbnail",
         "mail.thread",
@@ -149,6 +153,16 @@ class File(models.Model):
     content_file = fields.Binary(
         attachment=True, string="Content File", prefetch=False, invisible=True
     )
+
+    def get_human_size(self):
+        return human_size(self.size)
+
+    @api.multi
+    def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
+        self.ensure_one()
+        params = {"access_token": self._portal_ensure_token()}
+        url = "/my/dms/file/%s/download" % self.id
+        return "{}?{}".format(url, url_encode(params))
 
     # ----------------------------------------------------------
     # Helper
@@ -494,7 +508,14 @@ class File(models.Model):
     def check_access(self, operation, raise_exception=False):
         res = super(File, self).check_access(operation, raise_exception)
         try:
-            return res and self.check_directory_access(operation) is None
+            if self.env.user.has_group("base.group_portal"):
+                res_access = res and self.check_directory_access(operation)
+                return res_access and (
+                    self.directory_id.id
+                    not in self.directory_id._get_ids_without_access_groups(operation)
+                )
+            else:
+                return res and self.check_directory_access(operation)
         except AccessError:
             if raise_exception:
                 raise
@@ -504,7 +525,7 @@ class File(models.Model):
         if not vals:
             vals = {}
         if self.env.user.id == SUPERUSER_ID:
-            return None
+            return True
         if "directory_id" in vals and vals["directory_id"]:
             records = self.env["dms.directory"].browse(vals["directory_id"])
         else:
