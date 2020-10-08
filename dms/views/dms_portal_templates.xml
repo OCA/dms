@@ -20,19 +20,21 @@
     >
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <t t-if="page_name == 'dms_directory'">
-                <li class="breadcrumb-item">
-                    <t t-if="dms_directory">
-                        <a href="/my/dms/" title="DMS">DMS</a>
-                    </t>
-                    <t t-if="not dms_directory">
-                        <span>DMS</span>
-                    </t>
-                </li>
+                <t t-if="not access_token">
+                    <li class="breadcrumb-item">
+                        <t t-if="dms_directory">
+                            <a href="/my/dms/" title="DMS">DMS</a>
+                        </t>
+                        <t t-if="not dms_directory">
+                            <span>DMS</span>
+                        </t>
+                    </li>
+                </t>
                 <t t-foreach="dms_parent_categories" t-as="dms_parent_category">
                     <li class="breadcrumb-item">
                         <t t-if="dms_parent_category.id != dms_directory.id">
                             <a
-                                t-attf-href="/my/dms/directory/#{dms_parent_category.id}"
+                                t-attf-href="/my/dms/directory/#{dms_parent_category.id}?{{ keep_query() }}"
                                 t-att-title="dms_parent_category.name"
                             >
                                 <span t-esc="dms_parent_category.name" />
@@ -68,7 +70,7 @@
                         <tr class="tr_dms_directory">
                             <td>
                                 <a
-                                    t-attf-href="/my/dms/directory/#{dms_directory.id}"
+                                    t-attf-href="/my/dms/directory/#{dms_directory.id}?{{ keep_query() }}"
                                     t-attf-class="tr_dms_directory_link"
                                     t-att-title="dms_directory.name"
                                 >

@@ -9,8 +9,6 @@ import logging
 import mimetypes
 from collections import defaultdict
 
-from werkzeug.urls import url_encode
-
 from odoo import SUPERUSER_ID, _, api, fields, models, tools
 from odoo.exceptions import AccessError, ValidationError
 from odoo.osv import expression
@@ -157,12 +155,37 @@ class File(models.Model):
     def get_human_size(self):
         return human_size(self.size)
 
-    @api.multi
     def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
         self.ensure_one()
-        params = {"access_token": self._portal_ensure_token()}
-        url = "/my/dms/file/%s/download" % self.id
-        return "{}?{}".format(url, url_encode(params))
+        return "/my/dms/file/{}/download?access_token={}&db={}".format(
+            self.id, self._portal_ensure_token(), self.env.cr.dbname,
+        )
+
+    def check_access_token(self, access_token=False):
+        res = False
+        if access_token:
+            if self.access_token and self.access_token == access_token:
+                return True
+            else:
+                items = (
+                    self.env["dms.directory"]
+                    .sudo()
+                    .search([("access_token", "=", access_token)])
+                )
+                if items:
+                    item = items[0]
+                    if self.directory_id.id == item.id:
+                        return True
+                    else:
+                        directory_item = self.directory_id
+                        while directory_item.parent_id:
+                            if directory_item.id == self.directory_id.id:
+                                return True
+                            directory_item = directory_item.parent_id
+                        # Fix last level
+                        if directory_item.id == self.directory_id.id:
+                            return True
+        return res
 
     # ----------------------------------------------------------
     # Helper
@@ -488,6 +511,10 @@ class File(models.Model):
         )
         if self.env.user.id == SUPERUSER_ID:
             return len(result) if count else result
+        # Fix access files with share button (public)
+        if self.env.user.has_group("base.group_public"):
+            return len(result) if count else result
+        # operations
         if not result:
             return 0 if count else []
         file_ids = set(result)
