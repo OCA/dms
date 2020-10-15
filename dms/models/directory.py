@@ -194,20 +194,54 @@ class DmsDirectory(models.Model):
                 """,
     )
 
-    def _compute_access_url(self):
-        for record in self:
-            record.access_url = "/my/dms/directory/{}".format(record.id)
+    def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
+        self.ensure_one()
+        return "/my/dms/directory/{}?access_token={}&db={}".format(
+            self.id, self._portal_ensure_token(), self.env.cr.dbname,
+        )
+
+    def check_access_token(self, access_token=False):
+        res = False
+        if access_token:
+            items = self.env["dms.directory"].search(
+                [("access_token", "=", access_token)]
+            )
+            if items:
+                item = items[0]
+                if item.id == self.id:
+                    return True
+                else:
+                    directory_item = self
+                    while directory_item.parent_id:
+                        if directory_item.id == item.id:
+                            return True
+                        directory_item = directory_item.parent_id
+                    # Fix last level
+                    if directory_item.id == item.id:
+                        return True
+        return res
 
     @api.model
-    def _get_parent_categories(self):
+    def _get_parent_categories(self, access_token):
         self.ensure_one()
         directories = [self]
         current_directory = self
-        while current_directory.parent_id and current_directory.parent_id.check_access(
-            "read", False
-        ):
-            directories.append(current_directory.parent_id)
-            current_directory = current_directory.parent_id
+        if access_token:
+            # Only show parent categories to access_token
+            stop = False
+            while current_directory.parent_id and not stop:
+                if current_directory.access_token == access_token:
+                    stop = False
+                else:
+                    directories.append(current_directory.parent_id)
+                current_directory = current_directory.parent_id
+        else:
+            while (
+                current_directory.parent_id
+                and current_directory.parent_id.check_access("read", False)
+            ):
+                directories.append(current_directory.parent_id)
+                current_directory = current_directory.parent_id
         return directories[::-1]
 
     def _get_own_root_directories(self, user_id):
@@ -233,6 +267,9 @@ class DmsDirectory(models.Model):
         if self.env.user.has_group("base.group_portal"):
             if self.id in self._get_ids_without_access_groups(operation):
                 res = False
+        # Fix show breadcrumb with share button (public)
+        if self.env.user.has_group("base.group_public"):
+            res = True
         return res
 
     @api.model
