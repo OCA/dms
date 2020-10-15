@@ -6,7 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2020-10-05 08:34+0000\n"
+"PO-Revision-Date: 2020-10-05 08:34+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,13 +30,21 @@ msgid ""
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:353
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "%s Files"
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:346
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "%s Subdirectories"
 msgstr ""
@@ -165,6 +175,11 @@ msgid "<span class=\"o_form_label\">File Size</span>"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+msgid "<span>DMS</span>"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
 msgid ""
 "A Python dictionary that will be evaluated to provide default values when "
@@ -172,37 +187,61 @@ msgid ""
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:458
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:453
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A directory has to have a parent directory."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:488
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A directory with the same name already exists."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:619
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A file is locked, the folder cannot be deleted."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
+=======
+#: code:addons/dms/models/dms_file.py:552
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A file with the same name already exists."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:451
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A root directory has to have a root storage."
 msgstr ""
@@ -225,6 +264,12 @@ msgid "Access Information"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_warning
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_warning
+msgid "Access warning"
+msgstr ""
+
+#. module: dms
 #: model:dms.tag,name:dms.tag_07_demo
 msgid "Accounting"
 msgstr ""
@@ -236,6 +281,7 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Actions"
@@ -278,6 +324,11 @@ msgid "Add a new File."
 msgstr ""
 
 #. module: dms
+#: model:dms.access.group,name:dms.access_group_01_demo
+msgid "Admin"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_id
 msgid "Alias"
 msgstr ""
@@ -303,7 +354,11 @@ msgid "Alias domain"
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:547
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "Alias-Mail-Extraction"
 msgstr ""
@@ -641,6 +696,17 @@ msgid "Customer Invoice"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__access_url
+#: model:ir.model.fields,help:dms.field_dms_file__access_url
+msgid "Customer Portal URL"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+msgid "DMS"
+msgstr ""
+
+#. module: dms
 #: model:ir.model,name:dms.model_dms_security_mixin
 msgid "DMS Security Mixin"
 msgstr ""
@@ -687,6 +753,11 @@ msgid "Delete Access"
 msgstr ""
 
 #. module: dms
+#: model:dms.access.group,name:dms.access_group_02_demo
+msgid "Demo"
+msgstr ""
+
+#. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directories_storage
 #: model:ir.actions.act_window,name:dms.action_dms_directory
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__directory_ids
@@ -694,6 +765,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__storage_directory_ids
 #: model:ir.model.fields,field_description:dms.field_dms_tag__directory_ids
 #: model:ir.ui.menu,name:dms.menu_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
@@ -820,7 +892,11 @@ msgid "Error! You cannot create recursive categories."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:444
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "Error! You cannot create recursive directories."
 msgstr ""
@@ -901,6 +977,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__file
 #, python-format
 msgid "Filestore"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Folder"
 msgstr ""
 
 #. module: dms
@@ -1117,6 +1198,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Last update"
+msgstr ""
+
+#. module: dms
 #. openerp-web
 #: code:addons/dms/static/src/xml/views.xml:0
 #, python-format
@@ -1192,7 +1278,11 @@ msgid "Migrate"
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
+=======
+#: code:addons/dms/models/dms_file.py:229
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "Migrate File %s of %s [ %s ]"
 msgstr ""
@@ -1234,10 +1324,15 @@ msgid "My Files"
 msgstr ""
 
 #. module: dms
+#: code:addons/dms/controllers/portal.py:79
+#: code:addons/dms/controllers/portal.py:89
+#: code:addons/dms/controllers/portal.py:92
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__name
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+#, python-format
 msgid "Name"
 msgstr ""
 
@@ -1281,6 +1376,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__not_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__not_done
 msgid "Not done"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Not results"
 msgstr ""
 
 #. module: dms
@@ -1384,6 +1484,8 @@ msgstr ""
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
+#: model:ir.model.fields,field_description:dms.field_dms_directory__partner_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__partner_id
 msgid "Partner"
 msgstr ""
 
@@ -1414,6 +1516,12 @@ msgstr ""
 #. module: dms
 #: model:dms.tag,name:dms.tag_05_demo
 msgid "Portal"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_url
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_url
+msgid "Portal Access URL"
 msgstr ""
 
 #. module: dms
@@ -1485,8 +1593,20 @@ msgid "Save Type"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_token
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_token
+msgid "Security Token"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Settings"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Share"
 msgstr ""
 
 #. module: dms
@@ -1503,6 +1623,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__size
 #: model:ir.model.fields,field_description:dms.field_dms_file__size
 #: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_binary_max_size
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Size"
 msgstr ""
 
@@ -1655,31 +1776,51 @@ msgid "The configuration is done!"
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
+=======
+#: code:addons/dms/models/dms_file.py:577
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The directory has to have the permission to create files."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:476
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The directory name is invalid."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
+=======
+#: code:addons/dms/models/dms_file.py:561
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The file has a forbidden file extension."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
+=======
+#: code:addons/dms/models/dms_file.py:545
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The file name is invalid."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
+=======
+#: code:addons/dms/models/dms_file.py:568
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The maximum upload size is %s MB)."
 msgstr ""
@@ -1714,13 +1855,21 @@ msgid ""
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
+=======
+#: code:addons/dms/models/directory.py:466
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The parent directory has to have the permission to create directories."
 msgstr ""
 
 #. module: dms
+<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
+=======
+#: code:addons/dms/models/dms_file.py:650
+>>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
 msgstr ""
@@ -1778,6 +1927,7 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_mimetype
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Type"
 msgstr ""
 
@@ -1853,6 +2003,18 @@ msgid "Views"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__website_message_ids
+#: model:ir.model.fields,field_description:dms.field_dms_file__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__website_message_ids
+#: model:ir.model.fields,help:dms.field_dms_file__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_write
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
@@ -1871,6 +2033,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "action_close_documents_onboarding"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "element(s)"
 msgstr ""
 
 #. module: dms
