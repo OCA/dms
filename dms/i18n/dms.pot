@@ -6,9 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 08:34+0000\n"
-"PO-Revision-Date: 2020-10-05 08:34+0000\n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,21 +28,13 @@ msgid ""
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:353
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "%s Files"
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:346
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "%s Subdirectories"
 msgstr ""
@@ -187,61 +177,37 @@ msgid ""
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:458
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:453
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A directory has to have a parent directory."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:488
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A directory with the same name already exists."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:619
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A file is locked, the folder cannot be deleted."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
-=======
-#: code:addons/dms/models/dms_file.py:552
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A file with the same name already exists."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:451
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "A root directory has to have a root storage."
 msgstr ""
@@ -354,11 +320,7 @@ msgid "Alias domain"
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:547
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "Alias-Mail-Extraction"
 msgstr ""
@@ -892,11 +854,7 @@ msgid "Error! You cannot create recursive categories."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:444
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "Error! You cannot create recursive directories."
 msgstr ""
@@ -1278,11 +1236,7 @@ msgid "Migrate"
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
-=======
-#: code:addons/dms/models/dms_file.py:229
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "Migrate File %s of %s [ %s ]"
 msgstr ""
@@ -1324,9 +1278,8 @@ msgid "My Files"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/controllers/portal.py:79
-#: code:addons/dms/controllers/portal.py:89
-#: code:addons/dms/controllers/portal.py:92
+#: code:addons/dms/controllers/portal.py:0
+#: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
@@ -1484,8 +1437,6 @@ msgstr ""
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
-#: model:ir.model.fields,field_description:dms.field_dms_directory__partner_id
-#: model:ir.model.fields,field_description:dms.field_dms_file__partner_id
 msgid "Partner"
 msgstr ""
 
@@ -1776,51 +1727,31 @@ msgid "The configuration is done!"
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
-=======
-#: code:addons/dms/models/dms_file.py:577
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The directory has to have the permission to create files."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:476
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The directory name is invalid."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
-=======
-#: code:addons/dms/models/dms_file.py:561
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The file has a forbidden file extension."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
-=======
-#: code:addons/dms/models/dms_file.py:545
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The file name is invalid."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
-=======
-#: code:addons/dms/models/dms_file.py:568
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The maximum upload size is %s MB)."
 msgstr ""
@@ -1855,21 +1786,13 @@ msgid ""
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/directory.py:0
-=======
-#: code:addons/dms/models/directory.py:466
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The parent directory has to have the permission to create directories."
 msgstr ""
 
 #. module: dms
-<<<<<<< HEAD
 #: code:addons/dms/models/dms_file.py:0
-=======
-#: code:addons/dms/models/dms_file.py:650
->>>>>>> [IMP] dms: Portal
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
 msgstr ""
