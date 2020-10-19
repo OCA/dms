@@ -14,7 +14,7 @@ odoo.define("dms.tour", function(require) {
         [
             {
                 content: "Go /my/dms url",
-                trigger: 'a[href*="/my/dms/"]',
+                trigger: 'a[href*="/my/dms"]',
             },
             {
                 content: "Go to Photos directory",

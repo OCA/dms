@@ -38,30 +38,11 @@ class CustomerPortal(CustomerPortal):
         return values
 
     @http.route(
-        ["/my/dms/", "/my/dms/directory/<int:dms_directory_id>"],
-        type="http",
-        auth="public",
-        website=True,
+        ["/my/dms"], type="http", auth="user", website=True,
     )
     def portal_my_dms(
-        self,
-        dms_directory_id=False,
-        sortby=None,
-        filterby=None,
-        search=None,
-        search_in="name",
-        access_token=None,
-        **kw
+        self, sortby=None, filterby=None, search=None, search_in="name", **kw
     ):
-        """Process user's consent acceptance or rejection."""
-        ensure_db()
-        try:
-            # If there's a website, we need a user to render the template
-            request.uid = request.website.user_id.id
-        except AttributeError:
-            # If there's no website, the default is OK
-            pass
-        # operations
         values = self._prepare_portal_layout_values()
         searchbar_sortings = {"name": {"label": _("Name"), "order": "name asc"}}
         # default sortby br
@@ -75,18 +56,15 @@ class CustomerPortal(CustomerPortal):
         if not filterby:
             filterby = "name"
         # domain
-        if not dms_directory_id:
-            domain = [
-                (
-                    "id",
-                    "in",
-                    request.env["dms.directory"]._get_own_root_directories(
-                        request.env.user.id
-                    ),
-                )
-            ]
-        else:
-            domain = [("is_hidden", "=", False), ("parent_id", "=", dms_directory_id)]
+        domain = [
+            (
+                "id",
+                "in",
+                request.env["dms.directory"]._get_own_root_directories(
+                    request.env.user.id
+                ),
+            )
+        ]
         # search
         if search and search_in:
             search_domain = []
@@ -105,55 +83,112 @@ class CustomerPortal(CustomerPortal):
             {
                 "dms_directories": items.sudo(),
                 "page_name": "dms_directory",
-                "default_url": "/my/dms/directories",
+                "default_url": "/my/dms",
                 "searchbar_sortings": searchbar_sortings,
                 "searchbar_inputs": searchbar_inputs,
                 "search_in": search_in,
                 "sortby": sortby,
                 "filterby": filterby,
-                "access_token": access_token,
+                "access_token": None,
             }
         )
-        if dms_directory_id:
-            # check_access
-            res = self._dms_check_access(
-                "dms.directory", dms_directory_id, access_token
-            )
-            if not res:
-                if access_token:
-                    return request.redirect("/")
-                else:
-                    return request.redirect("/my")
+        return request.render("dms.portal_my_dms", values)
 
-            dms_directory_sudo = res
-            # dms_files_count
-            domain = [
-                ("is_hidden", "=", False),
-                ("directory_id", "=", dms_directory_id),
-            ]
-            # search
-            if search and search_in:
-                search_domain = []
-                if search_in == "name":
-                    search_domain = OR([search_domain, [("name", "ilike", search)]])
-                domain += search_domain
-            # items
-            items = (
-                request.env["dms.file"]
-                .sudo(request.env.user.id)
-                .search(domain, order=sort_br)
-            )
-            request.session["my_dms_file_history"] = items.ids
-            dms_parent_categories = dms_directory_sudo.sudo(
-                request.env.user.id
-            )._get_parent_categories(access_token)
-            values.update(
-                {
-                    "dms_directory": dms_directory_sudo,
-                    "dms_files": items.sudo(),
-                    "dms_parent_categories": dms_parent_categories,
-                }
-            )
+    @http.route(
+        ["/my/dms/directory/<int:dms_directory_id>"],
+        type="http",
+        auth="public",
+        website=True,
+    )
+    def portal_my_dms_directory(
+        self,
+        dms_directory_id=False,
+        sortby=None,
+        filterby=None,
+        search=None,
+        search_in="name",
+        access_token=None,
+        **kw
+    ):
+        """Process user's consent acceptance or rejection."""
+        ensure_db()
+        try:
+            # If there's a website, we need a user to render the template
+            request.uid = request.website.user_id.id
+        except AttributeError:
+            # If there's no website, the default is OK
+            pass
+        # operations
+        searchbar_sortings = {"name": {"label": _("Name"), "order": "name asc"}}
+        # default sortby br
+        if not sortby:
+            sortby = "name"
+        sort_br = searchbar_sortings[sortby]["order"]
+        # search
+        searchbar_inputs = {
+            "name": {"input": "name", "label": _("Name")},
+        }
+        if not filterby:
+            filterby = "name"
+        # domain
+        domain = [("is_hidden", "=", False), ("parent_id", "=", dms_directory_id)]
+        # search
+        if search and search_in:
+            search_domain = []
+            if search_in == "name":
+                search_domain = OR([search_domain, [("name", "ilike", search)]])
+            domain += search_domain
+        # content according to pager and archive selected
+        dms_directory_items = (
+            request.env["dms.directory"]
+            .sudo(request.env.user.id)
+            .search(domain, order=sort_br)
+        )
+        request.session["my_dms_folder_history"] = dms_directory_items.ids
+        # check_access
+        res = self._dms_check_access("dms.directory", dms_directory_id, access_token)
+        if not res:
+            if access_token:
+                return request.redirect("/")
+            else:
+                return request.redirect("/my")
+        dms_directory_sudo = res
+        # dms_files_count
+        domain = [
+            ("is_hidden", "=", False),
+            ("directory_id", "=", dms_directory_id),
+        ]
+        # search
+        if search and search_in:
+            search_domain = []
+            if search_in == "name":
+                search_domain = OR([search_domain, [("name", "ilike", search)]])
+            domain += search_domain
+        # items
+        dms_file_items = (
+            request.env["dms.file"]
+            .sudo(request.env.user.id)
+            .search(domain, order=sort_br)
+        )
+        request.session["my_dms_file_history"] = dms_file_items.ids
+        dms_parent_categories = dms_directory_sudo.sudo(
+            request.env.user.id
+        )._get_parent_categories(access_token)
+        # values
+        values = {
+            "dms_directories": dms_directory_items.sudo(),
+            "page_name": "dms_directory",
+            "default_url": "/my/dms/directories",
+            "searchbar_sortings": searchbar_sortings,
+            "searchbar_inputs": searchbar_inputs,
+            "search_in": search_in,
+            "sortby": sortby,
+            "filterby": filterby,
+            "access_token": access_token,
+            "dms_directory": dms_directory_sudo,
+            "dms_files": dms_file_items.sudo(),
+            "dms_parent_categories": dms_parent_categories,
+        }
         return request.render("dms.portal_my_dms", values)
 
     @http.route(
