@@ -11,10 +11,7 @@ from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
-try:
-    import bsdiff4
-except ImportError:
-    bsdiff4 = False
+import bsdiff4
 
 
 class FileVersion(models.Model):
@@ -45,11 +42,11 @@ class FileVersion(models.Model):
         related="storage_id.incremental_versions", readonly=True
     )
 
-    previous_version = fields.Many2one(
+    previous_version_id = fields.Many2one(
         comodel_name="dms.version", ondelete="set null", string="Previous Version"
     )
 
-    next_version = fields.Many2one(
+    next_version_id = fields.Many2one(
         comodel_name="dms.version", ondelete="set null", string="Next Version"
     )
 
@@ -79,7 +76,7 @@ class FileVersion(models.Model):
         if self.is_compress:
             binary = zlib.decompress(binary)
         if self.is_incremental and patch:
-            prev_version = self.previous_version
+            prev_version = self.previous_version_id
             prev_binary = prev_version.get_binary()
             binary = bsdiff4.patch(prev_binary, binary)
         return binary
@@ -91,14 +88,16 @@ class FileVersion(models.Model):
             if file.count_versions > max_size:
                 remove_size = file.count_versions - max_size
                 remove_versions = self.env["dms.version"]
-                current = file.versions.filtered(lambda rec: not rec.previous_version)
+                current = file.version_ids.filtered(
+                    lambda rec: not rec.previous_version_id
+                )
                 while len(remove_versions) < remove_size:
                     remove_versions |= current
-                    current = current.next_version
+                    current = current.next_version_id
                 current.write(
                     {
                         "content": current.content,
-                        "previous_version": None,
+                        "previous_version_id": None,
                         "is_incremental": False,
                     }
                 )
@@ -108,29 +107,29 @@ class FileVersion(models.Model):
     def add_version(self, file, content):
         domain = [
             ("file_id", "=", file.id),
-            ("next_version", "=", False),
         ]
-        record = self.search(domain, limit=1)
+        record = self.search(domain, order='id desc' limit=1)
         if not record:
             return self.create(
                 {"name": file.name, "file_id": file.id, "content": content}
             )
-        new_version = self.create(
-            {
-                "name": file.name,
-                "file_id": file.id,
-                "content": content,
-                "previous_version": record.id,
-            }
-        )
-        record.write({"next_version": new_version.id})
-        return new_version
+        else:        
+            new_version = self.create(
+                {
+                    "name": file.name,
+                    "file_id": file.id,
+                    "content": content,
+                    "previous_version_id": record.id,
+                }
+            )
+            record.write({"next_version_id": new_version.id})
+            return new_version
 
     @api.model
     def pop_version(self, file):
         domain = [
             ("file_id", "=", file.id),
-            ("next_version", "=", False),
+            ("next_version_id", "=", False),
         ]
         record = self.search(domain, limit=1)
         if not record:
@@ -149,10 +148,10 @@ class FileVersion(models.Model):
                 binary = record.get_binary() or b""
                 record.content = base64.b64encode(binary)
 
-    @api.constrains("previous_version", "is_incremental")
+    @api.constrains("previous_version_id", "is_incremental")
     def _check_incremental(self):
         for record in self:
-            if record.is_incremental and not record.previous_version.exists():
+            if record.is_incremental and not record.previous_version_id.exists():
                 raise ValidationError(
                     _("An incremental version has to have a previous version.")
                 )
@@ -163,8 +162,8 @@ class FileVersion(models.Model):
             is_compress = False
             is_incremental = False
             binary = base64.b64decode(record.content or "")
-            if record.incremental_versions and record.previous_version.exists():
-                prev_binary = record.previous_version.get_binary()
+            if record.incremental_versions and record.previous_version_id.exists():
+                prev_binary = record.previous_version_id.get_binary()
                 binary = bsdiff4.diff(prev_binary, binary)
                 is_incremental = True
             if record.compress_versions:

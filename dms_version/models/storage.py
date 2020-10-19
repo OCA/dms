@@ -8,10 +8,7 @@ from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
-try:
-    import bsdiff4
-except ImportError:
-    bsdiff4 = False
+import bsdiff4
 
 
 class Storage(models.Model):
@@ -61,13 +58,6 @@ class Storage(models.Model):
         domain = [("has_versioning", "=", True), ("clean_versions", "=", "autovacuum")]
         self.search(domain).action_clean_file_versions()
 
-    @api.constrains("incremental_versions")
-    def _check_incremental_versions(self):
-        for record in self:
-            if record.incremental_versions and not bsdiff4:
-                raise ValidationError(
-                    _("Incremental Version Control needs the `bsdiff4` Python library.")
-                )
 
     @api.constrains("has_versioning", "stored_versions")
     def _check_stored_versions(self):
