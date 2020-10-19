@@ -17,4 +17,5 @@
         "views/storage.xml",
     ],
     "application": False,
+    "external_dependencies": {"python": ["bsdiff4"]},
 }

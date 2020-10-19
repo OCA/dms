@@ -165,6 +165,11 @@ msgid "<span class=\"o_form_label\">File Size</span>"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+msgid "<span>DMS</span>"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
 msgid ""
 "A Python dictionary that will be evaluated to provide default values when "
@@ -225,6 +230,12 @@ msgid "Access Information"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_warning
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_warning
+msgid "Access warning"
+msgstr ""
+
+#. module: dms
 #: model:dms.tag,name:dms.tag_07_demo
 msgid "Accounting"
 msgstr ""
@@ -236,6 +247,7 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Actions"
@@ -275,6 +287,11 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_migration
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_storage_migration
 msgid "Add a new File."
+msgstr ""
+
+#. module: dms
+#: model:dms.access.group,name:dms.access_group_01_demo
+msgid "Admin"
 msgstr ""
 
 #. module: dms
@@ -641,6 +658,17 @@ msgid "Customer Invoice"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__access_url
+#: model:ir.model.fields,help:dms.field_dms_file__access_url
+msgid "Customer Portal URL"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+msgid "DMS"
+msgstr ""
+
+#. module: dms
 #: model:ir.model,name:dms.model_dms_security_mixin
 msgid "DMS Security Mixin"
 msgstr ""
@@ -687,6 +715,11 @@ msgid "Delete Access"
 msgstr ""
 
 #. module: dms
+#: model:dms.access.group,name:dms.access_group_02_demo
+msgid "Demo"
+msgstr ""
+
+#. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directories_storage
 #: model:ir.actions.act_window,name:dms.action_dms_directory
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__directory_ids
@@ -694,6 +727,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__storage_directory_ids
 #: model:ir.model.fields,field_description:dms.field_dms_tag__directory_ids
 #: model:ir.ui.menu,name:dms.menu_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
@@ -901,6 +935,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__file
 #, python-format
 msgid "Filestore"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Folder"
 msgstr ""
 
 #. module: dms
@@ -1117,6 +1156,11 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Last update"
+msgstr ""
+
+#. module: dms
 #. openerp-web
 #: code:addons/dms/static/src/xml/views.xml:0
 #, python-format
@@ -1234,10 +1278,14 @@ msgid "My Files"
 msgstr ""
 
 #. module: dms
+#: code:addons/dms/controllers/portal.py:0
+#: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__name
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+#, python-format
 msgid "Name"
 msgstr ""
 
@@ -1281,6 +1329,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__not_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__not_done
 msgid "Not done"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Not results"
 msgstr ""
 
 #. module: dms
@@ -1417,6 +1470,12 @@ msgid "Portal"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_url
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_url
+msgid "Portal Access URL"
+msgstr ""
+
+#. module: dms
 #: model:dms.tag,name:dms.tag_10_demo
 msgid "Product"
 msgstr ""
@@ -1485,8 +1544,20 @@ msgid "Save Type"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_token
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_token
+msgid "Security Token"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Settings"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Share"
 msgstr ""
 
 #. module: dms
@@ -1503,6 +1574,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__size
 #: model:ir.model.fields,field_description:dms.field_dms_file__size
 #: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_binary_max_size
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Size"
 msgstr ""
 
@@ -1778,6 +1850,7 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_mimetype
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Type"
 msgstr ""
 
@@ -1853,6 +1926,18 @@ msgid "Views"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__website_message_ids
+#: model:ir.model.fields,field_description:dms.field_dms_file__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__website_message_ids
+#: model:ir.model.fields,help:dms.field_dms_file__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_write
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
@@ -1871,6 +1956,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "action_close_documents_onboarding"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "element(s)"
 msgstr ""
 
 #. module: dms
