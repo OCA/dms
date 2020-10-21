@@ -74,7 +74,7 @@ class Thumbnail(models.AbstractModel):
     def _compute_thumbnail(self):
         for record in self:
             if record.custom_thumbnail:
-                record.thumbnail = record.custom_thumbnail
+                record.thumbnail = record.with_context(bin_size=False).custom_thumbnail
             else:
                 record.thumbnail = self._get_thumbnail_placeholder_image(
                     "original", record._get_thumbnail_placeholder_name()
