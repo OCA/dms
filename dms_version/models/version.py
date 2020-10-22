@@ -108,7 +108,7 @@ class FileVersion(models.Model):
         domain = [
             ("file_id", "=", file.id),
         ]
-        record = self.search(domain, order='id desc' limit=1)
+        record = self.search(domain, order='id desc', limit=1)
         if not record:
             return self.create(
                 {"name": file.name, "file_id": file.id, "content": content}
