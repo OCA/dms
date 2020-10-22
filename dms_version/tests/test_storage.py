@@ -4,14 +4,13 @@
 import logging
 import os
 import unittest
+import bsdiff4
 
 from odoo.addons.dms.tests.common import multi_users
 from odoo.addons.dms.tests.test_storage import StorageTestCase
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
-
-import bsdiff4
 
 
 class StorageVersionTestCase(StorageTestCase):
