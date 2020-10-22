@@ -5,13 +5,12 @@ import base64
 import logging
 import zlib
 from collections import defaultdict
+import bsdiff4
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
-
-import bsdiff4
 
 
 class FileVersion(models.Model):
