@@ -8,7 +8,7 @@
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-if="dms_directory_count" t-call="portal.portal_docs_entry">
                 <t t-set="title">Directories</t>
-                <t t-set="url" t-value="'/my/dms/'" />
+                <t t-set="url" t-value="'/my/dms'" />
                 <t t-set="count" t-value="dms_directory_count" />
             </t>
         </xpath>
@@ -23,7 +23,7 @@
                 <t t-if="not access_token">
                     <li class="breadcrumb-item">
                         <t t-if="dms_directory">
-                            <a href="/my/dms/" title="DMS">DMS</a>
+                            <a href="/my/dms" title="DMS">DMS</a>
                         </t>
                         <t t-if="not dms_directory">
                             <span>DMS</span>
