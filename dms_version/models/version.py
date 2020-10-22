@@ -5,6 +5,7 @@ import base64
 import logging
 import zlib
 from collections import defaultdict
+
 import bsdiff4
 
 from odoo import _, api, fields, models, tools
@@ -107,12 +108,12 @@ class FileVersion(models.Model):
         domain = [
             ("file_id", "=", file.id),
         ]
-        record = self.search(domain, order='id desc', limit=1)
+        record = self.search(domain, order="id desc", limit=1)
         if not record:
             return self.create(
                 {"name": file.name, "file_id": file.id, "content": content}
             )
-        else:        
+        else:
             new_version = self.create(
                 {
                     "name": file.name,

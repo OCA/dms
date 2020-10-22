@@ -56,7 +56,6 @@ class Storage(models.Model):
         domain = [("has_versioning", "=", True), ("clean_versions", "=", "autovacuum")]
         self.search(domain).action_clean_file_versions()
 
-
     @api.constrains("has_versioning", "stored_versions")
     def _check_stored_versions(self):
         for record in self:
