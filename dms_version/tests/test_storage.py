@@ -4,6 +4,7 @@
 import logging
 import os
 import unittest
+
 import bsdiff4
 
 from odoo.addons.dms.tests.common import multi_users
