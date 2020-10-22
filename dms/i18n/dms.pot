@@ -1237,8 +1237,10 @@ msgid "My Files"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/controllers/portal.py:66
-#: code:addons/dms/controllers/portal.py:73
+#: code:addons/dms/controllers/portal.py:47
+#: code:addons/dms/controllers/portal.py:54
+#: code:addons/dms/controllers/portal.py:122
+#: code:addons/dms/controllers/portal.py:129
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
