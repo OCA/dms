@@ -128,8 +128,8 @@ class StorageVersionTestCase(StorageTestCase):
         for _ in range(5):
             file.write({"content": self.content_base64()})
         domain = [
-            ("file", "=", file.id),
-            ("previous_version", "=", False),
+            ("file_id", "=", file.id),
+            ("previous_version_id", "=", False),
         ]
         oldest_version = self.version.search(domain, limit=1)
         newer_versions = file.version_ids - oldest_version
