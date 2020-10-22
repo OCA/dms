@@ -8,8 +8,6 @@ from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
-import bsdiff4
-
 
 class Storage(models.Model):
 
