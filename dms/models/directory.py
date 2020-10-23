@@ -272,6 +272,52 @@ class DmsDirectory(models.Model):
             res = True
         return res
 
+    allowed_model_ids = fields.Many2many(
+        compute="_compute_allowed_model_ids", comodel_name="ir.model", store=False
+    )
+    model_id = fields.Many2one(
+        comodel_name="ir.model",
+        domain="[('id', 'in', allowed_model_ids)]",
+        compute="_compute_model_id",
+        inverse="_inverse_model_id",
+        string="Model",
+        store=True,
+    )
+    res_model = fields.Char(string="Linked attachments model")
+    res_id = fields.Integer(string="Linked attachments record ID")
+    record_ref = fields.Reference(
+        string="Record Referenced", compute="_compute_record_ref", selection=[]
+    )
+    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
+
+    @api.depends("root_storage_id", "storage_id")
+    def _compute_allowed_model_ids(self):
+        for record in self:
+            if record.root_storage_id:
+                record.allowed_model_ids = record.root_storage_id.model_ids.ids
+            elif record.storage_id:
+                record.allowed_model_ids = record.storage_id.model_ids.ids
+
+    @api.depends("res_model")
+    def _compute_model_id(self):
+        for record in self:
+            if not record.res_model:
+                record.model_id = False
+                continue
+            record.model_id = self.env["ir.model"].search(
+                [("model", "=", record.res_model)]
+            )
+
+    def _inverse_model_id(self):
+        for record in self:
+            record.res_model = record.model_id.model
+
+    @api.depends("res_model", "res_id")
+    def _compute_record_ref(self):
+        for record in self:
+            if record.res_model and record.res_id:
+                record.record_ref = "{},{}".format(record.res_model, record.res_id)
+
     @api.model
     def _search_is_hidden(self, operator, value):
         return [("storage_id.is_hidden", operator, value)]
