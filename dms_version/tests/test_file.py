@@ -5,14 +5,13 @@ import base64
 import logging
 import os
 
-from odoo.addons.dms.tests.common import multi_users
-from odoo.addons.dms.tests.test_file import FileTestCase
+from odoo.addons.dms.tests.common import multi_users, DocumentsBaseCase
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
 
-class FileVersionTestCase(FileTestCase):
+class FileVersionTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_version_revert(self):
         storage = self.create_storage(sudo=True)

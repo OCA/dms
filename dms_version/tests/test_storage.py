@@ -7,14 +7,13 @@ import unittest
 
 import bsdiff4
 
-from odoo.addons.dms.tests.common import multi_users
-from odoo.addons.dms.tests.test_storage import StorageTestCase
+from odoo.addons.dms.tests.common import multi_users, DocumentsBaseCase
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
 
-class StorageVersionTestCase(StorageTestCase):
+class StorageVersionTestCase(DocumentsBaseCase):
     def _setup_test_data(self):
         super(StorageVersionTestCase, self)._setup_test_data()
         self.version = self.env["dms.version"]
