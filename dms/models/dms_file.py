@@ -655,6 +655,7 @@ class File(models.Model):
                         "datas": vals["content"],
                         "res_model": directory.res_model,
                         "res_id": directory.res_id,
+                        "type": "binary",
                     }
                 )
             )

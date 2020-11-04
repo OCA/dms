@@ -31,7 +31,11 @@ class IrAttachment(models.Model):
 
     def _dms_operations(self):
         for attachment in self:
-            if not attachment.res_model or not attachment.res_id:
+            if (
+                attachment.type != "binary"
+                or not attachment.res_model
+                or not attachment.res_id
+            ):
                 continue
             directories = self._get_dms_directories(
                 attachment.res_model, attachment.res_id
