@@ -1791,7 +1791,7 @@ msgid "The parent directory has to have the permission to create directories."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:731
+#: code:addons/dms/models/dms_file.py:732
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
 msgstr ""
