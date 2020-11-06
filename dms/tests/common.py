@@ -157,12 +157,12 @@ class DocumentsBaseCase(common.TransactionCase):
         self.attachment = self.env["ir.attachment"]
 
     def _setup_test_data(self):
-        self.storage = self.storage.sudo(self.env.uid)
-        self.directory = self.directory.sudo(self.env.uid)
-        self.file = self.file.sudo(self.env.uid)
-        self.category = self.category.sudo(self.env.uid)
-        self.tag = self.tag.sudo(self.env.uid)
-        self.attachment = self.attachment.sudo(self.env.uid)
+        self.storage = self.storage.with_user(self.env.uid)
+        self.directory = self.directory.with_user(self.env.uid)
+        self.file = self.file.with_user(self.env.uid)
+        self.category = self.category.with_user(self.env.uid)
+        self.tag = self.tag.with_user(self.env.uid)
+        self.attachment = self.attachment.with_user(self.env.uid)
 
     def _load(self, module, *args):
         convert_file(

@@ -301,9 +301,10 @@ class DmsDirectory(models.Model):
     @api.depends("root_storage_id", "storage_id")
     def _compute_allowed_model_ids(self):
         for record in self:
-            if record.root_storage_id:
+            record.allowed_model_ids = False
+            if record.root_storage_id and record.root_storage_id.model_ids:
                 record.allowed_model_ids = record.root_storage_id.model_ids.ids
-            elif record.storage_id:
+            elif record.storage_id and record.storage_id.model_ids:
                 record.allowed_model_ids = record.storage_id.model_ids.ids
 
     @api.depends("res_model")
@@ -323,6 +324,7 @@ class DmsDirectory(models.Model):
     @api.depends("res_model", "res_id")
     def _compute_record_ref(self):
         for record in self:
+            record.record_ref = False
             if record.res_model and record.res_id:
                 record.record_ref = "{},{}".format(record.res_model, record.res_id)
 

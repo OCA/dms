@@ -198,6 +198,7 @@ class File(models.Model):
     @api.depends("res_model", "res_id")
     def _compute_record_ref(self):
         for record in self:
+            record.record_ref = False
             if record.res_model and record.res_id:
                 record.record_ref = "{},{}".format(record.res_model, record.res_id)
 
@@ -448,14 +449,14 @@ class File(models.Model):
         selection = {value[0]: value[1] for value in values}
         for record in self:
             storage_type = record.storage_id.save_type
-            if storage_type != record.save_type:
+            if storage_type == "attachment" or storage_type == record.save_type:
+                record.migration = selection.get(storage_type)
+                record.require_migration = False
+            else:
                 storage_label = selection.get(storage_type)
                 file_label = selection.get(record.save_type)
                 record.migration = "{} > {}".format(file_label, storage_label)
                 record.require_migration = True
-            else:
-                record.migration = selection.get(storage_type)
-                record.require_migration = False
 
     def read(self, fields=None, load="_classic_read"):
         self.check_directory_access("read", {}, True)
@@ -547,13 +548,7 @@ class File(models.Model):
             return records
         directories = self._get_directories_from_database(records.ids)
         for directory in directories - directories._filter_access("read"):
-<<<<<<< HEAD
-            records -= self.browse(
-                directory.with_user(SUPERUSER_ID).mapped("file_ids").ids
-            )
-=======
             records -= self.browse(directory.sudo().mapped("file_ids").ids)
->>>>>>> [IMP] dms: Attachment integration
         return records
 
     def check_access(self, operation, raise_exception=False):
