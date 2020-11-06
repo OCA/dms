@@ -91,13 +91,17 @@ class Storage(models.Model):
     # ----------------------------------------------------------
 
     def action_storage_migrate(self):
-        if not self.env.user.has_group("dms.group_dms_manager"):
-            raise AccessError(_("Only managers can execute this action."))
-        files = self.env["dms.file"].with_context(active_test=False).sudo()
+        if self.save_type != "attachment":
+            if not self.env.user.has_group("dms.group_dms_manager"):
+                raise AccessError(_("Only managers can execute this action."))
+            files = self.env["dms.file"].with_context(active_test=False).sudo()
 
-        for record in self:
-            domain = [("require_migration", "=", True), ("storage_id", "=", record.id)]
-            files.search(domain).action_migrate()
+            for record in self:
+                domain = [
+                    ("require_migration", "=", True),
+                    ("storage_id", "=", record.id),
+                ]
+                files.search(domain).action_migrate()
 
     def action_save_onboarding_storage_step(self):
         self.env.user.company_id.set_onboarding_step_done(
