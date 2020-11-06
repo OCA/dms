@@ -11,11 +11,11 @@ class StorageLObjectTestCase(StorageTestCase):
     def test_storage_attachment(self):
         model_res_partner = self.browse_ref("base.model_res_partner")
         res_partner_1 = self.browse_ref("base.res_partner_1").id
-        storage = self.create_storage(sudo=False).sudo(self.uid)
+        storage = self.create_storage(sudo=False).with_user(self.uid)
         storage.write(
             {"save_type": "attachment", "model_ids": [(4, model_res_partner.id)]}
         )
-        root_directory = self.create_directory(storage=storage, sudo=False).sudo(
+        root_directory = self.create_directory(storage=storage, sudo=False).with_user(
             self.uid
         )
         root_directory.model_id = model_res_partner.id
@@ -25,8 +25,8 @@ class StorageLObjectTestCase(StorageTestCase):
             res_model=model_res_partner.model,
             res_id=res_partner_1,
             sudo=False,
-        ).sudo(self.uid)
-        directory_ids = self.directory.sudo(self.uid).search(
+        ).with_user(self.uid)
+        directory_ids = self.directory.with_user(self.uid).search(
             [
                 ("storage_id", "=", storage.id),
                 ("res_model", "=", model_res_partner.model),
@@ -37,7 +37,7 @@ class StorageLObjectTestCase(StorageTestCase):
             file_01 = self.create_file_with_context(
                 context={"default_directory_id": directory_id.id},
                 storage=directory_id.storage_id,
-            ).sudo(self.uid)
+            ).with_user(self.uid)
             self.assertEqual(file_01.storage_id, storage)
             self.assertEqual(file_01.storage_id.save_type, "attachment")
             self.assertEqual(file_01.save_type, "file")
@@ -73,18 +73,3 @@ class StorageLObjectTestCase(StorageTestCase):
         self.assertEqual(file_02.storage_id, storage)
         self.assertEqual(file_02.storage_id.save_type, "database")
         self.assertEqual(file_02.save_type, "database")
-        storage.write({"save_type": "attachment"})
-        file_03 = self.create_file(storage=storage)
-        self.assertEqual(file_02.storage_id, storage)
-        self.assertEqual(file_02.storage_id.save_type, "attachment")
-        self.assertEqual(file_02.save_type, "database")
-        self.assertEqual(file_03.storage_id, storage)
-        self.assertEqual(file_03.storage_id.save_type, "attachment")
-        self.assertEqual(file_03.save_type, "file")
-        storage.action_storage_migrate()
-        self.assertEqual(file_02.storage_id, storage)
-        self.assertEqual(file_02.storage_id.save_type, "attachment")
-        self.assertEqual(file_02.save_type, "file")
-        self.assertEqual(file_03.storage_id, storage)
-        self.assertEqual(file_03.storage_id.save_type, "attachment")
-        self.assertEqual(file_03.save_type, "file")
