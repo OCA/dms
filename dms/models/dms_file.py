@@ -6,7 +6,6 @@ import base64
 import hashlib
 import json
 import logging
-import mimetypes
 from collections import defaultdict
 
 from odoo import SUPERUSER_ID, _, api, fields, models, tools
@@ -412,11 +411,10 @@ class File(models.Model):
     @api.depends("name", "content")
     def _compute_mimetype(self):
         for record in self:
-            mimetype = record.name and mimetypes.guess_type(record.name)[0]
-            if not mimetype and record.content:
-                binary = base64.b64decode(record.with_context({}).content or "")
-                mimetype = guess_mimetype(binary, default="application/octet-stream")
-            record.res_mimetype = mimetype
+            binary = base64.b64decode(record.with_context({}).content or "")
+            record.res_mimetype = guess_mimetype(
+                binary, default="application/octet-stream"
+            )
 
     @api.depends("content_binary", "content_file", "attachment_id")
     def _compute_content(self):
