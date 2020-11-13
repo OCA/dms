@@ -26,7 +26,6 @@ class File(models.Model):
 
     _inherit = [
         "portal.mixin",
-        "dms.security.mixin",
         "dms.mixins.thumbnail",
         "mail.thread",
         "mail.activity.mixin",
@@ -39,13 +38,11 @@ class File(models.Model):
     # ----------------------------------------------------------
 
     name = fields.Char(string="Filename", required=True, index=True)
-
     active = fields.Boolean(
         string="Archived",
         default=True,
         help="If a file is set to archived, it is not displayed, but still exists.",
     )
-
     directory_id = fields.Many2one(
         comodel_name="dms.directory",
         string="Directory",
@@ -56,7 +53,6 @@ class File(models.Model):
         required=True,
         index=True,
     )
-
     storage_id = fields.Many2one(
         related="directory_id.storage_id",
         comodel_name="dms.storage",
@@ -65,11 +61,9 @@ class File(models.Model):
         readonly=True,
         store=True,
     )
-
     is_hidden = fields.Boolean(
         string="Storage is Hidden", related="storage_id.is_hidden", readonly=True
     )
-
     company_id = fields.Many2one(
         related="storage_id.company_id",
         comodel_name="res.company",
@@ -78,23 +72,18 @@ class File(models.Model):
         store=True,
         index=True,
     )
-
     path_names = fields.Char(
         compute="_compute_path", string="Path Names", readonly=True, store=False
     )
-
     path_json = fields.Text(
         compute="_compute_path", string="Path Json", readonly=True, store=False
     )
-
     color = fields.Integer(string="Color", default=0)
-
     category_id = fields.Many2one(
         comodel_name="dms.category",
         context="{'dms_category_show_path': True}",
         string="Category",
     )
-
     tag_ids = fields.Many2many(
         comodel_name="dms.tag",
         relation="dms_file_tag_rel",
@@ -102,7 +91,6 @@ class File(models.Model):
         column2="tid",
         string="Tags",
     )
-
     content = fields.Binary(
         compute="_compute_content",
         inverse="_inverse_content",
@@ -112,30 +100,23 @@ class File(models.Model):
         required=True,
         store=False,
     )
-
     extension = fields.Char(
         compute="_compute_extension", string="Extension", readonly=True, store=True
     )
-
     res_mimetype = fields.Char(
         compute="_compute_mimetype", string="Type", readonly=True, store=True
     )
-
     size = fields.Integer(string="Size", readonly=True)
-
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, size=40, index=True)
-
     content_binary = fields.Binary(
         string="Content Binary", attachment=False, prefetch=False, invisible=True
     )
-
     save_type = fields.Char(
         compute="_compute_save_type",
         string="Current Save Type",
         invisible=True,
         prefetch=False,
     )
-
     migration = fields.Char(
         compute="_compute_migration",
         string="Migration Status",
@@ -146,10 +127,58 @@ class File(models.Model):
     require_migration = fields.Boolean(
         compute="_compute_migration", store=True, compute_sudo=True,
     )
-
     content_file = fields.Binary(
         attachment=True, string="Content File", prefetch=False, invisible=True
     )
+    group_ids = fields.Many2many(
+        comodel_name="res.groups",
+        related="directory_id.complete_group_ids",
+        string="Group ids",
+        readonly=True,
+    )
+    read_group_ids = fields.Many2many(
+        comodel_name="res.groups",
+        related="directory_id.complete_read_group_ids",
+        string="Read Group ids",
+        readonly=True,
+    )
+    attachment_id = fields.Many2one(
+        comodel_name="ir.attachment",
+        string="Attachment File",
+        prefetch=False,
+        invisible=True,
+        ondelete="cascade",
+    )
+    res_model = fields.Char(string="Linked attachments model")
+    res_id = fields.Integer(string="Linked attachments record ID")
+
+    @api.model
+    def _selection_target_model(self):
+        models = self.env["ir.model"].search([])
+        return [(model.model, model.name) for model in models]
+
+    record_ref = fields.Reference(
+        string="Record reference",
+        selection="_selection_target_model",
+        compute="_compute_record_ref",
+        inverse="_inverse_record_ref",
+    )
+    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
+
+    @api.depends("res_model", "res_id")
+    def _compute_record_ref(self):
+        for preview in self:
+            if preview.res_model:
+                preview.record_ref = "{},{}".format(
+                    preview.res_model, preview.res_id or 0
+                )
+            else:
+                preview.record_ref = False
+
+    def _inverse_record_ref(self):
+        for preview in self:
+            if preview.record_ref:
+                preview.res_id = preview.record_ref.id
 
     def check_access_token(self, access_token=False):
         res = False
@@ -168,7 +197,12 @@ class File(models.Model):
                         return True
                     else:
                         directory_item = self.directory_id
-                        while directory_item.parent_id:
+                        while (
+                            directory_item.parent_id
+                            and directory_item.parent_id.check_access_rights(
+                                "read", False
+                            )
+                        ):
                             if directory_item.id == self.directory_id.id:
                                 return True
                             directory_item = directory_item.parent_id
@@ -176,31 +210,6 @@ class File(models.Model):
                         if directory_item.id == self.directory_id.id:
                             return True
         return res
-
-    attachment_id = fields.Many2one(
-        comodel_name="ir.attachment",
-        string="Attachment File",
-        prefetch=False,
-        invisible=True,
-        ondelete="cascade",
-    )
-    res_model = fields.Char(string="Linked attachments model")
-    res_id = fields.Integer(string="Linked attachments record ID")
-    record_ref = fields.Reference(
-        string="Record Referenced",
-        compute="_compute_record_ref",
-        selection=[],
-        readonly=True,
-        store=False,
-    )
-    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
-
-    @api.depends("res_model", "res_id")
-    def _compute_record_ref(self):
-        for record in self:
-            record.record_ref = False
-            if record.res_model and record.res_id:
-                record.record_ref = "{},{}".format(record.res_model, record.res_id)
 
     def get_human_size(self):
         return human_size(self.size)
@@ -458,10 +467,6 @@ class File(models.Model):
                 record.migration = "{} > {}".format(file_label, storage_label)
                 record.require_migration = True
 
-    def read(self, fields=None, load="_classic_read"):
-        self.check_directory_access("read", {}, True)
-        return super(File, self).read(fields, load=load)
-
     # ----------------------------------------------------------
     # View
     # ----------------------------------------------------------
@@ -515,69 +520,6 @@ class File(models.Model):
             query.where_clause += ["0=1"]
         return super(File, self)._read_group_process_groupby(gb, query)
 
-    @api.model
-    def _search(
-        self,
-        args,
-        offset=0,
-        limit=None,
-        order=None,
-        count=False,
-        access_rights_uid=None,
-    ):
-        result = super(File, self)._search(
-            args, offset, limit, order, False, access_rights_uid
-        )
-        if self.env.user.id == SUPERUSER_ID:
-            return len(result) if count else result
-        # Fix access files with share button (public)
-        if self.env.user.has_group("base.group_public"):
-            return len(result) if count else result
-        # operations
-        if not result:
-            return 0 if count else []
-        file_ids = set(result)
-        directories = self._get_directories_from_database(result)
-        for directory in directories - directories._filter_access("read"):
-            file_ids -= set(directory.sudo().mapped("file_ids").ids)
-        return len(file_ids) if count else list(file_ids)
-
-    def _filter_access(self, operation):
-        records = super(File, self)._filter_access(operation)
-        if self.env.user.id == SUPERUSER_ID:
-            return records
-        directories = self._get_directories_from_database(records.ids)
-        for directory in directories - directories._filter_access("read"):
-            records -= self.browse(directory.sudo().mapped("file_ids").ids)
-        return records
-
-    def check_access(self, operation, raise_exception=False):
-        res = super(File, self).check_access(operation, raise_exception)
-        try:
-            if self.env.user.has_group("base.group_portal"):
-                res_access = res and self.check_directory_access(operation)
-                return res_access and (
-                    self.directory_id.id
-                    not in self.directory_id._get_ids_without_access_groups(operation)
-                )
-            else:
-                return res and self.check_directory_access(operation)
-        except AccessError:
-            if raise_exception:
-                raise
-            return False
-
-    def check_directory_access(self, operation, vals=False, raise_exception=False):
-        if not vals:
-            vals = {}
-        if self.env.user.id == SUPERUSER_ID:
-            return True
-        if "directory_id" in vals and vals["directory_id"]:
-            records = self.env["dms.directory"].browse(vals["directory_id"])
-        else:
-            records = self._get_directories_from_database(self.ids)
-        return records.check_access(operation, raise_exception)
-
     # ----------------------------------------------------------
     # Constrains
     # ----------------------------------------------------------
@@ -611,14 +553,6 @@ class File(models.Model):
                 raise ValidationError(
                     _("The maximum upload size is %s MB).")
                     % self._get_binary_max_size()
-                )
-
-    @api.constrains("directory_id")
-    def _check_directory_access(self):
-        for record in self:
-            if not record.directory_id.check_access("create", raise_exception=False):
-                raise ValidationError(
-                    _("The directory has to have the permission to create files.")
                 )
 
     # ----------------------------------------------------------
@@ -668,17 +602,13 @@ class File(models.Model):
         else:
             names = self.sudo().directory_id.file_ids.mapped("name")
         default.update({"name": file.unique_name(self.name, names, self.extension)})
-        self.check_directory_access("create", default, True)
         return super(File, self).copy(default)
 
     def write(self, vals):
-        self.check_directory_access("write", vals, True)
         self.check_lock()
         return super(File, self).write(vals)
 
     def unlink(self):
-        self.check_access_rights("unlink")
-        self.check_directory_access("unlink", {}, True)
         self.check_lock()
         # We need to do sudo because we don't know when the related groups
         # will be deleted
@@ -696,13 +626,9 @@ class File(models.Model):
     # ----------------------------------------------------------
     # Locking fields and functions
     # ----------------------------------------------------------
-
     locked_by = fields.Many2one(comodel_name="res.users", string="Locked by")
-
     is_locked = fields.Boolean(compute="_compute_locked", string="Locked")
-
     is_lock_editor = fields.Boolean(compute="_compute_locked", string="Editor")
-
     # ----------------------------------------------------------
     # Locking
     # ----------------------------------------------------------

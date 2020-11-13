@@ -23,9 +23,6 @@ class CustomerPortal(CustomerPortal):
         if access_token:
             if not item_sudo.check_access_token(access_token):
                 return False
-        else:
-            if not item_sudo.with_user(request.env.user.id).check_access("read", False):
-                return False
 
         return item_sudo
 

@@ -1,5 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2020 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
@@ -96,8 +97,7 @@ class BenchmarkTestCase(common.SavepointCase):
         ]
 
     def test_file_search_benchmark(self):
-        demo_uid = self.browse_ref("base.user_demo").id
-        admin_uid = self.browse_ref("base.user_admin").id
+
         model = self.env["dms.file"].with_context(bin_size=True)
         args = [
             [[[]], {"limit": 1}],
@@ -110,10 +110,7 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search, args
-        )
-        benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search, args
+            model.with_user(self.admin_uid).search, args
         )
 
         info_message = "\n\nSearching files with bin_size = True | "
@@ -129,15 +126,12 @@ class BenchmarkTestCase(common.SavepointCase):
                 ],
                 benchmark_data_super,
                 benchmark_data_admin,
-                benchmark_data_demo,
             ]
         )
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
         _logger.info(info_message)
 
     def test_file_search_read_benchmark(self):
-        demo_uid = self.browse_ref("base.user_demo").id
-        admin_uid = self.browse_ref("base.user_admin").id
         model = self.env["dms.file"].with_context(bin_size=True)
         args = [[[], {"limit": 1}], [[], {"limit": 80}], [[], {"limit": 500}], [[]]]
 
@@ -145,10 +139,7 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search_read, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search_read, args
-        )
-        benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search_read, args
+            model.with_user(self.admin_uid).search_read, args
         )
 
         info_message = "\n\nSearching and reading all fields with bin_size = True | "
@@ -164,23 +155,19 @@ class BenchmarkTestCase(common.SavepointCase):
                 ],
                 benchmark_data_super,
                 benchmark_data_admin,
-                benchmark_data_demo,
             ]
         )
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
         _logger.info(info_message)
 
     def test_file_search_name_get_benchmark(self):
-        demo_uid = self.browse_ref("base.user_demo").id
-        admin_uid = self.browse_ref("base.user_admin").id
         model = self.env["dms.file"].with_context(bin_size=True)
 
         def test_function(model, limit):
             return model.search([], limit=limit).name_get()
 
         model_super = model.sudo()
-        model_admin = model.with_user(admin_uid)
-        model_demo = model.with_user(demo_uid)
+        model_admin = model.with_user(self.admin_uid)
         args_super = [
             [[model_super, 1]],
             [[model_super, 800]],
@@ -193,21 +180,12 @@ class BenchmarkTestCase(common.SavepointCase):
             [[model_admin, 500]],
             [[model_admin, None]],
         ]
-        args_demo = [
-            [[model_demo, 1]],
-            [[model_demo, 800]],
-            [[model_demo, 500]],
-            [[model_demo, None]],
-        ]
 
         benchmark_data_super = ["Super"] + self._benchmark_function(
             test_function, args_super
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
             test_function, args_admin
-        )
-        benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            test_function, args_demo
         )
 
         info_message = "\n\nSearching and 'name_get' function with bin_size = True | "
@@ -223,15 +201,12 @@ class BenchmarkTestCase(common.SavepointCase):
                 ],
                 benchmark_data_super,
                 benchmark_data_admin,
-                benchmark_data_demo,
             ]
         )
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
         _logger.info(info_message)
 
     def test_file_kanban_backend_benchmark(self):
-        demo_uid = self.browse_ref("base.user_demo").id
-        admin_uid = self.browse_ref("base.user_admin").id
         model = self.env["dms.file"].with_context(bin_size=True)
         kanban_fields = self._file_kanban_fields()
 
@@ -246,10 +221,7 @@ class BenchmarkTestCase(common.SavepointCase):
 
         args_super = function_args([model.sudo(), kanban_fields], [1, 80, 500, None])
         args_admin = function_args(
-            [model.with_user(admin_uid), kanban_fields], [1, 80, 500, None]
-        )
-        args_demo = function_args(
-            [model.with_user(demo_uid), kanban_fields], [1, 80, 500, None]
+            [model.with_user(self.admin_uid), kanban_fields], [1, 80, 500, None]
         )
 
         benchmark_data_super = ["Super"] + self._benchmark_function(
@@ -257,9 +229,6 @@ class BenchmarkTestCase(common.SavepointCase):
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
             test_function, args_admin
-        )
-        benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            test_function, args_demo
         )
 
         info_message = "\n\nSimulate kanban view loading on the backend | "
@@ -275,7 +244,6 @@ class BenchmarkTestCase(common.SavepointCase):
                 ],
                 benchmark_data_super,
                 benchmark_data_admin,
-                benchmark_data_demo,
             ]
         )
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time || "
@@ -287,8 +255,6 @@ class BenchmarkTestCase(common.SavepointCase):
     # ----------------------------------------------------------
 
     def test_directory_search_benchmark(self):
-        demo_uid = self.browse_ref("base.user_demo").id
-        admin_uid = self.browse_ref("base.user_admin").id
         model = self.env["dms.directory"].with_context(bin_size=True)
         args = [
             [[[]], {"limit": 1}],
@@ -301,10 +267,7 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search, args
-        )
-        benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search, args
+            model.with_user(self.admin_uid).search, args
         )
 
         info_message = "\n\nSearching directories with bin_size = True | "
@@ -320,15 +283,12 @@ class BenchmarkTestCase(common.SavepointCase):
                 ],
                 benchmark_data_super,
                 benchmark_data_admin,
-                benchmark_data_demo,
             ]
         )
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
         _logger.info(info_message)
 
     def test_directory_search_read_benchmark(self):
-        demo_uid = self.browse_ref("base.user_demo").id
-        admin_uid = self.browse_ref("base.user_admin").id
         model = self.env["dms.directory"].with_context(bin_size=True)
         args = [[[], {"limit": 1}], [[], {"limit": 80}], [[], {"limit": 500}], [[]]]
 
@@ -336,10 +296,7 @@ class BenchmarkTestCase(common.SavepointCase):
             model.sudo().search_read, args
         )
         benchmark_data_admin = ["Admin"] + self._benchmark_function(
-            model.with_user(admin_uid).search_read, args
-        )
-        benchmark_data_demo = ["Demo"] + self._benchmark_function(
-            model.with_user(demo_uid).search_read, args
+            model.with_user(self.admin_uid).search_read, args
         )
 
         info_message = "\n\nSearching and reading all fields with bin_size = True | "
@@ -355,7 +312,6 @@ class BenchmarkTestCase(common.SavepointCase):
                 ],
                 benchmark_data_super,
                 benchmark_data_admin,
-                benchmark_data_demo,
             ]
         )
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
@@ -372,6 +328,5 @@ class BenchmarkTestCase(common.SavepointCase):
         def profile_function(model):
             model.search_read([])
 
-        admin_uid = self.browse_ref("base.user_admin").id
-        model = self.env["dms.file"].with_user(admin_uid)
+        model = self.env["dms.file"].with_user(self.admin_uid)
         profile_function(model.with_context(bin_size=True))

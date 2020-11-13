@@ -1,22 +1,24 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2020 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from .common import DocumentsBaseCase, multi_users
+from .common import DocumentsBaseCase
 
 
 class StorageTestCase(DocumentsBaseCase):
-    def _setup_test_data(self):
-        self.storage_demo = self.browse_ref("dms.storage_demo")
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.storage_demo = cls.env.ref("dms.storage_demo")
 
-    @multi_users(lambda self: self.multi_users(demo=False), callback="_setup_test_data")
     def test_action_storage_migrate(self):
-        self.storage_demo.with_user(self.uid).action_storage_migrate()
+        self.storage_demo.with_user(self.admin_uid).action_storage_migrate()
 
-    @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_count_storage_directories(self):
-        self.assertTrue(self.storage_demo.count_storage_directories)
+        self.assertTrue(
+            self.storage_demo.with_user(self.admin_uid).count_storage_directories
+        )
 
-    @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_count_storage_files(self):
-        self.assertTrue(self.storage_demo.count_storage_files)
+        self.assertTrue(self.storage_demo.with_user(self.admin_uid).count_storage_files)
