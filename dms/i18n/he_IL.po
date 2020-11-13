@@ -22,11 +22,14 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -351,6 +354,11 @@ msgid "All Files"
 msgstr "כל הקבצים"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
+msgid "Allowed Model"
+msgstr ""
+
+#. module: dms
 #: model:dms.tag,name:dms.tag_06_demo
 msgid "Apps"
 msgstr ""
@@ -366,10 +374,23 @@ msgid "Archived Files"
 msgstr "קבצים בארכיון"
 
 #. module: dms
+#: code:addons/dms/models/storage.py:0
+#: model:ir.model,name:dms.model_ir_attachment
+#: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__attachment
+#, python-format
+msgid "Attachment"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_attachment_count
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_attachment_count
 msgid "Attachment Count"
 msgstr "כמות קבצים מצורפים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__attachment_id
+msgid "Attachment File"
+msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
@@ -1032,8 +1053,8 @@ msgstr "מזהה"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
 "מזהה של רשומת האב המחזיקה בכינוי (דוגמה: פרויקט המחזיק בכינוי ליצירת המשימות)"
 
@@ -1090,7 +1111,8 @@ msgstr "מציין אם ספריות וקבצים מוסתרים כברירת מ
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 
@@ -1171,6 +1193,23 @@ msgstr "עדכון אחרון ב"
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Last update"
 msgstr "עדכון אחרון"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_storage__model_ids
+msgid "Linked Models"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__res_model
+#: model:ir.model.fields,field_description:dms.field_dms_file__res_model
+msgid "Linked attachments model"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__res_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__res_id
+msgid "Linked attachments record ID"
+msgstr ""
 
 #. module: dms
 #. openerp-web
@@ -1269,6 +1308,11 @@ msgid "Migration Status"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__model_id
+msgid "Model"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Modification Date"
@@ -1290,9 +1334,6 @@ msgid "My Files"
 msgstr "הקבצים שלי"
 
 #. module: dms
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
 #: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
@@ -1446,8 +1487,8 @@ msgstr "מזהה רשומת אשכול אב"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
 "מודל אב המחזיק בכינוי. המודל המחזיק במזהה לכינוי אינו בהכרח המודל שניתן על "
@@ -1479,7 +1520,8 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 "מדיניות פרסום הודעה על המסמך באמצעות שער הדואר.\n"
 "- כולם: כולם יכולים לפרסם\n"
@@ -1521,6 +1563,12 @@ msgid "Record Access Groups"
 msgstr "שיא קבוצות גישה"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
+#: model:ir.model.fields,field_description:dms.field_dms_file__record_ref
+msgid "Record Referenced"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
 msgid "Record Thread ID"
 msgstr "מזהה רשומת אשכול"
@@ -1560,6 +1608,8 @@ msgid "Sales"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_save_type
+#: model:ir.model.fields,field_description:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_storage__save_type
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 msgid "Save Type"
@@ -1785,9 +1835,9 @@ msgstr "גודל ההעלאה המקסימלי הוא %s MB)."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 "המודל (סוג מסמך Odoo) שאליו הכינוי הזה תואם. כל דוא\"ל נכנס שלא יענה לרשומה "
 "קיימת יביא ליצירת רשומה חדשה של מודל זה (למשל משימת פרויקט)"
@@ -1798,8 +1848,8 @@ msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
 "<jobs@example.odoo.com>"
 msgstr ""
-"שם כינוי הדוא\"ל, למשל 'עבודות' אם ברצונך לקבל הודעות דוא\"ל ל "
-"<jobs@example.odoo.com>"
+"שם כינוי הדוא\"ל, למשל 'עבודות' אם ברצונך לקבל הודעות דוא\"ל ל <jobs@example."
+"odoo.com>"
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_access_group_name_uniq
@@ -1834,7 +1884,8 @@ msgstr "הרשומה (%s [%s]) נעולה על ידי משתמש אחר."
 #: code:addons/dms/models/dms_security_mixin.py:0
 #, python-format
 msgid ""
-"The requested operation cannot be completed due to group security restrictions. Please contact your system administrator.\n"
+"The requested operation cannot be completed due to group security "
+"restrictions. Please contact your system administrator.\n"
 "\n"
 "(Document type: %s, Operation: %s)"
 msgstr ""
@@ -1844,6 +1895,8 @@ msgstr ""
 "(סוג מסמך: %s, Operation: %s)"
 
 #. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
+#: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_storage__save_type
 msgid ""
 "The save type is used to determine how a file is saved by the\n"
