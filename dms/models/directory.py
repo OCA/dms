@@ -280,6 +280,54 @@ class DmsDirectory(models.Model):
             res = True
         return res
 
+    allowed_model_ids = fields.Many2many(
+        compute="_compute_allowed_model_ids", comodel_name="ir.model", store=False
+    )
+    model_id = fields.Many2one(
+        comodel_name="ir.model",
+        domain="[('id', 'in', allowed_model_ids)]",
+        compute="_compute_model_id",
+        inverse="_inverse_model_id",
+        string="Model",
+        store=True,
+    )
+    res_model = fields.Char(string="Linked attachments model")
+    res_id = fields.Integer(string="Linked attachments record ID")
+    record_ref = fields.Reference(
+        string="Record Referenced", compute="_compute_record_ref", selection=[]
+    )
+    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
+
+    @api.depends("root_storage_id", "storage_id")
+    def _compute_allowed_model_ids(self):
+        for record in self:
+            record.allowed_model_ids = False
+            if record.root_storage_id and record.root_storage_id.model_ids:
+                record.allowed_model_ids = record.root_storage_id.model_ids.ids
+            elif record.storage_id and record.storage_id.model_ids:
+                record.allowed_model_ids = record.storage_id.model_ids.ids
+
+    @api.depends("res_model")
+    def _compute_model_id(self):
+        for record in self:
+            if not record.res_model:
+                record.model_id = False
+                continue
+            record.model_id = self.env["ir.model"].search(
+                [("model", "=", record.res_model)]
+            )
+
+    def _inverse_model_id(self):
+        for record in self:
+            record.res_model = record.model_id.model
+
+    @api.depends("res_model", "res_id")
+    def _compute_record_ref(self):
+        for record in self:
+            record.record_ref = False
+            if record.res_model and record.res_id:
+                record.record_ref = "{},{}".format(record.res_model, record.res_id)
+
     @api.depends("name", "complete_name")
     def _compute_display_name(self):
         if not self.env.context.get("directory_short_name", False):

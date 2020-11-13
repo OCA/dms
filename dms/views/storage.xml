@@ -115,6 +115,7 @@
                         name="action_storage_migrate"
                         type="object"
                         string="Migrate Files"
+                        attrs="{'invisible': [('save_type', '=', 'attachment')]}"
                     />
                     <button
                         type="action"
@@ -169,6 +170,10 @@
                         </group>
                         <group>
                             <field name="company_id" />
+                            <field
+                                name="model_ids"
+                                attrs="{'invisible': [('save_type', '!=', 'attachment')]}"
+                            />
                         </group>
                     </group>
                     <notebook>
