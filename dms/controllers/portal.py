@@ -110,14 +110,7 @@ class CustomerPortal(CustomerPortal):
         access_token=None,
         **kw
     ):
-        """Process user's consent acceptance or rejection."""
         ensure_db()
-        try:
-            # If there's a website, we need a user to render the template
-            request.uid = request.website.user_id.id
-        except AttributeError:
-            # If there's no website, the default is OK
-            pass
         # operations
         searchbar_sortings = {"name": {"label": _("Name"), "order": "name asc"}}
         # default sortby br
