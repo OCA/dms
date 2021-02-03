@@ -298,7 +298,7 @@
                 <field name="is_lock_editor" invisible="1" />
                 <field name="name" />
                 <field name="write_date" />
-                <field name="content" />
+                <field name="size" />
                 <field name="res_mimetype" />
                 <field name="path_names" widget="path_names" string="Path" />
             </tree>
