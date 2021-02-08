@@ -8,7 +8,7 @@ odoo.define("dms.FileKanbanController", function(require) {
     "use strict";
 
     var KanbanController = require("web.KanbanController");
-    var preview = require("dms.preview");
+    var preview = require("mail_preview_base.preview");
     var FieldPreviewViewer = preview.FieldPreviewViewer;
     var DragDrop = require("dms.DragDrop");
 
