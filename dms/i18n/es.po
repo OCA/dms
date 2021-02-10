@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-02-09 18:44+0000\n"
+"PO-Revision-Date: 2021-02-10 11:45+0000\n"
 "Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -779,6 +779,8 @@ msgstr "Carpetas"
 msgid "Directories can be used to structure and organize\n"
 "                files directly in Odoo."
 msgstr ""
+"Las carpetas se pueden utilizar para estructurar y organizar\n"
+"                 archivos directamente en Odoo."
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_directory
@@ -1105,6 +1107,10 @@ msgid "Indicates if the directory is a root directory.\n"
 "        A root directory has a settings object, while a directory with a set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
+"Indica si la carpeta es una carpeta raíz.\n"
+"         Una carpeta raíz tiene un objeto de configuración, mientras que una "
+"carpeta con un\n"
+"         padre hereda la configuración de su padre."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__inherit_group_ids
@@ -1137,7 +1143,7 @@ msgstr "Es seguidor"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__is_root_directory
 msgid "Is Root Directory"
-msgstr "Is carpeta raíz"
+msgstr "Es carpeta raíz"
 
 #. module: dms
 #: selection:res.company,documents_onboarding_directory_state:0
@@ -1429,6 +1435,9 @@ msgstr "Operaciones"
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_force_thread_id
 msgid "Optional ID of a thread (record) to which all incoming messages will be attached, even if they did not reply to it. If set, this will disable the creation of new records completely."
 msgstr ""
+"ID opcional de un hilo (registro) al que se adjuntarán todos los mensajes "
+"entrantes, incluso si no respondieron. Si se establece, esto deshabilitará "
+"la creación de nuevos registros por completo."
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config_organizing
@@ -1482,6 +1491,9 @@ msgstr "ID del hilo del registro principal"
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid "Parent model holding the alias. The model holding the alias reference is not necessarily the model given by alias_model_id (example: project (parent_model) and task (model))"
 msgstr ""
+"Modelo principal que tiene el alias. El modelo que contiene la referencia de "
+"alias no es necesariamente el modelo dado por alias_model_id (ejemplo: "
+"proyecto (parent_model) y tarea (modelo))"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
@@ -1517,6 +1529,11 @@ msgid "Policy to post a message on the document using the mailgateway.\n"
 "- followers: only followers of the related document or members of following channels\n"
 ""
 msgstr ""
+"Política para publicar un mensaje en el documento mediante el mailgateway.\n"
+"- todos: todos pueden publicar\n"
+"- socios: solo socios autenticados\n"
+"- seguidores: solo seguidores del documento relacionado o miembros de los "
+"siguientes canales\n"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_05_demo
@@ -1550,7 +1567,7 @@ msgstr "Acceso de lectura"
 #. module: dms
 #: model:ir.model,name:dms.model_dms_access_group
 msgid "Record Access Groups"
-msgstr ""
+msgstr "Grupos de acceso de registro"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
@@ -1561,7 +1578,7 @@ msgstr "Registro referenciado"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
 msgid "Record Thread ID"
-msgstr ""
+msgstr "ID de hilo de registro"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
@@ -1671,6 +1688,10 @@ msgid "Status based on activities\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Estado basado en actividades\n"
+"Vencido: la fecha de vencimiento ya pasó\n"
+"Hoy: la fecha de actividad es hoy\n"
+"Planificado: actividades futuras."
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_storage
@@ -1815,11 +1836,17 @@ msgstr "El tamaño máximo de subida es %s MB)."
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid "The model (Odoo Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)"
 msgstr ""
+"El modelo (tipo de documento de Odoo) al que corresponde este alias. "
+"Cualquier correo electrónico entrante que no responda a un registro "
+"existente provocará la creación de un nuevo registro de este modelo (por "
+"ejemplo, una tarea de proyecto)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
 msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.odoo.com>"
 msgstr ""
+"El nombre del alias de correo electrónico, p. Ej. 'trabajos' si desea "
+"recibir correos electrónicos para <jobs@example.odoo.com>"
 
 #. module: dms
 #: sql_constraint:dms.access.group:0
@@ -1830,6 +1857,11 @@ msgstr "¡El nombre del grupo debe ser único!"
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_user_id
 msgid "The owner of records created upon receiving emails on this alias. If this field is not set the system will attempt to find the right owner based on the sender (From) address, or will use the Administrator account if no system user is found for that address."
 msgstr ""
+"El propietario de los registros creados al recibir correos electrónicos con "
+"este alias. Si este campo no está configurado, el sistema intentará "
+"encontrar el propietario correcto según la dirección del remitente (De), o "
+"utilizará la cuenta de administrador si no se encuentra ningún usuario del "
+"sistema para esa dirección."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:542
@@ -1850,6 +1882,11 @@ msgid "The requested operation cannot be completed due to group security restric
 "\n"
 "(Document type: %s, Operation: %s)"
 msgstr ""
+"La operación solicitada no se puede completar debido a restricciones de "
+"seguridad del grupo. Por favor, póngase en contacto con el administrador del "
+"sistema.\n"
+"\n"
+"(Tipo de documento: %s, Operación: %s)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
@@ -1859,6 +1896,10 @@ msgid "The save type is used to determine how a file is saved by the\n"
 "        system. If you change this setting, you can migrate existing files\n"
 "        manually by triggering the action."
 msgstr ""
+"El tipo de guardado se utiliza para determinar cómo se guarda un archivo\n"
+"         sistema. Si cambia esta configuración, puede migrar archivos "
+"existentes\n"
+"         manualmente activando la acción."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail
@@ -1919,7 +1960,7 @@ msgstr "Desbloquear"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_process
 msgid "Unpack Emails as"
-msgstr ""
+msgstr "Desempaquetar correos electrónicos como"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_unread
@@ -1964,24 +2005,24 @@ msgstr "Factura del proveedor"
 #: code:addons/dms/static/src/xml/views.xml:43
 #, python-format
 msgid "Viewer"
-msgstr ""
+msgstr "Visualizador"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "Views"
-msgstr ""
+msgstr "Vistas"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__website_message_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Mensajes del sitio web"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__website_message_ids
 #: model:ir.model.fields,help:dms.field_dms_file__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Histórico de mensajes del sitio web"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
