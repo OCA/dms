@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-02-10 11:45+0000\n"
+"PO-Revision-Date: 2021-02-11 11:45+0000\n"
 "Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -28,6 +28,17 @@ msgid "                Define how incoming emails are processed:\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
+"                Defina cómo se procesan los correos electrónicos entrantes:\n"
+"\n"
+"                 - Archivos individuales: el correo electrónico se adjunta a "
+"la carpeta y\n"
+"                 todos los adjuntos se crean como archivos.\n"
+"\n"
+"                 - Subcarpeta: se crea una nueva subcarpeta para cada correo "
+"electrónico\n"
+"                 y el correo se adjunta a esta subcarpeta. Los adjuntos\n"
+"                 se crean como archivos de la subcarpeta.\n"
+"                "
 
 #. module: dms
 #: code:addons/dms/models/directory.py:429
@@ -199,7 +210,7 @@ msgstr ""
 #: code:addons/dms/models/directory.py:534
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
-msgstr "Una carpeta no puede ser raíz y tener una carpera padre."
+msgstr "Una carpeta no puede ser raíz y tener una carpeta padre."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:529
@@ -315,7 +326,7 @@ msgstr "Alias"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_contact
 msgid "Alias Contact Security"
-msgstr ""
+msgstr "Seguridad de contacto de alias"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_name
@@ -336,12 +347,12 @@ msgstr "Dominio de alias"
 #: code:addons/dms/models/directory.py:623
 #, python-format
 msgid "Alias-Mail-Extraction"
-msgstr ""
+msgstr "Extracción de alias de correo"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_model_id
 msgid "Aliased Model"
-msgstr ""
+msgstr "Modelo con alias"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_search
@@ -587,7 +598,7 @@ msgstr "Nº de subcarpetas"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories
 msgid "Count Subdirectories Title"
-msgstr "Título de las carpetas de recuento"
+msgstr "Nº de título de subcarpetas"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_tags
@@ -969,7 +980,7 @@ msgstr "Los archivos se usan para guardar el contenido directamente en Odoo."
 #: selection:dms.storage,save_type:0
 #, python-format
 msgid "Filestore"
-msgstr "Almacenamiento de archivos"
+msgstr "Almacenamiento"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
@@ -1934,7 +1945,7 @@ msgstr "Total archivos"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_directories
 msgid "Total Subdirectories"
-msgstr "Total carpetas"
+msgstr "Total subcarpetas"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
