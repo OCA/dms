@@ -40,7 +40,8 @@
         <field name="arch" type="xml">
             <kanban
                 class="o_kanban_small_column o_emphasize_colors"
-                on_create="quick_create"
+                quick_create="true"
+                group_create="false"
             >
                 <field name="color" />
                 <templates>
