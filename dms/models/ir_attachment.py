@@ -7,8 +7,10 @@ class IrAttachment(models.Model):
     _inherit = "ir.attachment"
 
     def _get_dms_directories(self, res_model, res_id):
-        return self.env["dms.directory"].search(
-            [("res_model", "=", res_model), ("res_id", "=", res_id)]
+        return (
+            self.env["dms.directory"]
+            .sudo()
+            .search([("res_model", "=", res_model), ("res_id", "=", res_id)])
         )
 
     def _dms_directories_create(self):
@@ -18,7 +20,7 @@ class IrAttachment(models.Model):
             ir_model_item = self.env["ir.model"].search(
                 [("model", "=", self.res_model)]
             )
-            self.env["dms.directory"].create(
+            self.env["dms.directory"].sudo().create(
                 {
                     "name": model_item.display_name,
                     "model_id": ir_model_item.id,
@@ -48,7 +50,7 @@ class IrAttachment(models.Model):
                 )
             # Auto-create_files
             for directory in directories:
-                self.env["dms.file"].create(
+                self.env["dms.file"].sudo().create(
                     {
                         "name": attachment.name,
                         "directory_id": directory.id,
