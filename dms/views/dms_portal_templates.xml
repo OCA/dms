@@ -117,12 +117,21 @@
                                     />
                                 </td>
                                 <td>
-                                    <a
-                                        t-attf-href="/my/dms/file/#{dms_file.id}/download?{{ keep_query() }}"
-                                        t-attf-class="dms_file_download"
-                                    >
-                                        <i class="fa fa-download" />
-                                    </a>
+                                    <t t-if="dms_file.type == 'binary'">
+                                        <a
+                                            t-attf-href="/my/dms/file/#{dms_file.id}/download?{{ keep_query() }}"
+                                            t-attf-class="dms_file_download"
+                                        >
+                                            <i class="fa fa-download" />
+                                        </a>
+                                    </t>
+                                    <t t-if="dms_file.type == 'url'">
+                                        <a
+                                            t-attf-href="dms_file.url"
+                                        >
+                                            <i class="fa fa-external-link" />
+                                        </a>
+                                    </t>
                                 </td>
                             </tr>
                         </t>
