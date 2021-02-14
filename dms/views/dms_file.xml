@@ -383,10 +383,20 @@
                     </div>
                     <group name="content">
                         <group>
+                            <field 
+                                name="attachment_type"
+                                attrs="{'required': [('storage_id_save_type', '=', 'attachment')], 'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                            />
                             <field
                                 name="content"
                                 filename="name"
                                 widget="preview_binary"
+                                attrs="{'invisible': [('attachment_type', '!=', 'binary')], 'required': [('attachment_type', '=', 'binary')]}"
+                            />
+                            <field 
+                                name="url"
+                                widget="url"
+                                attrs="{'invisible': [('attachment_type', '!=', 'url')]}"
                             />
                         </group>
                         <group>
