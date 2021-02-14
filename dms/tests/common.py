@@ -234,6 +234,8 @@ class DocumentsBaseCase(common.TransactionCase):
                 "name": uuid.uuid4().hex,
                 "directory_id": directory.id,
                 "content": content or self.content_base64(),
+                "type": "binary",
+                "url": False,
             }
         )
 
@@ -247,5 +249,7 @@ class DocumentsBaseCase(common.TransactionCase):
                 "res_model": res_model,
                 "res_id": res_id,
                 "datas": content or self.content_base64(),
+                "type": "binary",
+                "url": False,
             }
         )

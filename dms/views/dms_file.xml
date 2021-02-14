@@ -90,6 +90,7 @@
                 <field name="write_date" />
                 <field name="locked_by" />
                 <field name="is_locked" />
+                <field name="type" />
                 <field name="is_lock_editor" />
                 <field name="permission_write" />
                 <field name="permission_unlink" />
@@ -239,10 +240,16 @@
                                             <a
                                                 class="o_kanban_dms_file_preview fa fa-search"
                                                 t-att-data-id="widget.db_id"
+                                                attrs="{'invisible': [('type', '=', 'url')]}"
                                             />
                                             <field name="name" />
                                         </div>
                                         <div class="o_kanban_record_body">
+                                            <field
+                                                name="url"
+                                                widget="url"
+                                                attrs="{'invisible': [('type', '=', 'binary')]}"
+                                            />
                                             <field
                                                 name="tag_ids"
                                                 widget="many2many_tags"
@@ -395,9 +402,19 @@
                     <group name="content">
                         <group>
                             <field
+                                name="type"
+                                attrs="{'required': [('storage_id_save_type', '=', 'attachment')], 'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                            />
+                            <field
                                 name="content"
                                 filename="name"
                                 widget="preview_binary"
+                                attrs="{'invisible': [('type', '!=', 'binary')], 'required': [('type', '=', 'binary')]}"
+                            />
+                            <field
+                                name="url"
+                                widget="url"
+                                attrs="{'invisible': [('type', '!=', 'url')]}"
                             />
                         </group>
                         <group>

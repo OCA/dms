@@ -37,7 +37,7 @@ class IrAttachment(models.Model):
     def _dms_operations(self):
         for attachment in self:
             if (
-                attachment.type != "binary"
+                attachment.type not in ("url", "binary")
                 or not attachment.res_model
                 or not attachment.res_id
             ):

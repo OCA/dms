@@ -26,6 +26,11 @@ odoo.define("dms.tour", function(require) {
                 extra_trigger: "li.breadcrumb-item:contains('Mails')",
                 trigger: ".tr_dms_file_link:contains('Mail_01.eml')",
             },
+            {
+                content: "Go to OCA link",
+                extra_trigger: "li.breadcrumb-item:contains('Mails')",
+                trigger: ".tr_dms_file_link:contains('OCA')",
+            },
         ]
     );
     tour.register(

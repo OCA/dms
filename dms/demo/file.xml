@@ -238,4 +238,11 @@
         <field name="directory_id" ref="dms.directory_02_demo" />
         <field name="content" type="base64" file="dms/demo/data/text.rst" />
     </record>
+    <record id="file_37_demo" model="dms.file">
+        <field name="name">OCA</field>
+        <field name="color" eval="3" />
+        <field name="directory_id" ref="dms.directory_11_demo" />
+        <field name="type">url</field>
+        <field name="url">https://odoo-community.org/</field>
+    </record>
 </odoo>

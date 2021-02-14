@@ -94,17 +94,30 @@
                         <t t-foreach="dms_files" t-as="dms_file">
                             <tr class="tr_dms_file">
                                 <td>
-                                    <a
-                                        t-attf-href="/my/dms/file/#{dms_file.id}/download?{{ keep_query() }}"
-                                        t-attf-class="tr_dms_file_link"
-                                        t-att-title="dms_file.name"
-                                    >
-                                        <img
-                                            class="o_portal_contact_img"
-                                            t-att-src="dms_file.icon_url"
-                                        />
-                                        <span t-esc="dms_file.name" />
-                                    </a>
+                                    <t t-if="dms_file.type == 'binary'">
+                                        <a
+                                            t-attf-href="/my/dms/file/#{dms_file.id}/download?{{ keep_query() }}"
+                                            t-attf-class="tr_dms_file_link"
+                                            t-att-title="dms_file.name"
+                                        >
+                                            <img
+                                                class="o_portal_contact_img"
+                                                t-att-src="dms_file.icon_url"
+                                            />
+                                            <span t-esc="dms_file.name" />
+                                        </a>
+                                    </t>
+                                    <t t-if="dms_file.type == 'url'">
+                                        <a
+                                            t-att-href="dms_file.url"
+                                            t-attf-class="tr_dms_file_link"
+                                            t-att-title="dms_file.name"
+                                            target="_blank"
+                                        >
+                                            <i class="fa fa-external-link" />
+                                            <span t-esc="dms_file.name" />
+                                        </a>
+                                    </t>
                                 </td>
                                 <td>
                                     <span t-esc="dms_file.get_human_size()" />
