@@ -650,7 +650,12 @@ class File(models.Model):
             directory = directory_model.browse(res_vals["directory_id"])
         elif self.env.context.get("active_id"):
             directory = directory_model.browse(self.env.context.get("active_id"))
-        if directory and directory.res_model and directory.res_id:
+        if (
+            directory
+            and directory.res_model
+            and directory.res_id
+            and directory.storage_id.save_type == "attachment"
+        ):
             attachment = (
                 self.env["ir.attachment"]
                 .with_context(dms_file=True)
