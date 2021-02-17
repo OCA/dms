@@ -49,7 +49,7 @@ Credits
 Authors
 ~~~~~~~
 
-* MuK IT
+* Creu Blanca
 
 Contributors
 ~~~~~~~~~~~~
