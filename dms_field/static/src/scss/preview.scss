@@ -1,0 +1,34 @@
+.o_preview_directory {
+    padding: 20px 30px 20px 30px;
+
+    .o_preview_directory_body {
+        padding-top: 25px;
+    }
+    .o_preview_directory_icon {
+        margin-right: 25px;
+        img {
+            width: 100%;
+            height: 100%;
+            min-width: 60px;
+            min-height: 60px;
+            max-width: 100px;
+            max-height: 100px;
+        }
+    }
+
+    .o_preview_directory_table > tbody > tr {
+        border-top: 1px solid rgb(221, 221, 221);
+    }
+
+    .o_preview_directory_table > tbody > tr:first-child {
+        border-top: 0;
+    }
+
+    .o_preview_directory_table > tbody > tr > td {
+        border-top: 0;
+    }
+
+    .btn-primary {
+        margin: 0.1em;
+    }
+}

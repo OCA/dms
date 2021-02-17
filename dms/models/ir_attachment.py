@@ -10,7 +10,13 @@ class IrAttachment(models.Model):
         return (
             self.env["dms.directory"]
             .sudo()
-            .search([("res_model", "=", res_model), ("res_id", "=", res_id)])
+            .search(
+                [
+                    ("res_model", "=", res_model),
+                    ("res_id", "=", res_id),
+                    ("storage_id.save_type", "=", "attachment"),
+                ]
+            )
         )
 
     def _dms_directories_create(self):
