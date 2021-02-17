@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo12-addon-dms',
+        'odoo12-addon-dms_field',
     ],
     classifiers=[
         'Programming Language :: Python',
