@@ -1,6 +1,7 @@
 from . import access_groups
 from . import mixins_thumbnail
 from . import dms_security_mixin
+from . import abstract_dms_mixin
 
 from . import storage
 from . import directory
