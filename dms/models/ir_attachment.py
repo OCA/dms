@@ -1,3 +1,4 @@
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 from odoo import api, models
 
@@ -12,13 +13,13 @@ class IrAttachment(models.Model):
         )
 
     def _dms_directories_create(self):
-        items = self._get_dms_directories(self.res_model, False)
+        items = self.sudo()._get_dms_directories(self.res_model, False)
         for item in items:
             model_item = self.env[self.res_model].sudo().browse(self.res_id)
             ir_model_item = self.env["ir.model"].search(
                 [("model", "=", self.res_model)]
             )
-            self.env["dms.directory"].create(
+            self.env["dms.directory"].sudo().create(
                 {
                     "name": model_item.display_name,
                     "model_id": ir_model_item.id,
@@ -33,18 +34,18 @@ class IrAttachment(models.Model):
         for attachment in self:
             if not attachment.res_model or not attachment.res_id:
                 continue
-            directories = self._get_dms_directories(
+            directories = self.sudo()._get_dms_directories(
                 attachment.res_model, attachment.res_id
             )
             if not directories:
                 attachment._dms_directories_create()
                 # Get dms_directories again (with items previously created)
-                directories = self._get_dms_directories(
+                directories = self.sudo()._get_dms_directories(
                     attachment.res_model, attachment.res_id
                 )
             # Auto-create_files
             for directory in directories:
-                self.env["dms.file"].create(
+                self.env["dms.file"].sudo().create(
                     {
                         "name": attachment.name,
                         "directory_id": directory.id,
