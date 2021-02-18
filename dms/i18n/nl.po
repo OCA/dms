@@ -21,11 +21,14 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -213,6 +216,11 @@ msgstr ""
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A root directory has to have a root storage."
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_abstract_dms_mixin
+msgid "Abstract Dms Mixin"
 msgstr ""
 
 #. module: dms
@@ -405,6 +413,7 @@ msgid "Categories are used to categorize Documents."
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__category_id
 #: model:ir.model.fields,field_description:dms.field_dms_directory__category_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__category_id
 #: model:ir.model.fields,field_description:dms.field_dms_tag__category_id
@@ -464,6 +473,7 @@ msgid "Closed"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__color
 #: model:ir.model.fields,field_description:dms.field_dms_directory__color
 #: model:ir.model.fields,field_description:dms.field_dms_file__color
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
@@ -483,6 +493,7 @@ msgid "Companies"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__company_id
 #: model:ir.model.fields,field_description:dms.field_dms_directory__company_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__company_id
 #: model:ir.model.fields,field_description:dms.field_dms_storage__company_id
@@ -778,6 +789,7 @@ msgid "Directory"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_category__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__display_name
@@ -913,11 +925,6 @@ msgid "File Upload"
 msgstr ""
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_file__name
-msgid "Filename"
-msgstr ""
-
-#. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_file
 #: model:ir.actions.act_window,name:dms.action_dms_file_migration
 #: model:ir.actions.act_window,name:dms.action_dms_file_storage_migration
@@ -1028,6 +1035,7 @@ msgid "Human Resource"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__id
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__id
 #: model:ir.model.fields,field_description:dms.field_dms_category__id
 #: model:ir.model.fields,field_description:dms.field_dms_directory__id
@@ -1042,8 +1050,8 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
 
 #. module: dms
@@ -1080,6 +1088,7 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,help:dms.field_abstract_dms_mixin__company_id
 #: model:ir.model.fields,help:dms.field_dms_directory__company_id
 #: model:ir.model.fields,help:dms.field_dms_file__company_id
 #: model:ir.model.fields,help:dms.field_dms_storage__company_id
@@ -1089,6 +1098,7 @@ msgid ""
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,help:dms.field_abstract_dms_mixin__is_hidden
 #: model:ir.model.fields,help:dms.field_dms_directory__is_hidden
 #: model:ir.model.fields,help:dms.field_dms_file__is_hidden
 #: model:ir.model.fields,help:dms.field_dms_storage__is_hidden
@@ -1099,7 +1109,8 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 
@@ -1145,6 +1156,7 @@ msgid "Just done"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_access_group____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_category____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_directory____last_update
@@ -1187,12 +1199,14 @@ msgid "Linked Models"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_model
 msgid "Linked attachments model"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_id
 msgid "Linked attachments record ID"
@@ -1322,11 +1336,10 @@ msgstr ""
 
 #. module: dms
 #: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__name
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
+#: model:ir.model.fields,field_description:dms.field_dms_file__name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__name
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
@@ -1475,8 +1488,8 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
 
@@ -1506,7 +1519,8 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 
 #. module: dms
@@ -1544,6 +1558,7 @@ msgid "Record Access Groups"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_file__record_ref
 msgid "Record Referenced"
@@ -1672,6 +1687,7 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_storage
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__storage_id
 #: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__storage_id
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
@@ -1683,6 +1699,7 @@ msgid "Storage"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__is_hidden
 #: model:ir.model.fields,field_description:dms.field_dms_directory__is_hidden
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_hidden
 #: model:ir.model.fields,field_description:dms.field_dms_storage__is_hidden
@@ -1812,9 +1829,9 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 
 #. module: dms
@@ -1854,7 +1871,8 @@ msgstr ""
 #: code:addons/dms/models/dms_security_mixin.py:0
 #, python-format
 msgid ""
-"The requested operation cannot be completed due to group security restrictions. Please contact your system administrator.\n"
+"The requested operation cannot be completed due to group security "
+"restrictions. Please contact your system administrator.\n"
 "\n"
 "(Document type: %s, Operation: %s)"
 msgstr ""
