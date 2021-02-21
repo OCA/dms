@@ -18,7 +18,7 @@ class IrAttachment(models.Model):
             ir_model_item = self.env["ir.model"].search(
                 [("model", "=", self.res_model)]
             )
-            self.env["dms.directory"].create(
+            dms_directory = self.env["dms.directory"].create(
                 {
                     "name": model_item.display_name,
                     "model_id": ir_model_item.id,
@@ -26,8 +26,11 @@ class IrAttachment(models.Model):
                     "res_id": self.res_id,
                     "parent_id": item.id,
                     "storage_id": item.storage_id.id,
+                    "record_mail_followers_sync": item.record_mail_followers_sync,
                 }
             )
+            if dms_directory.record_mail_followers_sync:
+                dms_directory.define_record_ref_mail_follower_ids()
 
     def _dms_operations(self):
         for attachment in self:

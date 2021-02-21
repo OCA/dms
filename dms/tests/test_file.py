@@ -1,22 +1,24 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2020 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
 
-from .common import multi_users
 from .test_file_database import FileTestCase
 
 
 class FileFilestoreTestCase(FileTestCase):
-    def _setup_test_data(self):
-        super(FileFilestoreTestCase, self)._setup_test_data()
-        self.new_storage.write({"save_type": "file"})
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.new_storage.with_user(cls.admin_uid).write({"save_type": "file"})
 
-    @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_content_file(self):
-        storage = self.create_storage(save_type="file", sudo=True)
-        lobject_file = self.create_file(storage=storage)
+        storage = self.create_storage(save_type="file", sudo=True).with_user(
+            self.admin_uid
+        )
+        lobject_file = self.create_file(storage=storage).with_user(self.admin_uid)
         self.assertTrue(lobject_file.content)
         self.assertTrue(lobject_file.content_file)
         self.assertTrue(lobject_file.with_context(bin_size=True).content)

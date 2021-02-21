@@ -47,22 +47,123 @@
             name="domain_force"
         >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
     </record>
-    <record id="rule_security_groups_user" model="ir.rule">
-        <field name="name">User can only edit and delete their own groups.</field>
-        <field name="model_id" ref="model_dms_access_group" />
-        <field name="groups" eval="[(4, ref('base.group_user'))]" />
-        <field name="perm_read" eval="0" />
+    <!-- model_dms_directory (read_group_ids) !-->
+    <record id="rule_security_groups_portal_dms_directory_read" model="ir.rule">
+        <field name="name">Portal dms directory (read)</field>
+        <field name="model_id" ref="model_dms_directory" />
+        <field name="groups" eval="[(4, ref('base.group_portal'))]" />
+        <field name="perm_read" eval="1" />
         <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+        <field
+            name="domain_force"
+        >['|', ('complete_read_group_ids','in',[g.id for g in user.groups_id]), ('record_ref_message_partner_ids', 'in', [user.partner_id.id])]</field>
+    </record>
+    <record id="rule_security_groups_user_dms_directory_read" model="ir.rule">
+        <field name="name">User dms directory (read)</field>
+        <field name="model_id" ref="model_dms_directory" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+        <field
+            name="domain_force"
+        >['|', ('complete_read_group_ids','in',[g.id for g in user.groups_id]), ('record_ref_message_partner_ids', 'in', [user.partner_id.id])]</field>
+    </record>
+    <!-- model_dms_directory (group_ids) !-->
+    <record id="rule_security_groups_portal_dms_directory" model="ir.rule">
+        <field name="name">Portal dms directory</field>
+        <field name="model_id" ref="model_dms_directory" />
+        <field name="groups" eval="[(4, ref('base.group_portal'))]" />
+        <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="1" />
         <field name="perm_write" eval="1" />
         <field name="perm_unlink" eval="1" />
-        <field name="domain_force">[('create_uid','=',user.id)]</field>
+        <field
+            name="domain_force"
+        >['|', ('complete_group_ids','in',[g.id for g in user.groups_id]), ('record_ref_message_partner_ids', 'in', [user.partner_id.id])]</field>
     </record>
-    <record id="rule_security_groups_manager" model="ir.rule">
-        <field name="name">Admins can edit and delete all groups.</field>
-        <field name="model_id" ref="model_dms_access_group" />
-        <field name="groups" eval="[(4, ref('base.group_erp_manager'))]" />
+    <record id="rule_security_groups_user_dms_directory" model="ir.rule">
+        <field name="name">User dms directory</field>
+        <field name="model_id" ref="model_dms_directory" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
         <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field
+            name="domain_force"
+        >['|', ('complete_group_ids','in',[g.id for g in user.groups_id]), ('record_ref_message_partner_ids', 'in', [user.partner_id.id])]</field>
+    </record>
+    <!-- model_dms_file (read_group_ids) !-->
+    <record id="rule_security_groups_portal_dms_file_read" model="ir.rule">
+        <field name="name">Portal dms file (read)</field>
+        <field name="model_id" ref="model_dms_file" />
+        <field name="groups" eval="[(4, ref('base.group_portal'))]" />
+        <field name="perm_read" eval="1" />
         <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+        <field
+            name="domain_force"
+        >['|', ('directory_id.complete_read_group_ids','in',[g.id for g in user.groups_id]), ('directory_id.record_ref_message_partner_ids', 'in', [user.partner_id.id])]</field>
+    </record>
+    <record id="rule_security_groups_user_dms_file_read" model="ir.rule">
+        <field name="name">User dms file (read)</field>
+        <field name="model_id" ref="model_dms_file" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+        <field
+            name="domain_force"
+        >['|', ('directory_id.complete_read_group_ids','in',[g.id for g in user.groups_id]), ('directory_id.record_ref_message_partner_ids', 'in', [user.partner_id.id])]</field>
+    </record>
+    <!-- model_dms_file (group_ids) !-->
+    <record id="rule_security_groups_portal_dms_file" model="ir.rule">
+        <field name="name">Portal dms file</field>
+        <field name="model_id" ref="model_dms_file" />
+        <field name="groups" eval="[(4, ref('base.group_portal'))]" />
+        <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field
+            name="domain_force"
+        >['|', ('directory_id.complete_group_ids','in',[g.id for g in user.groups_id]), ('directory_id.record_ref_message_partner_ids', 'in', [user.partner_id.id])]</field>
+    </record>
+    <record id="rule_security_groups_user_dms_file" model="ir.rule">
+        <field name="name">User dms file</field>
+        <field name="model_id" ref="model_dms_file" />
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="perm_read" eval="0" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field
+            name="domain_force"
+        >['|', ('directory_id.complete_group_ids','in',[g.id for g in user.groups_id]), ('directory_id.record_ref_message_partner_ids', 'in', [user.partner_id.id])]</field>
+    </record>
+    <!-- group_erp_manager !-->
+    <record id="rule_security_groups_manager_dms_directory" model="ir.rule">
+        <field name="name">Admin dms directory</field>
+        <field name="model_id" ref="model_dms_directory" />
+        <field name="groups" eval="[(4, ref('base.group_erp_manager'))]" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field name="domain_force">[(1 ,'=', 1)]</field>
+    </record>
+    <record id="rule_security_groups_manager_dms_file" model="ir.rule">
+        <field name="name">Admin dms file</field>
+        <field name="model_id" ref="model_dms_file" />
+        <field name="groups" eval="[(4, ref('base.group_erp_manager'))]" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
         <field name="perm_write" eval="1" />
         <field name="perm_unlink" eval="1" />
         <field name="domain_force">[(1 ,'=', 1)]</field>

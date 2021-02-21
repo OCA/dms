@@ -1,5 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2020 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 import base64
 import functools
@@ -9,7 +10,6 @@ import threading
 import time
 import uuid
 
-from odoo import SUPERUSER_ID, _
 from odoo.modules.module import get_module_resource
 from odoo.tests import common
 from odoo.tools import convert_file
@@ -20,74 +20,6 @@ _logger = logging.getLogger(__name__)
 # ----------------------------------------------------------
 # Decorators
 # ----------------------------------------------------------
-
-
-def multi_users(users=False, reset=True, raise_exception=True, callback=False):
-    def decorator(func):
-        @functools.wraps(func)
-        def wrapper(self, *args, **kwargs):
-            user_list = users(self) if callable(users) else users
-            test_results = []
-            for user in user_list:
-                self.cr.execute("SAVEPOINT test_multi_users")
-                try:
-                    if not isinstance(user[0], int):
-                        self.uid = self.ref(user[0])
-                    else:
-                        self.uid = user[0]
-                    if hasattr(self, callback):
-                        callb = getattr(self, callback)
-                        if callable(callb):
-                            callb()
-                    func(self, *args, **kwargs)
-                except Exception as error:
-                    test_results.append(
-                        {
-                            "user": user[0],
-                            "expect": user[1],
-                            "result": False,
-                            "error": error,
-                        }
-                    )
-                else:
-                    test_results.append(
-                        {
-                            "user": user[0],
-                            "expect": user[1],
-                            "result": True,
-                            "error": None,
-                        }
-                    )
-                if reset:
-                    self.env.cache.invalidate()
-                    self.registry.clear_caches()
-                    self.registry.reset_changes()
-                    self.cr.execute("ROLLBACK TO SAVEPOINT test_multi_users")
-                else:
-                    self._cr.execute("RELEASE SAVEPOINT test_multi_users")
-            test_fails = []
-            for result in test_results:
-                if result["expect"] != result["result"]:
-                    message = "Test (%s) with user (%s) failed!"
-                    _logger.info(message % (func.__name__, result["user"]))
-                    if result["error"]:
-                        _logger.error(result["error"], exc_info=True)
-                    test_fails.append(result)
-            if test_fails:
-                message = "{} out of {} tests failed".format(
-                    len(test_fails), len(test_results),
-                )
-                if raise_exception and test_fails[0]["error"]:
-                    raise test_fails[0]["error"]
-                elif raise_exception:
-                    raise Exception(_("Error has not been raised"))
-                else:
-                    _logger.info(message)
-            return test_results
-
-        return wrapper
-
-    return decorator
 
 
 def track_function(
@@ -143,18 +75,17 @@ def track_function(
 # ----------------------------------------------------------
 
 
-class DocumentsBaseCase(common.TransactionCase):
-    def setUp(self):
-        super(DocumentsBaseCase, self).setUp()
-        self.super_uid = SUPERUSER_ID
-        self.admin_uid = self.browse_ref("base.user_admin").id
-        self.demo_uid = self.browse_ref("base.user_demo").id
-        self.storage = self.env["dms.storage"]
-        self.directory = self.env["dms.directory"]
-        self.file = self.env["dms.file"]
-        self.category = self.env["dms.category"]
-        self.tag = self.env["dms.tag"]
-        self.attachment = self.env["ir.attachment"]
+class DocumentsBaseCase(common.SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.admin_uid = cls.env.ref("base.user_admin").id
+        cls.storage = cls.env["dms.storage"]
+        cls.directory = cls.env["dms.directory"]
+        cls.file = cls.env["dms.file"]
+        cls.category = cls.env["dms.category"]
+        cls.tag = cls.env["dms.tag"]
+        cls.attachment = cls.env["ir.attachment"]
 
     def _setup_test_data(self):
         self.storage = self.storage.with_user(self.env.uid)
@@ -175,16 +106,6 @@ class DocumentsBaseCase(common.TransactionCase):
             "test",
             self.registry._assertion_report,
         )
-
-    def multi_users(self, super_user=True, admin=True, demo=True):
-        return [
-            [self.super_uid, super_user],
-            [self.admin_uid, admin],
-            [self.demo_uid, demo],
-        ]
-
-    def content_base64(self):
-        return base64.b64encode(b"\xff data")
 
     def create_storage(self, save_type="database", sudo=False):
         model = self.storage.sudo() if sudo else self.storage
@@ -218,7 +139,7 @@ class DocumentsBaseCase(common.TransactionCase):
             {
                 "name": uuid.uuid4().hex,
                 "directory_id": directory.id,
-                "content": content or self.content_base64(),
+                "content": content or base64.b64encode(b"\xff data"),
             }
         )
 
@@ -232,7 +153,7 @@ class DocumentsBaseCase(common.TransactionCase):
             {
                 "name": uuid.uuid4().hex,
                 "directory_id": directory.id,
-                "content": content or self.content_base64(),
+                "content": content or base64.b64encode(b"\xff data"),
             }
         )
 
@@ -245,6 +166,6 @@ class DocumentsBaseCase(common.TransactionCase):
                 "name": name,
                 "res_model": res_model,
                 "res_id": res_id,
-                "datas": content or self.content_base64(),
+                "datas": content or base64.b64encode(b"\xff data"),
             }
         )

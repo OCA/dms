@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="group_dms_custom_group_demo" model="res.groups">
+        <field name="name">Custom group</field>
+        <field name="users" eval="[(6, 0, [ref('base.demo_user0')])]" />
+    </record>
+</odoo>

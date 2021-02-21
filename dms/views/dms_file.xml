@@ -102,8 +102,6 @@
                 <field name="locked_by" />
                 <field name="is_locked" />
                 <field name="is_lock_editor" />
-                <field name="permission_write" />
-                <field name="permission_unlink" />
                 <field name="__last_update" />
                 <templates>
                     <t t-name="kanban-box">
@@ -128,10 +126,11 @@
                                                 Operations
                                             </h6>
                                             <a
-                                                t-if="record.permission_write.raw_value and !record.is_locked.raw_value"
+                                                t-if="!record.is_locked.raw_value"
                                                 role="menuitem"
                                                 name="lock"
                                                 type="object"
+                                                groups="dms.group_dms_manager"
                                                 class="dropdown-item"
                                             >
                                                 <i class="fa fa-lock" />
@@ -148,20 +147,22 @@
                                                 Unlock
                                             </a>
                                             <a
-                                                t-if="record.permission_write.raw_value and record.active.raw_value"
+                                                t-if="record.active.raw_value"
                                                 role="menuitem"
                                                 name="toggle_active"
                                                 type="object"
+                                                groups="dms.group_dms_manager"
                                                 class="dropdown-item"
                                             >
                                                 <i class="fa fa-archive" />
                                                 Archive
                                             </a>
                                             <a
-                                                t-if="record.permission_write.raw_value and !record.active.raw_value"
+                                                t-if="!record.active.raw_value"
                                                 role="menuitem"
                                                 name="toggle_active"
                                                 type="object"
+                                                groups="dms.group_dms_manager"
                                                 class="dropdown-item"
                                             >
                                                 <i class="fa fa-archive" />
@@ -191,18 +192,18 @@
                                                 Open
                                             </a>
                                             <a
-                                                t-if="record.permission_write.raw_value"
                                                 role="menuitem"
                                                 type="edit"
+                                                groups="dms.group_dms_manager"
                                                 class="dropdown-item"
                                             >
                                                 <i class="fa fa-pencil-square-o" />
                                                 Edit
                                             </a>
                                             <a
-                                                t-if="record.permission_unlink.raw_value"
                                                 role="menuitem"
                                                 type="delete"
+                                                groups="dms.group_dms_manager"
                                                 class="dropdown-item"
                                             >
                                                 <i class="fa fa-trash-o" />
@@ -210,6 +211,7 @@
                                             </a>
                                         </div>
                                     </div>
+                                    <!--
                                     <div
                                         t-if="record.permission_write.raw_value"
                                         class="row"
@@ -221,6 +223,7 @@
                                             />
                                         </div>
                                     </div>
+                                    !-->
                                 </div>
                             </div>
                             <div class="oe_kanban_content">
@@ -336,7 +339,8 @@
                         name="lock"
                         type="object"
                         string="Lock"
-                        attrs="{'invisible':['|',('is_locked', '!=', False),('permission_write', '=', False)]}"
+                        attrs="{'invisible':['|',('is_locked', '!=', False)]}"
+                        groups="dms.group_dms_manager"
                     />
                     <button
                         class="oe_highlight"
@@ -449,10 +453,16 @@
                         <page name="page_access" string="Access Information">
                             <group>
                                 <group>
-                                    <field name="permission_write" readonly="1" />
-                                    <field name="permission_unlink" readonly="1" />
-                                </group>
-                                <group>
+                                    <field
+                                        name="group_ids"
+                                        widget="many2many_tags"
+                                        readonly="1"
+                                    />
+                                    <field
+                                        name="read_group_ids"
+                                        widget="many2many_tags"
+                                        readonly="1"
+                                    />
                                     <field name="is_lock_editor" invisible="1" />
                                     <field name="is_locked" invisible="1" />
                                     <field name="locked_by" />

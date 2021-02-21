@@ -1,6 +1,4 @@
-from . import access_groups
 from . import mixins_thumbnail
-from . import dms_security_mixin
 
 from . import storage
 from . import directory
@@ -12,3 +10,4 @@ from . import tag
 from . import res_company
 from . import res_config_settings
 from . import ir_attachment
+from . import mail_followers
