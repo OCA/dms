@@ -17,6 +17,8 @@ class CustomerPortal(CustomerPortal):
     def _dms_check_access(self, model, res_id, access_token=None):
         try:
             item_sudo = request.env[model].sudo().browse([res_id])
+            if item_sudo.type == 'url':
+                return False
         except (AccessError, MissingError):
             return False
 
