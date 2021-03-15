@@ -113,7 +113,7 @@ class File(models.Model):
         store=False,
     )
 
-    attachment_type = fields.Selection(
+    type = fields.Selection(
         [('url', 'URL'), ('binary', 'File')],
         string="Attachment Type",
         default='binary',
@@ -666,23 +666,17 @@ class File(models.Model):
             and directory.res_id
             and directory.storage_id.save_type == "attachment"
         ):
-            if self.attachment_type == 'binary':
-                attachment_vals = {
-                    "name": vals["name"],
-                    "datas": vals["content"],
-                    "res_model": directory.res_model,
-                    "res_id": directory.res_id,
-                    "type": "binary",
-                }
+            attachment_vals = {
+                "name": vals["name"],
+                "datas": vals["content"],
+                "res_model": directory.res_model,
+                "res_id": directory.res_id,
+                "type": self.type",
+            }
+            if self.type == 'binary':
+                attachment_vals["datas] = vals["content"]
             else:
-                attachment_vals = {
-                    "name": vals["name"],
-                    "url": vals["url"],
-                    "res_model": directory.res_model,
-                    "res_id": directory.res_id,
-                    "type": "url",
-                }
-
+                attachment_vals["url] = vals["url"]
             attachment = (
                 self.env["ir.attachment"]
                 .with_context(dms_file=True)
