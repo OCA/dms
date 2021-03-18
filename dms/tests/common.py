@@ -154,6 +154,7 @@ class DocumentsBaseCase(common.TransactionCase):
         self.file = self.env["dms.file"]
         self.category = self.env["dms.category"]
         self.tag = self.env["dms.tag"]
+        self.attachment = self.env["ir.attachment"]
 
     def _setup_test_data(self):
         self.storage = self.storage.with_user(self.env.uid)
@@ -161,6 +162,7 @@ class DocumentsBaseCase(common.TransactionCase):
         self.file = self.file.with_user(self.env.uid)
         self.category = self.category.with_user(self.env.uid)
         self.tag = self.tag.with_user(self.env.uid)
+        self.attachment = self.attachment.with_user(self.env.uid)
 
     def _load(self, module, *args):
         convert_file(
@@ -217,5 +219,32 @@ class DocumentsBaseCase(common.TransactionCase):
                 "name": uuid.uuid4().hex,
                 "directory_id": directory.id,
                 "content": content or self.content_base64(),
+            }
+        )
+
+    def create_file_with_context(
+        self, context, directory=False, content=False, storage=False, sudo=False
+    ):
+        model = self.file.sudo() if sudo else self.file
+        if not directory:
+            directory = self.create_directory(storage=storage, sudo=sudo)
+        return model.with_context(context).create(
+            {
+                "name": uuid.uuid4().hex,
+                "directory_id": directory.id,
+                "content": content or self.content_base64(),
+            }
+        )
+
+    def create_attachment(
+        self, name, res_model=False, res_id=False, content=False, sudo=False
+    ):
+        model = self.attachment.sudo() if sudo else self.attachment
+        return model.create(
+            {
+                "name": name,
+                "res_model": res_model,
+                "res_id": res_id,
+                "datas": content or self.content_base64(),
             }
         )

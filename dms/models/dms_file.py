@@ -6,12 +6,12 @@ import base64
 import hashlib
 import json
 import logging
-import mimetypes
 from collections import defaultdict
 
 from odoo import SUPERUSER_ID, _, api, fields, models, tools
 from odoo.exceptions import AccessError, ValidationError
 from odoo.osv import expression
+from odoo.tools import human_size
 from odoo.tools.mimetypes import guess_mimetype
 
 from ..tools import file
@@ -25,10 +25,12 @@ class File(models.Model):
     _description = "File"
 
     _inherit = [
+        "portal.mixin",
         "dms.security.mixin",
         "dms.mixins.thumbnail",
         "mail.thread",
         "mail.activity.mixin",
+        "abstract.dms.mixin",
     ]
 
     _order = "name asc"
@@ -36,8 +38,6 @@ class File(models.Model):
     # ----------------------------------------------------------
     # Database
     # ----------------------------------------------------------
-
-    name = fields.Char(string="Filename", required=True, index=True)
 
     active = fields.Boolean(
         string="Archived",
@@ -55,7 +55,7 @@ class File(models.Model):
         required=True,
         index=True,
     )
-
+    # Override acording to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
         related="directory_id.storage_id",
         comodel_name="dms.storage",
@@ -65,33 +65,12 @@ class File(models.Model):
         store=True,
     )
 
-    is_hidden = fields.Boolean(
-        string="Storage is Hidden", related="storage_id.is_hidden", readonly=True
-    )
-
-    company_id = fields.Many2one(
-        related="storage_id.company_id",
-        comodel_name="res.company",
-        string="Company",
-        readonly=True,
-        store=True,
-        index=True,
-    )
-
     path_names = fields.Char(
         compute="_compute_path", string="Path Names", readonly=True, store=False
     )
 
     path_json = fields.Text(
         compute="_compute_path", string="Path Json", readonly=True, store=False
-    )
-
-    color = fields.Integer(string="Color", default=0)
-
-    category_id = fields.Many2one(
-        comodel_name="dms.category",
-        context="{'dms_category_show_path': True}",
-        string="Category",
     )
 
     tag_ids = fields.Many2many(
@@ -150,6 +129,50 @@ class File(models.Model):
         attachment=True, string="Content File", prefetch=False, invisible=True
     )
 
+    def check_access_token(self, access_token=False):
+        res = False
+        if access_token:
+            if self.access_token and self.access_token == access_token:
+                return True
+            else:
+                items = (
+                    self.env["dms.directory"]
+                    .sudo()
+                    .search([("access_token", "=", access_token)])
+                )
+                if items:
+                    item = items[0]
+                    if self.directory_id.id == item.id:
+                        return True
+                    else:
+                        directory_item = self.directory_id
+                        while directory_item.parent_id:
+                            if directory_item.id == self.directory_id.id:
+                                return True
+                            directory_item = directory_item.parent_id
+                        # Fix last level
+                        if directory_item.id == self.directory_id.id:
+                            return True
+        return res
+
+    attachment_id = fields.Many2one(
+        comodel_name="ir.attachment",
+        string="Attachment File",
+        prefetch=False,
+        invisible=True,
+        ondelete="cascade",
+    )
+    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
+
+    def get_human_size(self):
+        return human_size(self.size)
+
+    def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
+        self.ensure_one()
+        return "/my/dms/file/{}/download?access_token={}&db={}".format(
+            self.id, self._portal_ensure_token(), self.env.cr.dbname,
+        )
+
     # ----------------------------------------------------------
     # Helper
     # ----------------------------------------------------------
@@ -170,9 +193,9 @@ class File(models.Model):
                 "size": binary and len(binary) or 0,
             }
         )
-        if self.storage_id.save_type == "file":
+        if self.storage_id.save_type in ["file", "attachment"]:
             new_vals["content_file"] = self.content
-        elif self.storage_id.save_type == "database":
+        else:
             new_vals["content_binary"] = self.content and binary
         return new_vals
 
@@ -347,24 +370,27 @@ class File(models.Model):
         for record in self:
             record.extension = file.guess_extension(record.name)
 
-    @api.depends("name", "content")
+    @api.depends("content")
     def _compute_mimetype(self):
         for record in self:
-            mimetype = record.name and mimetypes.guess_type(record.name)[0]
-            if not mimetype and record.content:
-                binary = base64.b64decode(record.with_context({}).content or "")
-                mimetype = guess_mimetype(binary, default="application/octet-stream")
-            record.res_mimetype = mimetype
+            record.res_mimetype = guess_mimetype(record.content or b"")
 
-    @api.depends("content_binary", "content_file")
+    @api.depends("content_binary", "content_file", "attachment_id")
     def _compute_content(self):
         bin_size = self.env.context.get("bin_size", False)
         for record in self:
             if record.content_file:
                 context = {"human_size": True} if bin_size else {"base64": True}
                 record.content = record.with_context(context).content_file
-            else:
-                record.content = base64.b64encode(record.content_binary)
+            elif record.content_binary:
+                record.content = (
+                    record.content_binary
+                    if bin_size
+                    else base64.b64encode(record.content_binary)
+                )
+            elif record.attachment_id:
+                context = {"human_size": True} if bin_size else {"base64": True}
+                record.content = record.with_context(context).attachment_id.datas
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
@@ -382,14 +408,14 @@ class File(models.Model):
         selection = {value[0]: value[1] for value in values}
         for record in self:
             storage_type = record.storage_id.save_type
-            if storage_type != record.save_type:
+            if storage_type == "attachment" or storage_type == record.save_type:
+                record.migration = selection.get(storage_type)
+                record.require_migration = False
+            else:
                 storage_label = selection.get(storage_type)
                 file_label = selection.get(record.save_type)
                 record.migration = "{} > {}".format(file_label, storage_label)
                 record.require_migration = True
-            else:
-                record.migration = selection.get(storage_type)
-                record.require_migration = False
 
     def read(self, fields=None, load="_classic_read"):
         self.check_directory_access("read", {}, True)
@@ -463,12 +489,16 @@ class File(models.Model):
         )
         if self.env.user.id == SUPERUSER_ID:
             return len(result) if count else result
+        # Fix access files with share button (public)
+        if self.env.user.has_group("base.group_public"):
+            return len(result) if count else result
+        # operations
         if not result:
             return 0 if count else []
         file_ids = set(result)
         directories = self._get_directories_from_database(result)
         for directory in directories - directories._filter_access("read"):
-            file_ids -= set(directory.with_user(SUPERUSER_ID).mapped("file_ids").ids)
+            file_ids -= set(directory.sudo().mapped("file_ids").ids)
         return len(file_ids) if count else list(file_ids)
 
     def _filter_access(self, operation):
@@ -477,15 +507,20 @@ class File(models.Model):
             return records
         directories = self._get_directories_from_database(records.ids)
         for directory in directories - directories._filter_access("read"):
-            records -= self.browse(
-                directory.with_user(SUPERUSER_ID).mapped("file_ids").ids
-            )
+            records -= self.browse(directory.sudo().mapped("file_ids").ids)
         return records
 
     def check_access(self, operation, raise_exception=False):
         res = super(File, self).check_access(operation, raise_exception)
         try:
-            return res and self.check_directory_access(operation) is None
+            if self.env.user.has_group("base.group_portal"):
+                res_access = res and self.check_directory_access(operation)
+                return res_access and (
+                    self.directory_id.id
+                    not in self.directory_id._get_ids_without_access_groups(operation)
+                )
+            else:
+                return res and self.check_directory_access(operation)
         except AccessError:
             if raise_exception:
                 raise
@@ -495,7 +530,7 @@ class File(models.Model):
         if not vals:
             vals = {}
         if self.env.user.id == SUPERUSER_ID:
-            return None
+            return True
         if "directory_id" in vals and vals["directory_id"]:
             records = self.env["dms.directory"].browse(vals["directory_id"])
         else:
@@ -560,6 +595,29 @@ class File(models.Model):
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
 
+    def _create_model_attachment(self, vals):
+        res_vals = vals.copy()
+        directory_id = res_vals.get("directory_id", self.env.context.get("active_id"))
+        directory = self.env["dms.directory"].browse(directory_id)
+        if directory.res_model and directory.res_id:
+            attachment = (
+                self.env["ir.attachment"]
+                .with_context(dms_file=True)
+                .create(
+                    {
+                        "name": vals["name"],
+                        "datas": vals["content"],
+                        "res_model": directory.res_model,
+                        "res_id": directory.res_id,
+                    }
+                )
+            )
+            res_vals["attachment_id"] = attachment.id
+            res_vals["res_model"] = attachment.res_model
+            res_vals["res_id"] = attachment.res_id
+            del res_vals["content"]
+        return res_vals
+
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
@@ -585,6 +643,15 @@ class File(models.Model):
         # We need to do sudo because we don't know when the related groups
         # will be deleted
         return super(File, self.sudo()).unlink()
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        new_vals_list = []
+        for vals in vals_list:
+            if "res_model" not in vals and "res_id" not in vals:
+                vals = self._create_model_attachment(vals)
+            new_vals_list.append(vals)
+        return super(File, self).create(new_vals_list)
 
     # ----------------------------------------------------------
     # Locking fields and functions

@@ -379,6 +379,12 @@
         <field name="arch" type="xml">
             <form string="Directory">
                 <header>
+                    <button
+                        name="%(portal.portal_share_action)d"
+                        string="Share"
+                        type="action"
+                        class="oe_highlight oe_read_only"
+                    />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -472,6 +478,23 @@
                             />
                             <field name="starred" widget="boolean_favorite" />
                         </group>
+                    </group>
+                    <group>
+                        <field name="storage_id_save_type" invisible="True" />
+                        <field name="allowed_model_ids" invisible="True" />
+                        <field
+                            name="model_id"
+                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')], 'readonly': [('count_total_files', '>', 0)]}"
+                        />
+                        <field
+                            name="res_id"
+                            readonly="True"
+                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                        />
+                        <field
+                            name="record_ref"
+                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                        />
                     </group>
                     <notebook>
                         <page name="page_directories" string="Subdirectories">

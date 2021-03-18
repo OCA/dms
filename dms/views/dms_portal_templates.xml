@@ -1,0 +1,134 @@
+<odoo>
+    <template
+        id="portal_my_home_dms"
+        name="Portal My Home : dms entries"
+        inherit_id="portal.portal_my_home"
+        priority="20"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="dms_directory_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Directories</t>
+                <t t-set="url" t-value="'/my/dms'" />
+                <t t-set="count" t-value="dms_directory_count" />
+            </t>
+        </xpath>
+    </template>
+    <template
+        id="portal_my_dms_breadcrumbs"
+        name="My DMS: Breadcrumbs"
+        inherit_id="portal.portal_breadcrumbs"
+    >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <t t-if="page_name == 'dms_directory'">
+                <t t-if="not access_token">
+                    <li class="breadcrumb-item">
+                        <t t-if="dms_directory">
+                            <a href="/my/dms" title="DMS">DMS</a>
+                        </t>
+                        <t t-if="not dms_directory">
+                            <span>DMS</span>
+                        </t>
+                    </li>
+                </t>
+                <t t-foreach="dms_parent_categories" t-as="dms_parent_category">
+                    <li class="breadcrumb-item">
+                        <t t-if="dms_parent_category.id != dms_directory.id">
+                            <a
+                                t-attf-href="/my/dms/directory/#{dms_parent_category.id}?{{ keep_query() }}"
+                                t-att-title="dms_parent_category.name"
+                            >
+                                <span t-esc="dms_parent_category.name" />
+                            </a>
+                        </t>
+                        <t t-if="dms_parent_category.id == dms_directory.id">
+                            <span t-esc="dms_parent_category.name" />
+                        </t>
+                    </li>
+                </t>
+            </t>
+        </xpath>
+    </template>
+    <template id="portal_my_dms" name="My DMS">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <t t-call="portal.portal_searchbar" />
+            <t t-if="not dms_directories and not dms_files">
+                <div class="alert alert-warning mt8" role="alert">Not results</div>
+            </t>
+            <t t-if="dms_directories or dms_files" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Last update</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="dms_directories" t-as="dms_directory">
+                        <tr class="tr_dms_directory">
+                            <td>
+                                <a
+                                    t-attf-href="/my/dms/directory/#{dms_directory.id}?{{ keep_query() }}"
+                                    t-attf-class="tr_dms_directory_link"
+                                    t-att-title="dms_directory.name"
+                                >
+                                    <img
+                                        t-att-src="image_data_uri(dms_directory.thumbnail)"
+                                        style="width:30px"
+                                    />
+                                    <span t-esc="dms_directory.name" />
+                                </a>
+                            </td>
+                            <td>Folder</td>
+                            <td>
+                                <span t-esc="dms_directory.count_elements" /> element(s)
+                            </td>
+                            <td>
+                                <span
+                                    t-esc="dms_directory.write_date"
+                                    t-options="{'widget': 'date'}"
+                                />
+                            </td>
+                            <td />
+                        </tr>
+                    </t>
+                    <t t-if="dms_files">
+                        <t t-foreach="dms_files" t-as="dms_file">
+                            <tr class="tr_dms_file">
+                                <td>
+                                    <img
+                                        t-att-src="image_data_uri(dms_file.thumbnail)"
+                                        style="width:30px"
+                                    />
+                                    <span t-esc="dms_file.name" />
+                                </td>
+                                <td>
+                                    <span t-esc="dms_file.res_mimetype" />
+                                </td>
+                                <td>
+                                    <span t-esc="dms_file.get_human_size()" />
+                                </td>
+                                <td>
+                                    <span
+                                        t-esc="dms_file.write_date"
+                                        t-options="{'widget': 'date'}"
+                                    />
+                                </td>
+                                <td>
+                                    <a
+                                        t-attf-href="/my/dms/file/#{dms_file.id}/download?{{ keep_query() }}"
+                                        t-attf-class="dms_file_download"
+                                    >
+                                        <i class="fa fa-download" />
+                                    </a>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+</odoo>
