@@ -109,9 +109,16 @@ class File(models.Model):
         string="Content",
         attachment=False,
         prefetch=False,
-        required=True,
         store=False,
     )
+
+    type = fields.Selection(
+        [('url', 'URL'), ('binary', 'File')],
+        string="Attachment Type",
+        default='binary',
+    )
+
+    url = fields.Char('URL', index=True, size=1024)
 
     extension = fields.Char(
         compute="_compute_extension", string="Extension", readonly=True, store=True
@@ -656,17 +663,22 @@ class File(models.Model):
             and directory.res_id
             and directory.storage_id.save_type == "attachment"
         ):
+            attachment_vals = {
+                "name": vals["name"],
+                "datas": vals["content"],
+                "res_model": directory.res_model,
+                "res_id": directory.res_id,
+                "type": self.type",
+            }
+            if self.type == 'binary':
+                attachment_vals["datas] = vals["content"]
+            else:
+                attachment_vals["url] = vals["url"]
             attachment = (
                 self.env["ir.attachment"]
                 .with_context(dms_file=True)
                 .create(
-                    {
-                        "name": vals["name"],
-                        "datas": vals["content"],
-                        "res_model": directory.res_model,
-                        "res_id": directory.res_id,
-                        "type": "binary",
-                    }
+                    attachment_vals
                 )
             )
             res_vals["attachment_id"] = attachment.id
