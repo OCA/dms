@@ -30,7 +30,7 @@ class Category(models.Model):
         default=True,
         help="The active field allows you to hide the category without removing it.",
     )
-    complete_name = fields.Char(compute="_compute_complete_name", store=True,)
+    complete_name = fields.Char(compute="_compute_complete_name", store=True)
     parent_id = fields.Many2one(
         comodel_name="dms.category",
         string="Parent Category",

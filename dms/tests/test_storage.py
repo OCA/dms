@@ -20,12 +20,23 @@ class StorageLObjectTestCase(StorageTestCase):
         )
         root_directory.model_id = model_res_partner.id
         self.assertEqual(root_directory.res_model, model_res_partner.model)
-        self.create_attachment(
+        attachment = self.create_attachment(
             name="demo.txt",
             res_model=model_res_partner.model,
             res_id=res_partner_1,
             sudo=False,
         ).with_user(self.uid)
+        self.assertEqual(root_directory.count_directories, 1)
+        self.assertEqual(len(root_directory.child_directory_ids), 1)
+        child_directory = root_directory.child_directory_ids[0]
+        self.assertEqual(child_directory.res_model, model_res_partner.model)
+        self.assertEqual(child_directory.res_id, res_partner_1)
+        self.assertEqual(len(root_directory.child_directory_ids.file_ids), 1)
+        dms_file = root_directory.child_directory_ids.file_ids[0]
+        self.assertEqual(dms_file.attachment_id, attachment)
+        self.assertEqual(dms_file.name, "demo.txt")
+        self.assertEqual(dms_file.res_model, model_res_partner.model)
+        self.assertEqual(dms_file.res_id, res_partner_1)
         directory_ids = self.directory.with_user(self.uid).search(
             [
                 ("storage_id", "=", storage.id),
@@ -34,13 +45,14 @@ class StorageLObjectTestCase(StorageTestCase):
             ]
         )
         for directory_id in directory_ids:
-            file_01 = self.create_file_with_context(
-                context={"default_directory_id": directory_id.id},
-                storage=directory_id.storage_id,
+            file_01 = self.create_file(
+                directory=directory_id, storage=directory_id.storage_id,
             ).with_user(self.uid)
+            self.assertEqual(file_01.res_model, model_res_partner.model)
+            self.assertEqual(file_01.res_id, res_partner_1)
             self.assertEqual(file_01.storage_id, storage)
             self.assertEqual(file_01.storage_id.save_type, "attachment")
-            self.assertEqual(file_01.save_type, "file")
+            self.assertEqual(file_01.save_type, "database")
             self.assertEqual(storage.count_storage_files, 2)
 
     @multi_users(lambda self: self.multi_users(demo=False), callback="_setup_test_data")

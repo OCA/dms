@@ -50,8 +50,6 @@ class IrAttachment(models.Model):
                         "name": attachment.name,
                         "directory_id": directory.id,
                         "attachment_id": attachment.id,
-                        "res_model": attachment.res_model,
-                        "res_id": attachment.res_id,
                     }
                 )
 
