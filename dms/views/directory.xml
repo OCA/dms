@@ -440,14 +440,8 @@
                             <field
                                 name="storage_id"
                                 options="{'no_open': True}"
-                                attrs="{'invisible':['|', ('is_root_directory','=',True), ('parent_id','=',False)]}"
-                            />
-                            <field
-                                name="root_storage_id"
-                                options="{'no_open': True}"
-                                readonly="1"
-                                invisible="context.get('hide_root_storage', False)"
-                                attrs="{'invisible':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
+                                attrs="{'readonly':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
+                                force_save="1"
                             />
                         </group>
                         <group>
@@ -625,10 +619,6 @@
             <field name="is_root_directory" position="attributes">
                 <attribute name="invisible">0</attribute>
             </field>
-            <field name="root_storage_id" position="attributes">
-                <attribute name="readonly">0</attribute>
-                <attribute name="options">{'no_quick_create': True}</attribute>
-            </field>
             <field name="storage_id" position="attributes">
                 <attribute name="options">{}</attribute>
             </field>
@@ -679,8 +669,10 @@
                     <group>
                         <field name="is_root_directory" readonly="1" />
                         <field
-                            name="root_storage_id"
+                            name="storage_id"
                             options="{'no_quick_create': True}"
+                            attrs="{'readonly':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
+                            force_save="1"
                         />
                     </group>
                     <group>
