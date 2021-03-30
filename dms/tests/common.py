@@ -1,5 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 import base64
 import functools
@@ -200,13 +201,15 @@ class DocumentsBaseCase(common.TransactionCase):
                     "name": uuid.uuid4().hex,
                     "is_root_directory": False,
                     "parent_id": directory.id,
+                    "storage_id": directory.storage_id.id,
                 }
             )
         return model.create(
             {
                 "name": uuid.uuid4().hex,
                 "is_root_directory": True,
-                "root_storage_id": storage.id,
+                "storage_id": storage.id,
+                "parent_id": False,
             }
         )
 
@@ -215,20 +218,6 @@ class DocumentsBaseCase(common.TransactionCase):
         if not directory:
             directory = self.create_directory(storage=storage, sudo=sudo)
         return model.create(
-            {
-                "name": uuid.uuid4().hex,
-                "directory_id": directory.id,
-                "content": content or self.content_base64(),
-            }
-        )
-
-    def create_file_with_context(
-        self, context, directory=False, content=False, storage=False, sudo=False
-    ):
-        model = self.file.sudo() if sudo else self.file
-        if not directory:
-            directory = self.create_directory(storage=storage, sudo=sudo)
-        return model.with_context(context).create(
             {
                 "name": uuid.uuid4().hex,
                 "directory_id": directory.id,

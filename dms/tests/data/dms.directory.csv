@@ -1,4 +1,4 @@
-id,name,parent_id/id,root_storage_id/id,is_root_directory,category_id/id,tag_ids/id
+id,name,parent_id/id,storage_id/id,is_root_directory,category_id/id,tag_ids/id
 dms.directory_001_benchmark,D_0001,,dms.storage_001_benchmark,TRUE,dms.category_041_benchmark,dms.tag_042_benchmark
 dms.directory_002_benchmark,D_0002,,dms.storage_002_benchmark,TRUE,dms.category_021_benchmark,dms.tag_140_benchmark
 dms.directory_003_benchmark,D_0003,,dms.storage_001_benchmark,TRUE,dms.category_017_benchmark,dms.tag_017_benchmark

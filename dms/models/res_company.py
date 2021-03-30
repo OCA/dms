@@ -93,7 +93,7 @@ class ResCompany(models.Model):
             **self.env.context,
             **{
                 "default_is_root_directory": True,
-                "default_root_storage_id": storage and storage.id,
+                "default_storage_id": storage and storage.id,
             },
         }
         return action

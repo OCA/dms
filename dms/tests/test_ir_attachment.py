@@ -38,8 +38,8 @@ class IrAttachmentTestCase(common.TransactionCase):
             "res_id": self.partner.id,
             "datas": self.content_base64(),
         }
-        attachment = self.attachment.sudo(self.user_demo).create(vals)
+        attachment = self.attachment.with_user(self.user_demo).create(vals)
         self.assertEquals(attachment.name, "Test file")
         vals["name"] = "Test file 2"
-        attachment = self.attachment.sudo(self.unprivileged_user).create(vals)
+        attachment = self.attachment.with_user(self.unprivileged_user).create(vals)
         self.assertEquals(attachment.name, "Test file 2")
