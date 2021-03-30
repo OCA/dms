@@ -1,5 +1,6 @@
 # Copyright 2020 Antoni Romera
 # Copyright 2017-2019 MuK IT GmbH
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
@@ -58,6 +59,7 @@ class File(models.Model):
     # Override acording to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
         related="directory_id.storage_id",
+        related_sudo=True,
         comodel_name="dms.storage",
         string="Storage",
         auto_join=True,
@@ -155,6 +157,12 @@ class File(models.Model):
                             return True
         return res
 
+    res_model = fields.Char(
+        string="Linked attachments model", related="directory_id.res_model"
+    )
+    res_id = fields.Integer(
+        string="Linked attachments record ID", related="directory_id.res_id"
+    )
     attachment_id = fields.Many2one(
         comodel_name="ir.attachment",
         string="Attachment File",
@@ -162,7 +170,6 @@ class File(models.Model):
         invisible=True,
         ondelete="cascade",
     )
-    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
 
     def get_human_size(self):
         return human_size(self.size)
@@ -653,7 +660,7 @@ class File(models.Model):
     def create(self, vals_list):
         new_vals_list = []
         for vals in vals_list:
-            if "res_model" not in vals and "res_id" not in vals:
+            if "attachment_id" not in vals:
                 vals = self._create_model_attachment(vals)
             new_vals_list.append(vals)
         return super(File, self).create(new_vals_list)
