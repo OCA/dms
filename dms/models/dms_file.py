@@ -1,5 +1,6 @@
 # Copyright 2020 Antoni Romera
 # Copyright 2017-2019 MuK IT GmbH
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
@@ -150,6 +151,10 @@ class File(models.Model):
     content_file = fields.Binary(
         attachment=True, string="Content File", prefetch=False, invisible=True
     )
+
+    def check_access_rule(self, operation):
+        self.mapped("directory_id").check_access_rule(operation)
+        return super().check_access_rule(operation)
 
     def get_human_size(self):
         return human_size(self.size)
@@ -557,22 +562,6 @@ class File(models.Model):
             records -= self.browse(directory.sudo().mapped("file_ids").ids)
         return records
 
-    def check_access(self, operation, raise_exception=False):
-        res = super(File, self).check_access(operation, raise_exception)
-        try:
-            if self.env.user.has_group("base.group_portal"):
-                res_access = res and self.check_directory_access(operation)
-                return res_access and (
-                    self.directory_id.id
-                    not in self.directory_id._get_ids_without_access_groups(operation)
-                )
-            else:
-                return res and self.check_directory_access(operation)
-        except AccessError:
-            if raise_exception:
-                raise
-            return False
-
     def check_directory_access(self, operation, vals=False, raise_exception=False):
         if not vals:
             vals = {}
@@ -587,6 +576,16 @@ class File(models.Model):
     # ----------------------------------------------------------
     # Constrains
     # ----------------------------------------------------------
+
+    @api.constrains("storage_id", "res_model")
+    def _check_storage_id_attachment_res_model(self):
+        for record in self:
+            if record.storage_id.save_type == "attachment" and not (
+                record.res_model and record.res_id
+            ):
+                raise ValidationError(
+                    _("A file must have model and resource ID in attachment storage.")
+                )
 
     @api.constrains("name")
     def _check_name(self):

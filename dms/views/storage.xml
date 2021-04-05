@@ -166,6 +166,14 @@
                     <group name="data_storage">
                         <group>
                             <field name="is_hidden" />
+                            <field
+                                name="inherit_access_from_parent_record"
+                                attrs="{'invisible': [('save_type', '!=', 'attachment')]}"
+                            />
+                            <field
+                                name="include_message_attachments"
+                                attrs="{'invisible': [('save_type', '!=', 'attachment')]}"
+                            />
                         </group>
                         <group>
                             <field name="company_id" />

@@ -7,26 +7,23 @@ class IrAttachment(models.Model):
     _inherit = "ir.attachment"
 
     def _get_dms_directories(self, res_model, res_id):
-        return (
-            self.env["dms.directory"]
-            .sudo()
-            .search(
-                [
-                    ("res_model", "=", res_model),
-                    ("res_id", "=", res_id),
-                    ("storage_id.save_type", "=", "attachment"),
-                ]
-            )
-        )
+        domain = [
+            ("res_model", "=", res_model),
+            ("res_id", "=", res_id),
+            ("storage_id.save_type", "=", "attachment"),
+        ]
+        if self.env.context.get("attaching_to_record"):
+            domain += [("storage_id.include_message_attachments", "=", True)]
+        return self.env["dms.directory"].search(domain)
 
     def _dms_directories_create(self):
         items = self._get_dms_directories(self.res_model, False)
         for item in items:
-            model_item = self.env[self.res_model].sudo().browse(self.res_id)
+            model_item = self.env[self.res_model].browse(self.res_id)
             ir_model_item = self.env["ir.model"].search(
                 [("model", "=", self.res_model)]
             )
-            self.env["dms.directory"].sudo().create(
+            self.env["dms.directory"].sudo().with_context(check_name=False).create(
                 {
                     "name": model_item.display_name,
                     "model_id": ir_model_item.id,
@@ -54,17 +51,25 @@ class IrAttachment(models.Model):
                 directories = self._get_dms_directories(
                     attachment.res_model, attachment.res_id
                 )
-            # Auto-create_files
+            # Auto-create_files (if not exists)
             for directory in directories:
-                self.env["dms.file"].sudo().create(
-                    {
-                        "name": attachment.name,
-                        "directory_id": directory.id,
-                        "attachment_id": attachment.id,
-                        "res_model": attachment.res_model,
-                        "res_id": attachment.res_id,
-                    }
+                dms_file_model = self.env["dms.file"].sudo()
+                dms_file = dms_file_model.search(
+                    [
+                        ("attachment_id", "=", attachment.id),
+                        ("directory_id", "=", directory.id),
+                    ]
                 )
+                if not dms_file:
+                    dms_file_model.create(
+                        {
+                            "name": attachment.name,
+                            "directory_id": directory.id,
+                            "attachment_id": attachment.id,
+                            "res_model": attachment.res_model,
+                            "res_id": attachment.res_id,
+                        }
+                    )
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -72,3 +77,11 @@ class IrAttachment(models.Model):
         if not self.env.context.get("dms_file"):
             records._dms_operations()
         return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        if not self.env.context.get("dms_file") and self.env.context.get(
+            "attaching_to_record"
+        ):
+            self._dms_operations()
+        return res

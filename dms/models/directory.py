@@ -1,5 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
@@ -194,6 +195,24 @@ class DmsDirectory(models.Model):
                 """,
     )
 
+    def check_access_rule(self, operation):
+        super().check_access_rule(operation)
+        for record in self:
+            if (
+                record.is_root_directory
+                and not record.root_storage_id_inherit_access_from_parent_record
+            ) or (
+                not record.is_root_directory
+                and not record.storage_id_inherit_access_from_parent_record
+            ):
+                record.check_access_groups(operation)
+                continue
+            # Check access to inherited model (and record)
+            model = self.env[record.res_model]
+            model.check_access_rights(operation)
+            if record.res_id:
+                model.browse(record.res_id).check_access_rule(operation)
+
     def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
         self.ensure_one()
         return "/my/dms/directory/{}?access_token={}&db={}".format(
@@ -244,11 +263,9 @@ class DmsDirectory(models.Model):
                 current_directory = current_directory.parent_id
         return directories[::-1]
 
-    def _get_own_root_directories(self, user_id):
+    def _get_own_root_directories(self):
         ids = []
-        items = (
-            self.env["dms.directory"].sudo(user_id).search([("is_hidden", "=", False)])
-        )
+        items = self.env["dms.directory"].search([("is_hidden", "=", False)])
         for item in items:
             current_directory = item
             while (
@@ -261,16 +278,6 @@ class DmsDirectory(models.Model):
                 ids.append(current_directory.id)
 
         return ids
-
-    def check_access(self, operation, raise_exception=False):
-        res = super(DmsDirectory, self).check_access(operation, raise_exception)
-        if self.env.user.has_group("base.group_portal"):
-            if self.id in self._get_ids_without_access_groups(operation):
-                res = False
-        # Fix show breadcrumb with share button (public)
-        if self.env.user.has_group("base.group_public"):
-            res = True
-        return res
 
     allowed_model_ids = fields.Many2many(
         compute="_compute_allowed_model_ids", comodel_name="ir.model", store=False
@@ -289,6 +296,18 @@ class DmsDirectory(models.Model):
         string="Record Referenced", compute="_compute_record_ref", selection=[]
     )
     storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
+    root_storage_id_inherit_access_from_parent_record = fields.Boolean(
+        related="root_storage_id.inherit_access_from_parent_record",
+        related_sudo=True,
+        auto_join=True,
+        store=True,
+    )
+    storage_id_inherit_access_from_parent_record = fields.Boolean(
+        related="storage_id.inherit_access_from_parent_record",
+        related_sudo=True,
+        auto_join=True,
+        store=True,
+    )
 
     @api.depends("root_storage_id", "storage_id")
     def _compute_allowed_model_ids(self):
@@ -364,26 +383,6 @@ class DmsDirectory(models.Model):
     # ----------------------------------------------------------
     # Search
     # ----------------------------------------------------------
-    @api.model
-    def _search(
-        self,
-        args,
-        offset=0,
-        limit=None,
-        order=None,
-        count=False,
-        access_rights_uid=None,
-    ):
-        result = super(DmsDirectory, self)._search(
-            args, offset, limit, order, False, access_rights_uid
-        )
-        if result:
-            directory_ids = set(result)
-            if self.env.user.has_group("base.group_portal"):
-                exclude_ids = self._get_ids_without_access_groups("read")
-                directory_ids -= set(exclude_ids)
-                return directory_ids
-        return result
 
     @api.model
     def _search_starred(self, operator, operand):
@@ -417,14 +416,16 @@ class DmsDirectory(models.Model):
     @api.depends("child_directory_ids")
     def _compute_count_directories(self):
         for record in self:
-            directories = len(record.child_directory_ids)
+            directories = len(
+                record.child_directory_ids.filtered(lambda x: x.check_access("read"))
+            )
             record.count_directories = directories
             record.count_directories_title = _("%s Subdirectories") % directories
 
     @api.depends("file_ids")
     def _compute_count_files(self):
         for record in self:
-            files = len(record.file_ids)
+            files = len(record.file_ids.filtered(lambda x: x.check_access("read")))
             record.count_files = files
             record.count_files_title = _("%s Files") % files
 
@@ -510,6 +511,24 @@ class DmsDirectory(models.Model):
             )
             record.tag_ids = tags
 
+    @api.onchange("storage_id")
+    def _onchange_storage_id(self):
+        for record in self:
+            if (
+                not record.is_root_directory
+                and record.storage_id.save_type == "attachment"
+                and record.storage_id.inherit_access_from_parent_record
+            ) or (
+                record.is_root_directory
+                and record.root_storage_id.save_type == "attachment"
+                and record.root_storage_id.inherit_access_from_parent_record
+            ):
+                record.group_ids = False
+
+    @api.onchange("model_id")
+    def _onchange_model_id(self):
+        self._inverse_model_id()
+
     # ----------------------------------------------------------
     # Constrains
     # ----------------------------------------------------------
@@ -519,6 +538,14 @@ class DmsDirectory(models.Model):
         if not self._check_recursion():
             raise ValidationError(_("Error! You cannot create recursive directories."))
         return True
+
+    @api.constrains("storage_id", "model_id")
+    def _check_storage_id_attachment_model_id(self):
+        for record in self:
+            if record.storage_id.save_type == "attachment" and not record.model_id:
+                raise ValidationError(
+                    _("A directory has to have model in attachment storage.")
+                )
 
     @api.constrains("is_root_directory", "root_storage_id", "parent_id")
     def _check_directory_storage(self):
@@ -548,7 +575,7 @@ class DmsDirectory(models.Model):
     @api.constrains("name")
     def _check_name(self):
         for record in self:
-            if not check_name(record.name):
+            if self.env.context.get("check_name", True) and not check_name(record.name):
                 raise ValidationError(_("The directory name is invalid."))
             if record.is_root_directory:
                 childs = record.sudo().root_storage_id.root_directory_ids.name_get()
