@@ -1,4 +1,5 @@
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from collections import defaultdict
@@ -135,6 +136,22 @@ class DmsSecurityMixin(models.AbstractModel):
             )
         query.where_clause += [where_clause]
         query.where_clause_params += [self.env.user.id]
+        # Add _get_directory_ids_with_res_model_without_access
+        if self.env.context.get("use_res_model_without_access", True):
+            custom_ids = self._get_directory_ids_with_res_model_without_access(mode)
+            if custom_ids:
+                field = "id"
+                if self._name == "dms.file":
+                    field = "directory_id"
+                extra_clause = """
+                    "{table}".{field} NOT IN ({ids})
+                """.format(
+                    table=self._table,
+                    field=field,
+                    ids=", ".join(["%s"] * len(custom_ids)),
+                )
+                query.where_clause += [extra_clause]
+                query.where_clause_params += custom_ids.ids
 
     @api.model
     def _apply_ir_rules(self, query, mode="read"):
@@ -222,11 +239,8 @@ class DmsSecurityMixin(models.AbstractModel):
         try:
             access_right = self.check_access_rights(operation, raise_exception)
             access_rule = self.check_access_rule(operation) is None
-            return (
-                access_right
-                and access_rule
-                and self.check_access_groups(operation) is None
-            )
+            access_group = self.check_access_groups(operation) is None
+            return access_right and access_rule and access_group
         except AccessError:
             if raise_exception:
                 raise
@@ -253,9 +267,10 @@ class DmsSecurityMixin(models.AbstractModel):
             result = defaultdict(list)
             for key, val in self.env.cr.fetchall():
                 result[key].append(val)
-            if len(result.keys()) < len(group_ids) or not all(
-                list(map(lambda val: any(val), result.values()))
-            ):
+            if (
+                len(result.keys()) < len(group_ids)
+                or not all(list(map(lambda val: any(val), result.values())))
+            ) and not self.check_access(operation):
                 raise AccessError(
                     _(
                         "The requested operation cannot be completed due "
@@ -288,6 +303,25 @@ class DmsSecurityMixin(models.AbstractModel):
             self.env.cr.execute(sql_query, [self.env.user.id])
             ids_with_access += list(map(lambda val: val[0], self.env.cr.fetchall()))
         return self & self.browse(ids_with_access)
+
+    def _get_directory_ids_with_res_model_without_access(self, operation):
+        """
+        It's necessary to get all directories with res_model related and check
+        if access to related record.
+        Context use_res_model_without_access=False is used to skip some
+        part of functions that use these function and prevent recursion error.
+        """
+        return (
+            self.env["dms.directory"]
+            .with_context(use_res_model_without_access=False)
+            .search(
+                [
+                    ("res_model", "!=", False),
+                    ("storage_id_inherit_access_from_parent_record", "=", True),
+                ]
+            )
+            .filtered(lambda x: not x.check_access("read"))
+        )
 
     def _write(self, vals):
         self.check_access_groups("write")
