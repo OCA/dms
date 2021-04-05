@@ -475,11 +475,16 @@
                     </group>
                     <group>
                         <field name="storage_id_save_type" invisible="True" />
+                        <field
+                            name="storage_id_inherit_access_from_parent_record"
+                            invisible="True"
+                        />
                         <field name="allowed_model_ids" invisible="True" />
                         <field
                             name="model_id"
-                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')], 'readonly': [('count_total_files', '>', 0)]}"
+                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')], 'readonly': [('count_total_files', '>', 0)], 'required': [('storage_id_save_type','=','attachment')]}"
                         />
+                        <field name="res_model" invisible="1" force_save="1" />
                         <field
                             name="res_id"
                             readonly="True"
@@ -546,7 +551,10 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Groups">
+                        <page
+                            string="Groups"
+                            attrs="{'invisible':[('storage_id_inherit_access_from_parent_record', '=', True)]}"
+                        >
                             <field name="group_ids">
                                 <tree string="Groups">
                                     <field name="name" />
@@ -557,7 +565,10 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Complete Groups">
+                        <page
+                            string="Complete Groups"
+                            attrs="{'invisible':[('storage_id_inherit_access_from_parent_record', '=', True)]}"
+                        >
                             <field name="complete_group_ids">
                                 <tree string="Complete Groups">
                                     <field name="name" />
