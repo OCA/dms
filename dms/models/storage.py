@@ -1,5 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
@@ -85,6 +86,25 @@ class Storage(models.Model):
     )
 
     model_ids = fields.Many2many("ir.model", string="Linked Models")
+    inherit_access_from_parent_record = fields.Boolean(
+        string="Inherit permissions from related record",
+        default=False,
+        help="Indicate if directories and files access work only with "
+        "related model access (for example, if some directories are related "
+        "with any sale, only users with read access to these sale can acess)",
+    )
+    include_message_attachments = fields.Boolean(
+        string="Create files from message attachments",
+        default=False,
+        help="Indicate if directories and files auto-create in mail "
+        "composition process too",
+    )
+
+    @api.onchange("save_type")
+    def _onchange_save_type(self):
+        for record in self:
+            if record.save_type == "attachment":
+                record.inherit_access_from_parent_record = True
 
     # ----------------------------------------------------------
     # Actions
