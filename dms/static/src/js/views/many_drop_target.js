@@ -4,7 +4,7 @@
  **********************************************************************************/
 
 /* global Uint8Array base64js*/
-odoo.define("dms.DragDrop", function(require) {
+odoo.define("dms.DragDrop", function (require) {
     "use strict";
 
     var DropTargetMixin = require("web_drop_target");
@@ -13,15 +13,15 @@ odoo.define("dms.DragDrop", function(require) {
     var _t = core._t;
 
     return _.extend(DropTargetMixin.DropTargetMixin, {
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             this.directory_id = false;
         },
-        _get_drop_items: function(e) {
+        _get_drop_items: function (e) {
             var self = this,
                 dataTransfer = e.originalEvent.dataTransfer,
                 drop_items = [];
-            _.each(dataTransfer.files, function(item) {
+            _.each(dataTransfer.files, function (item) {
                 if (
                     _.contains(self._drop_allowed_types, item.type) ||
                     _.isEmpty(self._drop_allowed_types)
@@ -31,13 +31,13 @@ odoo.define("dms.DragDrop", function(require) {
             });
             return drop_items;
         },
-        _handle_drop_items: function(drop_items, e) {
+        _handle_drop_items: function (drop_items, e) {
             var self = this;
-            _.each(drop_items, function(item) {
+            _.each(drop_items, function (item) {
                 return self._handle_file_drop(item, e, self.renderer.state.model);
             });
         },
-        _handle_file_drop: function(item, event, model) {
+        _handle_file_drop: function (item, event, model) {
             var self = this;
             var file = item;
             if (!file || !(file instanceof Blob)) {
@@ -50,7 +50,7 @@ odoo.define("dms.DragDrop", function(require) {
             reader.onerror = self.proxy("_file_reader_error_handler");
             reader.readAsArrayBuffer(file);
         },
-        _add_overlay: function() {
+        _add_overlay: function () {
             if (!this._drop_overlay) {
                 var o_content = jQuery(".o_content"),
                     view_manager = jQuery(".o_view_manager_content");
@@ -65,7 +65,7 @@ odoo.define("dms.DragDrop", function(require) {
                 o_content.append(this._drop_overlay);
             }
         },
-        _onSearchPanelDomainUpdated: function(ev) {
+        _onSearchPanelDomainUpdated: function (ev) {
             var directory_id = false;
             _.each(ev.data.domain, function (domain) {
                 if (
@@ -78,7 +78,7 @@ odoo.define("dms.DragDrop", function(require) {
             this.directory_id = directory_id;
             return this._super.apply(this, arguments);
         },
-        _create_file: function(file, reader, event, model) {
+        _create_file: function (file, reader, event, model) {
             // Helper to upload an attachment and update the sidebar
             var self = this;
             var ctx = this.model.get(this.handle, {raw: true}).getContext();
@@ -100,7 +100,7 @@ odoo.define("dms.DragDrop", function(require) {
                 kwargs: {
                     context: ctx,
                 },
-            }).then(function() {
+            }).then(function () {
                 self.reload();
             });
         },

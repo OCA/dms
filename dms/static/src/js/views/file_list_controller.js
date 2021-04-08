@@ -4,7 +4,7 @@
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
  **********************************************************************************/
 
-odoo.define("dms.FileListController", function(require) {
+odoo.define("dms.FileListController", function (require) {
     "use strict";
 
     var ListController = require("web.ListController");

@@ -76,7 +76,8 @@ def multi_users(users=False, reset=True, raise_exception=True, callback=False):
                     test_fails.append(result)
             if test_fails:
                 message = "{} out of {} tests failed".format(
-                    len(test_fails), len(test_results),
+                    len(test_fails),
+                    len(test_results),
                 )
                 if raise_exception and test_fails[0]["error"]:
                     raise test_fails[0]["error"]
@@ -112,7 +113,10 @@ def track_function(
                 remaining_time = time.time() - perf_t0 - query_time
                 time_taken = query_time + remaining_time
                 message += " - {} Q {:.3f}s QT {:.3f}s OT {:.3f}s TT".format(
-                    query_count, query_time, remaining_time, time_taken,
+                    query_count,
+                    query_time,
+                    remaining_time,
+                    time_taken,
                 )
                 tracking_parameters += [
                     query_count,

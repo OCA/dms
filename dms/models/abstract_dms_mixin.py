@@ -17,7 +17,9 @@ class AbstractDmsMixin(models.AbstractModel):
     )
     # Only defined to prevent error in other fields that related it
     storage_id = fields.Many2one(
-        comodel_name="dms.storage", string="Storage", store=True,
+        comodel_name="dms.storage",
+        string="Storage",
+        store=True,
     )
     is_hidden = fields.Boolean(
         string="Storage is Hidden",
