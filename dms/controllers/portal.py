@@ -36,7 +36,10 @@ class CustomerPortal(CustomerPortal):
         return values
 
     @http.route(
-        ["/my/dms"], type="http", auth="user", website=True,
+        ["/my/dms"],
+        type="http",
+        auth="user",
+        website=True,
     )
     def portal_my_dms(
         self, sortby=None, filterby=None, search=None, search_in="name", **kw
