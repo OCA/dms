@@ -124,7 +124,9 @@ class File(models.Model):
         compute_sudo=True,
     )
     require_migration = fields.Boolean(
-        compute="_compute_migration", store=True, compute_sudo=True,
+        compute="_compute_migration",
+        store=True,
+        compute_sudo=True,
     )
 
     content_file = fields.Binary(
@@ -181,7 +183,9 @@ class File(models.Model):
     def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
         self.ensure_one()
         return "/my/dms/file/{}/download?access_token={}&db={}".format(
-            self.id, self._portal_ensure_token(), self.env.cr.dbname,
+            self.id,
+            self._portal_ensure_token(),
+            self.env.cr.dbname,
         )
 
     # ----------------------------------------------------------

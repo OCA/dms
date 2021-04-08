@@ -132,7 +132,8 @@ class DmsSecurityMixin(models.AbstractModel):
                 table=self._table, groups_mode=groups_mode or ""
             )
             where_clause = "({groups_clause} OR {exists_clause})".format(
-                groups_clause=where_clause, exists_clause=exists_clause,
+                groups_clause=where_clause,
+                exists_clause=exists_clause,
             )
         query.where_clause += [where_clause]
         query.where_clause_params += [self.env.user.id]
@@ -178,7 +179,9 @@ class DmsSecurityMixin(models.AbstractModel):
         )
         # pylint: disable=sql-injection
         sql_query = sql_query.format(
-            table=self._table, subset=subset or "", groups_mode=groups_mode or "",
+            table=self._table,
+            subset=subset or "",
+            groups_mode=groups_mode or "",
         )
         self.env.cr.execute(sql_query)
         return list(map(lambda val: val[0], self.env.cr.fetchall()))
