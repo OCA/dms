@@ -7,7 +7,7 @@
     "version": "13.0.3.2.3",
     "category": "Document Management",
     "license": "LGPL-3",
-    "website": "http://github.com/OCA/dms",
+    "website": "https://github.com/OCA/dms",
     "author": "MuK IT, Tecnativa, Odoo Community Association (OCA)",
     "depends": [
         "web_drop_target",

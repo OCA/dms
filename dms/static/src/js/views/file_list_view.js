@@ -4,7 +4,7 @@
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
  **********************************************************************************/
 
-odoo.define("dms.FileListView", function(require) {
+odoo.define("dms.FileListView", function (require) {
     "use strict";
     var registry = require("web.view_registry");
 
