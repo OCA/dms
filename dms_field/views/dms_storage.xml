@@ -29,8 +29,8 @@
         <field name="model">dms.storage</field>
         <field name="inherit_id" ref="dms.view_dms_storage_form" />
         <field name="arch" type="xml">
-            <field name="company_id" position="after">
-                <field name="model_ids" widget="many2many_tags" />
+            <field name="model_ids" position="attributes">
+                <attribute name="attrs">{'invisible': 0}</attribute>
             </field>
         </field>
     </record>
