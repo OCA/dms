@@ -27,13 +27,13 @@ msgid "                Define how incoming emails are processed:\n"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:429
+#: code:addons/dms/models/directory.py:430
 #, python-format
 msgid "%s Files"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:422
+#: code:addons/dms/models/directory.py:423
 #, python-format
 msgid "%s Subdirectories"
 msgstr ""
@@ -150,7 +150,7 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
-msgid "<span>DMS</span>"
+msgid "<span>Documents</span>"
 msgstr ""
 
 #. module: dms
@@ -159,37 +159,49 @@ msgid "A Python dictionary that will be evaluated to provide default values when
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:534
+#: code:addons/dms/models/directory.py:561
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:529
+#: code:addons/dms/models/directory.py:556
 #, python-format
 msgid "A directory has to have a parent directory."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:564
+#: code:addons/dms/models/directory.py:547
+#, python-format
+msgid "A directory has to have model in attachment storage."
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/directory.py:591
 #, python-format
 msgid "A directory with the same name already exists."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:695
+#: code:addons/dms/models/directory.py:722
 #, python-format
 msgid "A file is locked, the folder cannot be deleted."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:602
+#: code:addons/dms/models/dms_file.py:587
+#, python-format
+msgid "A file must have model and resource ID in attachment storage."
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/dms_file.py:601
 #, python-format
 msgid "A file with the same name already exists."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:527
+#: code:addons/dms/models/directory.py:554
 #, python-format
 msgid "A root directory has to have a root storage."
 msgstr ""
@@ -296,7 +308,7 @@ msgid "Alias domain"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:623
+#: code:addons/dms/models/directory.py:650
 #, python-format
 msgid "Alias-Mail-Extraction"
 msgstr ""
@@ -603,6 +615,11 @@ msgid "Create a new Storage object."
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_storage__include_message_attachments
+msgid "Create files from message attachments"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__create_uid
 #: model:ir.model.fields,field_description:dms.field_dms_category__create_uid
 #: model:ir.model.fields,field_description:dms.field_dms_directory__create_uid
@@ -708,11 +725,6 @@ msgid "Delete Access"
 msgstr ""
 
 #. module: dms
-#: model:dms.access.group,name:dms.access_group_02_demo
-msgid "Demo"
-msgstr ""
-
-#. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directories_storage
 #: model:ir.actions.act_window,name:dms.action_dms_directory
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__directory_ids
@@ -720,7 +732,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__storage_directory_ids
 #: model:ir.model.fields,field_description:dms.field_dms_tag__directory_ids
 #: model:ir.ui.menu,name:dms.menu_dms_directory
-#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
@@ -773,6 +784,8 @@ msgstr ""
 #. module: dms
 #: model:ir.module.category,name:dms.category_dms_security
 #: model:ir.ui.menu,name:dms.main_menu_dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
 msgid "Documents"
 msgstr ""
 
@@ -834,7 +847,12 @@ msgid "Email Alias"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/tests/common.py:83
+#: model:ir.model,name:dms.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/tests/common.py:84
 #, python-format
 msgid "Error has not been raised"
 msgstr ""
@@ -846,7 +864,7 @@ msgid "Error! You cannot create recursive categories."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:520
+#: code:addons/dms/models/directory.py:539
 #, python-format
 msgid "Error! You cannot create recursive directories."
 msgstr ""
@@ -1046,6 +1064,18 @@ msgid "If set, directories and files will only be available for the selected com
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__root_storage_id_inherit_access_from_parent_record
+#: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
+#: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
+msgid "Indicate if directories and files access work only with related model access (for example, if some directories are related with any sale, only users with read access to these sale can acess)"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
+msgid "Indicate if directories and files auto-create in mail composition process too"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__is_hidden
 #: model:ir.model.fields,help:dms.field_dms_file__is_hidden
 #: model:ir.model.fields,help:dms.field_dms_storage__is_hidden
@@ -1062,6 +1092,13 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__inherit_group_ids
 msgid "Inherit Groups"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__root_storage_id_inherit_access_from_parent_record
+#: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
+#: model:ir.model.fields,field_description:dms.field_dms_storage__inherit_access_from_parent_record
+msgid "Inherit permissions from related record"
 msgstr ""
 
 #. module: dms
@@ -1230,7 +1267,7 @@ msgid "Migrate"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:266
+#: code:addons/dms/models/dms_file.py:271
 #, python-format
 msgid "Migrate File %s of %s [ %s ]"
 msgstr ""
@@ -1277,10 +1314,10 @@ msgid "My Files"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/controllers/portal.py:47
-#: code:addons/dms/controllers/portal.py:54
-#: code:addons/dms/controllers/portal.py:115
-#: code:addons/dms/controllers/portal.py:122
+#: code:addons/dms/controllers/portal.py:45
+#: code:addons/dms/controllers/portal.py:52
+#: code:addons/dms/controllers/portal.py:107
+#: code:addons/dms/controllers/portal.py:114
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
@@ -1368,7 +1405,12 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/storage.py:95
+#: model:dms.access.group,name:dms.access_group_03_demo
+msgid "Only admin user"
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/storage.py:108
 #, python-format
 msgid "Only managers can execute this action."
 msgstr ""
@@ -1472,6 +1514,7 @@ msgid "Policy to post a message on the document using the mailgateway.\n"
 msgstr ""
 
 #. module: dms
+#: model:dms.access.group,name:dms.access_group_02_demo
 #: model:dms.tag,name:dms.tag_05_demo
 msgid "Portal"
 msgstr ""
@@ -1735,31 +1778,31 @@ msgid "The configuration is done!"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:627
+#: code:addons/dms/models/dms_file.py:626
 #, python-format
 msgid "The directory has to have the permission to create files."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:552
+#: code:addons/dms/models/directory.py:579
 #, python-format
 msgid "The directory name is invalid."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:611
+#: code:addons/dms/models/dms_file.py:610
 #, python-format
 msgid "The file has a forbidden file extension."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:595
+#: code:addons/dms/models/dms_file.py:594
 #, python-format
 msgid "The file name is invalid."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:618
+#: code:addons/dms/models/dms_file.py:617
 #, python-format
 msgid "The maximum upload size is %s MB)."
 msgstr ""
@@ -1785,19 +1828,19 @@ msgid "The owner of records created upon receiving emails on this alias. If this
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:542
+#: code:addons/dms/models/directory.py:569
 #, python-format
 msgid "The parent directory has to have the permission to create directories."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:742
+#: code:addons/dms/models/dms_file.py:741
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_security_mixin.py:260
+#: code:addons/dms/models/dms_security_mixin.py:275
 #, python-format
 msgid "The requested operation cannot be completed due to group security restrictions. Please contact your system administrator.\n"
 "\n"
