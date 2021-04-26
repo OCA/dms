@@ -2088,7 +2088,7 @@ msgstr "Acceso de escritura"
 
 #. module: dms
 #. openerp-web
-#: code:addons/dms/static/src/js/views/many_drop_target.js:86
+#: code:addons/dms/static/src/js/views/many_drop_target.js:89
 #, python-format
 msgid "You must select a directory first"
 msgstr "Debe selecciona una carpeta primero"
