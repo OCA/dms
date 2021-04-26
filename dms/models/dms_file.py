@@ -597,7 +597,12 @@ class File(models.Model):
 
     def _create_model_attachment(self, vals):
         res_vals = vals.copy()
-        directory_id = res_vals.get("directory_id", self.env.context.get("active_id"))
+        if "directory_id" in res_vals:
+            directory_id = res_vals["directory_id"]
+        elif self.env.context.get("active_id"):
+            directory_id = self.env.context.get("active_id")
+        elif self.env.context.get("default_directory_id"):
+            directory_id = self.env.context.get("default_directory_id")
         directory = self.env["dms.directory"].browse(directory_id)
         if directory.res_model and directory.res_id:
             attachment = (
