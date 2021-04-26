@@ -130,4 +130,13 @@
         <field name="category_id" ref="dms.category_01_demo" />
         <field name="parent_id" ref="dms.directory_01_demo" />
     </record>
+    <record id="directory_root_res_partner_demo" model="dms.directory">
+        <field name="name">Partners</field>
+        <field name="is_root_directory" eval="True" />
+        <field name="color" eval="1" />
+        <field name="root_storage_id" ref="dms.storage_attachment_demo" />
+        <field name="category_id" ref="dms.category_01_demo" />
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="res_model">res.partner</field>
+    </record>
 </odoo>

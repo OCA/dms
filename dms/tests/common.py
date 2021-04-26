@@ -1,5 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 import base64
 import functools
