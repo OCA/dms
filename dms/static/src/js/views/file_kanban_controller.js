@@ -20,7 +20,7 @@ odoo.define("dms.FileKanbanController", function (require) {
             _onPreviewFile: function (ev) {
                 var record = this.model.get(ev.data.id, {raw: true});
                 var fieldName = "content";
-                var mimetype = record.data.res_mimetype;
+                var mimetype = record.data.mimetype;
                 var type = mimetype.split("/").shift();
                 if (
                     type === "video" ||
@@ -31,9 +31,9 @@ odoo.define("dms.FileKanbanController", function (require) {
                         this,
                         [
                             {
-                                mimetype: record.data.res_mimetype,
+                                mimetype: record.data.mimetype,
                                 id: record.data.id,
-                                fileType: record.data.res_mimetype,
+                                fileType: this.mimetype_value,
                                 name: record.data.name,
                             },
                         ],

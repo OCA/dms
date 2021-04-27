@@ -39,7 +39,7 @@ class Storage(models.Model):
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
-        default=lambda self: self.env.user.company_id,
+        default=lambda self: self.env.company,
         help="If set, directories and files will only be available for "
         "the selected company.",
     )

@@ -98,7 +98,7 @@ class FileTestCase(DocumentsBaseCase):
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_compute_mimetype(self):
-        self.assertTrue(self.file_demo_01.res_mimetype)
+        self.assertTrue(self.file_demo_01.mimetype)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_compute_extension(self):

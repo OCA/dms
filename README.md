@@ -5,9 +5,9 @@
 
 <!-- /!\ do not modify above this line -->
 
-# dms
+# Document Management System modules for Odoo
 
-TODO: add repo description.
+OCA modules for DMS
 
 <!-- /!\ do not modify below this line -->
 
