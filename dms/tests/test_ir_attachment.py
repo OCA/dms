@@ -39,7 +39,7 @@ class IrAttachmentTestCase(common.TransactionCase):
             "datas": self.content_base64(),
         }
         attachment = self.attachment.with_user(self.user_demo).create(vals)
-        self.assertEquals(attachment.name, "Test file")
+        self.assertEqual(attachment.name, "Test file")
         vals["name"] = "Test file 2"
         attachment = self.attachment.with_user(self.unprivileged_user).create(vals)
-        self.assertEquals(attachment.name, "Test file 2")
+        self.assertEqual(attachment.name, "Test file 2")

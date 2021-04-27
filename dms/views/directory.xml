@@ -2,6 +2,7 @@
 <!--
 
     Copyright 2017-2019 MuK IT GmbH
+    Copyright 2021 Tecnativa - Víctor Martínez
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
@@ -164,6 +165,7 @@
                         name="parent_id"
                         icon="fa-folder"
                         context="{'directory_short_name': True}"
+                        enable_counters="1"
                     />
                     <field name="category_id" select="multi" icon="fa-users" />
                     <field
@@ -171,6 +173,7 @@
                         select="multi"
                         icon="fa-tag"
                         groupby="category_id"
+                        enable_counters="1"
                     />
                 </searchpanel>
             </search>
@@ -309,9 +312,11 @@
                                 </div>
                                 <div class="o_kanban_image">
                                     <div class="o_kanban_image_wrapper">
-                                        <img
-                                            t-att-src="kanban_image('dms.directory', 'thumbnail_medium', record.id.raw_value)"
-                                            alt="Thumbnail"
+                                        <field
+                                            name="thumbnail_medium"
+                                            widget="image"
+                                            class="o_kanban_image_fill_left"
+                                            options="{'preview_image': 'thumbnail_medium'}"
                                         />
                                     </div>
                                 </div>
@@ -342,9 +347,11 @@
                                                     type="object"
                                                     name="toggle_starred"
                                                     t-attf-class="fa fa-lg fa-star#{record.starred.raw_value ? '  favorite_sign_button_enabled' : '-o'} favorite_sign_button"
+                                                    title="Starred"
                                                 />
                                                 <img
-                                                    t-att-src="kanban_image('res.users', 'image_small', record.create_uid.raw_value)"
+                                                    t-att-src="kanban_image('res.users', 'image_128', record.create_uid.raw_value)"
+                                                    t-att-title="record.create_uid.value"
                                                     t-att-alt="record.create_uid.value"
                                                     class="oe_kanban_avatar"
                                                 />
@@ -521,7 +528,7 @@
                             >
                                 <tree string="Files" limit="10">
                                     <field name="name" />
-                                    <field name="res_mimetype" />
+                                    <field name="mimetype" />
                                     <field name="content" />
                                     <field name="write_date" readonly="1" />
                                 </tree>
@@ -614,9 +621,9 @@
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
                 </div>
             </form>
         </field>
