@@ -50,7 +50,8 @@ class StorageLObjectTestCase(StorageTestCase):
         )
         for directory_id in directory_ids:
             file_01 = self.create_file(
-                directory=directory_id, storage=directory_id.storage_id,
+                directory=directory_id,
+                storage=directory_id.storage_id,
             ).with_user(self.uid)
             self.assertEqual(file_01.res_model, self.model_res_partner.model)
             self.assertEqual(file_01.res_id, self.partner.id)
@@ -99,7 +100,10 @@ class StorageLObjectTestCase(StorageTestCase):
                 "storage_id": storage.id,
             }
         )
-        file_03 = self.create_file(directory=directory, storage=directory.storage_id,)
+        file_03 = self.create_file(
+            directory=directory,
+            storage=directory.storage_id,
+        )
         self.assertEqual(file_02.storage_id, storage)
         self.assertEqual(file_02.storage_id.save_type, "attachment")
         self.assertEqual(file_02.save_type, "database")

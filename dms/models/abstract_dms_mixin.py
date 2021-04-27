@@ -25,7 +25,6 @@ class AbstractDmsMixin(models.AbstractModel):
         string="Storage is Hidden",
         related="storage_id.is_hidden",
         related_sudo=True,
-        auto_join=True,
         readonly=True,
         store=True,
     )

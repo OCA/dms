@@ -15,10 +15,10 @@ odoo.define("dms.tour", function (require) {
                 trigger: 'a[href*="/my/dms"]',
             },
             {
-                content: "Go to Photos directory",
-                trigger: ".tr_dms_directory_link:eq(1)",
+                content: "Go to Documents directory",
+                extra_trigger: "li.breadcrumb-item:contains('Documents')",
+                trigger: ".tr_dms_directory_link:eq(0)",
             },
         ]
     );
-    return {};
 });
