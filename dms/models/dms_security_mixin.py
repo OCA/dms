@@ -135,8 +135,7 @@ class DmsSecurityMixin(models.AbstractModel):
                 groups_clause=where_clause,
                 exists_clause=exists_clause,
             )
-        query.where_clause += [where_clause]
-        query.where_clause_params += [self.env.user.id]
+        query.add_where(where_clause, where_params=[self.env.user.id])
         # Add _get_directory_ids_with_res_model_without_access
         if self.env.context.get("use_res_model_without_access", True):
             custom_ids = self._get_directory_ids_with_res_model_without_access(mode)
@@ -151,8 +150,7 @@ class DmsSecurityMixin(models.AbstractModel):
                     field=field,
                     ids=", ".join(["%s"] * len(custom_ids)),
                 )
-                query.where_clause += [extra_clause]
-                query.where_clause_params += custom_ids.ids
+                query.add_where(extra_clause, where_params=custom_ids.ids)
 
     @api.model
     def _apply_ir_rules(self, query, mode="read"):
