@@ -22,14 +22,14 @@ class Thumbnail(models.AbstractModel):
         prefetch=False,
     )
     custom_thumbnail_medium = fields.Image(
-        "Medium Custom Thumbnail",
+        string="Medium Custom Thumbnail",
         related="custom_thumbnail",
         max_width=512,
         max_height=512,
         prefetch=False,
     )
     custom_thumbnail_small = fields.Image(
-        "Small Custom Thumbnail",
+        string="Small Custom Thumbnail",
         related="custom_thumbnail",
         max_width=512,
         max_height=512,
@@ -45,7 +45,7 @@ class Thumbnail(models.AbstractModel):
     )
 
     thumbnail_medium = fields.Image(
-        "Medium Thumbnail",
+        string="Medium Thumbnail",
         related="thumbnail",
         max_width=512,
         max_height=512,
@@ -53,7 +53,7 @@ class Thumbnail(models.AbstractModel):
     )
 
     thumbnail_small = fields.Image(
-        "SmallThumbnail",
+        string="SmallThumbnail",
         related="thumbnail",
         max_width=512,
         max_height=512,
@@ -75,7 +75,7 @@ class Thumbnail(models.AbstractModel):
         folders = ["static", "lib", "img", "thumbnails"]
         path = get_resource_path("dms", *folders, name)
         if not os.path.isfile(path):
-            path = get_resource_path("dms", *folders, "file_unkown.svg")
+            path = get_resource_path("dms", *folders, "file_unkown.png")
         return path
 
     def _get_thumbnail_placeholder_name(self):

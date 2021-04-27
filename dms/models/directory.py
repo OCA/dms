@@ -1,7 +1,9 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+import ast
 import base64
 import functools
 import logging
@@ -264,7 +266,8 @@ class DmsDirectory(models.Model):
         return ids
 
     allowed_model_ids = fields.Many2many(
-        related="storage_id.model_ids", comodel_name="ir.model",
+        related="storage_id.model_ids",
+        comodel_name="ir.model",
     )
     model_id = fields.Many2one(
         comodel_name="ir.model",
@@ -277,7 +280,6 @@ class DmsDirectory(models.Model):
     storage_id_inherit_access_from_parent_record = fields.Boolean(
         related="storage_id.inherit_access_from_parent_record",
         related_sudo=True,
-        auto_join=True,
         store=True,
     )
 
@@ -295,12 +297,13 @@ class DmsDirectory(models.Model):
         for record in self:
             record.res_model = record.model_id.model
 
-    @api.depends("name", "complete_name")
-    def _compute_display_name(self):
+    def name_get(self):
         if not self.env.context.get("directory_short_name", False):
-            return super()._compute_display_name()
+            return super().name_get()
+        vals = []
         for record in self:
-            record.display_name = record.name
+            vals.append(tuple([record.id, record.name]))
+        return vals
 
     def toggle_starred(self):
         updates = defaultdict(set)
@@ -381,7 +384,13 @@ class DmsDirectory(models.Model):
     @api.depends("file_ids")
     def _compute_count_files(self):
         for record in self:
-            files = len(record.file_ids.filtered(lambda x: x.check_access("read")))
+            files = len(
+                record.file_ids.filtered(lambda x: x.check_access("read"))
+            ) + len(
+                record.child_directory_ids.file_ids.filtered(
+                    lambda x: x.check_access("read")
+                )
+            )
             record.count_files = files
             record.count_files_title = _("%s Files") % files
 
@@ -579,13 +588,14 @@ class DmsDirectory(models.Model):
             record.copy({"parent_id": new.id})
         return new
 
-    @api.model
-    def get_alias_model_name(self, vals):
-        return vals.get("alias_model", "dms.directory")
-
-    def get_alias_values(self):
-        values = super().get_alias_values()
-        values["alias_defaults"] = {"parent_id": self.id}
+    def _alias_get_creation_values(self):
+        values = super()._alias_get_creation_values()
+        values["alias_model_id"] = self.env["ir.model"]._get("dms.directory").id
+        if self.id:
+            values["alias_defaults"] = defaults = ast.literal_eval(
+                self.alias_defaults or "{}"
+            )
+            defaults["parent_id"] = self.id
         return values
 
     @api.model
@@ -615,13 +625,15 @@ class DmsDirectory(models.Model):
         names = self.sudo().file_ids.mapped("name")
         for attachment in msg_dict["attachments"]:
             uname = unique_name(attachment.fname, names, escape_suffix=True)
-            self.env["dms.file"].sudo().create(
-                {
-                    "content": base64.b64encode(attachment.content),
-                    "directory_id": self.id,
-                    "name": uname,
-                }
-            )
+            vals = {
+                "directory_id": self.id,
+                "name": uname,
+            }
+            try:
+                vals["content"] = base64.b64encode(attachment.content)
+            except Exception:
+                vals["content"] = attachment.content
+            self.env["dms.file"].sudo().create(vals)
             names.append(uname)
 
     @api.model_create_multi

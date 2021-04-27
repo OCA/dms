@@ -14,13 +14,13 @@ Document Management System
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdms-lightgray.png?logo=github
-    :target: https://github.com/OCA/dms/tree/13.0/dms
+    :target: https://github.com/OCA/dms/tree/14.0/dms
     :alt: OCA/dms
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/dms-13-0/dms-13-0-dms
+    :target: https://translation.odoo-community.org/projects/dms-14-0/dms-14-0-dms
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/292/13.0
+    :target: https://runbot.odoo-community.org/runbot/292/14.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -99,6 +99,7 @@ Known issues / Roadmap
 - Save in cache own_root directories and update in every create/write/unlink function
 - Add a migration procedure for converting an storage to attachment one for populating existing records with attachments as folders
 - Add a link from attachment view in chatter to linked documents
+- If Inherit permissions from related record (the inherit_access_from_parent_record field from storage) is changed when directories already exist, inconsistencies may occur because groups defined in the directories and subdirectories will still exist, all groups in these directories should be removed before changing.
 
 Bug Tracker
 ===========
@@ -106,7 +107,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/dms/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/dms/issues/new?body=module:%20dms%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/dms/issues/new?body=module:%20dms%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -153,6 +154,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/13.0/dms>`_ project on GitHub.
+This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/14.0/dms>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
