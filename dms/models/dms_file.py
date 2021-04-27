@@ -97,13 +97,13 @@ class File(models.Model):
         compute="_compute_extension", string="Extension", readonly=True, store=True
     )
 
-    res_mimetype = fields.Char(
+    mimetype = fields.Char(
         compute="_compute_mimetype", string="Type", readonly=True, store=True
     )
 
     size = fields.Integer(string="Size", readonly=True)
 
-    checksum = fields.Char(string="Checksum/SHA1", readonly=True, size=40, index=True)
+    checksum = fields.Char(string="Checksum/SHA1", readonly=True, index=True)
 
     content_binary = fields.Binary(
         string="Content Binary", attachment=False, prefetch=False, invisible=True
@@ -229,7 +229,7 @@ class File(models.Model):
         return [extension.strip() for extension in extensions.split(",")]
 
     def _get_thumbnail_placeholder_name(self):
-        return self.extension and "file_%s.svg" % self.extension or ""
+        return self.extension and "file_%s.png" % self.extension or ""
 
     # ----------------------------------------------------------
     # Actions
@@ -388,7 +388,8 @@ class File(models.Model):
     @api.depends("content")
     def _compute_mimetype(self):
         for record in self:
-            record.res_mimetype = guess_mimetype(record.content or b"")
+            binary = base64.b64decode(record.content or "")
+            record.mimetype = guess_mimetype(binary)
 
     @api.depends("content_binary", "content_file", "attachment_id")
     def _compute_content(self):
@@ -484,9 +485,9 @@ class File(models.Model):
                 field="directory_id",
                 ids=", ".join(map(lambda id: "(%s)" % id, directories.ids)),
             )
-            query.where_clause += [where_clause]
         else:
-            query.where_clause += ["0=1"]
+            where_clause = "0=1"
+        query.add_where(where_clause)
         return super(File, self)._read_group_process_groupby(gb, query)
 
     @api.model
