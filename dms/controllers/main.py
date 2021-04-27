@@ -14,7 +14,7 @@ class OnboardingController(http.Controller):
             return {
                 "html": request.env.ref(
                     "dms.document_onboarding_directory_panel"
-                ).render(
+                )._render(
                     {
                         "state": company.get_and_update_documents_onboarding_state(),
                         "company": company,
@@ -30,7 +30,7 @@ class OnboardingController(http.Controller):
         check = request.env.user.has_group("dms.group_dms_manager")
         if check and not closed:
             return {
-                "html": request.env.ref("dms.document_onboarding_file_panel").render(
+                "html": request.env.ref("dms.document_onboarding_file_panel")._render(
                     {
                         "state": company.get_and_update_documents_onboarding_state(),
                         "company": company,

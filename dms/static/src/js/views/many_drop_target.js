@@ -65,9 +65,9 @@ odoo.define("dms.DragDrop", function (require) {
                 o_content.append(this._drop_overlay);
             }
         },
-        _onSearchPanelDomainUpdated: function (ev) {
+        _onSearch: function (searchQuery) {
             var directory_id = false;
-            _.each(ev.data.domain, function (domain) {
+            _.each(searchQuery.domain, function (domain) {
                 if (
                     domain[0] === "directory_id" &&
                     (domain[1] === "child_of" || domain[1] === "=")

@@ -105,7 +105,7 @@
                                     <span t-esc="dms_file.name" />
                                 </td>
                                 <td>
-                                    <span t-esc="dms_file.res_mimetype" />
+                                    <span t-esc="dms_file.mimetype" />
                                 </td>
                                 <td>
                                     <span t-esc="dms_file.get_human_size()" />

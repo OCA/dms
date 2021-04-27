@@ -134,8 +134,7 @@ class DmsSecurityMixin(models.AbstractModel):
                 groups_clause=where_clause,
                 exists_clause=exists_clause,
             )
-        query.where_clause += [where_clause]
-        query.where_clause_params += [self.env.user.id]
+        query.add_where(where_clause, where_params=[self.env.user.id])
 
     @api.model
     def _apply_ir_rules(self, query, mode="read"):
