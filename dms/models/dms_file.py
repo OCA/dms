@@ -649,6 +649,10 @@ class File(models.Model):
             directory = directory_model.browse(res_vals["directory_id"])
         elif self.env.context.get("active_id"):
             directory = directory_model.browse(self.env.context.get("active_id"))
+        elif self.env.context.get("default_directory_id"):
+            directory = directory_model.browse(
+                self.env.context.get("default_directory_id")
+            )
         if (
             directory
             and directory.res_model
