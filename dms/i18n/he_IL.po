@@ -221,8 +221,8 @@ msgstr "כבר קיים קובץ עם אותו שם."
 #. module: dms
 #: code:addons/dms/models/directory.py:0
 #, python-format
-msgid "A root directory has to have a root storage."
-msgstr "לספרייה ראשית צריכה להיות מאגר ראשי."
+msgid "A root directory has to have a storage."
+msgstr ""
 
 #. module: dms
 #: model:ir.model,name:dms.model_abstract_dms_mixin
@@ -357,11 +357,6 @@ msgstr "הכל"
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "All Files"
 msgstr "כל הקבצים"
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
-msgid "Allowed Model"
-msgstr ""
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_06_demo
@@ -1157,6 +1152,18 @@ msgid "Is Root Directory"
 msgstr "ספרייה ראשית"
 
 #. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "It is not possible to change parent to other storage."
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "It is not possible to change the storage."
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__just_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_file_state__just_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__just_done
@@ -1203,6 +1210,7 @@ msgid "Last update"
 msgstr "עדכון אחרון"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
 #: model:ir.model.fields,field_description:dms.field_dms_storage__model_ids
 msgid "Linked Models"
 msgstr ""
@@ -1605,11 +1613,6 @@ msgid "Root Directories"
 msgstr "ספרייה ראשית"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__root_storage_id
-msgid "Root Storage"
-msgstr "שורש שטח האיחסון"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
 msgid "SMS Delivery error"
@@ -1621,6 +1624,7 @@ msgid "Sales"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_storage__save_type
@@ -1910,6 +1914,7 @@ msgstr ""
 "(סוג מסמך: %s, Operation: %s)"
 
 #. module: dms
+#: model:ir.model.fields,help:dms.field_abstract_dms_mixin__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_storage__save_type
@@ -2096,6 +2101,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+
+#~ msgid "A root directory has to have a root storage."
+#~ msgstr "לספרייה ראשית צריכה להיות מאגר ראשי."
+
+#~ msgid "Root Storage"
+#~ msgstr "שורש שטח האיחסון"
 
 #~ msgid "Filename"
 #~ msgstr "שם קובץ"

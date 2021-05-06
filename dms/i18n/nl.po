@@ -215,7 +215,7 @@ msgstr ""
 #. module: dms
 #: code:addons/dms/models/directory.py:0
 #, python-format
-msgid "A root directory has to have a root storage."
+msgid "A root directory has to have a storage."
 msgstr ""
 
 #. module: dms
@@ -350,11 +350,6 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "All Files"
-msgstr ""
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
-msgid "Allowed Model"
 msgstr ""
 
 #. module: dms
@@ -1148,6 +1143,18 @@ msgid "Is Root Directory"
 msgstr ""
 
 #. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "It is not possible to change parent to other storage."
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "It is not possible to change the storage."
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__just_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_file_state__just_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__just_done
@@ -1194,6 +1201,7 @@ msgid "Last update"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
 #: model:ir.model.fields,field_description:dms.field_dms_storage__model_ids
 msgid "Linked Models"
 msgstr ""
@@ -1588,11 +1596,6 @@ msgid "Root Directories"
 msgstr ""
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__root_storage_id
-msgid "Root Storage"
-msgstr ""
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
 msgid "SMS Delivery error"
@@ -1604,6 +1607,7 @@ msgid "Sales"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_storage__save_type
@@ -1878,6 +1882,7 @@ msgid ""
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,help:dms.field_abstract_dms_mixin__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_storage__save_type
