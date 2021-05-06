@@ -1,5 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
@@ -9,7 +10,7 @@ import operator
 from collections import defaultdict
 
 from odoo import _, api, fields, models, tools
-from odoo.exceptions import AccessError, ValidationError
+from odoo.exceptions import AccessError, UserError, ValidationError
 
 from odoo.addons.http_routing.models.ir_http import slugify
 
@@ -48,23 +49,18 @@ class DmsDirectory(models.Model):
         parent inherits the settings form its parent.""",
     )
 
-    root_storage_id = fields.Many2one(
-        comodel_name="dms.storage",
-        string="Root Storage",
-        ondelete="restrict",
-        compute="_compute_directory_type",
-        store=True,
-        readonly=False,
-        copy=True,
-    )
     # Override acording to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
-        compute="_compute_storage",
+        compute="_compute_storage_id",
+        compute_sudo=True,
+        readonly=False,
         comodel_name="dms.storage",
         string="Storage",
         ondelete="restrict",
         auto_join=True,
         store=True,
+        copy=True,
+        default=False,
     )
 
     parent_id = fields.Many2one(
@@ -76,9 +72,17 @@ class DmsDirectory(models.Model):
         index=True,
         store=True,
         readonly=False,
-        compute="_compute_directory_type",
+        compute="_compute_parent_id",
         copy=True,
+        default=lambda self: self._default_parent_id(),
     )
+
+    def _default_parent_id(self):
+        context = self.env.context
+        if context.get("active_model") == self._name and context.get("active_id"):
+            return context["active_id"]
+        else:
+            return False
 
     complete_name = fields.Char(
         "Complete Name", compute="_compute_complete_name", store=True
@@ -261,7 +265,7 @@ class DmsDirectory(models.Model):
         return res
 
     allowed_model_ids = fields.Many2many(
-        compute="_compute_allowed_model_ids", comodel_name="ir.model", store=False
+        related="storage_id.model_ids", comodel_name="ir.model",
     )
     model_id = fields.Many2one(
         comodel_name="ir.model",
@@ -271,16 +275,6 @@ class DmsDirectory(models.Model):
         string="Model",
         store=True,
     )
-    storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
-
-    @api.depends("root_storage_id", "storage_id")
-    def _compute_allowed_model_ids(self):
-        for record in self:
-            record.allowed_model_ids = False
-            if record.root_storage_id and record.root_storage_id.model_ids:
-                record.allowed_model_ids = record.root_storage_id.model_ids.ids
-            elif record.storage_id and record.storage_id.model_ids:
-                record.allowed_model_ids = record.storage_id.model_ids.ids
 
     @api.depends("res_model")
     def _compute_model_id(self):
@@ -375,13 +369,14 @@ class DmsDirectory(models.Model):
             else:
                 category.complete_name = category.name
 
-    @api.depends("root_storage_id", "parent_id")
-    def _compute_storage(self):
+    @api.depends("parent_id")
+    def _compute_storage_id(self):
         for record in self:
-            if record.is_root_directory:
-                record.storage_id = record.root_storage_id
-            else:
+            if record.parent_id:
                 record.storage_id = record.parent_id.storage_id
+            else:
+                # HACK: Not needed in v14 due to odoo/odoo#64359
+                record.storage_id = record.storage_id
 
     @api.depends("user_star_ids")
     def _compute_starred(self):
@@ -469,12 +464,13 @@ class DmsDirectory(models.Model):
     # ----------------------------------------------------------
 
     @api.depends("is_root_directory")
-    def _compute_directory_type(self):
+    def _compute_parent_id(self):
         for record in self:
             if record.is_root_directory:
                 record.parent_id = None
             else:
-                record.root_storage_id = None
+                # HACK: Not needed in v14 due to odoo/odoo#64359
+                record.parent_id = record.parent_id
 
     @api.depends("category_id")
     def _compute_tags(self):
@@ -494,19 +490,21 @@ class DmsDirectory(models.Model):
             raise ValidationError(_("Error! You cannot create recursive directories."))
         return True
 
-    @api.constrains("is_root_directory", "root_storage_id", "parent_id")
+    @api.constrains("is_root_directory", "storage_id")
     def _check_directory_storage(self):
         for record in self:
-            if record.is_root_directory and not record.root_storage_id:
-                raise ValidationError(_("A root directory has to have a root storage."))
-            if not record.is_root_directory and not record.parent_id:
-                raise ValidationError(_("A directory has to have a parent directory."))
-            if record.parent_id and (
-                record.is_root_directory or record.root_storage_id
-            ):
+            if record.is_root_directory and not record.storage_id:
+                raise ValidationError(_("A root directory has to have a storage."))
+
+    @api.constrains("is_root_directory", "parent_id")
+    def _check_directory_parent(self):
+        for record in self:
+            if record.is_root_directory and record.parent_id:
                 raise ValidationError(
                     _("A directory can't be a root and have a parent directory.")
                 )
+            if not record.is_root_directory and not record.parent_id:
+                raise ValidationError(_("A directory has to have a parent directory."))
 
     @api.constrains("parent_id")
     def _check_directory_access(self):
@@ -525,7 +523,7 @@ class DmsDirectory(models.Model):
             if not check_name(record.name):
                 raise ValidationError(_("The directory name is invalid."))
             if record.is_root_directory:
-                childs = record.sudo().root_storage_id.root_directory_ids.name_get()
+                childs = record.sudo().storage_id.root_directory_ids.name_get()
             else:
                 childs = record.sudo().parent_id.child_directory_ids.name_get()
             if list(
@@ -556,14 +554,11 @@ class DmsDirectory(models.Model):
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
-        if "root_storage_id" in default:
-            storage = self.env["dms.storage"].browse(default["root_storage_id"])
-            names = storage.sudo().root_directory_ids.mapped("name")
-        elif "parent_id" in default:
+        if "parent_id" in default:
             parent_directory = self.browse(default["parent_id"])
             names = parent_directory.sudo().child_directory_ids.mapped("name")
         elif self.is_root_directory:
-            names = self.sudo().root_storage_id.root_directory_ids.mapped("name")
+            names = self.sudo().storage_id.root_directory_ids.mapped("name")
         else:
             names = self.sudo().parent_id.child_directory_ids.mapped("name")
         default.update({"name": unique_name(self.name, names)})
@@ -622,8 +617,6 @@ class DmsDirectory(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get("root_storage_id", False):
-                vals["storage_id"] = vals["root_storage_id"]
             if vals.get("parent_id", False):
                 parent = self.browse([vals["parent_id"]])
                 data = next(iter(parent.sudo().read(["storage_id"])), {})
@@ -631,6 +624,17 @@ class DmsDirectory(models.Model):
         return super().create(vals_list)
 
     def write(self, vals):
+        if vals.get("storage_id"):
+            for item in self:
+                if item.storage_id.id != vals["storage_id"]:
+                    raise UserError(_("It is not possible to change the storage."))
+        if vals.get("parent_id"):
+            parent = self.browse([vals["parent_id"]])
+            for item in self:
+                if item.parent_id.storage_id != parent.storage_id:
+                    raise UserError(
+                        _("It is not possible to change parent to other storage.")
+                    )
         # Groups part
         if any(key in vals for key in ["group_ids", "inherit_group_ids"]):
             with self.env.norecompute():
@@ -641,19 +645,6 @@ class DmsDirectory(models.Model):
             records.recompute()
         else:
             res = super().write(vals)
-
-        if self and any(
-            field for field in vals if field in ["root_storage_id", "parent_id"]
-        ):
-            records = self.sudo().search([("id", "child_of", self.ids)]) - self
-            if "root_storage_id" in vals:
-                records.write({"storage_id": vals["root_storage_id"]})
-            elif "parent_id" in vals:
-                parent = self.browse([vals["parent_id"]])
-                data = next(iter(parent.sudo().read(["storage_id"])), {})
-                records.write(
-                    {"storage_id": self._convert_to_write(data).get("storage_id")}
-                )
         return res
 
     def unlink(self):
