@@ -191,7 +191,9 @@ class DocumentsBaseCase(common.TransactionCase):
         model = self.storage.sudo() if sudo else self.storage
         return model.create({"name": "Test Storage", "save_type": save_type})
 
-    def create_directory(self, storage=False, directory=False, sudo=False):
+    def create_directory(
+        self, storage=False, directory=False, res_model=False, sudo=False
+    ):
         model = self.directory.sudo() if sudo else self.directory
         if not storage and not directory:
             storage = self.create_storage(sudo=sudo)
@@ -200,6 +202,7 @@ class DocumentsBaseCase(common.TransactionCase):
                 {
                     "name": uuid.uuid4().hex,
                     "is_root_directory": False,
+                    "res_model": res_model,
                     "parent_id": directory.id,
                     "storage_id": directory.storage_id.id,
                 }
@@ -208,6 +211,7 @@ class DocumentsBaseCase(common.TransactionCase):
             {
                 "name": uuid.uuid4().hex,
                 "is_root_directory": True,
+                "res_model": res_model,
                 "storage_id": storage.id,
                 "parent_id": False,
             }

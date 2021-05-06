@@ -85,6 +85,19 @@ class Storage(models.Model):
     )
 
     model_ids = fields.Many2many("ir.model", string="Linked Models")
+    inherit_access_from_parent_record = fields.Boolean(
+        string="Inherit permissions from related record",
+        default=False,
+        help="Indicate if directories and files access work only with "
+        "related model access (for example, if some directories are related "
+        "with any sale, only users with read access to these sale can acess)",
+    )
+    include_message_attachments = fields.Boolean(
+        string="Create files from message attachments",
+        default=False,
+        help="Indicate if directories and files auto-create in mail "
+        "composition process too",
+    )
 
     # ----------------------------------------------------------
     # Actions
