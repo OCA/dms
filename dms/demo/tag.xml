@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo noupdate="1">
+    <record id="tag_01_demo" model="dms.tag">
+        <field name="name">Customer</field>
+        <field name="color">1</field>
+        <field name="category_id" ref="category_03_demo" />
+    </record>
+    <record id="tag_02_demo" model="dms.tag">
+        <field name="name">Partner</field>
+        <field name="color">2</field>
+        <field name="category_id" ref="category_03_demo" />
+    </record>
+    <record id="tag_03_demo" model="dms.tag">
+        <field name="name">Project</field>
+        <field name="color">3</field>
+        <field name="category_id" ref="category_04_demo" />
+    </record>
+    <record id="tag_04_demo" model="dms.tag">
+        <field name="name">Sales</field>
+        <field name="color">4</field>
+        <field name="category_id" ref="category_05_demo" />
+    </record>
+    <record id="tag_05_demo" model="dms.tag">
+        <field name="name">Portal</field>
+        <field name="color">5</field>
+        <field name="category_id" ref="category_05_demo" />
+    </record>
+    <record id="tag_06_demo" model="dms.tag">
+        <field name="name">Apps</field>
+        <field name="color">6</field>
+        <field name="category_id" ref="category_05_demo" />
+    </record>
+    <record id="tag_07_demo" model="dms.tag">
+        <field name="name">Accounting</field>
+        <field name="color">7</field>
+        <field name="category_id" ref="category_05_demo" />
+    </record>
+    <record id="tag_08_demo" model="dms.tag">
+        <field name="name">Customer Invoice</field>
+        <field name="color">8</field>
+        <field name="category_id" ref="category_05_demo" />
+    </record>
+    <record id="tag_09_demo" model="dms.tag">
+        <field name="name">Vendor Bill</field>
+        <field name="color">9</field>
+        <field name="category_id" ref="category_05_demo" />
+    </record>
+    <record id="tag_10_demo" model="dms.tag">
+        <field name="name">Product</field>
+        <field name="color">10</field>
+        <field name="category_id" ref="category_06_demo" />
+    </record>
+    <record id="tag_11_demo" model="dms.tag">
+        <field name="name">Contract</field>
+        <field name="color">11</field>
+        <field name="category_id" ref="category_01_demo" />
+    </record>
+</odoo>

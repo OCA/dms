@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.dms</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="20" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div
+                    class="app_settings_block"
+                    data-string="Documents"
+                    data-key="dms"
+                    groups="base.group_system"
+                >
+                    <div name="dms_settings">
+                        <h2>File Upload</h2>
+                        <div class="row mt16 o_settings_container" name="file">
+                            <div class="col-12 col-md-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">File Size</span>
+                                    <div class="text-muted">
+                                        Define the maximum upload size of a
+                                        file in MB
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label
+                                                class="col-md-3 o_light_label"
+                                                for="documents_binary_max_size"
+                                            />
+                                            <field name="documents_binary_max_size" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">File
+                                        Extensions
+                                    </span>
+                                    <div class="text-muted">
+                                        Define forbidden file extensions
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label
+                                                class="col-md-3 o_light_label"
+                                                for="documents_forbidden_extensions"
+                                            />
+                                            <field
+                                                name="documents_forbidden_extensions"
+                                                placeholder="exe,msi"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">
+                                        Storages
+                                    </span>
+                                    <div class="text-muted">
+                                        Show storages
+                                    </div>
+                                    <div class="content-group">
+                                        <button
+                                            name="%(dms.action_dms_storage)d"
+                                            string="Storages"
+                                            type="action"
+                                            class="oe_link"
+                                            icon="fa-arrow-right"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_dms_settings_general" model="ir.actions.act_window">
+        <field name="name">General Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'dms'}</field>
+    </record>
+    <menuitem
+        id="menu_dms_settings_general"
+        name="General Settings"
+        parent="cat_menu_dms_config"
+        sequence="0"
+        action="action_dms_settings_general"
+        groups="base.group_system"
+    />
+</odoo>

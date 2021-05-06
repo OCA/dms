@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo>
+    <menuitem
+        id="main_menu_dms"
+        name="Documents"
+        web_icon="dms,static/description/icon.png"
+        groups="group_dms_user"
+    />
+    <menuitem
+        id="cat_menu_dms_config"
+        name="Configuration"
+        parent="main_menu_dms"
+        sequence="50"
+    />
+    <menuitem
+        id="cat_menu_dms_config_organizing"
+        name="Organizing"
+        parent="cat_menu_dms_config"
+        sequence="5"
+    />
+    <menuitem
+        id="cat_menu_dms_config_system"
+        name="System"
+        groups="dms.group_dms_manager"
+        parent="cat_menu_dms_config"
+        sequence="25"
+    />
+</odoo>
