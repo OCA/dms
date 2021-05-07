@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="dms.AddDocumentDirectory">
+        <div class="dms_document_add_directory">
+        </div>
+    </t>
+    <t t-name="dms.DocumentHelpDialogContent">
+        <div class="dms_document_help">
+            <div class="dms_document_help_info row">
+                <div class="dms_document_help_shortcut_info col-sm-6">
+                    <h3>Keyboard Shortcuts</h3>
+                    <ul>
+                        <li class="dms_document_help_shortcut">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <h5 class="dms_document_help_shortcut_icon">
+                                        <i class="fa fa-arrow-up" />
+                                    </h5>
+                                </div>
+                                <div class="col-xs-9">
+                                    <span class="dms_document_help_shortcut_text">
+                                        Move up one node
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dms_document_help_shortcut">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <h5 class="dms_document_help_shortcut_icon">
+                                        <i class="fa fa-arrow-left" />
+                                    </h5>
+                                </div>
+                                <div class="col-xs-9">
+                                    <span class="dms_document_help_shortcut_text">
+                                        Close the selected node
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dms_document_help_shortcut">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <h5 class="dms_document_help_shortcut_icon">
+                                        <i class="fa fa-arrow-right" />
+                                    </h5>
+                                </div>
+                                <div class="col-xs-9">
+                                    <span class="dms_document_help_shortcut_text">
+                                        Open the selected node
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dms_document_help_shortcut">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <h5 class="dms_document_help_shortcut_icon">
+                                        <i class="fa fa-arrow-down" />
+                                    </h5>
+                                </div>
+                                <div class="col-xs-9">
+                                    <span class="dms_document_help_shortcut_text">
+                                        Move down one node
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dms_document_help_shortcut">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <h5 class="dms_document_help_shortcut_icon">
+                                        <i class="fa fa-times" />
+                                    </h5>
+                                </div>
+                                <div class="col-xs-9">
+                                    <span class="dms_document_help_shortcut_text">
+                                        Open all nodes
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dms_document_help_shortcut">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <h5 class="dms_document_help_shortcut_icon">
+                                        F2
+                                    </h5>
+                                </div>
+                                <div class="col-xs-9">
+                                    <span class="dms_document_help_shortcut_text">
+                                        Edit the selected node
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dms_document_help_shortcut">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <h5 class="dms_document_help_shortcut_icon">
+                                        HOME
+                                    </h5>
+                                </div>
+                                <div class="col-xs-9">
+                                    <span class="dms_document_help_shortcut_text">
+                                        Jump to the top
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dms_document_help_shortcut">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <h5 class="dms_document_help_shortcut_icon">
+                                        END
+                                    </h5>
+                                </div>
+                                <div class="col-xs-9">
+                                    <span class="dms_document_help_shortcut_text">
+                                        Jump to the bottom
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dms_document_help_fuction_info col-sm-6">
+                    <h3>Context Menu</h3>
+                    <p>
+                        You can open a context menu by right-clicking on any node. This
+                        contains further options for interacting with the node.
+                    </p>
+                    <h3>Drag and Drop</h3>
+                    <p>
+                        You can change the structure by moving nodes. It is also possible
+                        to create new nodes by dragging files and even entire folder
+                        structures on the view.
+                    </p>
+                    <h3>Action Buttons</h3>
+                    <p>
+                        The action button at the top of the view can be used to open,
+                        create, edit or delete a node.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
