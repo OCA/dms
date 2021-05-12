@@ -3,6 +3,7 @@
 
     Copyright 2017-2019 MuK IT GmbH
     Copyright 2020 Creu Blanca
+    Copyright 2021 Tecnativa - Víctor Martínez
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
@@ -66,5 +67,35 @@
         <field name="perm_write" eval="1" />
         <field name="perm_unlink" eval="1" />
         <field name="domain_force">[(1 ,'=', 1)]</field>
+    </record>
+    <record id="rule_security_dms_directory" model="ir.rule">
+        <field
+            name="name"
+        >Dms Directories with dms group (will be filtered later by code)</field>
+        <field name="model_id" ref="model_dms_directory" />
+        <field
+            name="groups"
+            eval="[(4, ref('base.group_user')),(4, ref('base.group_portal'))]"
+        />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+        <field name="domain_force">[(1,'=',1)]</field>
+    </record>
+    <record id="rule_security_dms_file" model="ir.rule">
+        <field
+            name="name"
+        >Dms Files with dms group (will be filtered later by code)</field>
+        <field name="model_id" ref="model_dms_file" />
+        <field
+            name="groups"
+            eval="[(4, ref('base.group_user')),(4, ref('base.group_portal'))]"
+        />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+        <field name="domain_force">[(1,'=',1)]</field>
     </record>
 </odoo>
