@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo>
+    <record id="action_dms_directories_storage" model="ir.actions.act_window">
+        <field name="name">Directories</field>
+        <field name="res_model">dms.directory</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">
+            [
+            ("storage_id", "=", active_id),
+            ("is_hidden", "=", False),
+            ]
+        </field>
+        <field name="context">
+            {
+            'default_storage_id': active_id,
+            'default_is_root_directory': True,
+            }
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to add a new directory.
+            </p>
+            <p>
+                Directories can be used to structure and organize
+                files directly in Odoo.
+            </p>
+        </field>
+    </record>
+    <record id="action_dms_files_storage" model="ir.actions.act_window">
+        <field name="name">Files</field>
+        <field name="res_model">dms.file</field>
+        <field name="view_mode">kanban,tree,graph,pivot,form</field>
+        <field name="domain">
+            [
+            ("storage_id", "=", active_id),
+            ("is_hidden", "=", False),
+            ]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to add a new file.
+            </p>
+            <p>
+                Files are used to save content directly in Odoo.
+            </p>
+        </field>
+    </record>
+    <record id="action_dms_file_storage_migration" model="ir.actions.act_window">
+        <field name="name">Files</field>
+        <field name="res_model">dms.file</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="search_dms_file_migration" />
+        <field name="domain">
+            [
+            ("storage_id", "=", active_id),
+            ("require_migration", "=", True),
+            "|",("active", "=", False), ("active", "!=", False)
+            ]
+        </field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_dms_file_migration_tree')})]"
+        />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new File.
+            </p>
+            <p>
+                Files are used to save content directly in Odoo.
+            </p>
+        </field>
+    </record>
+    <record id="view_dms_storage_search" model="ir.ui.view">
+        <field name="name">dms_storage.search</field>
+        <field name="model">dms.storage</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Save Type"
+                        name="group_save_type"
+                        domain="[]"
+                        context="{'group_by':'save_type'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_dms_storage_tree" model="ir.ui.view">
+        <field name="name">dms_storage.tree</field>
+        <field name="model">dms.storage</field>
+        <field name="arch" type="xml">
+            <tree string="Storages">
+                <field name="name" />
+                <field name="save_type" />
+                <field name="is_hidden" />
+                <field name="company_id" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_dms_storage_form" model="ir.ui.view">
+        <field name="name">dms_storage.form</field>
+        <field name="model">dms.storage</field>
+        <field name="arch" type="xml">
+            <form string="Storage">
+                <header>
+                    <button
+                        name="action_storage_migrate"
+                        type="object"
+                        string="Migrate Files"
+                        attrs="{'invisible': [('save_type', '=', 'attachment')]}"
+                    />
+                    <button
+                        type="action"
+                        name="%(dms.action_dms_file_storage_migration)d"
+                        class="oe_stat_button"
+                        string="Manual File Migration"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="action"
+                            name="%(dms.action_dms_directories_storage)d"
+                            class="oe_stat_button"
+                            icon="fa-folder-open-o"
+                        >
+                            <field
+                                string="Directories"
+                                name="count_storage_directories"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            type="action"
+                            name="%(dms.action_dms_files_storage)d"
+                            class="oe_stat_button"
+                            icon="fa-file-text-o"
+                        >
+                            <field
+                                string="Files"
+                                name="count_storage_files"
+                                widget="statinfo"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group name="save_storage">
+                        <group name="save_storage_left">
+                            <field name="save_type" />
+                        </group>
+                        <group name="save_storage_right">
+                        </group>
+                    </group>
+                    <group name="data_storage">
+                        <group>
+                            <field name="is_hidden" />
+                            <field
+                                name="inherit_access_from_parent_record"
+                                attrs="{'invisible': [('save_type', '!=', 'attachment')]}"
+                            />
+                            <field
+                                name="include_message_attachments"
+                                attrs="{'invisible': [('save_type', '!=', 'attachment')]}"
+                            />
+                        </group>
+                        <group>
+                            <field name="company_id" />
+                            <field
+                                name="model_ids"
+                                attrs="{'invisible': [('save_type', '!=', 'attachment')]}"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page
+                            name="page_roots"
+                            string="Root Directories"
+                            attrs="{'invisible': [('id', '=', False)]}"
+                        >
+                            <field
+                                name="root_directory_ids"
+                                groups="dms.group_dms_manager"
+                                context="{'hide_root_storage': True,'default_storage_id': active_id, 'default_is_root_directory': True}"
+                            >
+                                <tree string="Root Directories">
+                                    <field name="name" />
+                                    <field name="count_total_directories" />
+                                    <field name="count_total_files" />
+                                    <field name="size" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>º
+    <record id="action_dms_storage" model="ir.actions.act_window">
+        <field name="name">Storages</field>
+        <field name="res_model">dms.storage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Storage object.
+            </p>
+            <p>
+                Storages are used to configure your Documents.
+            </p>
+        </field>
+    </record>
+    <menuitem
+        id="menu_dms_storage"
+        name="Storages"
+        parent="cat_menu_dms_config_system"
+        action="action_dms_storage"
+        sequence="5"
+    />
+    <record id="view_dms_storage_new_form" model="ir.ui.view">
+        <field name="name">dms_storage.form</field>
+        <field name="model">dms.storage</field>
+        <field name="inherit_id" ref="view_dms_storage_form" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <form position="inside">
+                <footer>
+                    <button
+                        class="btn btn-primary"
+                        type="object"
+                        string="Create"
+                        name="action_save_onboarding_storage_step"
+                    />
+                    <button special="cancel" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_dms_storage_new" model="ir.actions.act_window">
+        <field name="name">New Storage</field>
+        <field name="res_model">dms.storage</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_dms_storage_new_form" />
+    </record>
+</odoo>
