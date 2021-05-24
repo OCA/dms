@@ -196,7 +196,9 @@ class DmsDirectory(models.Model):
             if record.res_id:
                 model.browse(record.res_id).check_access_rule(operation)
 
-    def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
+    def _get_share_url(
+        self, redirect=False, signup_partner=False, pid=None, share_token=True
+    ):
         self.ensure_one()
         return "/my/dms/directory/{}?access_token={}&db={}".format(
             self.id, self._portal_ensure_token(), self.env.cr.dbname,
