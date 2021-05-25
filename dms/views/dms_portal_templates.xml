@@ -62,7 +62,6 @@
                         <th>Type</th>
                         <th>Size</th>
                         <th>Last update</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,18 +90,23 @@
                                     t-options="{'widget': 'date'}"
                                 />
                             </td>
-                            <td />
                         </tr>
                     </t>
                     <t t-if="dms_files">
                         <t t-foreach="dms_files" t-as="dms_file">
                             <tr class="tr_dms_file">
                                 <td>
-                                    <img
-                                        t-att-src="image_data_uri(dms_file.thumbnail)"
-                                        style="width:30px"
-                                    />
-                                    <span t-esc="dms_file.name" />
+                                    <a
+                                        t-attf-href="/my/dms/file/#{dms_file.id}/download?{{ keep_query() }}"
+                                        t-attf-class="tr_dms_file_link"
+                                        t-att-title="dms_file.name"
+                                    >
+                                        <img
+                                            t-att-src="image_data_uri(dms_file.thumbnail)"
+                                            style="width:30px"
+                                        />
+                                        <span t-esc="dms_file.name" />
+                                    </a>
                                 </td>
                                 <td>
                                     <span t-esc="dms_file.res_mimetype" />
@@ -115,14 +119,6 @@
                                         t-esc="dms_file.write_date"
                                         t-options="{'widget': 'date'}"
                                     />
-                                </td>
-                                <td>
-                                    <a
-                                        t-attf-href="/my/dms/file/#{dms_file.id}/download?{{ keep_query() }}"
-                                        t-attf-class="dms_file_download"
-                                    >
-                                        <i class="fa fa-download" />
-                                    </a>
                                 </td>
                             </tr>
                         </t>
