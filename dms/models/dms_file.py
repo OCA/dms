@@ -137,6 +137,11 @@ class File(models.Model):
         self.mapped("directory_id").check_access_rule(operation)
         return super().check_access_rule(operation)
 
+    def _compute_access_url(self):
+        super()._compute_access_url()
+        for item in self:
+            item.access_url = "/my/dms/file/%s/download" % (item.id)
+
     def check_access_token(self, access_token=False):
         res = False
         if access_token:
@@ -179,14 +184,6 @@ class File(models.Model):
 
     def get_human_size(self):
         return human_size(self.size)
-
-    def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
-        self.ensure_one()
-        return "/my/dms/file/{}/download?access_token={}&db={}".format(
-            self.id,
-            self._portal_ensure_token(),
-            self.env.cr.dbname,
-        )
 
     # ----------------------------------------------------------
     # Helper

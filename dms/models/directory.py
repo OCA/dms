@@ -197,19 +197,18 @@ class DmsDirectory(models.Model):
             if record.res_id:
                 model.browse(record.res_id).check_access_rule(operation)
 
-    def _get_share_url(self, redirect=False, signup_partner=False, pid=None):
-        self.ensure_one()
-        return "/my/dms/directory/{}?access_token={}&db={}".format(
-            self.id,
-            self._portal_ensure_token(),
-            self.env.cr.dbname,
-        )
+    def _compute_access_url(self):
+        super()._compute_access_url()
+        for item in self:
+            item.access_url = "/my/dms/directory/%s" % (item.id)
 
     def check_access_token(self, access_token=False):
         res = False
         if access_token:
-            items = self.env["dms.directory"].search(
-                [("access_token", "=", access_token)]
+            items = (
+                self.env["dms.directory"]
+                .sudo()
+                .search([("access_token", "=", access_token)])
             )
             if items:
                 item = items[0]

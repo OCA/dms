@@ -17,10 +17,7 @@
             name="tag_ids"
             eval="[(6, 0, [ref('dms.tag_01_demo'), ref('dms.tag_05_demo')])]"
         />
-        <field
-            name="group_ids"
-            eval="[(6, 0, [ref('dms.access_group_01_demo'), ref('dms.access_group_02_demo')])]"
-        />
+        <field name="group_ids" eval="[(6, 0, [ref('dms.access_group_01_demo')])]" />
     </record>
     <record id="directory_02_demo" model="dms.directory">
         <field name="name">Media</field>
