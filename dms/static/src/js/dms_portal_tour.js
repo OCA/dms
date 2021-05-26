@@ -5,7 +5,7 @@ odoo.define("dms.tour", function(require) {
     var base = require("web_editor.base");
 
     tour.register(
-        "dms_portal_tour",
+        "dms_portal_mail_tour",
         {
             test: true,
             url: "/my",
@@ -17,8 +17,43 @@ odoo.define("dms.tour", function(require) {
                 trigger: 'a[href*="/my/dms"]',
             },
             {
-                content: "Go to Photos directory",
-                trigger: ".tr_dms_directory_link:eq(1)",
+                content: "Go to Mails directory",
+                extra_trigger: "li.breadcrumb-item:contains('Documents')",
+                trigger: ".tr_dms_directory_link:contains('Mails')",
+            },
+            {
+                content: "Go to Mail_01.eml",
+                extra_trigger: "li.breadcrumb-item:contains('Mails')",
+                trigger: ".tr_dms_file_link:contains('Mail_01.eml')",
+            },
+        ]
+    );
+    tour.register(
+        "dms_portal_partners_tour",
+        {
+            test: true,
+            url: "/my",
+            wait_for: base.ready(),
+        },
+        [
+            {
+                content: "Go /my/dms url",
+                trigger: 'a[href*="/my/dms"]',
+            },
+            {
+                content: "Go to Partners directory",
+                extra_trigger: "li.breadcrumb-item:contains('Documents')",
+                trigger: ".tr_dms_directory_link:contains('Partners')",
+            },
+            {
+                content: "Go to Joel Willis",
+                extra_trigger: "li.breadcrumb-item:contains('Partners')",
+                trigger: ".tr_dms_directory_link:contains('Joel Willis')",
+            },
+            {
+                content: "Go to test.txt",
+                extra_trigger: "li.breadcrumb-item:contains('Joel Willis')",
+                trigger: ".tr_dms_file_link:contains('test.txt')",
             },
         ]
     );
