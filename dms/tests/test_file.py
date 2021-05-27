@@ -13,6 +13,61 @@ class FileFilestoreTestCase(FileTestCase):
         super(FileFilestoreTestCase, self)._setup_test_data()
         self.new_storage.write({"save_type": "file"})
 
+    def test_file_access(self):
+        user_a = self.env["res.users"].create(
+            {
+                "name": "User A",
+                "login": "user_a",
+                "email": "user_a@user_a.com",
+                "groups_id": [
+                    (
+                        6,
+                        0,
+                        [
+                            self.env.ref("base.group_user").id,
+                            self.env.ref("dms.group_dms_user").id,
+                        ],
+                    )
+                ],
+            }
+        )
+        group_a = self.env["dms.access.group"].create(
+            {
+                "name": "Group A",
+                "perm_read": True,
+                "explicit_user_ids": [(6, 0, [user_a.id])],
+            }
+        )
+        root_directory_a = self.env["dms.directory"].create(
+            {
+                "name": "Root directory A",
+                "is_root_directory": True,
+                "storage_id": self.env.ref("dms.storage_demo").id,
+                "group_ids": [
+                    (6, 0, [self.env.ref("dms.access_group_01_demo").id, group_a.id])
+                ],
+            }
+        )
+        sub_directory_x = self.env["dms.directory"].create(
+            {
+                "name": "Sub directory X",
+                "parent_id": root_directory_a.id,
+                "inherit_group_ids": True,
+            }
+        )
+        dms_file = self.env.ref("dms.file_13_demo").copy(
+            {
+                "name": "Test file directory %s" % (sub_directory_x.id),
+                "directory_id": sub_directory_x.id,
+            }
+        )
+        dms_files = self.env["dms.file"].with_user(user_a).search([])
+        self.assertTrue(self.env.ref("dms.file_13_demo") not in dms_files)
+        self.assertTrue(dms_file in dms_files)
+        dms_directories = self.env["dms.directory"].with_user(user_a).search([])
+        self.assertTrue(self.env.ref("dms.directory_01_demo") not in dms_directories)
+        self.assertTrue(sub_directory_x in dms_directories)
+
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_content_file(self):
         storage = self.create_storage(save_type="file", sudo=True)
