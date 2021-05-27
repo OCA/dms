@@ -104,24 +104,27 @@ class DmsSecurityMixin(models.AbstractModel):
         if self.env.user.has_group("base.group_public"):
             return None
 
+        field = "id"
+        if self._name == "dms.file":
+            field = "directory_id"
         where_clause = """
-            "{table}".id IN (
+            "{table}".{field} IN (
                 SELECT r.aid
-                FROM {table}_complete_groups_rel r
+                FROM dms_directory_complete_groups_rel r
                 JOIN dms_access_group g ON r.gid = g.id
                 JOIN dms_access_group_users_rel u ON r.gid = u.gid
                 WHERE u.uid = %s AND g.perm_{mode} = true
             )
         """.format(
-            table=self._table, mode=mode
+            table=self._table, field=field, mode=mode
         )
         if not self._access_groups_strict:
             exists_clause = """
                 NOT EXISTS (
                     SELECT 1
-                        FROM {table}_complete_groups_rel r
+                        FROM dms_directory_complete_groups_rel r
                         JOIN dms_access_group g ON r.gid = g.id
-                        WHERE r.aid = "{table}".id {groups_mode}
+                        WHERE r.aid = "{table}".{field} {groups_mode}
                 )
             """
             groups_mode = (
@@ -129,7 +132,7 @@ class DmsSecurityMixin(models.AbstractModel):
                 and "AND g.perm_{mode} = true".format(mode=mode)
             )
             exists_clause = exists_clause.format(
-                table=self._table, groups_mode=groups_mode or ""
+                table=self._table, field=field, groups_mode=groups_mode or ""
             )
             where_clause = "({groups_clause} OR {exists_clause})".format(
                 groups_clause=where_clause,
@@ -140,9 +143,6 @@ class DmsSecurityMixin(models.AbstractModel):
         if self.env.context.get("use_res_model_without_access", True):
             custom_ids = self._get_directory_ids_with_res_model_without_access(mode)
             if custom_ids:
-                field = "id"
-                if self._name == "dms.file":
-                    field = "directory_id"
                 extra_clause = """
                     "{table}".{field} NOT IN ({ids})
                 """.format(
