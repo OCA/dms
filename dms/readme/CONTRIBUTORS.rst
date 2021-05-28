@@ -7,3 +7,4 @@
 
   * Víctor Martínez
   * Pedro M. Baeza
+  * Jairo Llopis
