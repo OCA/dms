@@ -193,6 +193,8 @@
                 <field name="write_date" />
                 <field name="permission_write" />
                 <field name="permission_unlink" />
+                <field name="custom_thumbnail_small" />
+                <field name="icon_url" />
                 <field name="count_directories" />
                 <field name="count_files" />
                 <field name="count_directories_title" />
@@ -309,10 +311,20 @@
                                 </div>
                                 <div class="o_kanban_image">
                                     <div class="o_kanban_image_wrapper">
-                                        <img
-                                            t-att-src="kanban_image('dms.directory', 'thumbnail_medium', record.id.raw_value)"
-                                            alt="Thumbnail"
-                                        />
+                                        <t
+                                            t-if="record.custom_thumbnail_small.raw_value"
+                                        >
+                                            <img
+                                                t-att-src="kanban_image('dms.directory', 'custom_thumbnail_small', record.id.raw_value)"
+                                                alt="Custom thumbnail"
+                                            />
+                                        </t>
+                                        <t t-else="">
+                                            <img
+                                                t-att-src="record.icon_url.raw_value"
+                                                alt="Icon"
+                                            />
+                                        </t>
                                     </div>
                                 </div>
                                 <div class="o_kanban_details">
@@ -414,16 +426,15 @@
                         </button>
                     </div>
                     <field
-                        name="thumbnail"
+                        name="thumbnail_medium"
                         widget="image"
                         class="oe_avatar oe_read_only"
-                        options="{'preview_image': 'thumbnail_medium', 'size': [90, 90]}"
                     />
                     <field
                         name="custom_thumbnail"
                         widget="image"
                         class="oe_avatar oe_edit_only"
-                        options="{'preview_image': 'custom_thumbnail_medium', 'size': [90, 90]}"
+                        options="{'preview_image': 'thumbnail_medium'}"
                     />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
