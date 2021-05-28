@@ -59,7 +59,6 @@
                 <thead>
                     <tr class="active">
                         <th>Name</th>
-                        <th>Type</th>
                         <th>Size</th>
                         <th>Last update</th>
                     </tr>
@@ -74,13 +73,12 @@
                                     t-att-title="dms_directory.name"
                                 >
                                     <img
-                                        t-att-src="image_data_uri(dms_directory.thumbnail)"
-                                        style="width:30px"
+                                        class="o_portal_contact_img"
+                                        t-att-src="dms_directory.icon_url"
                                     />
                                     <span t-esc="dms_directory.name" />
                                 </a>
                             </td>
-                            <td>Folder</td>
                             <td>
                                 <span t-esc="dms_directory.count_elements" /> element(s)
                             </td>
@@ -102,14 +100,11 @@
                                         t-att-title="dms_file.name"
                                     >
                                         <img
-                                            t-att-src="image_data_uri(dms_file.thumbnail)"
-                                            style="width:30px"
+                                            class="o_portal_contact_img"
+                                            t-att-src="dms_file.icon_url"
                                         />
                                         <span t-esc="dms_file.name" />
                                     </a>
-                                </td>
-                                <td>
-                                    <span t-esc="dms_file.mimetype" />
                                 </td>
                                 <td>
                                     <span t-esc="dms_file.get_human_size()" />
