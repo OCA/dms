@@ -132,6 +132,7 @@ Contributors
 
   * Víctor Martínez
   * Pedro M. Baeza
+  * Jairo Llopis
 
 Other credits
 ~~~~~~~~~~~~~
