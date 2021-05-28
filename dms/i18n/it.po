@@ -717,6 +717,12 @@ msgid "Custom Thumbnail"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid "Custom thumbnail"
+msgstr ""
+
+#. module: dms
 #: model:dms.tag,name:dms.tag_01_demo
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Customer"
@@ -1009,11 +1015,6 @@ msgid "Filestore"
 msgstr ""
 
 #. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
-msgid "Folder"
-msgstr ""
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_follower_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_follower_ids
 msgid "Followers"
@@ -1110,7 +1111,16 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_icon
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_exception_icon
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Icon"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__icon_url
+#: model:ir.model.fields,field_description:dms.field_dms_file__icon_url
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__icon_url
+msgid "Icon URL"
 msgstr ""
 
 #. module: dms
@@ -1768,7 +1778,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail_small
 #: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail_small
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail_small
-msgid "SmallThumbnail"
+msgid "Small Thumbnail"
 msgstr ""
 
 #. module: dms
@@ -2004,7 +2014,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Thumbnail"
 msgstr ""
 
@@ -2035,7 +2044,6 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__mimetype
-#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Type"
 msgstr ""
 
