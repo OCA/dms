@@ -135,6 +135,11 @@ class File(models.Model):
         self.mapped("directory_id").check_access_rule(operation)
         return super().check_access_rule(operation)
 
+    def _compute_access_url(self):
+        super()._compute_access_url()
+        for item in self:
+            item.access_url = "/my/dms/file/%s/download" % (item.id)
+
     def check_access_token(self, access_token=False):
         res = False
         if access_token:
