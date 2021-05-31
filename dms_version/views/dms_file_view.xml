@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2017-2020 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+  -->
+<odoo>
+    <record id="action_dms_versions_file" model="ir.actions.act_window">
+        <field name="name">Versions</field>
+        <field name="res_model">dms.version</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'default_file_id': active_id}</field>
+    </record>
+    <record id="view_dms_file_kanban" model="ir.ui.view">
+        <field name="name">dms.kanban</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//templates" position="before">
+                <field name="versions_count" />
+            </xpath>
+            <xpath expr="//a[@t-attf-href]" position="after">
+                <a
+                    t-if="record.versions_count.raw_value > 0"
+                    role="menuitem"
+                    class="dropdown-item"
+                    type="object"
+                    name="action_revert_version"
+                >
+                    <i class="fa fa-undo" /> Revert Version
+                </a>
+            </xpath>
+            <xpath expr="//a[@type='delete']" position="after">
+                <a
+                    t-if="record.versions_count.raw_value > 0"
+                    role="menuitem"
+                    class="dropdown-item"
+                    type="action"
+                    name="%(dms_version.action_dms_versions_file)d"
+                >
+                    <i class="fa fa-paperclip" /> Versions
+                </a>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_file_form" model="ir.ui.view">
+        <field name="name">dms.form</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_revert_version"
+                    type="object"
+                    string="Revert Version"
+                    attrs="{'invisible':[('versions_count', '=', 0)]}"
+                />
+                <button
+                    name="action_delete_versions"
+                    type="object"
+                    string="Delete Versions"
+                    attrs="{'invisible':[('versions_count', '=', 0)]}"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    type="action"
+                    name="%(dms_version.action_dms_versions_file)d"
+                    icon="fa-paperclip"
+                    attrs="{'invisible':[('versions_count', '=', 0)]}"
+                    class="oe_stat_button"
+                >
+                    <field string="Versions" name="versions_count" widget="statinfo" />
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
