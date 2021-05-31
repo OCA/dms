@@ -1,0 +1,195 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dms_version
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-08 08:44+0000\n"
+"PO-Revision-Date: 2021-11-08 08:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dms_version
+#: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_kanban
+msgid "<i class=\"fa fa-paperclip\"/> Versions"
+msgstr ""
+
+#. module: dms_version
+#: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_kanban
+msgid "<i class=\"fa fa-undo\"/> Revert Version"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__binary
+msgid "Binary"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__content
+msgid "Content"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__permission_create
+msgid "Create Access"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model,name:dms_version.model_dms_version
+msgid "DMS Version"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__permission_unlink
+msgid "Delete Access"
+msgstr ""
+
+#. module: dms_version
+#: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_form
+#: model_terms:ir.ui.view,arch_db:dms_version.view_dms_storage_form
+msgid "Delete Versions"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model,name:dms_version.model_dms_file
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__file_id
+msgid "File"
+msgstr ""
+
+#. module: dms_version
+#: model_terms:ir.ui.view,arch_db:dms_version.view_dms_version_tree
+msgid "Filename"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_storage__has_versioning
+msgid "Has Versioning"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__id
+msgid "ID"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,help:dms_version.field_dms_file__storage_id_inherit_access_from_parent_record
+msgid ""
+"Indicate if directories and files access work only with related model access"
+" (for example, if some directories are related with any sale, only users "
+"with read access to these sale can acess)"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,help:dms_version.field_dms_storage__has_versioning
+msgid "Indicates if files have an active version control."
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_file__storage_id_inherit_access_from_parent_record
+msgid "Inherit permissions from related record"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__res_model
+msgid "Linked attachments model"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__res_id
+msgid "Linked attachments record ID"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__name
+msgid "Name"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__next_version
+msgid "Next Version"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__previous_version
+msgid "Previous Version"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__permission_read
+msgid "Read Access"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__record_ref
+msgid "Record Referenced"
+msgstr ""
+
+#. module: dms_version
+#: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_form
+msgid "Revert Version"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__size
+#: model_terms:ir.ui.view,arch_db:dms_version.view_dms_version_tree
+msgid "Size"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model,name:dms_version.model_dms_storage
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__storage_id
+msgid "Storage"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.actions.act_window,name:dms_version.action_dms_versions_file
+#: model:ir.model.fields,field_description:dms_version.field_dms_file__version_ids
+#: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_form
+msgid "Versions"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_file__versions_count
+msgid "Versions Count"
+msgstr ""
+
+#. module: dms_version
+#: model:ir.model.fields,field_description:dms_version.field_dms_version__permission_write
+msgid "Write Access"
+msgstr ""
