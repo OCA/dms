@@ -21,7 +21,9 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
 
     def test_storage_attachment(self):
         self._create_attachment("demo.txt", self.admin_uid)
-        self.assertEqual(self.storage.count_storage_files, 1)
+        self.assertTrue(
+            self.storage.storage_file_ids.filtered(lambda x: x.name == "demo.txt")
+        )
         directory_id = self.directory.with_user(self.admin_uid).search(
             [
                 ("storage_id", "=", self.storage.id),
@@ -38,7 +40,7 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
         self.assertEqual(file_01.storage_id, self.storage)
         self.assertEqual(file_01.storage_id.save_type, "attachment")
         self.assertEqual(file_01.save_type, "database")
-        self.assertEqual(self.storage.count_storage_files, 2)
+        self.assertEqual(directory_id.count_files, 2)
 
     def test_storage_attachment_directory_record_ref_access(self):
         self._create_attachment("demo.txt", self.admin_uid)
@@ -51,6 +53,20 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
         )
         self.assertTrue(directory_id.with_user(self.admin_uid).check_access("read"))
         # demo can access res_partner_12
+        self.browse_ref("base.user_demo").write(
+            {
+                "groups_id": [
+                    (
+                        6,
+                        0,
+                        [
+                            self.browse_ref("base.group_user").id,
+                            self.browse_ref("dms.group_dms_user").id,
+                        ],
+                    )
+                ]
+            }
+        )
         self.assertEqual(self.partner.type, "contact")
         self.assertTrue(directory_id.with_user(self.demo_uid).check_access("read"))
         self.partner.sudo().write({"type": "private"})
