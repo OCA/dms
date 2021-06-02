@@ -45,13 +45,13 @@ msgstr ""
 "                "
 
 #. module: dms
-#: code:addons/dms/models/directory.py:431
+#: code:addons/dms/models/directory.py:440
 #, python-format
 msgid "%s Files"
 msgstr "%s Archivos"
 
 #. module: dms
-#: code:addons/dms/models/directory.py:424
+#: code:addons/dms/models/directory.py:433
 #, python-format
 msgid "%s Subdirectories"
 msgstr "%s Subcarpetas"
@@ -228,31 +228,31 @@ msgstr ""
 "predeterminados al crear nuevos registros para este alias."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:562
+#: code:addons/dms/models/directory.py:571
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr "Una carpeta no puede ser raíz y tener una carpeta padre."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:557
+#: code:addons/dms/models/directory.py:566
 #, python-format
 msgid "A directory has to have a parent directory."
 msgstr "Una carpeta debe tener una carpeta padre."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:548
+#: code:addons/dms/models/directory.py:557
 #, python-format
 msgid "A directory has to have model in attachment storage."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:592
+#: code:addons/dms/models/directory.py:601
 #, python-format
 msgid "A directory with the same name already exists."
 msgstr "Una carpeta con el mismo nombre ya existe."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:723
+#: code:addons/dms/models/directory.py:732
 #, python-format
 msgid "A file is locked, the folder cannot be deleted."
 msgstr "El archivo está bloqueado, la carpeta no se puede eliminar."
@@ -270,7 +270,7 @@ msgid "A file with the same name already exists."
 msgstr "Un archivo con el mismo nombre ya existe."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:555
+#: code:addons/dms/models/directory.py:564
 #, python-format
 msgid "A root directory has to have a root storage."
 msgstr "Una carpeta principal debe tener un almacenamiento."
@@ -376,7 +376,7 @@ msgid "Alias domain"
 msgstr "Dominio de alias"
 
 #. module: dms
-#: code:addons/dms/models/directory.py:651
+#: code:addons/dms/models/directory.py:660
 #, python-format
 msgid "Alias-Mail-Extraction"
 msgstr "Extracción de alias de correo"
@@ -725,6 +725,12 @@ msgid "Custom Thumbnail"
 msgstr "Miniatura personalizada"
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid "Custom thumbnail"
+msgstr ""
+
+#. module: dms
 #: model:dms.tag,name:dms.tag_01_demo
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Customer"
@@ -937,7 +943,7 @@ msgid "Error! You cannot create recursive categories."
 msgstr "¡Error! No puedes crear categorías recursivas."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:540
+#: code:addons/dms/models/directory.py:549
 #, python-format
 msgid "Error! You cannot create recursive directories."
 msgstr "¡Error! No puedes crear carpetas recursivas."
@@ -1018,11 +1024,6 @@ msgstr "Los archivos se usan para guardar el contenido directamente en Odoo."
 #, python-format
 msgid "Filestore"
 msgstr "Almacenamiento"
-
-#. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
-msgid "Folder"
-msgstr "Carpeta"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_follower_ids
@@ -1108,6 +1109,19 @@ msgid ""
 msgstr ""
 "ID del registro principal que contiene el alias (ejemplo: proyecto que "
 "contiene el alias de creación de la tarea)"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid "Icon"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__icon_url
+#: model:ir.model.fields,field_description:dms.field_dms_file__icon_url
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__icon_url
+msgid "Icon URL"
+msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_file__active
@@ -1750,8 +1764,8 @@ msgstr "Miniatura personalizada pequeña"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail_small
 #: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail_small
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail_small
-msgid "SmallThumbnail"
-msgstr "Miniatura pequeña"
+msgid "Small Thumbnail"
+msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__starred
@@ -1898,7 +1912,7 @@ msgid "The directory has to have the permission to create files."
 msgstr "La carpeta debe tener permiso para crear archivos."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:580
+#: code:addons/dms/models/directory.py:589
 #, python-format
 msgid "The directory name is invalid."
 msgstr "El nombre de la carpeta es inválido."
@@ -1962,7 +1976,7 @@ msgstr ""
 "sistema para esa dirección."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:570
+#: code:addons/dms/models/directory.py:579
 #, python-format
 msgid "The parent directory has to have the permission to create directories."
 msgstr "La carpeta padre debe tener permisos para crear carpetas."
@@ -2006,8 +2020,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Thumbnail"
 msgstr "Miniatura"
 
@@ -2043,7 +2055,6 @@ msgstr "Viaje"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_mimetype
-#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Type"
 msgstr "Tipo"
 
@@ -2175,6 +2186,12 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
+
+#~ msgid "Folder"
+#~ msgstr "Carpeta"
+
+#~ msgid "SmallThumbnail"
+#~ msgstr "Miniatura pequeña"
 
 #~ msgid "<span>DMS</span>"
 #~ msgstr "<span>Carpetas</span>"
