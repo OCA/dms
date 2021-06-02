@@ -27,13 +27,13 @@ msgid "                Define how incoming emails are processed:\n"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:431
+#: code:addons/dms/models/directory.py:440
 #, python-format
 msgid "%s Files"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:424
+#: code:addons/dms/models/directory.py:433
 #, python-format
 msgid "%s Subdirectories"
 msgstr ""
@@ -159,31 +159,31 @@ msgid "A Python dictionary that will be evaluated to provide default values when
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:562
+#: code:addons/dms/models/directory.py:571
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:557
+#: code:addons/dms/models/directory.py:566
 #, python-format
 msgid "A directory has to have a parent directory."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:548
+#: code:addons/dms/models/directory.py:557
 #, python-format
 msgid "A directory has to have model in attachment storage."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:592
+#: code:addons/dms/models/directory.py:601
 #, python-format
 msgid "A directory with the same name already exists."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:723
+#: code:addons/dms/models/directory.py:732
 #, python-format
 msgid "A file is locked, the folder cannot be deleted."
 msgstr ""
@@ -201,7 +201,7 @@ msgid "A file with the same name already exists."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:555
+#: code:addons/dms/models/directory.py:564
 #, python-format
 msgid "A root directory has to have a root storage."
 msgstr ""
@@ -307,7 +307,7 @@ msgid "Alias domain"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:651
+#: code:addons/dms/models/directory.py:660
 #, python-format
 msgid "Alias-Mail-Extraction"
 msgstr ""
@@ -657,6 +657,12 @@ msgid "Custom Thumbnail"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid "Custom thumbnail"
+msgstr ""
+
+#. module: dms
 #: model:dms.tag,name:dms.tag_01_demo
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Customer"
@@ -863,7 +869,7 @@ msgid "Error! You cannot create recursive categories."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:540
+#: code:addons/dms/models/directory.py:549
 #, python-format
 msgid "Error! You cannot create recursive directories."
 msgstr ""
@@ -947,11 +953,6 @@ msgid "Filestore"
 msgstr ""
 
 #. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
-msgid "Folder"
-msgstr ""
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_follower_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_follower_ids
 msgid "Followers"
@@ -1030,6 +1031,19 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid "ID of the parent record holding the alias (example: project holding the task creation alias)"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid "Icon"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__icon_url
+#: model:ir.model.fields,field_description:dms.field_dms_file__icon_url
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__icon_url
+msgid "Icon URL"
 msgstr ""
 
 #. module: dms
@@ -1640,7 +1654,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail_small
 #: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail_small
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail_small
-msgid "SmallThumbnail"
+msgid "Small Thumbnail"
 msgstr ""
 
 #. module: dms
@@ -1783,7 +1797,7 @@ msgid "The directory has to have the permission to create files."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:580
+#: code:addons/dms/models/directory.py:589
 #, python-format
 msgid "The directory name is invalid."
 msgstr ""
@@ -1827,7 +1841,7 @@ msgid "The owner of records created upon receiving emails on this alias. If this
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:570
+#: code:addons/dms/models/directory.py:579
 #, python-format
 msgid "The parent directory has to have the permission to create directories."
 msgstr ""
@@ -1859,8 +1873,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Thumbnail"
 msgstr ""
 
@@ -1897,7 +1909,6 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_mimetype
-#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Type"
 msgstr ""
 
