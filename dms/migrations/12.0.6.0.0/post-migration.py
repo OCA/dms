@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 
 
 @openupgrade.migrate()
-def migrate(env):
+def migrate(env, version):
     for model in ("dms.file", "dms.directory"):
         _logger.info("Computing stored custom thumbnails for model %s", model)
         records = env[model].search([("custom_thumbnail", "!=", False)])
