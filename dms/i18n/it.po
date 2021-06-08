@@ -415,6 +415,11 @@ msgid "Attachment File"
 msgstr ""
 
 #. module: dms
+#: model:ir.model,name:dms.model_base
+msgid "Base"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
@@ -1410,6 +1415,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Modification Date"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
+#: model:ir.model.fields,field_description:dms.field_dms_file__my_activity_date_deadline
+msgid "My Activity Deadline"
 msgstr ""
 
 #. module: dms
