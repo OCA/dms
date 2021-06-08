@@ -9,7 +9,7 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
         super().setUp()
         self.storage = self.browse_ref("dms.storage_attachment_demo")
         self.model_res_partner = self.browse_ref("base.model_res_partner")
-        self.partner = self.browse_ref("base.res_partner_12")
+        self.partner = self.env["res.partner"].create({"name": "test partner"})
 
     def _create_attachment(self, name, uid):
         self.create_attachment(
@@ -40,6 +40,10 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
         self.assertEqual(file_01.storage_id.save_type, "attachment")
         self.assertEqual(file_01.save_type, "database")
         self.assertEqual(self.storage.count_storage_files, 2)
+        # Assert cascade removal
+        self.partner.unlink()
+        self.assertFalse(file_01.exists())
+        self.assertFalse(directory_id.exists())
 
     def test_storage_attachment_directory_record_ref_access(self):
         self._create_attachment("demo.txt", self.admin_uid)
