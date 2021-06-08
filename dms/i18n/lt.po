@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2021-06-08 15:48+0000\n"
+"Last-Translator: Gailius <gailius.kaz@gmail.com>\n"
 "Language-Team: none\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +16,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -34,13 +36,13 @@ msgstr ""
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "%s Files"
-msgstr ""
+msgstr "%s Failai"
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "%s Subdirectories"
-msgstr ""
+msgstr "%s Pakatalogiai"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
@@ -58,6 +60,8 @@ msgid ""
 "<i class=\"fa fa-archive\"/>\n"
 "                                                Archive"
 msgstr ""
+"<i class=\"fa fa-archive\"/>\n"
+"                                                Archyvuoti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -65,6 +69,8 @@ msgid ""
 "<i class=\"fa fa-archive\"/>\n"
 "                                                Unarchive"
 msgstr ""
+"<i class=\"fa fa-archive\"/>\n"
+"                                                Išarchyvuoti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -72,6 +78,8 @@ msgid ""
 "<i class=\"fa fa-download\"/>\n"
 "                                                Download"
 msgstr ""
+"<i class=\"fa fa-download\"/>\n"
+"                                                Atsisiųsti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -80,6 +88,8 @@ msgid ""
 "<i class=\"fa fa-external-link\"/>\n"
 "                                                Open"
 msgstr ""
+"<i class=\"fa fa-external-link\"/>\n"
+"                                                Atverti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
@@ -87,6 +97,8 @@ msgid ""
 "<i class=\"fa fa-external-link\"/>\n"
 "                                        Open"
 msgstr ""
+"<i class=\"fa fa-external-link\"/>\n"
+"                                        Atverti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -94,6 +106,8 @@ msgid ""
 "<i class=\"fa fa-file-o\"/>\n"
 "                                                Files"
 msgstr ""
+"<i class=\"fa fa-file-o\"/>\n"
+"                                                Failai"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -101,6 +115,8 @@ msgid ""
 "<i class=\"fa fa-folder-o\"/>\n"
 "                                                Directories"
 msgstr ""
+"<i class=\"fa fa-folder-o\"/>\n"
+"                                                Katalogai"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -108,6 +124,8 @@ msgid ""
 "<i class=\"fa fa-lock\"/>\n"
 "                                                Lock"
 msgstr ""
+"<i class=\"fa fa-lock\"/>\n"
+"                                                Užrakinti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -116,6 +134,8 @@ msgid ""
 "<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                                Edit"
 msgstr ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
+"                                                Redaguoti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
@@ -123,6 +143,8 @@ msgid ""
 "<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                        Edit"
 msgstr ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
+"                                        Redaguoti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -131,6 +153,8 @@ msgid ""
 "<i class=\"fa fa-trash-o\"/>\n"
 "                                                Delete"
 msgstr ""
+"<i class=\"fa fa-trash-o\"/>\n"
+"                                                Ištrinti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
@@ -138,6 +162,8 @@ msgid ""
 "<i class=\"fa fa-trash-o\"/>\n"
 "                                        Delete"
 msgstr ""
+"<i class=\"fa fa-trash-o\"/>\n"
+"                                        Ištrinti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -145,6 +171,8 @@ msgid ""
 "<i class=\"fa fa-unlock-alt\"/>\n"
 "                                                Unlock"
 msgstr ""
+"<i class=\"fa fa-unlock-alt\"/>\n"
+"                                                Atrakinti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -153,6 +181,9 @@ msgid ""
 "                                        Storages\n"
 "                                    </span>"
 msgstr ""
+"<span class=\"o_form_label\">\n"
+"                                        Saugyklos\n"
+"                                    </span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -161,16 +192,19 @@ msgid ""
 "                                        Extensions\n"
 "                                    </span>"
 msgstr ""
+"<span class=\"o_form_label\">File\n"
+"                                        Plėtiniai\n"
+"                                    </span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">File Size</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Failo dydis</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
 msgid "<span>Documents</span>"
-msgstr ""
+msgstr "<span>Dokumentai</span>"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
@@ -183,7 +217,7 @@ msgstr ""
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
-msgstr ""
+msgstr "Šakninis katalogas negali turėti tėvinio katalogo."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
