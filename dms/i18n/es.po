@@ -258,13 +258,13 @@ msgid "A file is locked, the folder cannot be deleted."
 msgstr "El archivo está bloqueado, la carpeta no se puede eliminar."
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:586
+#: code:addons/dms/models/dms_file.py:581
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:600
+#: code:addons/dms/models/dms_file.py:595
 #, python-format
 msgid "A file with the same name already exists."
 msgstr "Un archivo con el mismo nombre ya existe."
@@ -1911,7 +1911,7 @@ msgid "The configuration is done!"
 msgstr "¡La configuración está terminada!"
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:625
+#: code:addons/dms/models/dms_file.py:620
 #, python-format
 msgid "The directory has to have the permission to create files."
 msgstr "La carpeta debe tener permiso para crear archivos."
@@ -1923,19 +1923,19 @@ msgid "The directory name is invalid."
 msgstr "El nombre de la carpeta es inválido."
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:609
+#: code:addons/dms/models/dms_file.py:604
 #, python-format
 msgid "The file has a forbidden file extension."
 msgstr "El archivo tiene una extensión prohibida."
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:593
+#: code:addons/dms/models/dms_file.py:588
 #, python-format
 msgid "The file name is invalid."
 msgstr "El nombre de archivo es inválido."
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:616
+#: code:addons/dms/models/dms_file.py:611
 #, python-format
 msgid "The maximum upload size is %s MB)."
 msgstr "El tamaño máximo de subida es %s MB)."
@@ -1987,13 +1987,13 @@ msgid "The parent directory has to have the permission to create directories."
 msgstr "La carpeta padre debe tener permisos para crear carpetas."
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:744
+#: code:addons/dms/models/dms_file.py:739
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
 msgstr "El registro (%s [%s]) está bloqueado, por otro usuario."
 
 #. module: dms
-#: code:addons/dms/models/dms_security_mixin.py:275
+#: code:addons/dms/models/dms_security_mixin.py:269
 #, python-format
 msgid ""
 "The requested operation cannot be completed due to group security "
