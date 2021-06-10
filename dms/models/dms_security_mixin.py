@@ -165,7 +165,7 @@ class DmsSecurityMixin(models.AbstractModel):
                 SELECT 1
                 FROM {rel_table} r
                 JOIN dms_access_group g ON r.gid = g.id AND r.aid = a.id
-                WHERE AND r.aid = ANY (%(subset_ids)s)
+                WHERE r.aid = ANY (%(subset_ids)s)
             )
             """
         )
@@ -242,7 +242,9 @@ class DmsSecurityMixin(models.AbstractModel):
     def check_access_groups(self, operation):
         if self.env.user.id == SUPERUSER_ID:
             return None
-        group_ids = set(self.ids) - set(self._get_ids_without_access_groups(operation))
+        group_ids = list(
+            set(self.ids) - set(self._get_ids_without_access_groups(operation))
+        )
         if group_ids:
             sql_query = sql.SQL(
                 """
@@ -277,7 +279,7 @@ class DmsSecurityMixin(models.AbstractModel):
         if self.env.user.id == SUPERUSER_ID:
             return self
         ids_with_access = self._get_ids_without_access_groups(operation)
-        group_ids = set(self.ids) - set(ids_with_access)
+        group_ids = list(set(self.ids) - set(ids_with_access))
         if group_ids:
             sql_query = sql.SQL(
                 """
