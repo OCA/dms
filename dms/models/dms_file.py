@@ -301,22 +301,17 @@ class File(models.Model):
                 FROM dms_tag t
                 JOIN dms_category c ON t.category_id = c.id
                 LEFT JOIN dms_file_tag_rel r ON t.id = r.tid
-                {directory_where_clause}
+                WHERE %(filter_by_file_ids)s IS FALSE OR r.fid = ANY(%(file_ids)s)
                 GROUP BY c.name, c.id, t.name, t.id
                 ORDER BY c.name, c.id, t.name, t.id;
             """
-            where_clause = ""
-            params = []
+            file_ids = []
             if directory_id:
                 file_ids = self.search([("directory_id", operator, directory_id)]).ids
-                if file_ids:
-                    where_clause = "WHERE r.fid in %s"
-                    params.append(tuple(file_ids))
-                else:
-                    where_clause = "WHERE 1 = 0"
-            # pylint: disable=sql-injection
-            final_query = sql_query.format(directory_where_clause=where_clause)
-            self.env.cr.execute(final_query, params)
+            self.env.cr.execute(
+                sql_query,
+                {"file_ids": file_ids, "filter_by_file_ids": bool(directory_id)},
+            )
             return self.env.cr.dictfetchall()
         if directory_id and field_name in ["directory_id", "category_id"]:
             comodel_domain = kwargs.pop("comodel_domain", [])
