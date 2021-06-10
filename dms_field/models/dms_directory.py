@@ -184,8 +184,8 @@ class DmsDirectory(models.Model):
             query_str = "SELECT count(1) FROM " + from_clause + where_str
             self._cr.execute(query_str, where_clause_params)
             return self._cr.fetchone()[0]
-        limit_str = limit and " limit %d" % limit or ""
-        offset_str = offset and " offset %d" % offset or ""
+        limit_str = limit and " limit %s" or ""
+        offset_str = offset and " offset %s" or ""
         query_str = (
             'SELECT "%s".id FROM ' % (self._table)
             + from_clause
@@ -195,6 +195,10 @@ class DmsDirectory(models.Model):
             + offset_str
         )
         complete_where_clause_params = where_clause_params + where_clause_arguments
+        if limit:
+            complete_where_clause_params.append(limit)
+        if offset:
+            complete_where_clause_params.append(offset)
         # pylint: disable=sql-injection
         self._cr.execute(query_str, complete_where_clause_params)
         return list({x[0] for x in self._cr.fetchall()})
