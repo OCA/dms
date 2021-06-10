@@ -189,13 +189,13 @@ msgid "A file is locked, the folder cannot be deleted."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:586
+#: code:addons/dms/models/dms_file.py:581
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:600
+#: code:addons/dms/models/dms_file.py:595
 #, python-format
 msgid "A file with the same name already exists."
 msgstr ""
@@ -1796,7 +1796,7 @@ msgid "The configuration is done!"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:625
+#: code:addons/dms/models/dms_file.py:620
 #, python-format
 msgid "The directory has to have the permission to create files."
 msgstr ""
@@ -1808,19 +1808,19 @@ msgid "The directory name is invalid."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:609
+#: code:addons/dms/models/dms_file.py:604
 #, python-format
 msgid "The file has a forbidden file extension."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:593
+#: code:addons/dms/models/dms_file.py:588
 #, python-format
 msgid "The file name is invalid."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:616
+#: code:addons/dms/models/dms_file.py:611
 #, python-format
 msgid "The maximum upload size is %s MB)."
 msgstr ""
@@ -1852,13 +1852,13 @@ msgid "The parent directory has to have the permission to create directories."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:744
+#: code:addons/dms/models/dms_file.py:739
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_security_mixin.py:275
+#: code:addons/dms/models/dms_security_mixin.py:269
 #, python-format
 msgid "The requested operation cannot be completed due to group security restrictions. Please contact your system administrator.\n"
 "\n"
