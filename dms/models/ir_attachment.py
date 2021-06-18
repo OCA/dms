@@ -42,13 +42,13 @@ class IrAttachment(models.Model):
                 or not attachment.res_id
             ):
                 continue
-            directories = self._get_dms_directories(
+            directories = attachment._get_dms_directories(
                 attachment.res_model, attachment.res_id
             )
             if not directories:
                 attachment._dms_directories_create()
                 # Get dms_directories again (with items previously created)
-                directories = self._get_dms_directories(
+                directories = attachment._get_dms_directories(
                     attachment.res_model, attachment.res_id
                 )
             # Auto-create_files (if not exists)

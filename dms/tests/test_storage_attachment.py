@@ -54,13 +54,14 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
                 ("res_id", "=", self.partner.id),
             ]
         )
-        self.assertTrue(directory_id.sudo(self.admin_uid).check_access("read"))
+        self.assertTrue(directory_id.sudo(self.admin_uid).permission_read)
         # demo can access res_partner_12
         self.browse_ref("base.user_demo").write(
             {"groups_id": [(2, self.browse_ref("dms.group_dms_user").id, False)]}
         )
         self.assertEqual(self.partner.type, "contact")
-        self.assertTrue(directory_id.sudo(self.demo_uid).check_access("read"))
+        self.assertTrue(directory_id.sudo(self.demo_uid).permission_read)
+        directory_id.invalidate_cache()
         self.partner.sudo().write({"type": "private"})
         self.assertEqual(self.partner.type, "private")
-        self.assertFalse(directory_id.sudo(self.demo_uid).check_access("read"))
+        self.assertFalse(directory_id.sudo(self.demo_uid).permission_read)

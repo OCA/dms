@@ -103,6 +103,7 @@
             name="tag_ids"
             eval="[(6, 0, [ref('dms.tag_04_demo'), ref('dms.tag_05_demo')])]"
         />
+        <field name="group_ids" eval="[(6, 0, [ref('access_group_02_demo')])]" />
     </record>
     <record id="directory_12_demo" model="dms.directory">
         <field name="name">Data</field>
