@@ -404,6 +404,11 @@ msgid "Attachment File"
 msgstr ""
 
 #. module: dms
+#: model:ir.model,name:dms.model_base
+msgid "Base"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
