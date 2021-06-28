@@ -651,7 +651,14 @@ class DmsDirectory(models.Model):
                 parent = self.browse([vals["parent_id"]])
                 data = next(iter(parent.sudo().read(["storage_id"])), {})
                 vals["storage_id"] = self._convert_to_write(data).get("storage_id")
-        return super().create(vals_list)
+        # Create as sudo to avoid testing creation permissions before DMS security
+        # groups are attached (otherwise nobody would be able to create)
+        res = super(DmsDirectory, self.sudo()).create(vals_list)
+        # Go back to original user and check we really had creation permission
+        res = res.sudo(self.env.user)
+        res.check_access_rights("create")
+        res.check_access_rule("create")
+        return res
 
     def write(self, vals):
         # Groups part

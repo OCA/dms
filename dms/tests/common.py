@@ -150,6 +150,7 @@ class DocumentsBaseCase(common.TransactionCase):
         self.super_uid = SUPERUSER_ID
         self.admin_uid = self.browse_ref("base.user_admin").id
         self.demo_uid = self.browse_ref("base.user_demo").id
+        self.access_group_uid = self.browse_ref("dms.access_group_01_demo").id
         self.storage = self.env["dms.storage"]
         self.directory = self.env["dms.directory"]
         self.file = self.env["dms.file"]
@@ -208,6 +209,7 @@ class DocumentsBaseCase(common.TransactionCase):
                 "name": uuid.uuid4().hex,
                 "is_root_directory": True,
                 "root_storage_id": storage.id,
+                "group_ids": [(4, self.access_group_uid)],
             }
         )
 
