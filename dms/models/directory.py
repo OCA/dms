@@ -191,7 +191,16 @@ class DmsDirectory(models.Model):
                 record.check_access_groups(operation)
                 continue
             # Check access to inherited model (and record)
-            model = self.env[record.res_model]
+            try:
+                model = self.env[record.res_model]
+            except KeyError:
+                _logger.info(
+                    "Skipping access rule check for missing model (%s). "
+                    "This is normal if you are upgrading the database. "
+                    "Otherwise, you probably have garbage DMS data.",
+                    record.res_model,
+                )
+                continue
             model.check_access_rights(operation)
             if record.res_id:
                 model.browse(record.res_id).check_access_rule(operation)
