@@ -1,6 +1,12 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+import uuid
+
+from odoo.exceptions import AccessError
+from odoo.tests import Form
 
 from .common import DocumentsBaseCase, multi_users
 
@@ -141,3 +147,43 @@ class DirectoryTestCase(DocumentsBaseCase):
         self.assertTrue(self.directory.search_panel_select_multi_range("parent_id"))
         self.assertTrue(self.directory.search_panel_select_multi_range("category_id"))
         self.assertTrue(self.directory.search_panel_select_multi_range("tag_ids"))
+
+    def test_allow_create_directory_custom_user(self):
+        user = self.env["res.users"].create(
+            {
+                "name": "test",
+                "login": "test",
+                "groups_id": [
+                    (
+                        6,
+                        0,
+                        [
+                            self.env.ref("base.group_user").id,
+                            self.env.ref("dms.group_dms_user").id,
+                        ],
+                    )
+                ],
+            }
+        )
+        test_group = self.env["dms.access.group"].create(
+            {
+                "name": "test",
+                "perm_write": True,
+                "explicit_user_ids": [(6, 0, [user.id])],
+            }
+        )
+        document_directory = self.env.ref("dms.directory_01_demo")
+        # Add test_group to document directory
+        document_directory.write({"complete_group_ids": [(6, 0, [test_group.id])]})
+        record = Form(self.env["dms.directory"].sudo(user))
+        record.name = uuid.uuid4().hex
+        record.parent_id = document_directory
+        with self.assertRaises(AccessError):
+            record.save()
+        # allow perm_create
+        test_group.perm_create = True
+        record = Form(self.directory.sudo(user))
+        record.name = uuid.uuid4().hex
+        record.parent_id = document_directory
+        directory = record.save()
+        self.assertTrue(directory.permission_create)
