@@ -4,3 +4,4 @@
 - Add a migration procedure for converting an storage to attachment one for populating existing records with attachments as folders
 - Add a link from attachment view in chatter to linked documents
 - If Inherit permissions from related record (the inherit_access_from_parent_record field from storage) is changed when directories already exist, inconsistencies may occur because groups defined in the directories and subdirectories will still exist, all groups in these directories should be removed before changing.
+- Since portal users can read ``dms.storage`` records, if your module extends this model to another storage backend that needs using secrets, remember to forbid access to the secrets fields by other means. It would be nice to be able to remove that rule at some point.

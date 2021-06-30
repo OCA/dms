@@ -82,6 +82,31 @@
         <field name="domain_force">[(1 ,'=', 1)]</field>
     </record>
 
+    <!-- Forbid lower groups access to hidden storage -->
+    <record id="rule_forbid_hidden_storage" model="ir.rule">
+        <field name="name">Basic users cannot access hidden storage</field>
+        <field name="model_id" ref="model_dms_storage" />
+        <field
+            name="groups"
+            eval="[(4, ref('base.group_portal')), (4, ref('group_dms_user'))]"
+        />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field name="domain_force">[('is_hidden', '=', False)]</field>
+    </record>
+    <record id="rule_allow_hidden_storage" model="ir.rule">
+        <field name="name">Managers can access hidden storage</field>
+        <field name="model_id" ref="model_dms_storage" />
+        <field name="groups" eval="[(4, ref('group_dms_manager'))]" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+        <field name="domain_force">[('is_hidden', '=', True)]</field>
+    </record>
+
     <!-- These rules leverage computed permission management -->
     <record id="rule_directory_computed_create" model="ir.rule">
         <field name="name">Apply computed create permissions.</field>
