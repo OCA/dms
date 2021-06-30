@@ -45,13 +45,13 @@ msgstr ""
 "                "
 
 #. module: dms
-#: code:addons/dms/models/directory.py:440
+#: code:addons/dms/models/directory.py:418
 #, python-format
 msgid "%s Files"
 msgstr "%s Archivos"
 
 #. module: dms
-#: code:addons/dms/models/directory.py:433
+#: code:addons/dms/models/directory.py:411
 #, python-format
 msgid "%s Subdirectories"
 msgstr "%s Subcarpetas"
@@ -228,49 +228,43 @@ msgstr ""
 "predeterminados al crear nuevos registros para este alias."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:571
+#: code:addons/dms/models/directory.py:542
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr "Una carpeta no puede ser raíz y tener una carpeta padre."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:566
+#: code:addons/dms/models/directory.py:537
 #, python-format
 msgid "A directory has to have a parent directory."
 msgstr "Una carpeta debe tener una carpeta padre."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:557
+#: code:addons/dms/models/directory.py:524
 #, python-format
 msgid "A directory has to have model in attachment storage."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:601
+#: code:addons/dms/models/directory.py:561
 #, python-format
 msgid "A directory with the same name already exists."
 msgstr "Una carpeta con el mismo nombre ya existe."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:732
-#, python-format
-msgid "A file is locked, the folder cannot be deleted."
-msgstr "El archivo está bloqueado, la carpeta no se puede eliminar."
-
-#. module: dms
-#: code:addons/dms/models/dms_file.py:581
+#: code:addons/dms/models/dms_file.py:465
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:595
+#: code:addons/dms/models/dms_file.py:479
 #, python-format
 msgid "A file with the same name already exists."
 msgstr "Un archivo con el mismo nombre ya existe."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:564
+#: code:addons/dms/models/directory.py:535
 #, python-format
 msgid "A root directory has to have a root storage."
 msgstr "Una carpeta principal debe tener un almacenamiento."
@@ -376,7 +370,7 @@ msgid "Alias domain"
 msgstr "Dominio de alias"
 
 #. module: dms
-#: code:addons/dms/models/directory.py:660
+#: code:addons/dms/models/directory.py:620
 #, python-format
 msgid "Alias-Mail-Extraction"
 msgstr "Extracción de alias de correo"
@@ -548,8 +542,6 @@ msgstr "Compañía"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__complete_group_ids
-#: model:ir.model.fields,field_description:dms.field_dms_file__complete_group_ids
-#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__complete_group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Complete Groups"
 msgstr "Grupos completos"
@@ -559,6 +551,11 @@ msgstr "Grupos completos"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__complete_name
 msgid "Complete Name"
 msgstr "Nombre completo"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__complete_directory_ids
+msgid "Complete directories"
+msgstr ""
 
 #. module: dms
 #: model:ir.model,name:dms.model_res_config_settings
@@ -948,7 +945,7 @@ msgid "Error! You cannot create recursive categories."
 msgstr "¡Error! No puedes crear categorías recursivas."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:549
+#: code:addons/dms/models/directory.py:514
 #, python-format
 msgid "Error! You cannot create recursive directories."
 msgstr "¡Error! No puedes crear carpetas recursivas."
@@ -1081,8 +1078,6 @@ msgstr "Usuarios del grupo"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__group_ids
 #: model:ir.model.fields,field_description:dms.field_dms_directory__group_ids
-#: model:ir.model.fields,field_description:dms.field_dms_file__group_ids
-#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_tree
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -1165,7 +1160,6 @@ msgstr ""
 "empresa seleccionada."
 
 #. module: dms
-#: model:ir.model.fields,help:dms.field_dms_directory__root_storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
@@ -1207,10 +1201,24 @@ msgid "Inherit Groups"
 msgstr "Grupos heredados"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__root_storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,field_description:dms.field_dms_storage__inherit_access_from_parent_record
 msgid "Inherit permissions from related record"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_create
+msgid "Inherited Create Access"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_unlink
+msgid "Inherited Unlink Access"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_write
+msgid "Inherited Write Access"
 msgstr ""
 
 #. module: dms
@@ -1294,12 +1302,14 @@ msgstr "Modelos vinculados"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_model
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_model
 msgid "Linked attachments model"
 msgstr "Modelo de adjuntos vinculado"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_id
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_id
 msgid "Linked attachments record ID"
 msgstr "ID de registro de archivos adjuntos vinculados"
 
@@ -1379,7 +1389,7 @@ msgid "Migrate"
 msgstr "Migrar"
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:270
+#: code:addons/dms/models/dms_file.py:250
 #, python-format
 msgid "Migrate File %s of %s [ %s ]"
 msgstr "Migrar archivo %s de %s [ %s ]"
@@ -1426,10 +1436,10 @@ msgid "My Files"
 msgstr "Mis archivos"
 
 #. module: dms
-#: code:addons/dms/controllers/portal.py:37
-#: code:addons/dms/controllers/portal.py:44
-#: code:addons/dms/controllers/portal.py:95
-#: code:addons/dms/controllers/portal.py:102
+#: code:addons/dms/controllers/portal.py:35
+#: code:addons/dms/controllers/portal.py:42
+#: code:addons/dms/controllers/portal.py:93
+#: code:addons/dms/controllers/portal.py:100
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
@@ -1591,6 +1601,12 @@ msgid "Parent Record Thread ID"
 msgstr "ID del hilo del registro principal"
 
 #. module: dms
+#: code:addons/dms/models/access_groups.py:163
+#, python-format
+msgid "Parent group '%(parent)s' is child of '%(current)s'."
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
 "Parent model holding the alias. The model holding the alias reference is not "
@@ -1664,7 +1680,6 @@ msgid "Project"
 msgstr "Proyecto"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_read
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_read
@@ -1679,6 +1694,7 @@ msgstr "Grupos de acceso de registro"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_file__record_ref
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__record_ref
 msgid "Record Referenced"
 msgstr "Registro referenciado"
 
@@ -1911,31 +1927,25 @@ msgid "The configuration is done!"
 msgstr "¡La configuración está terminada!"
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:620
-#, python-format
-msgid "The directory has to have the permission to create files."
-msgstr "La carpeta debe tener permiso para crear archivos."
-
-#. module: dms
-#: code:addons/dms/models/directory.py:589
+#: code:addons/dms/models/directory.py:549
 #, python-format
 msgid "The directory name is invalid."
 msgstr "El nombre de la carpeta es inválido."
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:604
+#: code:addons/dms/models/dms_file.py:488
 #, python-format
 msgid "The file has a forbidden file extension."
 msgstr "El archivo tiene una extensión prohibida."
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:588
+#: code:addons/dms/models/dms_file.py:472
 #, python-format
 msgid "The file name is invalid."
 msgstr "El nombre de archivo es inválido."
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:611
+#: code:addons/dms/models/dms_file.py:495
 #, python-format
 msgid "The maximum upload size is %s MB)."
 msgstr "El tamaño máximo de subida es %s MB)."
@@ -1981,33 +1991,6 @@ msgstr ""
 "sistema para esa dirección."
 
 #. module: dms
-#: code:addons/dms/models/directory.py:579
-#, python-format
-msgid "The parent directory has to have the permission to create directories."
-msgstr "La carpeta padre debe tener permisos para crear carpetas."
-
-#. module: dms
-#: code:addons/dms/models/dms_file.py:739
-#, python-format
-msgid "The record (%s [%s]) is locked, by an other user."
-msgstr "El registro (%s [%s]) está bloqueado, por otro usuario."
-
-#. module: dms
-#: code:addons/dms/models/dms_security_mixin.py:269
-#, python-format
-msgid ""
-"The requested operation cannot be completed due to group security "
-"restrictions. Please contact your system administrator.\n"
-"\n"
-"(Document type: %s, Operation: %s)"
-msgstr ""
-"La operación solicitada no se puede completar debido a restricciones de "
-"seguridad del grupo. Por favor, póngase en contacto con el administrador del "
-"sistema.\n"
-"\n"
-"(Tipo de documento: %s, Operación: %s)"
-
-#. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_storage__save_type
@@ -2020,6 +2003,12 @@ msgstr ""
 "         sistema. Si cambia esta configuración, puede migrar archivos "
 "existentes\n"
 "         manualmente activando la acción."
+
+#. module: dms
+#: code:addons/dms/models/directory.py:528
+#, python-format
+msgid "This directory needs to be associated to a record."
+msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail
@@ -2191,6 +2180,31 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
+
+#~ msgid "A file is locked, the folder cannot be deleted."
+#~ msgstr "El archivo está bloqueado, la carpeta no se puede eliminar."
+
+#~ msgid "The directory has to have the permission to create files."
+#~ msgstr "La carpeta debe tener permiso para crear archivos."
+
+#~ msgid ""
+#~ "The parent directory has to have the permission to create directories."
+#~ msgstr "La carpeta padre debe tener permisos para crear carpetas."
+
+#~ msgid "The record (%s [%s]) is locked, by an other user."
+#~ msgstr "El registro (%s [%s]) está bloqueado, por otro usuario."
+
+#~ msgid ""
+#~ "The requested operation cannot be completed due to group security "
+#~ "restrictions. Please contact your system administrator.\n"
+#~ "\n"
+#~ "(Document type: %s, Operation: %s)"
+#~ msgstr ""
+#~ "La operación solicitada no se puede completar debido a restricciones de "
+#~ "seguridad del grupo. Por favor, póngase en contacto con el administrador "
+#~ "del sistema.\n"
+#~ "\n"
+#~ "(Tipo de documento: %s, Operación: %s)"
 
 #~ msgid "Folder"
 #~ msgstr "Carpeta"
