@@ -402,7 +402,7 @@ class DmsDirectory(models.Model):
 
     def _compute_count_total_directories(self):
         for record in self:
-            count = self.search_count([("id", "child_of", record.id)])
+            count = self.search_count([("parent_id", "=", record.id)])
             count = count - 1 if count > 0 else 0
             record.count_total_directories = count
 
@@ -682,3 +682,31 @@ class DmsDirectory(models.Model):
                 DmsDirectory, self.sudo().search([("id", "child_of", self.ids)])
             ).unlink()
         return super().unlink()
+
+    @api.model
+    def search_read(self, domain=None, fields=None, offset=0, limit=None, order=None):
+        """
+        It's necessary to prevent parent_id=False when searchpanel filter by directory
+        and prevent auto-aplly ('parent_id','child_of',xx) domain because it is not
+        expected for us (if we filter by Documents directory we expected view only
+        subdirectories and not Documents directory), similar to computer filestore.
+        """
+        if self.env.context.get("override_search_read") and len(domain) > 0:
+            domain.reverse()
+            domain2 = []
+            parent_id_override = False
+            for item in domain:
+                if item[0] == "parent_id" and item[1] == "child_of":
+                    domain2.append([item[0], "=", item[2]])
+                    parent_id_override = True
+                elif not parent_id_override or (
+                    parent_id_override
+                    and not bool(
+                        item[0] == "parent_id" and item[1] == "=" and not item[2]
+                    )
+                ):
+                    domain2.append(item)
+            domain = domain2
+        return super().search_read(
+            domain=domain, fields=fields, offset=offset, limit=limit, order=order
+        )

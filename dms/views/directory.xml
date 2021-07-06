@@ -13,6 +13,7 @@
         <field name="domain">
             [
             ("is_hidden", "=", False),
+            ("id", "!=", active_id),
             ]
         </field>
         <field name="context">
@@ -61,7 +62,7 @@
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
             [
-            ("parent_id", "child_of", active_id),
+            ("parent_id", "=", active_id),
             ("is_hidden", "=", False),
             ("id", "!=", active_id),
             ]
@@ -650,7 +651,8 @@
         <field name="name">Directories</field>
         <field name="res_model">dms.directory</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[("is_hidden", "=", False)]</field>
+        <field name="domain">[("is_hidden", "=", False),("parent_id","=",False)]</field>
+        <field name="context">{"override_search_read": True}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Add a new Directory.
@@ -664,7 +666,7 @@
     <menuitem
         id="menu_dms_directory"
         name="Directories"
-        sequence="30"
+        sequence="19"
         parent="main_menu_dms"
         action="action_dms_directory"
     />
