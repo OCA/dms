@@ -30,7 +30,7 @@
         <field name="global" eval="True" />
         <field
             name="domain_force"
-        >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
     </record>
     <record id="rule_multi_company_directory" model="ir.rule">
         <field name="name">DMS Directory multi-company</field>
@@ -38,7 +38,7 @@
         <field name="global" eval="True" />
         <field
             name="domain_force"
-        >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
     </record>
     <record id="rule_multi_company_file" model="ir.rule">
         <field name="name">File multi-company</field>
@@ -46,7 +46,7 @@
         <field name="global" eval="True" />
         <field
             name="domain_force"
-        >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
     </record>
     <record id="rule_security_groups_user" model="ir.rule">
         <field name="name">User can only edit and delete their own groups.</field>
