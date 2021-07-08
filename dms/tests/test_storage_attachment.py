@@ -10,6 +10,13 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
         self.storage = self.browse_ref("dms.storage_attachment_demo")
         self.model_res_partner = self.browse_ref("base.model_res_partner")
         self.partner = self.env["res.partner"].create({"name": "test partner"})
+        self.user = self.env["res.users"].create(
+            {
+                "name": "name",
+                "login": "login",
+                "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+            }
+        )
 
     def _create_attachment(self, name, uid):
         self.create_attachment(
@@ -54,8 +61,26 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
                 ("res_id", "=", self.partner.id),
             ]
         )
-        self.assertTrue(directory_id.with_user(self.admin_uid).check_access("read"))
-        # demo can access res_partner_12
+        self.assertTrue(directory_id.with_user(self.admin_uid).permission_read)
+        self.assertTrue(directory_id.with_user(self.demo_uid).permission_read)
+        self.assertTrue(directory_id.with_user(self.user.id).permission_read)
+        self.assertEqual(self.partner.type, "contact")
+        self.partner.sudo().write({"type": "private"})
+        self.assertEqual(self.partner.type, "private")
+        self.assertTrue(directory_id.sudo().permission_read)
+        if not self.browse_ref("base.user_admin").user_has_groups(
+            "base.group_private_addresses"
+        ):
+            directory_id.with_user(self.admin_uid).invalidate_cache()
+            self.assertFalse(directory_id.with_user(self.admin_uid).permission_read)
+        if not self.browse_ref("base.user_demo").user_has_groups(
+            "base.group_private_addresses"
+        ):
+            directory_id.with_user(self.demo_uid).invalidate_cache()
+            self.assertFalse(directory_id.with_user(self.demo_uid).permission_read)
+        directory_id.with_user(self.user).invalidate_cache()
+        self.assertFalse(directory_id.with_user(self.user.id).permission_read)
+        # user can access self.partner
         self.browse_ref("base.user_demo").write(
             {
                 "groups_id": [
@@ -63,15 +88,11 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
                         6,
                         0,
                         [
+                            self.browse_ref("base.group_private_addresses").id,
                             self.browse_ref("base.group_user").id,
-                            self.browse_ref("dms.group_dms_user").id,
                         ],
                     )
                 ]
             }
         )
-        self.assertEqual(self.partner.type, "contact")
-        self.assertTrue(directory_id.with_user(self.demo_uid).check_access("read"))
-        self.partner.sudo().write({"type": "private"})
-        self.assertEqual(self.partner.type, "private")
-        self.assertFalse(directory_id.with_user(self.demo_uid).check_access("read"))
+        self.assertTrue(directory_id.with_user(self.demo_uid).permission_read)

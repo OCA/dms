@@ -12,7 +12,7 @@ import uuid
 
 from odoo import SUPERUSER_ID, _
 from odoo.modules.module import get_module_resource
-from odoo.tests import common
+from odoo.tests import Form, common
 from odoo.tools import convert_file
 
 _path = os.path.dirname(os.path.dirname(__file__))
@@ -150,6 +150,7 @@ class DocumentsBaseCase(common.TransactionCase):
         self.super_uid = SUPERUSER_ID
         self.admin_uid = self.browse_ref("base.user_admin").id
         self.demo_uid = self.browse_ref("base.user_demo").id
+        self.access_group_demo = self.browse_ref("dms.access_group_01_demo")
         self.storage = self.env["dms.storage"]
         self.directory = self.env["dms.directory"]
         self.file = self.env["dms.file"]
@@ -197,37 +198,27 @@ class DocumentsBaseCase(common.TransactionCase):
         model = self.directory.sudo() if sudo else self.directory
         if not storage and not directory:
             storage = self.create_storage(sudo=sudo)
+        record = Form(model)
+        record.name = uuid.uuid4().hex
+        record.is_root_directory = True
+        record.res_model = res_model
         if directory:
-            return model.create(
-                {
-                    "name": uuid.uuid4().hex,
-                    "is_root_directory": False,
-                    "res_model": res_model,
-                    "parent_id": directory.id,
-                    "storage_id": directory.storage_id.id,
-                }
-            )
-        return model.create(
-            {
-                "name": uuid.uuid4().hex,
-                "is_root_directory": True,
-                "res_model": res_model,
-                "storage_id": storage.id,
-                "parent_id": False,
-            }
-        )
+            record.is_root_directory = False
+            record.parent_id = directory
+        if storage and not storage.inherit_access_from_parent_record:
+            record.storage_id = storage
+            record.group_ids.add(self.access_group_demo)
+        return record.save()
 
     def create_file(self, directory=False, content=False, storage=False, sudo=False):
         model = self.file.sudo() if sudo else self.file
         if not directory:
             directory = self.create_directory(storage=storage, sudo=sudo)
-        return model.create(
-            {
-                "name": uuid.uuid4().hex,
-                "directory_id": directory.id,
-                "content": content or self.content_base64(),
-            }
-        )
+        record = Form(model)
+        record.name = uuid.uuid4().hex
+        record.directory_id = directory
+        record.content = content or self.content_base64()
+        return record.save()
 
     def create_attachment(
         self, name, res_model=False, res_id=False, content=False, sudo=False

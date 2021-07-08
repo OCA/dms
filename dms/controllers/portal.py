@@ -11,13 +11,13 @@ from odoo.addons.web.controllers.main import content_disposition, ensure_db
 
 class CustomerPortal(CustomerPortal):
     def _dms_check_access(self, model, res_id, access_token=None):
+        item = request.env[model].browse(res_id)
         if access_token:
-            item = request.env[model].sudo().browse(res_id)
+            item = item.sudo()
             if not item.check_access_token(access_token):
                 return False
         else:
-            item = request.env[model].browse(res_id)
-            if not item.with_user(request.env.user.id).check_access("read", False):
+            if not item.permission_read:
                 return False
         return item
 
@@ -27,9 +27,7 @@ class CustomerPortal(CustomerPortal):
         values.update({"dms_directory_count": len(ids)})
         return values
 
-    @http.route(
-        ["/my/dms"], type="http", auth="user", website=True,
-    )
+    @http.route(["/my/dms"], type="http", auth="user", website=True)
     def portal_my_dms(
         self, sortby=None, filterby=None, search=None, search_in="name", **kw
     ):
@@ -121,7 +119,6 @@ class CustomerPortal(CustomerPortal):
                 domain, order=sort_br
             )
         request.session["my_dms_folder_history"] = dms_directory_items.ids
-        # check_access
         res = self._dms_check_access("dms.directory", dms_directory_id, access_token)
         if not res:
             if access_token:

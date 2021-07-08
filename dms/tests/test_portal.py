@@ -7,7 +7,6 @@ import odoo.tests
 from odoo.tests.common import users
 
 
-@odoo.tests.tagged("post_install", "-at_install")
 class TestDmsPortal(odoo.tests.HttpCase):
     def setUp(self):
         super().setUp()
@@ -17,6 +16,7 @@ class TestDmsPortal(odoo.tests.HttpCase):
         self.model_partner = self.env.ref("base.model_res_partner")
         storage = self.env.ref("dms.storage_attachment_demo")
         self.partner = self.env.ref("base.partner_demo_portal")
+        self.portal_user = self.partner.user_ids
         self._create_attachment("test.txt", self.user_admin.id)
         self.directory_partner = storage.storage_directory_ids.filtered(
             lambda x: (
@@ -56,16 +56,51 @@ class TestDmsPortal(odoo.tests.HttpCase):
         self.assertEqual(response.status_code, 200)
 
     def test_tour(self):
-        self.phantom_js(
-            "/",
-            "odoo.__DEBUG__.services['web_tour.tour'].run('dms_portal_mail_tour')",
-            "odoo.__DEBUG__.services['web_tour.tour'].tours.dms_portal_mail_tour.ready",
-            login="portal",
+        for tour in ("dms_portal_mail_tour", "dms_portal_partners_tour"):
+            with self.subTest(tour=tour):
+                self.phantom_js(
+                    "/my",
+                    "odoo.__DEBUG__.services['web_tour.tour'].run('%s')" % tour,
+                    "odoo.__DEBUG__.services['web_tour.tour'].tours.%s.ready" % tour,
+                    login="portal",
+                )
+
+    def test_permission_flag(self):
+        """Assert portal partner directory and files permissions."""
+        # Superuser can read everything
+        self.assertTrue(self.directory_partner.permission_read)
+        self.assertTrue(self.directory_partner.parent_id.permission_read)
+        self.assertTrue(self.file_partner.permission_read)
+        self.assertEqual(
+            self.directory_partner.parent_id.child_directory_ids, self.directory_partner
         )
-        tour = "dms_portal_partners_tour"
-        self.phantom_js(
-            "/",
-            "odoo.__DEBUG__.services['web_tour.tour'].run('%s')" % tour,
-            "odoo.__DEBUG__.services['web_tour.tour'].tours.%s.ready" % tour,
-            login="portal",
+        # Portal user can read everything (because it belongs to him)
+        self.assertTrue(
+            self.directory_partner.with_user(self.portal_user).permission_read
+        )
+        self.assertTrue(
+            self.directory_partner.parent_id.with_user(self.portal_user).permission_read
+        )
+        self.assertTrue(self.file_partner.with_user(self.portal_user).permission_read)
+        self.assertEqual(
+            self.directory_partner.parent_id.with_user(
+                self.portal_user
+            ).child_directory_ids,
+            self.directory_partner,
+        )
+        # Public user can access only the empty res.partner folder
+        self.directory_partner.with_user(self.public_user).invalidate_cache()
+        self.assertFalse(
+            self.directory_partner.with_user(self.public_user).permission_read
+        )
+        self.directory_partner.parent_id.with_user(self.public_user).invalidate_cache()
+        self.assertTrue(
+            self.directory_partner.parent_id.with_user(self.public_user).permission_read
+        )
+        self.file_partner.with_user(self.public_user).invalidate_cache()
+        self.assertFalse(self.file_partner.with_user(self.public_user).permission_read)
+        self.assertFalse(
+            self.directory_partner.parent_id.with_user(
+                self.public_user
+            ).child_directory_ids
         )

@@ -39,13 +39,13 @@ class IrAttachment(models.Model):
         for attachment in self:
             if not attachment.res_model or not attachment.res_id:
                 continue
-            directories = self.sudo()._get_dms_directories(
+            directories = attachment._get_dms_directories(
                 attachment.res_model, attachment.res_id
             )
             if not directories:
                 attachment._dms_directories_create()
                 # Get dms_directories again (with items previously created)
-                directories = self.sudo()._get_dms_directories(
+                directories = attachment._get_dms_directories(
                     attachment.res_model, attachment.res_id
                 )
             # Auto-create_files (if not exists)

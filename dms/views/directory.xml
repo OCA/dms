@@ -569,7 +569,6 @@
                             <field name="group_ids">
                                 <tree string="Groups">
                                     <field name="name" />
-                                    <field name="perm_read" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
                                     <field name="perm_unlink" />
@@ -583,7 +582,6 @@
                             <field name="complete_group_ids">
                                 <tree string="Complete Groups">
                                     <field name="name" />
-                                    <field name="perm_read" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
                                     <field name="perm_unlink" />
