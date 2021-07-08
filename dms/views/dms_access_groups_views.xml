@@ -12,7 +12,6 @@
         <field name="arch" type="xml">
             <tree string="Groups">
                 <field name="name" />
-                <field name="perm_read" />
                 <field name="perm_create" />
                 <field name="perm_write" />
                 <field name="perm_unlink" />
@@ -44,7 +43,6 @@
                     <group string="Settings">
                         <group>
                             <field name="perm_create" />
-                            <field name="perm_read" />
                         </group>
                         <group>
                             <field name="perm_write" />
@@ -84,7 +82,6 @@
                             <field name="child_group_ids">
                                 <tree string="Groups">
                                     <field name="name" />
-                                    <field name="perm_read" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
                                     <field name="perm_unlink" />

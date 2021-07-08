@@ -32,11 +32,7 @@ class FileFilestoreTestCase(FileTestCase):
             }
         )
         group_a = self.env["dms.access.group"].create(
-            {
-                "name": "Group A",
-                "perm_read": True,
-                "explicit_user_ids": [(6, 0, [user_a.id])],
-            }
+            {"name": "Group A", "explicit_user_ids": [(6, 0, [user_a.id])]}
         )
         root_directory_a = self.env["dms.directory"].create(
             {
@@ -55,12 +51,7 @@ class FileFilestoreTestCase(FileTestCase):
                 "inherit_group_ids": True,
             }
         )
-        dms_file = self.env.ref("dms.file_13_demo").copy(
-            {
-                "name": "Test file directory %s" % (sub_directory_x.id),
-                "directory_id": sub_directory_x.id,
-            }
-        )
+        dms_file = self.create_file(directory=sub_directory_x)
         dms_files = self.env["dms.file"].with_user(user_a).search([])
         self.assertTrue(self.env.ref("dms.file_13_demo") not in dms_files)
         self.assertTrue(dms_file in dms_files)
