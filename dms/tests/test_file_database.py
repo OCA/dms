@@ -34,7 +34,7 @@ class FileTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_create_file(self):
         root_directory = self.create_directory(storage=self.new_storage)
-        self.create_file(root_directory)
+        self.create_file(directory=root_directory)
         sub_directory = self.create_directory(directory=root_directory)
         self.create_file(sub_directory)
         self.assertEqual(root_directory.count_total_files, 2)
