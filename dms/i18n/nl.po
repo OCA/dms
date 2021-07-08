@@ -207,12 +207,6 @@ msgid "A directory with the same name already exists."
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:0
-#, python-format
-msgid "A file is locked, the folder cannot be deleted."
-msgstr ""
-
-#. module: dms
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
@@ -513,8 +507,6 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__complete_group_ids
-#: model:ir.model.fields,field_description:dms.field_dms_file__complete_group_ids
-#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__complete_group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Complete Groups"
 msgstr ""
@@ -523,6 +515,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_category__complete_name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__complete_name
 msgid "Complete Name"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__complete_directory_ids
+msgid "Complete directories"
 msgstr ""
 
 #. module: dms
@@ -1039,8 +1036,6 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__group_ids
 #: model:ir.model.fields,field_description:dms.field_dms_directory__group_ids
-#: model:ir.model.fields,field_description:dms.field_dms_file__group_ids
-#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_tree
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -1168,6 +1163,21 @@ msgid "Inherit permissions from related record"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_create
+msgid "Inherited Create Access"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_unlink
+msgid "Inherited Unlink Access"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_write
+msgid "Inherited Write Access"
+msgstr ""
+
+#. module: dms
 #: model:dms.category,name:dms.category_01_demo
 msgid "Internal"
 msgstr ""
@@ -1260,16 +1270,16 @@ msgid "Linked Models"
 msgstr ""
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_model
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_model
 msgid "Linked attachments model"
 msgstr ""
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_id
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_id
 msgid "Linked attachments record ID"
 msgstr ""
 
@@ -1552,6 +1562,12 @@ msgid "Parent Record Thread ID"
 msgstr ""
 
 #. module: dms
+#: code:addons/dms/models/access_groups.py:0
+#, python-format
+msgid "Parent group '%(parent)s' is child of '%(current)s'."
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
 "Parent model holding the alias. The model holding the alias reference is not "
@@ -1612,7 +1628,6 @@ msgid "Project"
 msgstr ""
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_read
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_read
@@ -1625,9 +1640,9 @@ msgid "Record Access Groups"
 msgstr ""
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_file__record_ref
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__record_ref
 msgid "Record Referenced"
 msgstr ""
 
@@ -1860,12 +1875,6 @@ msgid "The configuration is done!"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/dms_file.py:0
-#, python-format
-msgid "The directory has to have the permission to create files."
-msgstr ""
-
-#. module: dms
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "The directory name is invalid."
@@ -1919,28 +1928,6 @@ msgid ""
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/directory.py:0
-#, python-format
-msgid "The parent directory has to have the permission to create directories."
-msgstr ""
-
-#. module: dms
-#: code:addons/dms/models/dms_file.py:0
-#, python-format
-msgid "The record (%s [%s]) is locked, by an other user."
-msgstr ""
-
-#. module: dms
-#: code:addons/dms/models/dms_security_mixin.py:0
-#, python-format
-msgid ""
-"The requested operation cannot be completed due to group security "
-"restrictions. Please contact your system administrator.\n"
-"\n"
-"(Document type: %s, Operation: %s)"
-msgstr ""
-
-#. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
@@ -1949,6 +1936,12 @@ msgid ""
 "The save type is used to determine how a file is saved by the\n"
 "        system. If you change this setting, you can migrate existing files\n"
 "        manually by triggering the action."
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "This directory needs to be associated to a record."
 msgstr ""
 
 #. module: dms
