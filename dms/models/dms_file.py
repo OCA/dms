@@ -62,11 +62,19 @@ class File(models.Model):
     )
 
     path_names = fields.Char(
-        compute="_compute_path", string="Path Names", readonly=True, store=False
+        compute="_compute_path",
+        compute_sudo=True,
+        string="Path Names",
+        readonly=True,
+        store=False,
     )
 
     path_json = fields.Text(
-        compute="_compute_path", string="Path Json", readonly=True, store=False
+        compute="_compute_path",
+        compute_sudo=True,
+        string="Path Json",
+        readonly=True,
+        store=False,
     )
 
     tag_ids = fields.Many2many(
