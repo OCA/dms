@@ -129,7 +129,7 @@ class DmsSecurityMixin(models.AbstractModel):
             domains.append([("res_model", "=", model._name), ("res_id", "=", False)])
             # Check record access in batch too
             group_ids = [i for i in group["res_id"] if i]  # Hack to remove None res_id
-            related_ok = model.browse(group_ids)._filter_access_rules(operation)
+            related_ok = model.browse(group_ids)._filter_access_rules_python(operation)
             if not related_ok:
                 continue
             domains.append(
@@ -222,3 +222,29 @@ class DmsSecurityMixin(models.AbstractModel):
     @api.model
     def _search_permission_write(self, operator, value):
         return self._get_permission_domain(operator, value, "write")
+
+    def _filter_access_rules_python(self, operation):
+        # Only kept to not break inheritance; see next comment
+        result = super()._filter_access_rules_python(operation)
+        # HACK Always fall back to applying rules by SQL.
+        # Upstream `_filter_acccess_rules_python()` doesn't use computed fields
+        # search methods. Thus, it will take the `[('permission_{operation}',
+        # '=', user.id)]` rule literally. Obviously that will always fail
+        # because `self[f"permission_{operation}"]` will always be a `bool`,
+        # while `user.id` will always be an `int`.
+        result |= self._filter_access_rules(operation)
+        return result
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Create as sudo to avoid testing creation permissions before DMS security
+        # groups are attached (otherwise nobody would be able to create)
+        res = super(DmsSecurityMixin, self.sudo()).create(vals_list)
+        # Need to flush now, so all groups are stored in DB and the SELECT used
+        # to check access works
+        res.flush()
+        # Go back to original sudo state and check we really had creation permission
+        res = res.sudo(self.env.su)
+        res.check_access_rights("create")
+        res.check_access_rule("create")
+        return res
