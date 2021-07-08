@@ -9,10 +9,10 @@ import json
 import logging
 from collections import defaultdict
 
-from odoo import SUPERUSER_ID, _, api, fields, models, tools
-from odoo.exceptions import AccessError, ValidationError
+from odoo import _, api, fields, models, tools
+from odoo.exceptions import ValidationError
 from odoo.osv import expression
-from odoo.tools import human_size
+from odoo.tools import consteq, human_size
 from odoo.tools.mimetypes import guess_mimetype
 
 from ..tools import file
@@ -58,13 +58,7 @@ class File(models.Model):
     )
     # Override acording to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
-        related="directory_id.storage_id",
-        related_sudo=True,
-        comodel_name="dms.storage",
-        string="Storage",
-        auto_join=True,
-        readonly=True,
-        store=True,
+        related="directory_id.storage_id", readonly=True, store=True, prefetch=False,
     )
 
     path_names = fields.Char(
@@ -124,7 +118,7 @@ class File(models.Model):
         compute_sudo=True,
     )
     require_migration = fields.Boolean(
-        compute="_compute_migration", store=True, compute_sudo=True,
+        compute="_compute_migration", store=True, compute_sudo=True
     )
 
     content_file = fields.Binary(
@@ -143,7 +137,7 @@ class File(models.Model):
     def check_access_token(self, access_token=False):
         res = False
         if access_token:
-            if self.access_token and self.access_token == access_token:
+            if self.access_token and consteq(self.access_token, access_token):
                 return True
             else:
                 items = (
@@ -340,37 +334,27 @@ class File(models.Model):
     @api.depends("name", "directory_id", "directory_id.parent_path")
     def _compute_path(self):
         model = self.env["dms.directory"]
-        data = {}
         for record in self:
-            path_names = []
-            path_json = []
-            if record.directory_id.parent_path:
-                for directory_id in reversed(
-                    list(map(int, record.directory_id.parent_path.split("/")[:-1]))
-                ):
-                    if not directory_id:
-                        break
-                    if directory_id not in data:
-                        data[directory_id] = model.browse(directory_id)
-                    path_names.append(data[directory_id].name)
-                    path_json.append(
-                        {
-                            "model": model._name,
-                            "name": data[directory_id].name,
-                            "id": directory_id,
-                        }
-                    )
-            path_names.reverse()
-            path_json.reverse()
-            name = record.name_get()
-            path_names.append(name[0][1])
-            path_json.append(
+            path_names = [record.display_name]
+            path_json = [
                 {
                     "model": record._name,
-                    "name": name[0][1],
+                    "name": record.display_name,
                     "id": isinstance(record.id, int) and record.id or 0,
                 }
-            )
+            ]
+            current_dir = record.directory_id
+            while current_dir:
+                path_names.insert(0, current_dir.name)
+                path_json.insert(
+                    0,
+                    {
+                        "model": model._name,
+                        "name": current_dir.name,
+                        "id": current_dir.id,
+                    },
+                )
+                current_dir = current_dir.parent_id
             record.update(
                 {
                     "path_names": "/".join(path_names),
@@ -430,10 +414,6 @@ class File(models.Model):
                 record.migration = "{} > {}".format(file_label, storage_label)
                 record.require_migration = True
 
-    def read(self, fields=None, load="_classic_read"):
-        self.check_directory_access("read", {}, True)
-        return super(File, self).read(fields, load=load)
-
     # ----------------------------------------------------------
     # View
     # ----------------------------------------------------------
@@ -460,85 +440,10 @@ class File(models.Model):
         return res
 
     # ----------------------------------------------------------
-    # Security
-    # ----------------------------------------------------------
-
-    @api.model
-    def _get_directories_from_database(self, file_ids):
-        if not file_ids:
-            return self.env["dms.directory"]
-        return self.env["dms.file"].browse(file_ids).mapped("directory_id")
-
-    @api.model
-    def _read_group_process_groupby(self, gb, query):
-        if self.env.user.id == SUPERUSER_ID:
-            return super(File, self)._read_group_process_groupby(gb, query)
-        directories = (
-            self.env["dms.directory"].with_context(prefetch_fields=False).search([])
-        )
-        if directories:
-            where_clause = '"{table}"."{field}" = ANY (VALUES {ids})'.format(
-                table=self._table,
-                field="directory_id",
-                ids=", ".join(map(lambda id: "(%s)" % id, directories.ids)),
-            )
-            query.where_clause += [where_clause]
-        else:
-            query.where_clause += ["0=1"]
-        return super(File, self)._read_group_process_groupby(gb, query)
-
-    @api.model
-    def _search(
-        self,
-        args,
-        offset=0,
-        limit=None,
-        order=None,
-        count=False,
-        access_rights_uid=None,
-    ):
-        result = super(File, self)._search(
-            args, offset, limit, order, False, access_rights_uid
-        )
-        if self.env.user.id == SUPERUSER_ID:
-            return len(result) if count else result
-        # Fix access files with share button (public)
-        if self.env.user.has_group("base.group_public"):
-            return len(result) if count else result
-        # operations
-        if not result:
-            return 0 if count else []
-        file_ids = set(result)
-        directories = self._get_directories_from_database(result)
-        for directory in directories - directories._filter_access("read"):
-            file_ids -= set(directory.sudo().mapped("file_ids").ids)
-        return len(file_ids) if count else list(file_ids)
-
-    def _filter_access(self, operation):
-        records = super(File, self)._filter_access(operation)
-        if self.env.user.id == SUPERUSER_ID:
-            return records
-        directories = self._get_directories_from_database(records.ids)
-        for directory in directories - directories._filter_access("read"):
-            records -= self.browse(directory.sudo().mapped("file_ids").ids)
-        return records
-
-    def check_directory_access(self, operation, vals=False, raise_exception=False):
-        if not vals:
-            vals = {}
-        if self.env.user.id == SUPERUSER_ID:
-            return True
-        if "directory_id" in vals and vals["directory_id"]:
-            records = self.env["dms.directory"].browse(vals["directory_id"])
-        else:
-            records = self._get_directories_from_database(self.ids)
-        return records.check_access(operation, raise_exception)
-
-    # ----------------------------------------------------------
     # Constrains
     # ----------------------------------------------------------
 
-    @api.constrains("storage_id")
+    @api.constrains("storage_id", "res_model", "res_id")
     def _check_storage_id_attachment_res_model(self):
         for record in self:
             if record.storage_id.save_type == "attachment" and not (
@@ -577,14 +482,6 @@ class File(models.Model):
                 raise ValidationError(
                     _("The maximum upload size is %s MB).")
                     % self._get_binary_max_size()
-                )
-
-    @api.constrains("directory_id")
-    def _check_directory_access(self):
-        for record in self:
-            if not record.directory_id.check_access("create", raise_exception=False):
-                raise ValidationError(
-                    _("The directory has to have the permission to create files.")
                 )
 
     # ----------------------------------------------------------
@@ -640,21 +537,7 @@ class File(models.Model):
         else:
             names = self.sudo().directory_id.file_ids.mapped("name")
         default.update({"name": file.unique_name(self.name, names, self.extension)})
-        self.check_directory_access("create", default, True)
         return super(File, self).copy(default)
-
-    def write(self, vals):
-        self.check_directory_access("write", vals, True)
-        self.check_lock()
-        return super(File, self).write(vals)
-
-    def unlink(self):
-        self.check_access_rights("unlink")
-        self.check_directory_access("unlink", {}, True)
-        self.check_lock()
-        # We need to do sudo because we don't know when the related groups
-        # will be deleted
-        return super(File, self.sudo()).unlink()
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -684,18 +567,6 @@ class File(models.Model):
 
     def unlock(self):
         self.write({"locked_by": None})
-
-    @api.model
-    def _check_lock_editor(self, lock_uid):
-        return lock_uid in (self.env.uid, SUPERUSER_ID)
-
-    def check_lock(self):
-        for record in self:
-            if record.locked_by.exists() and not self._check_lock_editor(
-                record.locked_by.id
-            ):
-                message = _("The record (%s [%s]) is locked, by an other user.")
-                raise AccessError(message % (record._description, record.id))
 
     # ----------------------------------------------------------
     # Read, View
