@@ -17,6 +17,11 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
                 "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
             }
         )
+        user_admin = self.browse_ref("base.user_admin")
+        self.user_demo = self.browse_ref("base.user_demo")
+        (user_admin + self.user_demo).write(
+            {"groups_id": [(3, self.ref("base.group_private_addresses"))]}
+        )
 
     def _create_attachment(self, name, uid):
         self.create_attachment(
@@ -73,7 +78,7 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
         self.assertFalse(directory_id.sudo(self.demo_uid).permission_read)
         self.assertFalse(directory_id.sudo(self.user.id).permission_read)
         # user can access self.partner
-        self.browse_ref("base.user_demo").write(
+        self.user_demo.write(
             {
                 "groups_id": [
                     (
