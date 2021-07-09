@@ -185,14 +185,6 @@ class File(models.Model):
     def get_human_size(self):
         return human_size(self.size)
 
-    def _get_share_url(
-        self, redirect=False, signup_partner=False, pid=None, share_token=True
-    ):
-        self.ensure_one()
-        return "/my/dms/file/{}/download?access_token={}&db={}".format(
-            self.id, self._portal_ensure_token(), self.env.cr.dbname,
-        )
-
     # ----------------------------------------------------------
     # Helper
     # ----------------------------------------------------------
