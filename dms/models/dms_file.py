@@ -85,6 +85,7 @@ class File(models.Model):
         relation="dms_file_tag_rel",
         column1="fid",
         column2="tid",
+        domain="['|', ('category_id', '=', False),('category_id', '=?', category_id)]",
         string="Tags",
     )
 
@@ -424,24 +425,9 @@ class File(models.Model):
 
     @api.onchange("category_id")
     def _change_category(self):
-        res = {"domain": {"tag_ids": [("category_id", "=", False)]}}
-        if self.category_id:
-            res.update(
-                {
-                    "domain": {
-                        "tag_ids": [
-                            "|",
-                            ("category_id", "=", False),
-                            ("category_id", "child_of", self.category_id.id),
-                        ]
-                    }
-                }
-            )
-        tags = self.tag_ids.filtered(
+        self.tag_ids = self.tag_ids.filtered(
             lambda rec: not rec.category_id or rec.category_id == self.category_id
         )
-        self.tag_ids = tags
-        return res
 
     # ----------------------------------------------------------
     # Constrains
