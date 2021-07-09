@@ -6,6 +6,7 @@ import base64
 import odoo.tests
 
 
+@odoo.tests.tagged("post_install", "-at_install")
 class TestDmsPortal(odoo.tests.HttpCase):
     def setUp(self):
         super().setUp()
@@ -57,12 +58,7 @@ class TestDmsPortal(odoo.tests.HttpCase):
     def test_tour(self):
         for tour in ("dms_portal_mail_tour", "dms_portal_partners_tour"):
             with self.subTest(tour=tour):
-                self.start_tour(
-                    "/my",
-                    "odoo.__DEBUG__.services['web_tour.tour'].run('%s')" % tour,
-                    "odoo.__DEBUG__.services['web_tour.tour'].tours.%s.ready" % tour,
-                    login="portal",
-                )
+                self.start_tour("/", tour, login="portal")
 
     def test_permission_flag(self):
         """Assert portal partner directory and files permissions."""
