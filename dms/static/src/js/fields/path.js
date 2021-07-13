@@ -10,23 +10,6 @@ odoo.define("dms.fields_path", function (require) {
     var fields = require("web.basic_fields");
     var registry = require("web.field_registry");
 
-    var FieldPathNames = fields.FieldChar.extend({
-        init: function () {
-            this._super.apply(this, arguments);
-            this.max_width = this.nodeOptions.width || 500;
-        },
-        _renderReadonly: function () {
-            var show_value = this._formatValue(this.value);
-            var text_witdh = show_value.length;
-            if (text_witdh >= this.max_width) {
-                var ratio_start = (1 - this.max_width / text_witdh) * show_value.length;
-                show_value =
-                    ".." + show_value.substring(ratio_start, show_value.length);
-            }
-            this.$el.text(show_value);
-        },
-    });
-
     var FieldPathJson = fields.FieldText.extend({
         events: _.extend({}, fields.FieldText.prototype.events, {
             "click a": "_onNodeClicked",
@@ -90,11 +73,9 @@ odoo.define("dms.fields_path", function (require) {
         },
     });
 
-    registry.add("path_names", FieldPathNames);
     registry.add("path_json", FieldPathJson);
 
     return {
-        FieldPathNames: FieldPathNames,
         FieldPathJson: FieldPathJson,
     };
 });
