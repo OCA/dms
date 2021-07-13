@@ -304,15 +304,20 @@
                 js_class="file_list"
                 decoration-warning="not active"
                 decoration-muted="(is_locked and not is_lock_editor)"
+                multi_edit="1"
             >
                 <field name="active" invisible="1" />
                 <field name="is_locked" invisible="1" />
                 <field name="is_lock_editor" invisible="1" />
                 <field name="name" />
-                <field name="write_date" />
-                <field name="size" />
-                <field name="res_mimetype" />
-                <field name="path_names" widget="path_names" string="Path" />
+                <field name="write_date" readonly="1" />
+                <field name="size" readonly="1" />
+                <field name="res_mimetype" readonly="1" />
+                <field
+                    name="tag_ids"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color', 'no_create_edit': True}"
+                />
             </tree>
         </field>
     </record>
