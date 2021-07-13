@@ -300,6 +300,7 @@
                 js_class="file_list"
                 decoration-warning="not active"
                 decoration-muted="(is_locked and not is_lock_editor)"
+                multi_edit="1"
             >
                 <field name="active" invisible="1" />
                 <field name="is_locked" invisible="1" />
@@ -308,7 +309,11 @@
                 <field name="write_date" />
                 <field name="size" widget="integer" />
                 <field name="mimetype" />
-                <field name="path_names" widget="path_names" string="Path" />
+                <field
+                    name="tag_ids"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color', 'no_create_edit': True}"
+                />
             </tree>
         </field>
     </record>
