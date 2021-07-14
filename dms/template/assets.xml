@@ -39,6 +39,10 @@
                 type="text/javascript"
                 src="/dms/static/src/js/views/file_kanban_view.js"
             />
+            <script
+                type="text/javascript"
+                src="/dms/static/src/js/views/search_panel.js"
+            />
         </xpath>
     </template>
 </odoo>
