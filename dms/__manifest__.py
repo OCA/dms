@@ -38,6 +38,7 @@
             "dms/static/src/scss/directory_kanban.scss",
             "dms/static/src/js/fields/path.js",
             "dms/static/src/js/views/many_drop_target.js",
+            "dms/static/src/js/views/search_panel.esm.js",
             "dms/static/src/js/views/file_list_controller.js",
             "dms/static/src/js/views/file_list_view.js",
             "dms/static/src/js/views/file_kanban_controller.js",
