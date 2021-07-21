@@ -1579,11 +1579,6 @@ msgid "Partner"
 msgstr ""
 
 #. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_tree
-msgid "Path"
-msgstr ""
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_json
 msgid "Path Json"
 msgstr ""
@@ -1658,6 +1653,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_user_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_user_id
 msgid "Responsible User"
+msgstr ""
+
+#. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/js/views/search_panel.js:0
+#, python-format
+msgid "Root"
 msgstr ""
 
 #. module: dms

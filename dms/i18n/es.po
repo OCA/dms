@@ -1648,11 +1648,6 @@ msgid "Partner"
 msgstr "Contacto"
 
 #. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_tree
-msgid "Path"
-msgstr "Ruta"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_json
 msgid "Path Json"
 msgstr "Path Json"
@@ -1733,6 +1728,13 @@ msgstr "Requiere migración"
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_user_id
 msgid "Responsible User"
 msgstr "Usuario responsable"
+
+#. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/js/views/search_panel.js:0
+#, python-format
+msgid "Root"
+msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__root_directory_ids
@@ -2206,6 +2208,9 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
+
+#~ msgid "Path"
+#~ msgstr "Ruta"
 
 #~ msgid "A file is locked, the folder cannot be deleted."
 #~ msgstr "El archivo está bloqueado, la carpeta no se puede eliminar."
