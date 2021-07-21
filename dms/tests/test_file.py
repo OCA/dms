@@ -78,3 +78,9 @@ class FileFilestoreTestCase(FileTestCase):
         self.assertNotEqual(oid, lobject_file.with_context({"oid": True}).content_file)
         self.assertTrue(lobject_file.export_data(["content"]))
         lobject_file.unlink()
+
+    def test_content_file_res_mimetype(self):
+        file_svg = self.env.ref("dms.file_05_demo")
+        self.assertEqual(file_svg.res_mimetype, "image/svg+xml")
+        file_logo = self.env.ref("dms.file_02_demo")
+        self.assertEqual(file_logo.res_mimetype, "image/jpeg")
