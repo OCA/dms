@@ -691,19 +691,6 @@ msgid "Current Save Type"
 msgstr ""
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__custom_thumbnail
-#: model:ir.model.fields,field_description:dms.field_dms_file__custom_thumbnail
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__custom_thumbnail
-msgid "Custom Thumbnail"
-msgstr ""
-
-#. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "Custom thumbnail"
-msgstr ""
-
-#. module: dms
 #: model:dms.tag,name:dms.tag_01_demo
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Customer"
@@ -728,6 +715,11 @@ msgstr ""
 #. module: dms
 #: model:ir.model,name:dms.model_dms_security_mixin
 msgid "DMS Security Mixin"
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_mixins_thumbnail
+msgid "DMS thumbnail and icon mixin"
 msgstr ""
 
 #. module: dms
@@ -1129,6 +1121,41 @@ msgid ""
 msgstr "אם מוגדר, ספריות וקבצים יהיו זמינים רק עבור החברה שנבחרה."
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_1920
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_1920
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_1920
+msgid "Image"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_1024
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_1024
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_1024
+msgid "Image 1024"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_128
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_128
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_128
+msgid "Image 128"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_256
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_256
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_256
+msgid "Image 256"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_512
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_512
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_512
+msgid "Image 512"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
@@ -1329,20 +1356,6 @@ msgstr "מנהל"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Manual File Migration"
 msgstr "העברת קבצים ידנית"
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__custom_thumbnail_medium
-#: model:ir.model.fields,field_description:dms.field_dms_file__custom_thumbnail_medium
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__custom_thumbnail_medium
-msgid "Medium Custom Thumbnail"
-msgstr ""
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail_medium
-#: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail_medium
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail_medium
-msgid "Medium Thumbnail"
-msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_error
@@ -1744,20 +1757,6 @@ msgid "Size"
 msgstr "גודל"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__custom_thumbnail_small
-#: model:ir.model.fields,field_description:dms.field_dms_file__custom_thumbnail_small
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__custom_thumbnail_small
-msgid "Small Custom Thumbnail"
-msgstr ""
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail_small
-#: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail_small
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail_small
-msgid "Small Thumbnail"
-msgstr ""
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__starred
 msgid "Starred"
 msgstr "מסומן בכוכב"
@@ -1975,18 +1974,6 @@ msgstr ""
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "This directory needs to be associated to a record."
-msgstr ""
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail
-#: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail
-msgid "Thumbnail"
-msgstr ""
-
-#. module: dms
-#: model:ir.model,name:dms.model_dms_mixins_thumbnail
-msgid "Thumbnail Mixin"
 msgstr ""
 
 #. module: dms
