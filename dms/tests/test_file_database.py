@@ -86,7 +86,7 @@ class FileTestCase(DocumentsBaseCase):
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_compute_thumbnail(self):
-        self.assertTrue(self.file_demo_01.thumbnail)
+        self.assertTrue(self.file_demo_01.image_128)
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_compute_path_names(self):
