@@ -137,6 +137,16 @@ class File(models.Model):
         attachment=True, string="Content File", prefetch=False, invisible=True
     )
 
+    # Extend inherited field(s)
+    image_1920 = fields.Image(compute="_compute_image_1920", store=True, readonly=False)
+
+    @api.depends("mimetype", "content")
+    def _compute_image_1920(self):
+        """Provide thumbnail automatically if possible."""
+        for one in self.filtered("mimetype"):
+            if one.mimetype.startswith("image/"):
+                one.image_1920 = one.content
+
     def check_access_rule(self, operation):
         self.mapped("directory_id").check_access_rule(operation)
         return super().check_access_rule(operation)
@@ -229,8 +239,8 @@ class File(models.Model):
         extensions = get_param("dms.forbidden_extensions", default="")
         return [extension.strip() for extension in extensions.split(",")]
 
-    def _get_thumbnail_placeholder_name(self):
-        return self.extension and "file_%s.png" % self.extension or ""
+    def _get_icon_placeholder_name(self):
+        return self.extension and "file_%s.svg" % self.extension or ""
 
     # ----------------------------------------------------------
     # Actions
