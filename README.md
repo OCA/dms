@@ -17,9 +17,9 @@ OCA modules for DMS
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[dms](dms/) | 14.0.4.0.0 | Document Management System for Odoo
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[dms](dms/) | 14.0.4.0.0 |  | Document Management System for Odoo
 
 [//]: # (end addons)
 
