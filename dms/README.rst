@@ -47,6 +47,9 @@ Preview
 the other `mail_preview` modules from `social` OCA repository
 in order to improve the preview of files.
 
+`python-magic` library is recommended to be installed for having whole support
+to get proper file types and file preview.
+
 Configuration
 =============
 

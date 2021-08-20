@@ -1,11 +1,17 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
 
 from .common import multi_users
 from .test_file_database import FileTestCase
+
+try:
+    import magic
+except ImportError:
+    magic = None
 
 
 class FileFilestoreTestCase(FileTestCase):
@@ -84,3 +90,9 @@ class FileFilestoreTestCase(FileTestCase):
         self.assertEqual(file_svg.res_mimetype, "image/svg+xml")
         file_logo = self.env.ref("dms.file_02_demo")
         self.assertEqual(file_logo.res_mimetype, "image/jpeg")
+
+    def test_content_file_res_mimetype_magic_library(self):
+        if not magic:
+            self.skipTest("Without python-magic library installed")
+        file_video = self.env.ref("dms.file_10_demo")
+        self.assertEqual(file_video.res_mimetype, "video/mp4")
