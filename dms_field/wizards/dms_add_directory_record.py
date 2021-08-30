@@ -25,9 +25,10 @@ class DmsAddDirectory(models.TransientModel):
     def _create_directory_vals(self):
         record = self.env[self.res_model].browse(self.res_id)
         return {
-            "root_storage_id": self.storage_id.id,
+            "storage_id": self.storage_id.id,
             "res_id": self.res_id,
             "res_model": self.res_model,
             "is_root_directory": True,
             "name": record.display_name,
+            "group_ids": [(4, self.storage_id.field_default_group_id.id)],
         }
