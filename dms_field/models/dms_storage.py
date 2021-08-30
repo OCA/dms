@@ -1,13 +1,14 @@
 # Copyright 2020 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class DmsStorage(models.Model):
-
     _inherit = "dms.storage"
+
+    field_default_group_id = fields.Many2one("dms.access.group")
 
     @api.model
     def _build_documents_storage(self, storage):
@@ -36,7 +37,7 @@ class DmsStorage(models.Model):
                 continue
             if self.env["dms.directory"].search(
                 [
-                    ("root_storage_id", "=", storage.id),
+                    ("storage_id", "=", storage.id),
                     ("is_root_directory", "=", True),
                     ("res_model", "not in", storage.mapped("model_ids.model"),),
                 ]
@@ -46,7 +47,7 @@ class DmsStorage(models.Model):
                 )
             if storage.model_ids and self.env["dms.directory"].search(
                 [
-                    ("root_storage_id", "=", storage.id),
+                    ("storage_id", "=", storage.id),
                     ("is_root_directory", "=", True),
                     ("res_model", "=", False),
                 ]

@@ -32,6 +32,12 @@
             <field name="model_ids" position="attributes">
                 <attribute name="attrs">{'invisible': 0}</attribute>
             </field>
+            <field name="model_ids" position="after">
+                <field
+                    name="field_default_group_id"
+                    attrs="{'invisible': ['|', ('model_ids', '=', False),('save_type', '=', 'attachment')]}"
+                />
+            </field>
         </field>
     </record>
 </odoo>
