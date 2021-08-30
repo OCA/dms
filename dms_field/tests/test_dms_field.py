@@ -9,18 +9,25 @@ class TestDmsField(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.access_group = cls.env["dms.access.group"].create(
+            {
+                "name": "Access Group",
+                "group_ids": [(4, cls.env.ref("base.group_user").id)],
+            }
+        )
         cls.storage = cls.env["dms.storage"].create(
             {
                 "name": "DMS Storage",
                 "model_ids": [(4, cls.env.ref("base.model_res_partner").id)],
                 "save_type": "database",
+                "field_default_group_id": cls.access_group.id,
             }
         )
         cls.partner = cls.env["res.partner"].create({"name": "DEMO Partner"})
 
     def _create_directory_vals(self, record):
         return {
-            "root_storage_id": self.storage.id,
+            "storage_id": self.storage.id,
             "is_root_directory": True,
             "name": record.display_name,
             "res_model": record._name,
@@ -36,7 +43,7 @@ class TestDmsField(SavepointCase):
         with self.assertRaises(ValidationError):
             self.env["dms.directory"].create(
                 {
-                    "root_storage_id": self.storage.id,
+                    "storage_id": self.storage.id,
                     "is_root_directory": True,
                     "name": "Test Directory",
                 }
@@ -64,7 +71,7 @@ class TestDmsField(SavepointCase):
         self.storage.write({"model_ids": [(5, False)]})
         self.env["dms.directory"].create(
             {
-                "root_storage_id": self.storage.id,
+                "storage_id": self.storage.id,
                 "is_root_directory": True,
                 "name": "First Directory",
             }
@@ -86,4 +93,4 @@ class TestDmsField(SavepointCase):
         ).create({"storage_id": self.storage.id}).create_directory()
         self.partner.refresh()
         self.assertTrue(self.partner.dms_directory_ids)
-        self.assertEqual(self.storage, self.partner.dms_directory_ids.root_storage_id)
+        self.assertEqual(self.storage, self.partner.dms_directory_ids.storage_id)

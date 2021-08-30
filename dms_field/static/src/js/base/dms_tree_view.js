@@ -14,7 +14,7 @@ odoo.define("dms.DmsTreeView", function(require) {
         template: "dms.DocumentTree",
         viewType: "dms_tree",
         config: _.extend({}, BasicView.prototype.config, {
-            Controller: DmsTreeController,
+            Controller: DmsTreeController.Controller,
             Renderer: DmsTreeRenderer,
         }),
         multi_record: true,
