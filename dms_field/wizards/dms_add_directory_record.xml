@@ -11,7 +11,7 @@
                     <field name="res_id" invisible="1" />
                     <field
                         name="storage_id"
-                        domain="[('id', 'in', storage_ids)]"
+                        domain="[('id', 'in', storage_ids), ('field_default_group_id.users', '=', uid)]"
                         widget="selection"
                     />
                     <field name="storage_ids" invisible="1" />

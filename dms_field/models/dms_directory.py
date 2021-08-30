@@ -15,14 +15,14 @@ class DmsDirectory(models.Model):
     def _default_parent(self):
         return self.env.context.get("default_parent_directory_id", False)
 
-    @api.constrains("res_id", "is_root_directory", "root_storage_id", "res_model")
+    @api.constrains("res_id", "is_root_directory", "storage_id", "res_model")
     def _check_resource(self):
         for directory in self:
             if directory.storage_id.save_type == "attachment":
                 continue
             if (
                 directory.is_root_directory
-                and directory.root_storage_id.model_ids
+                and directory.storage_id.model_ids
                 and not directory.res_id
             ):
                 raise ValidationError(
@@ -35,15 +35,15 @@ class DmsDirectory(models.Model):
                     _("Directory %s must be root in order to be related to a " "record")
                     % directory.display_name
                 )
-            if not directory.root_storage_id.model_ids:
+            if not directory.storage_id.model_ids:
                 raise ValidationError(
                     _(
                         "Storage %s should need to be assigned to a model in "
                         "order to relate the directory to a record"
                     )
-                    % directory.root_storage_id.display_name
+                    % directory.storage_id.display_name
                 )
-            if directory.res_model not in directory.root_storage_id.model_ids.mapped(
+            if directory.res_model not in directory.storage_id.model_ids.mapped(
                 "model"
             ):
                 raise ValidationError(
@@ -51,11 +51,11 @@ class DmsDirectory(models.Model):
                         "Storage %s should need to be assigned to "
                         "a model related to the storage"
                     )
-                    % directory.root_storage_id.display_name
+                    % directory.storage_id.display_name
                 )
             if self.search(
                 [
-                    ("root_storage_id", "=", directory.root_storage_id.id),
+                    ("storage_id", "=", directory.storage_id.id),
                     ("id", "!=", directory.id),
                     ("res_id", "=", directory.res_id),
                     ("res_model", "=", directory.res_model),
