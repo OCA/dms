@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+
+
+    <record id="demo_access_group" model="dms.access.group">
+        <field name="name">Everyone for Partner DMS</field>
+        <field name="group_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record>
     <record id="storage_demo" model="dms.storage">
         <field name="name">Partner Storage</field>
         <field name="save_type">database</field>
         <field name="model_ids" eval="[(4, ref('base.model_res_partner'))]" />
+        <field name="field_default_group_id" ref="demo_access_group" />
     </record>
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form</field>

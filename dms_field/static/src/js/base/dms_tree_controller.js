@@ -569,13 +569,17 @@ odoo.define("dms.DmsTreeController", function(require) {
         })
     );
 
-    return BasicController.extend(
-        _.extend(DMSTreeController, {
-            custom_events: _.extend(
-                {},
-                BasicController.prototype.custom_events,
-                custom_events
-            ),
-        })
-    );
+    return {
+        Controller: BasicController.extend(
+            _.extend(DMSTreeController, {
+                custom_events: _.extend(
+                    {},
+                    BasicController.prototype.custom_events,
+                    custom_events
+                ),
+            })
+        ),
+        custom_events: custom_events,
+        DMSTreeController: DMSTreeController,
+    };
 });

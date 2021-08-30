@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* dms_field
+# 	* dms_field
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:139
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Action Buttons"
 msgstr ""
@@ -27,15 +27,9 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:253
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Actions"
-msgstr ""
-
-#. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-msgid "Activity"
 msgstr ""
 
 #. module: dms_field
@@ -45,21 +39,21 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:406
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add Directory: "
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:422
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add File: "
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:446
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add new root directory"
 msgstr ""
@@ -70,49 +64,43 @@ msgid "Base"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-msgid "Calendar"
-msgstr ""
-
-#. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:35
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Close the selected node"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:128
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Context Menu"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/controls.xml:15
+#: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Create"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:314
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Create File"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:302
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Create directory"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:57
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Create:"
 msgstr ""
@@ -129,14 +117,14 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:260
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Cut"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_view.js:13
+#: code:addons/dms_field/static/src/js/base/dms_tree_view.js:0
 #: model_terms:ir.ui.view,arch_db:dms_field.view_partner_form
 #, python-format
 msgid "DMS"
@@ -144,7 +132,9 @@ msgstr ""
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field__unknown__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_abstract_dms_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_base_document_layout__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_import_import__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_import_mapping__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_import_tests_models_char__dms_directory_ids
@@ -175,6 +165,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_bus_presence__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_change_password_user__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_change_password_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_decimal_precision__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_access_group__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_category__dms_directory_ids
@@ -188,6 +179,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_fetchmail_server__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_format_address_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_iap_account__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_image_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_url__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window_close__dms_directory_ids
@@ -217,6 +209,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_ir_model_constraint__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_model_data__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_model_fields__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_ir_model_fields_selection__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_model_relation__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_module_category__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_module_module__dms_directory_ids
@@ -253,11 +246,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity_type__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_address_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_alias__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_alias_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_blacklist__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_mail_blacklist_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_mail_bot__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_compose_message__dms_directory_ids
@@ -273,8 +265,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_mail_shortcode__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_thread__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_thread_blacklist__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_thread_cc__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_thread_phone__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_tracking_value__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_wizard_invite__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_phone_blacklist__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_phone_validation_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_portal_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_portal_share__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_portal_wizard__dms_directory_ids
@@ -303,9 +300,20 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_title__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_log__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_reset_view_arch_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_sms_api__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_send_sms__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_cancel__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_composer__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_resend__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_resend_recipient__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_sms__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_template__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_template_preview__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_snailmail_letter__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_cancel__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_format_error__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_missing_required_fields__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
@@ -313,33 +321,28 @@ msgid "DMS Directories"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: model:ir.model.fields.selection,name:dms_field.selection__ir_actions_act_window_view__view_mode__dms_tree
+#: model:ir.model.fields.selection,name:dms_field.selection__ir_ui_view__type__dms_tree
 msgid "DMS Tree"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:277
-#: code:addons/dms_field/static/src/xml/controls.xml:31
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Delete"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:79
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Delete:"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.ui.view,type:0
-msgid "Diagram"
-msgstr ""
-
-#. module: dms_field
-#: code:addons/dms_field/models/dms_directory.py:29
+#: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "Directories of this storage must be related to a record"
 msgstr ""
@@ -350,7 +353,7 @@ msgid "Directory"
 msgstr ""
 
 #. module: dms_field
-#: code:addons/dms_field/models/dms_directory.py:35
+#: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "Directory %s must be root in order to be related to a record"
 msgstr ""
@@ -373,68 +376,60 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:347
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:358
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Download"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:133
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Drag and Drop"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:114
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "END"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/controls.xml:23
+#: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Edit"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:91
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Edit the selected node"
 msgstr ""
 
 #. module: dms_field
+#: model:dms.access.group,name:dms_field.demo_access_group
+msgid "Everyone for Partner DMS"
+msgstr ""
+
+#. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:86
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "F2"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-msgid "Form"
-msgstr ""
-
-#. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-msgid "Gantt"
-msgstr ""
-
-#. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-msgid "Graph"
+#: model:ir.model.fields,field_description:dms_field.field_dms_storage__field_default_group_id
+msgid "Field Default Group"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:100
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "HOME"
 msgstr ""
@@ -446,27 +441,21 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:119
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Jump to the bottom"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:105
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Jump to the top"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-msgid "Kanban"
-msgstr ""
-
-#. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:11
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Keyboard Shortcuts"
 msgstr ""
@@ -488,51 +477,51 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:63
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Move down one node"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:21
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Move up one node"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:40
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Name:"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:289
-#: code:addons/dms_field/static/src/xml/controls.xml:7
-#: code:addons/dms_field/static/src/xml/preview.xml:31
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#: code:addons/dms_field/static/src/xml/controls.xml:0
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Open"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:77
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Open all nodes"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:49
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Open the selected node"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_controller.js:507
+#: code:addons/dms_field/static/src/js/base/dms_tree_controller.js:0
 #, python-format
 msgid "Open: "
 msgstr ""
@@ -544,15 +533,9 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:330
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Paste"
-msgstr ""
-
-#. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-msgid "Pivot"
 msgstr ""
 
 #. module: dms_field
@@ -562,33 +545,28 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:23
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Preview/download"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.ui.view,type:0
-msgid "QWeb"
-msgstr ""
-
-#. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:46
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Read:"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/controls.xml:52
+#: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Refresh"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:241
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Rename"
 msgstr ""
@@ -604,19 +582,14 @@ msgid "Res Model"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.ui.view,type:0
-msgid "Search"
-msgstr ""
-
-#. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/controls.xml:43
+#: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Show Help"
 msgstr ""
 
 #. module: dms_field
-#: code:addons/dms_field/models/dms_storage.py:45
+#: code:addons/dms_field/models/dms_storage.py:0
 #, python-format
 msgid "Some directories are inconsistent with the storage models"
 msgstr ""
@@ -628,41 +601,39 @@ msgid "Storage"
 msgstr ""
 
 #. module: dms_field
-#: code:addons/dms_field/models/dms_directory.py:40
+#: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
-msgid "Storage %s should need to be assigned to a model in order to relate the directory to a record"
+msgid ""
+"Storage %s should need to be assigned to a model in order to relate the "
+"directory to a record"
 msgstr ""
 
 #. module: dms_field
-#: code:addons/dms_field/models/dms_directory.py:50
+#: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
-msgid "Storage %s should need to be assigned to a model related to the storage"
+msgid ""
+"Storage %s should need to be assigned to a model related to the storage"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:140
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
-msgid "The action button at the top of the view can be used to open,\n"
+msgid ""
+"The action button at the top of the view can be used to open,\n"
 "                        create, edit or delete a node."
 msgstr ""
 
 #. module: dms_field
-#: code:addons/dms_field/models/dms_storage.py:55
+#: code:addons/dms_field/models/dms_storage.py:0
 #, python-format
 msgid "There are directories not associated to a record"
 msgstr ""
 
 #. module: dms_field
-#: code:addons/dms_field/models/dms_directory.py:67
+#: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "This record is already related in this storage"
-msgstr ""
-
-#. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
-msgid "Tree"
 msgstr ""
 
 #. module: dms_field
@@ -678,45 +649,46 @@ msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:68
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Write:"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:134
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
-msgid "You can change the structure by moving nodes. It is also possible\n"
+msgid ""
+"You can change the structure by moving nodes. It is also possible\n"
 "                        to create new nodes by dragging files and even entire folder\n"
 "                        structures on the view."
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:129
+#: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
-msgid "You can open a context menu by right-clicking on any node. This\n"
+msgid ""
+"You can open a context menu by right-clicking on any node. This\n"
 "                        contains further options for interacting with the node."
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:51
-#: code:addons/dms_field/static/src/xml/preview.xml:62
-#: code:addons/dms_field/static/src/xml/preview.xml:73
-#: code:addons/dms_field/static/src/xml/preview.xml:84
+#: code:addons/dms_field/static/src/xml/preview.xml:0
+#: code:addons/dms_field/static/src/xml/preview.xml:0
+#: code:addons/dms_field/static/src/xml/preview.xml:0
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "no"
 msgstr ""
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:48
-#: code:addons/dms_field/static/src/xml/preview.xml:59
-#: code:addons/dms_field/static/src/xml/preview.xml:70
-#: code:addons/dms_field/static/src/xml/preview.xml:81
+#: code:addons/dms_field/static/src/xml/preview.xml:0
+#: code:addons/dms_field/static/src/xml/preview.xml:0
+#: code:addons/dms_field/static/src/xml/preview.xml:0
+#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "yes"
 msgstr ""
-
