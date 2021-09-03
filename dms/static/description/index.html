@@ -403,9 +403,11 @@ seamlessly integrate with the document management system.</p>
 <h1><a class="toc-backref" href="#id1">Installation</a></h1>
 <div class="section" id="preview">
 <h2><a class="toc-backref" href="#id2">Preview</a></h2>
-<p><cite>mail_preview_base</cite> is required for DMS but it is recommended to install all
+<p><tt class="docutils literal">mail_preview_base</tt> is required for DMS but it is recommended to install all
 the other <cite>mail_preview</cite> modules from <cite>social</cite> OCA repository
 in order to improve the preview of files.</p>
+<p><tt class="docutils literal"><span class="pre">python-magic</span></tt> library is recommended to be installed for having whole support
+to get proper file types and file preview.</p>
 </div>
 </div>
 <div class="section" id="configuration">
@@ -422,10 +424,27 @@ in order to improve the preview of files.</p>
 </dd>
 </dl>
 </li>
-<li>Afterwards go to <em>Documents -&gt; Directories</em>.</li>
-<li>Create a new directory, mark it as root and select the previously created setting.</li>
 <li><dl class="first docutils">
-<dt>On the Directory you can also define the access groups that will be able to:</dt>
+<dt>Next create an administrative access group. Go to <em>Configuration -&gt; Access Groups</em>.</dt>
+<dd><ul class="first last">
+<li>Create a new group, name it appropriately, and turn on all three permissions (Create, Write and Unlink - Read is implied and always enabled).</li>
+<li>Add any other top-level administrative users to the group if needed (your user should already be there).</li>
+<li>You can create other groups in here later for fine grained access control.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Afterwards go to <em>Documents -&gt; Directories</em>.</li>
+<li><dl class="first docutils">
+<dt>Create a new directory, mark it as root and select the previously created setting.</dt>
+<dd><ul class="first last">
+<li>Select the <em>Groups</em> tab and add your administrative group created above.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>On the Directory you can also add other access groups (created above) that will be able to:</dt>
 <dd><ul class="first last">
 <li>read</li>
 <li>create</li>
