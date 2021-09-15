@@ -424,10 +424,27 @@ to get proper file types and file preview.</p>
 </dd>
 </dl>
 </li>
-<li>Afterwards go to <em>Documents -&gt; Directories</em>.</li>
-<li>Create a new directory, mark it as root and select the previously created setting.</li>
 <li><dl class="first docutils">
-<dt>On the Directory you can also define the access groups that will be able to:</dt>
+<dt>Next create an administrative access group. Go to <em>Configuration -&gt; Access Groups</em>.</dt>
+<dd><ul class="first last">
+<li>Create a new group, name it appropriately, and turn on all three permissions (Create, Write and Unlink - Read is implied and always enabled).</li>
+<li>Add any other top-level administrative users to the group if needed (your user should already be there).</li>
+<li>You can create other groups in here later for fine grained access control.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Afterwards go to <em>Documents -&gt; Directories</em>.</li>
+<li><dl class="first docutils">
+<dt>Create a new directory, mark it as root and select the previously created setting.</dt>
+<dd><ul class="first last">
+<li>Select the <em>Groups</em> tab and add your administrative group created above.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>On the Directory you can also add other access groups (created above) that will be able to:</dt>
 <dd><ul class="first last">
 <li>read</li>
 <li>create</li>
