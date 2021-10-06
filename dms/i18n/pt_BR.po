@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-09-28 20:34+0000\n"
+"PO-Revision-Date: 2021-10-06 20:34+0000\n"
 "Last-Translator: Luis Gustavo Almeida <luis.gustavo@kmee.com.br>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
@@ -326,38 +326,38 @@ msgstr "Admin"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_id
 msgid "Alias"
-msgstr "Pseudônimo"
+msgstr "Alias"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_contact
 msgid "Alias Contact Security"
-msgstr "Segurança de contato de pseudônimo"
+msgstr "Segurança de contato de alias"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_name
 msgid "Alias Name"
-msgstr "Nome do pseudônimo"
+msgstr "Nome do Alias"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Alias Setting"
-msgstr "Configuração de pseudônimo"
+msgstr "Configuração de alias"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_domain
 msgid "Alias domain"
-msgstr "Domínio de pseudônimo"
+msgstr "Domínio de alias"
 
 #. module: dms
 #: code:addons/dms/models/directory.py:620
 #, python-format
 msgid "Alias-Mail-Extraction"
-msgstr "Extração-Email-Pseudônimo"
+msgstr "Extração-Email-Alias"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_model_id
 msgid "Aliased Model"
-msgstr "Modelo com pseudônimo"
+msgstr "Modelo de alias"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_search
