@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-10-06 20:34+0000\n"
+"PO-Revision-Date: 2021-10-07 16:34+0000\n"
 "Last-Translator: Luis Gustavo Almeida <luis.gustavo@kmee.com.br>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
@@ -773,7 +773,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
 msgid "Defines the maximum upload size in MB. Default (25MB)"
-msgstr "Define o tamanho máximo de upload em MB. Padrão (25 MB)"
+msgstr "Defina o tamanho máximo de upload em MB. Padrão (25 MB)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_unlink
@@ -904,7 +904,7 @@ msgstr "Elementos"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Email Alias"
-msgstr "Pseudônimo de email"
+msgstr "Alias de email"
 
 #. module: dms
 #: model:ir.model,name:dms.model_mail_thread
