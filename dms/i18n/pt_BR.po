@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-10-07 16:34+0000\n"
+"PO-Revision-Date: 2021-10-08 14:34+0000\n"
 "Last-Translator: Luis Gustavo Almeida <luis.gustavo@kmee.com.br>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
@@ -1043,7 +1043,7 @@ msgstr "Grupo"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Group By"
-msgstr "Grupo por"
+msgstr "Agrupar por"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__name
@@ -1085,8 +1085,8 @@ msgstr "ID"
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid "ID of the parent record holding the alias (example: project holding the task creation alias)"
 msgstr ""
-"ID do registro pai que contém o pseudônimo (exemplo: projeto que contém o "
-"pseudônimo de criação da tarefa)"
+"ID do registro pai que contém o alias (exemplo: projeto que contém o alias "
+"de criação da tarefa)"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -1583,7 +1583,7 @@ msgstr "O grupo pai '%(parent)s' é filho de '%(current)s'."
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid "Parent model holding the alias. The model holding the alias reference is not necessarily the model given by alias_model_id (example: project (parent_model) and task (model))"
 msgstr ""
-"Modelo pai que contém o pseudônimo. O modelo que contém a referência de "
+"Modelo pai que contém o alias. O modelo que contém a referência de "
 "pseudônimo não é necessariamente o modelo fornecido por alias_model_id "
 "(exemplo: projeto (parent_model) e tarefa (model))"
 
@@ -1724,7 +1724,7 @@ msgstr "Definições"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Share"
-msgstr "Compartilhado"
+msgstr "Compartilhar"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -1796,7 +1796,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file_migration
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Storage"
-msgstr "Armazenar"
+msgstr "Armazenamento"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__is_hidden
@@ -1811,7 +1811,7 @@ msgstr "O armazenamento está oculto"
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_tree
 msgid "Storages"
-msgstr "Armazéns"
+msgstr "Armazenamentos"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_storage
@@ -1923,16 +1923,16 @@ msgstr "O tamanho máximo de upload é %s MB)."
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid "The model (Odoo Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)"
 msgstr ""
-"O modelo (Odoo Document Kind) ao qual esse pseudônimo corresponde. Qualquer "
-"e-mail recebido que não responda a um registro existente causará a criação "
-"de um novo registro deste modelo (por exemplo, uma tarefa de projeto)"
+"O modelo (Odoo Document Kind) ao qual esse alias corresponde. Qualquer e-"
+"mail recebido que não responda a um registro existente causará a criação de "
+"um novo registro deste modelo (por exemplo, uma tarefa de projeto)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
 msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.odoo.com>"
 msgstr ""
-"O nome do pseudônimo de e-mail, por exemplo 'jobs' se você quiser receber e-"
-"mails para <jobs@example.odoo.com>"
+"O nome do alias de e-mail, por exemplo 'jobs' se você quiser receber e-mails "
+"para <jobs@example.odoo.com>"
 
 #. module: dms
 #: sql_constraint:dms.access.group:0
@@ -2050,7 +2050,7 @@ msgstr "Carregue seu primeiro arquivo."
 #. module: dms
 #: model:res.groups,name:dms.group_dms_user
 msgid "User"
-msgstr "Do utilizador"
+msgstr "Usuário"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__count_users
