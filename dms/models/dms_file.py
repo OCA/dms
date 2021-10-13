@@ -345,11 +345,12 @@ class File(models.Model):
     def _compute_path(self):
         model = self.env["dms.directory"]
         for record in self:
-            path_names = [record.display_name]
+            record_name = record.display_name or _("Unnamed")
+            path_names = [record_name]
             path_json = [
                 {
                     "model": record._name,
-                    "name": record.display_name,
+                    "name": record_name,
                     "id": isinstance(record.id, int) and record.id or 0,
                 }
             ]
