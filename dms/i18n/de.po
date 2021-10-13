@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-10-13 19:24+0000\n"
+"PO-Revision-Date: 2021-10-13 19:48+0000\n"
 "Last-Translator: Corneliuus <nils@it-kraus.de>\n"
 "Language-Team: none\n"
 "Language: de\n"
@@ -56,12 +56,12 @@ msgstr "%s Unterverzeichnisse"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 msgid "/dms/static/lib/img/banner/documents_onboarding_directory.png"
-msgstr ""
+msgstr "/dms/static/lib/img/banner/documents_onboarding_directory.png"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "/dms/static/lib/img/banner/documents_onboarding_file.png"
-msgstr ""
+msgstr "/dms/static/lib/img/banner/documents_onboarding_file.png"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -220,6 +220,8 @@ msgid ""
 "A Python dictionary that will be evaluated to provide default values when "
 "creating new records for this alias."
 msgstr ""
+"Ein Python-Dictionary, das ausgewertet wird, um beim Erstellen neuer "
+"Datensätze für diesen Alias Standardwerte bereitzustellen."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
@@ -270,7 +272,7 @@ msgstr "Ein Stammverzeichnis benötigt einen Speicherort."
 #. module: dms
 #: model:ir.model,name:dms.model_abstract_dms_mixin
 msgid "Abstract Dms Mixin"
-msgstr ""
+msgstr "Abstraktes Dms-Mixin"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -328,7 +330,7 @@ msgstr "Aktivitäten"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_decoration
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Ausnahmenaktivitäts-Dekoration"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_state
@@ -367,7 +369,7 @@ msgstr "Alias"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_contact
 msgid "Alias Contact Security"
-msgstr ""
+msgstr "Alias Kontakt Sicherheit"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_name
@@ -388,12 +390,12 @@ msgstr "Alias Domain"
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "Alias-Mail-Extraction"
-msgstr ""
+msgstr "Extraktion von Alias-Mails"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_model_id
 msgid "Aliased Model"
-msgstr ""
+msgstr "Alias-Modell"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_search
@@ -736,7 +738,7 @@ msgstr "Aktueller Speichertyp"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_bounced_content
 msgid "Custom Bounced Message"
-msgstr ""
+msgstr "Benutzerdefinierte Bounce-Nachricht"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_01_demo
@@ -763,12 +765,12 @@ msgstr "DMS"
 #. module: dms
 #: model:ir.model,name:dms.model_dms_security_mixin
 msgid "DMS Security Mixin"
-msgstr ""
+msgstr "DMS-Sicherheits-Mixin"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_mixins_thumbnail
 msgid "DMS thumbnail and icon mixin"
-msgstr ""
+msgstr "DMS-Miniaturansicht und Symbol-Mixin"
 
 #. module: dms
 #: code:addons/dms/models/storage.py:0
@@ -1106,7 +1108,7 @@ msgstr "Gruppen"
 #. module: dms
 #: model:dms.category,name:dms.category_02_demo
 msgid "Human Resource"
-msgstr ""
+msgstr "Personalwesen"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__id
@@ -1131,6 +1133,8 @@ msgid ""
 "ID of the parent record holding the alias (example: project holding the task"
 " creation alias)"
 msgstr ""
+"ID des übergeordneten Datensatzes, der den Alias enthält (Beispiel: Projekt, "
+"das den Alias für die Aufgabenerstellung enthält)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_icon
@@ -1151,7 +1155,7 @@ msgstr "Icon URL"
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_exception_icon
 #: model:ir.model.fields,help:dms.field_dms_file__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Symbol zur Kennzeichnung einer Ausnahmeaktivität."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_file__active
@@ -1336,12 +1340,14 @@ msgstr "Ist ein Stammverzeichnis"
 #, python-format
 msgid "It is not possible to change parent to other storage."
 msgstr ""
+"Es ist nicht möglich, das Eltern-Objekt auf einen anderen Speicherort "
+"einzustellen."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "It is not possible to change the storage."
-msgstr ""
+msgstr "Es ist nicht möglich, den Speicherort zu ändern."
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__just_done
@@ -1411,7 +1417,7 @@ msgstr "Verlinktes Anhangsmodell"
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_id
 msgid "Linked attachments record ID"
-msgstr ""
+msgstr "ID des verknüpften Anhangs-Datensatzes"
 
 #. module: dms
 #. openerp-web
@@ -1511,7 +1517,7 @@ msgstr "Änderungsdatum"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
 #: model:ir.model.fields,field_description:dms.field_dms_file__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Meine Aktivitätsfrist"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
@@ -1644,6 +1650,10 @@ msgid ""
 "attached, even if they did not reply to it. If set, this will disable the "
 "creation of new records completely."
 msgstr ""
+"Optionale ID eines Threads (Datensatzes), an den alle eingehenden "
+"Nachrichten angehängt werden, auch wenn darauf nicht geantwortet wurde. Ist "
+"diese Option gesetzt, wird die Erstellung neuer Datensätze vollständig "
+"deaktiviert."
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config_organizing
@@ -1685,13 +1695,13 @@ msgstr "Elternpfad"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_thread_id
 msgid "Parent Record Thread ID"
-msgstr ""
+msgstr "Übergeordneter Datensatz Thread-ID"
 
 #. module: dms
 #: code:addons/dms/models/access_groups.py:0
 #, python-format
 msgid "Parent group '%(parent)s' is child of '%(current)s'."
-msgstr ""
+msgstr "Die übergeordnete Gruppe '%(parent)s' ist ein Kind von '%(current)s'."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
@@ -1700,6 +1710,9 @@ msgid ""
 " necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
+"Übergeordnetes Modell, das den Alias enthält. Das Modell, das den Alias-"
+"Referenzwert enthält, ist nicht notwendigerweise das durch alias_model_id "
+"angegebene Modell (Beispiel: Projekt (parent_model) und Aufgabe (model))"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
@@ -1729,6 +1742,12 @@ msgid ""
 "- partners: only authenticated partners\n"
 "- followers: only followers of the related document or members of following channels\n"
 msgstr ""
+"Richtlinie zum Veröffentlichen einer Nachricht auf dem Dokument über das "
+"Mailgateway.\n"
+"- Jeder: jeder kann posten\n"
+"- Partner: nur authentifizierte Partner\n"
+"- Follower: nur Follower des entsprechenden Dokuments oder Mitglieder der "
+"folgenden Kanäle\n"
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_02_demo
@@ -1774,7 +1793,7 @@ msgstr "Referenzierter Datensatz"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
 msgid "Record Thread ID"
-msgstr ""
+msgstr "Thread-ID des Datensatzes"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
@@ -1858,12 +1877,12 @@ msgstr "Größe"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__starred
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "Starred"
-msgstr ""
+msgstr "Sternchen"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 msgid "Starred Directories"
-msgstr ""
+msgstr "Verzeichnisse mit Sternchen"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__user_star_ids
@@ -1879,6 +1898,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Status basierend auf Aktivitäten\n"
+"Überfällig: Fälligkeitsdatum ist bereits überschritten\n"
+"Heute: Aktivitätsdatum ist heute\n"
+"Geplant: Zukünftige Aktivitäten."
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_storage
@@ -1979,11 +2002,15 @@ msgstr "Technische Informationen"
 #: model:ir.model.fields,help:dms.field_dms_category__active
 msgid "The active field allows you to hide the category without removing it."
 msgstr ""
+"Das Aktiv-Feld ermöglicht es Ihnen, die Kategorie auszublenden, ohne sie zu "
+"entfernen."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_tag__active
 msgid "The active field allows you to hide the tag without removing it."
 msgstr ""
+"Das Aktiv-Feld ermöglicht es Ihnen, das Stichwort auszublenden, ohne es zu "
+"entfernen."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
@@ -2022,6 +2049,10 @@ msgid ""
 " email that does not reply to an existing record will cause the creation of "
 "a new record of this model (e.g. a Project Task)"
 msgstr ""
+"Das Modell (Odoo Document Kind), dem dieser Alias entspricht. Jede "
+"eingehende E-Mail, die nicht auf einen bestehenden Datensatz antwortet, "
+"führt zur Erstellung eines neuen Datensatzes dieses Modells (z. B. einer "
+"Projektaufgabe)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
@@ -2029,6 +2060,8 @@ msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
 "<jobs@example.odoo.com>"
 msgstr ""
+"Der Name des E-Mail-Alias, z. B. \"jobs\", wenn Sie E-Mails für <jobs@"
+"example.odoo.com> abfangen möchten"
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_access_group_name_uniq
@@ -2043,6 +2076,11 @@ msgid ""
 "the sender (From) address, or will use the Administrator account if no "
 "system user is found for that address."
 msgstr ""
+"Der Eigentümer der Datensätze, die beim Empfang von E-Mails mit diesem Alias "
+"erstellt werden. Wenn dieses Feld nicht gesetzt ist, versucht das System, "
+"den richtigen Besitzer anhand der Absenderadresse zu finden, oder es "
+"verwendet das Administratorkonto, wenn kein Systembenutzer für diese Adresse "
+"gefunden wird."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__storage_id_save_type
@@ -2054,6 +2092,10 @@ msgid ""
 "        system. If you change this setting, you can migrate existing files\n"
 "        manually by triggering the action."
 msgstr ""
+"Der Speichertyp wird verwendet, um zu bestimmen, wie eine Datei vom\n"
+"        System gespeichert wird. Wenn Sie diese Einstellung ändern, können "
+"Sie vorhandene Dateien\n"
+"        manuell migrieren, indem Sie die Aktion auslösen."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
@@ -2090,7 +2132,7 @@ msgstr "Typ"
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_exception_decoration
 #: model:ir.model.fields,help:dms.field_dms_file__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Art der Ausnahmeaktivität des Datensatzes."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_unlink
@@ -2167,7 +2209,7 @@ msgstr "Webseiten-Nachrichten"
 #: model:ir.model.fields,help:dms.field_dms_directory__website_message_ids
 #: model:ir.model.fields,help:dms.field_dms_file__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Verlauf der Website-Kommunikation"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
@@ -2198,7 +2240,7 @@ msgstr "Element(e)"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "exe,msi"
-msgstr ""
+msgstr "exe, msi"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
