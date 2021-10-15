@@ -1983,6 +1983,12 @@ msgid "Unlock"
 msgstr ""
 
 #. module: dms
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "Unnamed"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_process
 msgid "Unpack Emails as"
 msgstr ""
