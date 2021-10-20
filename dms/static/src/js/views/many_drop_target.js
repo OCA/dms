@@ -1,95 +1,54 @@
-/** ********************************************************************************
-    Copyright 2020 Creu Blanca
-    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
- **********************************************************************************/
-
-/* global Uint8Array base64js*/
+/* global base64js*/
+/* Copyright 2020 Creu Blanca
+ * Copyright 2021 Tecnativa - Alexandre D. Díaz
+ * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
 odoo.define("dms.DragDrop", function (require) {
     "use strict";
 
-    var DropTargetMixin = require("web_drop_target");
-    var core = require("web.core");
-    var qweb = core.qweb;
-    var _t = core._t;
+    const DropTargetMixin = require("web_drop_target");
+    const core = require("web.core");
+    const _t = core._t;
 
-    return _.extend(DropTargetMixin.DropTargetMixin, {
+    return _.extend({}, DropTargetMixin.DropTargetMixin, {
+        /**
+         * @override
+         */
         init: function () {
             this._super.apply(this, arguments);
-            this.directory_id = false;
-        },
-        _get_drop_items: function (e) {
-            var self = this,
-                dataTransfer = e.originalEvent.dataTransfer,
-                drop_items = [];
-            _.each(dataTransfer.files, function (item) {
-                if (
-                    _.contains(self._drop_allowed_types, item.type) ||
-                    _.isEmpty(self._drop_allowed_types)
-                ) {
-                    drop_items.push(item);
-                }
-            });
-            return drop_items;
-        },
-        _handle_drop_items: function (drop_items, e) {
-            var self = this;
-            _.each(drop_items, function (item) {
-                return self._handle_file_drop(item, e, self.renderer.state.model);
-            });
-        },
-        _handle_file_drop: function (item, event, model) {
-            var self = this;
-            var file = item;
-            if (!file || !(file instanceof Blob)) {
-                return;
-            }
-            var reader = new FileReader();
-            reader.onloadend = self.proxy(
-                _.partial(self._create_file, file, reader, event, model)
+            this._get_directory_id(
+                this._searchPanel ? this._searchPanel.getDomain() : []
             );
-            reader.onerror = self.proxy("_file_reader_error_handler");
-            reader.readAsArrayBuffer(file);
         },
-        _add_overlay: function () {
-            if (!this._drop_overlay) {
-                var o_content = jQuery(".o_content"),
-                    view_manager = jQuery(".o_view_manager_content");
-                this._drop_overlay = jQuery(qweb.render("dms.drop_overlay"));
-                var o_content_position = o_content.position();
-                this._drop_overlay.css({
-                    top: o_content_position.top,
-                    left: o_content_position.left,
-                    width: view_manager.width(),
-                    height: view_manager.height(),
-                });
-                o_content.append(this._drop_overlay);
-            }
+
+        /**
+         * @override
+         */
+        _handle_drop_items: function (drop_items) {
+            _.each(drop_items, this._handle_file_drop_attach, this);
         },
-        _onSearch: function (searchQuery) {
-            var directory_id = false;
-            _.each(searchQuery.domain, function (domain) {
-                if (
-                    domain[0] === "directory_id" &&
-                    (domain[1] === "child_of" || domain[1] === "=")
-                ) {
-                    directory_id = domain[2];
-                }
-            });
-            this.directory_id = directory_id;
-            return this._super.apply(this, arguments);
+
+        /**
+         * @override
+         */
+        _get_record_id: function () {
+            // Don't need the record id to work
+            return true;
         },
-        _create_file: function (file, reader, event, model) {
+
+        /**
+         * @override
+         */
+        _create_attachment: function (file, reader, res_model) {
             // Helper to upload an attachment and update the sidebar
-            var self = this;
-            var ctx = this.model.get(this.handle, {raw: true}).getContext();
+            const ctx = this.renderer.state.getContext();
             if (this.directory_id) {
                 ctx.default_directory_id = this.directory_id;
             }
-            if (ctx.default_directory_id === undefined) {
+            if (typeof ctx.default_directory_id === "undefined") {
                 return this.do_warn(_t("You must select a directory first"));
             }
             return this._rpc({
-                model: model,
+                model: res_model,
                 method: "create",
                 args: [
                     {
@@ -100,9 +59,32 @@ odoo.define("dms.DragDrop", function (require) {
                 kwargs: {
                     context: ctx,
                 },
-            }).then(function () {
-                self.reload();
+            }).then(() => this.reload());
+        },
+
+        /**
+         * @private
+         * @param {Array} domain
+         */
+        _get_directory_id: function (domain) {
+            let directory_id = false;
+            _.each(domain, (leaf) => {
+                if (
+                    leaf[0] === "directory_id" &&
+                    (leaf[1] === "child_of" || leaf[1] === "=")
+                ) {
+                    directory_id = leaf[2];
+                }
             });
+            this.directory_id = directory_id;
+        },
+
+        /**
+         * @override
+         */
+        _onSearchPanelDomainUpdated: function (ev) {
+            this._get_directory_id(ev.data.domain);
+            return this._super.apply(this, arguments);
         },
     });
 });
