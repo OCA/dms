@@ -13,7 +13,7 @@ odoo.define("dms.FileKanbanController", function(require) {
     var DragDrop = require("dms.DragDrop");
 
     var FileKanbanController = KanbanController.extend(
-        _.extend(DragDrop, {
+        _.extend({}, DragDrop, {
             custom_events: _.extend({}, KanbanController.prototype.custom_events, {
                 preview_file: "_onPreviewFile",
             }),
