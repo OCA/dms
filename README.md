@@ -1,4 +1,4 @@
-[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat//14.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-dms-)
+[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/292/14.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-dms-292)
 [![Build Status](https://travis-ci.com/OCA/dms.svg?branch=14.0)](https://travis-ci.com/OCA/dms)
 [![codecov](https://codecov.io/gh/OCA/dms/branch/14.0/graph/badge.svg)](https://codecov.io/gh/OCA/dms)
 [![Translation Status](https://translation.odoo-community.org/widgets/dms-14-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/dms-14-0/?utm_source=widget)
