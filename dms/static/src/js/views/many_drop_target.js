@@ -19,7 +19,7 @@ odoo.define("dms.DragDrop", function (require) {
                 this._searchPanel ? this._searchPanel.getDomain() : []
             );
         },
-
+        _drop_zone_selector: ".o_kanban_view",
         /**
          * @override
          */
@@ -41,9 +41,11 @@ odoo.define("dms.DragDrop", function (require) {
         _create_attachment: function (file, reader, res_model) {
             // Helper to upload an attachment and update the sidebar
             const ctx = this.renderer.state.getContext();
+            console.log(ctx);
             if (this.directory_id) {
                 ctx.default_directory_id = this.directory_id;
             }
+            console.log(ctx);
             if (typeof ctx.default_directory_id === "undefined") {
                 return this.do_warn(_t("You must select a directory first"));
             }
@@ -82,9 +84,12 @@ odoo.define("dms.DragDrop", function (require) {
         /**
          * @override
          */
-        _onSearchPanelDomainUpdated: function (ev) {
-            this._get_directory_id(ev.data.domain);
-            return this._super.apply(this, arguments);
+        _update: function (state, params) {
+            this._get_directory_id(params.domain);
+            return this._super.apply(this, arguments).then((result) => {
+                this._update_overlay();
+                return result;
+            });
         },
     });
 });
