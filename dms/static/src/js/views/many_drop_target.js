@@ -19,7 +19,7 @@ odoo.define("dms.DragDrop", function(require) {
                 this._searchPanel ? this._searchPanel.getDomain() : []
             );
         },
-
+        _drop_zone_selector: ".o_kanban_view",
         /**
          * @override
          */
