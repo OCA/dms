@@ -385,6 +385,7 @@
                             <field
                                 name="content"
                                 filename="name"
+                                mimetype="mimetype"
                                 widget="preview_binary"
                             />
                         </group>
