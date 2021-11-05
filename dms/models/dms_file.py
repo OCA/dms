@@ -376,10 +376,12 @@ class File(models.Model):
                 }
             )
 
-    @api.depends("name")
+    @api.depends("name", "mimetype", "content")
     def _compute_extension(self):
         for record in self:
-            record.extension = file.guess_extension(record.name)
+            record.extension = file.guess_extension(
+                record.name, record.mimetype, record.content
+            )
 
     @api.depends("content")
     def _compute_mimetype(self):
