@@ -509,7 +509,7 @@
                                         name="count_directories"
                                         string="Directories"
                                     />
-                                    <field name="count_files" string="Files" />
+                                    <field name="count_total_files" string="Files" />
                                     <field name="size" />
                                 </tree>
                             </field>
