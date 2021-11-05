@@ -43,7 +43,7 @@ def unique_name(name, names, escape_suffix=False):
 
 def guess_extension(filename=None, mimetype=None, binary=None):
     extension = filename and os.path.splitext(filename)[1][1:].strip().lower()
-    if not extension and mimetype:
+    if not extension and mimetype and mimetype != "application/x-empty":
         extension = mimetypes.guess_extension(mimetype)[1:].strip().lower()
     if not extension and binary:
         mimetype = guess_mimetype(binary, default="")
