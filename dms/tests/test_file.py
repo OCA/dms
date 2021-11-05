@@ -96,3 +96,11 @@ class FileFilestoreTestCase(FileTestCase):
             self.skipTest("Without python-magic library installed")
         file_video = self.env.ref("dms.file_10_demo")
         self.assertEqual(file_video.mimetype, "video/mp4")
+
+    def test_content_file_extension(self):
+        file_pdf = self.env.ref("dms.file_27_demo")
+        self.assertEqual(file_pdf.extension, "pdf")
+        file_pdf.name = "Document_05"
+        self.assertEqual(file_pdf.extension, "pdf")
+        file_pdf.name = "Document_05.pdf"
+        self.assertEqual(file_pdf.extension, "pdf")
