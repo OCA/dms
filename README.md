@@ -19,7 +19,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[dms](dms/) | 14.0.4.0.1 |  | Document Management System for Odoo
+[dms](dms/) | 14.0.4.0.2 |  | Document Management System for Odoo
 
 [//]: # (end addons)
 
