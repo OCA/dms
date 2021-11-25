@@ -23,6 +23,7 @@ _table_renames = [
     ("muk_dms_directory_tag_rel", "dms_directory_tag_rel"),
     ("muk_dms_directory_star_rel", "dms_directory_star_rel"),
     ("muk_security_access_groups", "dms_access_group"),
+    ("muk_security_groups_explicit_users_rel", "dms_access_group_explicit_users_rel"),
     # Security Mixin relation tables
     ("muk_dms_directory_groups_rel", "dms_directory_groups_rel"),
     ("muk_dms_directory_complete_groups_rel", "dms_directory_complete_groups_rel"),
