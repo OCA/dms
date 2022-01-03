@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-01-03 14:17+0000\n"
+"Last-Translator: Hans Henrik Gabelgaard <hhg@gabelgaard.org>\n"
 "Language-Team: none\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -31,13 +33,13 @@ msgstr ""
 #: code:addons/dms/models/directory.py:418
 #, python-format
 msgid "%s Files"
-msgstr ""
+msgstr "%s filer"
 
 #. module: dms
 #: code:addons/dms/models/directory.py:411
 #, python-format
 msgid "%s Subdirectories"
-msgstr ""
+msgstr "%s undermapper"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
@@ -54,12 +56,16 @@ msgstr ""
 msgid "<i class=\"fa fa-archive\"/>\n"
 "                                                Archive"
 msgstr ""
+"<i class=\"fa fa-archive\"/>\n"
+"                                                Arkiver"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "<i class=\"fa fa-archive\"/>\n"
 "                                                Unarchive"
 msgstr ""
+"<i class=\"fa fa-archive\"/>\n"
+"                                                Af-arkiver"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -73,30 +79,40 @@ msgstr ""
 msgid "<i class=\"fa fa-external-link\"/>\n"
 "                                                Open"
 msgstr ""
+"<i class=\"fa fa-external-link\"/>\n"
+"                                                Åbn"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
 msgid "<i class=\"fa fa-external-link\"/>\n"
 "                                        Open"
 msgstr ""
+"<i class=\"fa fa-external-link\"/>\n"
+"                                        Åbn"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "<i class=\"fa fa-file-o\"/>\n"
 "                                                Files"
 msgstr ""
+"<i class=\"fa fa-file-o\"/>\n"
+"                                                Filer"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "<i class=\"fa fa-folder-o\"/>\n"
 "                                                Directories"
 msgstr ""
+"<i class=\"fa fa-folder-o\"/>\n"
+"                                                Mapper"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "<i class=\"fa fa-lock\"/>\n"
 "                                                Lock"
 msgstr ""
+"<i class=\"fa fa-lock\"/>\n"
+"                                                Lås"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -104,12 +120,16 @@ msgstr ""
 msgid "<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                                Edit"
 msgstr ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
+"                                                Rediger"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
 msgid "<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                        Edit"
 msgstr ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
+"                                        Rediger"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -117,18 +137,24 @@ msgstr ""
 msgid "<i class=\"fa fa-trash-o\"/>\n"
 "                                                Delete"
 msgstr ""
+"<i class=\"fa fa-trash-o\"/>\n"
+"                                                Slet"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
 msgid "<i class=\"fa fa-trash-o\"/>\n"
 "                                        Delete"
 msgstr ""
+"<i class=\"fa fa-trash-o\"/>\n"
+"                                        Slet"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "<i class=\"fa fa-unlock-alt\"/>\n"
 "                                                Unlock"
 msgstr ""
+"<i class=\"fa fa-unlock-alt\"/>\n"
+"                                                Lås op"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -136,6 +162,9 @@ msgid "<span class=\"o_form_label\">\n"
 "                                        Storages\n"
 "                                    </span>"
 msgstr ""
+"<span class=\"o_form_label\">\n"
+"                                        Lagre\n"
+"                                    </span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -143,16 +172,19 @@ msgid "<span class=\"o_form_label\">File\n"
 "                                        Extensions\n"
 "                                    </span>"
 msgstr ""
+"<span class=\"o_form_label\">Fil\n"
+"                                        typer\n"
+"                                    </span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">File Size</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Fil størrelse</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
 msgid "<span>Documents</span>"
-msgstr ""
+msgstr "<span>Dokumenter</span>"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
@@ -163,123 +195,125 @@ msgstr ""
 #: code:addons/dms/models/directory.py:542
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
-msgstr ""
+msgstr "En mappe kan ikke være en rod og have en overordnet mappe."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:537
 #, python-format
 msgid "A directory has to have a parent directory."
-msgstr ""
+msgstr "En mappe skal have en overordnet mappe."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:524
 #, python-format
 msgid "A directory has to have model in attachment storage."
-msgstr ""
+msgstr "En mappe skal have en model i vedhæftede filer."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:561
 #, python-format
 msgid "A directory with the same name already exists."
-msgstr ""
+msgstr "Der findes allerede en mappe med samme navn."
 
 #. module: dms
 #: code:addons/dms/models/dms_file.py:465
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
-msgstr ""
+msgstr "En fil skal have model- og ressource-id i vedhæftede filer."
 
 #. module: dms
 #: code:addons/dms/models/dms_file.py:479
 #, python-format
 msgid "A file with the same name already exists."
-msgstr ""
+msgstr "Der findes allerede en fil med samme navn."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:535
 #, python-format
 msgid "A root directory has to have a root storage."
-msgstr ""
+msgstr "En rodmappe skal have et rodlager."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Accept Emails from"
-msgstr ""
+msgstr "Accepter e-mails fra"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_access_groups
 #: model:ir.ui.menu,name:dms.menu_dms_access_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "Adgangsgrupper"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Access Information"
-msgstr ""
+msgstr "Adgangs information"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_warning
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_warning
 msgid "Access warning"
-msgstr ""
+msgstr "Adgangs advarsel"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_07_demo
 msgid "Accounting"
-msgstr ""
+msgstr "Regnskab"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Handling nødvendig"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Actions"
-msgstr ""
+msgstr "Handlinger"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__active
 #: model:ir.model.fields,field_description:dms.field_dms_tag__active
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Aktiviteter"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_state
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Aktivitetsstatus"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directory
 msgid "Add a new Directory."
-msgstr ""
+msgstr "Tilføj en ny mappe."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_migration
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_storage_migration
 msgid "Add a new File."
-msgstr ""
+msgstr "Tilføj en ny fil."
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_01_demo
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_id
+#, fuzzy
 msgid "Alias"
-msgstr ""
+msgstr "Alias"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_contact
@@ -316,32 +350,33 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_search
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "All Files"
-msgstr ""
+msgstr "Alle filer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
 msgid "Allowed Model"
-msgstr ""
+msgstr "Tilladt model"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_06_demo
+#, fuzzy
 msgid "Apps"
-msgstr ""
+msgstr "Apps"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__active
 msgid "Archived"
-msgstr ""
+msgstr "Arkiveret"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Archived Files"
-msgstr ""
+msgstr "Arkiverede filer"
 
 #. module: dms
 #: code:addons/dms/models/storage.py:28
@@ -349,30 +384,31 @@ msgstr ""
 #: model:ir.model,name:dms.model_ir_attachment
 #, python-format
 msgid "Attachment"
-msgstr ""
+msgstr "Vedhæftet fil"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_attachment_count
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Antal vedhæftede filer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__attachment_id
 msgid "Attachment File"
-msgstr ""
+msgstr "Vedhæftet fil"
 
 #. module: dms
 #: model:ir.model,name:dms.model_base
+#, fuzzy
 msgid "Base"
-msgstr ""
+msgstr "Base"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuller"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_category
@@ -381,12 +417,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_tree
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Categories"
-msgstr ""
+msgstr "Kategorier"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_category
 msgid "Categories are used to categorize Documents."
-msgstr ""
+msgstr "Kategorier anvendes til at kategorisere dokumenter."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__category_id
@@ -397,47 +433,48 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
 #. module: dms
 #: sql_constraint:dms.category:0
 msgid "Category name already exists!"
-msgstr ""
+msgstr "Kategorinavn findes allerede!"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__checksum
+#, fuzzy
 msgid "Checksum/SHA1"
-msgstr ""
+msgstr "Checksum/SHA1"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__child_category_ids
 msgid "Child Categories"
-msgstr ""
+msgstr "Underkategorier"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__child_group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Child Groups"
-msgstr ""
+msgstr "Undergrupper"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_all_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_storage
 msgid "Click to add a new directory."
-msgstr ""
+msgstr "Klik for at tilføje en ny mappe."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_all_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Click to add a new file."
-msgstr ""
+msgstr "Klik for at tilføje en ny fil."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
 msgid "Click to create a new tag."
-msgstr ""
+msgstr "Klik for at oprette et nyt tag."
 
 #. module: dms
 #: selection:res.company,documents_onboarding_directory_state:0
@@ -445,7 +482,7 @@ msgstr ""
 #: selection:res.company,documents_onboarding_state:0
 #: selection:res.company,documents_onboarding_storage_state:0
 msgid "Closed"
-msgstr ""
+msgstr "Lukket"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__color
@@ -454,76 +491,76 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Color"
-msgstr ""
+msgstr "Farve"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_tag__color
 msgid "Color Index"
-msgstr ""
+msgstr "Farveindeks"
 
 #. module: dms
 #: model:ir.model,name:dms.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Virksomheder"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__company_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__company_id
 #: model:ir.model.fields,field_description:dms.field_dms_storage__company_id
 msgid "Company"
-msgstr ""
+msgstr "Virksomhed"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__complete_group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Complete Groups"
-msgstr ""
+msgstr "Komplet gruppe"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__complete_name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__complete_name
 msgid "Complete Name"
-msgstr ""
+msgstr "Komplet navn"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__complete_directory_ids
 msgid "Complete directories"
-msgstr ""
+msgstr "Komplet mapper"
 
 #. module: dms
 #: model:ir.model,name:dms.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Konfigurations opsætning"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguration"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__content
 msgid "Content"
-msgstr ""
+msgstr "Indhold"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__content_binary
 msgid "Content Binary"
-msgstr ""
+msgstr "Binært indhold"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__content_file
 msgid "Content File"
-msgstr ""
+msgstr "Fil indhold"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_11_demo
 msgid "Contract"
-msgstr ""
+msgstr "Kontrakt"
 
 #. module: dms
 #: model:dms.category,name:dms.category_03_demo
 msgid "Contracts"
-msgstr ""
+msgstr "Kontrakter"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__count_directories
@@ -531,12 +568,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_directories
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_directories
 msgid "Count Directories"
-msgstr ""
+msgstr "Antal mapper"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_elements
 msgid "Count Elements"
-msgstr ""
+msgstr "Antal elementer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_files
@@ -544,39 +581,39 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_files
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_files
 msgid "Count Files"
-msgstr ""
+msgstr "Antal filer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_files
 msgid "Count Files Title"
-msgstr ""
+msgstr "Antal fil titler"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_categories
 msgid "Count Subcategories"
-msgstr ""
+msgstr "Antal underkategorier"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories_title
 msgid "Count Subdirectories"
-msgstr ""
+msgstr "Antal undermapper"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories
 msgid "Count Subdirectories Title"
-msgstr ""
+msgstr "Antal undermapper titler"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_tags
 msgid "Count Tags"
-msgstr ""
+msgstr "Antal tags"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
 msgid "Create"
-msgstr ""
+msgstr "Opret"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_create
@@ -584,42 +621,42 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_create
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_create
 msgid "Create Access"
-msgstr ""
+msgstr "Oprettelses adgang"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
 msgid "Create Directory"
-msgstr ""
+msgstr "Opret mappe"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
 msgid "Create Storage"
-msgstr ""
+msgstr "Opret lager"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_category
 msgid "Create a new Category."
-msgstr ""
+msgstr "Opret en ny kategori."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
 msgid "Create a new Document Storage."
-msgstr ""
+msgstr "Opret et nyt dokument lager."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
 msgid "Create a new Root Directory."
-msgstr ""
+msgstr "Opret en ny rod mappe."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_storage
 msgid "Create a new Storage object."
-msgstr ""
+msgstr "Opret et nyt lagerobjekt."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__include_message_attachments
 msgid "Create files from message attachments"
-msgstr ""
+msgstr "Opret filer fra vedhæftede filer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__create_uid
@@ -629,7 +666,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__create_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Oprettet af"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__create_date
@@ -639,53 +676,54 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__create_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Oprettet den"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Creation Date"
-msgstr ""
+msgstr "Oprettelsesdato"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__save_type
 msgid "Current Save Type"
-msgstr ""
+msgstr "Aktuel Gem-type"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__custom_thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_file__custom_thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__custom_thumbnail
 msgid "Custom Thumbnail"
-msgstr ""
+msgstr "Tilpasset miniaturebillede"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Custom thumbnail"
-msgstr ""
+msgstr "Tilpasset miniaturebillede"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_01_demo
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Customer"
-msgstr ""
+msgstr "Kunde"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_08_demo
 msgid "Customer Invoice"
-msgstr ""
+msgstr "Kundefaktura"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__access_url
 #: model:ir.model.fields,help:dms.field_dms_file__access_url
 msgid "Customer Portal URL"
-msgstr ""
+msgstr "Kundeportal URL"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+#, fuzzy
 msgid "DMS"
-msgstr ""
+msgstr "DMS"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_security_mixin
@@ -695,42 +733,44 @@ msgstr ""
 #. module: dms
 #: code:addons/dms/models/storage.py:26
 #: selection:dms.storage,save_type:0
-#, python-format
+#, fuzzy, python-format
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_defaults
 msgid "Default Values"
-msgstr ""
+msgstr "Standardværdier"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Define forbidden file extensions"
-msgstr ""
+msgstr "Definer forbudte filtypenavne"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Define the maximum upload size of a\n"
 "                                        file in MB"
 msgstr ""
+"Definer den maksimale uploadstørrelse for en\n"
+"                                         fil i MB"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Defines a list of forbidden file extensions. (Example: 'exe,msi')"
-msgstr ""
+msgstr "Definerer en liste over forbudte filtypenavne. (Eksempel: 'exe,msi')"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
 msgid "Defines the maximum upload size in MB. Default (25MB)"
-msgstr ""
+msgstr "Definerer den maksimale uploadstørrelse i MB. Standard (25 MB)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_unlink
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_unlink
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_unlink
 msgid "Delete Access"
-msgstr ""
+msgstr "Slette adgang"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directories_storage
@@ -748,7 +788,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Directories"
-msgstr ""
+msgstr "Mapper"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_all_directory
@@ -758,6 +798,8 @@ msgstr ""
 msgid "Directories can be used to structure and organize\n"
 "                files directly in Odoo."
 msgstr ""
+"Mapper kan bruges til at strukturere og organisere\n"
+"                 filer direkte i Odoo."
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_directory
@@ -765,7 +807,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Directory"
-msgstr ""
+msgstr "Mappe"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__display_name
@@ -777,17 +819,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Vist navn"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_category
 msgid "Document Category"
-msgstr ""
+msgstr "Dokumentkategori"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_tag
 msgid "Document Tag"
-msgstr ""
+msgstr "Dokument Tag"
 
 #. module: dms
 #: model:ir.module.category,name:dms.category_dms_security
@@ -795,7 +837,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
 msgid "Documents"
-msgstr ""
+msgstr "Dokumenter"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_directory_state
@@ -823,14 +865,14 @@ msgstr ""
 #: selection:res.company,documents_onboarding_state:0
 #: selection:res.company,documents_onboarding_storage_state:0
 msgid "Done"
-msgstr ""
+msgstr "Udført"
 
 #. module: dms
 #. openerp-web
 #: code:addons/dms/static/src/xml/views.xml:16
 #, python-format
 msgid "Drop your files here"
-msgstr ""
+msgstr "Slip dine filer her"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -841,13 +883,14 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_lock_editor
+#, fuzzy
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Elements"
-msgstr ""
+msgstr "Elementer"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -869,29 +912,29 @@ msgstr ""
 #: code:addons/dms/models/category.py:126
 #, python-format
 msgid "Error! You cannot create recursive categories."
-msgstr ""
+msgstr "Fejl! Du kan ikke oprette rekursive kategorier."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:514
 #, python-format
 msgid "Error! You cannot create recursive directories."
-msgstr ""
+msgstr "Fejl! Du kan ikke oprette rekursive mapper."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__explicit_user_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Explicit Users"
-msgstr ""
+msgstr "Eksplicitte brugere"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__extension
 msgid "Extension"
-msgstr ""
+msgstr "Filtype"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Extensions"
-msgstr ""
+msgstr "Filtyper"
 
 #. module: dms
 #: model:dms.category,name:dms.category_05_demo
@@ -902,17 +945,17 @@ msgstr ""
 #: model:ir.model,name:dms.model_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "File Upload"
-msgstr ""
+msgstr "Fil upload"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__name
 msgid "Filename"
-msgstr ""
+msgstr "Filnavn"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_file
@@ -936,7 +979,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Files"
-msgstr ""
+msgstr "Filer"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file
@@ -946,43 +989,43 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Files are used to save content directly in Odoo."
-msgstr ""
+msgstr "Filer bruges til at gemme indhold direkte i Odoo."
 
 #. module: dms
 #: code:addons/dms/models/storage.py:27
 #: selection:dms.storage,save_type:0
 #, python-format
 msgid "Filestore"
-msgstr ""
+msgstr "Fillager"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_follower_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Følgere"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_channel_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Følgere (kanaler)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_partner_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Følgere (Partnere)"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_settings_general
 #: model:ir.ui.menu,name:dms.menu_dms_settings_general
 msgid "General Settings"
-msgstr ""
+msgstr "Generel opsætning"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Group"
-msgstr ""
+msgstr "Gruppe"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
@@ -991,17 +1034,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Group By"
-msgstr ""
+msgstr "Sortér efter"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__name
 msgid "Group Name"
-msgstr ""
+msgstr "Gruppenavn"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__users
 msgid "Group Users"
-msgstr ""
+msgstr "Gruppe brugere"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__group_ids
@@ -1010,12 +1053,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_tree
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Groups"
-msgstr ""
+msgstr "Grupper"
 
 #. module: dms
 #: model:dms.category,name:dms.category_02_demo
+#, fuzzy
 msgid "Human Resource"
-msgstr ""
+msgstr "Human Resource"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__id
@@ -1026,8 +1070,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__id
 #: model:ir.model.fields,field_description:dms.field_dms_storage__id
 #: model:ir.model.fields,field_description:dms.field_dms_tag__id
+#, fuzzy
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
@@ -1038,37 +1083,39 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Icon"
-msgstr ""
+msgstr "Ikon"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__icon_url
 #: model:ir.model.fields,field_description:dms.field_dms_file__icon_url
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__icon_url
 msgid "Icon URL"
-msgstr ""
+msgstr "Ikon URL"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_file__active
 msgid "If a file is set to archived, it is not displayed, but still exists."
 msgstr ""
+"Hvis en fil er indstillet til arkiveret, vises den ikke, men den eksisterer "
+"stadig."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_unread
 #: model:ir.model.fields,help:dms.field_dms_file__message_unread
 msgid "If checked new messages require your attention."
-msgstr ""
+msgstr "Hvis markeret, kræver nye beskeder din opmærksomhed."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_needaction
 #: model:ir.model.fields,help:dms.field_dms_file__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Hvis markeret, kræver nye beskeder din opmærksomhed."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Hvis markeret, har nogle meddelelser en leveringsfejl."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__company_id
@@ -1076,24 +1123,31 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_storage__company_id
 msgid "If set, directories and files will only be available for the selected company."
 msgstr ""
+"Hvis det er indstillet, vil mapper og filer kun være tilgængelige for det "
+"valgte firma."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid "Indicate if directories and files access work only with related model access (for example, if some directories are related with any sale, only users with read access to these sale can acess)"
 msgstr ""
+"Angiv, om mapper og filadgang kun fungerer med relateret modeladgang (hvis "
+"f.eks. nogle mapper er relateret til ethvert salg, er det kun brugere med "
+"læseadgang til disse udsalg, der har adgang)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid "Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
+"Angiv, om mapper og filer også oprettes automatisk i e-mail-"
+"sammensætningsprocessen"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__is_hidden
 #: model:ir.model.fields,help:dms.field_dms_file__is_hidden
 #: model:ir.model.fields,help:dms.field_dms_storage__is_hidden
 msgid "Indicates if directories and files are hidden by default."
-msgstr ""
+msgstr "Angiver om mapper og filer er skjult som standard."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
@@ -1101,32 +1155,35 @@ msgid "Indicates if the directory is a root directory.\n"
 "        A root directory has a settings object, while a directory with a set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
+"Angiver om biblioteket er et rodbibliotek.\n"
+"         En rodmappe har et indstillingsobjekt, mens en mappe med et sæt\n"
+"         forælder arver indstillingerne fra sin forælder."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__inherit_group_ids
 msgid "Inherit Groups"
-msgstr ""
+msgstr "Nedarvet gruppe"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,field_description:dms.field_dms_storage__inherit_access_from_parent_record
 msgid "Inherit permissions from related record"
-msgstr ""
+msgstr "Arv tilladelser fra relateret post"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_create
 msgid "Inherited Create Access"
-msgstr ""
+msgstr "Nedarvet oprette adgang"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_unlink
 msgid "Inherited Unlink Access"
-msgstr ""
+msgstr "Nedarvet slette adgang"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_write
 msgid "Inherited Write Access"
-msgstr ""
+msgstr "Nedarvet skrive adgang"
 
 #. module: dms
 #: model:dms.category,name:dms.category_01_demo
@@ -1143,18 +1200,18 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 msgid "Invoices"
-msgstr ""
+msgstr "Fakturaer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_is_follower
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Er følger"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__is_root_directory
 msgid "Is Root Directory"
-msgstr ""
+msgstr "Er rod mappe"
 
 #. module: dms
 #: selection:res.company,documents_onboarding_directory_state:0
@@ -1162,7 +1219,7 @@ msgstr ""
 #: selection:res.company,documents_onboarding_state:0
 #: selection:res.company,documents_onboarding_storage_state:0
 msgid "Just done"
-msgstr ""
+msgstr "Lige gjort"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group____last_update
@@ -1174,7 +1231,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_tag____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Senest ændret den"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__write_uid
@@ -1184,7 +1241,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Senest ændret af"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__write_date
@@ -1194,24 +1251,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Senest ændret den"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Last update"
-msgstr ""
+msgstr "Senest ændret"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__model_ids
 msgid "Linked Models"
-msgstr ""
+msgstr "Linked modeller"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_model
 msgid "Linked attachments model"
-msgstr ""
+msgstr "Linked vedhæftningsmodel"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_id
@@ -1225,33 +1282,33 @@ msgstr ""
 #: code:addons/dms/static/src/xml/views.xml:36
 #, python-format
 msgid "Loading"
-msgstr ""
+msgstr "Indlæser"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Lock"
-msgstr ""
+msgstr "Lås"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_locked
 msgid "Locked"
-msgstr ""
+msgstr "Låst"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
 msgid "Locked by"
-msgstr ""
+msgstr "Låst af"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_main_attachment_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Primær vedhæftning"
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_manager
 msgid "Manager"
-msgstr ""
+msgstr "Leder"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
@@ -1282,7 +1339,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Meddelelser"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -1325,22 +1382,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Modification Date"
-msgstr ""
+msgstr "Ændringsdato"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 msgid "My Directories"
-msgstr ""
+msgstr "Mine mapper"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "My Documents"
-msgstr ""
+msgstr "Mine dokumenter"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "My Files"
-msgstr ""
+msgstr "Mine filer"
 
 #. module: dms
 #: code:addons/dms/controllers/portal.py:35
@@ -1354,41 +1411,41 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 #, python-format
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directory_new
 #: model:ir.actions.act_window,name:dms.action_dms_file_new
 msgid "New Root Directory"
-msgstr ""
+msgstr "Ny rod mappe"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_storage_new
 msgid "New Storage"
-msgstr ""
+msgstr "Nyt lager"
 
 #. module: dms
 #: model:dms.category,name:dms.category_06_demo
 msgid "News"
-msgstr ""
+msgstr "Nyheder"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_date_deadline
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Næste aktivitets deadline"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_summary
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Næste aktivitets sammendrag"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_type_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Næste aktivitetstype"
 
 #. module: dms
 #: selection:res.company,documents_onboarding_directory_state:0
@@ -1396,132 +1453,140 @@ msgstr ""
 #: selection:res.company,documents_onboarding_state:0
 #: selection:res.company,documents_onboarding_storage_state:0
 msgid "Not done"
-msgstr ""
+msgstr "Ikke færdig"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Not results"
-msgstr ""
+msgstr "Ikke resultater"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction_counter
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Antal handlinger"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_error_counter
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_has_error_counter
 msgid "Number of error"
-msgstr ""
+msgstr "Antal fejl"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_needaction_counter
 #: model:ir.model.fields,help:dms.field_dms_file__message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr ""
+msgstr "Antal meddelelser, der kræver en handling"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error_counter
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Antal meddelelser med leveringsfejl"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_unread_counter
 #: model:ir.model.fields,help:dms.field_dms_file__message_unread_counter
 msgid "Number of unread messages"
-msgstr ""
+msgstr "Antal ulæste beskeder"
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_03_demo
 msgid "Only admin user"
-msgstr ""
+msgstr "Kun administrator bruger"
 
 #. module: dms
 #: code:addons/dms/models/storage.py:108
 #, python-format
 msgid "Only managers can execute this action."
-msgstr ""
+msgstr "Kun ledere kan udføre denne handling."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid "Operations"
-msgstr ""
+msgstr "Operations"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_force_thread_id
 msgid "Optional ID of a thread (record) to which all incoming messages will be attached, even if they did not reply to it. If set, this will disable the creation of new records completely."
 msgstr ""
+"Valgfrit ID for en tråd (post), som alle indgående beskeder vil blive "
+"vedhæftet, selvom de ikke svarede på den. Hvis det er indstillet, vil dette "
+"deaktivere oprettelsen af nye poster fuldstændigt."
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config_organizing
 msgid "Organizing"
-msgstr ""
+msgstr "Organisering"
 
 #. module: dms
 #: selection:dms.directory,activity_state:0
 #: selection:dms.file,activity_state:0
 msgid "Overdue"
-msgstr ""
+msgstr "Forsinket"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_user_id
 msgid "Owner"
-msgstr ""
+msgstr "Ejer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__parent_id
 msgid "Parent Category"
-msgstr ""
+msgstr "Overordnet kategori"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__parent_id
 msgid "Parent Directory"
-msgstr ""
+msgstr "Overordnet mappe"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_group_id
 msgid "Parent Group"
-msgstr ""
+msgstr "Overordnet gruppe"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_model_id
 msgid "Parent Model"
-msgstr ""
+msgstr "Overordnet model"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_path
 #: model:ir.model.fields,field_description:dms.field_dms_category__parent_path
 #: model:ir.model.fields,field_description:dms.field_dms_directory__parent_path
 msgid "Parent Path"
-msgstr ""
+msgstr "Overordnet sti"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_thread_id
 msgid "Parent Record Thread ID"
-msgstr ""
+msgstr "Overordnet post tråd ID"
 
 #. module: dms
 #: code:addons/dms/models/access_groups.py:163
 #, python-format
 msgid "Parent group '%(parent)s' is child of '%(current)s'."
-msgstr ""
+msgstr "Overordnet gruppe '%(parent)s' er underordnet '%(current)s'."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid "Parent model holding the alias. The model holding the alias reference is not necessarily the model given by alias_model_id (example: project (parent_model) and task (model))"
 msgstr ""
+"Overordnet model med aliaset. Modellen med aliasreferencen er ikke "
+"nødvendigvis modellen givet af alias_model_id (eksempel: projekt (Overordnet "
+"model) og opgave (model))"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
+#, fuzzy
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_tree
 msgid "Path"
-msgstr ""
+msgstr "Sti"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_json
@@ -1531,13 +1596,13 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_names
 msgid "Path Names"
-msgstr ""
+msgstr "Sti navne"
 
 #. module: dms
 #: selection:dms.directory,activity_state:0
 #: selection:dms.file,activity_state:0
 msgid "Planned"
-msgstr ""
+msgstr "Planlagt"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_contact
@@ -1547,52 +1612,58 @@ msgid "Policy to post a message on the document using the mailgateway.\n"
 "- followers: only followers of the related document or members of following channels\n"
 ""
 msgstr ""
+"Politik for at sende en besked på dokumentet ved hjælp af mailgateway.\n"
+"- alle: alle kan skrive\n"
+"- partnere: kun godkendte partnere\n"
+"- følgere: kun følgere af det relaterede dokument eller medlemmer af "
+"følgende kanaler\n"
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_02_demo
 #: model:dms.tag,name:dms.tag_05_demo
+#, fuzzy
 msgid "Portal"
-msgstr ""
+msgstr "Portal"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_url
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_url
 msgid "Portal Access URL"
-msgstr ""
+msgstr "Portal adgang URL"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_10_demo
 msgid "Product"
-msgstr ""
+msgstr "Produkt"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_03_demo
 msgid "Project"
-msgstr ""
+msgstr "Projekt"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_read
 msgid "Read Access"
-msgstr ""
+msgstr "Læse adgang"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_access_group
 msgid "Record Access Groups"
-msgstr ""
+msgstr "Post adgangsgrupper"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_file__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__record_ref
 msgid "Record Referenced"
-msgstr ""
+msgstr "Rekord refereret"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
 msgid "Record Thread ID"
-msgstr ""
+msgstr "Post tråd ID"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
@@ -1603,24 +1674,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_user_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Ansvarlig bruger"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__root_directory_ids
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
-msgstr ""
+msgstr "Rod mapper"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__root_storage_id
 msgid "Root Storage"
-msgstr ""
+msgstr "Rod lager"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
 msgid "Sales"
-msgstr ""
+msgstr "Salg"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_save_type
@@ -1628,7 +1699,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__save_type
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 msgid "Save Type"
-msgstr ""
+msgstr "Gem type"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_token
@@ -1639,23 +1710,23 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Settings"
-msgstr ""
+msgstr "Opsætning"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Share"
-msgstr ""
+msgstr "Del"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Show storages"
-msgstr ""
+msgstr "Vis lagre"
 
 #. module: dms
 #: selection:dms.directory,alias_process:0
 msgid "Single Files"
-msgstr ""
+msgstr "Enkelt filer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__size
@@ -1663,7 +1734,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_binary_max_size
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Size"
-msgstr ""
+msgstr "Størrelse"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__custom_thumbnail_small
@@ -1682,17 +1753,17 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__starred
 msgid "Starred"
-msgstr ""
+msgstr "Stjernemarkeret"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 msgid "Starred Directories"
-msgstr ""
+msgstr "Stjernemarkerede mapper"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__user_star_ids
 msgid "Stars"
-msgstr ""
+msgstr "Stjerner"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_state
@@ -1702,6 +1773,10 @@ msgid "Status based on activities\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Status baseret på aktiviteter\n"
+"Forfalden: Forfaldsdatoen er allerede overskredet\n"
+"I dag: Aktivitetsdatoen er i dag\n"
+"Planlagt: Fremtidige aktiviteter."
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_storage
@@ -1713,14 +1788,14 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file_migration
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Storage"
-msgstr ""
+msgstr "Lager"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__is_hidden
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_hidden
 #: model:ir.model.fields,field_description:dms.field_dms_storage__is_hidden
 msgid "Storage is Hidden"
-msgstr ""
+msgstr "Lager er skjult"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_storage
@@ -1728,17 +1803,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_tree
 msgid "Storages"
-msgstr ""
+msgstr "Lagre"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_storage
 msgid "Storages are used to configure your Documents."
-msgstr ""
+msgstr "Lagerpladser bruges til at konfigurere dine dokumenter."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 msgid "Subcategories"
-msgstr ""
+msgstr "Underkategorier"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directories_all_directory
@@ -1746,27 +1821,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__child_directory_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Subdirectories"
-msgstr ""
+msgstr "Undermapper"
 
 #. module: dms
 #: selection:dms.directory,alias_process:0
 msgid "Subdirectory"
-msgstr ""
+msgstr "Undermappe"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config_system
+#, fuzzy
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
+#, fuzzy
 msgid "Tag"
-msgstr ""
+msgstr "Tag"
 
 #. module: dms
 #: sql_constraint:dms.tag:0
 msgid "Tag name already exists!"
-msgstr ""
+msgstr "Tag navnet findes allerede!"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_tag
@@ -1776,85 +1853,101 @@ msgstr ""
 #: model:ir.ui.menu,name:dms.menu_dms_tag
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_tree
+#, fuzzy
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
 msgid "Tags are used to categorize Documents."
-msgstr ""
+msgstr "Tags bruges til at kategorisere dokumenter."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+#, fuzzy
 msgid "Tags..."
-msgstr ""
+msgstr "Tags..."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Technical Information"
-msgstr ""
+msgstr "Teknisk information"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_category__active
 msgid "The active field allows you to hide the category without removing it."
 msgstr ""
+"Det aktive felt giver dig mulighed for at skjule kategorien uden at fjerne "
+"den."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_tag__active
 msgid "The active field allows you to hide the tag without removing it."
 msgstr ""
+"Det aktive felt giver dig mulighed for at skjule mærket uden at fjerne det."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "The configuration is done!"
-msgstr ""
+msgstr "Konfigurationen er færdig!"
 
 #. module: dms
 #: code:addons/dms/models/directory.py:549
 #, python-format
 msgid "The directory name is invalid."
-msgstr ""
+msgstr "Mappenavnet er ugyldigt."
 
 #. module: dms
 #: code:addons/dms/models/dms_file.py:488
 #, python-format
 msgid "The file has a forbidden file extension."
-msgstr ""
+msgstr "Filen har et forbudt filtypenavn."
 
 #. module: dms
 #: code:addons/dms/models/dms_file.py:472
 #, python-format
 msgid "The file name is invalid."
-msgstr ""
+msgstr "Filnavnet er ugyldigt."
 
 #. module: dms
 #: code:addons/dms/models/dms_file.py:495
 #, python-format
 msgid "The maximum upload size is %s MB)."
-msgstr ""
+msgstr "Den maksimale uploadstørrelse er %s MB)."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid "The model (Odoo Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)"
 msgstr ""
+"Modellen (Odoo Document Kind), som dette alias svarer til. Enhver "
+"indkommende e-mail, der ikke svarer på en eksisterende registrering, vil "
+"medføre oprettelse af en ny registrering af denne model (f.eks. en "
+"projektopgave)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
 msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.odoo.com>"
 msgstr ""
+"Navnet på e-mail-aliaset, f.eks. 'jobs', hvis du vil fange e-mails for "
+"<jobs@example.odoo.com>"
 
 #. module: dms
 #: sql_constraint:dms.access.group:0
 msgid "The name of the group must be unique!"
-msgstr ""
+msgstr "Navnet på gruppen skal være unikt!"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_user_id
 msgid "The owner of records created upon receiving emails on this alias. If this field is not set the system will attempt to find the right owner based on the sender (From) address, or will use the Administrator account if no system user is found for that address."
 msgstr ""
+"Ejeren af optegnelser oprettet ved modtagelse af e-mails på dette alias. "
+"Hvis dette felt ikke er indstillet, vil systemet forsøge at finde den "
+"rigtige ejer baseret på afsenderadressen (fra) eller vil bruge "
+"administratorkontoen, hvis der ikke findes nogen systembruger til denne "
+"adresse."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
@@ -1864,19 +1957,23 @@ msgid "The save type is used to determine how a file is saved by the\n"
 "        system. If you change this setting, you can migrate existing files\n"
 "        manually by triggering the action."
 msgstr ""
+"Gem-typen bruges til at bestemme, hvordan en fil gemmes af\n"
+"         system. Hvis du ændrer denne indstilling, kan du migrere "
+"eksisterende filer\n"
+"         manuelt ved at udløse handlingen."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:528
 #, python-format
 msgid "This directory needs to be associated to a record."
-msgstr ""
+msgstr "Denne mappe skal være knyttet til en post."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_file__thumbnail
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__thumbnail
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniaturebillede"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_mixins_thumbnail
@@ -1887,85 +1984,86 @@ msgstr ""
 #: selection:dms.directory,activity_state:0
 #: selection:dms.file,activity_state:0
 msgid "Today"
-msgstr ""
+msgstr "Idag"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_elements
 msgid "Total Elements"
-msgstr ""
+msgstr "Total elementer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_files
 msgid "Total Files"
-msgstr ""
+msgstr "Total filer"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_directories
 msgid "Total Subdirectories"
-msgstr ""
+msgstr "Total undermapper"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
 msgid "Traveling"
-msgstr ""
+msgstr "Rejsende"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_mimetype
+#, fuzzy
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_unlink
 msgid "Unlink Access"
-msgstr ""
+msgstr "Slette adgang"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Unlock"
-msgstr ""
+msgstr "Lås op"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_process
 msgid "Unpack Emails as"
-msgstr ""
+msgstr "Udpak email som"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_unread
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Ulæste beskeder"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_unread_counter
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr ""
+msgstr "Tæller for ulæste meddelelser"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload File"
-msgstr ""
+msgstr "Upload fil"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload your first File."
-msgstr ""
+msgstr "Upload din første fil."
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_user
 msgid "User"
-msgstr ""
+msgstr "Bruger"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__count_users
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Users"
-msgstr ""
+msgstr "Brugere"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_09_demo
 msgid "Vendor Bill"
-msgstr ""
+msgstr "Leverandørfaktura"
 
 #. module: dms
 #. openerp-web
@@ -1997,14 +2095,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_write
 msgid "Write Access"
-msgstr ""
+msgstr "Skrive adgang"
 
 #. module: dms
 #. openerp-web
 #: code:addons/dms/static/src/js/views/many_drop_target.js:89
 #, python-format
 msgid "You must select a directory first"
-msgstr ""
+msgstr "Du skal først vælge en mappe"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
@@ -2015,12 +2113,13 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "element(s)"
-msgstr ""
+msgstr "element(er)"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+#, fuzzy
 msgid "exe,msi"
-msgstr ""
+msgstr "exe,msi"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
