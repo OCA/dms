@@ -39,7 +39,11 @@ class DmsStorage(models.Model):
                 [
                     ("storage_id", "=", storage.id),
                     ("is_root_directory", "=", True),
-                    ("res_model", "not in", storage.mapped("model_ids.model"),),
+                    (
+                        "res_model",
+                        "not in",
+                        storage.mapped("model_ids.model"),
+                    ),
                 ]
             ):
                 raise ValidationError(

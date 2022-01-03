@@ -89,7 +89,8 @@ class TestDmsField(SavepointCase):
     def test_creation_wizard(self):
         self.assertFalse(self.partner.dms_directory_ids)
         self.env["dms.add.directory.record"].with_context(
-            default_res_id=self.partner.id, default_res_model=self.partner._name,
+            default_res_id=self.partner.id,
+            default_res_model=self.partner._name,
         ).create({"storage_id": self.storage.id}).create_directory()
         self.partner.refresh()
         self.assertTrue(self.partner.dms_directory_ids)

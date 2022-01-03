@@ -1,4 +1,4 @@
-odoo.define("dms_field.field_utils", function(require) {
+odoo.define("dms_field.field_utils", function (require) {
     "use strict";
 
     var utils = require("web.field_utils");

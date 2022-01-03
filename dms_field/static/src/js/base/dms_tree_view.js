@@ -1,4 +1,4 @@
-odoo.define("dms.DmsTreeView", function(require) {
+odoo.define("dms.DmsTreeView", function (require) {
     "use strict";
 
     var BasicView = require("web.BasicView");

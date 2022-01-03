@@ -101,16 +101,16 @@ class DmsDirectory(models.Model):
     def search_read_parents(
         self, domain=False, fields=None, offset=0, limit=None, order=None
     ):
-        """ This method finds the top level elements of the hierarchy
-            for a given search query.
+        """This method finds the top level elements of the hierarchy
+        for a given search query.
 
-            :param domain: a search domain <reference/orm/domains> (default: empty list)
-            :param fields: a list of fields to read (default: all fields of the model)
-            :param offset: the number of results to ignore (default: none)
-            :param limit: maximum number of records to return (default: all)
-            :param order: a string to define the sort order of the query
-                 (default: none)
-            :returns: the top level elements for the given search query
+        :param domain: a search domain <reference/orm/domains> (default: empty list)
+        :param fields: a list of fields to read (default: all fields of the model)
+        :param offset: the number of results to ignore (default: none)
+        :param limit: maximum number of records to return (default: all)
+        :param order: a string to define the sort order of the query
+             (default: none)
+        :returns: the top level elements for the given search query
         """
         if not domain:
             domain = []
@@ -131,17 +131,17 @@ class DmsDirectory(models.Model):
     def search_parents(
         self, domain=False, offset=0, limit=None, order=None, count=False
     ):
-        """ This method finds the top level elements of the
-            hierarchy for a given search query.
+        """This method finds the top level elements of the
+        hierarchy for a given search query.
 
-            :param domain: a search domain <reference/orm/domains> (default: empty list)
-            :param offset: the number of results to ignore (default: none)
-            :param limit: maximum number of records to return (default: all)
-            :param order: a string to define the sort order of the query
-                 (default: none)
-            :param count: counts and returns the number of matching records
-                 (default: False)
-            :returns: the top level elements for the given search query
+        :param domain: a search domain <reference/orm/domains> (default: empty list)
+        :param offset: the number of results to ignore (default: none)
+        :param limit: maximum number of records to return (default: all)
+        :param order: a string to define the sort order of the query
+             (default: none)
+        :param count: counts and returns the number of matching records
+             (default: False)
+        :returns: the top level elements for the given search query
         """
         if not domain:
             domain = []
@@ -207,18 +207,18 @@ class DmsDirectory(models.Model):
     def search_childs(
         self, parent_id, domain=False, offset=0, limit=None, order=None, count=False
     ):
-        """ This method finds the direct child elements of the parent
-            record for a given search query.
+        """This method finds the direct child elements of the parent
+        record for a given search query.
 
-            :param parent_id: the integer representing the ID of the parent record
-            :param domain: a search domain <reference/orm/domains> (default: empty list)
-            :param offset: the number of results to ignore (default: none)
-            :param limit: maximum number of records to return (default: all)
-            :param order: a string to define the sort order of the query
-                 (default: none)
-            :param count: counts and returns the number of matching records
-                 (default: False)
-            :returns: the top level elements for the given search query
+        :param parent_id: the integer representing the ID of the parent record
+        :param domain: a search domain <reference/orm/domains> (default: empty list)
+        :param offset: the number of results to ignore (default: none)
+        :param limit: maximum number of records to return (default: all)
+        :param order: a string to define the sort order of the query
+             (default: none)
+        :param count: counts and returns the number of matching records
+             (default: False)
+        :returns: the top level elements for the given search query
         """
         if not domain:
             domain = []
@@ -229,16 +229,16 @@ class DmsDirectory(models.Model):
     def search_read_childs(
         self, parent_id, domain=False, fields=None, offset=0, limit=None, order=None
     ):
-        """ This method finds the direct child elements of the parent
-            record for a given search query.
+        """This method finds the direct child elements of the parent
+        record for a given search query.
 
-            :param parent_id: the integer representing the ID of the parent record
-            :param domain: a search domain <reference/orm/domains> (default: empty list)
-            :param fields: a list of fields to read (default: all fields of the model)
-            :param offset: the number of results to ignore (default: none)
-            :param limit: maximum number of records to return (default: all)
-            :param order: a string to define the sort order of the query (default: none)
-            :returns: the top level elements for the given search query
+        :param parent_id: the integer representing the ID of the parent record
+        :param domain: a search domain <reference/orm/domains> (default: empty list)
+        :param fields: a list of fields to read (default: all fields of the model)
+        :param offset: the number of results to ignore (default: none)
+        :param limit: maximum number of records to return (default: all)
+        :param order: a string to define the sort order of the query (default: none)
+        :returns: the top level elements for the given search query
         """
         if not domain:
             domain = []

@@ -1,4 +1,4 @@
-odoo.define("dms_field.mimetype", function() {
+odoo.define("dms_field.mimetype", function () {
     "use strict";
 
     var mapping = [
@@ -43,7 +43,7 @@ odoo.define("dms_field.mimetype", function() {
 
     function match(mimetype, cond) {
         if (Array.isArray(cond)) {
-            return cond.reduce(function(v, c) {
+            return cond.reduce(function (v, c) {
                 return v || match(mimetype, c);
             }, false);
         } else if (cond instanceof RegExp) {
@@ -70,7 +70,7 @@ odoo.define("dms_field.mimetype", function() {
     function mimetype2fa(mimetype, options) {
         if (typeof mimetype === "object") {
             var new_options = mimetype;
-            return function(new_mimetype) {
+            return function (new_mimetype) {
                 return mimetype2fa(new_mimetype, new_options);
             };
         }
