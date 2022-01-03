@@ -5,7 +5,7 @@
     "name": "DMS Field",
     "summary": """
         Create DMS View and allow to use them inside a record""",
-    "version": "13.0.1.0.1",
+    "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/dms",
@@ -15,6 +15,7 @@
         "templates/assets.xml",
         "views/dms_storage.xml",
         "views/dms_directory.xml",
+        "security/ir.model.access.csv",
     ],
     "qweb": ["static/src/xml/*.xml"],
     "demo": ["demo/partner_dms.xml"],

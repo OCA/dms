@@ -1,4 +1,4 @@
-odoo.define("dms.DmsTreeRenderer", function(require) {
+odoo.define("dms.DmsTreeRenderer", function (require) {
     "use strict";
 
     var BasicRenderer = require("web.BasicRenderer");
@@ -25,7 +25,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             "click .o_dms_add_directory": "_onDMSAddDirectoryRecord",
         }),
         template: "dms.DocumentTree",
-        init: function(parent, params) {
+        init: function (parent, params) {
             // eslint-disable-next-line no-param-reassign
             params = _.defaults({}, params, {
                 viewType: "dms_tree",
@@ -35,11 +35,11 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             this.storage_data = {};
             this.isMobile = config.device.isMobile;
         },
-        willStart: function() {
+        willStart: function () {
             this.config = this._buildTreeConfig();
             return $.when(ajax.loadLibs(this), this._super.apply(this, arguments));
         },
-        _buildTreeConfig: function() {
+        _buildTreeConfig: function () {
             var plugins = this.params.plugins || [
                 "conditionalselect",
                 "massload",
@@ -75,35 +75,35 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             };
             return tree_config;
         },
-        _loadData: function(node, callback) {
+        _loadData: function (node, callback) {
             this.trigger_up("dms_load", {
                 node: node,
                 callback: callback,
             });
         },
-        start_tree_triggers: function() {
+        start_tree_triggers: function () {
             var self = this;
-            this.$tree.on("open_node.jstree", function(e, data) {
+            this.$tree.on("open_node.jstree", function (e, data) {
                 if (data.node.data && data.node.data.model === "dms.directory") {
                     data.instance.set_icon(data.node, "fa fa-folder-open-o");
                 }
             });
-            this.$tree.on("close_node.jstree", function(e, data) {
+            this.$tree.on("close_node.jstree", function (e, data) {
                 if (data.node.data && data.node.data.model === "dms.directory") {
                     data.instance.set_icon(data.node, "fa fa-folder-o");
                 }
             });
-            this.$tree.on("ready.jstree", function(e, data) {
+            this.$tree.on("ready.jstree", function (e, data) {
                 self.trigger_up("tree_ready", {
                     data: data,
                 });
             });
-            this.$tree.on("changed.jstree", function(e, data) {
+            this.$tree.on("changed.jstree", function (e, data) {
                 self.trigger_up("tree_changed", {
                     data: data,
                 });
             });
-            this.$tree.on("move_node.jstree", function(e, data) {
+            this.$tree.on("move_node.jstree", function (e, data) {
                 var jstree = self.$tree.jstree(true);
                 self.trigger_up("dms_move_node", {
                     node: data.node,
@@ -111,7 +111,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                     old_parent: data.old_parent,
                 });
             });
-            this.$tree.on("rename_node.jstree", function(e, data) {
+            this.$tree.on("rename_node.jstree", function (e, data) {
                 self.trigger_up("dms_rename_node", {
                     node: data.node,
                     text: data.text,
@@ -119,7 +119,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 });
                 self._preview_node(data.node);
             });
-            this.$tree.on("delete_node.jstree", function(e, data) {
+            this.$tree.on("delete_node.jstree", function (e, data) {
                 self.trigger_up("dms_delete_node", {
                     node: data.node,
                     parent: data.parent,
@@ -127,13 +127,13 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             });
             this.$('[data-toggle="tooltip"]').tooltip();
         },
-        _treeChanged: function(ev) {
+        _treeChanged: function (ev) {
             var data = ev.data.data;
             if (data.selected && data.selected.length === 1) {
                 this._preview_node(data.node);
             }
         },
-        start: function() {
+        start: function () {
             var res = this._super.apply(this, arguments);
             this.$tree = this.$(".dms_tree");
             this.$tree.jstree(this.config);
@@ -143,7 +143,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
         /*
             This is used to check that the operation is allowed
         */
-        _checkCallback: function(operation, node, parent) {
+        _checkCallback: function (operation, node, parent) {
             if (operation === "copy_node" || operation === "move_node") {
                 // Prevent moving a root node
                 if (node.parent === "#") {
@@ -164,13 +164,13 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             }
             return true;
         },
-        _checkSelect: function(node) {
+        _checkSelect: function (node) {
             if (this.params.filesOnly && node.data.model !== "dms.file") {
                 return false;
             }
             return !(node.parent === "#" && node.data.model === "dms.storage");
         },
-        _preview_node: function(node) {
+        _preview_node: function (node) {
             var $buttons = this.$el.find(".o_dms_extra_actions");
             $buttons.empty();
             if (
@@ -187,19 +187,19 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 );
                 var self = this;
                 var menu = this._loadContextMenu(node);
-                _.each(menu, function(action) {
+                _.each(menu, function (action) {
                     self._generateActionButton(node, action, $buttons);
                 });
             }
         },
-        _generateActionButton: function(node, action, $buttons) {
+        _generateActionButton: function (node, action, $buttons) {
             if (action.action) {
                 var $button = $("<button>", {
                     type: "button",
                     class: "btn btn-secondary " + action.icon,
                     "data-toggle": "dropdown",
                     title: action.label,
-                }).on("click", function(event) {
+                }).on("click", function (event) {
                     event.preventDefault();
                     event.stopPropagation();
                     if (action._disabled && action._disabled()) {
@@ -211,12 +211,12 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             }
             if (action.submenu) {
                 var self = this;
-                _.each(action.submenu, function(sub_action) {
+                _.each(action.submenu, function (sub_action) {
                     self._generateActionButton(node, sub_action, $buttons);
                 });
             }
         },
-        _loadContextMenu: function(node) {
+        _loadContextMenu: function (node) {
             var menu = {};
             var jstree = this.$tree.jstree(true);
             if (node.data) {
@@ -231,17 +231,17 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             }
             return menu;
         },
-        _loadContextMenuBasic: function($jstree, node, menu) {
+        _loadContextMenuBasic: function ($jstree, node, menu) {
             var self = this;
             menu.rename = {
                 separator_before: false,
                 separator_after: false,
                 icon: "fa fa-pencil",
                 label: _t("Rename"),
-                action: function() {
+                action: function () {
                     $jstree.edit(node);
                 },
-                _disabled: function() {
+                _disabled: function () {
                     return !node.data.data.perm_write || node.data.data.storage;
                 },
             };
@@ -257,15 +257,15 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                         separator_after: false,
                         icon: "fa fa-scissors",
                         label: _t("Cut"),
-                        action: function() {
+                        action: function () {
                             $jstree.cut(node);
                         },
-                        _disabled: function() {
+                        _disabled: function () {
                             return !node.data.data.perm_read || node.data.data.storage;
                         },
                     },
                 },
-                _disabled: function() {
+                _disabled: function () {
                     return !node.data.data.perm_read;
                 },
             };
@@ -274,10 +274,10 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 separator_after: false,
                 icon: "fa fa-trash-o",
                 label: _t("Delete"),
-                action: function() {
+                action: function () {
                     $jstree.delete_node(node);
                 },
-                _disabled: function() {
+                _disabled: function () {
                     return !node.data.data.perm_unlink || node.data.data.storage;
                 },
             };
@@ -286,23 +286,23 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 separator_after: false,
                 icon: "fa fa-external-link",
                 label: _t("Open"),
-                action: function() {
+                action: function () {
                     self.trigger_up("dms_open_record", {id: node.id});
                 },
             };
             return menu;
         },
-        _loadContextMenuDirectoryBefore: function($jstree, node, menu) {
+        _loadContextMenuDirectoryBefore: function ($jstree, node, menu) {
             var self = this;
             menu.add_directory = {
                 separator_before: false,
                 separator_after: false,
                 icon: "fa fa-folder",
                 label: _t("Create directory"),
-                action: function() {
+                action: function () {
                     self._onDMSAddDirectory(node);
                 },
-                _disabled: function() {
+                _disabled: function () {
                     return !node.data.data.perm_create;
                 },
             };
@@ -311,40 +311,40 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 separator_after: true,
                 icon: "fa fa-file",
                 label: _t("Create File"),
-                action: function() {
+                action: function () {
                     self._onDMSAddFile(node);
                 },
-                _disabled: function() {
+                _disabled: function () {
                     return !node.data.data.perm_create;
                 },
             };
             return menu;
         },
-        _loadContextMenuDirectory: function($jstree, node, menu) {
+        _loadContextMenuDirectory: function ($jstree, node, menu) {
             if (menu.action && menu.action.submenu) {
                 menu.action.submenu.paste = {
                     separator_before: false,
                     separator_after: false,
                     icon: "fa fa-clipboard",
                     label: _t("Paste"),
-                    action: function() {
+                    action: function () {
                         $jstree.paste(node);
                     },
-                    _disabled: function() {
+                    _disabled: function () {
                         return !$jstree.can_paste() && !node.data.data.perm_create;
                     },
                 };
             }
             return menu;
         },
-        _loadContextMenuFile: function($jstree, node, menu) {
+        _loadContextMenuFile: function ($jstree, node, menu) {
             var self = this;
             menu.preview = {
                 separator_before: false,
                 separator_after: false,
                 icon: "fa fa-eye",
                 label: _t("Download"),
-                action: function() {
+                action: function () {
                     self.trigger_up("dms_preview_file", {
                         id: node.id,
                     });
@@ -355,7 +355,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 separator_after: false,
                 icon: "fa fa-download",
                 label: _t("Download"),
-                action: function() {
+                action: function () {
                     framework.blockUI();
                     session.get_file({
                         url: "/web/content",
@@ -375,7 +375,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
             };
             return menu;
         },
-        _onRecordPreview: function(ev) {
+        _onRecordPreview: function (ev) {
             ev.stopPropagation();
             var id = $(ev.currentTarget).data("id");
             if (id) {
@@ -385,7 +385,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 });
             }
         },
-        _onOpenRecord: function(ev) {
+        _onOpenRecord: function (ev) {
             ev.stopPropagation();
             var id = $(ev.currentTarget).data("id");
             if (id) {
@@ -395,7 +395,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 });
             }
         },
-        _onDMSAddDirectory: function(node) {
+        _onDMSAddDirectory: function (node) {
             var self = this;
             var context = {
                 default_parent_directory_id: node.data.res_id,
@@ -404,14 +404,14 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 res_model: "dms.directory",
                 context: context,
                 title: _t("Add Directory: ") + self.string,
-                on_saved: function(record, changed) {
+                on_saved: function (record, changed) {
                     if (changed) {
                         self.$tree.jstree(true).refresh();
                     }
                 },
             }).open();
         },
-        _onDMSAddFile: function(node) {
+        _onDMSAddFile: function (node) {
             var self = this;
             var context = {
                 default_directory_id: node.data.res_id,
@@ -420,14 +420,14 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 res_model: "dms.file",
                 context: context,
                 title: _t("Add File: ") + self.string,
-                on_saved: function(record, changed) {
+                on_saved: function (record, changed) {
                     if (changed) {
                         self.$tree.jstree(true).refresh();
                     }
                 },
             }).open();
         },
-        _onDMSAddDirectoryRecord: function() {
+        _onDMSAddDirectoryRecord: function () {
             var self = this;
             var data = {};
             this.trigger_up("dms_empty_storages", {data: data});
@@ -436,7 +436,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 default_res_model: data.model,
                 default_storage_ids: [],
             };
-            _.each(data.empty_storages, function(storage) {
+            _.each(data.empty_storages, function (storage) {
                 context.default_storage_ids.push(storage.id);
             });
             new dialogs.FormViewDialog(self, {
@@ -444,13 +444,13 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 context: context,
                 disable_multiple_selection: true,
                 title: _t("Add new root directory"),
-                on_saved: function(record, changed) {
+                on_saved: function (record, changed) {
                     if (changed) {
                         self._rpc({
                             model: "dms.add.directory.record",
                             method: "create_directory",
                             args: [[record.res_id]],
-                        }).then(function() {
+                        }).then(function () {
                             self.trigger_up("reload");
                         });
                     }
