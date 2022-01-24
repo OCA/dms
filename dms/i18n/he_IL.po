@@ -876,13 +876,6 @@ msgid "Done"
 msgstr "בוצע"
 
 #. module: dms
-#. openerp-web
-#: code:addons/dms/static/src/xml/views.xml:0
-#, python-format
-msgid "Drop your files here"
-msgstr "לגרור קבצים לכאן"
-
-#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
@@ -2181,6 +2174,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+
+#~ msgid "Drop your files here"
+#~ msgstr "לגרור קבצים לכאן"
 
 #~ msgid "A file is locked, the folder cannot be deleted."
 #~ msgstr "קובץ נעול, לא ניתן למחוק את התיקיה."
