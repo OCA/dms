@@ -107,7 +107,7 @@ class File(models.Model):
         compute="_compute_mimetype", string="Type", readonly=True, store=True
     )
 
-    size = fields.Integer(string="Size", readonly=True)
+    size = fields.Float(string="Size", readonly=True)
 
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, index=True)
 
