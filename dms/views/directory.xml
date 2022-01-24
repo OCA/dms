@@ -451,7 +451,7 @@
                     </group>
                     <group name="data">
                         <group>
-                            <field name="size" />
+                            <field name="size" widget="integer" />
                             <field name="count_elements" string="Elements" />
                         </group>
                         <group>
@@ -505,7 +505,7 @@
                                         string="Directories"
                                     />
                                     <field name="count_total_files" string="Files" />
-                                    <field name="size" />
+                                    <field name="size" widget="integer" />
                                 </tree>
                             </field>
                         </page>

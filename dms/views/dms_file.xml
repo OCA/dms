@@ -301,7 +301,7 @@
                 <field name="is_lock_editor" invisible="1" />
                 <field name="name" />
                 <field name="write_date" readonly="1" />
-                <field name="size" readonly="1" />
+                <field name="size" widget="integer" readonly="1" />
                 <field name="res_mimetype" readonly="1" />
                 <field
                     name="tag_ids"
