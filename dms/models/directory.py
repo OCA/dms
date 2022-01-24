@@ -413,15 +413,19 @@ class DmsDirectory(models.Model):
 
     def _compute_count_total_directories(self):
         for record in self:
-            count = self.search_count([("id", "child_of", record.id)])
-            count = count - 1 if count > 0 else 0
-            record.count_total_directories = count
+            count = (
+                self.search_count([("id", "child_of", record.id)]) if record.id else 0
+            )
+            record.count_total_directories = count - 1 if count > 0 else 0
 
     def _compute_count_total_files(self):
         model = self.env["dms.file"]
         for record in self:
-            record.count_total_files = model.search_count(
-                [("directory_id", "child_of", record.id)]
+            # Prevent error in some NewId cases
+            record.count_total_files = (
+                model.search_count([("directory_id", "child_of", record.id)])
+                if record.id
+                else 0
             )
 
     def _compute_count_total_elements(self):
