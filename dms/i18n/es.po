@@ -918,13 +918,6 @@ msgid "Done"
 msgstr "Hecho"
 
 #. module: dms
-#. openerp-web
-#: code:addons/dms/static/src/xml/views.xml:0
-#, python-format
-msgid "Drop your files here"
-msgstr "Arrastra tus archivos aquí"
-
-#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
@@ -2241,6 +2234,9 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
+
+#~ msgid "Drop your files here"
+#~ msgstr "Arrastra tus archivos aquí"
 
 #~ msgid "Custom Thumbnail"
 #~ msgstr "Miniatura personalizada"
