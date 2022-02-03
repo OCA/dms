@@ -183,7 +183,7 @@ class DmsDirectory(models.Model):
         compute="_compute_count_total_elements", string="Total Elements"
     )
 
-    size = fields.Integer(compute="_compute_size", string="Size")
+    size = fields.Float(compute="_compute_size", string="Size")
 
     inherit_group_ids = fields.Boolean(string="Inherit Groups", default=True)
 
