@@ -549,7 +549,7 @@
                 <field name="is_lock_editor" invisible="1" />
                 <field name="name" />
                 <field name="write_date" />
-                <field name="content" />
+                <field name="size" widget="integer" />
                 <field name="mimetype" />
                 <field name="storage_id" />
                 <field name="migration" />
