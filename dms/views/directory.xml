@@ -523,7 +523,7 @@
                                 <tree string="Files" limit="10">
                                     <field name="name" />
                                     <field name="mimetype" />
-                                    <field name="content" />
+                                    <field name="size" widget="integer" />
                                     <field name="write_date" readonly="1" />
                                 </tree>
                             </field>
