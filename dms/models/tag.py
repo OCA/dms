@@ -13,7 +13,7 @@ class Tag(models.Model):
     _name = "dms.tag"
     _description = "Document Tag"
 
-    name = fields.Char(string="Name", required=True, translate=True)
+    name = fields.Char(required=True, translate=True)
     active = fields.Boolean(
         default=True,
         help="The active field allows you " "to hide the tag without removing it.",
@@ -41,10 +41,8 @@ class Tag(models.Model):
         string="Files",
         readonly=True,
     )
-    count_directories = fields.Integer(
-        compute="_compute_count_directories", string="Count Directories"
-    )
-    count_files = fields.Integer(compute="_compute_count_files", string="Count Files")
+    count_directories = fields.Integer(compute="_compute_count_directories")
+    count_files = fields.Integer(compute="_compute_count_files")
 
     _sql_constraints = [
         ("name_uniq", "unique (name, category_id)", "Tag name already exists!"),

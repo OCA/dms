@@ -24,13 +24,15 @@ class Category(models.Model):
     # Database
     # ----------------------------------------------------------
 
-    name = fields.Char(string="Name", required=True, translate=True)
+    name = fields.Char(required=True, translate=True)
 
     active = fields.Boolean(
         default=True,
         help="The active field allows you to hide the category without removing it.",
     )
-    complete_name = fields.Char(compute="_compute_complete_name", store=True)
+    complete_name = fields.Char(
+        compute="_compute_complete_name", store=True, recursive=True
+    )
     parent_id = fields.Many2one(
         comodel_name="dms.category",
         string="Parent Category",
@@ -44,7 +46,7 @@ class Category(models.Model):
         string="Child Categories",
     )
 
-    parent_path = fields.Char(string="Parent Path", index=True)
+    parent_path = fields.Char(index=True)
     tag_ids = fields.One2many(
         comodel_name="dms.tag", inverse_name="category_id", string="Tags"
     )
@@ -66,13 +68,11 @@ class Category(models.Model):
         compute="_compute_count_categories", string="Count Subcategories"
     )
 
-    count_tags = fields.Integer(compute="_compute_count_tags", string="Count Tags")
+    count_tags = fields.Integer(compute="_compute_count_tags")
 
-    count_directories = fields.Integer(
-        compute="_compute_count_directories", string="Count Directories"
-    )
+    count_directories = fields.Integer(compute="_compute_count_directories")
 
-    count_files = fields.Integer(compute="_compute_count_files", string="Count Files")
+    count_files = fields.Integer(compute="_compute_count_files")
 
     # ----------------------------------------------------------
     # Constrains
