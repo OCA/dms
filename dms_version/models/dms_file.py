@@ -2,71 +2,38 @@
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class DmsFile(models.Model):
-    _inherit = "dms.file"
+    _name = "dms.file"
+    _inherit = ["dms.file", "base.revision"]
 
-    version_ids = fields.One2many(
-        comodel_name="dms.version",
-        inverse_name="file_id",
-        string="Versions",
-        readonly=True,
+    current_revision_id = fields.Many2one(
+        comodel_name="dms.file",
     )
-    versions_count = fields.Integer(compute="_compute_versions_count", store=True)
-    storage_id_inherit_access_from_parent_record = fields.Boolean(
-        related="storage_id.inherit_access_from_parent_record",
-        related_sudo=True,
-        auto_join=True,
-        store=True,
+    old_revision_ids = fields.One2many(
+        comodel_name="dms.file",
+    )
+    has_versioning = fields.Boolean(
+        related="storage_id.has_versioning",
     )
 
-    @api.depends("version_ids")
-    def _compute_versions_count(self):
-        for record in self:
-            record.versions_count = len(record.version_ids)
+    _sql_constraints = [
+        (
+            "revision_unique",
+            "unique(unrevisioned_name, revision_number, has_versioning)",
+            "Reference and revision must be unique in vesioning.",
+        )
+    ]
 
-    def action_revert_version(self):
-        for record in self:
-            content_tuple = record._pop_version()
-            record.with_context(dms_versioning=True).write(
-                {"content": content_tuple[1], "name": content_tuple[0]}
-            )
-
-    def action_delete_versions(self):
-        self.mapped("version_ids").unlink()
+    def action_view_revision(self):
+        self.ensure_one()
+        action = self.env.ref("dms_version.action_dms_revisions_file")
+        return action.read()[0]
 
     def write(self, vals):
-        if "content" in vals and not self.env.context.get("dms_versioning"):
-            for record in self.filtered("storage_id.has_versioning"):
-                if not record.require_migration:
-                    record._add_version(record.content)
-        return super().write(vals)
-
-    def _add_version(self, content):
-        dms_version = self.env["dms.version"]
-        domain = [
-            ("file_id", "=", self.id),
-            ("next_version", "=", False),
-        ]
-        vals = {"name": self.name, "file_id": self.id, "content": content}
-        record = dms_version.search(domain, limit=1)
-        if not record:
-            return dms_version.create(vals)
-        vals["previous_version"] = record.id
-        new_version = dms_version.create(vals)
-        record.write({"next_version": new_version.id})
-        return new_version
-
-    def _pop_version(self):
-        domain = [
-            ("file_id", "=", self.id),
-            ("next_version", "=", False),
-        ]
-        record = self.env["dms.version"].search(domain, limit=1)
-        if not record:
-            return (None, None)
-        result = (record.name, record.content)
-        record.unlink()
-        return result
+        res = super().write(vals)
+        if vals.get("content"):
+            self.filtered(lambda x: x.storage_id.has_versioning).create_revision()
+        return res
