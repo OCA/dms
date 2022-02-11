@@ -10,7 +10,7 @@ from .common import DocumentsBaseCase, multi_users
 
 class FileTestCase(DocumentsBaseCase):
     def _setup_test_data(self):
-        super(FileTestCase, self)._setup_test_data()
+        res = super(FileTestCase, self)._setup_test_data()
         self.directory_root_demo_01 = self.browse_ref("dms.directory_01_demo")
         self.directory_root_demo_02 = self.browse_ref("dms.directory_02_demo")
         self.directory_root_demo_03 = self.browse_ref("dms.directory_03_demo")
@@ -30,6 +30,7 @@ class FileTestCase(DocumentsBaseCase):
             directory=self.new_root_directory
         )
         self.new_file_sub_directory = self.create_file(directory=self.new_sub_directory)
+        return res
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_create_file(self):
