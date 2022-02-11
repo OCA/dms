@@ -21,7 +21,6 @@ _logger = logging.getLogger(__name__)
 
 
 class File(models.Model):
-
     _name = "dms.file"
     _description = "File"
 
@@ -67,7 +66,6 @@ class File(models.Model):
     path_names = fields.Char(
         compute="_compute_path",
         compute_sudo=True,
-        string="Path Names",
         readonly=True,
         store=False,
     )
@@ -75,7 +73,6 @@ class File(models.Model):
     path_json = fields.Text(
         compute="_compute_path",
         compute_sudo=True,
-        string="Path Json",
         readonly=True,
         store=False,
     )
@@ -92,28 +89,23 @@ class File(models.Model):
     content = fields.Binary(
         compute="_compute_content",
         inverse="_inverse_content",
-        string="Content",
         attachment=False,
         prefetch=False,
         required=True,
         store=False,
     )
 
-    extension = fields.Char(
-        compute="_compute_extension", string="Extension", readonly=True, store=True
-    )
+    extension = fields.Char(compute="_compute_extension", readonly=True, store=True)
 
     mimetype = fields.Char(
         compute="_compute_mimetype", string="Type", readonly=True, store=True
     )
 
-    size = fields.Float(string="Size", readonly=True)
+    size = fields.Float(readonly=True)
 
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, index=True)
 
-    content_binary = fields.Binary(
-        string="Content Binary", attachment=False, prefetch=False, invisible=True
-    )
+    content_binary = fields.Binary(attachment=False, prefetch=False, invisible=True)
 
     save_type = fields.Char(
         compute="_compute_save_type",
@@ -133,9 +125,7 @@ class File(models.Model):
         compute="_compute_migration", store=True, compute_sudo=True
     )
 
-    content_file = fields.Binary(
-        attachment=True, string="Content File", prefetch=False, invisible=True
-    )
+    content_file = fields.Binary(attachment=True, prefetch=False, invisible=True)
 
     # Extend inherited field(s)
     image_1920 = fields.Image(compute="_compute_image_1920", store=True, readonly=False)
@@ -152,9 +142,10 @@ class File(models.Model):
         return super().check_access_rule(operation)
 
     def _compute_access_url(self):
-        super()._compute_access_url()
+        res = super()._compute_access_url()
         for item in self:
             item.access_url = "/my/dms/file/%s/download" % (item.id)
+        return res
 
     def check_access_token(self, access_token=False):
         res = False
@@ -251,10 +242,18 @@ class File(models.Model):
         index = 1
         for dms_file in self:
             if logging:
-                info = (index, record_count, dms_file.migration)
-                _logger.info(_("Migrate File %s of %s [ %s ]") % info)
+                _logger.info(
+                    _(
+                        "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
+                    )
+                    % {
+                        "index": index,
+                        "record_count": record_count,
+                        "dms_file_migration": dms_file.migration,
+                    }
+                )
                 index += 1
-            dms_file.write({"content": dms_file.with_context({}).content})
+            dms_file.write({"content": dms_file.with_context(**{}).content})
 
     def action_save_onboarding_file_step(self):
         self.env.user.company_id.set_onboarding_step_done(
@@ -395,7 +394,7 @@ class File(models.Model):
         for record in self:
             if record.content_file:
                 context = {"human_size": True} if bin_size else {"base64": True}
-                record.content = record.with_context(context).content_file
+                record.content = record.with_context(**context).content_file
             elif record.content_binary:
                 record.content = (
                     record.content_binary
@@ -404,7 +403,7 @@ class File(models.Model):
                 )
             elif record.attachment_id:
                 context = {"human_size": True} if bin_size else {"base64": True}
-                record.content = record.with_context(context).attachment_id.datas
+                record.content = record.with_context(**context).attachment_id.datas
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):
@@ -554,7 +553,7 @@ class File(models.Model):
     # Locking fields and functions
     # ----------------------------------------------------------
 
-    locked_by = fields.Many2one(comodel_name="res.users", string="Locked by")
+    locked_by = fields.Many2one(comodel_name="res.users")
 
     is_locked = fields.Boolean(compute="_compute_locked", string="Locked")
 
