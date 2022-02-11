@@ -369,7 +369,7 @@
         <field name="name">dms_directory.tree</field>
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
-            <tree string="Directories">
+            <tree>
                 <field name="name" />
                 <field name="write_date" />
                 <field name="count_files" string="Files" />
@@ -383,7 +383,7 @@
         <field name="name">dms_directory.form</field>
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
-            <form string="Directory">
+            <form>
                 <header>
                     <button
                         name="%(portal.portal_share_action)d"
@@ -503,7 +503,7 @@
                                 context="{'default_parent_id': active_id, 'mail_create_nolog': True}"
                                 attrs="{'readonly':[('permission_create','=',False)]}"
                             >
-                                <tree string="Subdirectories" limit="10">
+                                <tree limit="10">
                                     <field name="name" />
                                     <field
                                         name="count_directories"
@@ -520,10 +520,10 @@
                                 context="{'default_directory_id': active_id, 'mail_create_nolog': True}"
                                 attrs="{'readonly':[('permission_create','=',False)]}"
                             >
-                                <tree string="Files" limit="10">
+                                <tree limit="10">
                                     <field name="name" />
                                     <field name="mimetype" />
-                                    <field name="size" widget="integer" />
+                                     <field name="size" widget="integer" />
                                     <field name="write_date" readonly="1" />
                                 </tree>
                             </field>
@@ -557,7 +557,7 @@
                             attrs="{'invisible':[('storage_id_inherit_access_from_parent_record', '=', True)]}"
                         >
                             <field name="group_ids">
-                                <tree string="Groups">
+                                <tree>
                                     <field name="name" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
@@ -570,7 +570,7 @@
                             attrs="{'invisible':[('storage_id_inherit_access_from_parent_record', '=', True)]}"
                         >
                             <field name="complete_group_ids">
-                                <tree string="Complete Groups">
+                                <tree>
                                     <field name="name" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />

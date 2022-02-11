@@ -24,7 +24,6 @@ class ResCompany(models.Model):
             ("done", "Done"),
             ("closed", "Closed"),
         ],
-        string="Documents Onboarding State",
         default="not_done",
     )
 
@@ -35,7 +34,6 @@ class ResCompany(models.Model):
             ("done", "Done"),
             ("closed", "Closed"),
         ],
-        string="Documents Onboarding Storage State",
         default="not_done",
     )
 
@@ -46,7 +44,6 @@ class ResCompany(models.Model):
             ("done", "Done"),
             ("closed", "Closed"),
         ],
-        string="Documents Onboarding Directory State",
         default="not_done",
     )
 
@@ -57,7 +54,6 @@ class ResCompany(models.Model):
             ("done", "Done"),
             ("closed", "Closed"),
         ],
-        string="Documents Onboarding File State",
         default="not_done",
     )
 

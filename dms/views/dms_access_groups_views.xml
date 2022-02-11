@@ -10,7 +10,7 @@
         <field name="name">dms_access_groups.tree</field>
         <field name="model">dms.access.group</field>
         <field name="arch" type="xml">
-            <tree string="Groups">
+            <tree>
                 <field name="name" />
                 <field name="perm_create" />
                 <field name="perm_write" />
@@ -24,7 +24,7 @@
         <field name="name">dms_access.group.form</field>
         <field name="model">dms.access.group</field>
         <field name="arch" type="xml">
-            <form string="Group">
+            <form>
                 <sheet>
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
@@ -52,7 +52,7 @@
                     <notebook>
                         <page name="users" string="Users">
                             <field name="users">
-                                <tree string="Users">
+                                <tree>
                                     <field name="name" />
                                     <field name="login" />
                                     <field name="lang" />
@@ -62,7 +62,7 @@
                         </page>
                         <page name="groups" string="Groups">
                             <field name="group_ids">
-                                <tree string="Groups">
+                                <tree>
                                     <field name="name" />
                                     <field name="comment" />
                                 </tree>
@@ -70,7 +70,7 @@
                         </page>
                         <page name="extra_users" string="Explicit Users">
                             <field name="explicit_user_ids">
-                                <tree string="Explicit Users">
+                                <tree>
                                     <field name="name" />
                                     <field name="login" />
                                     <field name="lang" />
@@ -80,7 +80,7 @@
                         </page>
                         <page name="childs" string="Child Groups">
                             <field name="child_group_ids">
-                                <tree string="Groups">
+                                <tree>
                                     <field name="name" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
@@ -91,7 +91,7 @@
                         </page>
                         <page string="Directories">
                             <field name="directory_ids">
-                                <tree string="Directories">
+                                <tree>
                                     <field name="name" />
                                     <field
                                         name="count_directories"

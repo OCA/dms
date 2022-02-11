@@ -21,8 +21,8 @@ class IrAttachment(models.Model):
         items = self.sudo()._get_dms_directories(self.res_model, False)
         for item in items:
             model_item = self.env[self.res_model].browse(self.res_id)
-            ir_model_item = self.env["ir.model"].search(
-                [("model", "=", self.res_model)]
+            ir_model_item = (
+                self.env["ir.model"].sudo().search([("model", "=", self.res_model)])
             )
             self.env["dms.directory"].sudo().with_context(check_name=False).create(
                 {

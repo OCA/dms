@@ -20,7 +20,7 @@ class Storage(models.Model):
     # Database
     # ----------------------------------------------------------
 
-    name = fields.Char(string="Name", required=True)
+    name = fields.Char(required=True)
 
     save_type = fields.Selection(
         selection=[
@@ -28,7 +28,6 @@ class Storage(models.Model):
             ("file", _("Filestore")),
             ("attachment", _("Attachment")),
         ],
-        string="Save Type",
         default="database",
         required=True,
         help="""The save type is used to determine how a file is saved by the

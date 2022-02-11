@@ -21,7 +21,6 @@ _logger = logging.getLogger(__name__)
 
 
 class DmsDirectory(models.Model):
-
     _name = "dms.directory"
     _description = "Directory"
 
@@ -44,7 +43,6 @@ class DmsDirectory(models.Model):
 
     parent_path = fields.Char(index=True)
     is_root_directory = fields.Boolean(
-        string="Is Root Directory",
         default=False,
         help="""Indicates if the directory is a root directory.
         A root directory has a settings object, while a directory with a set
@@ -102,9 +100,10 @@ class DmsDirectory(models.Model):
         readonly=True,
         store=True,
         compute_sudo=True,
+        recursive=True,
     )
     complete_name = fields.Char(
-        "Complete Name", compute="_compute_complete_name", store=True
+        compute="_compute_complete_name", store=True, recursive=True
     )
     child_directory_ids = fields.One2many(
         comodel_name="dms.directory",
@@ -141,7 +140,6 @@ class DmsDirectory(models.Model):
         compute="_compute_starred",
         inverse="_inverse_starred",
         search="_search_starred",
-        string="Starred",
     )
 
     file_ids = fields.One2many(
@@ -168,9 +166,7 @@ class DmsDirectory(models.Model):
         compute="_compute_count_files", string="Count Files"
     )
 
-    count_elements = fields.Integer(
-        compute="_compute_count_elements", string="Count Elements"
-    )
+    count_elements = fields.Integer(compute="_compute_count_elements")
 
     count_total_directories = fields.Integer(
         compute="_compute_count_total_directories", string="Total Subdirectories"
@@ -184,7 +180,7 @@ class DmsDirectory(models.Model):
         compute="_compute_count_total_elements", string="Total Elements"
     )
 
-    size = fields.Float(compute="_compute_size", string="Size")
+    size = fields.Float(compute="_compute_size")
 
     inherit_group_ids = fields.Boolean(string="Inherit Groups", default=True)
 
@@ -227,9 +223,10 @@ class DmsDirectory(models.Model):
         return result
 
     def _compute_access_url(self):
-        super()._compute_access_url()
+        res = super()._compute_access_url()
         for item in self:
             item.access_url = "/my/dms/directory/%s" % (item.id)
+        return res
 
     def check_access_token(self, access_token=False):
         res = False
@@ -307,8 +304,8 @@ class DmsDirectory(models.Model):
             if not record.res_model:
                 record.model_id = False
                 continue
-            record.model_id = self.env["ir.model"].search(
-                [("model", "=", record.res_model)]
+            record.model_id = (
+                self.env["ir.model"].sudo().search([("model", "=", record.res_model)])
             )
 
     def _inverse_model_id(self):
@@ -589,7 +586,7 @@ class DmsDirectory(models.Model):
 
     def _alias_get_creation_values(self):
         values = super()._alias_get_creation_values()
-        values["alias_model_id"] = self.env["ir.model"]._get("dms.directory").id
+        values["alias_model_id"] = self.env["ir.model"].sudo()._get("dms.directory").id
         if self.id:
             values["alias_defaults"] = defaults = ast.literal_eval(
                 self.alias_defaults or "{}"
@@ -645,7 +642,7 @@ class DmsDirectory(models.Model):
         # Hack to prevent error related to mail_message parent not exists in some cases
         ctx = dict(self.env.context).copy()
         ctx.update({"default_parent_id": False})
-        res = super(DmsDirectory, self.with_context(ctx)).create(vals_list)
+        res = super(DmsDirectory, self.with_context(**ctx)).create(vals_list)
         return res
 
     def write(self, vals):

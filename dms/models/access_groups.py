@@ -13,7 +13,7 @@ class DmsAccessGroups(models.Model):
     _parent_name = "parent_group_id"
 
     name = fields.Char(string="Group Name", required=True, translate=True)
-    parent_path = fields.Char(string="Parent Path", index=True)
+    parent_path = fields.Char(index=True)
 
     # Permissions written directly on this group
     perm_create = fields.Boolean(string="Create Access")
@@ -25,16 +25,19 @@ class DmsAccessGroups(models.Model):
         string="Inherited Create Access",
         compute="_compute_inclusive_permissions",
         store=True,
+        recursive=True,
     )
     perm_inclusive_write = fields.Boolean(
         string="Inherited Write Access",
         compute="_compute_inclusive_permissions",
         store=True,
+        recursive=True,
     )
     perm_inclusive_unlink = fields.Boolean(
         string="Inherited Unlink Access",
         compute="_compute_inclusive_permissions",
         store=True,
+        recursive=True,
     )
 
     directory_ids = fields.Many2many(
@@ -55,10 +58,8 @@ class DmsAccessGroups(models.Model):
         auto_join=True,
         readonly=True,
     )
-    count_users = fields.Integer(compute="_compute_users", string="Users", store=True)
-    count_directories = fields.Integer(
-        compute="_compute_count_directories", string="Count Directories"
-    )
+    count_users = fields.Integer(compute="_compute_users", store=True)
+    count_directories = fields.Integer(compute="_compute_count_directories")
     parent_group_id = fields.Many2one(
         comodel_name="dms.access.group",
         string="Parent Group",
@@ -94,6 +95,7 @@ class DmsAccessGroups(models.Model):
         compute="_compute_users",
         auto_join=True,
         store=True,
+        recursive=True,
     )
 
     @api.depends("directory_ids")

@@ -27,7 +27,7 @@
         <field name="name">dms_category.tree</field>
         <field name="model">dms.category</field>
         <field name="arch" type="xml">
-            <tree string="Categories" decoration-muted="(not active)">
+            <tree decoration-muted="(not active)">
                 <field name="active" />
                 <field name="name" />
                 <field name="parent_id" />

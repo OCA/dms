@@ -8,7 +8,7 @@ import unittest
 from odoo.modules.module import get_module_resource
 from odoo.tests import common, tagged
 from odoo.tools import convert_file
-from odoo.tools.profiler import profile
+from odoo.tools.misc import profile
 
 from .common import track_function
 
@@ -17,7 +17,7 @@ _logger = logging.getLogger(__name__)
 
 # This tests will only be executed if --test-tags benchmark is defined
 @tagged("-standard", "benchmark")
-class BenchmarkTestCase(common.SavepointCase):
+class BenchmarkTestCase(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(BenchmarkTestCase, cls).setUpClass()
