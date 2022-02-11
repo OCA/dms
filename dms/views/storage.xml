@@ -97,7 +97,7 @@
         <field name="name">dms_storage.tree</field>
         <field name="model">dms.storage</field>
         <field name="arch" type="xml">
-            <tree string="Storages">
+            <tree>
                 <field name="name" />
                 <field name="save_type" />
                 <field name="is_hidden" />
@@ -109,7 +109,7 @@
         <field name="name">dms_storage.form</field>
         <field name="model">dms.storage</field>
         <field name="arch" type="xml">
-            <form string="Storage">
+            <form>
                 <header>
                     <button
                         name="action_storage_migrate"
@@ -195,7 +195,7 @@
                                 groups="dms.group_dms_manager"
                                 context="{'hide_root_storage': True,'default_storage_id': active_id, 'default_is_root_directory': True}"
                             >
-                                <tree string="Root Directories">
+                                <tree>
                                     <field name="name" />
                                     <field name="count_total_directories" />
                                     <field name="count_total_files" />

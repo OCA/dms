@@ -16,8 +16,9 @@ except ImportError:
 
 class FileFilestoreTestCase(FileTestCase):
     def _setup_test_data(self):
-        super(FileFilestoreTestCase, self)._setup_test_data()
+        res = super(FileFilestoreTestCase, self)._setup_test_data()
         self.new_storage.write({"save_type": "file"})
+        return res
 
     def test_file_access(self):
         user_a = self.env["res.users"].create(
@@ -78,10 +79,12 @@ class FileFilestoreTestCase(FileTestCase):
         self.assertTrue(lobject_file.with_context(stream=True).content_file)
         oid = lobject_file.with_context(oid=True).content_file
         self.assertTrue(oid)
-        lobject_file.with_context(show_content=True).write(
+        lobject_file.with_context(**{"show_content": True}).write(
             {"content": base64.b64encode(b"\xff new content")}
         )
-        self.assertNotEqual(oid, lobject_file.with_context({"oid": True}).content_file)
+        self.assertNotEqual(
+            oid, lobject_file.with_context(**{"oid": True}).content_file
+        )
         self.assertTrue(lobject_file.export_data(["content"]))
         lobject_file.unlink()
 
