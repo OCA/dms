@@ -10,14 +10,11 @@
     "license": "LGPL-3",
     "website": "https://github.com/OCA/dms",
     "author": "MuK IT, Tecnativa, Odoo Community Association (OCA)",
-    "depends": ["dms"],
-    "external_dependencies": {"python": ["bsdiff4"]},
+    "depends": ["dms", "base_revision"],
     "data": [
-        "security/security.xml",
-        "security/ir.model.access.csv",
         "views/dms_file_view.xml",
-        "views/dms_version_view.xml",
         "views/dms_storage_view.xml",
     ],
+    "maintainers": ["victoralmau"],
     "application": False,
 }

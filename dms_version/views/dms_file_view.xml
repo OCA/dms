@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
     Copyright 2017-2020 MuK IT GmbH
+    Copyright 2021 Tecnativa - Víctor Martínez
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
   -->
 <odoo>
-    <record id="action_dms_versions_file" model="ir.actions.act_window">
-        <field name="name">Versions</field>
-        <field name="res_model">dms.version</field>
+    <record id="action_dms_revisions_file" model="ir.actions.act_window">
+        <field name="name">Revisions</field>
+        <field name="res_model">dms.file</field>
         <field name="view_mode">tree</field>
-        <field name="context">{'default_file_id': active_id}</field>
+        <field
+            name="domain"
+        >["|", ("active", "=", False), ("active", "=", True)]</field>
+        <field
+            name="context"
+        >{'search_default_current_revision_id': active_id, 'default_current_revision_id': active_id}</field>
+    </record>
+    <record id="search_dms_file" model="ir.ui.view">
+        <field name="name">dms_file.search</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.search_dms_file" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="current_revision_id" invisible="1" />
+            </field>
+        </field>
+    </record>
+    <record id="view_dms_file_tree" model="ir.ui.view">
+        <field name="name">dms_file.tree</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="current_revision_id" />
+                <field name="revision_number" />
+                <field name="unrevisioned_name" />
+            </field>
+            <field name="tag_ids" position="after">
+                <field name="revision_count" />
+            </field>
+        </field>
     </record>
     <record id="view_dms_file_kanban" model="ir.ui.view">
         <field name="name">dms.kanban</field>
@@ -16,28 +47,17 @@
         <field name="inherit_id" ref="dms.view_dms_file_kanban" />
         <field name="arch" type="xml">
             <xpath expr="//templates" position="before">
-                <field name="versions_count" />
-            </xpath>
-            <xpath expr="//a[@t-attf-href]" position="after">
-                <a
-                    t-if="record.versions_count.raw_value > 0"
-                    role="menuitem"
-                    class="dropdown-item"
-                    type="object"
-                    name="action_revert_version"
-                >
-                    <i class="fa fa-undo" /> Revert Version
-                </a>
+                <field name="revision_count" />
             </xpath>
             <xpath expr="//a[@type='delete']" position="after">
                 <a
-                    t-if="record.versions_count.raw_value > 0"
+                    t-if="record.revision_count.raw_value > 0"
                     role="menuitem"
                     class="dropdown-item"
                     type="action"
-                    name="%(dms_version.action_dms_versions_file)d"
+                    name="%(dms_version.action_dms_revisions_file)d"
                 >
-                    <i class="fa fa-paperclip" /> Versions
+                    <i class="fa fa-paperclip" /> Revisions
                 </a>
             </xpath>
         </field>
@@ -47,31 +67,49 @@
         <field name="model">dms.file</field>
         <field name="inherit_id" ref="dms.view_dms_file_form" />
         <field name="arch" type="xml">
-            <xpath expr="//header" position="inside">
+            <xpath expr="//header" postion='inside'>
+                <field name="has_versioning" invisible="1" />
                 <button
-                    name="action_revert_version"
+                    name="create_revision"
+                    string="New Version of file"
                     type="object"
-                    string="Revert Version"
-                    attrs="{'invisible':[('versions_count', '=', 0)]}"
-                />
-                <button
-                    name="action_delete_versions"
-                    type="object"
-                    string="Delete Versions"
-                    attrs="{'invisible':[('versions_count', '=', 0)]}"
+                    attrs="{'invisible': ['|', ('has_versioning', '=', False),('current_revision_id', '!=', False)]}"
                 />
             </xpath>
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button
-                    type="action"
-                    name="%(dms_version.action_dms_versions_file)d"
-                    icon="fa-paperclip"
-                    attrs="{'invisible':[('versions_count', '=', 0)]}"
+                    name="action_view_revision"
+                    type="object"
                     class="oe_stat_button"
+                    icon="fa-paperclip"
+                    attrs="{'invisible': [('revision_count', '=', 0)]}"
                 >
-                    <field string="Versions" name="versions_count" widget="statinfo" />
+                    <field name="revision_count" widget="statinfo" string="Revisions" />
                 </button>
             </xpath>
+            <page name="page_access" position="after">
+                <page
+                    string="Revisions"
+                    attrs="{'invisible': ['&amp;',('has_old_revisions', '=', False), ('current_revision_id', '=', False)]}"
+                >
+                    <field
+                        name="old_revision_ids"
+                        domain="['|', ('active', '=', False), ('active', '=', True)]"
+                        context="{'active_test': 0}"
+                        attrs="{'invisible': [('has_old_revisions', '=', False)]}"
+                    >
+                        <tree>
+                            <field name="name" />
+                            <field name="create_date" string="Superseeded on" />
+                            <field name="create_uid" string="Superseeded by" />
+                        </tree>
+                    </field>
+                    <group attrs="{'invisible': [('current_revision_id', '=', False)]}">
+                        <field name="current_revision_id" />
+                        <field name="has_old_revisions" invisible="1" />
+                    </group>
+                </page>
+            </page>
         </field>
     </record>
 </odoo>

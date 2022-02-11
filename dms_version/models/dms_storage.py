@@ -14,4 +14,4 @@ class DmsStorage(models.Model):
     )
 
     def action_delete_file_versions(self):
-        self.mapped("storage_file_ids.version_ids").unlink()
+        self.mapped("storage_file_ids.old_revision_ids").unlink()

@@ -7,119 +7,123 @@ msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-16 09:05+0000\n"
-"PO-Revision-Date: 2022-05-16 09:05+0000\n"
+"PO-Revision-Date: 2022-05-16 11:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 2.3\n"
 
 #. module: dms_version
 #: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_kanban
 msgid "<i class=\"fa fa-paperclip\"/> Revisions"
-msgstr ""
+msgstr "<i class=\"fa fa-paperclip\"/> Revisiones"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__active
 msgid "Archived"
-msgstr ""
+msgstr "Archivado"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__current_revision_id
 msgid "Current revision"
-msgstr ""
+msgstr "Revisión actual"
 
 #. module: dms_version
 #: model_terms:ir.ui.view,arch_db:dms_version.view_dms_storage_form
 msgid "Delete Versions"
-msgstr ""
+msgstr "Eliminar versiones"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__display_name
 #: model:ir.model.fields,field_description:dms_version.field_dms_storage__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre a mostrar"
 
 #. module: dms_version
 #: model:ir.model,name:dms_version.model_dms_file
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__has_old_revisions
 msgid "Has Old Revisions"
-msgstr ""
+msgstr "Tiene revisiones antiguas"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_storage__has_versioning
 msgid "Has Versioning"
-msgstr ""
+msgstr "Tiene revisiones"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__id
 #: model:ir.model.fields,field_description:dms_version.field_dms_storage__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: dms_version
 #: model:ir.model.fields,help:dms_version.field_dms_file__active
 msgid "If a file is set to archived, it is not displayed, but still exists."
 msgstr ""
+"Si un archivo está definido como archivado, no se mostrará, pero todavía "
+"existe."
 
 #. module: dms_version
 #: model:ir.model.fields,help:dms_version.field_dms_storage__has_versioning
 msgid "Indicates if files have an active version control."
-msgstr ""
+msgstr "Indica si el archivo tiene un control de revisiones activo."
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file____last_update
 #: model:ir.model.fields,field_description:dms_version.field_dms_storage____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación el"
 
 #. module: dms_version
 #: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_form
 msgid "New Version of file"
-msgstr ""
+msgstr "Nueva revisión del archivo"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__old_revision_ids
 msgid "Old revisions"
-msgstr ""
+msgstr "Revisiones antiguas"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__unrevisioned_name
 msgid "Original Reference"
-msgstr ""
+msgstr "Referencia original"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__revision_count
 msgid "Previous versions count"
-msgstr ""
+msgstr "Nº de revisiones anteriores"
 
 #. module: dms_version
 #: model:ir.model.fields,field_description:dms_version.field_dms_file__revision_number
 msgid "Revision"
-msgstr ""
+msgstr "Revisión"
 
 #. module: dms_version
 #: model:ir.actions.act_window,name:dms_version.action_dms_revisions_file
 #: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_form
 msgid "Revisions"
-msgstr ""
+msgstr "Revisiones"
 
 #. module: dms_version
 #: model:ir.model,name:dms_version.model_dms_storage
 msgid "Storage"
-msgstr ""
+msgstr "Almacenamiento"
 
 #. module: dms_version
 #: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_form
 msgid "Superseeded by"
-msgstr ""
+msgstr "Sustituido por"
 
 #. module: dms_version
 #: model_terms:ir.ui.view,arch_db:dms_version.view_dms_file_form
 msgid "Superseeded on"
-msgstr ""
+msgstr "Reemplazo en"
