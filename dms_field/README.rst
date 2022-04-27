@@ -23,7 +23,7 @@ DMS Field
     :target: https://runbot.odoo-community.org/runbot/292/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This addon creates a new kind of view and allows to define a folder
 related to a record.
