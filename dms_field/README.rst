@@ -10,9 +10,9 @@ DMS Field
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
-    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
-    :alt: License: AGPL-3
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
+    :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
+    :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdms-lightgray.png?logo=github
     :target: https://github.com/OCA/dms/tree/13.0/dms_field
     :alt: OCA/dms
@@ -23,7 +23,7 @@ DMS Field
     :target: https://runbot.odoo-community.org/runbot/292/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This addon creates a new kind of view and allows to define a folder
 related to a record.
