@@ -43,6 +43,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                 autocompute_directory = true;
                 show_storage = false;
             }
+            console.log(params);
             this.params = $.extend(
                 true,
                 {},
@@ -63,8 +64,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                         show: true,
                     },
                     initial: undefined,
-                },
-                params || {}
+                }
             );
         },
         _onDMSLoad: function (ev) {
@@ -448,7 +448,7 @@ odoo.define("dms.DmsTreeController", function (require) {
             return {
                 id: dt.id,
                 text: dt.data.display_name,
-                icon: mimetype.mimetype2fa(dt.data.res_mimetype, {prefix: "fa fa-"}),
+                icon: mimetype.mimetype2fa(dt.data.mimetype, {prefix: "fa fa-"}),
                 type: "file",
                 data: dt,
             };
@@ -456,7 +456,8 @@ odoo.define("dms.DmsTreeController", function (require) {
         _onDMSPreviewFile: function (ev) {
             var record = this._getDataPoint(ev.data.id, {raw: true});
             var fieldName = "content";
-            var file_mimetype = record.data.res_mimetype;
+            console.log(record.data);
+            var file_mimetype = record.data.mimetype;
             var type = file_mimetype.split("/").shift();
             if (
                 type === "video" ||
@@ -467,9 +468,9 @@ odoo.define("dms.DmsTreeController", function (require) {
                     this,
                     [
                         {
-                            mimetype: record.data.res_mimetype,
+                            mimetype: record.data.mimetype,
                             id: record.data.id,
-                            fileType: record.data.res_mimetype,
+                            fileType: record.data.mimetype,
                             name: record.data.name,
                         },
                     ],
