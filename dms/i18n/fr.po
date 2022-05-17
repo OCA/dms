@@ -215,6 +215,14 @@ msgid "<span class=\"o_form_label\">File Size</span>"
 msgstr "<span class=\"o_form_label\">Taille fichier</span>"
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid ""
+"<span class=\"oe_read_only\">@</span>\n"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
 msgid "<span>Documents</span>"
 msgstr "<span>Documents</span>"
@@ -421,6 +429,9 @@ msgstr "Applications"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__active
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Archived"
 msgstr "Archivé"
 
@@ -464,7 +475,6 @@ msgstr "Annuler"
 #: model:ir.actions.act_window,name:dms.action_dms_category
 #: model:ir.ui.menu,name:dms.menu_dms_category
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_search
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_tree
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Categories"
 msgstr "Catégories"
@@ -661,6 +671,11 @@ msgid "Count Tags"
 msgstr "Nombre d'étiquettes"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__count_users
+msgid "Count Users"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
@@ -855,24 +870,16 @@ msgstr ""
 #: model:ir.model,name:dms.model_dms_directory
 #: model:ir.model.fields,field_description:dms.field_dms_file__directory_id
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Directory"
 msgstr "Dossier"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_category__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_file__display_name
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__display_name
-#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__display_name
-#: model:ir.model.fields,field_description:dms.field_ir_attachment__display_name
-#: model:ir.model.fields,field_description:dms.field_mail_thread__display_name
-#: model:ir.model.fields,field_description:dms.field_res_company__display_name
-#: model:ir.model.fields,field_description:dms.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "Afficher le nom"
 
@@ -1016,8 +1023,6 @@ msgstr "Téléchargement de fichiers"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_tree
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_migration_tree
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_tree
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Files"
@@ -1046,12 +1051,6 @@ msgstr "Stockage de fichiers"
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_follower_ids
 msgid "Followers"
 msgstr "Abonnés"
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__message_channel_ids
-#: model:ir.model.fields,field_description:dms.field_dms_file__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Abonnés (Canaux)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_partner_ids
@@ -1099,10 +1098,15 @@ msgstr "Utilisateurs du groupe"
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__group_ids
 #: model:ir.model.fields,field_description:dms.field_dms_directory__group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_tree
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Groups"
 msgstr "Groupes"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__has_message
+#: model:ir.model.fields,field_description:dms.field_dms_file__has_message
+msgid "Has Message"
+msgstr ""
 
 #. module: dms
 #: model:dms.category,name:dms.category_02_demo
@@ -1110,19 +1114,12 @@ msgid "Human Resource"
 msgstr "Ressource humaine"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__id
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__id
 #: model:ir.model.fields,field_description:dms.field_dms_category__id
 #: model:ir.model.fields,field_description:dms.field_dms_directory__id
 #: model:ir.model.fields,field_description:dms.field_dms_file__id
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__id
-#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__id
 #: model:ir.model.fields,field_description:dms.field_dms_storage__id
 #: model:ir.model.fields,field_description:dms.field_dms_tag__id
-#: model:ir.model.fields,field_description:dms.field_ir_attachment__id
-#: model:ir.model.fields,field_description:dms.field_mail_thread__id
-#: model:ir.model.fields,field_description:dms.field_res_company__id
-#: model:ir.model.fields,field_description:dms.field_res_config_settings__id
 msgid "ID"
 msgstr ""
 
@@ -1348,19 +1345,12 @@ msgid "Just done"
 msgstr "Vient d'être réalisé"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_access_group____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_category____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_directory____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_file____last_update
-#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail____last_update
-#: model:ir.model.fields,field_description:dms.field_dms_security_mixin____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_storage____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_tag____last_update
-#: model:ir.model.fields,field_description:dms.field_ir_attachment____last_update
-#: model:ir.model.fields,field_description:dms.field_mail_thread____last_update
-#: model:ir.model.fields,field_description:dms.field_res_company____last_update
-#: model:ir.model.fields,field_description:dms.field_res_config_settings____last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
@@ -1428,8 +1418,8 @@ msgstr "Verrouillé"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
-msgid "Locked by"
-msgstr "Verrouillé par"
+msgid "Locked By"
+msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_main_attachment_id
@@ -1473,8 +1463,8 @@ msgstr "Migrer"
 #. module: dms
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
-msgid "Migrate File %s of %s [ %s ]"
-msgstr "Migrer le fichier %s sur %s [ %s ]"
+msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
+msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
@@ -1899,7 +1889,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file_migration
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Storage"
 msgstr "Stockage"
 
@@ -1915,7 +1904,6 @@ msgstr "Stockage est masqué"
 #: model:ir.actions.act_window,name:dms.action_dms_storage
 #: model:ir.ui.menu,name:dms.menu_dms_storage
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_tree
 msgid "Storages"
 msgstr "Stockages"
 
@@ -1964,7 +1952,6 @@ msgstr "Le nom de l'étiquette existe déjà !"
 #: model:ir.model.fields,field_description:dms.field_dms_file__tag_ids
 #: model:ir.ui.menu,name:dms.menu_dms_tag
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_tree
 msgid "Tags"
 msgstr "Etiquettes"
 
@@ -2161,7 +2148,6 @@ msgid "User"
 msgstr "Utilisateur"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_access_group__count_users
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Users"
 msgstr "Utilisateurs"
@@ -2246,6 +2232,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Abonnés (Canaux)"
+
+#~ msgid "Locked by"
+#~ msgstr "Verrouillé par"
+
+#~ msgid "Migrate File %s of %s [ %s ]"
+#~ msgstr "Migrer le fichier %s sur %s [ %s ]"
 
 #~ msgid "Drop your files here"
 #~ msgstr "Déposez vos fichiers ici"
