@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="dms_directory_form_view">
+        <field name="name">dms.directory.form (in dms_action)</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="action" string="Actions">
+                    <field name="dms_action_ids" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+
+
+</odoo>

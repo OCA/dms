@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="dms_file_form_view">
+        <field name="name">dms.file.form (in dms_action)</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form" />
+        <field name="arch" type="xml">
+            <header position="after">
+                <div
+                    class="alert alert-info"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    attrs="{'invisible': [('with_actions', '=', False)]}"
+                >
+                    <span>Some actions can be executed: </span>
+                    <field name="action_button" widget="dms_action" />
+                    <field name="with_actions" invisible="1" />
+                </div>
+            </header>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_dms_file_kanban">
+        <field name="name">dms.file.form (in dms_action)</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//a[@name='lock']" position="after">
+                <field name="action_button" widget="dms_action_button" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
