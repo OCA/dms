@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -133,6 +133,7 @@ msgstr ""
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field__unknown__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_abstract_dms_mixin__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_auth_totp_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_document_layout__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_import_import__dms_directory_ids
@@ -175,7 +176,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_dms_security_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_storage__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_tag__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_email_template_preview__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_fetchmail_server__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_format_address_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_iap_account__dms_directory_ids
@@ -227,6 +227,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_float_time__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_html__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_image__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_image_url__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_integer__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_many2many__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_many2one__dms_directory_ids
@@ -246,10 +247,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity_type__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_mail_address_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_alias__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_alias_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_blacklist__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_blacklist_remove__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_bot__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_compose_message__dms_directory_ids
@@ -259,11 +261,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_mail_message_subtype__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_moderation__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_notification__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_render_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_resend_cancel__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_resend_message__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_resend_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_shortcode__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_template__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_template_preview__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_thread__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_thread_blacklist__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_thread_cc__dms_directory_ids
@@ -271,6 +275,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_mail_tracking_value__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_wizard_invite__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_phone_blacklist__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_phone_blacklist_remove__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_phone_validation_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_portal_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_portal_share__dms_directory_ids
@@ -299,6 +304,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_industry__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_title__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_res_users_apikeys__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_res_users_apikeys_description__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_res_users_apikeys_show__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_res_users_identitycheck__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_log__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_reset_view_arch_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_sms_api__dms_directory_ids
@@ -309,6 +318,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_sms_sms__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_sms_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_sms_template_preview__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_snailmail_confirm__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_snailmail_letter__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_cancel__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_format_error__dms_directory_ids
@@ -360,6 +370,10 @@ msgstr ""
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__display_name
+#: model:ir.model.fields,field_description:dms_field.field_dms_directory__display_name
+#: model:ir.model.fields,field_description:dms_field.field_dms_storage__display_name
+#: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window_view__display_name
+#: model:ir.model.fields,field_description:dms_field.field_ir_ui_view__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -436,6 +450,10 @@ msgstr ""
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__id
+#: model:ir.model.fields,field_description:dms_field.field_dms_directory__id
+#: model:ir.model.fields,field_description:dms_field.field_dms_storage__id
+#: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window_view__id
+#: model:ir.model.fields,field_description:dms_field.field_ir_ui_view__id
 msgid "ID"
 msgstr ""
 
@@ -462,6 +480,10 @@ msgstr ""
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record____last_update
+#: model:ir.model.fields,field_description:dms_field.field_dms_directory____last_update
+#: model:ir.model.fields,field_description:dms_field.field_dms_storage____last_update
+#: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window_view____last_update
+#: model:ir.model.fields,field_description:dms_field.field_ir_ui_view____last_update
 msgid "Last Modified on"
 msgstr ""
 
