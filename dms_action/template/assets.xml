@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    Copyright 2020 CreuBlanca
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo>
+    <template id="assets_backend" name="dms_assets" inherit_id="web.assets_backend">
+        <xpath expr="//link[last()]" position="after">
+            <link
+                rel="stylesheet"
+                href="/dms_action/static/src/scss/file_kanban.scss"
+            />
+            <link
+                rel="stylesheet"
+                href="/dms_action/static/src/scss/dms_action_widget.scss"
+            />
+            <script
+                type="text/javascript"
+                src="/dms_action/static/src/js/dms_action_button_widget.js"
+            />
+            <script
+                type="text/javascript"
+                src="/dms_action/static/src/js/dms_action_widget.js"
+            />
+        </xpath>
+    </template>
+</odoo>

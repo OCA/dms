@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="dms_action.FieldDMSAction">
+        <div>
+
+        <t t-foreach="widget.value" t-as="value_id">
+            <t t-value="widget.value[value_id]" t-set="value" />
+            <button
+                    t-att-data-name="value_id"
+                    class="o_dms_play_action btn btn-icon btn-primary"
+                    type="object"
+                >
+                <i t-att-class="'fa ' + value['icon']" t-if="value['icon']" />
+                <t t-esc="value.name" />
+            </button>
+        </t>
+        </div>
+    </t>
+    <t t-name="dms_action.FieldDMSActionButton">
+        <t t-foreach="widget.value" t-as="value_id">
+            <t t-value="widget.value[value_id]" t-set="value" />
+            <a
+                role="menuitem"
+                data-type="object"
+                data-name="execute_action"
+                t-attf-data-args="{'action_id': #{ value_id } }"
+                class="dropdown-item oe_kanban_action"
+            >
+                <i t-att-class="'fa ' + value['icon']" t-if="value['icon']" />
+                <t t-esc="value.name" />
+            </a>
+        </t>
+    </t>
+</templates>
