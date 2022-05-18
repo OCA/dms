@@ -1,9 +1,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models
+import odoo
+from odoo import api, fields
+
+from odoo.addons.web.models import models
 
 
-class AbstractDmsMixin(models.AbstractModel):
+class AbstractDmsMixin(odoo.models.AbstractModel):
     _name = "abstract.dms.mixin"
     _description = "Abstract Dms Mixin"
 
@@ -33,3 +36,13 @@ class AbstractDmsMixin(models.AbstractModel):
         context="{'dms_category_show_path': True}",
         string="Category",
     )
+
+    @api.model
+    def search_panel_select_range(self, field_name):
+        """We need to override function to prevent 200 records limit in search panel"""
+        old_value = models.SEARCH_PANEL_LIMIT
+        models.SEARCH_PANEL_LIMIT = False
+        _self = self.with_context(directory_short_name=True)
+        res = super(AbstractDmsMixin, _self).search_panel_select_range(field_name)
+        models.SEARCH_PANEL_LIMIT = old_value
+        return res
