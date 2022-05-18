@@ -2204,6 +2204,13 @@ msgstr "o_onboarding_orange"
 msgid "res.company"
 msgstr "res.company"
 
+#. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/xml/views.xml:0
+#, python-format
+msgid "value.display_name"
+msgstr ""
+
 #~ msgid "Drop your files here"
 #~ msgstr "Arrastra tus archivos aquí"
 
