@@ -1,9 +1,11 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo.exceptions import UserError
+
+from odoo.addons.web.models.models import SEARCH_PANEL_LIMIT
 
 from .common import DocumentsBaseCase, multi_users
 
@@ -152,3 +154,19 @@ class DirectoryTestCase(DocumentsBaseCase):
         self.assertTrue(self.directory.search_panel_select_multi_range("parent_id"))
         self.assertTrue(self.directory.search_panel_select_multi_range("category_id"))
         self.assertTrue(self.directory.search_panel_select_multi_range("tag_ids"))
+
+    def test_directory_search_panel_limit(self):
+        self.directory_sub_demo_01 = self.browse_ref("dms.directory_04_demo")
+        limit = SEARCH_PANEL_LIMIT + 20
+        for number in range(limit):
+            self.directory.sudo().create(
+                {
+                    "name": "Test Directory %s" % str(number),
+                    "parent_id": self.directory_sub_demo_01.parent_id.id,
+                    "storage_id": self.directory_sub_demo_01.storage_id.id,
+                }
+            )
+        res = self.directory.search_panel_select_range("parent_id")
+        self.assertGreaterEqual(len(res["values"]), limit)
+        res = self.file.search_panel_select_range("directory_id")
+        self.assertGreaterEqual(len(res["values"]), limit)
