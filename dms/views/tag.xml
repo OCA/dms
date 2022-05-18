@@ -102,7 +102,6 @@
         <field name="model">dms.tag</field>
         <field name="arch" type="xml">
             <tree string="Tags">
-                <field name="active" />
                 <field name="name" />
                 <field name="category_id" />
                 <field name="color" widget="color_index" />
@@ -115,6 +114,12 @@
         <field name="arch" type="xml">
             <form string="Tag">
                 <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
                     <div class="oe_button_box" name="button_box" />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />

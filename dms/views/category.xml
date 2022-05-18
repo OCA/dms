@@ -27,8 +27,7 @@
         <field name="name">dms_category.tree</field>
         <field name="model">dms.category</field>
         <field name="arch" type="xml">
-            <tree string="Categories" decoration-muted="(not active)">
-                <field name="active" />
+            <tree string="Categories">
                 <field name="name" />
                 <field name="parent_id" />
                 <field name="tag_ids" />
@@ -41,6 +40,12 @@
         <field name="arch" type="xml">
             <form string="Category">
                 <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
                     <div class="oe_button_box" name="button_box" />
                     <div class="oe_title">
                         <label for="name" class="oe_edit_only" />
