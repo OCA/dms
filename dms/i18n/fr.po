@@ -421,6 +421,9 @@ msgstr "Applications"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__active
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Archived"
 msgstr "Archivé"
 

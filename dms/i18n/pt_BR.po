@@ -22,11 +22,14 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -418,6 +421,9 @@ msgstr "Aplicativos"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__active
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Archived"
 msgstr "Arquivado"
 
@@ -1122,8 +1128,8 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
 
 #. module: dms
@@ -1224,16 +1230,15 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
-"Indicate if directories and files access work only with related model access"
-" (for example, if some directories are related with any sale, only users "
-"with read access to these sale can acess)"
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can acess)"
 msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid ""
-"Indicate if directories and files auto-create in mail composition process "
-"too"
+"Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 
 #. module: dms
@@ -1248,7 +1253,8 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 
@@ -1391,7 +1397,6 @@ msgstr ""
 #. module: dms
 #. openerp-web
 #: code:addons/dms/static/src/xml/views.xml:0
-#: code:addons/dms/static/src/xml/views.xml:0
 #, python-format
 msgid "Loading"
 msgstr ""
@@ -1504,9 +1509,6 @@ msgid "My Files"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
 #: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__name
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
@@ -1671,8 +1673,8 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
 
@@ -1702,7 +1704,8 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 
 #. module: dms
@@ -1993,9 +1996,9 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 
 #. module: dms
