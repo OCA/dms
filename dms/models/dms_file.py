@@ -289,14 +289,21 @@ class File(models.Model):
         operator, directory_id = self._search_panel_directory(**kwargs)
         if directory_id and field_name == "directory_id":
             domain = [("parent_id", operator, directory_id)]
-            values = self.env["dms.directory"].search_read(
-                domain, ["display_name", "parent_id"]
+            values = (
+                self.env["dms.directory"]
+                .with_context(directory_short_name=True)
+                .search_read(domain, ["display_name", "parent_id"])
             )
             return {
                 "parent_field": "parent_id",
                 "values": values if len(values) > 1 else [],
             }
-        return super().search_panel_select_range(field_name, **kwargs)
+        context = {}
+        if field_name == "directory_id":
+            context["directory_short_name"] = True
+        return super(File, self.with_context(**context)).search_panel_select_range(
+            field_name, **kwargs
+        )
 
     @api.model
     def search_panel_select_multi_range(self, field_name, **kwargs):
