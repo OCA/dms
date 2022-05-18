@@ -69,9 +69,4 @@
             />
         </t>
     </t>
-    <t t-extend="SearchPanel.CategoryValues">
-        <t t-jquery=".o_search_panel_label" t-operation="attributes">
-            <attribute name="t-att-title">value.display_name</attribute>
-        </t>
-    </t>
 </templates>
