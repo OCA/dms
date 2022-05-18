@@ -2250,6 +2250,13 @@ msgstr ""
 msgid "res.company"
 msgstr ""
 
+#. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/xml/views.xml:0
+#, python-format
+msgid "value.display_name"
+msgstr ""
+
 #~ msgid "Drop your files here"
 #~ msgstr "Déposez vos fichiers ici"
 
