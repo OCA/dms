@@ -478,7 +478,7 @@
                         <field name="allowed_model_ids" invisible="True" />
                         <field
                             name="model_id"
-                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')], 'readonly': [('count_total_files', '>', 0)], 'required': [('storage_id_save_type','=','attachment')]}"
+                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')], 'readonly': [('count_total_files', '>', 0)]}"
                         />
                         <field name="res_model" invisible="1" force_save="1" />
                         <field
