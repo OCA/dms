@@ -182,7 +182,7 @@ class CustomerPortal(CustomerPortal):
             else:
                 return request.redirect("/my")
 
-        dms_file_sudo = res
+        dms_file_sudo = res.sudo()
         filecontent = base64.b64decode(dms_file_sudo.content)
         content_type = ["Content-Type", "application/octet-stream"]
         disposition_content = [
