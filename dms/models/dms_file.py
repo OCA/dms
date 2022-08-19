@@ -360,7 +360,7 @@ class File(models.Model):
                     {
                         "model": model._name,
                         "name": current_dir.name,
-                        "id": current_dir.id,
+                        "id": isinstance(record.id, int) and record.id or 0,
                     },
                 )
                 current_dir = current_dir.parent_id
