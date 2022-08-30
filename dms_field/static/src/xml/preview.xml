@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="dms.DocumentTreeViewDirectoryPreview">
+        <div class="o_preview_directory">
+            <div class="o_preview_directory_header">
+                <h3>
+                    <t t-esc="dms_object.data.name" />
+                </h3>
+            </div>
+            <div class="o_preview_directory_body">
+                <div class="o_preview_directory_icon" align="center">
+                    <div>
+                        <img
+                            class="h-100 w-100"
+                            t-att-src="dms_object.data.thumbnail_link"
+                        />
+                    </div>
+                    <div>
+                        <button
+                            class="btn btn-primary o_preview_file"
+                            t-if="dms_object.model === 'dms.file'"
+                            t-att-data-id="dms_object.id"
+                        >
+                            Preview/download
+                        </button>
+                    </div>
+                    <div>
+                        <button
+                            class="btn btn-primary o_open_file"
+                            t-att-data-id="dms_object.id"
+                        >
+                            Open
+                        </button>
+                    </div>
+                </div>
+                <div class="o_preview_directory_table_body">
+                    <table class="table o_preview_directory_table">
+                        <tbody>
+                            <tr>
+                                <td>Name:</td>
+                                <td>
+                                    <t t-esc="dms_object.data.name" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Read:</td>
+                                <td>
+                                    <t t-if="dms_object.data.perm_read">
+                                        yes
+                                    </t>
+                                    <t t-else="">
+                                        no
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Create:</td>
+                                <td>
+                                    <t t-if="dms_object.data.perm_create">
+                                        yes
+                                    </t>
+                                    <t t-else="">
+                                        no
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Write:</td>
+                                <td>
+                                    <t t-if="dms_object.data.perm_write">
+                                        yes
+                                    </t>
+                                    <t t-else="">
+                                        no
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Delete:</td>
+                                <td>
+                                    <t t-if="dms_object.data.perm_delete">
+                                        yes
+                                    </t>
+                                    <t t-else="">
+                                        no
+                                    </t>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
