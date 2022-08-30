@@ -78,20 +78,6 @@ class DmsDirectory(models.Model):
             "children": directory.count_elements > 0,
         }
 
-    def _build_documents_view_initial(self):
-        if len(self) == 1:
-            return [self._build_documents_view_directory(self)]
-        else:
-            initial_data = []
-            subdirectories = self.env["dms.directory"]
-            for record in self.with_context(prefetch_fields=False):
-                subdirectories |= (
-                    record.search([("parent_id", "child_of", record.id)]) - record
-                )
-            for record in self - subdirectories:
-                initial_data.append(record._build_documents_view_directory(record))
-            return initial_data
-
     @api.model
     def _check_parent_field(self):
         if self._parent_name not in self._fields:
@@ -202,47 +188,3 @@ class DmsDirectory(models.Model):
         # pylint: disable=sql-injection
         self._cr.execute(query_str, complete_where_clause_params)
         return list({x[0] for x in self._cr.fetchall()})
-
-    @api.model
-    def search_childs(
-        self, parent_id, domain=False, offset=0, limit=None, order=None, count=False
-    ):
-        """This method finds the direct child elements of the parent
-        record for a given search query.
-
-        :param parent_id: the integer representing the ID of the parent record
-        :param domain: a search domain <reference/orm/domains> (default: empty list)
-        :param offset: the number of results to ignore (default: none)
-        :param limit: maximum number of records to return (default: all)
-        :param order: a string to define the sort order of the query
-             (default: none)
-        :param count: counts and returns the number of matching records
-             (default: False)
-        :returns: the top level elements for the given search query
-        """
-        if not domain:
-            domain = []
-        domain = self._build_search_childs_domain(parent_id, domain=domain)
-        return self.search(domain, offset=offset, limit=limit, order=order, count=count)
-
-    @api.model
-    def search_read_childs(
-        self, parent_id, domain=False, fields=None, offset=0, limit=None, order=None
-    ):
-        """This method finds the direct child elements of the parent
-        record for a given search query.
-
-        :param parent_id: the integer representing the ID of the parent record
-        :param domain: a search domain <reference/orm/domains> (default: empty list)
-        :param fields: a list of fields to read (default: all fields of the model)
-        :param offset: the number of results to ignore (default: none)
-        :param limit: maximum number of records to return (default: all)
-        :param order: a string to define the sort order of the query (default: none)
-        :returns: the top level elements for the given search query
-        """
-        if not domain:
-            domain = []
-        domain = self._build_search_childs_domain(parent_id, domain=domain)
-        return self.search_read(
-            domain=domain, fields=fields, offset=offset, limit=limit, order=order
-        )
