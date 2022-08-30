@@ -2,10 +2,10 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo.exceptions import ValidationError
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class TestDmsField(SavepointCase):
+class TestDmsField(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -95,3 +95,32 @@ class TestDmsField(SavepointCase):
         self.partner.refresh()
         self.assertTrue(self.partner.dms_directory_ids)
         self.assertEqual(self.storage, self.partner.dms_directory_ids.storage_id)
+
+    def test_js_tree(self):
+        self.assertTrue(
+            any(
+                r["id"] == "storage_%s" % self.storage.id
+                for r in self.storage.get_js_tree_data()
+            )
+        )
+
+    def test_parents(self):
+        directory = self.env["dms.directory"].create(
+            self._create_directory_vals(self.partner)
+        )
+        self.assertEqual(
+            directory.search_read_parents([("id", "=", directory.id)], fields=["id"])[
+                0
+            ],
+            {"id": directory.id},
+        )
+        self.assertEqual(
+            directory.search_read_parents(
+                [("id", "=", directory.id)], fields=["id", "name"]
+            )[0],
+            {"id": directory.id, "name": directory.name},
+        )
+        self.assertIn(
+            {"id": directory.id, "name": directory.name},
+            directory.search_read_parents(fields=["id", "name"]),
+        )
