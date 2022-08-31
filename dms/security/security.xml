@@ -11,8 +11,13 @@
     <record id="category_dms_security" model="ir.module.category">
         <field name="name">Documents</field>
     </record>
+    <record id="group_dms_readonly_user" model="res.groups">
+        <field name="name">Readonly User</field>
+        <field name="category_id" ref="category_dms_security" />
+    </record>
     <record id="group_dms_user" model="res.groups">
         <field name="name">User</field>
+        <field name="implied_ids" eval="[(4, ref('group_dms_readonly_user'))]" />
         <field name="category_id" ref="category_dms_security" />
     </record>
     <record id="group_dms_manager" model="res.groups">
@@ -61,20 +66,20 @@
             name="domain_force"
         >['|', ('locked_by', '=', False), ('locked_by', '=', user.id)]</field>
     </record>
-    <record id="rule_security_groups_user" model="ir.rule">
-        <field name="name">User can only edit and delete their own groups.</field>
+    <record id="rule_security_groups_dms_user" model="ir.rule">
+        <field name="name">DMS users can only edit and delete their own groups.</field>
         <field name="model_id" ref="model_dms_access_group" />
-        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="groups" eval="[(4, ref('group_dms_user'))]" />
         <field name="perm_read" eval="0" />
         <field name="perm_create" eval="0" />
         <field name="perm_write" eval="1" />
         <field name="perm_unlink" eval="1" />
         <field name="domain_force">[('create_uid','=',user.id)]</field>
     </record>
-    <record id="rule_security_groups_manager" model="ir.rule">
-        <field name="name">Admins can edit and delete all groups.</field>
+    <record id="rule_security_groups_dms_manager" model="ir.rule">
+        <field name="name">DMS Managers can edit and delete all groups.</field>
         <field name="model_id" ref="model_dms_access_group" />
-        <field name="groups" eval="[(4, ref('base.group_erp_manager'))]" />
+        <field name="groups" eval="[(4, ref('group_dms_manager'))]" />
         <field name="perm_read" eval="0" />
         <field name="perm_create" eval="0" />
         <field name="perm_write" eval="1" />

@@ -36,7 +36,7 @@ def multi_users(users=False, reset=True, raise_exception=True, callback=False):
                         self.uid = self.ref(user[0])
                     else:
                         self.uid = user[0]
-                    if hasattr(self, callback):
+                    if callback and hasattr(self, callback):
                         callb = getattr(self, callback)
                         if callable(callb):
                             callb()
