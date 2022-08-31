@@ -386,20 +386,17 @@ class File(models.Model):
 
     @api.depends("content_binary", "content_file", "attachment_id")
     def _compute_content(self):
-        bin_size = self.env.context.get("bin_size", False)
         for record in self:
             if record.content_file:
-                context = {"human_size": True} if bin_size else {"base64": True}
-                record.content = record.with_context(context).content_file
+                record.content = record.content_file
             elif record.content_binary:
                 record.content = (
                     record.content_binary
-                    if bin_size
+                    if self._context.get("bin_size")
                     else base64.b64encode(record.content_binary)
                 )
             elif record.attachment_id:
-                context = {"human_size": True} if bin_size else {"base64": True}
-                record.content = record.with_context(context).attachment_id.datas
+                record.content = record.attachment_id.datas
 
     @api.depends("content_binary", "content_file")
     def _compute_save_type(self):

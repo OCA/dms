@@ -21,14 +21,16 @@ class FileFilestoreTestCase(FileTestCase):
         self.assertTrue(lobject_file.content_file)
         self.assertTrue(lobject_file.with_context(bin_size=True).content)
         self.assertTrue(lobject_file.with_context(bin_size=True).content_file)
-        self.assertTrue(lobject_file.with_context(human_size=True).content_file)
-        self.assertTrue(lobject_file.with_context(base64=True).content_file)
-        self.assertTrue(lobject_file.with_context(stream=True).content_file)
-        oid = lobject_file.with_context(oid=True).content_file
-        self.assertTrue(oid)
-        lobject_file.with_context(show_content=True).write(
-            {"content": base64.b64encode(b"\xff new content")}
+        self.assertEqual(lobject_file.content, lobject_file.content_file)
+        self.assertEqual(
+            lobject_file.with_context(bin_size=True).content,
+            lobject_file.with_context(bin_size=True).content_file,
         )
-        self.assertNotEqual(oid, lobject_file.with_context({"oid": True}).content_file)
+        self.assertNotEqual(
+            lobject_file.content, lobject_file.with_context(bin_size=True).content
+        )
+        old_content = lobject_file.content_file
+        lobject_file.write({"content": base64.b64encode(b"\xff new content")})
+        self.assertNotEqual(old_content, lobject_file.content_file)
         self.assertTrue(lobject_file.export_data(["content"]))
         lobject_file.unlink()
