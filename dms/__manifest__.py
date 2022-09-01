@@ -4,7 +4,7 @@
 {
     "name": "Document Management System",
     "summary": """Document Management System for Odoo""",
-    "version": "14.0.4.2.3",
+    "version": "14.0.4.2.4",
     "category": "Document Management",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/dms",
