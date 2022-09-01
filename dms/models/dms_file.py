@@ -300,6 +300,8 @@ class File(models.Model):
         context = {}
         if field_name == "directory_id":
             context["directory_short_name"] = True
+        elif field_name == "category_id":
+            context["category_short_name"] = True
         return super(File, self.with_context(**context)).search_panel_select_range(
             field_name, **kwargs
         )
