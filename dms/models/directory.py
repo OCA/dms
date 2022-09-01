@@ -331,6 +331,25 @@ class DmsDirectory(models.Model):
         self.recompute()
 
     # ----------------------------------------------------------
+    # SearchPanel
+    # ----------------------------------------------------------
+
+    @api.model
+    def search_panel_select_range(self, field_name, **kwargs):
+        context = {}
+        if field_name == "parent_id":
+            context["directory_short_name"] = True
+        return super(
+            DmsDirectory, self.with_context(**context)
+        ).search_panel_select_range(field_name, **kwargs)
+
+    @api.model
+    def search_panel_select_multi_range(self, field_name, **kwargs):
+        return super(
+            DmsDirectory, self.with_context(category_short_name=True)
+        ).search_panel_select_multi_range(field_name, **kwargs)
+
+    # ----------------------------------------------------------
     # Actions
     # ----------------------------------------------------------
 

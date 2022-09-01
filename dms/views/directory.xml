@@ -164,15 +164,22 @@
                     <field
                         name="parent_id"
                         icon="fa-folder"
-                        context="{'directory_short_name': True}"
+                        limit="0"
                         enable_counters="1"
                     />
-                    <field name="category_id" select="multi" icon="fa-users" />
+                    <field
+                        name="category_id"
+                        select="multi"
+                        groupby="parent_id"
+                        icon="fa-users"
+                        limit="0"
+                    />
                     <field
                         name="tag_ids"
                         select="multi"
                         icon="fa-tag"
                         groupby="category_id"
+                        limit="0"
                         enable_counters="1"
                     />
                 </searchpanel>
