@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[dms](dms/) | 14.0.4.2.3 |  | Document Management System for Odoo
+[dms](dms/) | 14.0.4.2.4 |  | Document Management System for Odoo
 [dms_field](dms_field/) | 14.0.1.0.0 |  | Create DMS View and allow to use them inside a record
 
 [//]: # (end addons)
