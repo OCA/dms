@@ -11,4 +11,5 @@ column_renames = {
 
 @openupgrade.migrate()
 def migrate(env, version):
-    openupgrade.rename_columns(env.cr, column_renames)
+    if openupgrade.column_exists(env.cr, "dms_file", "custom_thumbnail"):
+        openupgrade.rename_columns(env.cr, column_renames)
