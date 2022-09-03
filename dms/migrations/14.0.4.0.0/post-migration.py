@@ -6,6 +6,8 @@ from openupgradelib import openupgrade, openupgrade_90
 def convert_binary_fields_to_attachment(env):
     """Convert old user-provided thumbnails to attachments."""
     column = openupgrade.get_legacy_name("custom_thumbnail")
+    if not openupgrade.column_exists(env.cr, "dms_file", column):
+        return
     spec = {
         "dms.file": [("image_1920", column)],
         "dms.directory": [("image_1920", column)],
