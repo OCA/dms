@@ -1,6 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 import base64
 import functools
@@ -12,7 +12,7 @@ import uuid
 
 from odoo import SUPERUSER_ID, _
 from odoo.modules.module import get_module_resource
-from odoo.tests import Form, common
+from odoo.tests import Form, common, new_test_user
 from odoo.tools import convert_file
 
 _path = os.path.dirname(os.path.dirname(__file__))
@@ -150,25 +150,45 @@ def track_function(
 
 class DocumentsBaseCase(common.TransactionCase):
     def setUp(self):
-        super(DocumentsBaseCase, self).setUp()
+        super().setUp()
         self.super_uid = SUPERUSER_ID
-        self.admin_uid = self.browse_ref("base.user_admin").id
-        self.demo_uid = self.browse_ref("base.user_demo").id
-        self.access_group_demo = self.browse_ref("dms.access_group_01_demo")
-        self.storage = self.env["dms.storage"]
-        self.directory = self.env["dms.directory"]
-        self.file = self.env["dms.file"]
-        self.category = self.env["dms.category"]
-        self.tag = self.env["dms.tag"]
-        self.attachment = self.env["ir.attachment"]
+        # models
+        self.access_group_model = self.env["dms.access.group"]
+        self.storage_model = self.env["dms.storage"]
+        self.directory_model = self.env["dms.directory"]
+        self.file_model = self.env["dms.file"]
+        self.category_model = self.env["dms.category"]
+        self.tag_model = self.env["dms.tag"]
+        self.attachment_model = self.env["ir.attachment"]
+        self.partner_model = self.env["res.partner"]
+        # users
+        self.user = new_test_user(self.env, login="basic-user")
+        self.public_user = self.env.ref("base.public_user")
+        self.dms_user = new_test_user(
+            self.env, login="dms-user", groups="dms.group_dms_user"
+        )
+        self.dms_manager_user = new_test_user(
+            self.env, login="dms-manager", groups="dms.group_dms_manager"
+        )
+        self.access_group = self.access_group_model.create(
+            {
+                "name": "Test",
+                "perm_create": True,
+                "perm_write": True,
+                "perm_unlink": True,
+                "explicit_user_ids": [
+                    (6, 0, [self.dms_user.id, self.dms_manager_user.id])
+                ],
+            }
+        )
 
     def _setup_test_data(self):
-        self.storage = self.storage.with_user(self.env.uid)
-        self.directory = self.directory.with_user(self.env.uid)
-        self.file = self.file.with_user(self.env.uid)
-        self.category = self.category.with_user(self.env.uid)
-        self.tag = self.tag.with_user(self.env.uid)
-        self.attachment = self.attachment.with_user(self.env.uid)
+        self.storage_model = self.storage_model.with_user(self.env.uid)
+        self.directory_model = self.directory_model.with_user(self.env.uid)
+        self.file_model = self.file_model.with_user(self.env.uid)
+        self.category_model = self.category_model.with_user(self.env.uid)
+        self.tag_model = self.tag_model.with_user(self.env.uid)
+        self.attachment_model = self.attachment_model.with_user(self.env.uid)
 
     def _load(self, module, *args):
         convert_file(
@@ -185,50 +205,41 @@ class DocumentsBaseCase(common.TransactionCase):
     def multi_users(self, super_user=True, admin=True, demo=True):
         return [
             [self.super_uid, super_user],
-            [self.admin_uid, admin],
-            [self.demo_uid, demo],
+            [self.dms_manager_user.id, admin],
+            [self.dms_user.id, demo],
         ]
 
     def content_base64(self):
         return base64.b64encode(b"\xff data")
 
-    def create_storage(self, save_type="database", sudo=False):
-        model = self.storage.sudo() if sudo else self.storage
-        return model.create({"name": "Test Storage", "save_type": save_type})
+    def create_storage(self, save_type="database"):
+        return self.storage_model.create(
+            {"name": "Test Storage", "save_type": save_type}
+        )
 
-    def create_directory(
-        self, storage=False, directory=False, res_model=False, sudo=False
-    ):
-        model = self.directory.sudo() if sudo else self.directory
-        if not storage and not directory:
-            storage = self.create_storage(sudo=sudo)
-        record = Form(model)
+    def create_directory(self, storage=False, directory=False, res_model=False):
+        record = Form(self.directory_model)
         record.name = uuid.uuid4().hex
         record.is_root_directory = True
         record.res_model = res_model
         if directory:
             record.is_root_directory = False
             record.parent_id = directory
-        if storage and not storage.inherit_access_from_parent_record:
+        else:
             record.storage_id = storage
-            record.group_ids.add(self.access_group_demo)
+            if not storage.inherit_access_from_parent_record:
+                record.group_ids.add(self.access_group)
         return record.save()
 
-    def create_file(self, directory=False, content=False, storage=False, sudo=False):
-        model = self.file.sudo() if sudo else self.file
-        if not directory:
-            directory = self.create_directory(storage=storage, sudo=sudo)
-        record = Form(model)
+    def create_file(self, directory=False, content=False):
+        record = Form(self.file_model)
         record.name = uuid.uuid4().hex
         record.directory_id = directory
         record.content = content or self.content_base64()
         return record.save()
 
-    def create_attachment(
-        self, name, res_model=False, res_id=False, content=False, sudo=False
-    ):
-        model = self.attachment.sudo() if sudo else self.attachment
-        return model.create(
+    def create_attachment(self, name, res_model=False, res_id=False, content=False):
+        return self.attachment_model.create(
             {
                 "name": name,
                 "res_model": res_model,
@@ -236,3 +247,51 @@ class DocumentsBaseCase(common.TransactionCase):
                 "datas": content or self.content_base64(),
             }
         )
+
+
+class StorageAttachmentBaseCase(DocumentsBaseCase):
+    def setUp(self):
+        super().setUp()
+        self.storage = self.create_storage(save_type="attachment")
+        self.storage.write(
+            {
+                "inherit_access_from_parent_record": True,
+                "include_message_attachments": True,
+                "model_ids": [(6, 0, [self.env.ref("base.model_res_partner").id])],
+            }
+        )
+        self.create_directory(storage=self.storage, res_model=self.partner_model._name)
+        self.partner = self.partner_model.create({"name": "test partner"})
+        self.model_partner = self.env.ref("base.model_res_partner")
+
+    def _create_attachment(self, name):
+        return self.create_attachment(
+            name=name,
+            res_model=self.partner_model._name,
+            res_id=self.partner.id,
+        )
+
+    def _get_partner_directory(self):
+        return self.directory_model.search(
+            [
+                ("storage_id", "=", self.storage.id),
+                ("res_model", "=", self.partner_model._name),
+                ("res_id", "=", self.partner.id),
+            ]
+        )
+
+
+class StorageDatabaseBaseCase(DocumentsBaseCase):
+    def setUp(self):
+        super().setUp()
+        self.storage = self.create_storage(save_type="database")
+        self.directory = self.create_directory(storage=self.storage)
+        self.file = self.create_file(directory=self.directory)
+
+
+class StorageFileBaseCase(DocumentsBaseCase):
+    def setUp(self):
+        super().setUp()
+        self.storage = self.create_storage(save_type="file")
+        self.directory = self.create_directory(storage=self.storage)
+        self.file = self.create_file(directory=self.directory)
