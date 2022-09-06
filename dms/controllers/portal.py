@@ -21,10 +21,11 @@ class CustomerPortal(CustomerPortal):
                 return False
         return item
 
-    def _prepare_portal_layout_values(self):
-        values = super()._prepare_portal_layout_values()
-        ids = request.env["dms.directory"]._get_own_root_directories()
-        values.update({"dms_directory_count": len(ids)})
+    def _prepare_home_portal_values(self, counters):
+        values = super()._prepare_home_portal_values(counters)
+        if "dms_directory_count" in counters:
+            ids = request.env["dms.directory"]._get_own_root_directories()
+            values["dms_directory_count"] = len(ids)
         return values
 
     @http.route(["/my/dms"], type="http", auth="user", website=True)
