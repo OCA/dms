@@ -1,6 +1,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AbstractDmsMixin(models.AbstractModel):
@@ -33,3 +33,11 @@ class AbstractDmsMixin(models.AbstractModel):
         context="{'dms_category_show_path': True}",
         string="Category",
     )
+
+    @api.model
+    def search_panel_select_range(self, field_name, **kwargs):
+        """Add context to display short folder name."""
+        _self = self.with_context(directory_short_name=True)
+        return super(AbstractDmsMixin, _self).search_panel_select_range(
+            field_name, **kwargs
+        )
