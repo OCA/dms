@@ -38,4 +38,7 @@ class AbstractDmsMixin(models.AbstractModel):
     def search_panel_select_range(self, field_name, **kwargs):
         """Remove the limit of records (default is 200 since js)."""
         kwargs.update(limit=False)
-        return super().search_panel_select_range(field_name, **kwargs)
+        _self = self.with_context(directory_short_name=True)
+        return super(AbstractDmsMixin, _self).search_panel_select_range(
+            field_name, **kwargs
+        )

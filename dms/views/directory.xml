@@ -164,8 +164,8 @@
                     <field
                         name="parent_id"
                         icon="fa-folder"
-                        context="{'directory_short_name': True}"
                         enable_counters="1"
+                        operator="="
                     />
                     <field name="category_id" select="multi" icon="fa-users" />
                     <field
