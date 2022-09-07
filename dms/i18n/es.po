@@ -1710,11 +1710,6 @@ msgid "Partner"
 msgstr "Contacto"
 
 #. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_tree
-msgid "Path"
-msgstr "Ruta"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_json
 msgid "Path Json"
 msgstr "Path Json"
@@ -1797,6 +1792,13 @@ msgid "Responsible User"
 msgstr "Usuario responsable"
 
 #. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/js/views/search_panel.js:0
+#, python-format
+msgid "Root"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__root_directory_ids
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
@@ -1822,11 +1824,6 @@ msgstr "Ventas"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 msgid "Save Type"
 msgstr "Tipo guardado"
-
-#. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "Search"
-msgstr "Búsqueda"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_token
@@ -2248,6 +2245,12 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
+
+#~ msgid "Path"
+#~ msgstr "Ruta"
+
+#~ msgid "Search"
+#~ msgstr "Búsqueda"
 
 #~ msgid "Drop your files here"
 #~ msgstr "Arrastra tus archivos aquí"
