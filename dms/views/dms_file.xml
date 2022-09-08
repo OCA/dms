@@ -245,11 +245,6 @@
                                         <div
                                             class="o_kanban_record_title o_text_overflow"
                                         >
-                                            <a
-                                                class="o_kanban_dms_file_preview fa fa-search"
-                                                title="Search"
-                                                t-att-data-id="widget.db_id"
-                                            />
                                             <field name="name" />
                                         </div>
                                         <div class="o_kanban_record_body">
@@ -300,6 +295,7 @@
                 js_class="file_list"
                 decoration-warning="not active"
                 decoration-muted="(is_locked and not is_lock_editor)"
+                multi_edit="1"
             >
                 <field name="active" invisible="1" />
                 <field name="is_locked" invisible="1" />
@@ -308,7 +304,11 @@
                 <field name="write_date" />
                 <field name="size" widget="integer" />
                 <field name="mimetype" />
-                <field name="path_names" widget="path_names" string="Path" />
+                <field
+                    name="tag_ids"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color', 'no_create_edit': True}"
+                />
             </tree>
         </field>
     </record>
@@ -544,6 +544,7 @@
                         icon="fa-folder"
                         limit="0"
                         enable_counters="1"
+                        operator="="
                     />
                     <field
                         name="category_id"
