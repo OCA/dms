@@ -682,3 +682,26 @@ class DmsDirectory(models.Model):
         if self.child_directory_ids:
             self.child_directory_ids.unlink()
         return super().unlink()
+
+    @api.model
+    def _search_panel_domain_image(
+        self, field_name, domain, set_count=False, limit=False
+    ):
+        """We need to overwrite function from directories because odoo only return
+        records with childs (very weird for user perspective).
+        All records are returned now.
+        """
+        if field_name == "parent_id":
+            res = {}
+            for item in self.search_read(
+                domain=domain, fields=["id", "name", "count_directories"]
+            ):
+                res[item["id"]] = {
+                    "id": item["id"],
+                    "display_name": item["name"],
+                    "__count": item["count_directories"],
+                }
+            return res
+        return super()._search_panel_domain_image(
+            field_name=field_name, domain=domain, set_count=set_count, limit=limit
+        )
