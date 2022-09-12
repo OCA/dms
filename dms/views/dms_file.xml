@@ -68,7 +68,12 @@
                     />
                 </group>
                 <searchpanel>
-                    <field name="directory_id" icon="fa-folder" enable_counters="1" />
+                    <field
+                        name="directory_id"
+                        icon="fa-folder"
+                        enable_counters="1"
+                        operator="="
+                    />
                     <field name="category_id" icon="fa-users" enable_counters="1" />
                 </searchpanel>
             </search>
