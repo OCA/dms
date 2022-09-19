@@ -7,6 +7,12 @@
         <field name="model">dms.add.directory.record</field>
         <field name="arch" type="xml">
             <form string="Dms Add Directory Record">
+                <p class="oe_grey">
+                    Here you can select one of the storages you have permission.
+                    If the storage you are looking for is not available for selection,
+                    it is probably because you do not have permission for it, in which
+                    case you should contact your system administrator or person in charge.
+                </p>
                 <group>
                     <field name="res_id" invisible="1" />
                     <field
