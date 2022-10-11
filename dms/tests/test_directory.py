@@ -76,12 +76,17 @@ class DirectoryTestCase(DocumentsBaseCase):
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_unlink_directory(self):
-        root_directory = self.create_directory(storage=self.new_storage)
-        sub_directory = self.create_directory(directory=root_directory)
-        sub_files = self.create_file(directory=sub_directory)
-        root_directory.unlink()
-        self.assertFalse(sub_directory.exists())
-        self.assertFalse(sub_files.exists())
+        root_directory1 = self.create_directory(storage=self.new_storage)
+        root_directory2 = self.create_directory(storage=self.new_storage)
+        sub_directory1 = self.create_directory(directory=root_directory1)
+        sub_directory2 = self.create_directory(directory=root_directory1)
+        sub_files1 = self.create_file(directory=sub_directory1)
+        sub_files2 = self.create_file(directory=sub_directory1)
+        (root_directory1 + root_directory2).unlink()
+        self.assertFalse(sub_directory1.exists())
+        self.assertFalse(sub_directory2.exists())
+        self.assertFalse(sub_files1.exists())
+        self.assertFalse(sub_files2.exists())
 
     @multi_users(lambda self: self.multi_users(), callback="_setup_test_data")
     def test_storage(self):
