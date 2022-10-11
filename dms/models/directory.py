@@ -678,9 +678,10 @@ class DmsDirectory(models.Model):
         Cannot rely on DB backend's cascade because subfolder and subfile unlinks
         must check custom permissions implementation.
         """
-        self.file_ids.unlink()
-        if self.child_directory_ids:
-            self.child_directory_ids.unlink()
+        self.mapped("file_ids").unlink()
+        child_dirs = self.mapped("child_directory_ids")
+        if child_dirs:
+            child_dirs.unlink()
         return super().unlink()
 
     @api.model
