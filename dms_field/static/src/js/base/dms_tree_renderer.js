@@ -288,7 +288,7 @@ odoo.define("dms.DmsTreeRenderer", function(require) {
                 icon: "fa fa-external-link",
                 label: _t("Open"),
                 action: function() {
-                    self.trigger_up("dms_open_record", {id: node.id});
+                    self.trigger_up("dms_open_record", {id: node.data.id});
                 },
             };
             return menu;
