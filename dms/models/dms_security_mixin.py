@@ -99,7 +99,8 @@ class DmsSecurityMixin(models.AbstractModel):
         inherited_access_field = "storage_id_inherit_access_from_parent_record"
         if self._name != "dms.directory":
             inherited_access_field = "{}.{}".format(
-                self._directory_field, inherited_access_field,
+                self._directory_field,
+                inherited_access_field,
             )
         inherited_access_domain = [(inherited_access_field, "=", True)]
         domains = []

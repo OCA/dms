@@ -2,7 +2,7 @@
 /* Copyright 2020 Creu Blanca
  * Copyright 2021 Tecnativa - Alexandre D. Díaz
  * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
-odoo.define("dms.DragDrop", function(require) {
+odoo.define("dms.DragDrop", function (require) {
     "use strict";
 
     const DropTargetMixin = require("web_drop_target");
@@ -13,7 +13,7 @@ odoo.define("dms.DragDrop", function(require) {
         /**
          * @override
          */
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             this._get_directory_id(
                 this._searchPanel ? this._searchPanel.getDomain() : []
@@ -23,14 +23,14 @@ odoo.define("dms.DragDrop", function(require) {
         /**
          * @override
          */
-        _handle_drop_items: function(drop_items) {
+        _handle_drop_items: function (drop_items) {
             _.each(drop_items, this._handle_file_drop_attach, this);
         },
 
         /**
          * @override
          */
-        _get_record_id: function() {
+        _get_record_id: function () {
             // Don't need the record id to work
             return true;
         },
@@ -38,7 +38,7 @@ odoo.define("dms.DragDrop", function(require) {
         /**
          * @override
          */
-        _create_attachment: function(file, reader, res_model) {
+        _create_attachment: function (file, reader, res_model) {
             // Helper to upload an attachment and update the sidebar
             const ctx = this.renderer.state.getContext();
             if (this.directory_id) {
@@ -66,9 +66,9 @@ odoo.define("dms.DragDrop", function(require) {
          * @private
          * @param {Array} domain
          */
-        _get_directory_id: function(domain) {
+        _get_directory_id: function (domain) {
             let directory_id = false;
-            _.each(domain, leaf => {
+            _.each(domain, (leaf) => {
                 if (
                     leaf[0] === "directory_id" &&
                     (leaf[1] === "child_of" || leaf[1] === "=")
@@ -82,7 +82,7 @@ odoo.define("dms.DragDrop", function(require) {
         /**
          * @override
          */
-        _onSearchPanelDomainUpdated: function(ev) {
+        _onSearchPanelDomainUpdated: function (ev) {
             this._get_directory_id(ev.data.domain);
             return this._super.apply(this, arguments);
         },

@@ -4,7 +4,7 @@
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
  **********************************************************************************/
 
-odoo.define("dms.fields_path", function(require) {
+odoo.define("dms.fields_path", function (require) {
     "use strict";
 
     var fields = require("web.basic_fields");
@@ -14,23 +14,23 @@ odoo.define("dms.fields_path", function(require) {
         events: _.extend({}, fields.FieldText.prototype.events, {
             "click a": "_onNodeClicked",
         }),
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             this.max_width = this.nodeOptions.width || 500;
             this.seperator = this.nodeOptions.seperator || "/";
             this.prefix = this.nodeOptions.prefix || false;
             this.suffix = this.nodeOptions.suffix || false;
         },
-        _renderReadonly: function() {
+        _renderReadonly: function () {
             this.$el.empty();
             this._renderPath();
         },
-        _renderPath: function() {
+        _renderPath: function () {
             var text_width_measure = "";
             var path = JSON.parse(this.value || "[]");
             $.each(
                 _.clone(path).reverse(),
-                function(index, element) {
+                function (index, element) {
                     text_width_measure += element.name + "/";
                     if (text_width_measure.length >= this.max_width) {
                         this.$el.prepend($("<span/>").text(".."));
@@ -60,7 +60,7 @@ odoo.define("dms.fields_path", function(require) {
                 }.bind(this)
             );
         },
-        _onNodeClicked: function(event) {
+        _onNodeClicked: function (event) {
             event.preventDefault();
             this.do_action({
                 type: "ir.actions.act_window",
