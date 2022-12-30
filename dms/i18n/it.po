@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-12-28 22:49+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2022-12-30 11:55+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -1740,7 +1740,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_user_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_user_id
 msgid "Responsible User"
-msgstr "Utente Responsabile"
+msgstr "Utente responsabile"
 
 #. module: dms
 #. openerp-web
@@ -1760,7 +1760,7 @@ msgstr "Cartelle Root"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr "Errore di consegna SMS"
+msgstr "Errore consegna SMS"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
