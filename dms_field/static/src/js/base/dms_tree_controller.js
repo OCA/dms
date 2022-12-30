@@ -1,4 +1,4 @@
-odoo.define("dms.DmsTreeController", function(require) {
+odoo.define("dms.DmsTreeController", function (require) {
     "use strict";
 
     var session = require("web.session");
@@ -16,11 +16,11 @@ odoo.define("dms.DmsTreeController", function(require) {
     var _t = core._t;
 
     var DMSTreeController = {
-        init: function(parent, model, renderer, params) {
+        init: function (parent, model, renderer, params) {
             this._super.apply(this, arguments);
             this.setParams(params);
         },
-        setParams: function(params) {
+        setParams: function (params) {
             var model = params.modelName;
             var storage_domain = [];
             var directory_domain = [];
@@ -67,7 +67,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                 params || {}
             );
         },
-        _onDMSLoad: function(ev) {
+        _onDMSLoad: function (ev) {
             var self = this;
             var node = ev.data.node;
             var params = ev.data.params;
@@ -82,7 +82,7 @@ odoo.define("dms.DmsTreeController", function(require) {
             } else {
                 result = this._loadNode(node, args);
             }
-            return result.then(function(data) {
+            return result.then(function (data) {
                 ev.data.callback.call(self.renderer, data);
                 if (self.empty_storages.length > 0) {
                     self.renderer.$el
@@ -91,7 +91,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                 }
             });
         },
-        _buildDMSArgs: function(args) {
+        _buildDMSArgs: function (args) {
             return $.extend(
                 true,
                 {
@@ -103,7 +103,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                 args || {}
             );
         },
-        _buildDMSDomain: function(base, domain, autocompute_directory) {
+        _buildDMSDomain: function (base, domain, autocompute_directory) {
             var result = new Domain(base);
             if (autocompute_directory) {
                 result._addSubdomain([["res_id", "=", this.renderer.state.res_id]]);
@@ -112,7 +112,7 @@ odoo.define("dms.DmsTreeController", function(require) {
             }
             return result.toArray();
         },
-        _loadStorages: function(args) {
+        _loadStorages: function (args) {
             return this._rpc({
                 fields: _.union(args.storage.fields || [], [
                     "name",
@@ -124,7 +124,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                 method: "search_read",
             });
         },
-        _loadDirectories: function(operator, value, args) {
+        _loadDirectories: function (operator, value, args) {
             return this._rpc({
                 model: "dms.directory",
                 method: "search_read_parents",
@@ -149,10 +149,10 @@ odoo.define("dms.DmsTreeController", function(require) {
                 },
             });
         },
-        _loadDirectoriesSingle: function(storage_id, args) {
+        _loadDirectoriesSingle: function (storage_id, args) {
             return this._loadDirectories("=", storage_id, args);
         },
-        _loadSubdirectories: function(operator, value, args) {
+        _loadSubdirectories: function (operator, value, args) {
             return this._rpc({
                 model: "dms.directory",
                 method: "search_read",
@@ -175,10 +175,10 @@ odoo.define("dms.DmsTreeController", function(require) {
                 context: args.file.context || session.user_context,
             });
         },
-        _loadSubdirectoriesSingle: function(directory_id, args) {
+        _loadSubdirectoriesSingle: function (directory_id, args) {
             return this._loadSubdirectories("=", directory_id, args);
         },
-        _loadFiles: function(operator, value, args) {
+        _loadFiles: function (operator, value, args) {
             return this._rpc({
                 model: "dms.file",
                 method: "search_read",
@@ -203,24 +203,24 @@ odoo.define("dms.DmsTreeController", function(require) {
                 context: args.file.context || session.user_context,
             });
         },
-        _loadFilesSingle: function(directory_id, args) {
+        _loadFilesSingle: function (directory_id, args) {
             return this._loadFiles("=", directory_id, args);
         },
-        _loadInitialData: function(args) {
+        _loadInitialData: function (args) {
             var self = this;
             var data_loaded = $.Deferred();
             this.empty_storages = [];
             this._loadStorages(args).then(
-                function(storages) {
+                function (storages) {
                     var loading_data_parts = [];
                     _.each(
                         storages,
-                        function(storage, index) {
+                        function (storage, index) {
                             if (storage.count_storage_directories > 0) {
                                 var directory_loaded = $.Deferred();
                                 loading_data_parts.push(directory_loaded);
                                 this._loadDirectoriesSingle(storage.id, args).then(
-                                    function(directories) {
+                                    function (directories) {
                                         if (directories.length > 0) {
                                             storages[index].directories = directories;
                                         } else if (
@@ -241,17 +241,17 @@ odoo.define("dms.DmsTreeController", function(require) {
                         }.bind(this)
                     );
                     $.when.apply($, loading_data_parts).then(
-                        function() {
+                        function () {
                             if (args.storage.show) {
                                 var result = _.chain(storages)
                                     .map(
-                                        function(storage) {
+                                        function (storage) {
                                             if (!storage.directories) {
                                                 return undefined;
                                             }
                                             var children = _.map(
                                                 storage.directories || [],
-                                                function(directory) {
+                                                function (directory) {
                                                     return this._makeNodeDirectory(
                                                         directory,
                                                         args.file.show
@@ -264,7 +264,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                                             );
                                         }.bind(this)
                                     )
-                                    .filter(function(node) {
+                                    .filter(function (node) {
                                         return node;
                                     })
                                     .value();
@@ -273,10 +273,10 @@ odoo.define("dms.DmsTreeController", function(require) {
                                 var nodes = [];
                                 _.each(
                                     storages,
-                                    function(storage) {
+                                    function (storage) {
                                         _.each(
                                             storage.directories,
-                                            function(directory) {
+                                            function (directory) {
                                                 nodes.push(
                                                     this._makeNodeDirectory(
                                                         directory,
@@ -296,14 +296,14 @@ odoo.define("dms.DmsTreeController", function(require) {
             );
             return data_loaded;
         },
-        _loadNode: function(node, args) {
+        _loadNode: function (node, args) {
             var result = $.Deferred();
             if (node.data && node.data.model === "dms.storage") {
                 this._loadDirectoriesSingle(node.data.data.id, args).then(
-                    function(directories) {
+                    function (directories) {
                         var directory_nodes = _.map(
                             directories,
-                            function(directory) {
+                            function (directory) {
                                 return this._makeNodeDirectory(
                                     directory,
                                     args.file.show
@@ -317,10 +317,10 @@ odoo.define("dms.DmsTreeController", function(require) {
                 var files_loaded = $.Deferred();
                 var directories_loaded = $.Deferred();
                 this._loadSubdirectoriesSingle(node.data.data.id, args).then(
-                    function(directories) {
+                    function (directories) {
                         var directory_nodes = _.map(
                             directories,
-                            function(directory) {
+                            function (directory) {
                                 return this._makeNodeDirectory(
                                     directory,
                                     args.file.show
@@ -332,10 +332,10 @@ odoo.define("dms.DmsTreeController", function(require) {
                 );
                 if (args.file.show) {
                     this._loadFilesSingle(node.data.data.id, args).then(
-                        function(files) {
+                        function (files) {
                             var file_nodes = _.map(
                                 files,
-                                function(file) {
+                                function (file) {
                                     return this._makeNodeFile(file);
                                 }.bind(this)
                             );
@@ -345,7 +345,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                 } else {
                     files_loaded.resolve([]);
                 }
-                $.when(directories_loaded, files_loaded).then(function(
+                $.when(directories_loaded, files_loaded).then(function (
                     directories,
                     files
                 ) {
@@ -356,13 +356,13 @@ odoo.define("dms.DmsTreeController", function(require) {
             }
             return result;
         },
-        _makeDataPoint: function(dt) {
+        _makeDataPoint: function (dt) {
             return this.model._makeDataPoint(dt);
         },
-        _getDataPoint: function(datapointId, attributes) {
+        _getDataPoint: function (datapointId, attributes) {
             return this.model.get(datapointId, attributes);
         },
-        _makeNodeStorage: function(storage, children) {
+        _makeNodeStorage: function (storage, children) {
             var dt = this._makeDataPoint({
                 data: storage,
                 modelName: "dms.storage",
@@ -376,7 +376,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                 children: children,
             };
         },
-        _makeNodeDirectory: function(directory, showFiles, storage) {
+        _makeNodeDirectory: function (directory, showFiles, storage) {
             var data = _.extend(directory, {
                 name: directory.name,
                 perm_read: directory.permission_read,
@@ -422,7 +422,7 @@ odoo.define("dms.DmsTreeController", function(require) {
             }
             return directoryNode;
         },
-        _makeNodeFile: function(file) {
+        _makeNodeFile: function (file) {
             var data = _.extend(file, {
                 filename: file.name,
                 display_name: file.name,
@@ -453,7 +453,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                 data: dt,
             };
         },
-        _onDMSPreviewFile: function(ev) {
+        _onDMSPreviewFile: function (ev) {
             var record = this._getDataPoint(ev.data.id, {raw: true});
             var fieldName = "content";
             var file_mimetype = record.data.res_mimetype;
@@ -491,7 +491,7 @@ odoo.define("dms.DmsTreeController", function(require) {
                     "?download=true";
             }
         },
-        _onDMSOpenRecord: function(event) {
+        _onDMSOpenRecord: function (event) {
             event.stopPropagation();
             var self = this;
             var record = this.model.get(event.data.id, {raw: true});
@@ -507,12 +507,12 @@ odoo.define("dms.DmsTreeController", function(require) {
                 title: _t("Open: ") + event.data.string,
             }).open();
         },
-        _onDMSEmptyStorages: function(event) {
+        _onDMSEmptyStorages: function (event) {
             event.data.data.model = this.modelName;
             event.data.data.empty_storages = this.empty_storages;
             event.data.data.res_id = this.renderer.state.res_id;
         },
-        _onDMSRenameNode: function(event) {
+        _onDMSRenameNode: function (event) {
             var record = this._getDataPoint(event.data.node.data.id, {raw: true});
             record.data.name = event.data.text;
             event.data.node.data = record;
@@ -527,14 +527,14 @@ odoo.define("dms.DmsTreeController", function(require) {
                 ],
             });
         },
-        _onDMSDeleteNode: function(event) {
+        _onDMSDeleteNode: function (event) {
             return this._rpc({
                 model: event.data.node.data.model,
                 method: "unlink",
                 args: [[event.data.node.data.res_id]],
             });
         },
-        _onDMSMoveNode: function(event) {
+        _onDMSMoveNode: function (event) {
             var data = {};
             if (event.data.node.data.model === "dms.file") {
                 data.directory_id = event.data.new_parent.data.res_id;

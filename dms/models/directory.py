@@ -276,7 +276,8 @@ class DmsDirectory(models.Model):
         )
 
     allowed_model_ids = fields.Many2many(
-        related="storage_id.model_ids", comodel_name="ir.model",
+        related="storage_id.model_ids",
+        comodel_name="ir.model",
     )
     model_id = fields.Many2one(
         comodel_name="ir.model",
@@ -368,7 +369,8 @@ class DmsDirectory(models.Model):
         for category in self:
             if category.parent_id:
                 category.complete_name = "{} / {}".format(
-                    category.parent_id.complete_name, category.name,
+                    category.parent_id.complete_name,
+                    category.name,
                 )
             else:
                 category.complete_name = category.name
@@ -439,12 +441,16 @@ class DmsDirectory(models.Model):
                 record.size = 0
                 continue
             recs = sudo_model.search_read(
-                domain=[("directory_id", "child_of", record.id)], fields=["size"],
+                domain=[("directory_id", "child_of", record.id)],
+                fields=["size"],
             )
             record.size = sum(rec.get("size", 0) for rec in recs)
 
     @api.depends(
-        "group_ids", "inherit_group_ids", "parent_id.complete_group_ids", "parent_path",
+        "group_ids",
+        "inherit_group_ids",
+        "parent_id.complete_group_ids",
+        "parent_path",
     )
     def _compute_groups(self):
         """Get all DMS security groups affecting this directory."""

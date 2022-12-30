@@ -45,7 +45,11 @@ class CustomerPortal(CustomerPortal):
             filterby = "name"
         # domain
         domain = [
-            ("id", "in", request.env["dms.directory"]._get_own_root_directories(),)
+            (
+                "id",
+                "in",
+                request.env["dms.directory"]._get_own_root_directories(),
+            )
         ]
         # search
         if search and search_in:

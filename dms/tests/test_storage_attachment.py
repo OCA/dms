@@ -81,7 +81,8 @@ class StorageAttachmentTestCase(DocumentsBaseCase):
         self.assertEqual(directory_id.count_files, 1)
         self.assertEqual(directory_id.file_ids[0].name, "demo.txt")
         file_01 = self.create_file(
-            directory=directory_id, storage=directory_id.storage_id,
+            directory=directory_id,
+            storage=directory_id.storage_id,
         ).with_user(self.user_admin.id)
         self.assertEqual(file_01.storage_id, self.storage)
         self.assertEqual(file_01.storage_id.save_type, "attachment")

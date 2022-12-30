@@ -58,7 +58,10 @@ class File(models.Model):
     )
     # Override acording to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
-        related="directory_id.storage_id", readonly=True, store=True, prefetch=False,
+        related="directory_id.storage_id",
+        readonly=True,
+        store=True,
+        prefetch=False,
     )
 
     path_names = fields.Char(
