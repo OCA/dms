@@ -323,6 +323,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_cancel__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_format_error__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_missing_required_fields__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sparse_fields_test__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
