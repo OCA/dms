@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="ir_actions_server_demo" model="ir.actions.server">
+        <field name="name">File DEMO action</field>
+        <field name="model_id" ref="dms.model_dms_file" />
+        <field name="state">code</field>
+        <field name="code">record.lock()</field>
+    </record>
+    <record id="dms_action_demo" model="dms.action">
+        <field name="name">File DEMO action</field>
+        <field name="kind">server_action</field>
+        <field name="action_id" ref="ir_actions_server_demo" />
+        <field name="dms_directory_ids" eval="[(4, ref('dms.directory_06_demo'))]" />
+    </record>
+</odoo>

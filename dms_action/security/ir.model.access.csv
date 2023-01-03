@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+
+access_dms_action_user,dms_storage_user,model_dms_action,dms.group_dms_user,1,0,0,0
+access_dms_action_manager,dms_storage_manager,model_dms_action,dms.group_dms_manager,1,1,1,1
