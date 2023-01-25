@@ -549,7 +549,7 @@
                         </page>
                         <page
                             string="Groups"
-                            attrs="{'invisible':[('storage_id_inherit_access_from_parent_record', '=', True)]}"
+                            attrs="{'invisible':[('storage_id_save_type', '=', 'attachment'),('storage_id_inherit_access_from_parent_record', '=', True)]}"
                         >
                             <field name="group_ids">
                                 <tree string="Groups">
@@ -562,7 +562,7 @@
                         </page>
                         <page
                             string="Complete Groups"
-                            attrs="{'invisible':[('storage_id_inherit_access_from_parent_record', '=', True)]}"
+                            attrs="{'invisible':[('storage_id_save_type', '=', 'attachment'),('storage_id_inherit_access_from_parent_record', '=', True)]}"
                         >
                             <field name="complete_group_ids">
                                 <tree string="Complete Groups">
