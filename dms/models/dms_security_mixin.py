@@ -102,7 +102,10 @@ class DmsSecurityMixin(models.AbstractModel):
                 self._directory_field,
                 inherited_access_field,
             )
-        inherited_access_domain = [(inherited_access_field, "=", True)]
+        inherited_access_domain = [
+            ("storage_id_save_type", "=", "attachment"),
+            (inherited_access_field, "=", True),
+        ]
         domains = []
         # Get all used related records
         related_groups = self.sudo().read_group(
