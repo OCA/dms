@@ -260,7 +260,11 @@ class DmsDirectory(models.Model):
         current_directory = self
         while current_directory:
             directories.insert(0, current_directory)
-            if access_token and consteq(current_directory.access_token, access_token):
+            if (
+                access_token
+                and current_directory.access_token
+                and consteq(current_directory.access_token, access_token)
+            ):
                 return directories
             current_directory = current_directory.parent_id
         if access_token:
