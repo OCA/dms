@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-03 13:48+0000\n"
+"PO-Revision-Date: 2023-01-30 13:47+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -570,7 +570,7 @@ msgstr "Cartelle complete"
 #. module: dms
 #: model:ir.model,name:dms.model_res_config_settings
 msgid "Config Settings"
-msgstr "Impostazioni di Configurazione"
+msgstr "Impostazioni di configurazione"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config
