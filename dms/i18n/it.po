@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-01-30 13:47+0000\n"
+"PO-Revision-Date: 2023-02-01 16:45+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -771,7 +771,7 @@ msgstr "Database"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_defaults
 msgid "Default Values"
-msgstr "Valori Predefiniti"
+msgstr "Valori predefiniti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
