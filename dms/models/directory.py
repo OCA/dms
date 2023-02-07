@@ -273,11 +273,15 @@ class DmsDirectory(models.Model):
         return directories
 
     def _get_own_root_directories(self):
-        return (
-            self.env["dms.directory"]
-            .search([("is_hidden", "=", False), ("parent_id", "=", False)])
-            .ids
+        res = self.env["dms.directory"].search_read(
+            [("is_hidden", "=", False)], ["parent_id"]
         )
+        all_ids = [value["id"] for value in res]
+        res_ids = []
+        for item in res:
+            if not item["parent_id"] or item["parent_id"][0] not in all_ids:
+                res_ids.append(item["id"])
+        return res_ids
 
     allowed_model_ids = fields.Many2many(
         related="storage_id.model_ids",
