@@ -44,5 +44,10 @@ class AbstractDmsMixin(odoo.models.AbstractModel):
         models.SEARCH_PANEL_LIMIT = False
         _self = self.with_context(directory_short_name=True)
         res = super(AbstractDmsMixin, _self).search_panel_select_range(field_name)
+        all_ids = [value["id"] for value in res["values"]]
+        # Prevent error if user not access to parent record
+        for value in res["values"]:
+            if value["parent_id"] and value["parent_id"][0] not in all_ids:
+                value["parent_id"] = False
         models.SEARCH_PANEL_LIMIT = old_value
         return res
