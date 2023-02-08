@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="assets_backend"
+        name="dms_attachment_link assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/dms_attachment_link/static/src/js/dms_attachment_link.js"
+            />
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates id="template" xml:space="preserve">
+    <t t-extend="mail.chatter.AttachmentBox">
+        <t t-jquery="span.o_upload_attachments_button" t-operation="after">
+            <span class="btn btn-link o_add_dms_file_button"><span
+                    class="fa fa-plus-square"
+                /> Add DMS File</span>
+        </t>
+    </t>
+</templates>
