@@ -319,6 +319,7 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_ir_attachment_dms_file__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
 msgstr "Directorios DMS"
@@ -381,7 +382,6 @@ msgstr "Documentos"
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Download"
@@ -620,8 +620,7 @@ msgstr ""
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
-msgid ""
-"Storage %s should need to be assigned to a model related to the storage"
+msgid "Storage %s should need to be assigned to a model related to the storage"
 msgstr ""
 "El almacenamiento %s debe asignarse a un modelo relacionado con el "
 "almacenamiento"
@@ -634,8 +633,8 @@ msgid ""
 "The action button at the top of the view can be used to open,\n"
 "                        create, edit or delete a node."
 msgstr ""
-"El botón de acción en la parte superior de la vista se puede usar para abrir,"
-"\n"
+"El botón de acción en la parte superior de la vista se puede usar para "
+"abrir,\n"
 "                        crear, editar o eliminar un nodo."
 
 #. module: dms_field
@@ -674,7 +673,8 @@ msgstr "Escribir:"
 #, python-format
 msgid ""
 "You can change the structure by moving nodes. It is also possible\n"
-"                        to create new nodes by dragging files and even entire folder\n"
+"                        to create new nodes by dragging files and even "
+"entire folder\n"
 "                        structures on the view."
 msgstr ""
 "Puede cambiar la estructura moviendo nodos. También es posible\n"
@@ -688,18 +688,16 @@ msgstr ""
 #, python-format
 msgid ""
 "You can open a context menu by right-clicking on any node. This\n"
-"                        contains further options for interacting with the node."
+"                        contains further options for interacting with the "
+"node."
 msgstr ""
-"Puede abrir un menú contextual haciendo clic derecho en cualquier nodo. Este "
-"\n"
+"Puede abrir un menú contextual haciendo clic derecho en cualquier nodo. "
+"Este \n"
 "                                contiene más opciones para interactuar con "
 "el nodo."
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "no"
@@ -707,9 +705,6 @@ msgstr "no"
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "yes"
