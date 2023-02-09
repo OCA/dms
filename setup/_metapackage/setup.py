@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo13-addon-dms',
+        'odoo13-addon-dms_attachment_link',
         'odoo13-addon-dms_field',
     ],
     classifiers=[
