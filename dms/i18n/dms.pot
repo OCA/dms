@@ -948,6 +948,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:dms.action_dms_file
 #: model:ir.actions.act_window,name:dms.action_dms_file_migration
 #: model:ir.actions.act_window,name:dms.action_dms_file_storage_migration
+#: model:ir.actions.act_window,name:dms.action_dms_file_wizard_selector
 #: model:ir.actions.act_window,name:dms.action_dms_files_all_directory
 #: model:ir.actions.act_window,name:dms.action_dms_files_directory
 #: model:ir.actions.act_window,name:dms.action_dms_files_storage
