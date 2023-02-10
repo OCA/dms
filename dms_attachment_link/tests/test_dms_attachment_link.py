@@ -9,20 +9,11 @@ class TestDmsAttachmentLink(common.TransactionCase):
         super().setUp()
         self.partner = self.env["res.partner"].create({"name": "Test partner"})
         self.dms_file = self.env.ref("dms.file_01_demo")
-        ctx = {
-            "active_model": self.partner._name,
-            "active_id": self.partner.id,
-        }
-        self.wizard_model = self.env["wizard.ir.attachment.dms.file"].with_context(ctx)
 
     def test_add_url_attachment(self):
-        wizard = self.wizard_model.create({"dms_file_id": self.dms_file.id})
-        wizard.action_link()
-        domain = [
-            ("dms_file_id", "=", self.dms_file.id),
-            ("res_model", "=", self.partner._name),
-            ("res_id", "=", self.partner.id),
-        ]
-        attachment = self.env["ir.attachment"].search(domain)
+        attachment = self.dms_file.with_context(
+            active_model=self.partner._name,
+            active_id=self.partner.id,
+        ).action_create_attachment_from_record()
         self.assertEqual(attachment.name, self.dms_file.name)
         self.assertEqual(attachment.datas, self.dms_file.content)
