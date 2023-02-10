@@ -261,7 +261,15 @@ class DmsDirectory(models.Model):
         current_directory = self
         while current_directory:
             directories.insert(0, current_directory)
-            if access_token and consteq(current_directory.access_token, access_token):
+            if (
+                (
+                    access_token
+                    and current_directory.access_token
+                    and consteq(current_directory.access_token, access_token)
+                )
+                or not access_token
+                and current_directory.check_access_rights("read")
+            ):
                 return directories
             current_directory = current_directory.parent_id
         if access_token:
@@ -270,11 +278,15 @@ class DmsDirectory(models.Model):
         return directories
 
     def _get_own_root_directories(self):
-        return (
-            self.env["dms.directory"]
-            .search([("is_hidden", "=", False), ("parent_id", "=", False)])
-            .ids
+        res = self.env["dms.directory"].search_read(
+            [("is_hidden", "=", False)], ["parent_id"]
         )
+        all_ids = [value["id"] for value in res]
+        res_ids = []
+        for item in res:
+            if not item["parent_id"] or item["parent_id"][0] not in all_ids:
+                res_ids.append(item["id"])
+        return res_ids
 
     allowed_model_ids = fields.Many2many(
         related="storage_id.model_ids",
