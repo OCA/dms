@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-09 16:49+0000\n"
-"PO-Revision-Date: 2023-02-09 17:50+0100\n"
+"POT-Creation-Date: 2023-02-13 07:19+0000\n"
+"PO-Revision-Date: 2023-02-13 08:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. module: dms_attachment_link
-#: model_terms:ir.ui.view,arch_db:dms_attachment_link.view_wizard_ir_attachment_dms_file_form
+#: model_terms:ir.ui.view,arch_db:dms_attachment_link.view_dms_file_kanban_wizard_selection
 msgid "Add"
 msgstr "Añadir"
 
@@ -35,61 +35,18 @@ msgid "Attachment"
 msgstr "Adjunto"
 
 #. module: dms_attachment_link
-#: model_terms:ir.ui.view,arch_db:dms_attachment_link.view_wizard_ir_attachment_dms_file_form
-msgid "Cancel"
-msgstr "Cancelar"
-
-#. module: dms_attachment_link
-#: model:ir.actions.act_window,name:dms_attachment_link.action_wizard_ir_attachment_dms_file
-msgid "Create Attachment from DMS File"
-msgstr "Crear adjunto desde archivo DMS"
-
-#. module: dms_attachment_link
-#: model:ir.model.fields,field_description:dms_attachment_link.field_wizard_ir_attachment_dms_file__create_uid
-msgid "Created by"
-msgstr "Creado por"
-
-#. module: dms_attachment_link
-#: model:ir.model.fields,field_description:dms_attachment_link.field_wizard_ir_attachment_dms_file__create_date
-msgid "Created on"
-msgstr "Creado el"
-
-#. module: dms_attachment_link
-#: model:ir.model.fields,field_description:dms_attachment_link.field_wizard_ir_attachment_dms_file__dms_file_id
-msgid "DMS File"
-msgstr "Archivo DMS"
-
-#. module: dms_attachment_link
-#: model:ir.model.fields,field_description:dms_attachment_link.field_wizard_ir_attachment_dms_file__display_name
-msgid "Display Name"
-msgstr "Nombre a mostrar"
-
-#. module: dms_attachment_link
 #: model:ir.model.fields,field_description:dms_attachment_link.field_ir_attachment__dms_file_id
 msgid "Dms File"
 msgstr "Archivo Dms"
 
 #. module: dms_attachment_link
-#: model:ir.model.fields,field_description:dms_attachment_link.field_wizard_ir_attachment_dms_file__id
-msgid "ID"
-msgstr "ID"
+#: model:ir.model,name:dms_attachment_link.model_dms_file
+msgid "File"
+msgstr "Archivo"
 
 #. module: dms_attachment_link
-#: model:ir.model.fields,field_description:dms_attachment_link.field_wizard_ir_attachment_dms_file____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
-
-#. module: dms_attachment_link
-#: model:ir.model.fields,field_description:dms_attachment_link.field_wizard_ir_attachment_dms_file__write_uid
-msgid "Last Updated by"
-msgstr "Última actualización por"
-
-#. module: dms_attachment_link
-#: model:ir.model.fields,field_description:dms_attachment_link.field_wizard_ir_attachment_dms_file__write_date
-msgid "Last Updated on"
-msgstr "Última actualización el"
-
-#. module: dms_attachment_link
-#: model:ir.model,name:dms_attachment_link.model_wizard_ir_attachment_dms_file
-msgid "Wizard Ir Attachment DMS File"
-msgstr ""
+#: model:ir.actions.act_window,name:dms_attachment_link.action_dms_file_wizard_selector_dms_attachment_link
+#, fuzzy
+#| msgid "File"
+msgid "Files"
+msgstr "Archivos"
