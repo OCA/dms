@@ -38,7 +38,21 @@ class AbstractDmsMixin(models.AbstractModel):
     def search_panel_select_range(self, field_name, **kwargs):
         """Remove the limit of records (default is 200 since js)."""
         kwargs.update(limit=False)
-        _self = self.with_context(directory_short_name=True)
+        _self = self.with_context(
+            directory_short_name=True, skip_sanitized_parent_hierarchy=True
+        )
         return super(AbstractDmsMixin, _self).search_panel_select_range(
             field_name, **kwargs
+        )
+
+    def _search_panel_sanitized_parent_hierarchy(self, records, parent_name, ids):
+        if self.env.context.get("skip_sanitized_parent_hierarchy"):
+            all_ids = [value["id"] for value in records]
+            # Prevent error if user not access to parent record
+            for value in records:
+                if value["parent_id"] and value["parent_id"][0] not in all_ids:
+                    value["parent_id"] = False
+            return records
+        return super()._search_panel_sanitized_parent_hierarchy(
+            records=records, parent_name=parent_name, ids=ids
         )
