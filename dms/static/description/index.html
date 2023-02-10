@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.15.1: http://docutils.sourceforge.net/" />
+<meta name="generator" content="Docutils: http://docutils.sourceforge.net/" />
 <title>Document Management System</title>
 <style type="text/css">
 
@@ -382,19 +382,20 @@ seamlessly integrate with the document management system.</p>
 </li>
 <li><a class="reference internal" href="#configuration" id="id3">Configuration</a><ul>
 <li><a class="reference internal" href="#migration" id="id4">Migration</a></li>
+<li><a class="reference internal" href="#file-wizard-selection" id="id5">File Wizard Selection</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#usage" id="id5">Usage</a><ul>
-<li><a class="reference internal" href="#portal-functionality" id="id6">Portal functionality</a></li>
+<li><a class="reference internal" href="#usage" id="id6">Usage</a><ul>
+<li><a class="reference internal" href="#portal-functionality" id="id7">Portal functionality</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#known-issues-roadmap" id="id7">Known issues / Roadmap</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="id8">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="id9">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="id10">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="id11">Contributors</a></li>
-<li><a class="reference internal" href="#other-credits" id="id12">Other credits</a></li>
-<li><a class="reference internal" href="#maintainers" id="id13">Maintainers</a></li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="id8">Known issues / Roadmap</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="id9">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="id10">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="id11">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="id12">Contributors</a></li>
+<li><a class="reference internal" href="#other-credits" id="id13">Other credits</a></li>
+<li><a class="reference internal" href="#maintainers" id="id14">Maintainers</a></li>
 </ul>
 </li>
 </ul>
@@ -468,19 +469,24 @@ In order to achieve it you need to:</p>
 <p>You can check all the files that still needs to be migrated from all storages
 and migrate them manually on <em>Documents -&gt; Configuration -&gt; Migration</em></p>
 </div>
+<div class="section" id="file-wizard-selection">
+<h2><a class="toc-backref" href="#id5">File Wizard Selection</a></h2>
+<p>There is an action called <cite>action_dms_file_wizard_selector</cite> to open a wizard to list files in kanban view.
+This can be used (example <cite>dms_attachment_link</cite> module) to add a button in kanban view with the action we need.</p>
+</div>
 </div>
 <div class="section" id="usage">
-<h1><a class="toc-backref" href="#id5">Usage</a></h1>
+<h1><a class="toc-backref" href="#id6">Usage</a></h1>
 <p>The best way to manage the documents is to switch to the Documents view.
 Existing documents can be managed there and new documents can be created.</p>
 <div class="section" id="portal-functionality">
-<h2><a class="toc-backref" href="#id6">Portal functionality</a></h2>
+<h2><a class="toc-backref" href="#id7">Portal functionality</a></h2>
 <p>You can add any portal user to DMS access groups, and then allow that group in directories, so they will see in the portal such directories and their files.
 Another possibility is to click on “Share” button inside a directory or a file for obtaining a tokenized link for single access to that resource, no matter if logged or not.</p>
 </div>
 </div>
 <div class="section" id="known-issues-roadmap">
-<h1><a class="toc-backref" href="#id7">Known issues / Roadmap</a></h1>
+<h1><a class="toc-backref" href="#id8">Known issues / Roadmap</a></h1>
 <ul class="simple">
 <li>Files preview in portal</li>
 <li>Allow to download folder in portal and create zip file with all content</li>
@@ -492,7 +498,7 @@ Another possibility is to click on “Share” button inside a directory or a fi
 </ul>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#id8">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#id9">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/dms/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
@@ -500,16 +506,16 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#id9">Credits</a></h1>
+<h1><a class="toc-backref" href="#id10">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#id10">Authors</a></h2>
+<h2><a class="toc-backref" href="#id11">Authors</a></h2>
 <ul class="simple">
 <li>MuK IT</li>
 <li>Tecnativa</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#id11">Contributors</a></h2>
+<h2><a class="toc-backref" href="#id12">Contributors</a></h2>
 <ul class="simple">
 <li>Mathias Markl &lt;<a class="reference external" href="mailto:mathias.markl&#64;mukit.at">mathias.markl&#64;mukit.at</a>&gt;</li>
 <li>Enric Tobella &lt;<a class="reference external" href="mailto:etobella&#64;creublanca.es">etobella&#64;creublanca.es</a>&gt;</li>
@@ -524,7 +530,7 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="other-credits">
-<h2><a class="toc-backref" href="#id12">Other credits</a></h2>
+<h2><a class="toc-backref" href="#id13">Other credits</a></h2>
 <p>Some pictures are based on or inspired by:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://www.flaticon.com/authors/roundicons">Roundicons</a></li>
@@ -532,7 +538,7 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#id13">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#id14">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
