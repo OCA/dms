@@ -31,3 +31,10 @@ In order to achieve it you need to:
 
 You can check all the files that still needs to be migrated from all storages
 and migrate them manually on *Documents -> Configuration -> Migration*
+
+
+File Wizard Selection
+~~~~~~~~~~~~~~~~~~~~~
+
+There is an action called `action_dms_file_wizard_selector` to open a wizard to list files in kanban view.
+This can be used (example `dms_attachment_link` module) to add a button in kanban view with the action we need.
