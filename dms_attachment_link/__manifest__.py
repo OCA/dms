@@ -8,7 +8,10 @@
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": ["dms"],
-    "data": ["views/assets.xml", "wizard/wizard_ir_attachment_dms_file_view.xml"],
+    "data": [
+        "views/assets.xml",
+        "views/dms_file_views.xml",
+    ],
     "qweb": ["static/src/xml/chatter.xml"],
     "installable": True,
     "maintainers": ["victoralmau"],
