@@ -21,11 +21,14 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -984,6 +987,7 @@ msgstr "Datei-Upload"
 #: model:ir.actions.act_window,name:dms.action_dms_file
 #: model:ir.actions.act_window,name:dms.action_dms_file_migration
 #: model:ir.actions.act_window,name:dms.action_dms_file_storage_migration
+#: model:ir.actions.act_window,name:dms.action_dms_file_wizard_selector
 #: model:ir.actions.act_window,name:dms.action_dms_files_all_directory
 #: model:ir.actions.act_window,name:dms.action_dms_files_directory
 #: model:ir.actions.act_window,name:dms.action_dms_files_storage
@@ -1099,8 +1103,8 @@ msgstr "ID"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
 "ID des übergeordneten Datensatzes, der den Alias enthält (Beispiel: Projekt, "
 "das den Alias für die Aufgabenerstellung enthält)"
@@ -1202,9 +1206,9 @@ msgstr "Bild 512"
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
-"Indicate if directories and files access work only with related model access"
-" (for example, if some directories are related with any sale, only users "
-"with read access to these sale can acess)"
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can acess)"
 msgstr ""
 "Gibt an, ob Verzeichnisse und Dateizugriff nur mit verwandtem Modellzugriff "
 "funktionieren (z. B. wenn einige Verzeichnisse mit einem Verkauf in "
@@ -1214,8 +1218,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid ""
-"Indicate if directories and files auto-create in mail composition process "
-"too"
+"Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 "Geben Sie an, ob Verzeichnisse und Dateien auch im E-Mail-"
 "Kompositionsprozess automatisch erstellt werden"
@@ -1232,7 +1235,8 @@ msgstr "Gibt an, ob Verzeichnisse und Dateien standardmäßig ausgeblendet sind.
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 "Gibt an, ob es sich bei dem Verzeichnis um ein Stammverzeichnis handelt.\n"
@@ -1485,9 +1489,6 @@ msgstr "Meine Dateien"
 
 #. module: dms
 #: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__name
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__name
@@ -1655,8 +1656,8 @@ msgstr "Die übergeordnete Gruppe '%(parent)s' ist ein Kind von '%(current)s'."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
 "Übergeordnetes Modell, das den Alias enthält. Das Modell, das den Alias-"
@@ -1684,7 +1685,8 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 "Richtlinie zum Veröffentlichen einer Nachricht auf dem Dokument über das "
 "Mailgateway.\n"
@@ -1990,9 +1992,9 @@ msgstr "Die maximale Upload-Größe beträgt %s MB."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 "Das Modell (Odoo Document Kind), dem dieser Alias entspricht. Jede "
 "eingehende E-Mail, die nicht auf einen bestehenden Datensatz antwortet, "
@@ -2005,8 +2007,8 @@ msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
 "<jobs@example.odoo.com>"
 msgstr ""
-"Der Name des E-Mail-Alias, z. B. \"jobs\", wenn Sie E-Mails für <jobs@"
-"example.odoo.com> abfangen möchten."
+"Der Name des E-Mail-Alias, z. B. \"jobs\", wenn Sie E-Mails für "
+"<jobs@example.odoo.com> abfangen möchten."
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_access_group_name_uniq
