@@ -13,6 +13,7 @@ class IrAttachment(models.Model):
     def _compute_datas(self):
         """Get the contents of the attachment directly from the DMS fiel."""
         _self = self.filtered("dms_file_id")
-        super(IrAttachment, (self - _self))._compute_datas()
+        res = super(IrAttachment, (self - _self))._compute_datas()
         for item in _self:
             item.datas = item.dms_file_id.content
+        return res
