@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates id="template" xml:space="preserve">
+    <t t-inherit="mail.AttachmentBox" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_AttachmentBox_content')]" position="attributes">
+            <attribute name="class" add="d-block text-center" separator=" " />
+        </xpath>
+        <xpath expr="//button[hasclass('o_AttachmentBox_buttonAdd')]" position="after">
+            <button
+                class="o_add_dms_file_button btn btn-link"
+                type="button"
+                t-on-click.stop.prevent="_onAddDmsFile"
+            >
+                <i class="fa fa-plus-square" />
+                Add DMS File
+            </button>
+        </xpath>
+    </t>
+</templates>
