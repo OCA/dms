@@ -9,6 +9,8 @@ import json
 import logging
 from collections import defaultdict
 
+from PIL import Image
+
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import ValidationError
 from odoo.osv import expression
@@ -134,7 +136,10 @@ class File(models.Model):
     def _compute_image_1920(self):
         """Provide thumbnail automatically if possible."""
         for one in self.filtered("mimetype"):
-            if one.mimetype.startswith("image/"):
+            # Image.MIME provides a dict of mimetypes supported by Pillow,
+            # SVG is not present in the dict but is also a supported image format
+            # lacking a better solution, it's being added manually
+            if one.mimetype in (*Image.MIME.values(), "image/svg+xml"):
                 one.image_1920 = one.content
 
     def check_access_rule(self, operation):
