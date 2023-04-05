@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-04-04 15:26+0000\n"
+"PO-Revision-Date: 2023-04-05 11:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -1038,7 +1038,7 @@ msgstr "Seguito da (canali)"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_partner_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Seguaci (Partner)"
+msgstr "Seguito da (partner)"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_settings_general
@@ -1058,7 +1058,7 @@ msgstr "Gruppo"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Group By"
-msgstr "Raggruppa Per"
+msgstr "Raggruppa per"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__name
