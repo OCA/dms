@@ -15,7 +15,7 @@ exclude: |
   # You don't usually want a bot to modify your legal texts
   (LICENSE.*|COPYING.*)
 default_language_version:
-  python: python3
+  python: python3.8
   node: "14.13.0"
 repos:
   - repo: local
@@ -101,7 +101,7 @@ repos:
       - id: pyupgrade
         args: ["--keep-percent-format"]
   - repo: https://github.com/PyCQA/isort
-    rev: 5.5.1
+    rev: 5.12.0
     hooks:
       - id: isort
         name: isort except __init__.py
