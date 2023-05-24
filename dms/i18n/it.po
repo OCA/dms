@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-05-03 14:34+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-05-24 19:10+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -1003,7 +1003,7 @@ msgstr "Caricamento File"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Files"
-msgstr "File"
+msgstr "Files"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file
