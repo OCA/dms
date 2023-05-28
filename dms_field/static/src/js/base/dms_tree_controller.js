@@ -408,7 +408,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                 ? "directory_" + directory.parent_id[0]
                 : "#";
             var directoryNode = {
-                id: "directory_" + directory.id,
+                id: dt.id,
                 text: directory.name,
                 icon: "fa fa-folder-o",
                 type: "directory",
