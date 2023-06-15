@@ -149,7 +149,12 @@ class File(models.Model):
             # Image.MIME provides a dict of mimetypes supported by Pillow,
             # SVG is not present in the dict but is also a supported image format
             # lacking a better solution, it's being added manually
-            if one.mimetype in (*Image.MIME.values(), "image/svg+xml"):
+            # Some component modifies the PIL dictionary by adding PDF as a valid
+            # image type, so it must be explicitly excluded.
+            if one.mimetype != "application/pdf" and one.mimetype in (
+                *Image.MIME.values(),
+                "image/svg+xml",
+            ):
                 one.image_1920 = one.content
 
     def check_access_rule(self, operation):
