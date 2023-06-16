@@ -1,0 +1,2208 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2020-11-10 18:08+0000\n"
+"Last-Translator: Yves Goldberg <admin@ygol.com>\n"
+"Language-Team: none\n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Weblate 3.10\n"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_process
+msgid ""
+"                Define how incoming emails are processed:\n"
+"\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
+"                all attachments are created as files.\n"
+"\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
+"                are created as files of the subdirectory.\n"
+"                "
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "%s Files"
+msgstr "%s קבצים"
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "%s Subdirectories"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
+msgid "/dms/static/lib/img/banner/documents_onboarding_directory.png"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
+msgid "/dms/static/lib/img/banner/documents_onboarding_file.png"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid ""
+"<i class=\"fa fa-archive\"/>\n"
+"                                                Archive"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid ""
+"<i class=\"fa fa-archive\"/>\n"
+"                                                Unarchive"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid ""
+"<i class=\"fa fa-download\"/>\n"
+"                                                Download"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid ""
+"<i class=\"fa fa-external-link\"/>\n"
+"                                                Open"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
+msgid ""
+"<i class=\"fa fa-external-link\"/>\n"
+"                                        Open"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid ""
+"<i class=\"fa fa-file-o\"/>\n"
+"                                                Files"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid ""
+"<i class=\"fa fa-folder-o\"/>\n"
+"                                                Directories"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid ""
+"<i class=\"fa fa-lock\"/>\n"
+"                                                Lock"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
+"                                                Edit"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
+msgid ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
+"                                        Edit"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid ""
+"<i class=\"fa fa-trash-o\"/>\n"
+"                                                Delete"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
+msgid ""
+"<i class=\"fa fa-trash-o\"/>\n"
+"                                        Delete"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid ""
+"<i class=\"fa fa-unlock-alt\"/>\n"
+"                                                Unlock"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid ""
+"<span class=\"o_form_label\">\n"
+"                                        Storages\n"
+"                                    </span>"
+msgstr ""
+"<span class=\"o_form_label\">\n"
+"                                        מאגרים\n"
+"                                    </span>"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid ""
+"<span class=\"o_form_label\">File\n"
+"                                        Extensions\n"
+"                                    </span>"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">File Size</span>"
+msgstr "<span class=\"o_form_label\">גודל הקובץ </span>"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid ""
+"<span class=\"oe_read_only\">@</span>\n"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+msgid "<span>Documents</span>"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
+msgid ""
+"A Python dictionary that will be evaluated to provide default values when "
+"creating new records for this alias."
+msgstr ""
+"מילון פייתון שיוערך כדי לספק ערכי ברירת מחדל בעת יצירת רשומות חדשות לכינוי "
+"זה."
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "A directory can't be a root and have a parent directory."
+msgstr "ספריה לא יכולה להיות ראשית אם יש לה ספריית אב."
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "A directory has to have a parent directory."
+msgstr "לספרייה צריכה להיות ספריה אב."
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "A directory has to have model in attachment storage."
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "A directory with the same name already exists."
+msgstr "כבר קיימת ספרייה עם אותו שם."
+
+#. module: dms
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "A file must have model and resource ID in attachment storage."
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "A file with the same name already exists."
+msgstr "כבר קיים קובץ עם אותו שם."
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "A root directory has to have a storage."
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_abstract_dms_mixin
+msgid "Abstract Dms Mixin"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Accept Emails from"
+msgstr "קבל הודעות דוא\"ל מ"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_access_groups
+#: model:ir.ui.menu,name:dms.menu_dms_access_groups
+msgid "Access Groups"
+msgstr "קבוצות גישה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Access Information"
+msgstr "הרשאות למידע"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_warning
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_warning
+msgid "Access warning"
+msgstr "אזהרת גישה"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_07_demo
+msgid "Accounting"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction
+msgid "Action Needed"
+msgstr "נדרשת פעולה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid "Actions"
+msgstr "פעולות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_category__active
+#: model:ir.model.fields,field_description:dms.field_dms_tag__active
+msgid "Active"
+msgstr "פעיל"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_ids
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_ids
+msgid "Activities"
+msgstr "פעילויות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_decoration
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "סימון פעילות חריגה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_state
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_state
+msgid "Activity State"
+msgstr "מצב פעילות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_type_icon
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_directory
+msgid "Add a new Directory."
+msgstr "הוסף ספריה חדשה."
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_file
+#: model_terms:ir.actions.act_window,help:dms.action_dms_file_migration
+#: model_terms:ir.actions.act_window,help:dms.action_dms_file_storage_migration
+msgid "Add a new File."
+msgstr "הוסף קובץ חדש."
+
+#. module: dms
+#: model:dms.access.group,name:dms.access_group_01_demo
+msgid "Admin"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_id
+msgid "Alias"
+msgstr "כינוי"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_contact
+msgid "Alias Contact Security"
+msgstr "כינוי אבטחת איש קשר"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_name
+msgid "Alias Name"
+msgstr "שם כינוי"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Alias Setting"
+msgstr "הגדרת כינוי"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_domain
+msgid "Alias domain"
+msgstr "כינוי דומיין"
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "Alias-Mail-Extraction"
+msgstr "כינוי דואר-חילוץ"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_model_id
+msgid "Aliased Model"
+msgstr "מודל בעל כינוי"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_search
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
+msgid "All"
+msgstr "הכל"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+msgid "All Files"
+msgstr "כל הקבצים"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_06_demo
+msgid "Apps"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__active
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
+msgid "Archived"
+msgstr "בארכיון"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+msgid "Archived Files"
+msgstr "קבצים בארכיון"
+
+#. module: dms
+#: code:addons/dms/models/storage.py:0
+#: model:ir.model,name:dms.model_ir_attachment
+#: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__attachment
+#, python-format
+msgid "Attachment"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_attachment_count
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_attachment_count
+msgid "Attachment Count"
+msgstr "כמות קבצים מצורפים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__attachment_id
+msgid "Attachment File"
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_base
+msgid "Base"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
+msgid "Cancel"
+msgstr "בטל"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_category
+#: model:ir.ui.menu,name:dms.menu_dms_category
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_search
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
+msgid "Categories"
+msgstr "קטגוריות"
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_category
+msgid "Categories are used to categorize Documents."
+msgstr "קטגוריות משמשות לסיווג מסמכים."
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__category_id
+#: model:ir.model.fields,field_description:dms.field_dms_directory__category_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__category_id
+#: model:ir.model.fields,field_description:dms.field_dms_tag__category_id
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
+msgid "Category"
+msgstr "קטגוריה"
+
+#. module: dms
+#: model:ir.model.constraint,message:dms.constraint_dms_category_name_uniq
+msgid "Category name already exists!"
+msgstr "שם קטגוריה כבר קיים!"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__checksum
+msgid "Checksum/SHA1"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_category__child_category_ids
+msgid "Child Categories"
+msgstr "תתי קטגוריות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__child_group_ids
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
+msgid "Child Groups"
+msgstr "קבוצת בן"
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_directories_all_directory
+#: model_terms:ir.actions.act_window,help:dms.action_dms_directories_directory
+#: model_terms:ir.actions.act_window,help:dms.action_dms_directories_storage
+msgid "Click to add a new directory."
+msgstr "לחץ כדי להוסיף ספריה חדשה."
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_files_all_directory
+#: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
+#: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
+msgid "Click to add a new file."
+msgstr "לחץ כדי להוסיף קובץ חדש."
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_tag
+msgid "Click to create a new tag."
+msgstr "לחץ ליצירת תגית."
+
+#. module: dms
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__closed
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_file_state__closed
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__closed
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__closed
+msgid "Closed"
+msgstr "סגור"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__color
+#: model:ir.model.fields,field_description:dms.field_dms_directory__color
+#: model:ir.model.fields,field_description:dms.field_dms_file__color
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
+msgid "Color"
+msgstr "צבע"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_tag__color
+msgid "Color Index"
+msgstr "אינדקס צבעים"
+
+#. module: dms
+#: model:ir.model,name:dms.model_res_company
+msgid "Companies"
+msgstr "חברות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__company_id
+#: model:ir.model.fields,field_description:dms.field_dms_directory__company_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__company_id
+#: model:ir.model.fields,field_description:dms.field_dms_storage__company_id
+msgid "Company"
+msgstr "חברה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__complete_group_ids
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Complete Groups"
+msgstr "קבוצות שלמות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_category__complete_name
+#: model:ir.model.fields,field_description:dms.field_dms_directory__complete_name
+msgid "Complete Name"
+msgstr "שם מלא"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__complete_directory_ids
+msgid "Complete directories"
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_res_config_settings
+msgid "Config Settings"
+msgstr "הגדרות תצורה"
+
+#. module: dms
+#: model:ir.ui.menu,name:dms.cat_menu_dms_config
+msgid "Configuration"
+msgstr "תצורה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__content
+msgid "Content"
+msgstr "תוכן"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__content_binary
+msgid "Content Binary"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__content_file
+msgid "Content File"
+msgstr "תוכן הקובץ"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_11_demo
+msgid "Contract"
+msgstr ""
+
+#. module: dms
+#: model:dms.category,name:dms.category_03_demo
+msgid "Contracts"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__count_directories
+#: model:ir.model.fields,field_description:dms.field_dms_category__count_directories
+#: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_directories
+#: model:ir.model.fields,field_description:dms.field_dms_tag__count_directories
+msgid "Count Directories"
+msgstr "ספירת ספריות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__count_elements
+msgid "Count Elements"
+msgstr "ספירת אלמנטים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_category__count_files
+#: model:ir.model.fields,field_description:dms.field_dms_directory__count_files_title
+#: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_files
+#: model:ir.model.fields,field_description:dms.field_dms_tag__count_files
+msgid "Count Files"
+msgstr "ספירת קבצים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__count_files
+msgid "Count Files Title"
+msgstr "ספירת כותרות קבצים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_category__count_categories
+msgid "Count Subcategories"
+msgstr "ספירת קטגוריות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories_title
+msgid "Count Subdirectories"
+msgstr "ספירת תת-ספריות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories
+msgid "Count Subdirectories Title"
+msgstr "ספירת כותרות תת-ספריות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_category__count_tags
+msgid "Count Tags"
+msgstr "ספירת תגיות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__count_users
+msgid "Count Users"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
+msgid "Create"
+msgstr "צור"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_create
+#: model:ir.model.fields,field_description:dms.field_dms_directory__permission_create
+#: model:ir.model.fields,field_description:dms.field_dms_file__permission_create
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_create
+msgid "Create Access"
+msgstr "צור גישה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
+msgid "Create Directory"
+msgstr "צור ספריה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
+msgid "Create Storage"
+msgstr "צור מאגר"
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_category
+msgid "Create a new Category."
+msgstr "צור קטגוריה חדשה."
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
+msgid "Create a new Document Storage."
+msgstr "צור מאגר מסמכים חדש."
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
+msgid "Create a new Root Directory."
+msgstr "צור ספרייה ראשית חדשה."
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_storage
+msgid "Create a new Storage object."
+msgstr "צור אובייקט אחסון חדש."
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_storage__include_message_attachments
+msgid "Create files from message attachments"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__create_uid
+#: model:ir.model.fields,field_description:dms.field_dms_category__create_uid
+#: model:ir.model.fields,field_description:dms.field_dms_directory__create_uid
+#: model:ir.model.fields,field_description:dms.field_dms_file__create_uid
+#: model:ir.model.fields,field_description:dms.field_dms_storage__create_uid
+#: model:ir.model.fields,field_description:dms.field_dms_tag__create_uid
+msgid "Created by"
+msgstr "נוצר על-ידי"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__create_date
+#: model:ir.model.fields,field_description:dms.field_dms_category__create_date
+#: model:ir.model.fields,field_description:dms.field_dms_directory__create_date
+#: model:ir.model.fields,field_description:dms.field_dms_file__create_date
+#: model:ir.model.fields,field_description:dms.field_dms_storage__create_date
+#: model:ir.model.fields,field_description:dms.field_dms_tag__create_date
+msgid "Created on"
+msgstr "נוצר ב-"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+msgid "Creation Date"
+msgstr "תאריך יצירה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__save_type
+msgid "Current Save Type"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_bounced_content
+msgid "Custom Bounced Message"
+msgstr ""
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_01_demo
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
+msgid "Customer"
+msgstr "לקוח"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_08_demo
+msgid "Customer Invoice"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__access_url
+#: model:ir.model.fields,help:dms.field_dms_file__access_url
+msgid "Customer Portal URL"
+msgstr "כתובת פורטל לקוח"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+msgid "DMS"
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_security_mixin
+msgid "DMS Security Mixin"
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_mixins_thumbnail
+msgid "DMS thumbnail and icon mixin"
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/storage.py:0
+#: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__database
+#, python-format
+msgid "Database"
+msgstr "מסד נתונים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_defaults
+msgid "Default Values"
+msgstr "ערכי ברירת מחדל"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid "Define forbidden file extensions"
+msgstr "הגדר סיומות קבצים אסורות"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid ""
+"Define the maximum upload size of a\n"
+"                                        file in MB"
+msgstr ""
+"הגדר את גודל ההעלאה המקסימלי של\n"
+"                                        קובץ ב- MB"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_res_config_settings__documents_forbidden_extensions
+msgid "Defines a list of forbidden file extensions. (Example: 'exe,msi')"
+msgstr "מגדיר רשימה של סיומות קבצים אסורות. (דוגמה: 'exe, msi')"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
+msgid "Defines the maximum upload size in MB. Default (25MB)"
+msgstr "מגדיר את גודל ההעלאה המרבי ב- MB. ברירת מחדל (25MB)"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__permission_unlink
+#: model:ir.model.fields,field_description:dms.field_dms_file__permission_unlink
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_unlink
+msgid "Delete Access"
+msgstr "מחק גישה"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_directories_storage
+#: model:ir.actions.act_window,name:dms.action_dms_directory
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__directory_ids
+#: model:ir.model.fields,field_description:dms.field_dms_category__directory_ids
+#: model:ir.model.fields,field_description:dms.field_dms_storage__storage_directory_ids
+#: model:ir.model.fields,field_description:dms.field_dms_tag__directory_ids
+#: model:ir.ui.menu,name:dms.menu_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_tree
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
+msgid "Directories"
+msgstr "ספריות"
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_directories_all_directory
+#: model_terms:ir.actions.act_window,help:dms.action_dms_directories_directory
+#: model_terms:ir.actions.act_window,help:dms.action_dms_directories_storage
+#: model_terms:ir.actions.act_window,help:dms.action_dms_directory
+msgid ""
+"Directories can be used to structure and organize\n"
+"                files directly in Odoo."
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_directory
+#: model:ir.model.fields,field_description:dms.field_dms_file__directory_id
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
+msgid "Directory"
+msgstr "ספריה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__display_name
+#: model:ir.model.fields,field_description:dms.field_dms_category__display_name
+#: model:ir.model.fields,field_description:dms.field_dms_directory__display_name
+#: model:ir.model.fields,field_description:dms.field_dms_file__display_name
+#: model:ir.model.fields,field_description:dms.field_dms_storage__display_name
+#: model:ir.model.fields,field_description:dms.field_dms_tag__display_name
+msgid "Display Name"
+msgstr "שם תצוגה"
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_category
+msgid "Document Category"
+msgstr "קטגוריית מסמכים"
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_tag
+msgid "Document Tag"
+msgstr "תגית מסמך"
+
+#. module: dms
+#: model:ir.module.category,name:dms.category_dms_security
+#: model:ir.ui.menu,name:dms.main_menu_dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
+msgid "Documents"
+msgstr "מסמכים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_directory_state
+msgid "Documents Onboarding Directory State"
+msgstr "מדיניות ניהול שלבי ספריות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_file_state
+msgid "Documents Onboarding File State"
+msgstr "מדיניות ניהול שלבי קבצים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_state
+msgid "Documents Onboarding State"
+msgstr "מדיניות ניהול שלבי מסמכים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_storage_state
+msgid "Documents Onboarding Storage State"
+msgstr "מדיניות ניהול שלבי ספריות"
+
+#. module: dms
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_file_state__done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__done
+msgid "Done"
+msgstr "בוצע"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
+msgid "Dropdown menu"
+msgstr "תפריט נפתח"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__is_lock_editor
+msgid "Editor"
+msgstr "עורך"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Elements"
+msgstr "אלמנטים"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Email Alias"
+msgstr "כינוי דוא\"ל"
+
+#. module: dms
+#: model:ir.model,name:dms.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/tests/common.py:0
+#, python-format
+msgid "Error has not been raised"
+msgstr "שגיאה לא הועלתה"
+
+#. module: dms
+#: code:addons/dms/models/category.py:0
+#, python-format
+msgid "Error! You cannot create recursive categories."
+msgstr "שְׁגִיאָה! אינך יכול ליצור קטגוריות רקורסיביות."
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "Error! You cannot create recursive directories."
+msgstr "שְׁגִיאָה! אינך יכול ליצור ספריות רקורסיביות."
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__explicit_user_ids
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
+msgid "Explicit Users"
+msgstr "משתמשים מפורשים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__extension
+msgid "Extension"
+msgstr "סיומת"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_forbidden_extensions
+msgid "Extensions"
+msgstr "סוגי קבצים"
+
+#. module: dms
+#: model:dms.category,name:dms.category_05_demo
+msgid "External"
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_file
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
+msgid "File"
+msgstr "קובץ"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid "File Upload"
+msgstr "העלאת קובץ"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_file
+#: model:ir.actions.act_window,name:dms.action_dms_file_migration
+#: model:ir.actions.act_window,name:dms.action_dms_file_storage_migration
+#: model:ir.actions.act_window,name:dms.action_dms_file_wizard_selector
+#: model:ir.actions.act_window,name:dms.action_dms_files_all_directory
+#: model:ir.actions.act_window,name:dms.action_dms_files_directory
+#: model:ir.actions.act_window,name:dms.action_dms_files_storage
+#: model:ir.model.fields,field_description:dms.field_dms_category__file_ids
+#: model:ir.model.fields,field_description:dms.field_dms_directory__file_ids
+#: model:ir.model.fields,field_description:dms.field_dms_storage__storage_file_ids
+#: model:ir.model.fields,field_description:dms.field_dms_tag__file_ids
+#: model:ir.ui.menu,name:dms.menu_dms_file
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_tree
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
+msgid "Files"
+msgstr "קבצים"
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_file
+#: model_terms:ir.actions.act_window,help:dms.action_dms_file_migration
+#: model_terms:ir.actions.act_window,help:dms.action_dms_file_storage_migration
+#: model_terms:ir.actions.act_window,help:dms.action_dms_files_all_directory
+#: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
+#: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
+msgid "Files are used to save content directly in Odoo."
+msgstr "קבצים משמשים לשמירת תוכן ישירות בOdoo."
+
+#. module: dms
+#: code:addons/dms/models/storage.py:0
+#: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__file
+#, python-format
+msgid "Filestore"
+msgstr "מאגר"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_follower_ids
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_follower_ids
+msgid "Followers"
+msgstr "עוקבים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_partner_ids
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "עוקבים (לקוחות/ספקים)"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__activity_type_icon
+#: model:ir.model.fields,help:dms.field_dms_file__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_settings_general
+#: model:ir.ui.menu,name:dms.menu_dms_settings_general
+msgid "General Settings"
+msgstr "הגדרות כלליות"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
+msgid "Group"
+msgstr "קבוצה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file_migration
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
+msgid "Group By"
+msgstr "קבץ לפי"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__name
+msgid "Group Name"
+msgstr "שם הקבוצה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__users
+msgid "Group Users"
+msgstr "קבוצות שלמות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__group_ids
+#: model:ir.model.fields,field_description:dms.field_dms_directory__group_ids
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Groups"
+msgstr "קבוצות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__has_message
+#: model:ir.model.fields,field_description:dms.field_dms_file__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: dms
+#: model:dms.category,name:dms.category_02_demo
+msgid "Human Resource"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__id
+#: model:ir.model.fields,field_description:dms.field_dms_category__id
+#: model:ir.model.fields,field_description:dms.field_dms_directory__id
+#: model:ir.model.fields,field_description:dms.field_dms_file__id
+#: model:ir.model.fields,field_description:dms.field_dms_storage__id
+#: model:ir.model.fields,field_description:dms.field_dms_tag__id
+msgid "ID"
+msgstr "מזהה"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
+msgid ""
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
+msgstr ""
+"מזהה של רשומת האב המחזיקה בכינוי (דוגמה: פרויקט המחזיק בכינוי ליצירת המשימות)"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_icon
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_exception_icon
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid "Icon"
+msgstr "אייקון"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__icon_url
+#: model:ir.model.fields,field_description:dms.field_dms_file__icon_url
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__icon_url
+msgid "Icon URL"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__activity_exception_icon
+#: model:ir.model.fields,help:dms.field_dms_file__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "סמל לציון פעילות חריגה."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_file__active
+msgid "If a file is set to archived, it is not displayed, but still exists."
+msgstr "אם קובץ מוגדר לארכיון, הוא לא מוצג, אך עדיין קיים."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__message_needaction
+#: model:ir.model.fields,help:dms.field_dms_directory__message_unread
+#: model:ir.model.fields,help:dms.field_dms_file__message_needaction
+#: model:ir.model.fields,help:dms.field_dms_file__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "אם מסומן, הודעות חדשות דורשות את תשומת לבך."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
+#: model:ir.model.fields,help:dms.field_dms_directory__message_has_sms_error
+#: model:ir.model.fields,help:dms.field_dms_file__message_has_error
+#: model:ir.model.fields,help:dms.field_dms_file__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "אם מסומן, בחלק מההודעות קיימת שגיאת משלוח."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_abstract_dms_mixin__company_id
+#: model:ir.model.fields,help:dms.field_dms_directory__company_id
+#: model:ir.model.fields,help:dms.field_dms_file__company_id
+#: model:ir.model.fields,help:dms.field_dms_storage__company_id
+msgid ""
+"If set, directories and files will only be available for the selected "
+"company."
+msgstr "אם מוגדר, ספריות וקבצים יהיו זמינים רק עבור החברה שנבחרה."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_bounced_content
+msgid ""
+"If set, this content will automatically be sent out to unauthorized users "
+"instead of the default message."
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_1920
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_1920
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_1920
+msgid "Image"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_1024
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_1024
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_1024
+msgid "Image 1024"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_128
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_128
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_128
+msgid "Image 128"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_256
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_256
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_256
+msgid "Image 256"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__image_512
+#: model:ir.model.fields,field_description:dms.field_dms_file__image_512
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_512
+msgid "Image 512"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
+#: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
+msgid ""
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can acess)"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
+msgid ""
+"Indicate if directories and files auto-create in mail composition process too"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_abstract_dms_mixin__is_hidden
+#: model:ir.model.fields,help:dms.field_dms_directory__is_hidden
+#: model:ir.model.fields,help:dms.field_dms_file__is_hidden
+#: model:ir.model.fields,help:dms.field_dms_storage__is_hidden
+msgid "Indicates if directories and files are hidden by default."
+msgstr "מציין אם ספריות וקבצים מוסתרים כברירת מחדל."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
+msgid ""
+"Indicates if the directory is a root directory.\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
+"        parent inherits the settings form its parent."
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__inherit_group_ids
+msgid "Inherit Groups"
+msgstr "תורשת קבוצות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
+#: model:ir.model.fields,field_description:dms.field_dms_storage__inherit_access_from_parent_record
+msgid "Inherit permissions from related record"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_create
+msgid "Inherited Create Access"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_unlink
+msgid "Inherited Unlink Access"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_write
+msgid "Inherited Write Access"
+msgstr ""
+
+#. module: dms
+#: model:dms.category,name:dms.category_01_demo
+msgid "Internal"
+msgstr "פנימיים"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Internal / Human Resource"
+msgstr "משאבים פנימיים / אנושיים"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+msgid "Invoices"
+msgstr "חשבוניות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_is_follower
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_is_follower
+msgid "Is Follower"
+msgstr "עוקב"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__is_root_directory
+msgid "Is Root Directory"
+msgstr "ספרייה ראשית"
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "It is not possible to change parent to other storage."
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "It is not possible to change the storage."
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__just_done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_file_state__just_done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__just_done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__just_done
+msgid "Just done"
+msgstr "הרגע בוצע"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group____last_update
+#: model:ir.model.fields,field_description:dms.field_dms_category____last_update
+#: model:ir.model.fields,field_description:dms.field_dms_directory____last_update
+#: model:ir.model.fields,field_description:dms.field_dms_file____last_update
+#: model:ir.model.fields,field_description:dms.field_dms_storage____last_update
+#: model:ir.model.fields,field_description:dms.field_dms_tag____last_update
+msgid "Last Modified on"
+msgstr "שינוי אחרון ב"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__write_uid
+#: model:ir.model.fields,field_description:dms.field_dms_category__write_uid
+#: model:ir.model.fields,field_description:dms.field_dms_directory__write_uid
+#: model:ir.model.fields,field_description:dms.field_dms_file__write_uid
+#: model:ir.model.fields,field_description:dms.field_dms_storage__write_uid
+#: model:ir.model.fields,field_description:dms.field_dms_tag__write_uid
+msgid "Last Updated by"
+msgstr "עודכן לאחרונה על-ידי"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__write_date
+#: model:ir.model.fields,field_description:dms.field_dms_category__write_date
+#: model:ir.model.fields,field_description:dms.field_dms_directory__write_date
+#: model:ir.model.fields,field_description:dms.field_dms_file__write_date
+#: model:ir.model.fields,field_description:dms.field_dms_storage__write_date
+#: model:ir.model.fields,field_description:dms.field_dms_tag__write_date
+msgid "Last Updated on"
+msgstr "עדכון אחרון ב"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Last update"
+msgstr "עדכון אחרון"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
+#: model:ir.model.fields,field_description:dms.field_dms_storage__model_ids
+msgid "Linked Models"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__res_model
+#: model:ir.model.fields,field_description:dms.field_dms_file__res_model
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_model
+msgid "Linked attachments model"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__res_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__res_id
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_id
+msgid "Linked attachments record ID"
+msgstr ""
+
+#. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/xml/views.xml:0
+#, python-format
+msgid "Loading"
+msgstr "טוען"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Lock"
+msgstr "נעל"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__is_locked
+msgid "Locked"
+msgstr "נעול"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
+msgid "Locked By"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_main_attachment_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "קובץ ראשי מצורף"
+
+#. module: dms
+#: model:res.groups,name:dms.group_dms_manager
+msgid "Manager"
+msgstr "מנהל"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
+msgid "Manual File Migration"
+msgstr "העברת קבצים ידנית"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_error
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_error
+msgid "Message Delivery error"
+msgstr "הודעת שגיאת משלוח"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_ids
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_ids
+msgid "Messages"
+msgstr "הודעות"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Meta Information"
+msgstr "מטא מידע"
+
+#. module: dms
+#: model:ir.actions.server,name:dms.action_dms_attachment_migrate
+msgid "Migrate"
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
+msgid "Migrate Files"
+msgstr "העברת קבצים"
+
+#. module: dms
+#: model:ir.ui.menu,name:dms.menu_dms_file_migration
+msgid "Migration"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__migration
+msgid "Migration Status"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__model_id
+msgid "Model"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+msgid "Modification Date"
+msgstr "תאריך שינוי"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
+#: model:ir.model.fields,field_description:dms.field_dms_file__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+msgid "My Directories"
+msgstr "הספריות שלי"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "My Documents"
+msgstr "הקבצים שלי"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+msgid "My Files"
+msgstr "הקבצים שלי"
+
+#. module: dms
+#: code:addons/dms/controllers/portal.py:0
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__name
+#: model:ir.model.fields,field_description:dms.field_dms_category__name
+#: model:ir.model.fields,field_description:dms.field_dms_directory__name
+#: model:ir.model.fields,field_description:dms.field_dms_file__name
+#: model:ir.model.fields,field_description:dms.field_dms_storage__name
+#: model:ir.model.fields,field_description:dms.field_dms_tag__name
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+#, python-format
+msgid "Name"
+msgstr "שם"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_directory_new
+#: model:ir.actions.act_window,name:dms.action_dms_file_new
+msgid "New Root Directory"
+msgstr "ספרייה ראשית חדשה"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_storage_new
+msgid "New Storage"
+msgstr "שטח אחסון חדש"
+
+#. module: dms
+#: model:dms.category,name:dms.category_06_demo
+msgid "News"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_date_deadline
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "מועד אחרון לפעילות הבאה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_summary
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_summary
+msgid "Next Activity Summary"
+msgstr "תיאור הפעילות הבאה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_type_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_type_id
+msgid "Next Activity Type"
+msgstr "סוג הפעילות הבאה"
+
+#. module: dms
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__not_done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_file_state__not_done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__not_done
+#: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__not_done
+msgid "Not done"
+msgstr "לא בוצע"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Not results"
+msgstr "לא תוצאות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction_counter
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction_counter
+msgid "Number of Actions"
+msgstr "מספר הפעולות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_error_counter
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_error_counter
+msgid "Number of errors"
+msgstr "מספר השגיאות"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__message_needaction_counter
+#: model:ir.model.fields,help:dms.field_dms_file__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "מספר ההודעות המחייבות פעולה"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__message_has_error_counter
+#: model:ir.model.fields,help:dms.field_dms_file__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "מספר הודעות עם שגיאת משלוח"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__message_unread_counter
+#: model:ir.model.fields,help:dms.field_dms_file__message_unread_counter
+msgid "Number of unread messages"
+msgstr "מספר ההודעות שלא נקראו"
+
+#. module: dms
+#: model:dms.access.group,name:dms.access_group_03_demo
+msgid "Only admin user"
+msgstr ""
+
+#. module: dms
+#: code:addons/dms/models/storage.py:0
+#, python-format
+msgid "Only managers can execute this action."
+msgstr "רק מנהלים יכולים לבצע פעולה זו."
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+msgid "Operations"
+msgstr "פעולות"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_force_thread_id
+msgid ""
+"Optional ID of a thread (record) to which all incoming messages will be "
+"attached, even if they did not reply to it. If set, this will disable the "
+"creation of new records completely."
+msgstr ""
+"מזהה אפשרי של שרשור (רשומה) שאליו יצורפו כל ההודעות הנכנסות, גם אם לא השיבו "
+"אליו. אם מוגדר, הדבר יבטל את יצירת הרשומות החדשות לחלוטין."
+
+#. module: dms
+#: model:ir.ui.menu,name:dms.cat_menu_dms_config_organizing
+msgid "Organizing"
+msgstr "מארגן"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_user_id
+msgid "Owner"
+msgstr "בעלים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_category__parent_id
+msgid "Parent Category"
+msgstr "קטגוריית אם"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__parent_id
+msgid "Parent Directory"
+msgstr "ספריית אב"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_group_id
+msgid "Parent Group"
+msgstr "קבוצת אב"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_model_id
+msgid "Parent Model"
+msgstr "מודל אב"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_path
+#: model:ir.model.fields,field_description:dms.field_dms_category__parent_path
+#: model:ir.model.fields,field_description:dms.field_dms_directory__parent_path
+msgid "Parent Path"
+msgstr "נתיב אב"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_thread_id
+msgid "Parent Record Thread ID"
+msgstr "מזהה רשומת אשכול אב"
+
+#. module: dms
+#: code:addons/dms/models/access_groups.py:0
+#, python-format
+msgid "Parent group '%(parent)s' is child of '%(current)s'."
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
+msgid ""
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
+"(parent_model) and task (model))"
+msgstr ""
+"מודל אב המחזיק בכינוי. המודל המחזיק במזהה לכינוי אינו בהכרח המודל שניתן על "
+"ידי alias_model_id (דוגמה: project (parent_model) ומשימה (model))"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_02_demo
+msgid "Partner"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__path_json
+msgid "Path Json"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__path_names
+msgid "Path Names"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_contact
+msgid ""
+"Policy to post a message on the document using the mailgateway.\n"
+"- everyone: everyone can post\n"
+"- partners: only authenticated partners\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
+msgstr ""
+"מדיניות פרסום הודעה על המסמך באמצעות שער הדואר.\n"
+"- כולם: כולם יכולים לפרסם\n"
+"- לקוחות/ספקים: רק לקוחות/ספקים מאומתים\n"
+"- עוקבים: רק עוקבים של המסמך הקשור או חברים בערוצים הבאים\n"
+
+#. module: dms
+#: model:dms.access.group,name:dms.access_group_02_demo
+#: model:dms.tag,name:dms.tag_05_demo
+msgid "Portal"
+msgstr "פורטל"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_url
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_url
+msgid "Portal Access URL"
+msgstr "כתובת גישה לפורטל"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_10_demo
+msgid "Product"
+msgstr "מוצר"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_03_demo
+msgid "Project"
+msgstr "פרויקט"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__permission_read
+#: model:ir.model.fields,field_description:dms.field_dms_file__permission_read
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_read
+msgid "Read Access"
+msgstr "גישה לקריאה"
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_access_group
+msgid "Record Access Groups"
+msgstr "שיא קבוצות גישה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
+#: model:ir.model.fields,field_description:dms.field_dms_file__record_ref
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__record_ref
+msgid "Record Referenced"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
+msgid "Record Thread ID"
+msgstr "מזהה רשומת אשכול"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
+msgid "Require Migration"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__activity_user_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__activity_user_id
+msgid "Responsible User"
+msgstr "משתמש אחראי"
+
+#. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/js/views/search_panel.esm.js:0
+#, python-format
+msgid "Root"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_storage__root_directory_ids
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
+msgid "Root Directories"
+msgstr "ספרייה ראשית"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "שגיאת שליחת SMS"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_04_demo
+msgid "Sales"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__storage_id_save_type
+#: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_save_type
+#: model:ir.model.fields,field_description:dms.field_dms_file__storage_id_save_type
+#: model:ir.model.fields,field_description:dms.field_dms_storage__save_type
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
+msgid "Save Type"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__access_token
+#: model:ir.model.fields,field_description:dms.field_dms_file__access_token
+msgid "Security Token"
+msgstr "אסימון אבטחה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
+msgid "Settings"
+msgstr "הגדרות"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Share"
+msgstr "שתף"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid "Show storages"
+msgstr "הצג מאגרים"
+
+#. module: dms
+#: model:ir.model.fields.selection,name:dms.selection__dms_directory__alias_process__files
+msgid "Single Files"
+msgstr "קבצים בודדים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__size
+#: model:ir.model.fields,field_description:dms.field_dms_file__size
+#: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_binary_max_size
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "Size"
+msgstr "גודל"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__starred
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid "Starred"
+msgstr "מסומן בכוכב"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+msgid "Starred Directories"
+msgstr "ספריות מכוכבות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__user_star_ids
+msgid "Stars"
+msgstr "כוכביות"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__activity_state
+#: model:ir.model.fields,help:dms.field_dms_file__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"סטטוס על בסיס פעילויות\n"
+"איחור: תאריך היעד כבר חלף\n"
+"היום: תאריך הפעילות הוא היום\n"
+"מתוכנן: פעילויות עתידיות."
+
+#. module: dms
+#: model:ir.model,name:dms.model_dms_storage
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__storage_id
+#: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__storage_id
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
+#: model_terms:ir.ui.view,arch_db:dms.search_dms_file_migration
+msgid "Storage"
+msgstr "אחסון"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__is_hidden
+#: model:ir.model.fields,field_description:dms.field_dms_directory__is_hidden
+#: model:ir.model.fields,field_description:dms.field_dms_file__is_hidden
+#: model:ir.model.fields,field_description:dms.field_dms_storage__is_hidden
+msgid "Storage is Hidden"
+msgstr "האחסון מוסתר"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_storage
+#: model:ir.ui.menu,name:dms.menu_dms_storage
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid "Storages"
+msgstr "מחסני"
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_storage
+msgid "Storages are used to configure your Documents."
+msgstr "אחסנים משמשים לתצורת המסמכים שלך."
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+msgid "Subcategories"
+msgstr "תת קטגוריה"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_directories_all_directory
+#: model:ir.actions.act_window,name:dms.action_dms_directories_directory
+#: model:ir.model.fields,field_description:dms.field_dms_directory__child_directory_ids
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Subdirectories"
+msgstr "תת-ספריות"
+
+#. module: dms
+#: model:ir.model.fields.selection,name:dms.selection__dms_directory__alias_process__directory
+msgid "Subdirectory"
+msgstr "תת-ספרייה"
+
+#. module: dms
+#: model:ir.ui.menu,name:dms.cat_menu_dms_config_system
+msgid "System"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
+msgid "Tag"
+msgstr "תגית"
+
+#. module: dms
+#: model:ir.model.constraint,message:dms.constraint_dms_tag_name_uniq
+msgid "Tag name already exists!"
+msgstr "שם התגית כבר קיים!"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.action_dms_tag
+#: model:ir.model.fields,field_description:dms.field_dms_category__tag_ids
+#: model:ir.model.fields,field_description:dms.field_dms_directory__tag_ids
+#: model:ir.model.fields,field_description:dms.field_dms_file__tag_ids
+#: model:ir.ui.menu,name:dms.menu_dms_tag
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
+msgid "Tags"
+msgstr "תגיות"
+
+#. module: dms
+#: model_terms:ir.actions.act_window,help:dms.action_dms_tag
+msgid "Tags are used to categorize Documents."
+msgstr "תגיות משמשים לסיווג מסמכים."
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Tags..."
+msgstr "תגיות..."
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Technical Information"
+msgstr "מידע טכני"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_category__active
+msgid "The active field allows you to hide the category without removing it."
+msgstr "השדה הפעיל מאפשר לך להסתיר את הקטגוריה מבלי להסיר אותה."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_tag__active
+msgid "The active field allows you to hide the tag without removing it."
+msgstr "השדה הפעיל מאפשר להסתיר את התגית מבלי להסיר אותה."
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
+msgid "The configuration is done!"
+msgstr "התצורה נעשית!"
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "The directory name is invalid."
+msgstr "שם הספרייה אינו חוקי."
+
+#. module: dms
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "The file has a forbidden file extension."
+msgstr "לקובץ סיומת קבצים אסורה."
+
+#. module: dms
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "The file name is invalid."
+msgstr "שם הקובץ אינו חוקי."
+
+#. module: dms
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "The maximum upload size is %s MB)."
+msgstr "גודל ההעלאה המקסימלי הוא %s MB)."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
+msgid ""
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
+msgstr ""
+"המודל (סוג מסמך Odoo) שאליו הכינוי הזה תואם. כל דוא\"ל נכנס שלא יענה לרשומה "
+"קיימת יביא ליצירת רשומה חדשה של מודל זה (למשל משימת פרויקט)"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_name
+msgid ""
+"The name of the email alias, e.g. 'jobs' if you want to catch emails for "
+"<jobs@example.odoo.com>"
+msgstr ""
+"שם כינוי הדוא\"ל, למשל 'עבודות' אם ברצונך לקבל הודעות דוא\"ל ל <jobs@example."
+"odoo.com>"
+
+#. module: dms
+#: model:ir.model.constraint,message:dms.constraint_dms_access_group_name_uniq
+msgid "The name of the group must be unique!"
+msgstr "שם הקבוצה חייב להיות ייחודי!"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__alias_user_id
+msgid ""
+"The owner of records created upon receiving emails on this alias. If this "
+"field is not set the system will attempt to find the right owner based on "
+"the sender (From) address, or will use the Administrator account if no "
+"system user is found for that address."
+msgstr ""
+"הבעלים של רשומות שנוצרו עם קבלת דוא\"ל בכינוי זה. אם שדה זה לא מוגדר, המערכת "
+"תנסה למצוא את הבעלים הנכון על סמך כתובת השולח (מאת), או שתשתמש בחשבון מנהל "
+"המערכת אם לא נמצא משתמש מערכת עבור אותה כתובת."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_abstract_dms_mixin__storage_id_save_type
+#: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
+#: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
+#: model:ir.model.fields,help:dms.field_dms_storage__save_type
+msgid ""
+"The save type is used to determine how a file is saved by the\n"
+"        system. If you change this setting, you can migrate existing files\n"
+"        manually by triggering the action."
+msgstr ""
+"סוג השמירה משמש לקביעת אופן שמירת הקובץ על ידי ה-\n"
+"         מערכת. אם תשנה הגדרה זו, תוכל להעביר קבצים קיימים\n"
+"         באופן ידני על ידי הפעלת הפעולה."
+
+#. module: dms
+#: code:addons/dms/models/directory.py:0
+#, python-format
+msgid "This directory needs to be associated to a record."
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_elements
+msgid "Total Elements"
+msgstr "סה\"כ אלמנטים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_files
+msgid "Total Files"
+msgstr "סה\"כ קבצים"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_directories
+msgid "Total Subdirectories"
+msgstr "סה\"כ תת-ספריות"
+
+#. module: dms
+#: model:dms.category,name:dms.category_04_demo
+msgid "Traveling"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_file__mimetype
+msgid "Type"
+msgstr "סוג"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__activity_exception_decoration
+#: model:ir.model.fields,help:dms.field_dms_file__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "סוג פעילות חריגה ברשומה."
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_unlink
+msgid "Unlink Access"
+msgstr "בטל את קישור הגישה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+msgid "Unlock"
+msgstr "שחרר נעילה"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__alias_process
+msgid "Unpack Emails as"
+msgstr "חלק הודעות דוא\"ל כ-"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_unread
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_unread
+msgid "Unread Messages"
+msgstr "הודעות שלא נקראו"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__message_unread_counter
+#: model:ir.model.fields,field_description:dms.field_dms_file__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "מספר הודעות שלא נקראו"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
+msgid "Upload File"
+msgstr "טען קובץ"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
+msgid "Upload your first File."
+msgstr "טען את הקובץ הראשון שלך."
+
+#. module: dms
+#: model:res.groups,name:dms.group_dms_user
+msgid "User"
+msgstr "משתמש"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
+msgid "Users"
+msgstr "משתמשים"
+
+#. module: dms
+#: model:dms.tag,name:dms.tag_09_demo
+msgid "Vendor Bill"
+msgstr ""
+
+#. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/xml/views.xml:0
+#, python-format
+msgid "Viewer"
+msgstr "צופה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid "Views"
+msgstr "תצוגות"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__website_message_ids
+#: model:ir.model.fields,field_description:dms.field_dms_file__website_message_ids
+msgid "Website Messages"
+msgstr "הודעות מאתר האינטרנט"
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_dms_directory__website_message_ids
+#: model:ir.model.fields,help:dms.field_dms_file__website_message_ids
+msgid "Website communication history"
+msgstr "היסטורית התקשרויות מאתר האינטרנט"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
+#: model:ir.model.fields,field_description:dms.field_dms_directory__permission_write
+#: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_write
+msgid "Write Access"
+msgstr "גישה לכתיבה"
+
+#. module: dms
+#. openerp-web
+#: code:addons/dms/static/src/js/views/many_drop_target.js:0
+#, python-format
+msgid "You must select a directory first"
+msgstr "תחילה עליך לבחור ספריה"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
+msgid "action_close_documents_onboarding"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
+msgid "element(s)"
+msgstr "אלמנט(ים)"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+msgid "exe,msi"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "mail.catchall.domain"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
+msgid "o_onboarding_blue"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
+msgid "o_onboarding_orange"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
+#: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
+msgid "res.company"
+msgstr ""
+
+#~ msgid "Path"
+#~ msgstr "נתיב"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "עוקבים (ערוצים)"
+
+#~ msgid "Locked by"
+#~ msgstr "נעול ע\"י"
+
+#~ msgid "Drop your files here"
+#~ msgstr "לגרור קבצים לכאן"
+
+#~ msgid "A file is locked, the folder cannot be deleted."
+#~ msgstr "קובץ נעול, לא ניתן למחוק את התיקיה."
+
+#~ msgid "The directory has to have the permission to create files."
+#~ msgstr "על הספריה לקבל הרשאה ליצור קבצים."
+
+#~ msgid ""
+#~ "The parent directory has to have the permission to create directories."
+#~ msgstr "לספריית האב צריך להיות הרשאה ליצור ספריות."
+
+#~ msgid "The record (%s [%s]) is locked, by an other user."
+#~ msgstr "הרשומה (%s [%s]) נעולה על ידי משתמש אחר."
+
+#~ msgid ""
+#~ "The requested operation cannot be completed due to group security "
+#~ "restrictions. Please contact your system administrator.\n"
+#~ "\n"
+#~ "(Document type: %s, Operation: %s)"
+#~ msgstr ""
+#~ "לא ניתן להשלים את הפעולה המבוקשת בגלל מגבלות אבטחה קבוצתיות. אנא פנה "
+#~ "למנהל המערכת שלך.\n"
+#~ "\n"
+#~ "(סוג מסמך: %s, Operation: %s)"
+
+#~ msgid "Folder"
+#~ msgstr "תיקייה"
+
+#~ msgid "A root directory has to have a root storage."
+#~ msgstr "לספרייה ראשית צריכה להיות מאגר ראשי."
+
+#~ msgid "Root Storage"
+#~ msgstr "שורש שטח האיחסון"
+
+#~ msgid "Filename"
+#~ msgstr "שם קובץ"

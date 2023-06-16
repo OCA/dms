@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="dms.BinaryPreviewDialog" owl="1">
+        <Dialog title="this.props.title">
+            <t t-if="this.props.isImage">
+                <img t-att-src="this.props.url" t-att-alt="this.props.title"/>
+            </t>
+            <t t-elif="this.props.isVideo">
+                <video t-att-src="this.props.url" t-ref="videoPreview" autoplay="true" playsinline="true"
+                       style="max-width: 100%; max-height: 100%;"/>
+            </t>
+            <t t-else="">
+                <div style="height:50rem">
+                    <object t-att-data="this.props.url"
+                            t-att-type="this.props.type"
+                            width="100%"
+                            height="100%"/>
+                </div>
+            </t>
+        </Dialog>
+    </t>
+</templates>

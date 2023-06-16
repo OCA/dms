@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="dms.PreviewBinaryField" t-inherit="web.BinaryField" owl="1">
+        <xpath expr="//button[hasclass('o_clear_file_button')]" position="after">
+            <button
+                    class="btn btn-secondary fa fa-search"
+                    data-tooltip="Preview"
+                    aria-label="Preview"
+                    t-on-click="preview"
+            />
+        </xpath>
+    </t>
+</templates>
