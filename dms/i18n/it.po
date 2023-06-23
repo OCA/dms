@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-06-07 13:18+0000\n"
+"PO-Revision-Date: 2023-06-23 13:11+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -860,7 +860,7 @@ msgstr "Nome visualizzato"
 #. module: dms
 #: model:ir.model,name:dms.model_dms_category
 msgid "Document Category"
-msgstr "Categoria Documento"
+msgstr "Categoria documento"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_tag
