@@ -152,6 +152,16 @@ class DocumentsBaseCase(common.TransactionCase):
     def setUp(self):
         super().setUp()
         self.super_uid = SUPERUSER_ID
+        self.env = self.env(
+            context=dict(
+                self.env.context,
+                mail_create_nolog=True,
+                mail_create_nosubscribe=True,
+                mail_notrack=True,
+                no_reset_password=True,
+                tracking_disable=True,
+            )
+        )
         # models
         self.access_group_model = self.env["dms.access.group"]
         self.storage_model = self.env["dms.storage"]
