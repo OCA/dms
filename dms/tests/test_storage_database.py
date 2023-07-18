@@ -59,7 +59,7 @@ class StorageDatabaseTestCase(StorageDatabaseBaseCase):
         partner = self.partner_model.create({"name": "Test partner"})
         directory = self.directory_model.create(
             {
-                "name": model_partner.model,
+                "name": self.partner_model._name,
                 "model_id": model_partner.id,
                 "res_id": partner.id,
                 "parent_id": self.storage.root_directory_ids[0].id,
