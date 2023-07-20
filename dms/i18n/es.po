@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-02-02 12:33+0000\n"
-"Last-Translator: Olga Marco Puértolas <olga.marco@creublanca.es>\n"
+"PO-Revision-Date: 2023-07-28 22:09+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -220,6 +220,9 @@ msgid ""
 "                                        <span class=\"oe_edit_only\"> @ </"
 "span>"
 msgstr ""
+"<span class=\"oe_read_only\">@</span>\n"
+"                                        <span class=\"oe_edit_only\"> @ "
+"</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
@@ -283,7 +286,7 @@ msgstr "Un directorio root debe tener un almacenamiento."
 #. module: dms
 #: model:ir.model,name:dms.model_abstract_dms_mixin
 msgid "Abstract Dms Mixin"
-msgstr ""
+msgstr "Mezcla Dms abstracta"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -353,7 +356,7 @@ msgstr "Estado de actividad"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_type_icon
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icono para el tipo de actividad"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directory
@@ -459,7 +462,7 @@ msgstr "Archivo adjunto"
 #. module: dms
 #: model:ir.model,name:dms.model_base
 msgid "Base"
-msgstr ""
+msgstr "Base/Fuente"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
@@ -501,7 +504,7 @@ msgstr "¡El nombre de la categoría ya existe!"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__checksum
 msgid "Checksum/SHA1"
-msgstr "Checksum/SHA1"
+msgstr "Verificación de suma/SHA1"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__child_category_ids
@@ -670,7 +673,7 @@ msgstr "Nº de etiquetas"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__count_users
 msgid "Count Users"
-msgstr ""
+msgstr "Conteo de usuarios"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
@@ -756,7 +759,7 @@ msgstr "Tipo de guardado actual"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_bounced_content
 msgid "Custom Bounced Message"
-msgstr ""
+msgstr "Mensaje de rebote personalizado"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_01_demo
@@ -783,7 +786,7 @@ msgstr "Carpetas"
 #. module: dms
 #: model:ir.model,name:dms.model_dms_security_mixin
 msgid "DMS Security Mixin"
-msgstr "DMS Security Mixin"
+msgstr "Mezcla de seguridad DMS"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_mixins_thumbnail
@@ -952,7 +955,7 @@ msgstr "Alias de email"
 #. module: dms
 #: model:ir.model,name:dms.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Hilo de correo electrónico"
 
 #. module: dms
 #: code:addons/dms/tests/common.py:0
@@ -1060,7 +1063,7 @@ msgstr "Seguidores (Contactos)"
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_type_icon
 #: model:ir.model.fields,help:dms.field_dms_file__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icono de fuente impresionante, por ejemplo fa-tasks"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_settings_general
@@ -1080,7 +1083,7 @@ msgstr "Grupo"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Group By"
-msgstr "Grupo por"
+msgstr "agrupado por"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__name
@@ -1104,7 +1107,7 @@ msgstr "Grupos"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__has_message
 #: model:ir.model.fields,field_description:dms.field_dms_file__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Tiene mensaje"
 
 #. module: dms
 #: model:dms.category,name:dms.category_02_demo
@@ -1143,7 +1146,7 @@ msgstr "Icono"
 #: model:ir.model.fields,field_description:dms.field_dms_file__icon_url
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__icon_url
 msgid "Icon URL"
-msgstr ""
+msgstr "URL del icono"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_exception_icon
@@ -1287,17 +1290,17 @@ msgstr "Heredar permisos del registro relacionado"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_create
 msgid "Inherited Create Access"
-msgstr ""
+msgstr "Crear acceso heredado"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_unlink
 msgid "Inherited Unlink Access"
-msgstr ""
+msgstr "Acceso no enlazado heredado"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_write
 msgid "Inherited Write Access"
-msgstr ""
+msgstr "Acceso de escritura heredado"
 
 #. module: dms
 #: model:dms.category,name:dms.category_01_demo
@@ -1422,7 +1425,7 @@ msgstr "Bloqueado"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
 msgid "Locked By"
-msgstr ""
+msgstr "Bloqueado por"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_main_attachment_id
@@ -1467,7 +1470,7 @@ msgstr "Migrar"
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
-msgstr ""
+msgstr "Migrar archivo %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
@@ -1499,7 +1502,7 @@ msgstr "Fecha de modificación"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
 #: model:ir.model.fields,field_description:dms.field_dms_file__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Fecha límite de mi actividad"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
@@ -1609,7 +1612,7 @@ msgstr "Número de mensajes no leídos"
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_03_demo
 msgid "Only admin user"
-msgstr ""
+msgstr "Solo usuario administrador"
 
 #. module: dms
 #: code:addons/dms/models/storage.py:0
@@ -1679,7 +1682,7 @@ msgstr "Ruta padre"
 #: code:addons/dms/models/access_groups.py:0
 #, python-format
 msgid "Parent group '%(parent)s' is child of '%(current)s'."
-msgstr ""
+msgstr "El grupo parental 'l%(parent)s' es hijo de '%(current)s'."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
@@ -1700,7 +1703,7 @@ msgstr "Contacto"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_json
 msgid "Path Json"
-msgstr "Path Json"
+msgstr "Ruta Json"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_names
@@ -1784,7 +1787,7 @@ msgstr "Usuario responsable"
 #: code:addons/dms/static/src/js/views/search_panel.esm.js:0
 #, python-format
 msgid "Root"
-msgstr ""
+msgstr "Raíz"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__root_directory_ids
