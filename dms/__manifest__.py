@@ -4,17 +4,18 @@
 {
     "name": "Document Management System",
     "summary": """Document Management System for Odoo""",
-    "version": "15.0.1.8.2",
+    "version": "16.0.1.0.0",
     "category": "Document Management",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/dms",
     "author": "MuK IT, Tecnativa, Odoo Community Association (OCA)",
     "depends": [
-        "web_drop_target",
+        # "web_drop_target", #TODO only exist in v15
         "mail",
         "http_routing",
         "portal",
-        "mail_preview_base",
+        # "mail_preview_base", #TODO only exist in v15
+        "base",
     ],
     "data": [
         "security/security.xml",
@@ -32,20 +33,18 @@
         "views/dms_portal_templates.xml",
     ],
     "assets": {
-        "web.assets_backend": [
-            "dms/static/src/scss/variables.scss",
-            "dms/static/src/scss/file_kanban.scss",
-            "dms/static/src/scss/directory_kanban.scss",
-            "dms/static/src/js/fields/path.js",
-            "dms/static/src/js/views/many_drop_target.js",
-            "dms/static/src/js/views/search_panel.esm.js",
-            "dms/static/src/js/views/file_list_controller.js",
-            "dms/static/src/js/views/file_list_view.js",
-            "dms/static/src/js/views/file_kanban_controller.js",
-            "dms/static/src/js/views/file_kanban_renderer.js",
-            "dms/static/src/js/views/file_kanban_view.js",
+        "mail.assets_messaging": [
+            ("include", "mail.assets_core_messaging"),
+            "dms/static/src/models/*.js",
         ],
-        "web.assets_qweb": ["dms/static/src/xml/views.xml"],
+        "web.assets_backend": [
+            "dms/static/src/scss/*",
+            "dms/static/src/js/fields/*",
+            "dms/static/src/js/views/*.esm.js",
+            "dms/static/src/js/views/*.xml",
+            "dms/static/src/js/views/fields/binary/*",
+        ],
+        #    "web.assets_qweb": ["dms/static/src/xml/views.xml"],
         "web.assets_frontend": ["dms/static/src/js/dms_portal_tour.js"],
     },
     "demo": [

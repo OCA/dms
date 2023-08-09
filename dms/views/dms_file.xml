@@ -109,6 +109,7 @@
                 <field name="permission_write" />
                 <field name="permission_unlink" />
                 <field name="__last_update" />
+                <field name="model_name" />
                 <templates>
                     <t t-name="kanban-box">
                         <div
@@ -232,13 +233,16 @@
                                     <div class="o_kanban_image_wrapper">
                                         <a
                                             class="o_kanban_dms_file_preview"
-                                            t-att-data-id="widget.db_id"
+                                            t-att-data-id="record.id"
+                                            t-att-id="record.id.raw_value"
+                                            t-att-name="record.name.raw_value"
                                         >
                                             <img
                                                 t-att-src="record.icon_url.raw_value"
                                                 alt="Icon"
                                             />
                                         </a>
+
                                     </div>
                                 </div>
                                 <div class="o_kanban_details">
@@ -515,10 +519,10 @@
         <field name="name">dms_file.form</field>
         <field name="model">dms.file</field>
         <field name="inherit_id" ref="view_dms_file_form" />
-        <field name="groups_id" eval="[(6, 0, [ref('dms.group_dms_manager')])]" />
         <field name="arch" type="xml">
             <field name="storage_id" position="attributes">
                 <attribute name="options">{}</attribute>
+                <attribute name="groups">dms.group_dms_manager</attribute>
             </field>
         </field>
     </record>

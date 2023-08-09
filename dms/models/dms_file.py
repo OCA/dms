@@ -12,7 +12,7 @@ from collections import defaultdict
 from PIL import Image
 
 from odoo import _, api, fields, models, tools
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
 from odoo.tools import consteq, human_size
 from odoo.tools.mimetypes import guess_mimetype
@@ -55,7 +55,7 @@ class File(models.Model):
         ondelete="restrict",
         auto_join=True,
         required=True,
-        index=True,
+        index="btree",
     )
     # Override acording to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
@@ -84,7 +84,7 @@ class File(models.Model):
         relation="dms_file_tag_rel",
         column1="fid",
         column2="tid",
-        domain="['|', ('category_id', '=', False),('category_id', '=?', category_id)]",
+        # domain="['|', ('category_id', '=', False),('category_id', '=?', category_id)]",
         string="Tags",
     )
 
@@ -105,7 +105,7 @@ class File(models.Model):
 
     size = fields.Float(readonly=True)
 
-    checksum = fields.Char(string="Checksum/SHA1", readonly=True, index=True)
+    checksum = fields.Char(string="Checksum/SHA1", readonly=True, index="btree")
 
     content_binary = fields.Binary(attachment=False, prefetch=False, invisible=True)
 
@@ -131,6 +131,20 @@ class File(models.Model):
 
     # Extend inherited field(s)
     image_1920 = fields.Image(compute="_compute_image_1920", store=True, readonly=False)
+
+    model_name = fields.Char(
+        "Name of the Model",
+        compute="_compute_default_model_name",
+        readonly=True,
+        invisible=True,
+    )
+
+    # ----------------------------------------------------------
+    # Compute
+
+    def _compute_default_model_name(self):
+        for record in self:
+            record.model_name = "dms.file"
 
     @api.depends("mimetype", "content")
     def _compute_image_1920(self):
@@ -398,6 +412,7 @@ class File(models.Model):
     def _compute_mimetype(self):
         for record in self:
             binary = base64.b64decode(record.content or "")
+            guess_mimetype(binary)
             record.mimetype = guess_mimetype(binary)
 
     @api.depends("content_binary", "content_file", "attachment_id")
@@ -601,3 +616,29 @@ class File(models.Model):
                 )
             else:
                 record.update({"is_locked": False, "is_lock_editor": False})
+
+    def create_dms_file_from_attachments(self, attachment_ids=None, view_type="list"):
+        """Create the dms files from files.
+        :return: An action redirecting to dms.file tree view.
+        """
+
+        if attachment_ids is None:
+            attachment_ids = []
+
+        attachments = self.env["ir.attachment"].browse(attachment_ids)
+
+        if not attachments:
+            raise UserError(_("No attachment was provided"))
+
+        if any(
+            attachment.res_id or attachment.res_model != "dms.file"
+            for attachment in attachments
+        ):
+            raise UserError(_("Invalid attachments!"))
+
+        for attachment in attachments:
+            return {
+                "name": attachment.name,
+                "datas": attachment.datas,
+                "res_model": attachment.res_model,
+            }

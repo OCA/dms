@@ -62,7 +62,7 @@ class StorageAttachmentTestCase(StorageAttachmentBaseCase):
         self.partner.sudo().write({"type": "private"})
         self.assertEqual(self.partner.type, "private")
         self.assertTrue(directory.sudo().permission_read)
-        directory.invalidate_cache()
+        directory.invalidate_recordset()
         self.assertFalse(directory.with_user(self.dms_manager_user).permission_read)
 
     @users("dms-user")
@@ -74,7 +74,7 @@ class StorageAttachmentTestCase(StorageAttachmentBaseCase):
         self.partner.sudo().write({"type": "private"})
         self.assertEqual(self.partner.type, "private")
         self.assertTrue(directory.sudo().permission_read)
-        directory.invalidate_cache()
+        directory.invalidate_recordset()
         self.assertFalse(directory.with_user(self.dms_user).permission_read)
         # user can access self.partner
         self.dms_user.write(
@@ -103,7 +103,7 @@ class StorageAttachmentTestCase(StorageAttachmentBaseCase):
         self.partner.sudo().write({"type": "private"})
         self.assertEqual(self.partner.type, "private")
         self.assertTrue(directory.sudo().permission_read)
-        directory.invalidate_cache()
+        directory.invalidate_recordset()
         self.assertFalse(directory.with_user(self.user).permission_read)
 
     @users("basic-user")
