@@ -76,6 +76,10 @@ class DmsDirectory(models.Model):
         default=lambda self: self._default_parent_id(),
     )
 
+    root_directory_id = fields.Many2one(
+        "dms.directory", "Root Directory", compute="_compute_root_id", store=True
+    )
+
     def _default_parent_id(self):
         context = self.env.context
         if context.get("active_model") == self._name and context.get("active_id"):
@@ -502,6 +506,17 @@ class DmsDirectory(models.Model):
                 # HACK: Not needed in v14 due to odoo/odoo#64359
                 record.parent_id = record.parent_id
 
+    @api.depends("is_root_directory", "parent_id")
+    def _compute_root_id(self):
+        for record in self:
+            if record.is_root_directory:
+                record.root_directory_id = record
+            else:
+                # recursively check all parent nodes up to the root directory
+                if not record.parent_id.root_directory_id:
+                    record.parent_id._compute_root_id()
+                record.root_directory_id = record.parent_id.root_directory_id
+
     @api.depends("category_id")
     def _compute_tags(self):
         for record in self:
@@ -677,17 +692,20 @@ class DmsDirectory(models.Model):
         return res
 
     def write(self, vals):
-        if vals.get("storage_id"):
+        if any([k in vals.keys() for k in ["storage_id", "parent_id"]]):
             for item in self:
-                if item.storage_id.id != vals["storage_id"]:
+                new_storage_id = vals.get("storage_id", item.storage_id.id)
+                new_parent_id = vals.get("parent_id", item.parent_id.id)
+                old_storage_id = (
+                    item.storage_id or item.root_directory_id.storage_id
+                ).id
+                if new_parent_id:
+                    if old_storage_id != self.browse(new_parent_id).storage_id.id:
+                        raise UserError(
+                            _("It is not possible to change parent to other storage.")
+                        )
+                elif old_storage_id != new_storage_id:
                     raise UserError(_("It is not possible to change the storage."))
-        if vals.get("parent_id"):
-            parent = self.browse([vals["parent_id"]])
-            for item in self:
-                if item.parent_id.storage_id != parent.storage_id:
-                    raise UserError(
-                        _("It is not possible to change parent to other storage.")
-                    )
         # Groups part
         if any(key in vals for key in ["group_ids", "inherit_group_ids"]):
             with self.env.norecompute():
