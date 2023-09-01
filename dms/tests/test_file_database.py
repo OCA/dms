@@ -14,6 +14,8 @@ class FileDatabaseTestCase(StorageDatabaseBaseCase):
         super().setUp()
         self.file_demo_01 = self.env.ref("dms.file_01_demo")
         self.directory2 = self.create_directory(storage=self.storage)
+        self.new_storage2 = self.create_storage(save_type="database")
+        self.directory3 = self.create_directory(storage=self.new_storage2)
 
     @users("dms-manager", "dms-user")
     def test_create_file(self):
@@ -59,7 +61,7 @@ class FileDatabaseTestCase(StorageDatabaseBaseCase):
             self.directory.write(
                 {
                     "is_root_directory": False,
-                    "parent_id": self.directory2.id,
+                    "parent_id": self.directory3.id,
                 }
             )
 
