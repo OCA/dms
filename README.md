@@ -17,7 +17,12 @@ Document Management System
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[dms](dms/) | 12.0.8.0.3 |  | Document Management System for Odoo
+[dms_field](dms_field/) | 12.0.1.0.1 |  | Create DMS View and allow to use them inside a record
 
 [//]: # (end addons)
 
