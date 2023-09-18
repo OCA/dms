@@ -109,6 +109,7 @@
                 <field name="permission_write" />
                 <field name="permission_unlink" />
                 <field name="__last_update" />
+                <!-- <field name="model_name" /> -->
                 <templates>
                     <t t-name="kanban-box">
                         <div
@@ -232,7 +233,9 @@
                                     <div class="o_kanban_image_wrapper">
                                         <a
                                             class="o_kanban_dms_file_preview"
-                                            t-att-data-id="widget.db_id"
+                                            t-att-data-id="record.id"
+                                            t-att-id="record.id.raw_value"
+                                            t-att-name="record.name.raw_value"
                                         >
                                             <img
                                                 t-att-src="record.icon_url.raw_value"
@@ -323,6 +326,7 @@
                 <field name="write_date" />
                 <field name="size" widget="integer" />
                 <field name="mimetype" />
+                <field name="category_id" invisible="1" />
                 <field
                     name="tag_ids"
                     widget="many2many_tags"
@@ -429,7 +433,12 @@
                                 name="directory_id"
                                 options="{'no_quick_create': True}"
                             />
-                            <field name="storage_id" options="{'no_open': True}" />
+                            <field
+                                name="storage_id"
+                                options="{'no_open': True}"
+                                groups="!dms.group_dms_manager"
+                            />
+                            <field name="storage_id" groups="dms.group_dms_manager" />
                         </group>
                         <group>
                             <field
@@ -509,17 +518,6 @@
                     <field name="message_ids" />
                 </div>
             </form>
-        </field>
-    </record>
-    <record id="view_dms_file_manager_form" model="ir.ui.view">
-        <field name="name">dms_file.form</field>
-        <field name="model">dms.file</field>
-        <field name="inherit_id" ref="view_dms_file_form" />
-        <field name="groups_id" eval="[(6, 0, [ref('dms.group_dms_manager')])]" />
-        <field name="arch" type="xml">
-            <field name="storage_id" position="attributes">
-                <attribute name="options">{}</attribute>
-            </field>
         </field>
     </record>
     <record id="action_dms_file" model="ir.actions.act_window">

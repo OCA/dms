@@ -18,9 +18,11 @@ class DmsSecurityMixin(models.AbstractModel):
     # Submodels must define this field that points to the owner dms.directory
     _directory_field = "directory_id"
 
-    res_model = fields.Char(string="Linked attachments model", index=True, store=True)
+    res_model = fields.Char(
+        string="Linked attachments model", index="btree", store=True
+    )
     res_id = fields.Integer(
-        string="Linked attachments record ID", index=True, store=True
+        string="Linked attachments record ID", index="btree", store=True
     )
     record_ref = fields.Reference(
         string="Record Referenced",
@@ -246,7 +248,7 @@ class DmsSecurityMixin(models.AbstractModel):
         res = super(DmsSecurityMixin, self.sudo()).create(vals_list)
         # Need to flush now, so all groups are stored in DB and the SELECT used
         # to check access works
-        res.flush()
+        res.flush_recordset()
         # Go back to original sudo state and check we really had creation permission
         res = res.sudo(self.env.su)
         res.check_access_rights("create")

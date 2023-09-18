@@ -153,6 +153,12 @@ Contributors
   * Pedro M. Baeza
   * Jairo Llopis
 
+* `Elego <https://www.elegosoft.com>`_:
+
+  * Yu Weng <yweng@elegosoft.com>
+  * Philip Witte <phillip.witte@elegosoft.com>
+  * Khanh Bui <khanh.bui@mail.elegosoft.com>
+
 Other credits
 ~~~~~~~~~~~~~
 
@@ -160,6 +166,8 @@ Some pictures are based on or inspired by:
 
 * `Roundicons <https://www.flaticon.com/authors/roundicons>`_
 * `Smashicons <https://www.flaticon.com/authors/smashicons>`_
+
+The migration of this module from 15.0 to 16.0 was finanically supported by `AgentERP <https://www.agenterp.com>`_
 
 Maintainers
 ~~~~~~~~~~~

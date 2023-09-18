@@ -13,7 +13,7 @@ class DmsAccessGroups(models.Model):
     _parent_name = "parent_group_id"
 
     name = fields.Char(string="Group Name", required=True, translate=True)
-    parent_path = fields.Char(index=True)
+    parent_path = fields.Char(index="btree", unaccent=False)
 
     # Permissions written directly on this group
     perm_create = fields.Boolean(string="Create Access")
@@ -64,7 +64,7 @@ class DmsAccessGroups(models.Model):
         comodel_name="dms.access.group",
         string="Parent Group",
         ondelete="cascade",
-        index=True,
+        index="btree",
     )
 
     child_group_ids = fields.One2many(
