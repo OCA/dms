@@ -7,7 +7,7 @@ class AbstractDmsMixin(models.AbstractModel):
     _name = "abstract.dms.mixin"
     _description = "Abstract Dms Mixin"
 
-    name = fields.Char(required=True, index=True)
+    name = fields.Char(required=True, index="btree")
     # Only defined to prevent error in other fields that related it
     storage_id = fields.Many2one(
         comodel_name="dms.storage", string="Storage", store=True, copy=True
@@ -24,7 +24,7 @@ class AbstractDmsMixin(models.AbstractModel):
         string="Company",
         readonly=True,
         store=True,
-        index=True,
+        index="btree",
     )
     storage_id_save_type = fields.Selection(related="storage_id.save_type", store=False)
     color = fields.Integer(default=0)

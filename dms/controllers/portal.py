@@ -2,11 +2,11 @@
 import base64
 
 from odoo import _, http
-from odoo.http import request
+from odoo.http import content_disposition, request
 from odoo.osv.expression import OR
 
 from odoo.addons.portal.controllers.portal import CustomerPortal
-from odoo.addons.web.controllers.main import content_disposition, ensure_db
+from odoo.addons.web.controllers.utils import ensure_db
 
 
 class CustomerPortal(CustomerPortal):

@@ -88,13 +88,13 @@
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
             [
-            ("directory_id", "child_of", active_id),
             ("is_hidden", "=", False),
             ]
         </field>
         <field name="context">
             {
             'default_directory_id': active_id,
+            'searchpanel_default_directory_id': active_id
             }
         </field>
         <field name="help" type="html">
@@ -445,12 +445,28 @@
                     </div>
                     <group name="settings">
                         <group>
-                            <field name="is_root_directory" invisible="1" />
+                            <field
+                                name="is_root_directory"
+                                readonly="1"
+                                groups="!dms.group_dms_manager"
+                            />
+                            <field
+                                name="is_root_directory"
+                                groups="dms.group_dms_manager"
+                            />
                             <field
                                 name="storage_id"
                                 options="{'no_open': True}"
                                 attrs="{'readonly':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
                                 force_save="1"
+                                groups="!dms.group_dms_manager"
+                            />
+                            <field
+                                name="storage_id"
+                                options="{}"
+                                attrs="{'readonly':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
+                                force_save="1"
+                                groups="dms.group_dms_manager"
                             />
                         </group>
                         <group>
@@ -628,20 +644,6 @@
             </form>
         </field>
     </record>
-    <record id="view_dms_directory_manager_form" model="ir.ui.view">
-        <field name="name">dms_directory.form</field>
-        <field name="model">dms.directory</field>
-        <field name="inherit_id" ref="view_dms_directory_form" />
-        <field name="groups_id" eval="[(6, 0, [ref('dms.group_dms_manager')])]" />
-        <field name="arch" type="xml">
-            <field name="is_root_directory" position="attributes">
-                <attribute name="invisible">0</attribute>
-            </field>
-            <field name="storage_id" position="attributes">
-                <attribute name="options">{}</attribute>
-            </field>
-        </field>
-    </record>
     <record id="action_dms_directory" model="ir.actions.act_window">
         <field name="name">Directories</field>
         <field name="res_model">dms.directory</field>
@@ -685,7 +687,15 @@
             <xpath expr="//sheet//group[@name='data']" position="after">
                 <group>
                     <group>
-                        <field name="is_root_directory" readonly="1" />
+                        <field
+                            name="is_root_directory"
+                            readonly="1"
+                            groups="!dms.group_dms_manager"
+                        />
+                        <field
+                            name="is_root_directory"
+                            groups="dms.group_dms_manager"
+                        />
                         <field
                             name="storage_id"
                             options="{'no_quick_create': True}"

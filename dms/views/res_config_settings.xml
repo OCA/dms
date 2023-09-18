@@ -18,6 +18,7 @@
                     data-string="Documents"
                     data-key="dms"
                     groups="base.group_system"
+                    string="Documents"
                 >
                     <div name="dms_settings">
                         <h2>File Upload</h2>

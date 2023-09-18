@@ -12,7 +12,7 @@ from collections import defaultdict
 from PIL import Image
 
 from odoo import _, api, fields, models, tools
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
 from odoo.tools import consteq, human_size
 from odoo.tools.mimetypes import guess_mimetype
@@ -55,7 +55,7 @@ class File(models.Model):
         ondelete="restrict",
         auto_join=True,
         required=True,
-        index=True,
+        index="btree",
     )
     # Override acording to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
@@ -105,7 +105,7 @@ class File(models.Model):
 
     size = fields.Float(readonly=True)
 
-    checksum = fields.Char(string="Checksum/SHA1", readonly=True, index=True)
+    checksum = fields.Char(string="Checksum/SHA1", readonly=True, index="btree")
 
     content_binary = fields.Binary(attachment=False, prefetch=False, invisible=True)
 
@@ -601,3 +601,28 @@ class File(models.Model):
                 )
             else:
                 record.update({"is_locked": False, "is_lock_editor": False})
+
+    def get_attachment_object(self, attachment):
+        return {
+            "name": attachment.name,
+            "datas": attachment.datas,
+            "res_model": attachment.res_model,
+            "mimetype": attachment.mimetype,
+        }
+
+    def get_dms_files_from_attachments(self, attachment_ids=None):
+        """Get the dms files from uploaded attachments.
+        :return: An Array of dms files.
+        """
+        if not attachment_ids:
+            raise UserError(_("No attachment was provided"))
+
+        attachments = self.env["ir.attachment"].browse(attachment_ids)
+
+        if any(
+            attachment.res_id or attachment.res_model != "dms.file"
+            for attachment in attachments
+        ):
+            raise UserError(_("Invalid attachments!"))
+
+        return [self.get_attachment_object(attachment) for attachment in attachments]

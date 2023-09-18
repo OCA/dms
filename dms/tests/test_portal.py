@@ -47,15 +47,17 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
             self.directory_partner.parent_id.child_directory_ids, self.directory_partner
         )
         # Public user can access only the empty res.partner folder
-        self.directory_partner.with_user(self.public_user).invalidate_cache()
+        self.directory_partner.with_user(self.public_user).invalidate_recordset()
         self.assertFalse(
             self.directory_partner.with_user(self.public_user).permission_read
         )
-        self.directory_partner.parent_id.with_user(self.public_user).invalidate_cache()
+        self.directory_partner.parent_id.with_user(
+            self.public_user
+        ).invalidate_recordset()
         self.assertTrue(
             self.directory_partner.parent_id.with_user(self.public_user).permission_read
         )
-        self.file_partner.with_user(self.public_user).invalidate_cache()
+        self.file_partner.with_user(self.public_user).invalidate_recordset()
         self.assertFalse(self.file_partner.with_user(self.public_user).permission_read)
         self.assertFalse(
             self.directory_partner.parent_id.with_user(

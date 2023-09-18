@@ -50,7 +50,7 @@ class FileDatabaseTestCase(StorageDatabaseBaseCase):
         file = self.create_file(directory=self.directory)
         path_names = file.path_names
         file.write({"directory_id": self.directory2.id})
-        file.flush()
+        file.flush_recordset()
         self.assertNotEqual(path_names, file.path_names)
 
     @users("dms-manager", "dms-user")

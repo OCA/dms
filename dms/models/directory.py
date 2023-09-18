@@ -41,7 +41,7 @@ class DmsDirectory(models.Model):
     _parent_name = "parent_id"
     _directory_field = _parent_name
 
-    parent_path = fields.Char(index=True)
+    parent_path = fields.Char(index="btree", unaccent=False)
     is_root_directory = fields.Boolean(
         default=False,
         help="""Indicates if the directory is a root directory.
@@ -68,7 +68,7 @@ class DmsDirectory(models.Model):
         # Access to a directory doesn't necessarily mean access its parent, so
         # prefetching this field could lead to misleading access errors
         prefetch=False,
-        index=True,
+        index="btree",
         store=True,
         readonly=False,
         compute="_compute_parent_id",
@@ -340,7 +340,7 @@ class DmsDirectory(models.Model):
         with self.env.norecompute():
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
-        self.recompute()
+        self.flush_recordset()
 
     # ----------------------------------------------------------
     # SearchPanel
@@ -695,7 +695,7 @@ class DmsDirectory(models.Model):
                 domain = [("id", "child_of", self.ids)]
                 records = self.sudo().search(domain)
                 records.modified(["group_ids"])
-            records.recompute()
+            records.flush_recordset()
         else:
             res = super().write(vals)
         return res
