@@ -88,3 +88,11 @@
         }
     }
 }
+
+.o_kanban_renderer {
+    .o_kanban_record {
+        > div {
+            padding: 0;
+        }
+    }
+}

@@ -70,6 +70,7 @@ class BenchmarkTestCase(common.TransactionCase):
             args = item[0] if len(item) > 0 else []
             kwargs = item[1] if len(item) > 1 else {}
             tracking = tuple(tfunc(*args, **kwargs)[1][1:])
+            # pylint: disable=too-few-format-args
             benchmark.append("%sq %.3fs %.3fs %.3fs" % tracking)
         return benchmark
 
