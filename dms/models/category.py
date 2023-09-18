@@ -37,7 +37,7 @@ class Category(models.Model):
         comodel_name="dms.category",
         string="Parent Category",
         ondelete="cascade",
-        index=True,
+        index="btree",
     )
 
     child_category_ids = fields.One2many(
@@ -46,7 +46,7 @@ class Category(models.Model):
         string="Child Categories",
     )
 
-    parent_path = fields.Char(index=True)
+    parent_path = fields.Char(index="btree", unaccent=False)
     tag_ids = fields.One2many(
         comodel_name="dms.tag", inverse_name="category_id", string="Tags"
     )

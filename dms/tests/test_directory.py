@@ -31,7 +31,7 @@ class DirectoryTestCase(StorageDatabaseBaseCase):
     @users("dms-manager", "dms-user")
     def test_copy_root_directory(self):
         copy_root_directory = self.directory.copy()
-        copy_root_directory.flush()
+        copy_root_directory.flush_recordset()
         self.assertEqual(
             self.directory.storage_id.id, copy_root_directory.storage_id.id
         )

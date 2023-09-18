@@ -227,11 +227,14 @@ class DocumentsBaseCase(common.TransactionCase):
             {"name": "Test Storage", "save_type": save_type}
         )
 
-    def create_directory(self, storage=False, directory=False, res_model=False):
+    def create_directory(self, storage=False, directory=False, model_id=False):
         record = Form(self.directory_model)
         record.name = uuid.uuid4().hex
         record.is_root_directory = True
-        record.res_model = res_model
+        if model_id and storage.save_type == "attachment":
+            # set storage_id_save_type to attachment, making model visible
+            record.storage_id = storage
+            record.model_id = model_id
         if directory:
             record.is_root_directory = False
             record.parent_id = directory
@@ -270,7 +273,8 @@ class StorageAttachmentBaseCase(DocumentsBaseCase):
                 "model_ids": [(6, 0, [self.env.ref("base.model_res_partner").id])],
             }
         )
-        self.create_directory(storage=self.storage, res_model=self.partner_model._name)
+        self.partner_model_id = self.env.ref("base.model_res_partner")
+        self.create_directory(storage=self.storage, model_id=self.partner_model_id)
         self.partner = self.partner_model.create({"name": "test partner"})
         self.model_partner = self.env.ref("base.model_res_partner")
 

@@ -62,7 +62,7 @@ class ResCompany(models.Model):
     # ----------------------------------------------------------
 
     def get_and_update_documents_onboarding_state(self):
-        return self.get_and_update_onbarding_state(
+        return self._get_and_update_onboarding_state(
             "documents_onboarding_state", self.get_documents_steps_states_names()
         )
 
