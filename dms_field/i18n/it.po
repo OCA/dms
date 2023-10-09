@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-21 10:36+0000\n"
-"Last-Translator: Riccardo Bellanova <bellanova@webmonks.it>\n"
+"PO-Revision-Date: 2023-10-09 08:30+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -383,9 +383,8 @@ msgstr "Nome visualizzato"
 
 #. module: dms_field
 #: model_terms:ir.ui.view,arch_db:dms_field.dms_add_directory_record_form_view
-#, fuzzy
 msgid "Dms Add Directory Record"
-msgstr "Dms Aggiungi Record Cartella"
+msgstr "Aggiungi record cartella DMS"
 
 #. module: dms_field
 #: model:ir.actions.act_window,name:dms_field.dms_storage_act_window
@@ -443,9 +442,8 @@ msgstr "F2"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_storage__field_default_group_id
-#, fuzzy
 msgid "Field Default Group"
-msgstr "Campo Gruppo Default"
+msgstr "Campo gruppo predefinito"
 
 #. module: dms_field
 #. openerp-web
@@ -550,7 +548,7 @@ msgstr "Apri il nodo selezionato"
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_controller.js:0
-#, fuzzy, python-format
+#, python-format
 msgid "Open: "
 msgstr "Apri: "
 
@@ -601,15 +599,13 @@ msgstr "Rinomina"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__res_id
-#, fuzzy
 msgid "Res"
 msgstr "Res"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__res_model
-#, fuzzy
 msgid "Res Model"
-msgstr "Modello Res"
+msgstr "Modello res"
 
 #. module: dms_field
 #. openerp-web
