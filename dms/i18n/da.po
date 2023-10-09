@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* dms
+# 	* dms
 #
 msgid ""
 msgstr ""
@@ -18,13 +18,17 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
-msgid "                Define how incoming emails are processed:\n"
+msgid ""
+"                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -53,7 +57,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "<i class=\"fa fa-archive\"/>\n"
+msgid ""
+"<i class=\"fa fa-archive\"/>\n"
 "                                                Archive"
 msgstr ""
 "<i class=\"fa fa-archive\"/>\n"
@@ -61,7 +66,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "<i class=\"fa fa-archive\"/>\n"
+msgid ""
+"<i class=\"fa fa-archive\"/>\n"
 "                                                Unarchive"
 msgstr ""
 "<i class=\"fa fa-archive\"/>\n"
@@ -69,14 +75,16 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "<i class=\"fa fa-download\"/>\n"
+msgid ""
+"<i class=\"fa fa-download\"/>\n"
 "                                                Download"
 msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "<i class=\"fa fa-external-link\"/>\n"
+msgid ""
+"<i class=\"fa fa-external-link\"/>\n"
 "                                                Open"
 msgstr ""
 "<i class=\"fa fa-external-link\"/>\n"
@@ -84,7 +92,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
-msgid "<i class=\"fa fa-external-link\"/>\n"
+msgid ""
+"<i class=\"fa fa-external-link\"/>\n"
 "                                        Open"
 msgstr ""
 "<i class=\"fa fa-external-link\"/>\n"
@@ -92,7 +101,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
-msgid "<i class=\"fa fa-file-o\"/>\n"
+msgid ""
+"<i class=\"fa fa-file-o\"/>\n"
 "                                                Files"
 msgstr ""
 "<i class=\"fa fa-file-o\"/>\n"
@@ -100,7 +110,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
-msgid "<i class=\"fa fa-folder-o\"/>\n"
+msgid ""
+"<i class=\"fa fa-folder-o\"/>\n"
 "                                                Directories"
 msgstr ""
 "<i class=\"fa fa-folder-o\"/>\n"
@@ -108,7 +119,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "<i class=\"fa fa-lock\"/>\n"
+msgid ""
+"<i class=\"fa fa-lock\"/>\n"
 "                                                Lock"
 msgstr ""
 "<i class=\"fa fa-lock\"/>\n"
@@ -117,7 +129,8 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "<i class=\"fa fa-pencil-square-o\"/>\n"
+msgid ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                                Edit"
 msgstr ""
 "<i class=\"fa fa-pencil-square-o\"/>\n"
@@ -125,7 +138,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
-msgid "<i class=\"fa fa-pencil-square-o\"/>\n"
+msgid ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                        Edit"
 msgstr ""
 "<i class=\"fa fa-pencil-square-o\"/>\n"
@@ -134,7 +148,8 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "<i class=\"fa fa-trash-o\"/>\n"
+msgid ""
+"<i class=\"fa fa-trash-o\"/>\n"
 "                                                Delete"
 msgstr ""
 "<i class=\"fa fa-trash-o\"/>\n"
@@ -142,7 +157,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
-msgid "<i class=\"fa fa-trash-o\"/>\n"
+msgid ""
+"<i class=\"fa fa-trash-o\"/>\n"
 "                                        Delete"
 msgstr ""
 "<i class=\"fa fa-trash-o\"/>\n"
@@ -150,7 +166,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-msgid "<i class=\"fa fa-unlock-alt\"/>\n"
+msgid ""
+"<i class=\"fa fa-unlock-alt\"/>\n"
 "                                                Unlock"
 msgstr ""
 "<i class=\"fa fa-unlock-alt\"/>\n"
@@ -158,7 +175,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
-msgid "<span class=\"o_form_label\">\n"
+msgid ""
+"<span class=\"o_form_label\">\n"
 "                                        Storages\n"
 "                                    </span>"
 msgstr ""
@@ -168,7 +186,8 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
-msgid "<span class=\"o_form_label\">File\n"
+msgid ""
+"<span class=\"o_form_label\">File\n"
 "                                        Extensions\n"
 "                                    </span>"
 msgstr ""
@@ -188,7 +207,9 @@ msgstr "<span>Dokumenter</span>"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
-msgid "A Python dictionary that will be evaluated to provide default values when creating new records for this alias."
+msgid ""
+"A Python dictionary that will be evaluated to provide default values when "
+"creating new records for this alias."
 msgstr ""
 
 #. module: dms
@@ -379,8 +400,7 @@ msgid "Archived Files"
 msgstr "Arkiverede filer"
 
 #. module: dms
-#: code:addons/dms/models/storage.py:28
-#: selection:dms.storage,save_type:0
+#: code:addons/dms/models/storage.py:28 selection:dms.storage,save_type:0
 #: model:ir.model,name:dms.model_ir_attachment
 #, python-format
 msgid "Attachment"
@@ -731,8 +751,7 @@ msgid "DMS Security Mixin"
 msgstr ""
 
 #. module: dms
-#: code:addons/dms/models/storage.py:26
-#: selection:dms.storage,save_type:0
+#: code:addons/dms/models/storage.py:26 selection:dms.storage,save_type:0
 #, fuzzy, python-format
 msgid "Database"
 msgstr "Database"
@@ -749,7 +768,8 @@ msgstr "Definer forbudte filtypenavne"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
-msgid "Define the maximum upload size of a\n"
+msgid ""
+"Define the maximum upload size of a\n"
 "                                        file in MB"
 msgstr ""
 "Definer den maksimale uploadstørrelse for en\n"
@@ -795,7 +815,8 @@ msgstr "Mapper"
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_storage
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directory
-msgid "Directories can be used to structure and organize\n"
+msgid ""
+"Directories can be used to structure and organize\n"
 "                files directly in Odoo."
 msgstr ""
 "Mapper kan bruges til at strukturere og organisere\n"
@@ -992,8 +1013,7 @@ msgid "Files are used to save content directly in Odoo."
 msgstr "Filer bruges til at gemme indhold direkte i Odoo."
 
 #. module: dms
-#: code:addons/dms/models/storage.py:27
-#: selection:dms.storage,save_type:0
+#: code:addons/dms/models/storage.py:27 selection:dms.storage,save_type:0
 #, python-format
 msgid "Filestore"
 msgstr "Fillager"
@@ -1076,7 +1096,9 @@ msgstr "ID"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
-msgid "ID of the parent record holding the alias (example: project holding the task creation alias)"
+msgid ""
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
 
 #. module: dms
@@ -1121,7 +1143,9 @@ msgstr "Hvis markeret, har nogle meddelelser en leveringsfejl."
 #: model:ir.model.fields,help:dms.field_dms_directory__company_id
 #: model:ir.model.fields,help:dms.field_dms_file__company_id
 #: model:ir.model.fields,help:dms.field_dms_storage__company_id
-msgid "If set, directories and files will only be available for the selected company."
+msgid ""
+"If set, directories and files will only be available for the selected "
+"company."
 msgstr ""
 "Hvis det er indstillet, vil mapper og filer kun være tilgængelige for det "
 "valgte firma."
@@ -1129,15 +1153,19 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
-msgid "Indicate if directories and files access work only with related model access (for example, if some directories are related with any sale, only users with read access to these sale can acess)"
+msgid ""
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can acess)"
 msgstr ""
-"Angiv, om mapper og filadgang kun fungerer med relateret modeladgang (hvis "
-"f.eks. nogle mapper er relateret til ethvert salg, er det kun brugere med "
+"Angiv, om mapper og filadgang kun fungerer med relateret modeladgang (hvis f."
+"eks. nogle mapper er relateret til ethvert salg, er det kun brugere med "
 "læseadgang til disse udsalg, der har adgang)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
-msgid "Indicate if directories and files auto-create in mail composition process too"
+msgid ""
+"Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 "Angiv, om mapper og filer også oprettes automatisk i e-mail-"
 "sammensætningsprocessen"
@@ -1151,8 +1179,10 @@ msgstr "Angiver om mapper og filer er skjult som standard."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
-msgid "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+msgid ""
+"Indicates if the directory is a root directory.\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 "Angiver om biblioteket er et rodbibliotek.\n"
@@ -1509,7 +1539,10 @@ msgstr "Operations"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_force_thread_id
-msgid "Optional ID of a thread (record) to which all incoming messages will be attached, even if they did not reply to it. If set, this will disable the creation of new records completely."
+msgid ""
+"Optional ID of a thread (record) to which all incoming messages will be "
+"attached, even if they did not reply to it. If set, this will disable the "
+"creation of new records completely."
 msgstr ""
 "Valgfrit ID for en tråd (post), som alle indgående beskeder vil blive "
 "vedhæftet, selvom de ikke svarede på den. Hvis det er indstillet, vil dette "
@@ -1521,8 +1554,7 @@ msgid "Organizing"
 msgstr "Organisering"
 
 #. module: dms
-#: selection:dms.directory,activity_state:0
-#: selection:dms.file,activity_state:0
+#: selection:dms.directory,activity_state:0 selection:dms.file,activity_state:0
 msgid "Overdue"
 msgstr "Forsinket"
 
@@ -1571,7 +1603,10 @@ msgstr "Overordnet gruppe '%(parent)s' er underordnet '%(current)s'."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
-msgid "Parent model holding the alias. The model holding the alias reference is not necessarily the model given by alias_model_id (example: project (parent_model) and task (model))"
+msgid ""
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
+"(parent_model) and task (model))"
 msgstr ""
 "Overordnet model med aliaset. Modellen med aliasreferencen er ikke "
 "nødvendigvis modellen givet af alias_model_id (eksempel: projekt (Overordnet "
@@ -1599,18 +1634,18 @@ msgid "Path Names"
 msgstr "Sti navne"
 
 #. module: dms
-#: selection:dms.directory,activity_state:0
-#: selection:dms.file,activity_state:0
+#: selection:dms.directory,activity_state:0 selection:dms.file,activity_state:0
 msgid "Planned"
 msgstr "Planlagt"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_contact
-msgid "Policy to post a message on the document using the mailgateway.\n"
+msgid ""
+"Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
-""
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 "Politik for at sende en besked på dokumentet ved hjælp af mailgateway.\n"
 "- alle: alle kan skrive\n"
@@ -1768,7 +1803,8 @@ msgstr "Stjerner"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_state
 #: model:ir.model.fields,help:dms.field_dms_file__activity_state
-msgid "Status based on activities\n"
+msgid ""
+"Status based on activities\n"
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
@@ -1920,7 +1956,10 @@ msgstr "Den maksimale uploadstørrelse er %s MB)."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
-msgid "The model (Odoo Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)"
+msgid ""
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 "Modellen (Odoo Document Kind), som dette alias svarer til. Enhver "
 "indkommende e-mail, der ikke svarer på en eksisterende registrering, vil "
@@ -1929,7 +1968,9 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
-msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.odoo.com>"
+msgid ""
+"The name of the email alias, e.g. 'jobs' if you want to catch emails for "
+"<jobs@example.odoo.com>"
 msgstr ""
 "Navnet på e-mail-aliaset, f.eks. 'jobs', hvis du vil fange e-mails for "
 "<jobs@example.odoo.com>"
@@ -1941,7 +1982,11 @@ msgstr "Navnet på gruppen skal være unikt!"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_user_id
-msgid "The owner of records created upon receiving emails on this alias. If this field is not set the system will attempt to find the right owner based on the sender (From) address, or will use the Administrator account if no system user is found for that address."
+msgid ""
+"The owner of records created upon receiving emails on this alias. If this "
+"field is not set the system will attempt to find the right owner based on "
+"the sender (From) address, or will use the Administrator account if no "
+"system user is found for that address."
 msgstr ""
 "Ejeren af optegnelser oprettet ved modtagelse af e-mails på dette alias. "
 "Hvis dette felt ikke er indstillet, vil systemet forsøge at finde den "
@@ -1953,7 +1998,8 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_storage__save_type
-msgid "The save type is used to determine how a file is saved by the\n"
+msgid ""
+"The save type is used to determine how a file is saved by the\n"
 "        system. If you change this setting, you can migrate existing files\n"
 "        manually by triggering the action."
 msgstr ""
@@ -1981,8 +2027,7 @@ msgid "Thumbnail Mixin"
 msgstr ""
 
 #. module: dms
-#: selection:dms.directory,activity_state:0
-#: selection:dms.file,activity_state:0
+#: selection:dms.directory,activity_state:0 selection:dms.file,activity_state:0
 msgid "Today"
 msgstr "Idag"
 
