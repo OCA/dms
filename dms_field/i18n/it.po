@@ -395,7 +395,6 @@ msgstr "Documenti"
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Download"
 msgstr "Download"
@@ -639,8 +638,7 @@ msgstr ""
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
-msgid ""
-"Storage %s should need to be assigned to a model related to the storage"
+msgid "Storage %s should need to be assigned to a model related to the storage"
 msgstr ""
 "Dovrebbe essere necessario assegnare lo storage %s a un modello correlato "
 "allo storage"
@@ -693,7 +691,8 @@ msgstr "Scrittura:"
 #, python-format
 msgid ""
 "You can change the structure by moving nodes. It is also possible\n"
-"                        to create new nodes by dragging files and even entire folder\n"
+"                        to create new nodes by dragging files and even "
+"entire folder\n"
 "                        structures on the view."
 msgstr ""
 "Puoi cambiare la struttura spostando i nodi. È anche possibile\n"
@@ -707,7 +706,8 @@ msgstr ""
 #, python-format
 msgid ""
 "You can open a context menu by right-clicking on any node. This\n"
-"                        contains further options for interacting with the node."
+"                        contains further options for interacting with the "
+"node."
 msgstr ""
 "È possibile aprire un menu contestuale facendo clic con il tasto destro su "
 "qualsiasi nodo. Questo\n"
@@ -717,18 +717,12 @@ msgstr ""
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "no"
 msgstr "no"
 
 #. module: dms_field
 #. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "yes"
