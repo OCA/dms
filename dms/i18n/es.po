@@ -221,8 +221,8 @@ msgid ""
 "span>"
 msgstr ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ "
-"</span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
@@ -1470,7 +1470,8 @@ msgstr "Migrar"
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
-msgstr "Migrar archivo %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
+msgstr ""
+"Migrar archivo %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
