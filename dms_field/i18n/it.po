@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* dms_field
+# 	* dms_field
 #
 msgid ""
 msgstr ""
@@ -34,8 +34,7 @@ msgid "Actions"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Activity"
 msgstr ""
 
@@ -71,8 +70,7 @@ msgid "Base"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Calendar"
 msgstr ""
 
@@ -309,8 +307,7 @@ msgid "DMS Directories"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "DMS Tree"
 msgstr ""
 
@@ -411,20 +408,17 @@ msgid "F2"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Form"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Gantt"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Graph"
 msgstr ""
 
@@ -455,8 +449,7 @@ msgid "Jump to the top"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Kanban"
 msgstr ""
 
@@ -546,8 +539,7 @@ msgid "Paste"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Pivot"
 msgstr ""
 
@@ -626,7 +618,9 @@ msgstr ""
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:40
 #, python-format
-msgid "Storage %s should need to be assigned to a model in order to relate the directory to a record"
+msgid ""
+"Storage %s should need to be assigned to a model in order to relate the "
+"directory to a record"
 msgstr ""
 
 #. module: dms_field
@@ -639,7 +633,8 @@ msgstr ""
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:140
 #, python-format
-msgid "The action button at the top of the view can be used to open,\n"
+msgid ""
+"The action button at the top of the view can be used to open,\n"
 "                        create, edit or delete a node."
 msgstr ""
 
@@ -656,8 +651,7 @@ msgid "This record is already related in this storage"
 msgstr ""
 
 #. module: dms_field
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Tree"
 msgstr ""
 
@@ -683,8 +677,10 @@ msgstr ""
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:134
 #, python-format
-msgid "You can change the structure by moving nodes. It is also possible\n"
-"                        to create new nodes by dragging files and even entire folder\n"
+msgid ""
+"You can change the structure by moving nodes. It is also possible\n"
+"                        to create new nodes by dragging files and even "
+"entire folder\n"
 "                        structures on the view."
 msgstr ""
 
@@ -692,8 +688,10 @@ msgstr ""
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:129
 #, python-format
-msgid "You can open a context menu by right-clicking on any node. This\n"
-"                        contains further options for interacting with the node."
+msgid ""
+"You can open a context menu by right-clicking on any node. This\n"
+"                        contains further options for interacting with the "
+"node."
 msgstr ""
 
 #. module: dms_field
