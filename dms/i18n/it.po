@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-09 08:30+0000\n"
+"PO-Revision-Date: 2023-10-11 09:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -242,7 +242,7 @@ msgstr "Una cartella deve avere una cartella genitore."
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A directory has to have model in attachment storage."
-msgstr "Una cartella deve avere un modello nello storage di tipo allegato."
+msgstr "Una cartella deve avere un modello nello storage allegati."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
@@ -254,8 +254,7 @@ msgstr "Esiste già una cartella con lo stesso nome."
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
-msgstr ""
-"Un file deve avere un modello e un ID risorsa nello storage di tipo allegato."
+msgstr "Un file deve avere un modello e un ID risorsa nello storage allegati."
 
 #. module: dms
 #: code:addons/dms/models/dms_file.py:0
@@ -267,13 +266,12 @@ msgstr "Esiste già un file con lo stesso nome."
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A root directory has to have a storage."
-msgstr "Una cartella root deve avere uno storage."
+msgstr "Una cartella radice deve avere uno storage."
 
 #. module: dms
 #: model:ir.model,name:dms.model_abstract_dms_mixin
-#, fuzzy
 msgid "Abstract Dms Mixin"
-msgstr "Abstract Dms Mixin"
+msgstr "Mixin DMS astratto"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -296,7 +294,7 @@ msgstr "Informazioni di accesso"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_warning
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_warning
 msgid "Access warning"
-msgstr "Avviso di accesso"
+msgstr "Avviso accesso"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_07_demo
@@ -370,7 +368,7 @@ msgstr "Alias"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_contact
 msgid "Alias Contact Security"
-msgstr "Sicurezza contatto alias"
+msgstr "Alias contatto sicurezza"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_name
@@ -389,14 +387,14 @@ msgstr "Dominio alias"
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Alias-Mail-Extraction"
 msgstr "Alias-Mail-Extraction"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_model_id
 msgid "Aliased Model"
-msgstr "Modello alias"
+msgstr "Modello con alias"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_search
@@ -439,7 +437,7 @@ msgstr "Allegato"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_attachment_count
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_attachment_count
 msgid "Attachment Count"
-msgstr "N. Allegati"
+msgstr "Conteggio allegati"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__attachment_id
@@ -470,7 +468,7 @@ msgstr "Categorie"
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_category
 msgid "Categories are used to categorize Documents."
-msgstr "Le categorie sono usate per categorizzare i documenti."
+msgstr "Le categorie sono usate per classificare i documenti."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__category_id
@@ -510,19 +508,19 @@ msgstr "Gruppi figli"
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_storage
 msgid "Click to add a new directory."
-msgstr "Clicca per aggiungere una nuova cartella."
+msgstr "Fare clic per aggiungere una nuova cartella."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_all_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Click to add a new file."
-msgstr "Clicca per aggiungere un nuovo file."
+msgstr "Fare clic per aggiungere un nuovo file."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
 msgid "Click to create a new tag."
-msgstr "Clicca per aggiungere una nuova etichetta."
+msgstr "Fare clic per aggiungere una nuova etichetta."
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__closed
@@ -618,12 +616,12 @@ msgstr "Contratti"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_directories
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_directories
 msgid "Count Directories"
-msgstr "N. Cartelle"
+msgstr "Conteggio cartelle"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_elements
 msgid "Count Elements"
-msgstr "N. Elementi"
+msgstr "Contggio elementi"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_files
@@ -631,34 +629,32 @@ msgstr "N. Elementi"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_files
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_files
 msgid "Count Files"
-msgstr "N. File"
+msgstr "Conteggio file"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_files
-#, fuzzy
 msgid "Count Files Title"
-msgstr "N. Titoli dei file"
+msgstr "Conteggio titoli dei file"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_categories
 msgid "Count Subcategories"
-msgstr "N. Sottocategorie"
+msgstr "Contggio sotto categorie"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories_title
 msgid "Count Subdirectories"
-msgstr "N. Sottocartelle"
+msgstr "Conteggio sottocartelle"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories
-#, fuzzy
 msgid "Count Subdirectories Title"
-msgstr "N. Titoli delle sottocartelle"
+msgstr "Conteggio titoli delle sottocartelle"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_tags
 msgid "Count Tags"
-msgstr "N. Etichette"
+msgstr "Conteggio etichette"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
@@ -673,7 +669,7 @@ msgstr "Crea"
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_create
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_create
 msgid "Create Access"
-msgstr "Accesso alla creazione"
+msgstr "Crea accesso"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
@@ -693,12 +689,12 @@ msgstr "Crea una nuova categoria."
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
 msgid "Create a new Document Storage."
-msgstr "Crea un nuovo storage."
+msgstr "Crea un nuovo storage documenti."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
 msgid "Create a new Root Directory."
-msgstr "Crea una nuova cartella root."
+msgstr "Crea una nuova cartella radice."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_storage
@@ -761,7 +757,7 @@ msgstr "Fattura cliente"
 #: model:ir.model.fields,help:dms.field_dms_directory__access_url
 #: model:ir.model.fields,help:dms.field_dms_file__access_url
 msgid "Customer Portal URL"
-msgstr "URL del portale clienti"
+msgstr "URL portale cliente"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
@@ -770,15 +766,13 @@ msgstr "DMS"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_security_mixin
-#, fuzzy
 msgid "DMS Security Mixin"
-msgstr "DMS Security Mixin"
+msgstr "Mixin sicurezza DMS"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_mixins_thumbnail
-#, fuzzy
 msgid "DMS thumbnail and icon mixin"
-msgstr "DMS thumbnail and icon mixin"
+msgstr "Anteprima e icona mixin DMS"
 
 #. module: dms
 #: code:addons/dms/models/storage.py:0
@@ -815,14 +809,15 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
 msgid "Defines the maximum upload size in MB. Default (25MB)"
-msgstr "Definisce la dimensione massima di upload in MB. Predefinito (25 MB)"
+msgstr ""
+"Definisci la dimensione massima di caricamento in MB. Predefinita (25MB)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_unlink
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_unlink
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_unlink
 msgid "Delete Access"
-msgstr "Accesso all'eliminazione"
+msgstr "Cancella accesso"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directories_storage
@@ -899,27 +894,23 @@ msgstr "Documenti"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_directory_state
-#, fuzzy
 msgid "Documents Onboarding Directory State"
-msgstr "Stato della cartella onboarding dei documenti"
+msgstr "Stato della cartella caricamento dei documenti"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_file_state
-#, fuzzy
 msgid "Documents Onboarding File State"
-msgstr "Stato del file onboarding dei documenti"
+msgstr "Stato del file caricamento dei documenti"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_state
-#, fuzzy
 msgid "Documents Onboarding State"
-msgstr "Stato onboarding dei documenti"
+msgstr "Stato caricamento dei documenti"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_storage_state
-#, fuzzy
 msgid "Documents Onboarding Storage State"
-msgstr "Stato storage onboarding dei documenti"
+msgstr "Stato deposito caricamento documenti"
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__done
@@ -1562,9 +1553,8 @@ msgstr "Nuovo storage"
 
 #. module: dms
 #: model:dms.category,name:dms.category_06_demo
-#, fuzzy
 msgid "News"
-msgstr "News"
+msgstr "Novità"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_date_deadline
@@ -1693,9 +1683,8 @@ msgstr "Path genitore"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_thread_id
-#, fuzzy
 msgid "Parent Record Thread ID"
-msgstr "Record Thread ID genitore"
+msgstr "ID record thread genitore"
 
 #. module: dms
 #: code:addons/dms/models/access_groups.py:0
@@ -1788,13 +1777,11 @@ msgstr "Record referenziato"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
-#, fuzzy
 msgid "Record Thread ID"
-msgstr "Record Thread ID"
+msgstr "ID thread record"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
-#, fuzzy
 msgid "Require Migration"
 msgstr "Richiede migrazione"
 
