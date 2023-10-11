@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-04 18:39+0000\n"
+"PO-Revision-Date: 2023-10-11 11:39+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -242,32 +242,31 @@ msgstr "Una cartella deve avere una cartella genitore."
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A directory has to have model in attachment storage."
-msgstr "Una cartella deve avere un modello nello storage di tipo allegato."
+msgstr "Una cartella deve avere un modello nello storage allegati."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A directory with the same name already exists."
-msgstr "Una cartella con lo stesso nome esiste già."
+msgstr "Esiste già una cartella con lo stesso nome."
 
 #. module: dms
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
-msgstr ""
-"Un file deve avere il modello e la risorsa ID nello storage di tipo allegato."
+msgstr "Un file deve avere un modello e un ID risorsa nello storage allegati."
 
 #. module: dms
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file with the same name already exists."
-msgstr "Un file con lo stesso nome esiste già."
+msgstr "Esiste già un file con lo stesso nome."
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A root directory has to have a storage."
-msgstr "Una cartella root deve avere uno storage."
+msgstr "Una cartella radice deve avere uno storage."
 
 #. module: dms
 #: model:ir.model,name:dms.model_abstract_dms_mixin
@@ -277,25 +276,25 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Accept Emails from"
-msgstr "Accetta Email da"
+msgstr "Accetta email da"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_access_groups
 #: model:ir.ui.menu,name:dms.menu_dms_access_groups
 msgid "Access Groups"
-msgstr "Gruppi d'Accesso"
+msgstr "Gruppi di accesso"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Access Information"
-msgstr "Informazioni Accesso"
+msgstr "Informazioni di accesso"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_warning
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_warning
 msgid "Access warning"
-msgstr "Avviso Accesso"
+msgstr "Avviso accesso"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_07_demo
@@ -341,14 +340,14 @@ msgstr "Stato attività"
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directory
 msgid "Add a new Directory."
-msgstr "Aggiungi una nuova Cartella."
+msgstr "Aggiungi una nuova cartella."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_migration
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_storage_migration
 msgid "Add a new File."
-msgstr "Aggiungi un nuovo File."
+msgstr "Aggiungi un nuovo file."
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_01_demo
@@ -368,17 +367,17 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_name
 msgid "Alias Name"
-msgstr "Nome Alias"
+msgstr "Nome alias"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Alias Setting"
-msgstr "Impostazioni Alias"
+msgstr "Impostazioni alias"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_domain
 msgid "Alias domain"
-msgstr "Dominio Alias"
+msgstr "Dominio alias"
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
@@ -400,7 +399,7 @@ msgstr "Tutti"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "All Files"
-msgstr "Tutti i File"
+msgstr "Tutti i file"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_06_demo
@@ -415,7 +414,7 @@ msgstr "In archivio"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Archived Files"
-msgstr "File Archiviati"
+msgstr "File archiviati"
 
 #. module: dms
 #: code:addons/dms/models/storage.py:0
@@ -434,7 +433,7 @@ msgstr "Numero allegati"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__attachment_id
 msgid "Attachment File"
-msgstr "File Allegato"
+msgstr "File allegato"
 
 #. module: dms
 #: model:ir.model,name:dms.model_base
@@ -460,7 +459,7 @@ msgstr "Categorie"
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_category
 msgid "Categories are used to categorize Documents."
-msgstr "Le Categorie sono usate per classificare i Documenti."
+msgstr "Le categorie sono usate per classificare i documenti."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__category_id
@@ -493,26 +492,26 @@ msgstr "Categorie figlie"
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__child_group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Child Groups"
-msgstr "Gruppi Figli"
+msgstr "Gruppi figli"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_all_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_storage
 msgid "Click to add a new directory."
-msgstr "Clicca per aggiungere una nuova cartella."
+msgstr "Fare clic per aggiungere una nuova cartella."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_all_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Click to add a new file."
-msgstr "Clicca per aggiungere un nuovo file."
+msgstr "Fare clic per aggiungere un nuovo file."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
 msgid "Click to create a new tag."
-msgstr "Clicca per creare una nuova etichetta."
+msgstr "Fare clic per creare una nuova etichetta."
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__closed
@@ -554,7 +553,7 @@ msgstr "Azienda"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__complete_group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Complete Groups"
-msgstr "Gruppi Completi"
+msgstr "Gruppi completi"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__complete_name
@@ -585,12 +584,12 @@ msgstr "Contenuto"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__content_binary
 msgid "Content Binary"
-msgstr "Contenuto Binario"
+msgstr "Contenuto binario"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__content_file
 msgid "Content File"
-msgstr "Contenuto File"
+msgstr "Contenuto file"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_11_demo
@@ -608,12 +607,12 @@ msgstr "Contratti"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_directories
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_directories
 msgid "Count Directories"
-msgstr "N. Cartelle"
+msgstr "Conteggio cartelle"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_elements
 msgid "Count Elements"
-msgstr "N. Elementi"
+msgstr "Contggio elementi"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_files
@@ -621,7 +620,7 @@ msgstr "N. Elementi"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_files
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_files
 msgid "Count Files"
-msgstr "N. File"
+msgstr "Conteggio file"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_files
@@ -631,12 +630,12 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_categories
 msgid "Count Subcategories"
-msgstr "N. Sottocategorie"
+msgstr "Contggio sotto categorie"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories_title
 msgid "Count Subdirectories"
-msgstr "N. Sottocartelle"
+msgstr "Conteggio sottocartelle"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_directories
@@ -646,7 +645,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_tags
 msgid "Count Tags"
-msgstr "N. Etichette"
+msgstr "Conteggio etichette"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
@@ -661,37 +660,37 @@ msgstr "Crea"
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_create
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_create
 msgid "Create Access"
-msgstr "Permesso di Creazione"
+msgstr "Crea accesso"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
 msgid "Create Directory"
-msgstr "Crea Cartella"
+msgstr "Crea cartella"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
 msgid "Create Storage"
-msgstr "Crea Storage"
+msgstr "Crea storage"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_category
 msgid "Create a new Category."
-msgstr "Crea una nuova Categoria."
+msgstr "Crea una nuova categoria."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_storage_step
 msgid "Create a new Document Storage."
-msgstr "Crea un nuovo Storage dei Documenti."
+msgstr "Crea un nuovo storage documenti."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
 msgid "Create a new Root Directory."
-msgstr "Crea una nuova Cartella Root."
+msgstr "Crea una nuova cartella radice."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_storage
 msgid "Create a new Storage object."
-msgstr "Crea un nuovo oggetto Storage."
+msgstr "Crea un nuovo oggetto storage."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__include_message_attachments
@@ -727,7 +726,7 @@ msgstr "Data Creazione"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__save_type
 msgid "Current Save Type"
-msgstr "Tipo di Salvataggio Corrente"
+msgstr "Tipo di salvataggio corrente"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_01_demo
@@ -776,7 +775,7 @@ msgstr "Valori predefiniti"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Define forbidden file extensions"
-msgstr "Definisci estensioni di file vietate"
+msgstr "Definire le estensioni di file vietate"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -784,14 +783,13 @@ msgid ""
 "Define the maximum upload size of a\n"
 "                                        file in MB"
 msgstr ""
-"Definisci la dimensione massima di caricamento di un\n"
+"Definire la dimensione massima di upload di un\n"
 "                                        file in MB"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Defines a list of forbidden file extensions. (Example: 'exe,msi')"
-msgstr ""
-"Definisci una lista di estensioni vietate dei file. (Esempio: 'exe,msi')"
+msgstr "Definisce un elenco di estensioni di file vietate. (Esempio: 'exe,msi')"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
@@ -804,7 +802,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_unlink
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_unlink
 msgid "Delete Access"
-msgstr "Permesso di Eliminazione"
+msgstr "Cancella accesso"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directories_storage
@@ -833,8 +831,8 @@ msgid ""
 "Directories can be used to structure and organize\n"
 "                files directly in Odoo."
 msgstr ""
-"Le Cartelle possono essere usate per strutturare e organizzare\n"
-"                file direttamente in Odoo."
+"Le cartelle possono essere usate per strutturare e organizzare\n"
+"                i file direttamente su Odoo."
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_directory
@@ -1003,7 +1001,7 @@ msgstr "Caricamento File"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Files"
-msgstr "Files"
+msgstr "File"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file
@@ -1614,7 +1612,7 @@ msgstr "Categoria Genitore"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__parent_id
 msgid "Parent Directory"
-msgstr "Cartella Genitore"
+msgstr "Cartella genitore"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_group_id
@@ -1636,7 +1634,7 @@ msgstr "Percorso padre"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_thread_id
 msgid "Parent Record Thread ID"
-msgstr "Record Thread ID Genitore"
+msgstr "ID record thread genitore"
 
 #. module: dms
 #: code:addons/dms/models/access_groups.py:0
@@ -1730,7 +1728,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
 msgid "Record Thread ID"
-msgstr "ID Thread Record"
+msgstr "ID thread record"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
