@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-09 08:30+0000\n"
+"PO-Revision-Date: 2023-10-11 09:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -21,12 +21,12 @@ msgstr ""
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Action Buttons"
-msgstr "Bottoni azione"
+msgstr "Pulsanti di azione"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_ir_actions_act_window_view
 msgid "Action Window View"
-msgstr "Vista azione finestra"
+msgstr "Vista maschera azione"
 
 #. module: dms_field
 #. openerp-web
@@ -45,21 +45,21 @@ msgstr "Aggiungi cartella a un record DMS"
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add Directory: "
-msgstr "Aggiungi Cartella: "
+msgstr "Aggiungi cartella: "
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add File: "
-msgstr "Aggiungi File: "
+msgstr "Aggiungi file: "
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add new root directory"
-msgstr "Aggiungi una nuova cartella root"
+msgstr "Aggiungi una nuova cartella radice"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_base
@@ -370,7 +370,7 @@ msgstr "Cartella"
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "Directory %s must be root in order to be related to a record"
-msgstr "La cartella %s deve essere root per essere collegata ad un record"
+msgstr "La cartella %s deve essere radice per essere collegata ad un record"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__display_name
@@ -430,7 +430,7 @@ msgstr "Modifica il nodo selezionato"
 #. module: dms_field
 #: model:dms.access.group,name:dms_field.demo_access_group
 msgid "Everyone for Partner DMS"
-msgstr "Tutti per il Partner DMS"
+msgstr "Tutti per il DMS del partner"
 
 #. module: dms_field
 #. openerp-web
@@ -573,21 +573,21 @@ msgstr "Storage possibili"
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Preview/download"
-msgstr "Anteprima/Download"
+msgstr "Anteprima/download"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Read:"
-msgstr "Lettura:"
+msgstr "Leggi:"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Refresh"
-msgstr "Ricarica"
+msgstr "Aggiorna"
 
 #. module: dms_field
 #. openerp-web
@@ -651,7 +651,7 @@ msgid ""
 "The action button at the top of the view can be used to open,\n"
 "                        create, edit or delete a node."
 msgstr ""
-"Il bottone azione nella parte superiore della vista può essere utilizzato "
+"Il pulsante azione nella parte superiore della vista può essere utilizzato "
 "per aprire,\n"
 "                         creare, modificare o eliminare un nodo."
 
@@ -676,14 +676,14 @@ msgstr "Visualizzazione"
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window_view__view_mode
 #: model:ir.model.fields,field_description:dms_field.field_ir_ui_view__type
 msgid "View Type"
-msgstr "Tipo visualizzazione"
+msgstr "Tipo vista"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Write:"
-msgstr "Scrittura:"
+msgstr "Scrivi:"
 
 #. module: dms_field
 #. openerp-web
@@ -696,9 +696,9 @@ msgid ""
 "                        structures on the view."
 msgstr ""
 "Puoi cambiare la struttura spostando i nodi. È anche possibile\n"
-"                         per creare nuovi nodi trascinando file e persino "
-"intere cartelle\n"
-"                         strutture in vista."
+"                         creare nuovi nodi trascinando file e anche intere "
+"strutture\n"
+"                        di cartelle nella vista."
 
 #. module: dms_field
 #. openerp-web
