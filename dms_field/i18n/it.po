@@ -6,122 +6,124 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-10-11 09:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Action Buttons"
-msgstr ""
+msgstr "Pulsanti di azione"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_ir_actions_act_window_view
 msgid "Action Window View"
-msgstr ""
+msgstr "Vista maschera azione"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Actions"
-msgstr ""
+msgstr "Azioni"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_dms_add_directory_record
 msgid "Add Directory to a DMS Record"
-msgstr ""
+msgstr "Aggiungi cartella a un record DMS"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add Directory: "
-msgstr ""
+msgstr "Aggiungi cartella: "
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add File: "
-msgstr ""
+msgstr "Aggiungi file: "
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Add new root directory"
-msgstr ""
+msgstr "Aggiungi una nuova cartella radice"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_base
 msgid "Base"
-msgstr ""
+msgstr "Base"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Close the selected node"
-msgstr ""
+msgstr "Chiudi il nodo selezionato"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Context Menu"
-msgstr ""
+msgstr "Menù contestuale"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Create"
-msgstr ""
+msgstr "Crea"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Create File"
-msgstr ""
+msgstr "Crea file"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Create directory"
-msgstr ""
+msgstr "Crea cartella"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Create:"
-msgstr ""
+msgstr "Crea:"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Cut"
-msgstr ""
+msgstr "Taglia"
 
 #. module: dms_field
 #. openerp-web
@@ -129,7 +131,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms_field.view_partner_form
 #, python-format
 msgid "DMS"
-msgstr ""
+msgstr "DMS"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field__unknown__dms_directory_ids
@@ -342,13 +344,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
-msgstr ""
+msgstr "Cartelle DMS"
 
 #. module: dms_field
 #: model:ir.model.fields.selection,name:dms_field.selection__ir_actions_act_window_view__view_mode__dms_tree
 #: model:ir.model.fields.selection,name:dms_field.selection__ir_ui_view__type__dms_tree
 msgid "DMS Tree"
-msgstr ""
+msgstr "Albero DMS"
 
 #. module: dms_field
 #. openerp-web
@@ -356,168 +358,168 @@ msgstr ""
 #: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Delete"
-msgstr ""
+msgstr "Cancella"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Delete:"
-msgstr ""
+msgstr "Cancella:"
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "Directories of this storage must be related to a record"
-msgstr ""
+msgstr "Le cartelle di questo storage devono essere collegate ad un record"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_dms_directory
 msgid "Directory"
-msgstr ""
+msgstr "Cartella"
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "Directory %s must be root in order to be related to a record"
-msgstr ""
+msgstr "La cartella %s deve essere radice per essere collegata ad un record"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: dms_field
 #: model_terms:ir.ui.view,arch_db:dms_field.dms_add_directory_record_form_view
 msgid "Dms Add Directory Record"
-msgstr ""
+msgstr "Aggiungi record cartella DMS"
 
 #. module: dms_field
 #: model:ir.actions.act_window,name:dms_field.dms_storage_act_window
 #: model:ir.ui.menu,name:dms_field.dms_storage_menu
 msgid "Documents"
-msgstr ""
+msgstr "Documenti"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Download"
-msgstr ""
+msgstr "Scarica"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Drag and Drop"
-msgstr ""
+msgstr "Drag e Drop"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "END"
-msgstr ""
+msgstr "FINE"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Edit"
-msgstr ""
+msgstr "Modifica"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Edit the selected node"
-msgstr ""
+msgstr "Modifica il nodo selezionato"
 
 #. module: dms_field
 #: model:dms.access.group,name:dms_field.demo_access_group
 msgid "Everyone for Partner DMS"
-msgstr ""
+msgstr "Tutti per il DMS del partner"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_storage__field_default_group_id
 msgid "Field Default Group"
-msgstr ""
+msgstr "Campo gruppo predefinito"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "HOME"
-msgstr ""
+msgstr "HOME"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Jump to the bottom"
-msgstr ""
+msgstr "Salta fino in fondo"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Jump to the top"
-msgstr ""
+msgstr "Salta in cima"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Scorciatoie tastiera"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Move down one node"
-msgstr ""
+msgstr "Scendi di un nodo"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Move up one node"
-msgstr ""
+msgstr "Sali di un nodo"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 #. module: dms_field
 #. openerp-web
@@ -526,102 +528,102 @@ msgstr ""
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Open"
-msgstr ""
+msgstr "Apri"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Open all nodes"
-msgstr ""
+msgstr "Apri tutti i nodi"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Open the selected node"
-msgstr ""
+msgstr "Apri il nodo selezionato"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_controller.js:0
 #, python-format
 msgid "Open: "
-msgstr ""
+msgstr "Apri: "
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_directory__parent_id
 msgid "Parent Directory"
-msgstr ""
+msgstr "Cartella genitore"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Paste"
-msgstr ""
+msgstr "Incolla"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__storage_ids
 msgid "Possible storages"
-msgstr ""
+msgstr "Storage possibili"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Preview/download"
-msgstr ""
+msgstr "Anteprima/download"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Read:"
-msgstr ""
+msgstr "Leggi:"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Refresh"
-msgstr ""
+msgstr "Aggiorna"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Rename"
-msgstr ""
+msgstr "Rinomina"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__res_id
 msgid "Res"
-msgstr ""
+msgstr "Res"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__res_model
 msgid "Res Model"
-msgstr ""
+msgstr "Modello res"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Show Help"
-msgstr ""
+msgstr "Mostra aiuto"
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_storage.py:0
 #, python-format
 msgid "Some directories are inconsistent with the storage models"
-msgstr ""
+msgstr "Alcune cartelle non sono coerenti con i modelli dello storage"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_dms_storage
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__storage_id
 msgid "Storage"
-msgstr ""
+msgstr "Storage"
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
@@ -630,12 +632,16 @@ msgid ""
 "Storage %s should need to be assigned to a model in order to relate the "
 "directory to a record"
 msgstr ""
+"Dovrebbe essere necessario assegnare lo storage %s a un modello per "
+"correlare la cartella a un record"
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "Storage %s should need to be assigned to a model related to the storage"
 msgstr ""
+"Dovrebbe essere necessario assegnare lo storage %s a un modello correlato "
+"allo storage"
 
 #. module: dms_field
 #. openerp-web
@@ -645,36 +651,39 @@ msgid ""
 "The action button at the top of the view can be used to open,\n"
 "                        create, edit or delete a node."
 msgstr ""
+"Il pulsante azione nella parte superiore della vista può essere utilizzato "
+"per aprire,\n"
+"                         creare, modificare o eliminare un nodo."
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_storage.py:0
 #, python-format
 msgid "There are directories not associated to a record"
-msgstr ""
+msgstr "Sono presenti cartelle non associate ad un record"
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "This record is already related in this storage"
-msgstr ""
+msgstr "Questo record è già correlato a questo storage"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_ir_ui_view
 msgid "View"
-msgstr ""
+msgstr "Vista"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window_view__view_mode
 #: model:ir.model.fields,field_description:dms_field.field_ir_ui_view__type
 msgid "View Type"
-msgstr ""
+msgstr "Tipo vista"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Write:"
-msgstr ""
+msgstr "Scrivi:"
 
 #. module: dms_field
 #. openerp-web
@@ -686,6 +695,10 @@ msgid ""
 "entire folder\n"
 "                        structures on the view."
 msgstr ""
+"Puoi cambiare la struttura spostando i nodi. È anche possibile\n"
+"                         creare nuovi nodi trascinando file e anche intere "
+"strutture\n"
+"                        di cartelle nella vista."
 
 #. module: dms_field
 #. openerp-web
@@ -696,17 +709,21 @@ msgid ""
 "                        contains further options for interacting with the "
 "node."
 msgstr ""
+"È possibile aprire un menu contestuale facendo clic con il tasto destro su "
+"qualsiasi nodo. Questo\n"
+"                         contiene ulteriori opzioni per interagire con il "
+"nodo."
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "no"
-msgstr ""
+msgstr "no"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "yes"
-msgstr ""
+msgstr "si"
