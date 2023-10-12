@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-11 09:37+0000\n"
+"PO-Revision-Date: 2023-10-12 09:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "%s Files"
-msgstr "%s File"
+msgstr "%s file"
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
@@ -910,7 +910,7 @@ msgstr "Stato caricamento dei documenti"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_storage_state
 msgid "Documents Onboarding Storage State"
-msgstr "Stato deposito caricamento documenti"
+msgstr "Stato strage caricamento documenti"
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__done
@@ -940,7 +940,7 @@ msgstr "Elementi"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Email Alias"
-msgstr "Email alias"
+msgstr "Alias email"
 
 #. module: dms
 #: model:ir.model,name:dms.model_mail_thread
@@ -995,7 +995,7 @@ msgstr "File"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "File Upload"
-msgstr "Upload file"
+msgstr "Carica file"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_file
@@ -1131,7 +1131,7 @@ msgid ""
 "ID of the parent record holding the alias (example: project holding the task "
 "creation alias)"
 msgstr ""
-"ID del record genitore che contiene l'alias (esempio: progetto che contiene "
+"ID del record padre che contiene l'alias (esempio: progetto che contiene "
 "l'alias di creazione dell'attività)"
 
 #. module: dms
@@ -1176,7 +1176,7 @@ msgstr "Se selezionato, i nuovi messaggi richiedono la tua attenzione."
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Se selezionato, alcuni messaggi presentano un errore di consegna."
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__company_id
@@ -1242,10 +1242,10 @@ msgid ""
 "(for example, if some directories are related with any sale, only users with "
 "read access to these sale can acess)"
 msgstr ""
-"Indicare se l'accesso alle cartelle e ai file funziona solo con il modello "
-"di accesso correlato (ad esempio, se alcune cartelle sono correlate a "
-"qualsiasi ordine di vendita, possono accedervi solo gli utenti con accesso "
-"in lettura a tali ordini)"
+"Indica se l'accesso alle cartelle e ai file funziona solo con l'accesso al "
+"modello correlato (ad esempio, se alcune cartelle sono collegate a un ordine "
+"di vendita, solo gli utenti con accesso in lettura a questo ordine di "
+"vendita possono accedervi)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
@@ -1253,7 +1253,7 @@ msgid ""
 "Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 "Indica se le cartelle e i file vengono creati automaticamente anche nel "
-"processo di composizione della posta"
+"processo di composizione delle mail"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__is_hidden
@@ -1272,10 +1272,10 @@ msgid ""
 "set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
-"Indica se la cartella è una cartella root.\n"
-"         Una cartella root ha delle impostazioni proprie, mentre una "
-"cartella con un genitore impostato\n"
-"         eredita le impostazioni dal suo genitore."
+"Indica se la cartella è una cartella radice.\n"
+"        Una cartella radice ha un oggetto impostazioni, mentre una cartella "
+"con un\n"
+"        padre impostato eredita le impostazioni dal padre."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__inherit_group_ids
@@ -1324,12 +1324,12 @@ msgstr "Fatture"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_is_follower
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_is_follower
 msgid "Is Follower"
-msgstr "È seguace"
+msgstr "Segue"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__is_root_directory
 msgid "Is Root Directory"
-msgstr "È una cartella root"
+msgstr "È una cartella radice"
 
 #. module: dms
 #: code:addons/dms/models/directory.py:0
@@ -1444,12 +1444,12 @@ msgstr "Allegato principale"
 #. module: dms
 #: model:res.groups,name:dms.group_dms_manager
 msgid "Manager"
-msgstr "Manager"
+msgstr "Responsabile"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Manual File Migration"
-msgstr "Migrazione manuale dei file"
+msgstr "Migrazione manuale del file"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_error
@@ -1467,7 +1467,7 @@ msgstr "Messaggi"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Meta Information"
-msgstr "Informazioni Meta"
+msgstr "Informazioni metadati"
 
 #. module: dms
 #: model:ir.actions.server,name:dms.action_dms_attachment_migrate
@@ -1544,7 +1544,7 @@ msgstr "Nome"
 #: model:ir.actions.act_window,name:dms.action_dms_directory_new
 #: model:ir.actions.act_window,name:dms.action_dms_file_new
 msgid "New Root Directory"
-msgstr "Nuova cartella root"
+msgstr "Nuova cartella radice"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_storage_new
@@ -1626,7 +1626,7 @@ msgstr "Solo utente amministratore"
 #: code:addons/dms/models/storage.py:0
 #, python-format
 msgid "Only managers can execute this action."
-msgstr "Solo i manager possono eseguire questa azione."
+msgstr "Solo i responsabili possono eseguire questa azione."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -1657,40 +1657,40 @@ msgstr "Proprietario"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__parent_id
 msgid "Parent Category"
-msgstr "Categoria genitore"
+msgstr "Categoria padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__parent_id
 msgid "Parent Directory"
-msgstr "Cartella genitore"
+msgstr "Cartella padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_group_id
 msgid "Parent Group"
-msgstr "Gruppo genitore"
+msgstr "Gruppo padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_model_id
 msgid "Parent Model"
-msgstr "Modello genitore"
+msgstr "Modello padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_path
 #: model:ir.model.fields,field_description:dms.field_dms_category__parent_path
 #: model:ir.model.fields,field_description:dms.field_dms_directory__parent_path
 msgid "Parent Path"
-msgstr "Path genitore"
+msgstr "Percorso padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_thread_id
 msgid "Parent Record Thread ID"
-msgstr "ID record thread genitore"
+msgstr "ID record thread padre"
 
 #. module: dms
 #: code:addons/dms/models/access_groups.py:0
 #, python-format
 msgid "Parent group '%(parent)s' is child of '%(current)s'."
-msgstr "Il gruppo genitore '%(parent)s' è figlio di '%(current)s'."
+msgstr "Il gruppo padre '%(parent)s' è figlio di '%(current)s'."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
@@ -1699,9 +1699,9 @@ msgid ""
 "necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
-"Modello principale che detiene l'alias. Il modello che contiene il "
-"riferimento alias non è necessariamente il modello fornito da alias_model_id "
-"(esempio: progetto (parent_model) e attività (modello))"
+"Modello padre che detiene l'alias. Il modello che contiene il riferimento "
+"alias non è necessariamente il modello fornito da alias_model_id (esempio: "
+"progetto (parent_model) e task (model))"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
@@ -1711,12 +1711,12 @@ msgstr "Partner"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_json
 msgid "Path Json"
-msgstr "Path Json"
+msgstr "Percorso Json"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_names
 msgid "Path Names"
-msgstr "Nomi path"
+msgstr "Nomi percorso"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_contact
@@ -1727,12 +1727,11 @@ msgid ""
 "- followers: only followers of the related document or members of following "
 "channels\n"
 msgstr ""
-"Policy per pubblicare un messaggio sul documento utilizzando il "
-"mailgateway.\n"
-"- tutti: tutti possono postare\n"
-"- partner: solo partner autenticati\n"
-"- seguaci: solo seguaci del documento correlato o membri dei canali "
-"successivi\n"
+"Politica per inviare un messaggio sul documento utilizzando il mailgateway.\n"
+"- chiunque: chiunque può inviare\n"
+"- clienti: solo i clienti autenticati\n"
+"- chi segue: solo chi segue il documento collegato o i membri dei seguenti "
+"canali\n"
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_02_demo
@@ -1744,7 +1743,7 @@ msgstr "Portale"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_url
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_url
 msgid "Portal Access URL"
-msgstr "URL di accesso al portale"
+msgstr "URL accesso portale"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_10_demo
@@ -1761,12 +1760,12 @@ msgstr "Progetto"
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_read
 msgid "Read Access"
-msgstr "Accesso alla lettura"
+msgstr "Accesso in lettura"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_access_group
 msgid "Record Access Groups"
-msgstr "Gruppi di accesso del record"
+msgstr "Gruppi di accesso al record"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
@@ -1796,14 +1795,14 @@ msgstr "Utente responsabile"
 #: code:addons/dms/static/src/js/views/search_panel.js:0
 #, python-format
 msgid "Root"
-msgstr "Root"
+msgstr "Radice"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__root_directory_ids
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
-msgstr "Cartelle root"
+msgstr "Cartelle radice"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
@@ -1864,12 +1863,12 @@ msgstr "Dimensione"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__starred
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "Starred"
-msgstr "Preferiti"
+msgstr "Asteriscato"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 msgid "Starred Directories"
-msgstr "Cartelle preferite"
+msgstr "Cartelle asteriscate"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__user_star_ids
@@ -1971,7 +1970,7 @@ msgstr "Etichette"
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
 msgid "Tags are used to categorize Documents."
-msgstr "Le etichette sono usate per categorizzare i documenti."
+msgstr "Le etichette sono usate per classificare i documenti."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -1988,12 +1987,12 @@ msgstr "Informazioni tecniche"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_category__active
 msgid "The active field allows you to hide the category without removing it."
-msgstr "Il campo Attivo consente di nascondere la categoria senza rimuoverla."
+msgstr "Il campo attivo permette di nascondere la categoria senza rimuoverla."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_tag__active
 msgid "The active field allows you to hide the tag without removing it."
-msgstr "Il campo Attivo permette di nascondere l'etichetta senza rimuoverla."
+msgstr "Il campo attivo permette di nascondere l'etichetta senza rimuoverla."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
@@ -2034,7 +2033,7 @@ msgid ""
 msgstr ""
 "Il modello (Odoo Document Kind) a cui corrisponde questo alias. Qualsiasi "
 "email in arrivo che non risponde a un record esistente causerà la creazione "
-"di un nuovo record di questo modello (ad esempio un'attività di progetto)"
+"di un nuovo record di questo modello (es. una task progetto)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
@@ -2042,8 +2041,8 @@ msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
 "<jobs@example.odoo.com>"
 msgstr ""
-"Il nome dell'alias email, ad es. 'jobs' se vuoi ricevere email per "
-"<jobs@example.odoo.com>"
+"Il nome dell'alias email, ad es. 'lavori' se vuoi ricevere email per "
+"<lavori@example.odoo.com>"
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_access_group_name_uniq
@@ -2058,10 +2057,10 @@ msgid ""
 "the sender (From) address, or will use the Administrator account if no "
 "system user is found for that address."
 msgstr ""
-"Il proprietario dei record creati dopo aver ricevuto e-mail su questo alias. "
-"Se questo campo non è impostato, il sistema tenterà di trovare il "
+"Il proprietario dei record creati dopo aver ricevuto email con questo alias. "
+"Se questo campo non è impostato il sistema tenterà di trovare il "
 "proprietario corretto in base all'indirizzo del mittente (Da) oppure "
-"utilizzerà l'account Amministratore se non viene trovato alcun utente di "
+"utilizzerà l'account amministratore se non viene trovato alcun utente di "
 "sistema per quell'indirizzo."
 
 #. module: dms
@@ -2142,12 +2141,12 @@ msgstr "Messaggi non letti"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_unread_counter
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_unread_counter
 msgid "Unread Messages Counter"
-msgstr "N. Messaggi non letti"
+msgstr "Contatore messaggi non letti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload File"
-msgstr "Upload File"
+msgstr "Carica file"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
@@ -2200,7 +2199,7 @@ msgstr "Cronologia comunicazioni sito web"
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_write
 msgid "Write Access"
-msgstr "Accesso alla scrittura"
+msgstr "Accesso in scrittura"
 
 #. module: dms
 #. openerp-web
