@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-12 09:39+0000\n"
+"PO-Revision-Date: 2023-10-12 14:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Action Buttons"
-msgstr "Pulsanti di azione"
+msgstr "Pulsanti azione"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_ir_actions_act_window_view
@@ -412,7 +412,7 @@ msgstr "Scarica"
 #: code:addons/dms_field/static/src/xml/dialogs.xml:0
 #, python-format
 msgid "Drag and Drop"
-msgstr "Drag e Drop"
+msgstr "Tascina e rilascia"
 
 #. module: dms_field
 #. openerp-web
