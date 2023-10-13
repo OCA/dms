@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-12 14:37+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-10-13 10:40+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -358,14 +358,14 @@ msgstr "Albero DMS"
 #: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
 msgid "Delete"
-msgstr "Cancella"
+msgstr "Elimina"
 
 #. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/preview.xml:0
 #, python-format
 msgid "Delete:"
-msgstr "Cancella:"
+msgstr "Elimina:"
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
