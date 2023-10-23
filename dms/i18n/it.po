@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-12 14:36+0000\n"
+"PO-Revision-Date: 2023-10-29 08:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -53,7 +53,7 @@ msgstr "%s file"
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "%s Subdirectories"
-msgstr "%s Sottocartelle"
+msgstr "%s sottocartelle"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
@@ -721,7 +721,7 @@ msgstr "Creato il"
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Creation Date"
-msgstr "Data Creazione"
+msgstr "Data creazione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__save_type
@@ -737,7 +737,7 @@ msgstr "Cliente"
 #. module: dms
 #: model:dms.tag,name:dms.tag_08_demo
 msgid "Customer Invoice"
-msgstr "Fattura Cliente"
+msgstr "Fattura cliente"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__access_url
@@ -795,7 +795,7 @@ msgstr "Definisce un elenco di estensioni di file vietate. (Esempio: 'exe,msi')"
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
 msgid "Defines the maximum upload size in MB. Default (25MB)"
 msgstr ""
-"Definisci la dimensione massima di caricamento in MB. Predefinita (25MB)"
+"Definisce la dimensione massima di caricamento in MB. Predefinita (25MB)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_unlink
@@ -926,7 +926,7 @@ msgstr "Alias email"
 #. module: dms
 #: model:ir.model,name:dms.model_mail_thread
 msgid "Email Thread"
-msgstr "Thread email"
+msgstr "Discussione e-mail"
 
 #. module: dms
 #: code:addons/dms/tests/common.py:0
@@ -1435,12 +1435,12 @@ msgstr "Migra"
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Migrate File %s of %s [ %s ]"
-msgstr "Migra File %s di %s [ %s ]"
+msgstr "Migra file %s di %s [ %s ]"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Migrate Files"
-msgstr "Migrare file"
+msgstr "Migra file"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.menu_dms_file_migration
@@ -1667,7 +1667,7 @@ msgstr "Percorso Json"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_names
 msgid "Path Names"
-msgstr "Nomi Percorso"
+msgstr "Nomi percorso"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_contact
