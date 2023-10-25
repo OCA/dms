@@ -101,10 +101,7 @@ class Storage(models.Model):
     model = fields.Char(search="_search_model", store=False)
 
     def _search_model(self, operator, value):
-        allowed_items = (
-            self.env["ir.model"].sudo()
-            .search([("model", operator, value)])
-        )
+        allowed_items = self.env["ir.model"].sudo().search([("model", operator, value)])
         return [("model_ids", "in", allowed_items.ids)]
 
     @api.onchange("save_type")

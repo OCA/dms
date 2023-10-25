@@ -39,7 +39,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                     ["child_directory_ids", "in", params.initialState.res_ids],
                 ];
             } else {
-                storage_domain = [["model_ids.model", "=", model]];
+                storage_domain = [["model", "=", model]];
                 autocompute_directory = true;
                 show_storage = false;
             }
