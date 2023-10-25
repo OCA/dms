@@ -1527,6 +1527,7 @@ msgstr "Stato migrazione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__model_id
+#: model:ir.model.fields,field_description:dms.field_dms_storage__model
 msgid "Model"
 msgstr "Modello"
 
