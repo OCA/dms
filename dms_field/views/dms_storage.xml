@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Creu Blanca
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record model="ir.ui.view" id="dms_storage_dms_tree_view">
+        <field name="name">dms.storage.dms_tree (in dms_field)</field>
+        <field name="model">dms.storage</field>
+        <field name="arch" type="xml">
+            <dms_tree>
+                <field name="name" />
+            </dms_tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="dms_storage_act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">dms.storage</field>
+        <field name="view_mode">dms_tree</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record model="ir.ui.menu" id="dms_storage_menu">
+        <field name="name">Documents</field>
+        <field name="parent_id" ref="dms.main_menu_dms" />
+        <field name="action" ref="dms_storage_act_window" />
+        <field name="sequence" eval="99" />
+    </record>
+    <record id="view_dms_storage_form" model="ir.ui.view">
+        <field name="name">dms_storage.form</field>
+        <field name="model">dms.storage</field>
+        <field name="inherit_id" ref="dms.view_dms_storage_form" />
+        <field name="arch" type="xml">
+            <field name="model_ids" position="attributes">
+                <attribute name="attrs">{'invisible': 0}</attribute>
+            </field>
+            <field name="model_ids" position="after">
+                <field
+                    name="field_default_group_id"
+                    attrs="{'invisible': ['|', ('model_ids', '=', False),('save_type', '=', 'attachment')]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
