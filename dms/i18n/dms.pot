@@ -1104,9 +1104,7 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_file__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -1705,12 +1703,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
-msgstr ""
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
-#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: dms
