@@ -182,9 +182,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_dms_tag__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_fetchmail_server__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_format_address_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_iap_account__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_iap_autocomplete_api__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_iap_enrich_api__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_image_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_url__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window__dms_directory_ids
@@ -310,7 +307,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_res_groups__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_lang__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_res_partner_autocomplete_sync__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_bank__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_category__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_industry__dms_directory_ids
@@ -324,19 +320,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings_volumes__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_reset_view_arch_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_api__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_cancel__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_composer__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_resend__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_resend_recipient__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_sms__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_template__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_template_preview__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_confirm__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_cancel__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_format_error__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_missing_required_fields__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
