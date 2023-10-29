@@ -221,8 +221,8 @@ msgid ""
 "span>"
 msgstr ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ "
-"</span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
@@ -819,7 +819,8 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Defines a list of forbidden file extensions. (Example: 'exe,msi')"
-msgstr "Definisce un elenco di estensioni di file vietate. (Esempio: 'exe,msi')"
+msgstr ""
+"Definisce un elenco di estensioni di file vietate. (Esempio: 'exe,msi')"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
@@ -1035,7 +1036,8 @@ msgstr "File"
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Files are used to save content directly in Odoo."
-msgstr "I file vengono utilizzati per salvare i contenuti direttamente in Odoo."
+msgstr ""
+"I file vengono utilizzati per salvare i contenuti direttamente in Odoo."
 
 #. module: dms
 #: code:addons/dms/models/storage.py:0
@@ -1168,9 +1170,7 @@ msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_file__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
@@ -1486,6 +1486,7 @@ msgstr "Stato migrazione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__model_id
+#: model:ir.model.fields,field_description:dms.field_dms_storage__model
 msgid "Model"
 msgstr "Modello"
 
@@ -1792,12 +1793,6 @@ msgstr "Radice"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
 msgstr "Cartelle radice"
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
-#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Errore consegna SMS"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
@@ -2229,3 +2224,6 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Errore consegna SMS"

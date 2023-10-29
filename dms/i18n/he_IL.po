@@ -1120,9 +1120,7 @@ msgstr "אם מסומן, הודעות חדשות דורשות את תשומת ל
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_file__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "אם מסומן, בחלק מההודעות קיימת שגיאת משלוח."
 
@@ -1423,6 +1421,7 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__model_id
+#: model:ir.model.fields,field_description:dms.field_dms_storage__model
 msgid "Model"
 msgstr ""
 
@@ -1726,12 +1725,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
 msgstr "ספרייה ראשית"
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
-#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "שגיאת שליחת SMS"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
@@ -2158,6 +2151,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "שגיאת שליחת SMS"
 
 #~ msgid "Path"
 #~ msgstr "נתיב"

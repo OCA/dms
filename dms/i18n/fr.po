@@ -1171,9 +1171,7 @@ msgstr "Si coché, les nouveaux messages nécessitent votre attention."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_file__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si coché, certains messages ont une erreur de livraison."
 
@@ -1484,6 +1482,7 @@ msgstr "Etat de la migration"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__model_id
+#: model:ir.model.fields,field_description:dms.field_dms_storage__model
 msgid "Model"
 msgstr "Modèle"
 
@@ -1792,12 +1791,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
 msgstr "Dossiers Racine"
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
-#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Erreur de livraison SMS"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
@@ -2230,6 +2223,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Erreur de livraison SMS"
 
 #~ msgid "Path"
 #~ msgstr "Chemin"

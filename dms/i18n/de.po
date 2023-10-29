@@ -1168,9 +1168,7 @@ msgstr "Falls markiert, benötigen neue Nachrichten Ihre Aufmerksamkeit."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_file__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 "Wenn diese Überprüfung aktiviert ist, weisen einige Nachrichten einen "
@@ -1490,6 +1488,7 @@ msgstr "Migrationsstatus"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__model_id
+#: model:ir.model.fields,field_description:dms.field_dms_storage__model
 msgid "Model"
 msgstr "Modell"
 
@@ -1798,12 +1797,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
 msgstr "Stammverzeichnisse"
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
-#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "SMS-Zustellfehler"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
@@ -2239,6 +2232,9 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "SMS-Zustellfehler"
 
 #~ msgid "Path"
 #~ msgstr "Pfad"
