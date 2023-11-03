@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-09-18 11:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -20,20 +21,25 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
 "                Legen Sie fest, wie ankommende E-Mails behandelt werden:\n"
 "\n"
-"                - Einzelne Dateien: Die E-Mail wird im Verzeichnis gespeichert und\n"
+"                - Einzelne Dateien: Die E-Mail wird im Verzeichnis "
+"gespeichert und\n"
 "                alle Anhänge werden als Dateien gespeichert.\n"
 "\n"
-"                - Unterverzeichnis: Für jede E-Mail wird ein neues Unterverzeichnis erstellt\n"
+"                - Unterverzeichnis: Für jede E-Mail wird ein neues "
+"Unterverzeichnis erstellt\n"
 "                und die E-Mail in dieses gespeichert. Die Anhänge\n"
 "                werden als Dateien in diesem Unterverzeichnis gespeichert.\n"
 "                "
@@ -212,7 +218,8 @@ msgstr "<span class=\"o_form_label\">Dateigröße</span>"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ </span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 msgstr ""
 
 #. module: dms
@@ -269,8 +276,17 @@ msgstr ""
 "Speicherort gewählt wurde."
 
 #. module: dms
+#. odoo-javascript
+#: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
+#, python-format
+msgid "A file with the same name already exists"
+msgstr ""
+
+#. module: dms
 #. odoo-python
+#. odoo-javascript
 #: code:addons/dms/models/dms_file.py:0
+#: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
 msgid "A file with the same name already exists."
 msgstr "Es existiert bereits eine Datei mit diesem Namen."
@@ -424,7 +440,7 @@ msgstr "Alle Dateien"
 
 #. module: dms
 #. odoo-javascript
-#: code:addons/dms/static/src/js/views/dms_file_upload.js:0
+#: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
 msgid "An error occurred during the upload"
 msgstr "Während des Uploads ist ein Fehler aufgetreten"
@@ -908,6 +924,7 @@ msgstr "Dokumenten-Stichwort"
 #: model:ir.ui.menu,name:dms.main_menu_dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
+#: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Documents"
 msgstr "Dokumente"
 
@@ -1140,11 +1157,11 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
-"ID des übergeordneten Datensatzes, der den Alias enthält (Beispiel: Projekt,"
-" das den Alias für die Aufgabenerstellung enthält)"
+"ID des übergeordneten Datensatzes, der den Alias enthält (Beispiel: Projekt, "
+"das den Alias für die Aufgabenerstellung enthält)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_icon
@@ -1182,9 +1199,7 @@ msgstr "Falls markiert, benötigen neue Nachrichten Ihre Aufmerksamkeit."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_directory__message_has_sms_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
-#: model:ir.model.fields,help:dms.field_dms_file__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 "Wenn diese Überprüfung aktiviert ist, weisen einige Nachrichten einen "
@@ -1199,8 +1214,8 @@ msgid ""
 "If set, directories and files will only be available for the selected "
 "company."
 msgstr ""
-"Wenn diese Option festgelegt ist, sind Verzeichnisse und Dateien nur für das"
-" ausgewählte Unternehmen verfügbar."
+"Wenn diese Option festgelegt ist, sind Verzeichnisse und Dateien nur für das "
+"ausgewählte Unternehmen verfügbar."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_bounced_content
@@ -1250,9 +1265,9 @@ msgstr "Bild 512"
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
-"Indicate if directories and files access work only with related model access"
-" (for example, if some directories are related with any sale, only users "
-"with read access to these sale can acess)"
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can acess)"
 msgstr ""
 "Gibt an, ob Verzeichnisse und Dateizugriff nur mit verwandtem Modellzugriff "
 "funktionieren (z. B. wenn einige Verzeichnisse mit einem Verkauf in "
@@ -1262,8 +1277,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid ""
-"Indicate if directories and files auto-create in mail composition process "
-"too"
+"Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 "Geben Sie an, ob Verzeichnisse und Dateien auch im E-Mail-"
 "Kompositionsprozess automatisch erstellt werden"
@@ -1274,19 +1288,21 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_file__is_hidden
 #: model:ir.model.fields,help:dms.field_dms_storage__is_hidden
 msgid "Indicates if directories and files are hidden by default."
-msgstr ""
-"Gibt an, ob Verzeichnisse und Dateien standardmäßig ausgeblendet sind."
+msgstr "Gibt an, ob Verzeichnisse und Dateien standardmäßig ausgeblendet sind."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 "Gibt an, ob es sich bei dem Verzeichnis um ein Stammverzeichnis handelt.\n"
-"        Ein Stammverzeichnis hat ein Einstellungsobjekt, während ein Verzeichnis mit einem gesetzten\n"
-"        Oberverzeichnis die Einstellungen von seinem übergeordneten Element erbt."
+"        Ein Stammverzeichnis hat ein Einstellungsobjekt, während ein "
+"Verzeichnis mit einem gesetzten\n"
+"        Oberverzeichnis die Einstellungen von seinem übergeordneten Element "
+"erbt."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__inherit_group_ids
@@ -1431,7 +1447,6 @@ msgstr "ID des verknüpften Anhangs-Datensatzes"
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/xml/views.xml:0
-#: code:addons/dms/static/src/xml/views.xml:0
 #, python-format
 msgid "Loading"
 msgstr "Lädt"
@@ -1518,11 +1533,6 @@ msgid "Model"
 msgstr "Modell"
 
 #. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_file__model_name
-msgid "Model Name"
-msgstr "Modellname"
-
-#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Modification Date"
@@ -1551,9 +1561,6 @@ msgstr "Meine Dateien"
 
 #. module: dms
 #. odoo-python
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
 #: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__name
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
@@ -1725,8 +1732,8 @@ msgstr "Die übergeordnete Gruppe '%(parent)s' ist ein Kind von '%(current)s'."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
 "Übergeordnetes Modell, das den Alias enthält. Das Modell, das den Alias-"
@@ -1754,12 +1761,15 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
-"Richtlinie zum Veröffentlichen einer Nachricht auf dem Dokument über das Mailgateway.\n"
+"Richtlinie zum Veröffentlichen einer Nachricht auf dem Dokument über das "
+"Mailgateway.\n"
 "- Jeder: jeder kann posten\n"
 "- Partner: nur authentifizierte Partner\n"
-"- Abonnenten: nur Abonnenten des entsprechenden Dokuments oder Mitglieder der folgenden Kanäle\n"
+"- Abonnenten: nur Abonnenten des entsprechenden Dokuments oder Mitglieder "
+"der folgenden Kanäle\n"
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_02_demo
@@ -1826,24 +1836,11 @@ msgid "Responsible User"
 msgstr "Verantwortlicher Benutzer"
 
 #. module: dms
-#. odoo-javascript
-#: code:addons/dms/static/src/js/views/search_panel.esm.js:0
-#, python-format
-msgid "Root"
-msgstr ""
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__root_directory_ids
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
 msgstr "Stammverzeichnisse"
-
-#. module: dms
-#: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_sms_error
-#: model:ir.model.fields,field_description:dms.field_dms_file__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "SMS-Zustellfehler"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
@@ -1861,7 +1858,6 @@ msgstr "Speichertyp"
 
 #. module: dms
 #. odoo-javascript
-#: code:addons/dms/static/src/js/views/file_kanban_buttons_template.xml:0
 #: code:addons/dms/static/src/js/views/file_kanban_renderer.xml:0
 #: code:addons/dms/static/src/js/views/file_list_renderer.xml:0
 #, python-format
@@ -2076,9 +2072,9 @@ msgstr "Die maximale Upload-Größe beträgt %s MB."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 "Das Modell (Odoo Document Kind), dem dieser Alias entspricht. Jede "
 "eingehende E-Mail, die nicht auf einen bestehenden Datensatz antwortet, "
@@ -2107,11 +2103,11 @@ msgid ""
 "the sender (From) address, or will use the Administrator account if no "
 "system user is found for that address."
 msgstr ""
-"Der Eigentümer der Datensätze, die beim Empfang von E-Mails mit diesem Alias"
-" erstellt werden. Wenn dieses Feld nicht gesetzt ist, versucht das System, "
+"Der Eigentümer der Datensätze, die beim Empfang von E-Mails mit diesem Alias "
+"erstellt werden. Wenn dieses Feld nicht gesetzt ist, versucht das System, "
 "den richtigen Besitzer anhand der Absenderadresse zu finden, oder es "
-"verwendet das Administratorkonto, wenn kein Systembenutzer für diese Adresse"
-" gefunden wird."
+"verwendet das Administratorkonto, wenn kein Systembenutzer für diese Adresse "
+"gefunden wird."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__storage_id_save_type
@@ -2124,7 +2120,8 @@ msgid ""
 "        manually by triggering the action."
 msgstr ""
 "Der Speichertyp wird verwendet, um zu bestimmen, wie eine Datei vom\n"
-"        System gespeichert wird. Wenn Sie diese Einstellung ändern, können Sie vorhandene Dateien\n"
+"        System gespeichert wird. Wenn Sie diese Einstellung ändern, können "
+"Sie vorhandene Dateien\n"
 "        manuell migrieren, indem Sie die Aktion auslösen."
 
 #. module: dms
@@ -2182,7 +2179,6 @@ msgstr "E-Mail entpacken als"
 
 #. module: dms
 #. odoo-javascript
-#: code:addons/dms/static/src/js/views/file_kanban_buttons_template.xml:0
 #: code:addons/dms/static/src/js/views/file_kanban_controller.xml:0
 #: code:addons/dms/static/src/js/views/file_kanban_renderer.xml:0
 #: code:addons/dms/static/src/js/views/file_list_renderer.xml:0
@@ -2249,7 +2245,7 @@ msgstr "Schreibberechtigung"
 
 #. module: dms
 #. odoo-javascript
-#: code:addons/dms/static/src/js/views/dms_file_upload.js:0
+#: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #: code:addons/dms/static/src/js/views/many_drop_target.js:0
 #, python-format
 msgid "You must select a directory first"
@@ -2291,3 +2287,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+
+#~ msgid "Model Name"
+#~ msgstr "Modellname"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "SMS-Zustellfehler"
