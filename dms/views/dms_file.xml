@@ -315,6 +315,12 @@
                 <field name="is_locked" invisible="1" />
                 <field name="is_lock_editor" invisible="1" />
                 <field name="name" />
+                <field
+                    name="content"
+                    filename="name"
+                    widget="binary"
+                    string="Download"
+                />
                 <field name="write_date" />
                 <field name="size" widget="integer" />
                 <field name="mimetype" />
