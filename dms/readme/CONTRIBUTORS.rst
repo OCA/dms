@@ -8,3 +8,9 @@
   * Víctor Martínez
   * Pedro M. Baeza
   * Jairo Llopis
+
+* `Elego <https://www.elegosoft.com>`_:
+
+  * Yu Weng <yweng@elegosoft.com>
+  * Philip Witte <phillip.witte@elegosoft.com>
+  * Khanh Bui <khanh.bui@mail.elegosoft.com>
