@@ -223,8 +223,8 @@ msgid ""
 "span>"
 msgstr ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ "
-"</span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
@@ -283,8 +283,8 @@ msgid "A file with the same name already exists"
 msgstr "Esiste già un file con lo stesso nome"
 
 #. module: dms
-#. odoo-python
 #. odoo-javascript
+#. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
@@ -847,7 +847,8 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Defines a list of forbidden file extensions. (Example: 'exe,msi')"
-msgstr "Definisce un elenco di estensioni di file vietate. (Esempio: 'exe,msi')"
+msgstr ""
+"Definisce un elenco di estensioni di file vietate. (Esempio: 'exe,msi')"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
