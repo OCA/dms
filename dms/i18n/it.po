@@ -283,8 +283,8 @@ msgid "A file with the same name already exists"
 msgstr "Esiste già un file con lo stesso nome"
 
 #. module: dms
-#. odoo-javascript
 #. odoo-python
+#. odoo-javascript
 #: code:addons/dms/models/dms_file.py:0
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
@@ -1068,7 +1068,8 @@ msgstr "File"
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Files are used to save content directly in Odoo."
-msgstr "I file vengono utilizzati per salvare i contenuti direttamente in Odoo."
+msgstr ""
+"I file vengono utilizzati per salvare i contenuti direttamente in Odoo."
 
 #. module: dms
 #. odoo-python
