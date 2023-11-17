@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-13 13:37+0000\n"
+"PO-Revision-Date: 2023-11-17 15:48+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -967,75 +967,75 @@ msgstr "Menu a tendina"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_lock_editor
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Elements"
-msgstr ""
+msgstr "Elementi"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Email Alias"
-msgstr ""
+msgstr "Alias email"
 
 #. module: dms
 #: model:ir.model,name:dms.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Discussione e-mail"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/tests/common.py:0
 #, python-format
 msgid "Error has not been raised"
-msgstr ""
+msgstr "L'errore non è stato segnalato"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/category.py:0
 #, python-format
 msgid "Error! You cannot create recursive categories."
-msgstr ""
+msgstr "Errore! Non è possibile creare categorie ricorsive."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "Error! You cannot create recursive directories."
-msgstr ""
+msgstr "Errore! Non è possibile creare cartelle ricorsive."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__explicit_user_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Explicit Users"
-msgstr ""
+msgstr "Utenti espliciti"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__extension
 msgid "Extension"
-msgstr ""
+msgstr "Estensione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Extensions"
-msgstr ""
+msgstr "Estensioni"
 
 #. module: dms
 #: model:dms.category,name:dms.category_05_demo
 msgid "External"
-msgstr ""
+msgstr "Esterno"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "File Upload"
-msgstr ""
+msgstr "Carica file"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_file
@@ -1058,7 +1058,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Files"
-msgstr ""
+msgstr "File"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file
@@ -1068,7 +1068,7 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Files are used to save content directly in Odoo."
-msgstr ""
+msgstr "I file vengono utilizzati per salvare i contenuti direttamente in Odoo."
 
 #. module: dms
 #. odoo-python
@@ -1076,36 +1076,36 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__file
 #, python-format
 msgid "Filestore"
-msgstr ""
+msgstr "Filestore"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_follower_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguito da"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_partner_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguito da (partner)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_type_icon
 #: model:ir.model.fields,help:dms.field_dms_file__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icona Font Awesome es. fa-tasks"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_settings_general
 #: model:ir.ui.menu,name:dms.menu_dms_settings_general
 msgid "General Settings"
-msgstr ""
+msgstr "Impostazioni generali"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Group"
-msgstr ""
+msgstr "Gruppo"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
@@ -1114,17 +1114,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
 msgid "Group By"
-msgstr ""
+msgstr "Raggruppa per"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__name
 msgid "Group Name"
-msgstr ""
+msgstr "Nome gruppo"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__users
 msgid "Group Users"
-msgstr ""
+msgstr "Utenti gruppo"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__group_ids
@@ -1132,18 +1132,18 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Groups"
-msgstr ""
+msgstr "Gruppi"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__has_message
 #: model:ir.model.fields,field_description:dms.field_dms_file__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha un messaggio"
 
 #. module: dms
 #: model:dms.category,name:dms.category_02_demo
 msgid "Human Resource"
-msgstr ""
+msgstr "Risorse umane"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__id
@@ -1153,7 +1153,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__id
 #: model:ir.model.fields,field_description:dms.field_dms_tag__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
@@ -1161,6 +1161,8 @@ msgid ""
 "ID of the parent record holding the alias (example: project holding the task "
 "creation alias)"
 msgstr ""
+"ID del record padre che contiene l'alias (esempio: progetto che contiene "
+"l'alias di creazione dell'attività)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_icon
@@ -1168,37 +1170,39 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__icon_url
 #: model:ir.model.fields,field_description:dms.field_dms_file__icon_url
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__icon_url
 msgid "Icon URL"
-msgstr ""
+msgstr "URL icona"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_exception_icon
 #: model:ir.model.fields,help:dms.field_dms_file__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icona per indicare un'attività eccezione."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_file__active
 msgid "If a file is set to archived, it is not displayed, but still exists."
 msgstr ""
+"Se un file è impostato su archiviato, non viene visualizzato, ma esiste "
+"ancora."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_needaction
 #: model:ir.model.fields,help:dms.field_dms_file__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__company_id
@@ -1209,6 +1213,8 @@ msgid ""
 "If set, directories and files will only be available for the selected "
 "company."
 msgstr ""
+"Se impostato, cartelle e file saranno disponibili solo per l'azienda "
+"selezionata."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_bounced_content
@@ -1216,41 +1222,43 @@ msgid ""
 "If set, this content will automatically be sent out to unauthorized users "
 "instead of the default message."
 msgstr ""
+"Se impostato, questo contenuto verrà inviato automaticamente agli utenti non "
+"autorizzati invece del messaggio predefinito."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__image_1920
 #: model:ir.model.fields,field_description:dms.field_dms_file__image_1920
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_1920
 msgid "Image"
-msgstr ""
+msgstr "Immagine"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__image_1024
 #: model:ir.model.fields,field_description:dms.field_dms_file__image_1024
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_1024
 msgid "Image 1024"
-msgstr ""
+msgstr "Immagine 1024"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__image_128
 #: model:ir.model.fields,field_description:dms.field_dms_file__image_128
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_128
 msgid "Image 128"
-msgstr ""
+msgstr "Immagine 128"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__image_256
 #: model:ir.model.fields,field_description:dms.field_dms_file__image_256
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_256
 msgid "Image 256"
-msgstr ""
+msgstr "Immagine 256"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__image_512
 #: model:ir.model.fields,field_description:dms.field_dms_file__image_512
 #: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__image_512
 msgid "Image 512"
-msgstr ""
+msgstr "Immagine 512"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
@@ -1260,12 +1268,18 @@ msgid ""
 "(for example, if some directories are related with any sale, only users with "
 "read access to these sale can acess)"
 msgstr ""
+"Indica se l'accesso alle cartelle e ai file funziona solo con l'accesso al "
+"modello correlato (ad esempio, se alcune cartelle sono collegate a un ordine "
+"di vendita, solo gli utenti con accesso in lettura a questo ordine di "
+"vendita possono accedervi)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid ""
 "Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
+"Indica se le cartelle e i file vengono creati automaticamente anche nel "
+"processo di composizione delle mail"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__is_hidden
@@ -1274,6 +1288,7 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_storage__is_hidden
 msgid "Indicates if directories and files are hidden by default."
 msgstr ""
+"Indica se le cartelle e i file sono nascosti per impostazione predefinita."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
@@ -1283,81 +1298,85 @@ msgid ""
 "set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
+"Indica se la cartella è una cartella radice.\n"
+"        Una cartella radice ha un oggetto impostazioni, mentre una cartella "
+"con un\n"
+"        padre impostato eredita le impostazioni dal padre."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__inherit_group_ids
 msgid "Inherit Groups"
-msgstr ""
+msgstr "Eredita gruppi"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,field_description:dms.field_dms_storage__inherit_access_from_parent_record
 msgid "Inherit permissions from related record"
-msgstr ""
+msgstr "Eredita le autorizzazioni dal record correlato"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_create
 msgid "Inherited Create Access"
-msgstr ""
+msgstr "Accesso alla creazione ereditato"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_unlink
 msgid "Inherited Unlink Access"
-msgstr ""
+msgstr "Accesso all'eliminazione ereditato"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_write
 msgid "Inherited Write Access"
-msgstr ""
+msgstr "Accesso alla scrittura ereditato"
 
 #. module: dms
 #: model:dms.category,name:dms.category_01_demo
 msgid "Internal"
-msgstr ""
+msgstr "Interna"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Internal / Human Resource"
-msgstr ""
+msgstr "Interno / Risorse umane"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Invalid attachments!"
-msgstr ""
+msgstr "Allegato non valido!"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 msgid "Invoices"
-msgstr ""
+msgstr "Fatture"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_is_follower
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Segue"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__is_root_directory
 msgid "Is Root Directory"
-msgstr ""
+msgstr "È una cartella radice"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "It is not possible to change parent to other storage."
-msgstr ""
+msgstr "Non è possibile cambiare il genitore in un altro storage."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "It is not possible to change the storage."
-msgstr ""
+msgstr "Non è possibile modificare lo storage."
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__just_done
@@ -1365,7 +1384,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__just_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__just_done
 msgid "Just done"
-msgstr ""
+msgstr "Appena fatto"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group____last_update
@@ -1375,7 +1394,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_tag____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__write_uid
@@ -1385,7 +1404,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__write_date
@@ -1395,147 +1414,147 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Last update"
-msgstr ""
+msgstr "Ultimo aggiornamento"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
 #: model:ir.model.fields,field_description:dms.field_dms_storage__model_ids
 msgid "Linked Models"
-msgstr ""
+msgstr "Modelli collegati"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_model
 msgid "Linked attachments model"
-msgstr ""
+msgstr "Modello degli allegati collegati"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_id
 msgid "Linked attachments record ID"
-msgstr ""
+msgstr "ID record degli allegati collegati"
 
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/xml/views.xml:0
 #, python-format
 msgid "Loading"
-msgstr ""
+msgstr "Caricamento"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Lock"
-msgstr ""
+msgstr "Blocco"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_locked
 msgid "Locked"
-msgstr ""
+msgstr "Bloccato"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
 msgid "Locked By"
-msgstr ""
+msgstr "Bloccato da"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_main_attachment_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Allegato principale"
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_manager
 msgid "Manager"
-msgstr ""
+msgstr "Responsabile"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Manual File Migration"
-msgstr ""
+msgstr "Migrazione manuale del file"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_error
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Errore di consegna messaggio"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messaggi"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Meta Information"
-msgstr ""
+msgstr "Informazioni metadati"
 
 #. module: dms
 #: model:ir.actions.server,name:dms.action_dms_attachment_migrate
 msgid "Migrate"
-msgstr ""
+msgstr "Migra"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
-msgstr ""
+msgstr "Migra il file %(index)s di %(record_count)s [ %(dms_file_migration)s ]"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Migrate Files"
-msgstr ""
+msgstr "Migra file"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.menu_dms_file_migration
 msgid "Migration"
-msgstr ""
+msgstr "Migrazione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__migration
 msgid "Migration Status"
-msgstr ""
+msgstr "Stato migrazione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__model_id
 msgid "Model"
-msgstr ""
+msgstr "Modello"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Modification Date"
-msgstr ""
+msgstr "Data di modifica"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
 #: model:ir.model.fields,field_description:dms.field_dms_file__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Scadenza mia attività"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 msgid "My Directories"
-msgstr ""
+msgstr "Le mie cartelle"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "My Documents"
-msgstr ""
+msgstr "I miei documenti"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "My Files"
-msgstr ""
+msgstr "I miei file"
 
 #. module: dms
 #. odoo-python
@@ -1549,48 +1568,48 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 #, python-format
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directory_new
 #: model:ir.actions.act_window,name:dms.action_dms_file_new
 msgid "New Root Directory"
-msgstr ""
+msgstr "Nuova cartella radice"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_storage_new
 msgid "New Storage"
-msgstr ""
+msgstr "Nuovo storage"
 
 #. module: dms
 #: model:dms.category,name:dms.category_06_demo
 msgid "News"
-msgstr ""
+msgstr "Novità"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_date_deadline
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Scadenza prossima attività"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_summary
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Riepilogo prossima attività"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_type_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Tipo prossima attività"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "No attachment was provided"
-msgstr ""
+msgstr "Non è stato fornito l'allegato"
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__not_done
@@ -1598,53 +1617,53 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__not_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__not_done
 msgid "Not done"
-msgstr ""
+msgstr "Non completato"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Not results"
-msgstr ""
+msgstr "Nessun risultato"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction_counter
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Numero di azioni"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_has_error_counter
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Numero di errori"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_needaction_counter
 #: model:ir.model.fields,help:dms.field_dms_file__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Numero di messaggi che richiedono un'azione"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error_counter
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Numero di messaggi con errore di consegna"
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_03_demo
 msgid "Only admin user"
-msgstr ""
+msgstr "Solo utente amministratore"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/storage.py:0
 #, python-format
 msgid "Only managers can execute this action."
-msgstr ""
+msgstr "Solo i responsabili possono eseguire questa azione."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Operations"
-msgstr ""
+msgstr "Operazioni"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_force_thread_id
@@ -1653,55 +1672,58 @@ msgid ""
 "attached, even if they did not reply to it. If set, this will disable the "
 "creation of new records completely."
 msgstr ""
+"ID facoltativo di un thread (record) a cui verranno allegati tutti i "
+"messaggi in arrivo, anche se non hanno risposto. Se impostato, disabiliterà "
+"completamente la creazione di nuovi record."
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config_organizing
 msgid "Organizing"
-msgstr ""
+msgstr "Organizzazione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_user_id
 msgid "Owner"
-msgstr ""
+msgstr "Proprietario"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__parent_id
 msgid "Parent Category"
-msgstr ""
+msgstr "Categoria padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__parent_id
 msgid "Parent Directory"
-msgstr ""
+msgstr "Cartella padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_group_id
 msgid "Parent Group"
-msgstr ""
+msgstr "Gruppo padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_model_id
 msgid "Parent Model"
-msgstr ""
+msgstr "Modello padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__parent_path
 #: model:ir.model.fields,field_description:dms.field_dms_category__parent_path
 #: model:ir.model.fields,field_description:dms.field_dms_directory__parent_path
 msgid "Parent Path"
-msgstr ""
+msgstr "Percorso padre"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_parent_thread_id
 msgid "Parent Record Thread ID"
-msgstr ""
+msgstr "ID record thread padre"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/access_groups.py:0
 #, python-format
 msgid "Parent group '%(parent)s' is child of '%(current)s'."
-msgstr ""
+msgstr "Il gruppo padre '%(parent)s' è figlio di '%(current)s'."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
@@ -1710,21 +1732,24 @@ msgid ""
 "necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
+"Modello padre che detiene l'alias. Il modello che contiene il riferimento "
+"alias non è necessariamente il modello fornito da alias_model_id (esempio: "
+"progetto (parent_model) e task (model))"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_json
 msgid "Path Json"
-msgstr ""
+msgstr "Percorso Json"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_names
 msgid "Path Names"
-msgstr ""
+msgstr "Nomi percorso"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_contact
@@ -1735,82 +1760,87 @@ msgid ""
 "- followers: only followers of the related document or members of following "
 "channels\n"
 msgstr ""
+"Politica per inviare un messaggio sul documento utilizzando il mailgateway.\n"
+"- chiunque: chiunque può inviare\n"
+"- clienti: solo i clienti autenticati\n"
+"- chi segue: solo chi segue il documento collegato o i membri dei seguenti "
+"canali\n"
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_02_demo
 #: model:dms.tag,name:dms.tag_05_demo
 msgid "Portal"
-msgstr ""
+msgstr "Portale"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_url
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_url
 msgid "Portal Access URL"
-msgstr ""
+msgstr "URL accesso portale"
 
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/js/views/fields/binary/preview_record.xml:0
 #, python-format
 msgid "Preview"
-msgstr ""
+msgstr "Anteprima"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_10_demo
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_03_demo
 msgid "Project"
-msgstr ""
+msgstr "Progetto"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_read
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_read
 msgid "Read Access"
-msgstr ""
+msgstr "Accesso in lettura"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_access_group
 msgid "Record Access Groups"
-msgstr ""
+msgstr "Gruppi di accesso al record"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_file__record_ref
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__record_ref
 msgid "Record Referenced"
-msgstr ""
+msgstr "Record referenziato"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
 msgid "Record Thread ID"
-msgstr ""
+msgstr "ID thread record"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
 msgid "Require Migration"
-msgstr ""
+msgstr "Richiede migrazione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_user_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Utente responsabile"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__root_directory_ids
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Root Directories"
-msgstr ""
+msgstr "Cartelle radice"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
 msgid "Sales"
-msgstr ""
+msgstr "Vendite"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__storage_id_save_type
@@ -1819,7 +1849,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_storage__save_type
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
 msgid "Save Type"
-msgstr ""
+msgstr "Tipo salvataggio"
 
 #. module: dms
 #. odoo-javascript
@@ -1827,34 +1857,34 @@ msgstr ""
 #: code:addons/dms/static/src/js/views/file_list_renderer.xml:0
 #, python-format
 msgid "Scan"
-msgstr ""
+msgstr "Scansiona"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_token
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_token
 msgid "Security Token"
-msgstr ""
+msgstr "Token di sicurezza"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Settings"
-msgstr ""
+msgstr "Impostazioni"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Share"
-msgstr ""
+msgstr "Condividi"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Show storages"
-msgstr ""
+msgstr "Mostra storage"
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__dms_directory__alias_process__files
 msgid "Single Files"
-msgstr ""
+msgstr "File singoli"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__size
@@ -1862,23 +1892,23 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_binary_max_size
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Size"
-msgstr ""
+msgstr "Dimensione"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__starred
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "Starred"
-msgstr ""
+msgstr "Asteriscato"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
 msgid "Starred Directories"
-msgstr ""
+msgstr "Cartelle asteriscate"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__user_star_ids
 msgid "Stars"
-msgstr ""
+msgstr "Asterischi"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_state
@@ -1889,6 +1919,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Stato in base alle attività\n"
+"Scaduto: la data richiesta è trascorsa\n"
+"Oggi: la data attività è oggi\n"
+"Pianificato: attività future."
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_storage
@@ -1900,7 +1934,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file_migration
 msgid "Storage"
-msgstr ""
+msgstr "Storage"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__is_hidden
@@ -1908,24 +1942,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_hidden
 #: model:ir.model.fields,field_description:dms.field_dms_storage__is_hidden
 msgid "Storage is Hidden"
-msgstr ""
+msgstr "Lo storage è nascosto"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_storage
 #: model:ir.ui.menu,name:dms.menu_dms_storage
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Storages"
-msgstr ""
+msgstr "Storage"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_storage
 msgid "Storages are used to configure your Documents."
-msgstr ""
+msgstr "Gli storage sono usati per organizzare i tuoi documenti."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 msgid "Subcategories"
-msgstr ""
+msgstr "Sottocategorie"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_directories_all_directory
@@ -1933,27 +1967,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__child_directory_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Subdirectories"
-msgstr ""
+msgstr "Sottocartelle"
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__dms_directory__alias_process__directory
 msgid "Subdirectory"
-msgstr ""
+msgstr "Sottocartella"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config_system
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Tag"
-msgstr ""
+msgstr "Etichetta"
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_tag_name_uniq
 msgid "Tag name already exists!"
-msgstr ""
+msgstr "Il nome dell'etichetta esiste già!"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_tag
@@ -1963,68 +1997,68 @@ msgstr ""
 #: model:ir.ui.menu,name:dms.menu_dms_tag
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 msgid "Tags"
-msgstr ""
+msgstr "Etichette"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
 msgid "Tags are used to categorize Documents."
-msgstr ""
+msgstr "Le etichette sono usate per classificare i documenti."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Tags..."
-msgstr ""
+msgstr "Etichette..."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Technical Information"
-msgstr ""
+msgstr "Informazioni tecniche"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_category__active
 msgid "The active field allows you to hide the category without removing it."
-msgstr ""
+msgstr "Il campo attivo permette di nascondere la categoria senza rimuoverla."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_tag__active
 msgid "The active field allows you to hide the tag without removing it."
-msgstr ""
+msgstr "Il campo attivo permette di nascondere l'etichetta senza rimuoverla."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "The configuration is done!"
-msgstr ""
+msgstr "La configurazione è terminata!"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "The directory name is invalid."
-msgstr ""
+msgstr "Il nome della cartella non è valido."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "The file has a forbidden file extension."
-msgstr ""
+msgstr "Il file ha un'estensione vietata."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "The file name is invalid."
-msgstr ""
+msgstr "Il nome del file non è valido."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "The maximum upload size is %s MB)."
-msgstr ""
+msgstr "La dimensione massima di upload è %s MB)."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
@@ -2033,6 +2067,9 @@ msgid ""
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
+"Il modello (Odoo Document Kind) a cui corrisponde questo alias. Qualsiasi "
+"email in arrivo che non risponde a un record esistente causerà la creazione "
+"di un nuovo record di questo modello (es. una task progetto)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
@@ -2040,11 +2077,13 @@ msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
 "<jobs@example.odoo.com>"
 msgstr ""
+"Il nome dell'alias email, ad es. 'lavori' se vuoi ricevere email per "
+"<lavori@example.odoo.com>"
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_access_group_name_uniq
 msgid "The name of the group must be unique!"
-msgstr ""
+msgstr "Il nome del gruppo deve essere unico!"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_user_id
@@ -2054,6 +2093,11 @@ msgid ""
 "the sender (From) address, or will use the Administrator account if no "
 "system user is found for that address."
 msgstr ""
+"Il proprietario dei record creati dopo aver ricevuto email con questo alias. "
+"Se questo campo non è impostato il sistema tenterà di trovare il "
+"proprietario corretto in base all'indirizzo del mittente (Da) oppure "
+"utilizzerà l'account amministratore se non viene trovato alcun utente di "
+"sistema per quell'indirizzo."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__storage_id_save_type
@@ -2065,59 +2109,64 @@ msgid ""
 "        system. If you change this setting, you can migrate existing files\n"
 "        manually by triggering the action."
 msgstr ""
+"Il tipo di salvataggio viene utilizzato per determinare come un file viene "
+"salvato dal sistema.\n"
+"          Se modifichi questa impostazione, puoi eseguire la migrazione dei "
+"file esistenti\n"
+"         manualmente attivando l'azione."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "This directory needs to be associated to a record."
-msgstr ""
+msgstr "Questa cartella deve essere associata a un record."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_elements
 msgid "Total Elements"
-msgstr ""
+msgstr "Totale elementi"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_files
 msgid "Total Files"
-msgstr ""
+msgstr "Totale file"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_directories
 msgid "Total Subdirectories"
-msgstr ""
+msgstr "Totale sottocartelle"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
 msgid "Traveling"
-msgstr ""
+msgstr "In viaggio"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__mimetype
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_exception_decoration
 #: model:ir.model.fields,help:dms.field_dms_file__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo di attività eccezione sul record."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_unlink
 msgid "Unlink Access"
-msgstr ""
+msgstr "Accesso all'eliminazione"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Unlock"
-msgstr ""
+msgstr "Sblocca"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_process
 msgid "Unpack Emails as"
-msgstr ""
+msgstr "Decomprimi le email come"
 
 #. module: dms
 #. odoo-javascript
@@ -2126,56 +2175,56 @@ msgstr ""
 #: code:addons/dms/static/src/js/views/file_list_renderer.xml:0
 #, python-format
 msgid "Upload"
-msgstr ""
+msgstr "Carica"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload File"
-msgstr ""
+msgstr "Carica file"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload your first File."
-msgstr ""
+msgstr "Carica il tuo primo file."
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_user
 msgid "User"
-msgstr ""
+msgstr "Utente"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Users"
-msgstr ""
+msgstr "Utenti"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_09_demo
 msgid "Vendor Bill"
-msgstr ""
+msgstr "Fattura fornitore"
 
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/xml/views.xml:0
 #, python-format
 msgid "Viewer"
-msgstr ""
+msgstr "Visualizzatore"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "Views"
-msgstr ""
+msgstr "Viste"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__website_message_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messaggi sito web"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__website_message_ids
 #: model:ir.model.fields,help:dms.field_dms_file__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Cronologia comunicazioni sito web"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
@@ -2183,7 +2232,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_write
 msgid "Write Access"
-msgstr ""
+msgstr "Accesso in scrittura"
 
 #. module: dms
 #. odoo-javascript
@@ -2191,41 +2240,41 @@ msgstr ""
 #: code:addons/dms/static/src/js/views/many_drop_target.js:0
 #, python-format
 msgid "You must select a directory first"
-msgstr ""
+msgstr "È necessario prima selezionare una cartella"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "action_close_documents_onboarding"
-msgstr ""
+msgstr "action_close_documents_onboarding"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "element(s)"
-msgstr ""
+msgstr "elemento(i)"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "exe,msi"
-msgstr ""
+msgstr "exe,msi"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "mail.catchall.domain"
-msgstr ""
+msgstr "mail.catchall.domain"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "o_onboarding_blue"
-msgstr ""
+msgstr "o_onboarding_blue"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 msgid "o_onboarding_orange"
-msgstr ""
+msgstr "o_onboarding_orange"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
-msgstr ""
+msgstr "res.company"
