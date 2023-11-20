@@ -27,7 +27,7 @@
         <field name="name">dms_category.tree</field>
         <field name="model">dms.category</field>
         <field name="arch" type="xml">
-            <tree string="Categories">
+            <tree>
                 <field name="name" />
                 <field name="parent_id" />
                 <field name="tag_ids" />

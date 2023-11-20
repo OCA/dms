@@ -101,7 +101,7 @@
         <field name="name">dms_tag.tree</field>
         <field name="model">dms.tag</field>
         <field name="arch" type="xml">
-            <tree string="Tags">
+            <tree>
                 <field name="name" />
                 <field name="category_id" />
                 <field name="color" widget="color_index" />
