@@ -305,7 +305,6 @@
         <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <tree
-                string="Files"
                 js_class="file_list"
                 decoration-warning="not active"
                 decoration-muted="(is_locked and not is_lock_editor)"
@@ -581,7 +580,6 @@
         <field name="model">dms.file</field>
         <field name="arch" type="xml">
             <tree
-                string="Files"
                 decoration-muted="(is_locked and not is_lock_editor)"
                 create="0"
                 delete="0"
