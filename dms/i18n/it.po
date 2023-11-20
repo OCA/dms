@@ -920,6 +920,11 @@ msgid "Done"
 msgstr "Completato"
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_tree
+msgid "Download"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
