@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-13 10:40+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-12-01 13:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -606,7 +606,7 @@ msgstr "Alcune cartelle non sono coerenti con i modelli dello storage"
 #: model:ir.model,name:dms_field.model_dms_storage
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__storage_id
 msgid "Storage"
-msgstr "Storage"
+msgstr "Deposito"
 
 #. module: dms_field
 #: code:addons/dms_field/models/dms_directory.py:0
