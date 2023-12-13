@@ -10,4 +10,4 @@ class DmsStorage(models.Model):
     save_type = fields.Selection(
         selection_add=[("storage", "Storage")], ondelete={"storage": "cascade"}
     )
-    storage_backend_id = fields.Many2one("storage.backend")
+    storage_backend_id = fields.Many2one("fs.storage")
