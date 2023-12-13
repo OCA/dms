@@ -119,3 +119,5 @@ class FileDatabaseTestCase(StorageDatabaseBaseCase):
         self.assertTrue(self.file.search_panel_select_range("directory_id"))
         self.assertTrue(self.file.search_panel_select_multi_range("directory_id"))
         self.assertTrue(self.file.search_panel_select_multi_range("tag_ids"))
+        res = self.file.search_panel_select_range("directory_id", enable_counters=True)
+        self.assertTrue(self.directory2.id == x["id"] for x in res["values"])
