@@ -295,22 +295,36 @@ class File(models.Model):
 
     @api.model
     def search_panel_select_range(self, field_name, **kwargs):
-        operator, directory_id = self._search_panel_directory(**kwargs)
-        if directory_id and field_name == "directory_id":
-            domain = [("parent_id", operator, directory_id)]
-            values = (
+        """This method is overwritten to make it 'similar' to v13.
+        The goal is that the directory searchpanel shows all directories
+        (even if some folders have no files)."""
+        if field_name == "directory_id":
+            domain = kwargs.get("search_domain", [])
+            comodel_records = (
                 self.env["dms.directory"]
                 .with_context(directory_short_name=True)
                 .search_read(domain, ["display_name", "parent_id"])
             )
-            return {
-                "parent_field": "parent_id",
-                "values": values if len(values) > 1 else [],
-            }
+            field_range = {}
+            enable_counters = kwargs.get("enable_counters")
+            for record in comodel_records:
+                record_id = record["id"]
+                parent = record["parent_id"]
+                record_values = {
+                    "id": record_id,
+                    "display_name": record["display_name"],
+                    "parent_id": parent[0] if parent else False,
+                }
+                if enable_counters:
+                    record_values["__count"] = 0
+                field_range[record_id] = record_values
+            if enable_counters:
+                res = super().search_panel_select_range(field_name, **kwargs)
+                for item in res["values"]:
+                    field_range[item["id"]]["__count"] = item["__count"]
+            return {"parent_field": "parent_id", "values": list(field_range.values())}
         context = {}
-        if field_name == "directory_id":
-            context["directory_short_name"] = True
-        elif field_name == "category_id":
+        if field_name == "category_id":
             context["category_short_name"] = True
         return super(File, self.with_context(**context)).search_panel_select_range(
             field_name, **kwargs
