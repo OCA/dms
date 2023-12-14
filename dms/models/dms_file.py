@@ -305,6 +305,7 @@ class File(models.Model):
                 .with_context(directory_short_name=True)
                 .search_read(domain, ["display_name", "parent_id"])
             )
+            all_record_ids = [rec["id"] for rec in comodel_records]
             field_range = {}
             enable_counters = kwargs.get("enable_counters")
             for record in comodel_records:
@@ -313,7 +314,11 @@ class File(models.Model):
                 record_values = {
                     "id": record_id,
                     "display_name": record["display_name"],
-                    "parent_id": parent[0] if parent else False,
+                    # If the parent directory is not in all the records we should not
+                    # set parent_id because the user does not have access to parent.
+                    "parent_id": (
+                        parent[0] if parent and parent[0] in all_record_ids else False
+                    ),
                 }
                 if enable_counters:
                     record_values["__count"] = 0
