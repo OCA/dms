@@ -7,10 +7,10 @@ import uuid
 from odoo.tests.common import Form
 from odoo.tools import human_size
 
-from odoo.addons.storage_backend.tests.common import CommonCase
+from odoo.addons.fs_storage.tests.common import TestFSStorageCase
 
 
-class TestDmsField(CommonCase):
+class TestDmsField(TestFSStorageCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
