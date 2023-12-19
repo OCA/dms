@@ -22,6 +22,7 @@ patch(SearchModel.prototype, "dms.SearchPanel", {
                     domain.push([category.fieldName, "=", category.activeValueId]);
                 }
                 if (domain.length === 0) {
+                    // / only correct for the main action!
                     domain.push([category.fieldName, "=", false]);
                 }
             }
