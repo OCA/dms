@@ -299,7 +299,7 @@ class File(models.Model):
         The goal is that the directory searchpanel shows all directories
         (even if some folders have no files)."""
         if field_name == "directory_id":
-            domain = kwargs.get("search_domain", [])
+            domain = [["is_hidden", "=", False]]
             comodel_records = (
                 self.env["dms.directory"]
                 .with_context(directory_short_name=True)
