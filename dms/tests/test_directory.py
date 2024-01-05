@@ -68,6 +68,38 @@ class DirectoryTestCase(StorageDatabaseBaseCase):
                     "parent_id": self.subdirectory.id,
                 }
             )
+        with self.assertRaises(UserError):
+            self.subdirectory.write(
+                {
+                    "is_root_directory": True,
+                    "storage_id": self.new_storage.id,
+                    "parent_id": False,
+                }
+            )
+        self.subdirectory.write(
+            {
+                "is_root_directory": True,
+                "storage_id": self.storage.id,
+                "parent_id": False,
+            }
+        )
+        new_directory = self.create_directory(storage=self.storage)
+        self.subdirectory.write(
+            {
+                "is_root_directory": False,
+                "storage_id": False,
+                "parent_id": new_directory.id,
+            }
+        )
+        with self.assertRaises(UserError):
+            self.directory.storage_id = self.new_storage.id
+            self.subdirectory.write(
+                {
+                    "is_root_directory": False,
+                    "storage_id": False,
+                    "parent_id": self.directory.id,
+                }
+            )
 
     @users("dms-manager", "dms-user")
     def test_unlink_root_directory(self):
