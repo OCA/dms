@@ -72,7 +72,6 @@
                         name="directory_id"
                         icon="fa-folder"
                         limit="0"
-                        operator="="
                         enable_counters="1"
                     />
                     <field
@@ -573,7 +572,6 @@
                         icon="fa-folder"
                         limit="0"
                         enable_counters="1"
-                        operator="="
                     />
                     <field
                         name="category_id"
