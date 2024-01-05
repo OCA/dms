@@ -1,5 +1,5 @@
 /** @odoo-module **/
-/* Copyright 2021-2022 Tecnativa - Víctor Martínez
+/* Copyright 2021-2024 Tecnativa - Víctor Martínez
  * License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). */
 
 import {SearchModel} from "@web/search/search_model";
@@ -17,13 +17,11 @@ patch(SearchModel.prototype, "dms.SearchPanel", {
                 continue;
             }
 
-            if (this.resModel === "dms.directory") {
-                if (category.activeValueId) {
-                    domain.push([category.fieldName, "=", category.activeValueId]);
-                }
-                if (domain.length === 0) {
-                    domain.push([category.fieldName, "=", false]);
-                }
+            if (category.activeValueId) {
+                domain.push([category.fieldName, "=", category.activeValueId]);
+            }
+            if (domain.length === 0 && this.resModel === "dms.directory") {
+                domain.push([category.fieldName, "=", false]);
             }
         }
         return domain;
