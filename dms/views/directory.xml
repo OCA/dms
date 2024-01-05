@@ -166,7 +166,6 @@
                         icon="fa-folder"
                         limit="0"
                         enable_counters="1"
-                        operator="="
                     />
                     <field
                         name="category_id"
