@@ -1771,6 +1771,11 @@ msgid "Root Directories"
 msgstr "ספרייה ראשית"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__root_directory_id
+msgid "Root Directory"
+msgstr ""
+
+#. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
 msgid "Sales"
 msgstr ""
