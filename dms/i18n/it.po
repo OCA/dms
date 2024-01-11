@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-27 16:36+0000\n"
+"PO-Revision-Date: 2024-01-11 10:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -283,8 +283,8 @@ msgid "A file with the same name already exists"
 msgstr "Esiste già un file con lo stesso nome"
 
 #. module: dms
-#. odoo-javascript
 #. odoo-python
+#. odoo-javascript
 #: code:addons/dms/models/dms_file.py:0
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
@@ -1841,7 +1841,7 @@ msgstr "Cartelle radice"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__root_directory_id
 msgid "Root Directory"
-msgstr ""
+msgstr "Cartella radice"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
