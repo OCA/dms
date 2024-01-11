@@ -234,8 +234,8 @@ msgid "A file with the same name already exists"
 msgstr ""
 
 #. module: dms
-#. odoo-javascript
 #. odoo-python
+#. odoo-javascript
 #: code:addons/dms/models/dms_file.py:0
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
