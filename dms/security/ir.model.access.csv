@@ -3,6 +3,7 @@ id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 access_dms_tag_user,dms_tag_user,model_dms_tag,group_dms_user,1,1,1,1
 access_dms_category_user,dms_category_user,model_dms_category,group_dms_user,1,1,1,1
 
+access_dms_storage_base_user,dms_storage_base_user,model_dms_storage,base.group_user,1,0,0,0
 access_dms_storage_portal,dms_storage_portal,model_dms_storage,base.group_portal,1,0,0,0
 access_dms_storage_user,dms_storage_user,model_dms_storage,group_dms_user,1,0,0,0
 access_dms_storage_manager,dms_storage_manager,model_dms_storage,group_dms_manager,1,1,1,1
