@@ -11,10 +11,11 @@
     "website": "https://github.com/OCA/dms",
     "depends": ["dms"],
     "data": [
-        "wizards/dms_add_directory_record.xml",
-        "views/dms_storage.xml",
         "views/dms_directory.xml",
+        "views/dms_field_template_views.xml",
+        "views/dms_storage.xml",
         "security/ir.model.access.csv",
+        "security/security.xml",
     ],
     "assets": {
         "web.assets_backend": [
