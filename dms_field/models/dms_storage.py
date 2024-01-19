@@ -1,4 +1,5 @@
 # Copyright 2020 Creu Blanca
+# Copyright 2024 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import _, api, fields, models
@@ -8,7 +9,11 @@ from odoo.exceptions import ValidationError
 class DmsStorage(models.Model):
     _inherit = "dms.storage"
 
-    field_default_group_id = fields.Many2one("dms.access.group")
+    field_template_ids = fields.One2many(
+        comodel_name="dms.field.template",
+        inverse_name="storage_id",
+        string="File templated ids",
+    )
 
     @api.model
     def _build_documents_storage(self, storage):
