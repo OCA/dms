@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="dms_classification_template_documents"
+        model="dms.classification.template"
+    >
+        <field name="name">Documents template</field>
+        <field name="filename_pattern">.txt$</field>
+        <field name="directory_pattern">Documents</field>
+    </record>
+</odoo>
