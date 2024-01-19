@@ -5,16 +5,17 @@
     "name": "DMS Field",
     "summary": """
         Create DMS View and allow to use them inside a record""",
-    "version": "15.0.1.0.2",
+    "version": "15.0.1.1.0",
     "license": "LGPL-3",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/dms",
     "depends": ["dms"],
     "data": [
-        "wizards/dms_add_directory_record.xml",
-        "views/dms_storage.xml",
         "views/dms_directory.xml",
+        "views/dms_field_template_views.xml",
+        "views/dms_storage.xml",
         "security/ir.model.access.csv",
+        "security/security.xml",
     ],
     "assets": {
         "web.assets_backend": [

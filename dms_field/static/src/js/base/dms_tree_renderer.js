@@ -431,31 +431,16 @@ odoo.define("dms.DmsTreeRenderer", function (require) {
             var self = this;
             var data = {};
             this.trigger_up("dms_empty_storages", {data: data});
-            var context = {
-                default_res_id: data.res_id,
-                default_res_model: data.model,
-                default_storage_ids: [],
-            };
-            _.each(data.empty_storages, function (storage) {
-                context.default_storage_ids.push(storage.id);
-            });
-            new dialogs.FormViewDialog(self, {
-                res_model: "dms.add.directory.record",
-                context: context,
-                disable_multiple_selection: true,
-                title: _t("Add new root directory"),
-                on_saved: function (record, changed) {
-                    if (changed) {
-                        self._rpc({
-                            model: "dms.add.directory.record",
-                            method: "create_directory",
-                            args: [[record.res_id]],
-                        }).then(function () {
-                            self.trigger_up("reload");
-                        });
-                    }
+            this._rpc({
+                context: {
+                    res_id: data.res_id,
+                    res_model: data.model,
                 },
-            }).open();
+                model: "dms.field.template",
+                method: "create_dms_directory",
+            }).then(function () {
+                self.trigger_up("reload");
+            });
         },
     });
 

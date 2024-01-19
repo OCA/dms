@@ -35,24 +35,6 @@ class DmsDirectory(models.Model):
                     _("Directory %s must be root in order to be related to a " "record")
                     % directory.display_name
                 )
-            if not directory.storage_id.model_ids:
-                raise ValidationError(
-                    _(
-                        "Storage %s should need to be assigned to a model in "
-                        "order to relate the directory to a record"
-                    )
-                    % directory.storage_id.display_name
-                )
-            if directory.res_model not in directory.storage_id.model_ids.mapped(
-                "model"
-            ):
-                raise ValidationError(
-                    _(
-                        "Storage %s should need to be assigned to "
-                        "a model related to the storage"
-                    )
-                    % directory.storage_id.display_name
-                )
             if self.search(
                 [
                     ("storage_id", "=", directory.storage_id.id),
