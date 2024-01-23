@@ -1,0 +1,2 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_dms_classification_template_detail_manager,dms_classification_template_detail_manager,model_dms_classification_template_detail,dms.group_dms_manager,1,1,1,1
