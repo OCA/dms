@@ -1887,7 +1887,9 @@ msgid "Single Files"
 msgstr "File singoli"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_directory__human_size
 #: model:ir.model.fields,field_description:dms.field_dms_directory__size
+#: model:ir.model.fields,field_description:dms.field_dms_file__human_size
 #: model:ir.model.fields,field_description:dms.field_dms_file__size
 #: model:ir.model.fields,field_description:dms.field_res_config_settings__documents_binary_max_size
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
