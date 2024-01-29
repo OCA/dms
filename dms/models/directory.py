@@ -12,7 +12,7 @@ from collections import defaultdict
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
 from odoo.osv.expression import AND, OR
-from odoo.tools import consteq
+from odoo.tools import consteq, human_size
 
 from odoo.addons.http_routing.models.ir_http import slugify
 
@@ -186,6 +186,7 @@ class DmsDirectory(models.Model):
     )
 
     size = fields.Float(compute="_compute_size")
+    human_size = fields.Char(compute="_compute_human_size", string="Size")
 
     inherit_group_ids = fields.Boolean(string="Inherit Groups", default=True)
 
@@ -479,6 +480,11 @@ class DmsDirectory(models.Model):
                 fields=["size"],
             )
             record.size = sum(rec.get("size", 0) for rec in recs)
+
+    @api.depends("size")
+    def _compute_human_size(self):
+        for item in self:
+            item.human_size = human_size(item.size) if item.size else False
 
     @api.depends(
         "group_ids",

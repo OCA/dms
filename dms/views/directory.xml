@@ -479,7 +479,7 @@
                     </group>
                     <group name="data">
                         <group>
-                            <field name="size" widget="integer" />
+                            <field name="human_size" />
                             <field name="count_elements" string="Elements" />
                         </group>
                         <group>
@@ -533,7 +533,7 @@
                                         string="Directories"
                                     />
                                     <field name="count_total_files" string="Files" />
-                                    <field name="size" widget="integer" />
+                                    <field name="human_size" />
                                 </tree>
                             </field>
                         </page>
@@ -546,7 +546,7 @@
                                 <tree limit="10">
                                     <field name="name" />
                                     <field name="mimetype" />
-                                     <field name="size" widget="integer" />
+                                     <field name="human_size" />
                                     <field name="write_date" readonly="1" />
                                 </tree>
                             </field>
