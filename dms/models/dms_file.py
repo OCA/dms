@@ -104,6 +104,9 @@ class File(models.Model):
     )
 
     size = fields.Float(readonly=True)
+    human_size = fields.Char(
+        readonly=True, string="Size", compute="_compute_human_size", store=True
+    )
 
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, index="btree")
 
@@ -430,6 +433,11 @@ class File(models.Model):
         for record in self:
             binary = base64.b64decode(record.content or "")
             record.mimetype = guess_mimetype(binary)
+
+    @api.depends("size")
+    def _compute_human_size(self):
+        for item in self:
+            item.human_size = human_size(item.size)
 
     @api.depends("content_binary", "content_file", "attachment_id")
     def _compute_content(self):
