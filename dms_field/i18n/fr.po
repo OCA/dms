@@ -174,6 +174,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_dms_access_group__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_category__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_dms_classification_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_directory__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_file__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_mixins_thumbnail__dms_directory_ids
@@ -323,6 +324,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification_detail__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
 msgstr ""
