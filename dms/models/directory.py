@@ -6,11 +6,12 @@
 import ast
 import base64
 import logging
+from ast import literal_eval
 from collections import defaultdict
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
-from odoo.osv.expression import OR
+from odoo.osv.expression import AND, OR
 from odoo.tools import consteq
 
 from odoo.addons.http_routing.models.ir_http import slugify
@@ -751,3 +752,39 @@ class DmsDirectory(models.Model):
         return super()._search_panel_domain_image(
             field_name=field_name, domain=domain, set_count=set_count, limit=limit
         )
+
+    def action_dms_directories_all_directory(self):
+        self.ensure_one()
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "dms.action_dms_directory"
+        )
+        domain = AND(
+            [
+                literal_eval(action["domain"].strip()),
+                [("parent_id", "child_of", self.id)],
+            ]
+        )
+        action["domain"] = domain
+        action["context"] = dict(
+            self.env.context,
+            default_parent_id=self.id,
+            searchpanel_default_parent_id=self.id,
+        )
+        return action
+
+    def action_dms_files_all_directory(self):
+        self.ensure_one()
+        action = self.env["ir.actions.act_window"]._for_xml_id("dms.action_dms_file")
+        domain = AND(
+            [
+                literal_eval(action["domain"].strip()),
+                [("directory_id", "child_of", self.id)],
+            ]
+        )
+        action["domain"] = domain
+        action["context"] = dict(
+            self.env.context,
+            default_directory_id=self.id,
+            searchpanel_default_directory_id=self.id,
+        )
+        return action
