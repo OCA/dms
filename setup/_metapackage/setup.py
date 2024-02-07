@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo-addon-dms>=15.0dev,<15.1dev',
         'odoo-addon-dms_attachment_link>=15.0dev,<15.1dev',
+        'odoo-addon-dms_auto_classification>=15.0dev,<15.1dev',
         'odoo-addon-dms_field>=15.0dev,<15.1dev',
     ],
     classifiers=[
