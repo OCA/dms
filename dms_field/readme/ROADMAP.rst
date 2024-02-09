@@ -1,0 +1,1 @@
+- Add drag & drop compatibility to the dms_tree mode
