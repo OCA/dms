@@ -168,6 +168,7 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_decimal_precision__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_access_group__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_category__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_dms_classification_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_directory__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_file__dms_directory_ids
@@ -177,6 +178,18 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_dms_tag__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_fetchmail_server__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_format_address_mixin__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_department__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_departure_reason__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_departure_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_employee__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_employee_base__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_employee_category__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_employee_public__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_job__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_plan__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_plan_activity_type__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_plan_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_hr_work_location__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_image_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_url__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window__dms_directory_ids
@@ -315,9 +328,17 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings_volumes__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_reset_view_arch_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_resource_calendar__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_resource_calendar_attendance__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_resource_calendar_leaves__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_resource_mixin__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_resource_resource__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_resource_test__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification_detail__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
 msgstr "Directorios DMS"
