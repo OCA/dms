@@ -4,19 +4,42 @@
 from base64 import b64encode
 from os import path
 
-from odoo.tests import Form, common
+from odoo.tests import Form, common, new_test_user
+from odoo.tests.common import users
 
 
 class TestDmsAutoClassification(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                mail_create_nolog=True,
+                mail_create_nosubscribe=True,
+                mail_notrack=True,
+                no_reset_password=True,
+                tracking_disable=True,
+            )
+        )
         cls.template = cls.env.ref(
             "dms_auto_classification.dms_classification_template_documents"
         )
         cls.directory = cls.env.ref("dms.directory_01_demo")
         cls.wizard = cls._create_wizard_dms_classification(cls, cls.template)
         cls.extra_wizard = cls._create_wizard_dms_classification(cls, cls.template)
+        cls.user = new_test_user(
+            cls.env, login="test_dms_user", groups="dms.group_dms_user"
+        )
+        access_group = cls.env["dms.access.group"].create(
+            {
+                "name": "Test access group",
+                "perm_create": True,
+                "perm_write": True,
+                "explicit_user_ids": [(4, cls.user.id)],
+            }
+        )
+        cls.directory.group_ids = [(4, access_group.id)]
 
     def _data_file(self, filename, encoding=None):
         mode = "rt" if encoding else "rb"
@@ -32,7 +55,9 @@ class TestDmsAutoClassification(common.TransactionCase):
         wizard_form.data_file = self._data_file(self, "data/test.zip")
         return wizard_form.save()
 
+    @users("test_dms_user")
     def test_wizard_dms_clasification_process(self):
+        self.wizard = self.wizard.with_user(self.env.user)
         self.assertEqual(self.wizard.state, "draft")
         # Wizard - Analyze process
         self.wizard.action_analyze()
@@ -65,6 +90,7 @@ class TestDmsAutoClassification(common.TransactionCase):
         # Extra wizard
         self.assertEqual(self.extra_wizard.state, "draft")
         # New Wizard - Analyze process
+        self.extra_wizard = self.extra_wizard.with_user(self.env.user)
         self.extra_wizard.action_analyze()
         self.assertEqual(self.extra_wizard.state, "analyze")
         self.assertEqual(len(self.extra_wizard.detail_ids), 2)
@@ -96,10 +122,12 @@ class TestDmsAutoClassification(common.TransactionCase):
         self.assertEqual(self.wizard.state, "analyze")
         self.assertEqual(len(self.wizard.detail_ids), 0)
 
+    @users("test_dms_user")
     def test_wizard_dms_clasification_process_directory_pattern(self):
         self.template.directory_pattern = "Documents2"
         self.assertEqual(self.wizard.state, "draft")
         # Analyze process
+        self.wizard = self.wizard.with_user(self.env.user)
         self.wizard.action_analyze()
         self.assertEqual(self.wizard.state, "analyze")
         self.assertEqual(len(self.wizard.detail_ids), 2)
