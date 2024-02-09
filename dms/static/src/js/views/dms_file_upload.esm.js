@@ -111,10 +111,16 @@ export const FileUpload = {
             return;
         }
 
-        if (this.props.domain.length === 1) {
-            ctx.default_directory_id = this.props.domain[0][2];
-        } else {
-            ctx.default_directory_id = this.props.domain[2][2];
+        // Search the correct directory_id value according to the domain
+        ctx.default_directory_id = false;
+        if (this.props.domain) {
+            for (const domain_item of this.props.domain) {
+                if (domain_item.length === 3) {
+                    if (domain_item[0] === "directory_id" && domain_item[1] === "=") {
+                        ctx.default_directory_id = domain_item[2];
+                    }
+                }
+            }
         }
 
         if (ctx.default_directory_id === false) {
