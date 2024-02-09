@@ -60,6 +60,7 @@
         <field name="res_model">wizard.dms.classification</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
+        <field name="groups_id" eval="[(4, ref('dms.group_dms_user'))]" />
     </record>
     <menuitem
         id="menu_wizard_dms_classification"
@@ -67,5 +68,6 @@
         parent="dms.main_menu_dms"
         sequence="40"
         action="action_wizard_dms_classification"
+        groups="dms.group_dms_user"
     />
 </odoo>
