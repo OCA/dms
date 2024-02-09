@@ -35,6 +35,7 @@
         <field name="name">Classification Templates</field>
         <field name="res_model">dms.classification.template</field>
         <field name="view_mode">tree,form</field>
+        <field name="groups_id" eval="[(4, ref('dms.group_dms_manager'))]" />
     </record>
     <menuitem
         id="menu_dms_classification_template"
@@ -42,5 +43,6 @@
         parent="dms.cat_menu_dms_config_organizing"
         sequence="6"
         action="action_dms_classification_template"
+        groups="dms.group_dms_manager"
     />
 </odoo>
