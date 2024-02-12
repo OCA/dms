@@ -54,7 +54,7 @@ odoo.define("dms.DmsTreeRenderer", function (require) {
                 core: {
                     widget: this,
                     animation: this.params.animation || 0,
-                    multiple: !this.params.disable_multiple,
+                    multiple: false,
                     check_callback:
                         this.params.check_callback || this._checkCallback.bind(this),
                     themes: this.params.themes || {
