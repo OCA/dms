@@ -300,6 +300,18 @@ class File(models.Model):
         (even if some folders have no files)."""
         if field_name == "directory_id":
             domain = [["is_hidden", "=", False]]
+            # If we pass by context something, we filter more about it we filter
+            # the directories of the files or we show all of them
+            if self.env.context.get("active_model", False) == "dms.directory":
+                active_id = self.env.context.get("active_id")
+                # para saber que directorios, buscamos las posibles carpetas que nos interesan
+                files = self.env["dms.file"].search(
+                    [["directory_id", "child_of", active_id]]
+                )
+                all_directories = files.mapped("directory_id")
+                all_directories += files.mapped("directory_id.parent_id")
+                domain.append(["id", "in", all_directories.ids])
+            # Get all possible directories
             comodel_records = (
                 self.env["dms.directory"]
                 .with_context(directory_short_name=True)

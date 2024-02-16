@@ -230,8 +230,8 @@
                                             <h6 class="dropdown-header">Views
                                             </h6>
                                             <a
-                                                type="action"
-                                                name="%(dms.action_dms_directories_all_directory)d"
+                                                type="object"
+                                                name="action_dms_directories_all_directory"
                                                 role="menuitem"
                                                 class="dropdown-item"
                                             >
@@ -239,8 +239,8 @@
                                                 Directories
                                             </a>
                                             <a
-                                                type="action"
-                                                name="%(dms.action_dms_files_all_directory)d"
+                                                type="object"
+                                                name="action_dms_files_all_directory"
                                                 role="menuitem"
                                                 class="dropdown-item"
                                             >
@@ -299,8 +299,8 @@
                                 <div class="mk_directory_kanban_actions">
                                     <div class="mk_directory_kanban_actions_wrapper">
                                         <a
-                                            type="action"
-                                            name="%(dms.action_dms_directories_directory)d"
+                                            type="object"
+                                            name="action_dms_directories_all_directory"
                                             role="button"
                                             class="btn btn-sm btn-outline-primary mk_directory_kanban_directories"
                                             t-att-title="record.count_directories_title.raw_value"
@@ -308,8 +308,8 @@
                                             <i class="fa fa-lg fa-folder" />
                                         </a>
                                         <a
-                                            type="action"
-                                            name="%(dms.action_dms_files_directory)d"
+                                            type="object"
+                                            name="action_dms_files_all_directory"
                                             role="button"
                                             class="btn btn-sm btn-outline-primary mk_directory_kanban_files"
                                             t-att-title="record.count_files_title.raw_value"
@@ -402,8 +402,8 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
-                            type="action"
-                            name="%(dms.action_dms_directories_all_directory)d"
+                            type="object"
+                            name="action_dms_directories_all_directory"
                             class="oe_stat_button"
                             icon="fa-folder-open-o"
                         >
@@ -414,8 +414,8 @@
                             />
                         </button>
                         <button
-                            type="action"
-                            name="%(dms.action_dms_files_all_directory)d"
+                            type="object"
+                            name="action_dms_files_all_directory"
                             class="oe_stat_button"
                             icon="fa-file-text-o"
                         >
