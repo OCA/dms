@@ -5,17 +5,19 @@
 
 from odoo.exceptions import UserError
 from odoo.tests.common import users
+from odoo.tools import mute_logger
 
 from .common import StorageDatabaseBaseCase
 
 
 class FileDatabaseTestCase(StorageDatabaseBaseCase):
-    def setUp(self):
-        super().setUp()
-        self.file_demo_01 = self.env.ref("dms.file_01_demo")
-        self.directory2 = self.create_directory(storage=self.storage)
-        self.new_storage2 = self.create_storage(save_type="database")
-        self.directory3 = self.create_directory(storage=self.new_storage2)
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.file_demo_01 = cls.env.ref("dms.file_01_demo")
+        cls.directory2 = cls.create_directory(storage=cls.storage)
+        cls.new_storage2 = cls.create_storage(save_type="database")
+        cls.directory3 = cls.create_directory(storage=cls.new_storage2)
 
     @users("dms-manager", "dms-user")
     def test_create_file(self):
@@ -66,6 +68,7 @@ class FileDatabaseTestCase(StorageDatabaseBaseCase):
             )
 
     @users("dms-manager", "dms-user")
+    @mute_logger("odoo.models.unlink")
     def test_unlink_file(self):
         file = self.create_file(directory=self.directory)
         file.unlink()

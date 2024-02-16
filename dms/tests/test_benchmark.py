@@ -20,7 +20,7 @@ _logger = logging.getLogger(__name__)
 class BenchmarkTestCase(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(BenchmarkTestCase, cls).setUpClass()
+        super().setUpClass()
         cls._clean_existing_records()
         cls._setup_benchmark_data()
 

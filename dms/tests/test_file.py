@@ -17,22 +17,21 @@ except ImportError:
 
 
 class FileFilestoreTestCase(StorageFileBaseCase):
-    def setUp(self):
-        super().setUp()
-        self.user_a = new_test_user(
-            self.env, login="user-a", groups="dms.group_dms_user"
-        )
-        self.group_a = self.access_group_model.create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.user_a = new_test_user(cls.env, login="user-a", groups="dms.group_dms_user")
+        cls.group_a = cls.access_group_model.create(
             {
                 "name": "Group A",
                 "perm_create": True,
-                "explicit_user_ids": [(6, 0, [self.user_a.id])],
+                "explicit_user_ids": [(6, 0, [cls.user_a.id])],
             }
         )
-        self.directory_group_a = self.create_directory(storage=self.storage)
-        self.directory_group_a.group_ids = [(4, self.group_a.id)]
-        self.sub_directory_x = self.create_directory(directory=self.directory_group_a)
-        self.file2 = self.create_file(directory=self.sub_directory_x)
+        cls.directory_group_a = cls.create_directory(storage=cls.storage)
+        cls.directory_group_a.group_ids = [(4, cls.group_a.id)]
+        cls.sub_directory_x = cls.create_directory(directory=cls.directory_group_a)
+        cls.file2 = cls.create_file(directory=cls.sub_directory_x)
 
     @users("user-a")
     def test_file_access(self):
