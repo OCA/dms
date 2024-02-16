@@ -4,6 +4,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo.tests.common import users
+from odoo.tools import mute_logger
 
 from .common import StorageDatabaseBaseCase
 
@@ -22,6 +23,7 @@ class StorageDatabaseTestCase(StorageDatabaseBaseCase):
         self.assertTrue(self.storage.count_storage_files)
 
     @users("dms-manager")
+    @mute_logger("odoo.models.unlink")
     def test_file_migrate(self):
         root_directory = self.storage.root_directory_ids.filtered(
             lambda x: x.is_root_directory

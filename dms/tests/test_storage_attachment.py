@@ -3,12 +3,14 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo.tests.common import users
+from odoo.tools import mute_logger
 
 from .common import StorageAttachmentBaseCase
 
 
 class StorageAttachmentTestCase(StorageAttachmentBaseCase):
     @users("dms-manager")
+    @mute_logger("odoo.models.unlink")
     def test_storage_attachment(self):
         self._create_attachment("demo.txt")
         self.assertTrue(
