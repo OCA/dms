@@ -9,14 +9,15 @@ from .common import StorageAttachmentBaseCase
 
 @odoo.tests.tagged("post_install", "-at_install")
 class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
-    def setUp(self):
-        super().setUp()
-        self.partner = self.env.ref("base.partner_demo_portal")
-        self.portal_user = self.partner.user_ids
-        self.portal_user.login = "portal"
-        self._create_attachment("test.txt")
-        self.directory_partner = self._get_partner_directory()
-        self.file_partner = self.directory_partner.file_ids[0]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.partner = cls.env.ref("base.partner_demo_portal")
+        cls.portal_user = cls.partner.user_ids
+        cls.portal_user.login = "portal"
+        cls._create_attachment("test.txt")
+        cls.directory_partner = cls._get_partner_directory()
+        cls.file_partner = cls.directory_partner.file_ids[0]
 
     def test_access_portal(self):
         self.authenticate("portal", "portal")

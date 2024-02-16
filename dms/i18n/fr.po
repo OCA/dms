@@ -286,8 +286,8 @@ msgid "A file with the same name already exists"
 msgstr ""
 
 #. module: dms
-#. odoo-python
 #. odoo-javascript
+#. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
@@ -984,13 +984,6 @@ msgstr "Alias de messagerie"
 #: model:ir.model,name:dms.model_mail_thread
 msgid "Email Thread"
 msgstr "Fil d'e-mail"
-
-#. module: dms
-#. odoo-python
-#: code:addons/dms/tests/common.py:0
-#, python-format
-msgid "Error has not been raised"
-msgstr "L'erreur n'a pas été signalée"
 
 #. module: dms
 #. odoo-python
@@ -2284,6 +2277,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+
+#, python-format
+#~ msgid "Error has not been raised"
+#~ msgstr "L'erreur n'a pas été signalée"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Nombre de messages nécessitant une action"

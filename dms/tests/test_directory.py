@@ -14,12 +14,13 @@ from .common import StorageDatabaseBaseCase
 _path = os.path.dirname(os.path.dirname(__file__))
 
 
-class DirectoryTestCase(StorageDatabaseBaseCase):
-    def setUp(self):
-        super().setUp()
-        self.subdirectory = self.create_directory(directory=self.directory)
-        self.file.directory_id = self.subdirectory
-        self.new_storage = self.create_storage(save_type="database")
+class DirectoryTestCaseBase(StorageDatabaseBaseCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.subdirectory = cls.create_directory(directory=cls.directory)
+        cls.file.directory_id = cls.subdirectory
+        cls.new_storage = cls.create_storage(save_type="database")
 
     @users("dms-manager", "dms-user")
     def test_create_directory(self):
@@ -102,6 +103,7 @@ class DirectoryTestCase(StorageDatabaseBaseCase):
             )
 
     @users("dms-manager", "dms-user")
+    @mute_logger("odoo.models.unlink")
     def test_unlink_root_directory(self):
         root_directory = self.create_directory(storage=self.storage)
         sub_directory = self.create_directory(directory=root_directory)
@@ -111,6 +113,7 @@ class DirectoryTestCase(StorageDatabaseBaseCase):
         self.assertFalse(sub_files.exists())
 
     @users("dms-manager", "dms-user")
+    @mute_logger("odoo.models.unlink")
     def test_unlink_directory(self):
         root_directory = self.create_directory(storage=self.storage)
         sub_directory = self.create_directory(directory=root_directory)
@@ -186,7 +189,7 @@ class DirectoryTestCase(StorageDatabaseBaseCase):
         self.assertTrue(self.directory_model.search_panel_select_multi_range("tag_ids"))
 
 
-class DirectoryMailTestCase(DirectoryTestCase):
+class DirectoryMailTestCase(StorageDatabaseBaseCase):
     def setUp(self):
         super().setUp()
         self.params = self.env["ir.config_parameter"].sudo()

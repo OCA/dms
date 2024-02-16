@@ -234,8 +234,8 @@ msgid "A file with the same name already exists"
 msgstr ""
 
 #. module: dms
-#. odoo-python
 #. odoo-javascript
+#. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
@@ -927,13 +927,6 @@ msgstr ""
 #. module: dms
 #: model:ir.model,name:dms.model_mail_thread
 msgid "Email Thread"
-msgstr ""
-
-#. module: dms
-#. odoo-python
-#: code:addons/dms/tests/common.py:0
-#, python-format
-msgid "Error has not been raised"
 msgstr ""
 
 #. module: dms
