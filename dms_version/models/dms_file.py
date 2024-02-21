@@ -177,18 +177,17 @@ class DmsFile(models.Model):
         ]
         return res
 
-    @api.model
-    def create(self, values):
-        res = super().create(values)
-        if "origin_id" not in values:
-            res.origin_id = res
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super().create(vals_list)
+        for rec in res:
+            if not rec.origin_id:
+                rec.origin_id = rec
         return res
 
     def write(self, vals):
-        if (
-            not self.env.context.get("restore_old_revision", False)
-            and "active" in vals
-            and vals["active"]
+        if not self.env.context.get("restore_old_revision", False) and vals.get(
+            "active"
         ):
             raise exceptions.UserError(
                 _("Please use the restore button to activate this revision.")
