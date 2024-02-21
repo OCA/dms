@@ -2,7 +2,8 @@
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class DmsDirectory(models.Model):
@@ -12,6 +13,19 @@ class DmsDirectory(models.Model):
         default=False,
         help="Indicates if files have an active version control.",
     )
+
+    @api.constrains("has_versioning")
+    def _check_can_be_versioned(self):
+        for directory in self:
+            if (
+                directory.has_versioning
+                and directory.storage_id_save_type == "attachment"
+            ):
+                msg = _(
+                    "Attachment storages cannot be versioned. "
+                    "Please check the directory storage."
+                )
+                raise ValidationError(msg)
 
     @api.onchange("storage_id")
     def _onchange_storage_id(self):

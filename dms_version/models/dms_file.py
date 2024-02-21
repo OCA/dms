@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, exceptions, fields, models
+from odoo.exceptions import ValidationError
 
 
 class DmsFile(models.Model):
@@ -70,6 +71,19 @@ class DmsFile(models.Model):
             "Reference and revision must be unique.",
         )
     ]
+
+    @api.constrains("has_versioning")
+    def _check_can_be_versioned(self):
+        for file in self:
+            if (
+                file.has_versioning
+                and file.directory_id.storage_id_save_type == "attachment"
+            ):
+                msg = _(
+                    "Attachment storages cannot be versioned. "
+                    "Please check the directory storage."
+                )
+                raise ValidationError(msg)
 
     @api.constrains("unrevisioned_name", "revision_number", "directory_id")
     def check_unique_name_revision_number(self):
