@@ -19,14 +19,6 @@
         <field name="model">dms.storage</field>
         <field name="inherit_id" ref="dms.view_dms_storage_form" />
         <field name="arch" type="xml">
-            <xpath expr="//header" position="inside">
-                <button
-                    name="action_delete_file_versions"
-                    type="object"
-                    string="Delete Versions"
-                    attrs="{'invisible':[('has_versioning', '=', False)]}"
-                />
-            </xpath>
             <xpath expr="//field[@name='is_hidden']" position="after">
                 <field name="has_versioning" />
             </xpath>

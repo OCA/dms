@@ -12,6 +12,3 @@ class DmsStorage(models.Model):
         default=False,
         help="Indicates if files have an active version control.",
     )
-
-    def action_delete_file_versions(self):
-        self.mapped("storage_file_ids.old_revision_ids").unlink()
