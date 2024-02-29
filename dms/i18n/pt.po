@@ -21,11 +21,14 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -215,11 +218,12 @@ msgstr "<span class=\"o_form_label\">Tamanho do Arquivo</span>"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ </span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 msgstr ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ "
-"</span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
@@ -279,8 +283,8 @@ msgid "A file with the same name already exists"
 msgstr "Já existe um arquivo com o mesmo nome"
 
 #. module: dms
-#. odoo-javascript
 #. odoo-python
+#. odoo-javascript
 #: code:addons/dms/models/dms_file.py:0
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
@@ -1146,8 +1150,8 @@ msgstr "ID"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
 "ID do registo ascendente que armazena o pseudónimo (Ex.: projeto que "
 "armazena o pseudónimo de criação de tarefas)"
@@ -1252,9 +1256,9 @@ msgstr "Imagem 512"
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
-"Indicate if directories and files access work only with related model access"
-" (for example, if some directories are related with any sale, only users "
-"with read access to these sale can acess)"
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can acess)"
 msgstr ""
 "Indique se o acesso a diretorias e arquivos funciona apenas com o acesso do "
 "modelo relacionado (por exemplo, se algumas diretorias estiverem "
@@ -1264,8 +1268,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid ""
-"Indicate if directories and files auto-create in mail composition process "
-"too"
+"Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 "Indique se as diretorias e arquivos também são criados automaticamente no "
 "processo de composição de e-mail"
@@ -1282,7 +1285,8 @@ msgstr "Indica se as diretorias e arquivos estão ocultos por predefinição."
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 "Indica se a diretoria é um diretoria raiz.\n"
@@ -1431,7 +1435,6 @@ msgstr "Registro ID de Anexos vinculados"
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/xml/views.xml:0
-#: code:addons/dms/static/src/xml/views.xml:0
 #, python-format
 msgid "Loading"
 msgstr "Carregando"
@@ -1495,7 +1498,8 @@ msgstr "Migrar"
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
-msgstr "Migrar arquivo %(index)s de %(record_count)s [ %(dms_file_migration)s ]"
+msgstr ""
+"Migrar arquivo %(index)s de %(record_count)s [ %(dms_file_migration)s ]"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
@@ -1547,9 +1551,6 @@ msgstr "Meus Arquivos"
 
 #. module: dms
 #. odoo-python
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
-#: code:addons/dms/controllers/portal.py:0
 #: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__name
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
@@ -1720,8 +1721,8 @@ msgstr "O grupo ascendente '%(parent)s' é descendente de '%(current)s'."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
 "Modelo ascendente que armazena o pseudónimo. O modelo que armazena a "
@@ -1749,7 +1750,8 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 "Política para enviar uma mensagem sobre o documento usando o MailGateway.\n"
 "- todos: Qualquer um pode escrever\n"
@@ -2061,9 +2063,9 @@ msgstr "O tamanho máximo de upload é %s MB)."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 "O modelo (Odoo Document Kind) ao qual este pseudónimo corresponde. Qualquer "
 "e-mail de entrada que não responda a um registo existente criará um novo "
