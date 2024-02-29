@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-29 20:34+0000\n"
+"PO-Revision-Date: 2024-03-01 00:00+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -42,105 +42,105 @@ msgstr "La acción no está permitida"
 #: model:ir.ui.menu,name:dms_action.dms_action_menu
 #: model_terms:ir.ui.view,arch_db:dms_action.dms_directory_form_view
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__active
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: dms_action
 #: model:ir.model,name:dms_action.model_dms_action
 msgid "DMS Action"
-msgstr ""
+msgstr "Acción DMS"
 
 #. module: dms_action
 #: model:ir.model,name:dms_action.model_dms_directory
 msgid "Directory"
-msgstr ""
+msgstr "Directorio"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__display_name
 #: model:ir.model.fields,field_description:dms_action.field_dms_directory__display_name
 #: model:ir.model.fields,field_description:dms_action.field_dms_file__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_directory__dms_action_ids
 msgid "Dms Action"
-msgstr ""
+msgstr "Acción Dms"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__dms_directory_ids
 msgid "Dms Directory"
-msgstr ""
+msgstr "Directorio Dms"
 
 #. module: dms_action
 #: model:ir.model,name:dms_action.model_dms_file
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #. module: dms_action
 #: model:ir.actions.server,name:dms_action.ir_actions_server_demo
 msgid "File DEMO action"
-msgstr ""
+msgstr "Archivo de la Acción DEMO"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__id
 #: model:ir.model.fields,field_description:dms_action.field_dms_directory__id
 #: model:ir.model.fields,field_description:dms_action.field_dms_file__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__icon
 msgid "Icon"
-msgstr ""
+msgstr "Icono"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__kind
 msgid "Kind"
-msgstr ""
+msgstr "Amable"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action____last_update
 #: model:ir.model.fields,field_description:dms_action.field_dms_directory____last_update
 #: model:ir.model.fields,field_description:dms_action.field_dms_file____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__name
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: dms_action
 #: model:ir.model.fields.selection,name:dms_action.selection__dms_action__kind__server_action
 msgid "Server Action"
-msgstr ""
+msgstr "Acción de Servidor"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_file__with_actions
 msgid "With Actions"
-msgstr ""
+msgstr "Con Acciones"
