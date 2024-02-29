@@ -6,34 +6,36 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-02-29 20:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: dms_action
 #: model_terms:ir.ui.view,arch_db:dms_action.dms_file_form_view
 msgid "<span>Some actions can be executed: </span>"
-msgstr ""
+msgstr "<span>Se pueden ejecutar algunas acciones: </span>"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__action_id
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_file__action_button
 msgid "Action Button"
-msgstr ""
+msgstr "Botón de acción"
 
 #. module: dms_action
 #: code:addons/dms_action/models/dms_file.py:0
 #, python-format
 msgid "Action is not allowed"
-msgstr ""
+msgstr "La acción no está permitida"
 
 #. module: dms_action
 #: model:ir.actions.act_window,name:dms_action.dms_action_act_window
