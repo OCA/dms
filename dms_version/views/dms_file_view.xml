@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2017-2020 MuK IT GmbH
+    Copyright 2021 Tecnativa - Víctor Martínez
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+  -->
+<odoo>
+    <record id="action_dms_revisions_file" model="ir.actions.act_window">
+        <field name="name">Revisions</field>
+        <field name="res_model">dms.file</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="search_dms_file" model="ir.ui.view">
+        <field name="name">dms_file.search</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.search_dms_file" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="current_revision_id" invisible="1" />
+            </field>
+            <filter name="filter_active" position="after">
+                <separator />
+                <filter
+                    name="modified"
+                    string="Modified"
+                    domain="[('parent_id', '!=', False)]"
+                />
+                <filter
+                    name="not_modified"
+                    string="Not Modified"
+                    domain="[('parent_id', '=', False)]"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="view_dms_file_tree" model="ir.ui.view">
+        <field name="name">dms_file.tree</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="origin_id" />
+                <field name="parent_id" />
+                <field name="current_revision_id" />
+                <field name="revision_number" />
+                <field name="unrevisioned_name" />
+            </field>
+            <field name="tag_ids" position="after">
+                <field name="all_revision_count" invisible="1" />
+                <field name="has_versioning" invisible="1" />
+                <button
+                    name="%(action_restore_old_revision)d"
+                    type="action"
+                    string="Restore"
+                    attrs="{'invisible': ['|', ('has_versioning', '=', False), ('active', '=', True)]}"
+                />
+            </field>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-warning">parent_id != False</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_file_kanban" model="ir.ui.view">
+        <field name="name">dms.kanban</field>
+        <field name="model">dms.file</field>
+        <field name="priority">100</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="parent_id" />
+            </field>
+            <xpath expr="//templates" position="before">
+                <field name="all_revision_count" />
+            </xpath>
+            <xpath expr="//a[@type='delete']" position="replace">
+                <a
+                    t-if="record.all_revision_count.raw_value > 0"
+                    role="menuitem"
+                    class="dropdown-item"
+                    type="object"
+                    name="action_view_revision"
+                >
+                    <i class="fa fa-paperclip" /> Revisions
+                </a>
+            </xpath>
+            <xpath
+                expr="//div[hasclass('o_kanban_record_bottom')]//field[@name='write_date']"
+                position="after"
+            >
+                <t t-if="record.parent_id.raw_value">
+                    <i
+                        class="fa fa-exclamation-circle"
+                        aria-label="modified"
+                        role="img"
+                        title="Modified"
+                    />
+                </t>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_file_form" model="ir.ui.view">
+        <field name="name">dms.form</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form" />
+        <field name="arch" type="xml">
+            <field name="directory_id" position="before">
+                <field name="can_edit_has_versioning" invisible="1" />
+                <field
+                    name="has_versioning"
+                    attrs="{'readonly': [('can_edit_has_versioning', '=', False)]}"
+                />
+            </field>
+            <xpath expr="//header" postion='inside'>
+                <field name="id" invisible="1" />
+                <field name="has_current_revision" invisible="1" />
+                <button
+                    name="%(action_restore_old_revision)d"
+                    type="action"
+                    string="Restore"
+                    attrs="{'invisible': ['|', ('has_versioning', '=', False), ('active', '=', True)]}"
+                />
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_revision"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-paperclip"
+                    attrs="{'invisible': ['|', ('has_versioning', '=', False), ('all_revision_count', '=', 0)]}"
+                >
+                    <field
+                        name="all_revision_count"
+                        widget="statinfo"
+                        string="Revisions"
+                    />
+                </button>
+            </xpath>
+            <page name="page_access" position="after">
+                <page
+                    string="Revisions"
+                    name="revision"
+                    attrs="{'invisible': [('has_versioning', '=', False)]}"
+                >
+                    <group>
+                        <field name="current_revision_id" />
+                        <field name="has_old_revisions" invisible="1" />
+                    </group>
+                    <group>
+                        <field name="origin_id" readonly="1" />
+                        <field name="parent_id" readonly="1" />
+                        <field name="revision_number" readonly="1" />
+                    </group>
+                </page>
+            </page>
+            <xpath expr="//field[@name='content']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('active', '=', False)]}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

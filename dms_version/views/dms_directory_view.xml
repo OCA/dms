@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2017-2020 MuK IT GmbH
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+  -->
+<odoo>
+    <record id="view_dms_directory_tree" model="ir.ui.view">
+        <field name="name">dms_directory.form</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='storage_id']" position="after">
+                <field name="has_versioning" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_directory_form" model="ir.ui.view">
+        <field name="name">dms_directory.form</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='inherit_group_ids']" position="after">
+                <field name="has_versioning" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

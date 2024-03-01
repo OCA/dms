@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_restore_old_revision" model="ir.ui.view">
+        <field name="name">restore.old.revision.form</field>
+        <field name="model">restore.old.revision</field>
+        <field name="arch" type="xml">
+            <form string="Restore Old Revision">
+                <div
+                    name="warning_1"
+                    attrs="{'invisible': [('has_current_revision', '=', False)]}"
+                >
+                    Do you really want to restore this archived file?
+                    Be aware that the current version will be archived if you continue.!
+                </div>
+                <div
+                    name="warning_2"
+                    attrs="{'invisible': [('has_current_revision', '=', True)]}"
+                >
+                    Do you really want to restore this archived file?
+                </div>
+                <group>
+                    <field name="has_current_revision" invisible="1" />
+                    <field name="file_id" readonly="1" />
+                    <field
+                        name="current_revision_id"
+                        readonly="1"
+                        attrs="{'invisible': [('has_current_revision', '=', False)]}"
+                    />
+                </group>
+                <footer>
+                    <button
+                        string="Restore"
+                        name="action_done"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn btn-secondary"
+                        special="cancel"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_restore_old_revision" model="ir.actions.act_window">
+        <field name="name">Restore Old Revision</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">restore.old.revision</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
