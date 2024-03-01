@@ -231,7 +231,7 @@ class File(models.Model):
         )
         if self.storage_id.save_type in ["file", "attachment"]:
             new_vals["content_file"] = self.content
-        else:
+        elif self.storage_id.save_type == "database":
             new_vals["content_binary"] = self.content and binary
         return new_vals
 
