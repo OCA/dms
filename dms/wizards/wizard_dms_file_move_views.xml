@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_dms_file_move_form_view" model="ir.ui.view">
+        <field name="name">wizard.dms.file.move.form</field>
+        <field name="model">wizard.dms.file.move</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa fa-exclamation-triangle mr-3" title="Warning" />
+                    <b>ATTENTION:</b> Tips to keep in mind before moving files:<br />
+                    - This change cannot be undone.<br />
+                    - Remember that the permissions of the files are those of the folder that contains it, therefore, it is possible that when you change it, the permissions will also change.<br
+                    />
+                    Make this change at your own risk.
+                </div>
+                <group>
+                    <field name="directory_id" />
+                    <field name="count_files" string="Total files" />
+                </group>
+                <footer>
+                    <button
+                        name="process"
+                        string="Move"
+                        class="btn-primary"
+                        type="object"
+                        confirm="Are you sure? All files will be moved."
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="wizard_dms_file_move_act_window" model="ir.actions.act_window">
+        <field name="name">Move files</field>
+        <field name="res_model">wizard.dms.file.move</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

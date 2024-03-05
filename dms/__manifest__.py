@@ -29,6 +29,7 @@
         "views/dms_access_groups_views.xml",
         "views/res_config_settings.xml",
         "views/dms_portal_templates.xml",
+        "wizards/wizard_dms_file_move_views.xml",
     ],
     "assets": {
         "mail.assets_messaging": [
