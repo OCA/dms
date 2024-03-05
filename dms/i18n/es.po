@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-20 21:48+0000\n"
+"POT-Creation-Date: 2024-03-05 14:44+0000\n"
+"PO-Revision-Date: 2024-03-05 15:44+0100\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -92,6 +93,27 @@ msgid ""
 msgstr ""
 "<i class=\"fa fa-download\"/>\n"
 "                                                Descargar"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+msgid ""
+"<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
+"                    <b>ATTENTION:</b> Tips to keep in mind before moving "
+"files:<br/>\n"
+"                    - This change cannot be undone.<br/>\n"
+"                    - Remember that the permissions of the files are those "
+"of the folder that contains it, therefore, it is possible that when you "
+"change it, the permissions will also change.<br/>\n"
+"                    Make this change at your own risk."
+msgstr ""
+"<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
+"                    <b>ATENCIÓN:</b> Consejos a tener en cuenta antes de "
+"mover los archivos:<br/>\n"
+"                    - Este cambio no se puede deshacer.<br/>\n"
+"                    - Recuerda que los permisos de los archivos son los del "
+"directorio que lo contiene, por lo tanto, es posible que al cambiarlo, los "
+"permisos también cambien.<br/>\n"
+"                    Haz este cambio bajo tu responsabilidad."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -441,6 +463,11 @@ msgid "Archived Files"
 msgstr "Archivos archivados"
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+msgid "Are you sure? All files will be moved."
+msgstr "¿Estás seguro? Todos los archivos se moverán."
+
+#. module: dms
 #: code:addons/dms/models/storage.py:0
 #: model:ir.model,name:dms.model_ir_attachment
 #: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__attachment
@@ -468,6 +495,7 @@ msgstr "Base/Fuente"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -642,6 +670,7 @@ msgstr "Nº de elementos"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_files_title
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_files
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_files
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__count_files
 msgid "Count Files"
 msgstr "Nº de archivos"
 
@@ -732,6 +761,7 @@ msgstr "Crear archivos a partir de archivos adjuntos de mensajes"
 #: model:ir.model.fields,field_description:dms.field_dms_file__create_uid
 #: model:ir.model.fields,field_description:dms.field_dms_storage__create_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__create_uid
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
@@ -742,6 +772,7 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:dms.field_dms_file__create_date
 #: model:ir.model.fields,field_description:dms.field_dms_storage__create_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__create_date
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__create_date
 msgid "Created on"
 msgstr "Creado el"
 
@@ -870,6 +901,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model,name:dms.model_dms_directory
 #: model:ir.model.fields,field_description:dms.field_dms_file__directory_id
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__directory_id
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
 msgid "Directory"
 msgstr "Carpeta"
@@ -881,6 +913,7 @@ msgstr "Carpeta"
 #: model:ir.model.fields,field_description:dms.field_dms_file__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__display_name
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__display_name
 msgid "Display Name"
 msgstr "Nombre a mostrar"
 
@@ -1121,6 +1154,7 @@ msgstr "Recursos humanos"
 #: model:ir.model.fields,field_description:dms.field_dms_file__id
 #: model:ir.model.fields,field_description:dms.field_dms_storage__id
 #: model:ir.model.fields,field_description:dms.field_dms_tag__id
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__id
 msgid "ID"
 msgstr "ID"
 
@@ -1355,6 +1389,7 @@ msgstr "Justo ahora"
 #: model:ir.model.fields,field_description:dms.field_dms_file____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_storage____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_tag____last_update
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
 
@@ -1365,6 +1400,7 @@ msgstr "Última modificación el"
 #: model:ir.model.fields,field_description:dms.field_dms_file__write_uid
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_uid
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__write_uid
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
@@ -1375,6 +1411,7 @@ msgstr "Última actualización por"
 #: model:ir.model.fields,field_description:dms.field_dms_file__write_date
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_date
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__write_date
 msgid "Last Updated on"
 msgstr "Última actualización el"
 
@@ -1499,6 +1536,17 @@ msgid "Modification Date"
 msgstr "Fecha de modificación"
 
 #. module: dms
+#: model:ir.actions.server,name:dms.action_wizard_dms_file_move
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+msgid "Move"
+msgstr "Mover"
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.wizard_dms_file_move_act_window
+msgid "Move files"
+msgstr "Mover archivos"
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
 #: model:ir.model.fields,field_description:dms.field_dms_file__my_activity_date_deadline
 msgid "My Activity Deadline"
@@ -1613,6 +1661,12 @@ msgstr "Número de mensajes no leídos"
 #: model:dms.access.group,name:dms.access_group_03_demo
 msgid "Only admin user"
 msgstr "Solo usuario administrador"
+
+#. module: dms
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "Only files in the same root directory can be moved."
+msgstr "Solo los archivos con la misma carpeta raíz se pueden mover."
 
 #. module: dms
 #: code:addons/dms/models/storage.py:0
@@ -1798,8 +1852,9 @@ msgstr "Carpetas raíz"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__root_directory_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__root_directory_id
 msgid "Root Directory"
-msgstr ""
+msgstr "Directorio raíz"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
@@ -2091,6 +2146,11 @@ msgid "Total Subdirectories"
 msgstr "Total subcarpetas"
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+msgid "Total files"
+msgstr "Total archivos"
+
+#. module: dms
 #: model:dms.category,name:dms.category_04_demo
 msgid "Traveling"
 msgstr "Viaje"
@@ -2183,6 +2243,11 @@ msgid "Website communication history"
 msgstr "Histórico de mensajes del sitio web"
 
 #. module: dms
+#: model:ir.model,name:dms.model_wizard_dms_file_move
+msgid "Wizard Dms File Move"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_write
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
@@ -2233,91 +2298,3 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
-
-#~ msgid "SMS Delivery error"
-#~ msgstr "Error de entrega de SMS"
-
-#~ msgid "Path"
-#~ msgstr "Ruta"
-
-#~ msgid "Search"
-#~ msgstr "Búsqueda"
-
-#~ msgid "Followers (Channels)"
-#~ msgstr "Seguidores (canales)"
-
-#~ msgid "Locked by"
-#~ msgstr "Bloqueado por"
-
-#~ msgid "Migrate File %s of %s [ %s ]"
-#~ msgstr "Migrar archivo %s de %s [ %s ]"
-
-#~ msgid "Drop your files here"
-#~ msgstr "Arrastra tus archivos aquí"
-
-#~ msgid "Custom Thumbnail"
-#~ msgstr "Miniatura personalizada"
-
-#~ msgid "Medium Custom Thumbnail"
-#~ msgstr "Miniatura personalizada mediana"
-
-#~ msgid "Medium Thumbnail"
-#~ msgstr "Miniatura mediana"
-
-#~ msgid "Small Custom Thumbnail"
-#~ msgstr "Miniatura personalizada pequeña"
-
-#~ msgid "Thumbnail"
-#~ msgstr "Miniatura"
-
-#~ msgid "Thumbnail Mixin"
-#~ msgstr "Miniatura Mixin"
-
-#~ msgid "A file is locked, the folder cannot be deleted."
-#~ msgstr "El archivo está bloqueado, la carpeta no se puede eliminar."
-
-#~ msgid "The directory has to have the permission to create files."
-#~ msgstr "La carpeta debe tener permiso para crear archivos."
-
-#~ msgid ""
-#~ "The parent directory has to have the permission to create directories."
-#~ msgstr "La carpeta padre debe tener permisos para crear carpetas."
-
-#~ msgid "The record (%s [%s]) is locked, by an other user."
-#~ msgstr "El registro (%s [%s]) está bloqueado, por otro usuario."
-
-#~ msgid ""
-#~ "The requested operation cannot be completed due to group security "
-#~ "restrictions. Please contact your system administrator.\n"
-#~ "\n"
-#~ "(Document type: %s, Operation: %s)"
-#~ msgstr ""
-#~ "La operación solicitada no se puede completar debido a restricciones de "
-#~ "seguridad del grupo. Por favor, póngase en contacto con el administrador "
-#~ "del sistema.\n"
-#~ "\n"
-#~ "(Tipo de documento: %s, Operación: %s)"
-
-#~ msgid "Folder"
-#~ msgstr "Carpeta"
-
-#~ msgid "SmallThumbnail"
-#~ msgstr "Miniatura pequeña"
-
-#~ msgid "<span>DMS</span>"
-#~ msgstr "<span>Carpetas</span>"
-
-#~ msgid "A root directory has to have a root storage."
-#~ msgstr "Una carpeta principal debe tener un almacenamiento."
-
-#~ msgid "Allowed Model"
-#~ msgstr "Modelo permitido"
-
-#~ msgid "Demo"
-#~ msgstr "Demo"
-
-#~ msgid "Root Storage"
-#~ msgstr "Almacenamiento raíz"
-
-#~ msgid "Filename"
-#~ msgstr "Nombre de archivo"
