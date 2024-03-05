@@ -323,6 +323,8 @@
                 <field name="is_locked" invisible="1" />
                 <field name="is_lock_editor" invisible="1" />
                 <field name="name" />
+                <field name="directory_id" optional="hide" />
+                <field name="root_directory_id" optional="hide" />
                 <field name="write_date" />
                 <field name="human_size" />
                 <field name="mimetype" />
@@ -666,4 +668,16 @@
         <field name="target">new</field>
         <field name="view_id" ref="view_dms_file_new_form" />
     </record>
+    <record id="action_wizard_dms_file_move" model="ir.actions.server">
+        <field name="name">Move</field>
+        <field name="model_id" ref="dms.model_dms_file" />
+        <field name="binding_model_id" ref="dms.model_dms_file" />
+        <field name="groups_id" eval="[(4, ref('dms.group_dms_user'))]" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = model.action_wizard_dms_file_move()
+        </field>
+    </record>
+
 </odoo>
