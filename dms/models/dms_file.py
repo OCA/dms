@@ -56,8 +56,10 @@ class File(models.Model):
         auto_join=True,
         required=True,
         index="btree",
+        tracking=True,  # Leave log if "moved" to another directory
     )
-    # Override acording to defined in AbstractDmsMixin
+    root_directory_id = fields.Many2one(related="directory_id.root_directory_id")
+    # Override according to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
         related="directory_id.storage_id",
         readonly=True,
@@ -272,6 +274,17 @@ class File(models.Model):
         self.env.user.company_id.set_onboarding_step_done(
             "documents_onboarding_file_state"
         )
+
+    def action_wizard_dms_file_move(self):
+        items = self.browse(self.env.context.get("active_ids"))
+        root_directories = items.mapped("root_directory_id")
+        if len(root_directories) > 1:
+            raise UserError(_("Only files in the same root directory can be moved."))
+        result = self.env["ir.actions.act_window"]._for_xml_id(
+            "dms.wizard_dms_file_move_act_window"
+        )
+        result["context"] = dict(self.env.context)
+        return result
 
     # ----------------------------------------------------------
     # SearchPanel

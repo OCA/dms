@@ -5,6 +5,7 @@
 
 import base64
 
+from odoo.exceptions import UserError
 from odoo.tests import new_test_user
 from odoo.tests.common import users
 
@@ -86,3 +87,23 @@ class FileFilestoreTestCase(StorageFileBaseCase):
         self.assertEqual(file_pdf.extension, "pdf")
         file_pdf.name = "Document_05.pdf"
         self.assertEqual(file_pdf.extension, "pdf")
+
+    def test_wizard_dms_file_move(self):
+        file3 = self.create_file(directory=self.sub_directory_x)
+        all_files = self.file + self.file2 + file3
+        # Error: All files must have the same root directory
+        with self.assertRaises(UserError):
+            self.file_model.with_context(
+                active_ids=all_files.ids
+            ).action_wizard_dms_file_move()
+        # Change the files that have the same root directory
+        files = self.file2 + file3
+        res = self.file_model.with_context(
+            active_ids=files.ids
+        ).action_wizard_dms_file_move()
+        wizard_model = self.env[res["res_model"]].with_context(**res["context"])
+        wizard = wizard_model.create({"directory_id": self.directory.id})
+        self.assertEqual(wizard.count_files, 2)
+        wizard.process()
+        self.assertEqual(self.file2.directory_id, self.directory)
+        self.assertEqual(file3.directory_id, self.directory)
