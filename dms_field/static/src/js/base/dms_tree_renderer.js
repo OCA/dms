@@ -72,6 +72,18 @@ odoo.define("dms.DmsTreeRenderer", function (require) {
                 conditionalselect:
                     this.params.conditionalselect || this._checkSelect.bind(this),
                 plugins: plugins,
+                sort: function (a, b) {
+                    // Correctly sort the records according to the type of element
+                    // (folder or file).
+                    // Do not use node.icon because they may have (or will have) a
+                    // different icon for each file according to its extension.
+                    var node_a = this.get_node(a);
+                    var node_b = this.get_node(b);
+                    if (node_a.data.model === node_b.data.model) {
+                        return node_a.text > node_b.text ? 1 : -1;
+                    }
+                    return node_a.data.model > node_b.data.model ? 1 : -1;
+                },
             };
             return tree_config;
         },
