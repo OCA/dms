@@ -410,7 +410,7 @@
                         >
                             <field
                                 string="Subdirectories"
-                                name="count_total_directories"
+                                name="count_directories"
                                 widget="statinfo"
                             />
                         </button>
@@ -422,7 +422,7 @@
                         >
                             <field
                                 string="Files"
-                                name="count_total_files"
+                                name="count_files"
                                 widget="statinfo"
                             />
                         </button>
@@ -465,7 +465,15 @@
                     <group name="data">
                         <group>
                             <field name="human_size" />
-                            <field name="count_elements" string="Elements" />
+                            <field
+                                name="count_total_directories"
+                                string="Total Directories"
+                            />
+                            <field name="count_total_files" string="Total files" />
+                            <field
+                                name="count_total_elements"
+                                string="Total Elements"
+                            />
                         </group>
                         <group>
                             <field

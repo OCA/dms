@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-20 21:48+0000\n"
+"POT-Creation-Date: 2024-03-07 13:41+0000\n"
+"PO-Revision-Date: 2024-03-07 14:43+0100\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -944,11 +945,6 @@ msgstr "Editor"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
-msgid "Elements"
-msgstr "Elementos"
-
-#. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Email Alias"
 msgstr "Alias de email"
 
@@ -1799,7 +1795,7 @@ msgstr "Carpetas raíz"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__root_directory_id
 msgid "Root Directory"
-msgstr ""
+msgstr "Directorio raíz"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
@@ -2076,7 +2072,13 @@ msgid "This directory needs to be associated to a record."
 msgstr "Este directorio necesita estar asociado a un registro."
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Total Directories"
+msgstr "Total subcarpetas"
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_elements
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Total Elements"
 msgstr "Total elementos"
 
@@ -2089,6 +2091,11 @@ msgstr "Total archivos"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_directories
 msgid "Total Subdirectories"
 msgstr "Total subcarpetas"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+msgid "Total files"
+msgstr "Total archivos"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
@@ -2233,91 +2240,3 @@ msgstr "o_onboarding_orange"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr "res.company"
-
-#~ msgid "SMS Delivery error"
-#~ msgstr "Error de entrega de SMS"
-
-#~ msgid "Path"
-#~ msgstr "Ruta"
-
-#~ msgid "Search"
-#~ msgstr "Búsqueda"
-
-#~ msgid "Followers (Channels)"
-#~ msgstr "Seguidores (canales)"
-
-#~ msgid "Locked by"
-#~ msgstr "Bloqueado por"
-
-#~ msgid "Migrate File %s of %s [ %s ]"
-#~ msgstr "Migrar archivo %s de %s [ %s ]"
-
-#~ msgid "Drop your files here"
-#~ msgstr "Arrastra tus archivos aquí"
-
-#~ msgid "Custom Thumbnail"
-#~ msgstr "Miniatura personalizada"
-
-#~ msgid "Medium Custom Thumbnail"
-#~ msgstr "Miniatura personalizada mediana"
-
-#~ msgid "Medium Thumbnail"
-#~ msgstr "Miniatura mediana"
-
-#~ msgid "Small Custom Thumbnail"
-#~ msgstr "Miniatura personalizada pequeña"
-
-#~ msgid "Thumbnail"
-#~ msgstr "Miniatura"
-
-#~ msgid "Thumbnail Mixin"
-#~ msgstr "Miniatura Mixin"
-
-#~ msgid "A file is locked, the folder cannot be deleted."
-#~ msgstr "El archivo está bloqueado, la carpeta no se puede eliminar."
-
-#~ msgid "The directory has to have the permission to create files."
-#~ msgstr "La carpeta debe tener permiso para crear archivos."
-
-#~ msgid ""
-#~ "The parent directory has to have the permission to create directories."
-#~ msgstr "La carpeta padre debe tener permisos para crear carpetas."
-
-#~ msgid "The record (%s [%s]) is locked, by an other user."
-#~ msgstr "El registro (%s [%s]) está bloqueado, por otro usuario."
-
-#~ msgid ""
-#~ "The requested operation cannot be completed due to group security "
-#~ "restrictions. Please contact your system administrator.\n"
-#~ "\n"
-#~ "(Document type: %s, Operation: %s)"
-#~ msgstr ""
-#~ "La operación solicitada no se puede completar debido a restricciones de "
-#~ "seguridad del grupo. Por favor, póngase en contacto con el administrador "
-#~ "del sistema.\n"
-#~ "\n"
-#~ "(Tipo de documento: %s, Operación: %s)"
-
-#~ msgid "Folder"
-#~ msgstr "Carpeta"
-
-#~ msgid "SmallThumbnail"
-#~ msgstr "Miniatura pequeña"
-
-#~ msgid "<span>DMS</span>"
-#~ msgstr "<span>Carpetas</span>"
-
-#~ msgid "A root directory has to have a root storage."
-#~ msgstr "Una carpeta principal debe tener un almacenamiento."
-
-#~ msgid "Allowed Model"
-#~ msgstr "Modelo permitido"
-
-#~ msgid "Demo"
-#~ msgstr "Demo"
-
-#~ msgid "Root Storage"
-#~ msgstr "Almacenamiento raíz"
-
-#~ msgid "Filename"
-#~ msgstr "Nombre de archivo"
