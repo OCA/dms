@@ -7,6 +7,7 @@ odoo.define("dms.DmsTreeController", function (require) {
     var mimetype = require("dms_field.mimetype");
 
     var Domain = require("web.Domain");
+    var DragDrop = require("dms_field.DragDrop");
     var BasicController = require("web.BasicController");
     var FormController = require("web.FormController");
     var preview = require("mail_preview_base.preview");
@@ -582,7 +583,7 @@ odoo.define("dms.DmsTreeController", function (require) {
     };
 
     FormController.include(
-        _.extend(DMSTreeController, {
+        _.extend(DMSTreeController, DragDrop, {
             custom_events: _.extend(
                 {},
                 FormController.prototype.custom_events,
@@ -593,7 +594,7 @@ odoo.define("dms.DmsTreeController", function (require) {
 
     return {
         Controller: BasicController.extend(
-            _.extend(DMSTreeController, {
+            _.extend(DMSTreeController, DragDrop, {
                 custom_events: _.extend(
                     {},
                     BasicController.prototype.custom_events,
