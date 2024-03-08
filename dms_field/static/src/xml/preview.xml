@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="dms.DocumentTreeViewDirectoryPreview">
-        <div class="o_preview_directory">
+        <div
+            class="o_preview_directory"
+            t-att-data-directory-id="dms_object.model === 'dms.directory' ? dms_object.res_id : ''"
+        >
             <div class="top_info row">
                 <div class="left_info col-4">
                     <div class="o_preview_directory_icon" align="center">
