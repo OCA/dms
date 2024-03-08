@@ -189,7 +189,8 @@ odoo.define("dms.DmsTreeRenderer", function (require) {
                 node.data &&
                 ["dms.directory", "dms.file"].indexOf(node.data.model) !== -1
             ) {
-                this.$(".dms_document_preview").html(
+                this.$(".dms_document_preview .o_preview_directory").remove();
+                this.$(".dms_document_preview").prepend(
                     $(
                         QWeb.render("dms.DocumentTreeViewDirectoryPreview", {
                             widget: this,

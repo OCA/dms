@@ -339,6 +339,7 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification_detail__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_file_move__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
 msgstr "Directorios DMS"
