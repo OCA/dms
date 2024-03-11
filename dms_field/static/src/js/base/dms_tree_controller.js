@@ -403,7 +403,6 @@ odoo.define("dms.DmsTreeController", function (require) {
                 type: "storage",
                 data: dt,
                 children: children,
-                state: {opened: true},
             };
         },
         _makeNodeDirectory: function (directory, showFiles, storage) {
@@ -441,7 +440,6 @@ odoo.define("dms.DmsTreeController", function (require) {
                 icon: "fa fa-folder-o",
                 type: "directory",
                 data: dt,
-                state: {opened: true},
             };
             if (showFiles) {
                 directoryNode.children =

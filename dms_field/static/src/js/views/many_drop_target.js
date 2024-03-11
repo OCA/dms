@@ -60,6 +60,25 @@ odoo.define("dms_field.DragDrop", function (require) {
                 },
             }).then(() => {
                 const selected_id = $(".jstree-clicked").attr("id");
+                const model_data = this.$(".dms_tree").jstree(true)._model.data;
+                const state = this.$(".dms_tree").jstree(true).get_state();
+                const open_res_ids = state.core.open.map(
+                    (id) => model_data[id].data.res_id
+                );
+                this.$(".dms_tree").on("refresh_node.jstree", () => {
+                    const model_data_entries = Object.entries(model_data);
+                    const ids = model_data_entries
+                        .filter(
+                            ([, value]) =>
+                                value.data &&
+                                open_res_ids.includes(value.data.res_id) &&
+                                value.data.model === "dms.directory"
+                        )
+                        .map((tuple) => tuple[0]);
+                    for (var id of ids) {
+                        this.$(".dms_tree").jstree(true).open_node(id);
+                    }
+                });
                 this.$(".dms_tree").jstree(true).refresh_node(selected_id);
             });
         },

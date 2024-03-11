@@ -137,6 +137,9 @@ odoo.define("dms.DmsTreeRenderer", function (require) {
                     parent: data.parent,
                 });
             });
+            this.$tree.on("loaded.jstree", () => {
+                this.$tree.jstree("open_all");
+            });
             this.$('[data-toggle="tooltip"]').tooltip();
         },
         _treeChanged: function (ev) {
@@ -419,7 +422,29 @@ odoo.define("dms.DmsTreeRenderer", function (require) {
                 title: _t("Add Directory: ") + self.string,
                 on_saved: function (record, changed) {
                     if (changed) {
-                        self.$tree.jstree(true).refresh();
+                        const selected_id = self.$tree
+                            .find(".jstree-clicked")
+                            .attr("id");
+                        const model_data = self.$tree.jstree(true)._model.data;
+                        const state = self.$tree.jstree(true).get_state();
+                        const open_res_ids = state.core.open.map(
+                            (id) => model_data[id].data.res_id
+                        );
+                        self.$tree.on("refresh_node.jstree", () => {
+                            const model_data_entries = Object.entries(model_data);
+                            const ids = model_data_entries
+                                .filter(
+                                    ([, value]) =>
+                                        value.data &&
+                                        open_res_ids.includes(value.data.res_id) &&
+                                        value.data.model === "dms.directory"
+                                )
+                                .map((tuple) => tuple[0]);
+                            for (var id of ids) {
+                                self.$tree.jstree(true).open_node(id);
+                            }
+                        });
+                        self.$tree.jstree(true).refresh_node(selected_id);
                     }
                 },
             }).open();
@@ -435,7 +460,29 @@ odoo.define("dms.DmsTreeRenderer", function (require) {
                 title: _t("Add File: ") + self.string,
                 on_saved: function (record, changed) {
                     if (changed) {
-                        self.$tree.jstree(true).refresh();
+                        const selected_id = self.$tree
+                            .find(".jstree-clicked")
+                            .attr("id");
+                        const model_data = self.$tree.jstree(true)._model.data;
+                        const state = self.$tree.jstree(true).get_state();
+                        const open_res_ids = state.core.open.map(
+                            (id) => model_data[id].data.res_id
+                        );
+                        self.$tree.on("refresh_node.jstree", () => {
+                            const model_data_entries = Object.entries(model_data);
+                            const ids = model_data_entries
+                                .filter(
+                                    ([, value]) =>
+                                        value.data &&
+                                        open_res_ids.includes(value.data.res_id) &&
+                                        value.data.model === "dms.directory"
+                                )
+                                .map((tuple) => tuple[0]);
+                            for (var id of ids) {
+                                self.$tree.jstree(true).open_node(id);
+                            }
+                        });
+                        self.$tree.jstree(true).refresh_node(selected_id);
                     }
                 },
             }).open();
