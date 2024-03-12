@@ -10,7 +10,7 @@
             <button
                 class="o_add_dms_file_button btn btn-link"
                 type="button"
-                t-on-click.stop.prevent="_onAddDmsFile"
+                t-on-click.stop.prevent="attachmentBoxView._onAddDmsFile"
             >
                 <i class="fa fa-plus-square" />
                 Add DMS File
