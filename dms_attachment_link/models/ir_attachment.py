@@ -17,3 +17,12 @@ class IrAttachment(models.Model):
         for item in _self:
             item.datas = item.dms_file_id.content
         return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Create attachments and link them to DMS files."""
+        attachments = super().create(vals_list)
+        for attachment, vals in zip(attachments, vals_list):
+            if "dms_file_id" in vals:
+                attachment.datas = attachment.dms_file_id.content
+        return attachments
