@@ -11,7 +11,7 @@ class IrAttachment(models.Model):
 
     @api.depends("dms_file_id.content")
     def _compute_datas(self):
-        """Get the contents of the attachment directly from the DMS fiel."""
+        """Get the contents of the attachment directly from the DMS file."""
         _self = self.filtered("dms_file_id")
         res = super(IrAttachment, (self - _self))._compute_datas()
         for item in _self:
