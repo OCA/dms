@@ -1,35 +1,37 @@
 /** @odoo-module **/
 
-import {AttachmentBox} from "@mail/components/attachment_box/attachment_box";
-import {patch} from "web.utils";
+import {registerPatch} from "@mail/model/model_core";
 
-patch(
-    AttachmentBox.prototype,
-    "dms_attachment_link/static/src/js/dms_attachment_link.js",
-    {
+registerPatch({
+    name: "AttachmentBoxView",
+    recordMethods: {
         _onAddDmsFile() {
-            this.env.bus.trigger("do-action", {
-                action: "dms_attachment_link.action_dms_file_wizard_selector_dms_attachment_link",
-                options: {
-                    additional_context: {
-                        active_id: this.messaging.models["mail.chatter"].get(
-                            this.props.chatterLocalId
-                        ).threadId,
-                        active_ids: [
-                            this.messaging.models["mail.chatter"].get(
-                                this.props.chatterLocalId
-                            ).threadId,
-                        ],
-                        active_model: this.messaging.models["mail.chatter"].get(
-                            this.props.chatterLocalId
-                        ).threadModel,
+            this.env.services.action.doAction(
+                "dms_attachment_link.action_dms_file_wizard_selector_dms_attachment_link",
+                {
+                    additionalContext: {
+                        active_id: this.chatter.thread.id,
+                        active_ids: [this.chatter.thread.id],
+                        active_model: this.chatter.threadModel,
                     },
-                    on_close: this._onAddedDmsFile.bind(this),
-                },
-            });
+                    onClose: this._onAddedDmsFile.bind(this),
+                }
+            );
         },
         _onAddedDmsFile() {
-            this.trigger("reload");
+            this.chatter.refresh();
         },
-    }
-);
+    },
+});
+
+registerPatch({
+    name: "Chatter",
+    recordMethods: {
+        /**
+         * Handles click on the attach button.
+         */
+        async onClickButtonAddAttachments() {
+            await this.onClickButtonToggleAttachments();
+        },
+    },
+});
