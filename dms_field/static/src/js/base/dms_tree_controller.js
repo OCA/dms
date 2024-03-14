@@ -7,6 +7,7 @@ odoo.define("dms.DmsTreeController", function (require) {
     var mimetype = require("dms_field.mimetype");
 
     var Domain = require("web.Domain");
+    var DragDrop = require("dms_field.DragDrop");
     var BasicController = require("web.BasicController");
     var FormController = require("web.FormController");
     var preview = require("mail_preview_base.preview");
@@ -402,7 +403,6 @@ odoo.define("dms.DmsTreeController", function (require) {
                 type: "storage",
                 data: dt,
                 children: children,
-                state: {opened: true},
             };
         },
         _makeNodeDirectory: function (directory, showFiles, storage) {
@@ -440,7 +440,6 @@ odoo.define("dms.DmsTreeController", function (require) {
                 icon: "fa fa-folder-o",
                 type: "directory",
                 data: dt,
-                state: {opened: true},
             };
             if (showFiles) {
                 directoryNode.children =
@@ -582,7 +581,7 @@ odoo.define("dms.DmsTreeController", function (require) {
     };
 
     FormController.include(
-        _.extend(DMSTreeController, {
+        _.extend(DMSTreeController, DragDrop, {
             custom_events: _.extend(
                 {},
                 FormController.prototype.custom_events,
@@ -593,7 +592,7 @@ odoo.define("dms.DmsTreeController", function (require) {
 
     return {
         Controller: BasicController.extend(
-            _.extend(DMSTreeController, {
+            _.extend(DMSTreeController, DragDrop, {
                 custom_events: _.extend(
                     {},
                     BasicController.prototype.custom_events,
