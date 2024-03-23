@@ -7,9 +7,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-05 14:44+0000\n"
-"PO-Revision-Date: 2024-03-08 21:36+0000\n"
-"Last-Translator: carolinafernandez-tecnativa <carolina.fernandez@tecnativa."
-"com>\n"
+"PO-Revision-Date: 2024-03-23 09:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -2246,7 +2245,7 @@ msgstr "Histórico de mensajes del sitio web"
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_file_move
 msgid "Wizard Dms File Move"
-msgstr ""
+msgstr "Asistente para Mover Archivos Dms"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
