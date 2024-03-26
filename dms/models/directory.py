@@ -770,6 +770,7 @@ class DmsDirectory(models.Model):
                 [("parent_id", "child_of", self.id)],
             ]
         )
+        action["display_name"] = self.name
         action["domain"] = domain
         action["context"] = dict(
             self.env.context,
@@ -787,6 +788,7 @@ class DmsDirectory(models.Model):
                 [("directory_id", "child_of", self.id)],
             ]
         )
+        action["display_name"] = self.name
         action["domain"] = domain
         action["context"] = dict(
             self.env.context,
