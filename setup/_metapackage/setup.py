@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo-addon-dms_auto_classification>=15.0dev,<15.1dev',
         'odoo-addon-dms_field>=15.0dev,<15.1dev',
         'odoo-addon-dms_field_auto_classification>=15.0dev,<15.1dev',
+        'odoo-addon-dms_user_role>=15.0dev,<15.1dev',
         'odoo-addon-hr_dms_field>=15.0dev,<15.1dev',
     ],
     classifiers=[
