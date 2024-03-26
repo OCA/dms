@@ -321,6 +321,8 @@ odoo.define("dms.DmsTreeController", function (require) {
                             }
                         }.bind(this)
                     );
+                    // Launch _update_overlay to show the drag and drop
+                    this._update_overlay();
                 }.bind(this)
             );
             return data_loaded;
