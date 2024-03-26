@@ -325,6 +325,8 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_res_users_apikeys_show__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_identitycheck__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_log__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_res_users_role__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_res_users_role_line__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings_volumes__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_reset_view_arch_wizard__dms_directory_ids
@@ -340,6 +342,7 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification_detail__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_dms_file_move__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_groups_into_role__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
 msgstr "Directorios DMS"
