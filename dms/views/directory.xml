@@ -376,7 +376,7 @@
         <field name="name">dms_directory.tree</field>
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order="complete_name asc">
                 <field name="name" />
                 <field name="write_date" />
                 <field name="count_files" string="Files" />

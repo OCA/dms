@@ -317,6 +317,7 @@
                 decoration-warning="not active"
                 decoration-muted="(is_locked and not is_lock_editor)"
                 multi_edit="1"
+                default_order="name asc"
             >
                 <field name="active" invisible="1" />
                 <field name="is_locked" invisible="1" />
