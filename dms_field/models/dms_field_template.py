@@ -105,14 +105,27 @@ class DmsFieldTemplate(models.Model):
             file.copy({"directory_id": new_directory.id})
 
     def _set_groups_from_directory(self, directory, record):
-        groups = self.env["dms.access.group"]
+        """Set groups of directory, if there are already linked groups we use those
+        to avoid constraint name error."""
+        group_model = groups = self.env["dms.access.group"]
+        groups_ref = group_model.search(
+            [("model_ref", "=", "%s,%s" % (record._name, record.id))]
+        )
+        if groups_ref:
+            return groups_ref
         for group in directory.group_ids:
             group_name = _("Autogenerate group from %(model)s (%(name)s) #%(id)s") % {
                 "model": record._description,
                 "name": record.display_name,
                 "id": record.id,
             }
-            new_group = group.copy({"name": group_name, "directory_ids": False})
+            new_group = group.copy(
+                {
+                    "name": group_name,
+                    "directory_ids": False,
+                    "model_ref": "%s,%s" % (record._name, record.id),
+                }
+            )
             # Apply sudo() because the user may not have permissions to access
             # ir.model.fields.
             user_field = self.sudo().user_field_id
