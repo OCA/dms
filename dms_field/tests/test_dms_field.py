@@ -117,6 +117,7 @@ class TestDmsField(TransactionCase):
         directory_0 = self.partner.dms_directory_ids[0]
         self.assertNotIn(self.template.group_ids, directory_0.group_ids)
         self.assertIn(self.group, directory_0.group_ids.group_ids)
+        self.assertEqual(directory_0.group_ids.model_ref, self.partner)
         self.assertIn(self.user_b, directory_0.group_ids.explicit_user_ids)
         self.assertIn(self.user_a, directory_0.group_ids.users)
         self.assertIn(self.user_b, directory_0.group_ids.users)
@@ -124,6 +125,19 @@ class TestDmsField(TransactionCase):
         self.assertIn(self.subdirectory_2.name, child_names)
         with self.assertRaises(ValidationError):
             template.create_dms_directory()
+        # Remove folder: El grupo de acceso todavía existe
+        old_groups = directory_0.group_ids
+        directory_0.unlink()
+        model_ref_value = "%s,%s" % (self.partner._name, self.partner.id)
+        total = self.env["dms.access.group"].search_count(
+            [("model_ref", "=", model_ref_value)]
+        )
+        self.assertEqual(total, 1)
+        # Create directory again (access groups are the same)
+        template.create_dms_directory()
+        self.partner.refresh()
+        directory_0 = self.partner.dms_directory_ids[0]
+        self.assertEqual(directory_0.group_ids, old_groups)
 
     def test_creation_process_02(self):
         partner_1 = self.env["res.partner"].create({"name": "Test partner 1"})
