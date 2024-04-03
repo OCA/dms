@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dms_user_role
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-05 10:23+0000\n"
+"PO-Revision-Date: 2024-03-27 18:35+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: dms_user_role
+#: model:ir.model,name:dms_user_role.model_dms_access_group
+msgid "Record Access Groups"
+msgstr "Grupos de acceso de registro"
+
+#. module: dms_user_role
+#: model:ir.model.fields,field_description:dms_user_role.field_dms_access_group__role_ids
+#: model_terms:ir.ui.view,arch_db:dms_user_role.view_dms_access_groups_form
+msgid "Roles"
+msgstr "Funciones"
