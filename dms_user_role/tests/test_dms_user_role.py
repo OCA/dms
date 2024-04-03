@@ -1,24 +1,16 @@
 # Copyright 2024 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common, new_test_user
+from odoo.tests import new_test_user
 from odoo.tools import mute_logger
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestDmsUserRole(common.TransactionCase):
+
+class TestDmsUserRole(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
         cls.user_a = new_test_user(cls.env, login="test_user_a")
         cls.user_b = new_test_user(cls.env, login="test_user_b")
         cls.user_c = new_test_user(cls.env, login="test_user_c")

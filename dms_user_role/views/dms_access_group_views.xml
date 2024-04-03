@@ -4,10 +4,9 @@
         <field name="name">dms_access.group.form</field>
         <field name="model">dms.access.group</field>
         <field name="inherit_id" ref="dms.view_dms_access_groups_form" />
-        <field name="groups_id" eval="[(4, ref('base.group_erp_manager'))]" />
         <field name="arch" type="xml">
             <page name="groups" position="before">
-                <page name="roles" string="Roles">
+                <page name="roles" string="Roles" groups="base.group_erp_manager">
                     <field name="role_ids">
                         <tree>
                             <field name="name" />
