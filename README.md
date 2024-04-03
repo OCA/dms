@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [dms](dms/) | 16.0.1.4.0 |  | Document Management System for Odoo
+[dms_auto_classification](dms_auto_classification/) | 16.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Auto classify documents into DMS
 [dms_user_role](dms_user_role/) | 16.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | DMS User Role
 
 [//]: # (end addons)
