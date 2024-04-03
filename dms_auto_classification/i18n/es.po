@@ -70,6 +70,11 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: dms_auto_classification
+#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__data_filename
+msgid "Data Filename"
+msgstr ""
+
+#. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__detail_ids
 #: model_terms:ir.ui.view,arch_db:dms_auto_classification.view_wizard_dms_classification_form
 msgid "Details"
@@ -153,6 +158,7 @@ msgid "Name"
 msgstr "Nombrr"
 
 #. module: dms_auto_classification
+#. odoo-python
 #: code:addons/dms_auto_classification/wizards/wizard_dms_classification.py:0
 #, python-format
 msgid "Only .zip files are allowed"
