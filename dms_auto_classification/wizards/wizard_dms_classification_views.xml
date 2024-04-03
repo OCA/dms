@@ -17,7 +17,9 @@
                     <field
                         name="data_file"
                         attrs="{'readonly' : [('state', '!=', 'draft')]}"
+                        filename="data_filename"
                     />
+                    <field name="data_filename" invisible="1" />
                 </group>
                 <notebook>
                     <page
