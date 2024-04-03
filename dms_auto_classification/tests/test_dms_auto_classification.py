@@ -4,24 +4,16 @@
 from base64 import b64encode
 from os import path
 
-from odoo.tests import Form, common, new_test_user
+from odoo.tests import Form, new_test_user
 from odoo.tests.common import users
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestDmsAutoClassification(common.TransactionCase):
+
+class TestDmsAutoClassification(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
         cls.template = cls.env.ref(
             "dms_auto_classification.dms_classification_template_documents"
         )

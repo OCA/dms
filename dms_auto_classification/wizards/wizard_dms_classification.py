@@ -29,6 +29,7 @@ class WizardDmsClassification(models.TransientModel):
         string="File",
         required=True,
     )
+    data_filename = fields.Char()
     detail_ids = fields.One2many(
         comodel_name="wizard.dms.classification.detail",
         inverse_name="parent_id",
