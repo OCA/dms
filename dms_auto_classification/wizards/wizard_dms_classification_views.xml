@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_wizard_dms_classification_form" model="ir.ui.view">
+        <field name="model">wizard.dms.classification</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" readonly="1" />
+                </header>
+                <group>
+                    <field
+                        name="template_id"
+                        attrs="{'readonly' : [('state', '!=', 'draft')]}"
+                    />
+                    <field
+                        name="data_file"
+                        attrs="{'readonly' : [('state', '!=', 'draft')]}"
+                        filename="data_filename"
+                    />
+                    <field name="data_filename" invisible="1" />
+                </group>
+                <notebook>
+                    <page
+                        name="detail_ids"
+                        string="Details"
+                        attrs="{'invisible' : [('state', '=', 'draft')]}"
+                    >
+                        <field name="detail_ids">
+                            <tree editable="bottom" delete="false" create="false">
+                                <field name="file_name" />
+                                <field name="directory_id" />
+                                <field name="file_id" />
+                                <field name="state" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button
+                        name="action_analyze"
+                        string="Analyze"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible' : [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_classify"
+                        string="Classify"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible' : [('state', '!=', 'analyze')]}"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_wizard_dms_classification" model="ir.actions.act_window">
+        <field name="name">Auto Classification</field>
+        <field name="res_model">wizard.dms.classification</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4, ref('dms.group_dms_user'))]" />
+    </record>
+    <menuitem
+        id="menu_wizard_dms_classification"
+        name="Auto Classification"
+        parent="dms.main_menu_dms"
+        sequence="40"
+        action="action_wizard_dms_classification"
+        groups="dms.group_dms_user"
+    />
+</odoo>

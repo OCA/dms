@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_dms_classification_template_tree" model="ir.ui.view">
+        <field name="model">dms.classification.template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="filename_pattern" />
+                <field name="directory_pattern" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_dms_classification_template_form" model="ir.ui.view">
+        <field name="model">dms.classification.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" /></h1>
+                    </div>
+                    <group name="main_group">
+                        <field name="company_id" groups="base.group_multi_company" />
+                        <field name="filename_pattern" />
+                        <field name="directory_pattern" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_dms_classification_template" model="ir.actions.act_window">
+        <field name="name">Classification Templates</field>
+        <field name="res_model">dms.classification.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="groups_id" eval="[(4, ref('dms.group_dms_manager'))]" />
+    </record>
+    <menuitem
+        id="menu_dms_classification_template"
+        name="Classification Templates"
+        parent="dms.cat_menu_dms_config_organizing"
+        sequence="6"
+        action="action_dms_classification_template"
+        groups="dms.group_dms_manager"
+    />
+</odoo>
