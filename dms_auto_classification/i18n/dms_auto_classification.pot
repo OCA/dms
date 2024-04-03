@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -63,6 +63,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__create_date
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: dms_auto_classification
+#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__data_filename
+msgid "Data Filename"
 msgstr ""
 
 #. module: dms_auto_classification
@@ -149,6 +154,7 @@ msgid "Name"
 msgstr ""
 
 #. module: dms_auto_classification
+#. odoo-python
 #: code:addons/dms_auto_classification/wizards/wizard_dms_classification.py:0
 #, python-format
 msgid "Only .zip files are allowed"
