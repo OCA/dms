@@ -6,6 +6,12 @@
 **********************************************************************************/
 
 .mk_directory_kanban_view {
+
+     span.total_items {
+            margin-left: 3px;
+            margin-top: 3px;
+        }
+
     height: 100%;
     .o_kanban_record {
         > div:nth-child(1) {
