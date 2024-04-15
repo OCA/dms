@@ -208,6 +208,8 @@
                 <field name="count_files" />
                 <field name="count_directories_title" />
                 <field name="count_files_title" />
+                <field name="count_total_directories" />
+                <field name="count_total_files" />
                 <templates>
                     <t t-name="kanban-box">
                         <div
@@ -305,7 +307,11 @@
                                             class="btn btn-sm btn-outline-primary mk_directory_kanban_directories"
                                             t-att-title="record.count_directories_title.raw_value"
                                         >
-                                            <i class="fa fa-lg fa-folder" />
+                                            <i class="fa fa-xs fa-folder" />
+                                            <span
+                                                class="total_items"
+                                                t-esc="record.count_total_directories.raw_value"
+                                            />
                                         </a>
                                         <a
                                             type="object"
@@ -314,7 +320,11 @@
                                             class="btn btn-sm btn-outline-primary mk_directory_kanban_files"
                                             t-att-title="record.count_files_title.raw_value"
                                         >
-                                            <i class="fa fa-lg fa-file" />
+                                            <i class="fa fa-xs fa-file" />
+                                            <span
+                                                class="total_items"
+                                                t-esc="record.count_total_files.raw_value"
+                                            />
                                         </a>
                                     </div>
                                 </div>
