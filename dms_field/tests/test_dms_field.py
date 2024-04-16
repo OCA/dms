@@ -41,7 +41,7 @@ class TestDmsField(TransactionCase):
             res_model=cls.template._name, res_id=cls.template.id
         )
         template_ctx.create_dms_directory()
-        cls.template.refresh()
+        cls.template.invalidate_model()
         cls.directory = cls.template.dms_directory_ids
         cls.subdirectory_1 = cls.env["dms.directory"].create(
             {
@@ -111,7 +111,7 @@ class TestDmsField(TransactionCase):
             res_model=self.partner._name, res_id=self.partner.id
         )
         template.create_dms_directory()
-        self.partner.refresh()
+        self.partner.invalidate_model()
         self.assertEqual(self.partner.dms_directory_ids.name, self.partner.display_name)
         child_names = self.partner.dms_directory_ids.mapped("child_directory_ids.name")
         directory_0 = self.partner.dms_directory_ids[0]
@@ -127,14 +127,14 @@ class TestDmsField(TransactionCase):
 
     def test_creation_process_02(self):
         partner_1 = self.env["res.partner"].create({"name": "Test partner 1"})
-        partner_1.refresh()
+        partner_1.invalidate_model()
         self.assertTrue(partner_1.dms_directory_ids)
         partner_2 = (
             self.env["res.partner"]
             .with_context(skip_track_dms_field_template=True)
             .create({"name": "Test partner 2"})
         )
-        partner_2.refresh()
+        partner_2.invalidate_model()
         self.assertFalse(partner_2.dms_directory_ids)
 
     def test_creation_process_03(self):
@@ -142,7 +142,7 @@ class TestDmsField(TransactionCase):
         partner_1 = self.env["res.partner"].create(
             {"name": "TEST-PARTNER1", "ref": "CUSTOM-REF"}
         )
-        partner_1.refresh()
+        partner_1.invalidate_model()
         self.assertEqual(
             partner_1.dms_directory_ids.name, "%s-%s" % (partner_1.name, partner_1.ref)
         )

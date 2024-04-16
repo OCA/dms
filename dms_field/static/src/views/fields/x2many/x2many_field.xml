@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t
+        t-name="dms_field.X2ManyField"
+        t-inherit="web.X2ManyField"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//ListRenderer" position="after">
+            <DmsListRenderer t-elif="viewMode == 'dms_list'" t-props="rendererProps" />
+        </xpath>
+    </t>
+
+</templates>

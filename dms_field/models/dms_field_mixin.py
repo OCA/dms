@@ -5,8 +5,9 @@
 from odoo import api, fields, models
 
 
-class Base(models.AbstractModel):
-    _inherit = "base"
+class DMSFieldMixin(models.AbstractModel):
+    _name = "dms.field.mixin"
+    _description = "Mixin to use DMS Field"
 
     dms_directory_ids = fields.One2many(
         "dms.directory",
