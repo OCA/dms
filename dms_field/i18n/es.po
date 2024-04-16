@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-04 08:09+0000\n"
-"PO-Revision-Date: 2024-06-04 10:11+0200\n"
+"POT-Creation-Date: 2024-04-16 11:00+0000\n"
+"PO-Revision-Date: 2024-04-16 13:01+0200\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -163,10 +163,6 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_dms_tag__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_fetchmail_server__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_format_address_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_google_gmail_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_iap_account__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_iap_autocomplete_api__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_iap_enrich_api__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_image_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_url__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window__dms_directory_ids
@@ -315,22 +311,10 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings_volumes__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_reset_view_arch_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_api__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_composer__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_resend__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_resend_recipient__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_sms__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_template__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_template_preview__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_sms_template_reset__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_confirm__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_format_error__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_missing_required_fields__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_template_reset_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_file_move__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
 msgstr "Directorios DMS"
@@ -361,15 +345,6 @@ msgstr ""
 #: model:ir.model,name:dms_field.model_dms_directory
 msgid "Directory"
 msgstr "Directorio"
-
-#. module: dms_field
-#. odoo-python
-#: code:addons/dms_field/models/dms_directory.py:0
-#, python-format
-msgid "Directory %s must be root in order to be related to a record"
-msgstr ""
-"Directorio %s debede ser raíz en la orden para estar relacionado con un "
-"registro"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__directory_format_name
@@ -494,8 +469,13 @@ msgid "Parent Directory"
 msgstr "Directorio parental"
 
 #. module: dms_field
-#. odoo-javascript
-#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
+#: model:ir.model.fields,field_description:dms_field.field_dms_field_template__parent_directory_id
+msgid "Parent directory"
+msgstr "Carpeta padre"
+
+#. module: dms_field
+#. openerp-web
+#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
 #, python-format
 msgid "Paste"
 msgstr "Pegar"

@@ -30,18 +30,12 @@ class DmsDirectory(models.Model):
                 )
             if not directory.res_id:
                 continue
-            if not directory.is_root_directory:
-                raise ValidationError(
-                    _("Directory %s must be root in order to be related to a " "record")
-                    % directory.display_name
-                )
             if self.search(
                 [
                     ("storage_id", "=", directory.storage_id.id),
                     ("id", "!=", directory.id),
                     ("res_id", "=", directory.res_id),
                     ("res_model", "=", directory.res_model),
-                    ("is_root_directory", "=", True),
                 ],
                 limit=1,
             ):

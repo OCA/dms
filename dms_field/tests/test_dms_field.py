@@ -2,6 +2,7 @@
 # Copyright 2024 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+from odoo import fields
 from odoo.exceptions import ValidationError
 from odoo.tests import TransactionCase, new_test_user
 
@@ -115,6 +116,9 @@ class TestDmsField(TransactionCase):
         self.assertEqual(self.partner.dms_directory_ids.name, self.partner.display_name)
         child_names = self.partner.dms_directory_ids.mapped("child_directory_ids.name")
         directory_0 = self.partner.dms_directory_ids[0]
+        self.assertFalse(directory_0.parent_id)
+        self.assertTrue(directory_0.is_root_directory)
+        self.assertTrue(directory_0.inherit_group_ids)
         self.assertNotIn(self.template.group_ids, directory_0.group_ids)
         self.assertIn(self.group, directory_0.group_ids.group_ids)
         self.assertIn(self.user_b, directory_0.group_ids.explicit_user_ids)
@@ -125,10 +129,52 @@ class TestDmsField(TransactionCase):
         with self.assertRaises(ValidationError):
             template.create_dms_directory()
 
+    def test_creation_process_01_with_parent(self):
+        self.assertFalse(self.partner.dms_directory_ids)
+        self.template.parent_directory_id = fields.first(
+            self.template.storage_id.root_directory_ids
+        )
+        template = self.env["dms.field.template"].with_context(
+            res_model=self.partner._name, res_id=self.partner.id
+        )
+        template.create_dms_directory()
+        self.partner.invalidate_model()
+        self.assertEqual(self.partner.dms_directory_ids.name, self.partner.display_name)
+        directory_0 = self.partner.dms_directory_ids[0]
+        self.assertEqual(directory_0.parent_id, self.template.parent_directory_id)
+        self.assertFalse(directory_0.is_root_directory)
+        self.assertFalse(directory_0.inherit_group_ids)
+        self.assertNotIn(self.template.group_ids, directory_0.group_ids)
+        self.assertIn(self.group, directory_0.group_ids.group_ids)
+        self.assertIn(self.user_b, directory_0.group_ids.explicit_user_ids)
+        self.assertIn(self.user_a, directory_0.group_ids.users)
+        self.assertIn(self.user_b, directory_0.group_ids.users)
+
     def test_creation_process_02(self):
         partner_1 = self.env["res.partner"].create({"name": "Test partner 1"})
         partner_1.invalidate_model()
-        self.assertTrue(partner_1.dms_directory_ids)
+        directory_1 = partner_1.dms_directory_ids[0]
+        self.assertFalse(directory_1.parent_id)
+        self.assertTrue(directory_1.is_root_directory)
+        self.assertTrue(directory_1.inherit_group_ids)
+        partner_2 = (
+            self.env["res.partner"]
+            .with_context(skip_track_dms_field_template=True)
+            .create({"name": "Test partner 2"})
+        )
+        partner_2.invalidate_model()
+        self.assertFalse(partner_2.dms_directory_ids)
+
+    def test_creation_process_02_with_parent(self):
+        self.template.parent_directory_id = fields.first(
+            self.template.storage_id.root_directory_ids
+        )
+        partner_1 = self.env["res.partner"].create({"name": "Test partner 1"})
+        partner_1.invalidate_model()
+        directory_1 = partner_1.dms_directory_ids[0]
+        self.assertEqual(directory_1.parent_id, self.template.parent_directory_id)
+        self.assertFalse(directory_1.is_root_directory)
+        self.assertFalse(directory_1.inherit_group_ids)
         partner_2 = (
             self.env["res.partner"]
             .with_context(skip_track_dms_field_template=True)
