@@ -5,10 +5,11 @@
     <record model="ir.ui.view" id="dms_directory_dms_tree_view">
         <field name="name">dms.directory.dms_tree (in dms_field)</field>
         <field name="model">dms.directory</field>
+        <field name="type">dms_list</field>
         <field name="arch" type="xml">
-            <dms_tree>
+            <dms_list>
                 <field name="name" />
-            </dms_tree>
+            </dms_list>
         </field>
     </record>
 </odoo>

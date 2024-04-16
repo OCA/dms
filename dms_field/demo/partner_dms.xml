@@ -11,7 +11,7 @@
                     string="DMS"
                     attrs="{'invisible': [('id', '=', False)]}"
                 >
-                    <field name="dms_directory_ids" mode="dms_tree" />
+                    <field name="dms_directory_ids" mode="dms_list" />
                 </page>
             </notebook>
         </field>
