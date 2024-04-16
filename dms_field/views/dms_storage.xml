@@ -5,16 +5,17 @@
     <record model="ir.ui.view" id="dms_storage_dms_tree_view">
         <field name="name">dms.storage.dms_tree (in dms_field)</field>
         <field name="model">dms.storage</field>
+        <field name="type">dms_list</field>
         <field name="arch" type="xml">
-            <dms_tree>
+            <dms_list>
                 <field name="name" />
-            </dms_tree>
+            </dms_list>
         </field>
     </record>
     <record model="ir.actions.act_window" id="dms_storage_act_window">
         <field name="name">Documents</field>
         <field name="res_model">dms.storage</field>
-        <field name="view_mode">dms_tree</field>
+        <field name="view_mode">dms_list</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-04 08:09+0000\n"
+"PO-Revision-Date: 2024-06-04 08:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -14,10 +16,10 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
-msgid "Action Buttons"
+msgid "A file with the same name already exists"
 msgstr ""
 
 #. module: dms_field
@@ -26,30 +28,38 @@ msgid "Action Window View"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Actions"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Add Directory: "
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Add File: "
 msgstr ""
 
 #. module: dms_field
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
+#, python-format
+msgid "An error occurred during the upload"
+msgstr ""
+
+#. module: dms_field
+#. odoo-python
 #: code:addons/dms_field/models/dms_field_template.py:0
 #, python-format
-msgid "Autogenerate group from %(model)s (%(name)s)"
+msgid "Autogenerate group from %(model)s (%(name)s) #%(id)s"
 msgstr ""
 
 #. module: dms_field
@@ -58,41 +68,20 @@ msgid "Base"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Close the selected node"
-msgstr ""
-
-#. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__company_id
 msgid "Company"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Context Menu"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/controls.xml:0
-#, python-format
-msgid "Create"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Create File"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Create directory"
 msgstr ""
@@ -108,17 +97,14 @@ msgid "Created on"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Cut"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_view.js:0
 #: model_terms:ir.ui.view,arch_db:dms_field.view_partner_form
-#, python-format
 msgid "DMS"
 msgstr ""
 
@@ -151,20 +137,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_base_language_export__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_language_import__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_language_install__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_base_module_install_request__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_base_module_install_review__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_module_uninstall__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_module_update__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_module_upgrade__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_partner_merge_automatic_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_base_partner_merge_line__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_base_update_translations__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_bus_bus__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_bus_presence__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_change_password_own__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_change_password_user__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_change_password_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_decimal_precision__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_access_group__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_category__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_dms_classification_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_directory__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_file__dms_directory_ids
@@ -174,18 +161,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_dms_tag__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_fetchmail_server__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_format_address_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_department__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_departure_reason__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_departure_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_employee__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_employee_base__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_employee_category__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_employee_public__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_job__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_plan__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_plan_activity_type__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_plan_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_hr_work_location__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_google_gmail_mixin__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_iap_account__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_iap_autocomplete_api__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_iap_enrich_api__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_image_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_url__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window__dms_directory_ids
@@ -199,6 +178,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_ir_asset__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_attachment__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_autovacuum__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_ir_binary__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_config_parameter__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_cron__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_cron_trigger__dms_directory_ids
@@ -246,14 +226,15 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_relative__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_selection__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_text__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_ir_qweb_field_time__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_rule__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_sequence__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_sequence_date_range__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_server_object_lines__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_ir_translation__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_ui_menu__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_ui_view__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_ir_ui_view_custom__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_ir_websocket__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_activity_type__dms_directory_ids
@@ -263,25 +244,28 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_mail_blacklist_remove__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_bot__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_mail_channel_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_channel_member__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel_rtc_session__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_compose_message__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_composer_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_followers__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_gateway_allowed__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_guest__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_ice_server__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_link_preview__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_mail__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_message__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_message_reaction__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_message_schedule__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_message_subtype__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_notification__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_render_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_mail_resend_cancel__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_resend_message__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_resend_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_shortcode__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_template_preview__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_mail_template_reset__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_thread__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_thread_blacklist__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_thread_cc__dms_directory_ids
@@ -294,6 +278,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_portal_share__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_portal_wizard__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_portal_wizard_user__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_privacy_log__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_privacy_lookup_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_privacy_lookup_wizard_line__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_publisher_warranty_contract__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_report_base_report_irmodulereference__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_report_layout__dms_directory_ids
@@ -311,6 +298,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_res_groups__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_lang__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_res_partner_autocomplete_sync__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_bank__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_category__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_partner_industry__dms_directory_ids
@@ -319,42 +307,47 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_res_users_apikeys__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_apikeys_description__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_apikeys_show__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_res_users_deletion__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_identitycheck__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_log__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_settings_volumes__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_reset_view_arch_wizard__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_resource_calendar__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_resource_calendar_attendance__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_resource_calendar_leaves__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_resource_mixin__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_resource_resource__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_resource_test__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_api__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_composer__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_resend__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_resend_recipient__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_sms__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_template__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_template_preview__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_sms_template_reset__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_snailmail_confirm__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_format_error__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_snailmail_letter_missing_required_fields__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_template_reset_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification_detail__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_file_move__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
 msgstr ""
 
 #. module: dms_field
-#: model:ir.model.fields.selection,name:dms_field.selection__ir_actions_act_window_view__view_mode__dms_tree
-#: model:ir.model.fields.selection,name:dms_field.selection__ir_ui_view__type__dms_tree
+#: model:ir.model.fields.selection,name:dms_field.selection__ir_actions_act_window_view__view_mode__dms_list
+#: model:ir.model.fields.selection,name:dms_field.selection__ir_ui_view__type__dms_list
 msgid "DMS Tree"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
-#: code:addons/dms_field/static/src/xml/controls.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Delete"
 msgstr ""
 
 #. module: dms_field
+#. odoo-python
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "Directories of this storage must be related to a record"
@@ -366,6 +359,7 @@ msgid "Directory"
 msgstr ""
 
 #. module: dms_field
+#. odoo-python
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "Directory %s must be root in order to be related to a record"
@@ -394,45 +388,16 @@ msgid "Documents"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.xml:0
 #, python-format
 msgid "Download"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Drag and Drop"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "END"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/controls.xml:0
-#, python-format
-msgid "Edit"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Edit the selected node"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.xml:0
 #, python-format
 msgid "Elements:"
 msgstr ""
@@ -444,20 +409,13 @@ msgid "Embedded DMS templates"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "F2"
-msgstr ""
-
-#. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_storage__field_template_ids
 msgid "File templated ids"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.xml:0
 #, python-format
 msgid "Files:"
 msgstr ""
@@ -468,36 +426,8 @@ msgid "Groups"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "HOME"
-msgstr ""
-
-#. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__id
 msgid "ID"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Jump to the bottom"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Jump to the top"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Keyboard Shortcuts"
 msgstr ""
 
 #. module: dms_field
@@ -526,17 +456,10 @@ msgid "Model name"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
+#. odoo-python
+#: code:addons/dms_field/models/ir_ui_view.py:0
 #, python-format
-msgid "Move down one node"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Move up one node"
+msgid "Model not found: %(model)s"
 msgstr ""
 
 #. module: dms_field
@@ -545,31 +468,16 @@ msgid "Name"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
-#: code:addons/dms_field/static/src/xml/controls.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.xml:0
 #, python-format
 msgid "Open"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Open all nodes"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid "Open the selected node"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_controller.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Open: "
 msgstr ""
@@ -580,42 +488,36 @@ msgid "Parent Directory"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Paste"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/controls.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
-msgid "Refresh"
+msgid "Preview"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/js/base/dms_tree_renderer.js:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Rename"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/controls.xml:0
-#, python-format
-msgid "Show Help"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:0
-#: code:addons/dms_field/static/src/xml/preview.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.xml:0
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.xml:0
 #, python-format
 msgid "Size:"
 msgstr ""
 
 #. module: dms_field
+#. odoo-python
 #: code:addons/dms_field/models/dms_storage.py:0
 #, python-format
 msgid "Some directories are inconsistent with the storage models"
@@ -628,40 +530,42 @@ msgid "Storage"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/preview.xml:0
+#. odoo-javascript
+#: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.xml:0
 #, python-format
 msgid "Subdirectories:"
 msgstr ""
 
 #. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid ""
-"The action button at the top of the view can be used to open,\n"
-"                        create, edit or delete a node."
-msgstr ""
-
-#. module: dms_field
+#. odoo-python
 #: code:addons/dms_field/models/dms_storage.py:0
 #, python-format
 msgid "There are directories not associated to a record"
 msgstr ""
 
 #. module: dms_field
+#. odoo-python
 #: code:addons/dms_field/models/dms_field_template.py:0
 #, python-format
 msgid "There is already a linked directory created."
 msgstr ""
 
 #. module: dms_field
+#. odoo-python
+#: code:addons/dms_field/models/dms_field_template.py:0
+#, python-format
+msgid "There is already a template created for this model."
+msgstr ""
+
+#. module: dms_field
+#. odoo-python
 #: code:addons/dms_field/models/dms_field_template.py:0
 #, python-format
 msgid "There is no template linked to this model"
 msgstr ""
 
 #. module: dms_field
+#. odoo-python
 #: code:addons/dms_field/models/dms_directory.py:0
 #, python-format
 msgid "This record is already related in this storage"
@@ -681,25 +585,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_ir_actions_act_window_view__view_mode
 #: model:ir.model.fields,field_description:dms_field.field_ir_ui_view__type
 msgid "View Type"
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid ""
-"You can change the structure by moving nodes. It is also possible\n"
-"                        to create new nodes by dragging files and even entire folder\n"
-"                        structures on the view."
-msgstr ""
-
-#. module: dms_field
-#. openerp-web
-#: code:addons/dms_field/static/src/xml/dialogs.xml:0
-#, python-format
-msgid ""
-"You can open a context menu by right-clicking on any node. This\n"
-"                        contains further options for interacting with the node."
 msgstr ""
 
 #. module: dms_field

@@ -9,5 +9,5 @@ class IrActionsActWindowView(models.Model):
     _inherit = "ir.actions.act_window.view"
 
     view_mode = fields.Selection(
-        selection_add=[("dms_tree", "DMS Tree")], ondelete={"dms_tree": "cascade"}
+        selection_add=[("dms_list", "DMS Tree")], ondelete={"dms_list": "cascade"}
     )

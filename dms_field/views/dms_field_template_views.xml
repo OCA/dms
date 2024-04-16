@@ -43,7 +43,11 @@
                             string="Documents"
                             attrs="{'invisible':['|', ('storage_id', '=', False), ('model_id', '=', False)]}"
                         >
-                            <field name="dms_directory_ids" mode="dms_tree" />
+                            <field
+                                name="dms_directory_ids"
+                                mode="dms_list"
+                                attrs="{'invisible': [('id', '=', False)]}"
+                            />
                         </page>
                     </notebook>
                 </sheet>

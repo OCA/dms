@@ -1,11 +1,12 @@
 # Copyright 2024 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class DmsFieldTemplate(models.Model):
     _name = "dms.field.template"
+    _inherit = "dms.field.mixin"
     _description = "Dms Field Template"
 
     name = fields.Char(required=True)
@@ -72,7 +73,7 @@ class DmsFieldTemplate(models.Model):
                     "group_ids": record.group_ids.ids,
                 }
             )
-        template = self._get_template_from_model(res_model)
+        template = self._get_template_from_model(res_model).sudo()
         if not template:
             raise ValidationError(_("There is no template linked to this model"))
         total_directories = directory_model.search_count(
@@ -86,13 +87,13 @@ class DmsFieldTemplate(models.Model):
             raise ValidationError(_("There is already a linked directory created."))
         # Create root directory + files
         dms_directory_ids = template.dms_directory_ids
-        directory = directory_model.create(
+        new_directory = directory_model.create(
             template._prepare_directory_vals(dms_directory_ids, record)
         )
-        self._copy_files_from_directory(dms_directory_ids, directory)
+        self._copy_files_from_directory(dms_directory_ids, new_directory)
         # Create child directories
-        self._create_child_directories(directory, dms_directory_ids)
-        return directory
+        self._create_child_directories(new_directory, dms_directory_ids)
+        return new_directory
 
     def _copy_files_from_directory(self, directory, new_directory):
         for file in directory.file_ids:
@@ -101,9 +102,10 @@ class DmsFieldTemplate(models.Model):
     def _set_groups_from_directory(self, directory, record):
         groups = self.env["dms.access.group"]
         for group in directory.group_ids:
-            group_name = _("Autogenerate group from %(model)s (%(name)s)") % {
+            group_name = _("Autogenerate group from %(model)s (%(name)s) #%(id)s") % {
                 "model": record._description,
                 "name": record.display_name,
+                "id": record.id,
             }
             new_group = group.copy({"name": group_name, "directory_ids": False})
             # Apply sudo() because the user may not have permissions to access
@@ -146,3 +148,13 @@ class DmsFieldTemplate(models.Model):
             "name": directory_name,
             "group_ids": [(4, group.id) for group in groups],
         }
+
+    @api.constrains("model_id")
+    def _check_model_id(self):
+        for template in self:
+            if self.env["dms.field.template"].search(
+                [("model_id", "=", template.model_id.id), ("id", "!=", template.id)]
+            ):
+                raise UserError(
+                    _("There is already a template created for this model.")
+                )
