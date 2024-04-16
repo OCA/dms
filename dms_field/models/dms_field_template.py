@@ -21,6 +21,11 @@ class DmsFieldTemplate(models.Model):
         domain=[("save_type", "!=", "attachment")],
         string="Storage",
     )
+    parent_directory_id = fields.Many2one(
+        comodel_name="dms.directory",
+        domain="[('storage_id', '=', storage_id)]",
+        string="Parent directory",
+    )
     model_id = fields.Many2one(
         comodel_name="ir.model",
         string="Model",
@@ -78,7 +83,7 @@ class DmsFieldTemplate(models.Model):
             raise ValidationError(_("There is no template linked to this model"))
         total_directories = directory_model.search_count(
             [
-                ("is_root_directory", "=", True),
+                ("parent_id", "=", self.parent_directory_id.id),
                 ("res_model", "=", res_model),
                 ("res_id", "=", res_id),
             ]
@@ -140,14 +145,20 @@ class DmsFieldTemplate(models.Model):
             record.ids,
             engine="inline_template",
         )[record.id]
-        return {
+        vals = {
             "storage_id": directory.storage_id.id,
             "res_id": record.id,
             "res_model": record._name,
-            "is_root_directory": directory.is_root_directory,
             "name": directory_name,
             "group_ids": [(4, group.id) for group in groups],
         }
+        if not self.parent_directory_id:
+            vals.update({"is_root_directory": True})
+        else:
+            vals.update(
+                {"parent_id": self.parent_directory_id.id, "inherit_group_ids": False}
+            )
+        return vals
 
     @api.constrains("model_id")
     def _check_model_id(self):
