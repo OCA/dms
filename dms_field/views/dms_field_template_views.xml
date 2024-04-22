@@ -25,6 +25,10 @@
                         <field name="company_id" groups="base.group_multi_company" />
                         <field name="dms_directory_ids" invisible="1" />
                         <field name="storage_id" required="1" />
+                        <field
+                            name="parent_directory_id"
+                            attrs="{'invisible':[('storage_id', '=', False)]}"
+                        />
                         <field name="model_id" required="1" />
                         <field
                             name="user_field_id"
