@@ -167,6 +167,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_bus_presence__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_change_password_user__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_change_password_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_collection_base__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_component_builder__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_decimal_precision__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_access_group__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_dms_add_directory_record__dms_directory_ids
@@ -309,7 +311,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_res_users_identitycheck__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_res_users_log__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_reset_view_arch_wizard__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_server_config__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_server_env_mixin__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_server_env_techname_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_sparse_fields_test__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_storage_backend__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_assets__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_editor_converter_test_sub__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_web_tour_tour__dms_directory_ids
