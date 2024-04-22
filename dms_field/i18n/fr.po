@@ -370,12 +370,6 @@ msgid "Directory"
 msgstr ""
 
 #. module: dms_field
-#: code:addons/dms_field/models/dms_directory.py:0
-#, python-format
-msgid "Directory %s must be root in order to be related to a record"
-msgstr ""
-
-#. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__directory_format_name
 msgid "Directory format name"
 msgstr ""
@@ -580,6 +574,11 @@ msgstr ""
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_directory__parent_id
 msgid "Parent Directory"
+msgstr ""
+
+#. module: dms_field
+#: model:ir.model.fields,field_description:dms_field.field_dms_field_template__parent_directory_id
+msgid "Parent directory"
 msgstr ""
 
 #. module: dms_field
