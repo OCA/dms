@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-dms',
         'odoo14-addon-dms_action',
         'odoo14-addon-dms_field',
+        'odoo14-addon-dms_storage',
     ],
     classifiers=[
         'Programming Language :: Python',
