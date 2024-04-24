@@ -31,10 +31,14 @@
                         border-bottom: solid 1px $gray-400;
                     }
                 }
+                span.total_items {
+                    margin-left: 3px;
+                    margin-top: 3px;
+                }
             }
         }
         .o_kanban_image {
-            width: $o-kanban-image-width + 1;
+            width: $o-kanban-image-width - 1;
             border-right: solid 1px $gray-400;
             + div {
                 padding-left: $o-kanban-image-width + $o-kanban-inside-hgutter +
