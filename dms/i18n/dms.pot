@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-27 10:07+0000\n"
+"PO-Revision-Date: 2024-03-27 10:07+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -70,6 +72,16 @@ msgstr ""
 msgid ""
 "<i class=\"fa fa-download\"/>\n"
 "                                                Download"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+msgid ""
+"<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
+"                    <b>ATTENTION:</b> Tips to keep in mind before moving files:<br/>\n"
+"                    - This change cannot be undone.<br/>\n"
+"                    - Remember that the permissions of the files are those of the folder that contains it, therefore, it is possible that when you change it, the permissions will also change.<br/>\n"
+"                    Make this change at your own risk."
 msgstr ""
 
 #. module: dms
@@ -409,6 +421,11 @@ msgid "Archived Files"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+msgid "Are you sure? All files will be moved."
+msgstr ""
+
+#. module: dms
 #. odoo-python
 #: code:addons/dms/models/storage.py:0
 #: model:ir.model,name:dms.model_ir_attachment
@@ -437,6 +454,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_new_form
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Cancel"
 msgstr ""
 
@@ -611,6 +629,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_files_title
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_files
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_files
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__count_files
 msgid "Count Files"
 msgstr ""
 
@@ -701,6 +720,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__create_uid
 #: model:ir.model.fields,field_description:dms.field_dms_storage__create_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__create_uid
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -711,6 +731,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__create_date
 #: model:ir.model.fields,field_description:dms.field_dms_storage__create_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__create_date
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__create_date
 msgid "Created on"
 msgstr ""
 
@@ -835,6 +856,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model,name:dms.model_dms_directory
 #: model:ir.model.fields,field_description:dms.field_dms_file__directory_id
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__directory_id
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_directory_step
 msgid "Directory"
 msgstr ""
@@ -846,6 +868,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__display_name
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -1084,6 +1107,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__id
 #: model:ir.model.fields,field_description:dms.field_dms_storage__id
 #: model:ir.model.fields,field_description:dms.field_dms_tag__id
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__id
 msgid "ID"
 msgstr ""
 
@@ -1306,6 +1330,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_storage____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_tag____last_update
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -1316,6 +1341,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__write_uid
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_uid
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -1326,6 +1352,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__write_date
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_date
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -1451,6 +1478,17 @@ msgid "Modification Date"
 msgstr ""
 
 #. module: dms
+#: model:ir.actions.server,name:dms.action_wizard_dms_file_move
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+msgid "Move"
+msgstr ""
+
+#. module: dms
+#: model:ir.actions.act_window,name:dms.wizard_dms_file_move_act_window
+msgid "Move files"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
 #: model:ir.model.fields,field_description:dms.field_dms_file__my_activity_date_deadline
 msgid "My Activity Deadline"
@@ -1569,6 +1607,13 @@ msgstr ""
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_03_demo
 msgid "Only admin user"
+msgstr ""
+
+#. module: dms
+#. odoo-python
+#: code:addons/dms/models/dms_file.py:0
+#, python-format
+msgid "Only files in the same root directory can be moved."
 msgstr ""
 
 #. module: dms
@@ -1746,6 +1791,7 @@ msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__root_directory_id
+#: model:ir.model.fields,field_description:dms.field_dms_file__root_directory_id
 msgid "Root Directory"
 msgstr ""
 
@@ -2033,6 +2079,11 @@ msgid "Total Subdirectories"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+msgid "Total files"
+msgstr ""
+
+#. module: dms
 #: model:dms.category,name:dms.category_04_demo
 msgid "Traveling"
 msgstr ""
@@ -2119,6 +2170,11 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_directory__website_message_ids
 #: model:ir.model.fields,help:dms.field_dms_file__website_message_ids
 msgid "Website communication history"
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_wizard_dms_file_move
+msgid "Wizard Dms File Move"
 msgstr ""
 
 #. module: dms
