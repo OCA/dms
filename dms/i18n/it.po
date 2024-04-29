@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-16 17:46+0000\n"
+"PO-Revision-Date: 2024-04-29 09:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -107,6 +107,14 @@ msgid ""
 "change it, the permissions will also change.<br/>\n"
 "                    Make this change at your own risk."
 msgstr ""
+"<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Attenzione\"/>\n"
+"                    <b>ATTENZIONE:</b> Cose da tenere presente prima di "
+"muovere i file:<br/>\n"
+"                    - Questa modifica non può essere annullata.<br/>\n"
+"                    - Ricordarsi che i permessi dei file sono quelli della "
+"cartella che li contiene, quindi, è possibile che quando viene modificata, "
+"anche i permessi cambino.<br/>\n"
+"                    Eseguire queste modifiche a proprio rischio."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -479,7 +487,7 @@ msgstr "File archiviati"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Are you sure? All files will be moved."
-msgstr ""
+msgstr "Si è sicuri? Tutti i file verranno spostati."
 
 #. module: dms
 #. odoo-python
@@ -1562,12 +1570,12 @@ msgstr "Data di modifica"
 #: model:ir.actions.server,name:dms.action_wizard_dms_file_move
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Move"
-msgstr ""
+msgstr "Sposta"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.wizard_dms_file_move_act_window
 msgid "Move files"
-msgstr ""
+msgstr "Sposta file"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
@@ -1692,7 +1700,7 @@ msgstr "Solo utente amministratore"
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Only files in the same root directory can be moved."
-msgstr ""
+msgstr "Solo i file nella stessa cartella radice possono essere spostati."
 
 #. module: dms
 #. odoo-python
@@ -2189,7 +2197,7 @@ msgstr "Totale sottocartelle"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Total files"
-msgstr ""
+msgstr "File totali"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
@@ -2283,7 +2291,7 @@ msgstr "Cronologia comunicazioni sito web"
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_file_move
 msgid "Wizard Dms File Move"
-msgstr ""
+msgstr "Procedura guidata sposta file DMS"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
