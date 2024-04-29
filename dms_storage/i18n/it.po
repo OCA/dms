@@ -6,64 +6,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-04-29 14:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: dms_storage
 #: model:ir.model.fields,field_description:dms_storage.field_dms_file__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_storage.field_dms_storage__dms_directory_ids
 msgid "DMS Directories"
-msgstr ""
+msgstr "Cartelle DMS"
 
 #. module: dms_storage
 #: model:ir.model.fields,field_description:dms_storage.field_dms_file__display_name
 #: model:ir.model.fields,field_description:dms_storage.field_dms_storage__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: dms_storage
 #: model:ir.model,name:dms_storage.model_dms_file
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #. module: dms_storage
 #: model:ir.model.fields,field_description:dms_storage.field_dms_file__id
 #: model:ir.model.fields,field_description:dms_storage.field_dms_storage__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: dms_storage
 #: model:ir.model.fields,field_description:dms_storage.field_dms_file____last_update
 #: model:ir.model.fields,field_description:dms_storage.field_dms_storage____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: dms_storage
 #: model:ir.model.fields,field_description:dms_storage.field_dms_storage__save_type
 msgid "Save Type"
-msgstr ""
+msgstr "Tipo salvataggio"
 
 #. module: dms_storage
 #: model:ir.model,name:dms_storage.model_dms_storage
 #: model:ir.model.fields.selection,name:dms_storage.selection__dms_storage__save_type__storage
 msgid "Storage"
-msgstr ""
+msgstr "Deposito"
 
 #. module: dms_storage
 #: model:ir.model.fields,field_description:dms_storage.field_dms_file__storage_backend_id
 #: model:ir.model.fields,field_description:dms_storage.field_dms_storage__storage_backend_id
 msgid "Storage Backend"
-msgstr ""
+msgstr "Backend deposito"
 
 #. module: dms_storage
 #: model:ir.model.fields,field_description:dms_storage.field_dms_file__storage_path
 msgid "Storage Path"
-msgstr ""
+msgstr "Percorso deposito"
 
 #. module: dms_storage
 #: model:ir.model.fields,help:dms_storage.field_dms_storage__save_type
@@ -72,3 +74,8 @@ msgid ""
 "        system. If you change this setting, you can migrate existing files\n"
 "        manually by triggering the action."
 msgstr ""
+"Il tipo di salvataggio viene utilizzato per determinare come un file viene "
+"salvato dal sistema.\n"
+"          Se modifichi questa impostazione, puoi eseguire la migrazione dei "
+"file esistenti\n"
+"         manualmente attivando l'azione."
