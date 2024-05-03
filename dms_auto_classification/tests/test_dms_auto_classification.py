@@ -48,13 +48,16 @@ class TestDmsAutoClassification(BaseCommon):
         return wizard_form.save()
 
     @users("test_dms_user")
-    def test_wizard_dms_clasification_process(self):
+    def test_wizard_dms_clasification_process_01(self):
         self.wizard = self.wizard.with_user(self.env.user)
         self.assertEqual(self.wizard.state, "draft")
         # Wizard - Analyze process
         self.wizard.action_analyze()
         self.assertEqual(self.wizard.state, "analyze")
         self.assertEqual(len(self.wizard.detail_ids), 2)
+        full_paths = self.wizard.mapped("detail_ids.full_path")
+        self.assertIn("test/file-1.txt", full_paths)
+        self.assertIn("test/file-2.txt", full_paths)
         file_names = self.wizard.mapped("detail_ids.file_name")
         self.assertIn("file-1.txt", file_names)
         self.assertIn("file-2.txt", file_names)
@@ -107,12 +110,52 @@ class TestDmsAutoClassification(BaseCommon):
         dms_files = self.env[res["res_model"]].search(res["domain"])
         self.assertEqual(len(dms_files), 2)
 
-    def test_wizard_dms_clasification_process_filename_pattern(self):
+    def test_wizard_dms_clasification_process_filename_pattern_01(self):
         self.template.filename_pattern = ".pdf$"
         self.assertEqual(self.wizard.state, "draft")
         self.wizard.action_analyze()
         self.assertEqual(self.wizard.state, "analyze")
         self.assertEqual(len(self.wizard.detail_ids), 0)
+
+    def test_wizard_dms_clasification_process_filename_pattern_02(self):
+        self.template.filename_pattern = "test2/.txt$"
+        self.assertEqual(self.wizard.state, "draft")
+        self.wizard.action_analyze()
+        self.assertEqual(self.wizard.state, "analyze")
+        self.assertEqual(len(self.wizard.detail_ids), 0)
+
+    def test_wizard_dms_clasification_process_filename_pattern_03(self):
+        self.template.filename_pattern = "test.*.txt$"
+        self.assertEqual(self.wizard.state, "draft")
+        self.wizard.action_analyze()
+        self.assertEqual(self.wizard.state, "analyze")
+        self.assertEqual(len(self.wizard.detail_ids), 2)
+        full_paths = self.wizard.mapped("detail_ids.full_path")
+        self.assertIn("test/file-1.txt", full_paths)
+        self.assertIn("test/file-2.txt", full_paths)
+        file_names = self.wizard.mapped("detail_ids.file_name")
+        self.assertIn("file-1.txt", file_names)
+        self.assertIn("file-2.txt", file_names)
+
+    def test_wizard_dms_clasification_process_filename_pattern_04(self):
+        self.template.filename_pattern = "test1.*.txt$"
+        self.assertEqual(self.wizard.state, "draft")
+        self.wizard.action_analyze()
+        self.assertEqual(self.wizard.state, "analyze")
+        self.assertEqual(len(self.wizard.detail_ids), 0)
+
+    def test_wizard_dms_clasification_process_filename_pattern_05(self):
+        self.template.filename_pattern = "test.*.file-1.txt$"
+        self.assertEqual(self.wizard.state, "draft")
+        self.wizard.action_analyze()
+        self.assertEqual(self.wizard.state, "analyze")
+        self.assertEqual(len(self.wizard.detail_ids), 1)
+        full_paths = self.wizard.mapped("detail_ids.full_path")
+        self.assertIn("test/file-1.txt", full_paths)
+        self.assertNotIn("test/file-2.txt", full_paths)
+        file_names = self.wizard.mapped("detail_ids.file_name")
+        self.assertIn("file-1.txt", file_names)
+        self.assertNotIn("file-2.txt", file_names)
 
     @users("test_dms_user")
     def test_wizard_dms_clasification_process_directory_pattern(self):
@@ -123,6 +166,9 @@ class TestDmsAutoClassification(BaseCommon):
         self.wizard.action_analyze()
         self.assertEqual(self.wizard.state, "analyze")
         self.assertEqual(len(self.wizard.detail_ids), 2)
+        full_paths = self.wizard.mapped("detail_ids.full_path")
+        self.assertIn("test/file-1.txt", full_paths)
+        self.assertIn("test/file-2.txt", full_paths)
         file_names = self.wizard.mapped("detail_ids.file_name")
         self.assertIn("file-1.txt", file_names)
         self.assertIn("file-2.txt", file_names)
