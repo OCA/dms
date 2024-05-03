@@ -82,17 +82,21 @@ class WizardDmsClassification(models.TransientModel):
         details = []
         zip_file = zipfile.ZipFile(BytesIO(base64.b64decode(self.data_file)))
         filename_pattern = self.template_id.filename_pattern
-        for filename in zip_file.namelist():
+        for zip_info in zip_file.infolist():
+            if zip_info.is_dir():
+                continue
+            filename = zip_info.filename
             if re.search(filename_pattern, filename):
                 file_content = zip_file.read(filename)
                 data_file = base64.b64encode(file_content)
                 details.append(self._prepare_detail_vals(filename, data_file))
         return details
 
-    def _prepare_detail_vals(self, file_name, data_file):
-        """Method to set the values of each detail. May be extended by other modules."""
+    def _prepare_detail_vals(self, full_path, data_file):
+        """Method to set the values of each detail. May be extended by other modules.
+        Clean full_path (remove / from folders)."""
         return {
-            "file_name": file_name,
+            "full_path": full_path,
             "data_file": data_file,
         }
 
@@ -122,10 +126,15 @@ class WizardDmsClassificationDetail(models.TransientModel):
         comodel_name="wizard.dms.classification",
         string="Parent",
     )
-    file_name = fields.Char(
-        string="File name",
+    full_path = fields.Char(
+        string="Full path",
         required=True,
         readonly="True",
+    )
+    file_name = fields.Char(
+        compute="_compute_file_name",
+        store=True,
+        string="File name",
     )
     data_file = fields.Binary(
         string="File",
@@ -154,6 +163,15 @@ class WizardDmsClassificationDetail(models.TransientModel):
         store=True,
         readonly=True,
     )
+
+    @api.depends("full_path")
+    def _compute_file_name(self):
+        """File_name field is used to set file_id."""
+        for item in self:
+            name = item.full_path
+            if "/" in name:
+                name = name.split("/")[-1]
+            item.file_name = name
 
     @api.depends("file_name")
     def _compute_directory_id(self):

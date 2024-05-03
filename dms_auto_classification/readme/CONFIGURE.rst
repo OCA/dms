@@ -4,3 +4,6 @@
 Example of filename pattern to use only .txt files: .txt$
 Directory pattern example 1: Documents
 Directory pattern example 1: Documents / Data
+
+If the pattern doesn't contain path separators (/), the file name will be search across
+all the subdirectories.

@@ -116,6 +116,7 @@ msgstr "Archivo"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__file_name
+#: model_terms:ir.ui.view,arch_db:dms_auto_classification.view_wizard_dms_classification_form
 msgid "File name"
 msgstr "Nombre de archivo"
 
@@ -123,6 +124,11 @@ msgstr "Nombre de archivo"
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__filename_pattern
 msgid "Filename Pattern"
 msgstr "Patrón de nombre de archivo"
+
+#. module: dms_auto_classification
+#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__full_path
+msgid "Full path"
+msgstr ""
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__id
