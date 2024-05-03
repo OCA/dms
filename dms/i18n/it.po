@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-29 14:37+0000\n"
+"PO-Revision-Date: 2024-05-03 17:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -1866,7 +1866,7 @@ msgstr "Lo storage è nascosto"
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_tree
 msgid "Storages"
-msgstr "Storage"
+msgstr "Depositi"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_storage
