@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-04 16:35+0000\n"
+"PO-Revision-Date: 2024-05-15 09:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -127,7 +127,7 @@ msgstr "Schema nome file"
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__full_path
 msgid "Full path"
-msgstr ""
+msgstr "Percorso completo"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__id
