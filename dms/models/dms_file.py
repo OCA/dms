@@ -106,7 +106,10 @@ class File(models.Model):
 
     size = fields.Float(readonly=True)
     human_size = fields.Char(
-        readonly=True, string="Size", compute="_compute_human_size", store=True
+        readonly=True,
+        string="Size (human readable)",
+        compute="_compute_human_size",
+        store=True,
     )
 
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, index="btree")
