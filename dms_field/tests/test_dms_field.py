@@ -149,6 +149,9 @@ class TestDmsField(TransactionCase):
         self.assertIn(self.user_b, directory_0.group_ids.explicit_user_ids)
         self.assertIn(self.user_a, directory_0.group_ids.users)
         self.assertIn(self.user_b, directory_0.group_ids.users)
+        # Create new partner (same name) process to prevent error in dms access group
+        partner2 = self.env["res.partner"].create({"name": self.partner.name})
+        partner2.refresh()
 
     def test_creation_process_02(self):
         partner_1 = self.env["res.partner"].create({"name": "Test partner 1"})

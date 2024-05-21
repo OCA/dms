@@ -106,9 +106,10 @@ class DmsFieldTemplate(models.Model):
     def _set_groups_from_directory(self, directory, record):
         groups = self.env["dms.access.group"]
         for group in directory.group_ids:
-            group_name = _("Autogenerate group from %(model)s (%(name)s)") % {
+            group_name = _("Autogenerate group from %(model)s (%(name)s) #%(id)s") % {
                 "model": record._description,
                 "name": record.display_name,
+                "id": record.id,
             }
             new_group = group.copy({"name": group_name, "directory_ids": False})
             # Apply sudo() because the user may not have permissions to access

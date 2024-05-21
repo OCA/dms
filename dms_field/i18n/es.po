@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-16 11:00+0000\n"
-"PO-Revision-Date: 2024-04-16 13:01+0200\n"
+"POT-Creation-Date: 2024-05-20 11:48+0000\n"
+"PO-Revision-Date: 2024-05-20 13:49+0200\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -53,8 +53,8 @@ msgstr "Agregar archivo: "
 #. module: dms_field
 #: code:addons/dms_field/models/dms_field_template.py:0
 #, python-format
-msgid "Autogenerate group from %(model)s (%(name)s)"
-msgstr "Grupo autogenerado desde %(model)s (%(name)s)"
+msgid "Autogenerate group from %(model)s (%(name)s) #%(id)s"
+msgstr "Grupo autogenerado desde %(model)s (%(name)s) #%(id)s"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_base
