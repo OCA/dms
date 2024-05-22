@@ -199,7 +199,7 @@
                                     <field name="name" />
                                     <field name="count_total_directories" />
                                     <field name="count_total_files" />
-                                    <field name="human_size" />
+                                    <field name="human_size" string="Size" />
                                 </tree>
                             </field>
                         </page>

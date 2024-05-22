@@ -326,7 +326,7 @@
                 <field name="directory_id" optional="hide" />
                 <field name="root_directory_id" optional="hide" />
                 <field name="write_date" />
-                <field name="human_size" />
+                <field name="human_size" string="Size" />
                 <field name="mimetype" />
                 <field name="category_id" invisible="1" />
                 <field
@@ -599,7 +599,7 @@
                 <field name="is_lock_editor" invisible="1" />
                 <field name="name" />
                 <field name="write_date" />
-                <field name="human_size" />
+                <field name="human_size" string="Size" />
                 <field name="mimetype" />
                 <field name="storage_id" />
                 <field name="migration" />
