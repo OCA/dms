@@ -186,7 +186,9 @@ class DmsDirectory(models.Model):
     )
 
     size = fields.Float(compute="_compute_size")
-    human_size = fields.Char(compute="_compute_human_size", string="Size")
+    human_size = fields.Char(
+        compute="_compute_human_size", string="Size (human readable)"
+    )
 
     inherit_group_ids = fields.Boolean(string="Inherit Groups", default=True)
 
