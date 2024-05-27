@@ -4,11 +4,13 @@
 from base64 import b64encode
 from os import path
 
-from odoo.tests import Form, common, new_test_user
+from odoo.tests import Form, new_test_user
 from odoo.tests.common import users
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestDmsFieldAutoClassification(common.TransactionCase):
+
+class TestDmsFieldAutoClassification(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -33,7 +35,7 @@ class TestDmsFieldAutoClassification(common.TransactionCase):
             res_model=file_template._name, res_id=file_template.id
         )
         file_template_ctx.create_dms_directory()
-        file_template_ctx.refresh()
+        file_template_ctx.invalidate_model()
         cls.partner_a = cls.env["res.partner"].create(
             {
                 "name": "Test partner A",
