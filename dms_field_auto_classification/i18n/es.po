@@ -28,13 +28,6 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: dms_field_auto_classification
-#: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field_auto_classification.field_wizard_dms_classification_detail__dms_directory_ids
-msgid "DMS Directories"
-msgstr "Directorios DMS"
-
-#. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__detail_ids
 msgid "Details"
 msgstr "Detalles"
@@ -115,3 +108,6 @@ msgstr "Plantilla"
 #: model:ir.model,name:dms_field_auto_classification.model_wizard_dms_classification_detail
 msgid "Wizard Dms Classification Detail"
 msgstr "Asistente de Clasificación Dms Detalle"
+
+#~ msgid "DMS Directories"
+#~ msgstr "Directorios DMS"
