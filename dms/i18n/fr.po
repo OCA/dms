@@ -2112,8 +2112,8 @@ msgstr "Le nom du fichier n'est pas valide."
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
-msgid "The maximum upload size is %s MB)."
-msgstr "La taille de téléchargement maximale est de %s Mo)."
+msgid "The maximum upload size is %s MB."
+msgstr "La taille de téléchargement maximale est de %s Mo."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id

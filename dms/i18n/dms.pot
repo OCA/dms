@@ -2019,7 +2019,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
-msgid "The maximum upload size is %s MB)."
+msgid "The maximum upload size is %s MB."
 msgstr ""
 
 #. module: dms
