@@ -1,0 +1,14 @@
+- Mathias Markl \<<mathias.markl@mukit.at>\>
+- Enric Tobella \<<etobella@creublanca.es>\>
+- Antoni Romera
+- Gelu Boros \<<gelu.boros@rgbconsulting.com>\>
+- [Tecnativa](https://www.tecnativa.com):
+  - Víctor Martínez
+  - Pedro M. Baeza
+  - Jairo Llopis
+- [Elego](https://www.elegosoft.com):
+  - Yu Weng \<<yweng@elegosoft.com>\>
+  - Philip Witte \<<phillip.witte@elegosoft.com>\>
+  - Khanh Bui \<<khanh.bui@mail.elegosoft.com>\>
+- [Subteno](https://www.subteno.com):
+  - Timothée Vannier <<tva@subteno.com>>

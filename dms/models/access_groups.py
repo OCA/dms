@@ -1,5 +1,6 @@
 # Copyright 2017-2019 MuK IT GmbH
 # Copyright 2020 RGB Consulting
+# Copyright 2024 Timothée Vannier - Subteno (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import _, api, fields, models
@@ -121,8 +122,7 @@ class DmsAccessGroups(models.Model):
         for one in self:
             one.update(
                 {
-                    "perm_inclusive_%s"
-                    % perm: (
+                    "perm_inclusive_%s" % perm: (
                         one["perm_%s" % perm]
                         or one.parent_group_id["perm_inclusive_%s" % perm]
                     )
@@ -132,8 +132,8 @@ class DmsAccessGroups(models.Model):
 
     @api.model
     def default_get(self, fields_list):
-        res = super(DmsAccessGroups, self).default_get(fields_list)
-        if "explicit_user_ids" in res and res["explicit_user_ids"]:
+        res = super().default_get(fields_list)
+        if res.get("explicit_user_ids"):
             res["explicit_user_ids"] = res["explicit_user_ids"] + [self.env.uid]
         else:
             res["explicit_user_ids"] = [(6, 0, [self.env.uid])]
@@ -148,17 +148,24 @@ class DmsAccessGroups(models.Model):
     )
     def _compute_users(self):
         for record in self:
-            users = record.mapped("group_ids.users")
-            users |= record.mapped("explicit_user_ids")
-            users |= record.mapped("parent_group_id.users")
+            users = (
+                record.group_ids.users
+                | record.explicit_user_ids
+                | record.parent_group_id.users
+            )
             record.update({"users": users, "count_users": len(users)})
+
+    def copy(self, default=None):
+        default = dict(default or {})
+        default["name"] = _("%s (copy)") % self.name
+        return super().copy(default=default)
 
     @api.constrains("parent_path")
     def _check_parent_recursiveness(self):
-        """Forbid recursive relationships."""
-        for one in self:
-            if not one.parent_group_id:
-                continue
+        """
+        Forbid recursive relationships.
+        """
+        for one in self.filtered("parent_group_id"):
             if str(one.id) in one.parent_path.split("/"):
                 raise ValidationError(
                     _("Parent group '%(parent)s' is child of '%(current)s'.")

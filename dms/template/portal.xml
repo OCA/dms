@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
 <odoo>
     <template
         id="portal_my_home_dms"
@@ -5,10 +10,15 @@
         inherit_id="portal.portal_my_home"
         priority="20"
     >
-        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_client_category_enable" t-value="True" />
+        </xpath>
+        <xpath expr="//div[@id='portal_client_category']" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Documents</t>
+                <t t-set="text" t-value="'Manage your documents'" />
                 <t t-set="url" t-value="'/my/dms'" />
+                <t t-set="icon" t-value="'/dms/static/description/portal_icon.svg'" />
                 <t t-set="placeholder_count" t-value="'dms_directory_count'" />
             </t>
         </xpath>
@@ -101,9 +111,9 @@
                                     >
                                         <img
                                             class="o_portal_contact_img"
-                                            t-att-src="dms_file.icon_url"
+                                            t-att-src="dms_file.icon_url + (('&amp;access_token=' + access_token) if access_token else '')"
                                         />
-                                        <span t-esc="dms_file.name" />
+                                            <span t-esc="dms_file.name" />
                                     </a>
                                 </td>
                                 <td>

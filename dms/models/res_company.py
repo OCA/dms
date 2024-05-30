@@ -1,5 +1,6 @@
 # Copyright 2020 Creu Blanca
 # Copyright 2017-2019 MuK IT GmbH
+# Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
@@ -10,12 +11,7 @@ _logger = logging.getLogger(__name__)
 
 
 class ResCompany(models.Model):
-
     _inherit = "res.company"
-
-    # ----------------------------------------------------------
-    # Database
-    # ----------------------------------------------------------
 
     documents_onboarding_state = fields.Selection(
         selection=[
@@ -26,7 +22,6 @@ class ResCompany(models.Model):
         ],
         default="not_done",
     )
-
     documents_onboarding_storage_state = fields.Selection(
         selection=[
             ("not_done", "Not done"),
@@ -36,7 +31,6 @@ class ResCompany(models.Model):
         ],
         default="not_done",
     )
-
     documents_onboarding_directory_state = fields.Selection(
         selection=[
             ("not_done", "Not done"),
@@ -46,7 +40,6 @@ class ResCompany(models.Model):
         ],
         default="not_done",
     )
-
     documents_onboarding_file_state = fields.Selection(
         selection=[
             ("not_done", "Not done"),
@@ -57,55 +50,37 @@ class ResCompany(models.Model):
         default="not_done",
     )
 
-    # ----------------------------------------------------------
     # Functions
-    # ----------------------------------------------------------
-
     def get_and_update_documents_onboarding_state(self):
-        return self._get_and_update_onboarding_state(
-            "documents_onboarding_state", self.get_documents_steps_states_names()
-        )
-
-    def get_documents_steps_states_names(self):
-        return [
+        step_states = [
             "documents_onboarding_storage_state",
             "documents_onboarding_directory_state",
             "documents_onboarding_file_state",
         ]
+        onboarding_state = "documents_onboarding_state"
+        old_values = {}
+        all_done = True
 
-    # ----------------------------------------------------------
+        for step_state in step_states:
+            old_values[step_state] = self[step_state]
+            if self[step_state] == "just_done":
+                self[step_state] = "done"
+            all_done = all_done and self[step_state] == "done"
+
+        if all_done:
+            old_values[onboarding_state] = (
+                "just_done" if self[onboarding_state] == "not_done" else "done"
+            )
+            self[onboarding_state] = "done"
+
+        return old_values
+
     # Actions
-    # ----------------------------------------------------------
-
-    @api.model
-    def action_open_documents_onboarding_storage(self):
-        return self.env.ref("dms.action_dms_storage_new").read()[0]
-
-    @api.model
-    def action_open_documents_onboarding_directory(self):
-        storage = self.env["dms.storage"].search([], order="create_date desc", limit=1)
-        action = self.env.ref("dms.action_dms_directory_new").read()[0]
-        action["context"] = {
-            **self.env.context,
-            **{
-                "default_is_root_directory": True,
-                "default_storage_id": storage and storage.id,
-            },
-        }
-        return action
-
-    @api.model
-    def action_open_documents_onboarding_file(self):
-        directory = self.env["dms.directory"].search(
-            [], order="create_date desc", limit=1
-        )
-        action = self.env.ref("dms.action_dms_file_new").read()[0]
-        action["context"] = {
-            **self.env.context,
-            **{"default_directory_id": directory and directory.id},
-        }
-        return action
-
     @api.model
     def action_close_documents_onboarding(self):
         self.env.user.company_id.documents_onboarding_state = "closed"
+
+    def set_onboarding_step_done(self, step):
+        self.ensure_one()
+        if self[step] == "not_done":
+            self[step] = "just_done"

@@ -4,7 +4,6 @@ from odoo import api, models
 
 
 class IrAttachment(models.Model):
-
     _inherit = "ir.attachment"
 
     def _get_dms_directories(self, res_model, res_id):

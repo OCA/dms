@@ -2,6 +2,7 @@
 <!--
 
     Copyright 2017-2019 MuK IT GmbH
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
@@ -90,17 +91,7 @@
                             </field>
                         </page>
                         <page string="Directories">
-                            <field name="directory_ids">
-                                <tree>
-                                    <field name="name" />
-                                    <field
-                                        name="count_directories"
-                                        string="Directories"
-                                    />
-                                    <field name="count_files" string="Files" />
-                                    <field name="size" widget="binary_size" />
-                                </tree>
-                            </field>
+                            <field name="directory_ids" />
                         </page>
                     </notebook>
                 </sheet>
@@ -118,10 +109,4 @@
             (0, 0, {'view_mode': 'form', 'view_id': ref('view_dms_access_groups_form')})]"
         />
     </record>
-    <menuitem
-        id="menu_dms_access_groups"
-        name="Access Groups"
-        parent="dms.cat_menu_dms_config_system"
-        action="action_dms_access_groups"
-    />
 </odoo>

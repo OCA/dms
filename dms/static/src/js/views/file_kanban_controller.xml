@@ -4,7 +4,6 @@
         t-name="dms.FileKanbanView.Buttons"
         t-inherit="web.KanbanView.Buttons"
         t-inherit-mode="primary"
-        owl="1"
     >
         <div role="toolbar" position="inside">
             <input

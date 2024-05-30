@@ -3,6 +3,7 @@
 
     Copyright 2017-2019 MuK IT GmbH
     Copyright 2021 Tecnativa - Víctor Martínez
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
@@ -90,8 +91,8 @@
         <field name="arch" type="xml">
             <kanban
                 js_class="file_kanban"
-                class="mk_file_kanban_view o_kanban_small_column align-content-start"
-                banner_route="/dms/document_onboarding/file"
+                class="mk_file_kanban_view o_kanban_small_column o_kanban_mobile"
+                banner_route="/onboarding/document_onboarding_file"
             >
                 <field name="id" />
                 <field name="tag_ids" />
@@ -107,179 +108,159 @@
                 <field name="is_lock_editor" />
                 <field name="permission_write" />
                 <field name="permission_unlink" />
-                <field name="__last_update" />
-                <!-- <field name="model_name" /> -->
+                <field name="write_date" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div
-                            t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click"
-                        >
-                            <div class="o_dropdown_kanban dropdown">
-                                <a
-                                    class="dropdown-toggle o-no-caret btn"
-                                    href="#"
-                                    role="button"
-                                    data-toggle="dropdown"
-                                    aria-label="Dropdown menu"
-                                    title="Dropdown menu"
+                    <t t-name="kanban-menu">
+                        <div class="container">
+                            <div class="row">
+                                <div
+                                    class="col-6 o_kanban_card_manage_section o_kanban_manage_view"
                                 >
-                                    <span class="fa fa-ellipsis-v" />
-                                </a>
-                                <div class="dropdown-menu" role="menu">
-                                    <div class="row">
-                                        <div class="col-6 mk_file_kanban_operations">
-                                            <h6 class="dropdown-header">
-                                                Operations
-                                            </h6>
-                                            <a
-                                                t-if="record.permission_write.raw_value and !record.is_locked.raw_value"
-                                                role="menuitem"
-                                                name="lock"
-                                                type="object"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-lock" />
-                                                Lock
-                                            </a>
-                                            <a
-                                                t-if="record.is_locked.raw_value  and record.is_lock_editor.raw_value"
-                                                role="menuitem"
-                                                name="unlock"
-                                                type="object"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-unlock-alt" />
-                                                Unlock
-                                            </a>
-                                            <a
-                                                t-if="record.permission_write.raw_value and record.active.raw_value"
-                                                role="menuitem"
-                                                name="toggle_active"
-                                                type="object"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-archive" />
-                                                Archive
-                                            </a>
-                                            <a
-                                                t-if="record.permission_write.raw_value and !record.active.raw_value"
-                                                role="menuitem"
-                                                name="toggle_active"
-                                                type="object"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-archive" />
-                                                Unarchive
-                                            </a>
-                                            <a
-                                                role="menuitem"
-                                                class="dropdown-item"
-                                                t-attf-href="/web/content?id=#{record.id.raw_value}&amp;field=content&amp;model=dms.file&amp;filename_field=name&amp;download=true"
-                                            >
-                                                <i class="fa fa-download" />
-                                                Download
-                                            </a>
-                                        </div>
-                                        <div
-                                            class="col-6 border-left mk_file_kanban_actions"
-                                        >
-                                            <h6 class="dropdown-header">
-                                                Actions
-                                            </h6>
-                                            <a
-                                                role="menuitem"
-                                                type="open"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-external-link" />
-                                                Open
-                                            </a>
-                                            <a
-                                                t-if="record.permission_write.raw_value"
-                                                role="menuitem"
-                                                type="edit"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-pencil-square-o" />
-                                                Edit
-                                            </a>
-                                            <a
-                                                t-if="record.permission_unlink.raw_value"
-                                                role="menuitem"
-                                                type="delete"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-trash-o" />
-                                                Delete
-                                            </a>
-                                        </div>
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >
+                                        <span>Operations</span>
+                                    </h5>
+                                    <div
+                                        role="menuitem"
+                                        t-if="record.permission_write.raw_value and !record.is_locked.raw_value"
+                                    >
+                                        <a name="lock" type="object">
+                                            <i class="fa fa-lock" />
+                                            Lock
+                                        </a>
                                     </div>
                                     <div
-                                        t-if="record.permission_write.raw_value"
-                                        class="row"
+                                        role="menuitem"
+                                        t-if="record.is_locked.raw_value  and record.is_lock_editor.raw_value"
                                     >
-                                        <div role="menuitem" class="col-12">
-                                            <ul
-                                                class="oe_kanban_colorpicker"
-                                                data-field="color"
-                                            />
-                                        </div>
+                                        <a name="unlock" type="object">
+                                            <i class="fa fa-unlock-alt" />
+                                            Unlock
+                                        </a>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="oe_kanban_content">
-                                <div class="o_kanban_image">
-                                    <div class="o_kanban_image_wrapper">
+                                    <div
+                                        role="menuitem"
+                                        t-if="record.permission_write.raw_value and record.active.raw_value"
+                                    >
+                                        <a name="toggle_active" type="object">
+                                            <i class="fa fa-archive" />
+                                            Archive
+                                        </a>
+                                    </div>
+                                    <div
+                                        role="menuitem"
+                                        t-if="record.permission_write.raw_value and !record.active.raw_value"
+                                    >
+                                        <a name="toggle_active" type="object">
+                                            <i class="fa fa-archive" />
+                                            Unarchive
+                                        </a>
+                                    </div>
+                                    <div role="menuitem">
                                         <a
-                                            class="o_kanban_dms_file_preview"
-                                            t-att-data-id="record.id"
-                                            t-att-id="record.id.raw_value"
-                                            t-att-name="record.name.raw_value"
+                                            t-attf-href="/web/content?id=#{record.id.raw_value}&amp;field=content&amp;model=dms.file&amp;filename_field=name&amp;download=true"
                                         >
-                                            <img
-                                                t-att-src="record.icon_url.raw_value"
-                                                alt="Icon"
-                                            />
+                                            <i class="fa fa-download" />
+                                            Download
                                         </a>
                                     </div>
                                 </div>
+                                <div class="col-6 o_kanban_card_manage_section">
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >
+                                        <span>Actions</span>
+                                    </h5>
+                                    <div role="menuitem">
+                                        <a type="open">
+                                            <i class="fa fa-external-link" />
+                                            Open
+                                        </a>
+                                    </div>
+                                    <div
+                                        role="menuitem"
+                                        t-if="record.permission_write.raw_value"
+                                    >
+                                        <a type="edit">
+                                            <i class="fa fa-pencil-square-o" />
+                                            Edit
+                                        </a>
+                                    </div>
+                                    <div
+                                        role="menuitem"
+                                        t-if="record.permission_unlink.raw_value"
+                                    >
+                                        <a type="delete">
+                                            <i class="fa fa-trash-o" />
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_card_manage_settings row">
+                                <div
+                                    t-if="record.permission_write.raw_value"
+                                    role="menuitem"
+                                    aria-haspopup="true"
+                                >
+                                    <ul
+                                        class="oe_kanban_colorpicker"
+                                        data-field="color"
+                                        role="popup"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click oe_kanban_content oe_kanban_card row g-0"
+                        >
+                            <div class="col-3 h-100">
+                                <a
+                                    class="h-100 d-block o_kanban_dms_file_preview"
+                                    t-att-data-id="record.id.raw_value"
+                                    t-att-id="record.id.raw_value"
+                                    t-att-name="record.name.raw_value"
+                                >
+                                    <img
+                                        t-att-src="record.icon_url.raw_value"
+                                        alt="Icon"
+                                    />
+                                </a>
+                            </div>
+                            <div class="col-9">
                                 <div class="o_kanban_details">
-                                    <div class="o_kanban_details_wrapper">
-                                        <div
-                                            class="o_kanban_record_title o_text_overflow"
-                                        >
-                                            <field name="name" />
-                                        </div>
-                                        <div class="o_kanban_record_body">
-                                            <field
-                                                name="tag_ids"
-                                                widget="many2many_tags"
-                                                options="{'color_field': 'color'}"
+                                    <h5 class="o_kanban_record_title o_text_overflow">
+                                        <field name="name" />
+                                    </h5>
+                                    <div class="o_kanban_record_body">
+                                        <field
+                                            name="tag_ids"
+                                            widget="many2many_tags"
+                                            options="{'color_field': 'color'}"
+                                        />
+                                        <field name="write_date" widget="date" />
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_right">
+                                            <span
+                                                t-if="record.is_locked.raw_value"
+                                                class="o_dms_file_kanban_lock"
+                                            >
+                                                <i
+                                                    t-attf-class="fa #{(record.is_locked.raw_value and !record.is_lock_editor.raw_value) ? 'fa-lock' : ''} #{((record.is_locked.raw_value and record.is_lock_editor.raw_value)) ? 'fa-unlock-alt' : ''}"
+                                                    t-att-title="record.locked_by.value"
+                                                />
+                                            </span>
+                                            <img
+                                                t-att-src="kanban_image('res.users', 'image_128', record.create_uid.raw_value)"
+                                                t-att-alt="record.create_uid.value"
+                                                class="oe_kanban_avatar"
                                             />
-                                        </div>
-                                        <div class="o_kanban_record_bottom">
-                                            <div class="oe_kanban_bottom_left">
-                                                <field
-                                                    name="write_date"
-                                                    widget="date"
-                                                />
-                                            </div>
-                                            <div class="oe_kanban_bottom_right">
-                                                <span
-                                                    t-if="record.is_locked.raw_value"
-                                                    class="mk_file_kanban_lock"
-                                                >
-                                                    <i
-                                                        t-attf-class="fa #{(record.is_locked.raw_value and !record.is_lock_editor.raw_value) ? 'fa-lock' : ''} #{((record.is_locked.raw_value and record.is_lock_editor.raw_value)) ? 'fa-unlock-alt' : ''}"
-                                                        t-att-title="record.locked_by.value"
-                                                    />
-                                                </span>
-                                                <img
-                                                    t-att-src="kanban_image('res.users', 'image_128', record.create_uid.raw_value)"
-                                                    t-att-alt="record.create_uid.value"
-                                                    class="oe_kanban_avatar"
-                                                />
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -302,7 +283,6 @@
                 <attribute name="banner_route" />
                 <attribute name="class">o_kanban_mobile</attribute>
             </kanban>
-            <xpath expr="//div[hasclass('o_dropdown_kanban')]" position="replace" />
             <xpath expr="//div[hasclass('oe_kanban_bottom_right')]" position="replace">
                 <div class="oe_kanban_bottom_right" />
             </xpath>
@@ -319,16 +299,16 @@
                 multi_edit="1"
                 default_order="name asc"
             >
-                <field name="active" invisible="1" />
-                <field name="is_locked" invisible="1" />
-                <field name="is_lock_editor" invisible="1" />
+                <field name="active" column_invisible="1" />
+                <field name="is_locked" column_invisible="1" />
+                <field name="is_lock_editor" column_invisible="1" />
                 <field name="name" />
                 <field name="directory_id" optional="hide" />
                 <field name="root_directory_id" optional="hide" />
                 <field name="write_date" />
                 <field name="human_size" string="Size" />
                 <field name="mimetype" />
-                <field name="category_id" invisible="1" />
+                <field name="category_id" column_invisible="1" />
                 <field
                     name="tag_ids"
                     widget="many2many_tags"
@@ -369,22 +349,35 @@
                         name="lock"
                         type="object"
                         string="Lock"
-                        attrs="{'invisible':['|',('is_locked', '!=', False),('permission_write', '=', False)]}"
+                        invisible="is_locked or not permission_write"
                     />
                     <button
                         class="oe_highlight"
                         name="unlock"
                         type="object"
                         string="Unlock"
-                        attrs="{'invisible':['|',('is_locked', '=', False),('is_lock_editor', '=', False)]}"
+                        invisible="not is_locked or not is_lock_editor"
                     />
                 </header>
                 <sheet>
+                    <!-- locked ribbon first, so that archived ribbon appear above if archived-->
+                    <widget
+                        name="web_ribbon"
+                        title="Locked"
+                        bg_color="text-bg-info"
+                        invisible="not is_locked or (is_locked and locked_by != uid)"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="Locked"
+                        bg_color="text-bg-warning"
+                        invisible="not is_locked or (is_locked and locked_by == uid)"
+                    />
                     <widget
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <div class="oe_button_box" name="button_box" />
                     <field
@@ -405,7 +398,7 @@
                                 name="path_json"
                                 widget="path_json"
                                 options="{'prefix': True, 'suffix': False}"
-                                attrs="{'invisible': ['|', ('name', '=', False), ('directory_id', '=', False)]}"
+                                invisible="not name or not directory_id"
                             />
                         </h4>
                     </div>
@@ -455,16 +448,16 @@
                         <field
                             name="res_model"
                             readonly="True"
-                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                            invisible="storage_id_save_type != 'attachment'"
                         />
                         <field
                             name="res_id"
                             readonly="True"
-                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                            invisible="storage_id_save_type != 'attachment'"
                         />
                         <field
                             name="record_ref"
-                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                            invisible="storage_id_save_type != 'attachment'"
                         />
                     </group>
                     <notebook>
@@ -542,13 +535,6 @@
             eval="[(5, 0, 0),(0, 0, {'view_mode': 'kanban', 'view_id': ref('view_dms_file_kanban_wizard_selection')})]"
         />
     </record>
-    <menuitem
-        id="menu_dms_file"
-        name="Files"
-        sequence="20"
-        parent="main_menu_dms"
-        action="action_dms_file"
-    />
     <record id="search_dms_file_migration" model="ir.ui.view">
         <field name="name">dms_file.search</field>
         <field name="model">dms.file</field>
@@ -589,8 +575,8 @@
                 create="0"
                 delete="0"
             >
-                <field name="is_locked" invisible="1" />
-                <field name="is_lock_editor" invisible="1" />
+                <field name="is_locked" column_invisible="1" />
+                <field name="is_lock_editor" column_invisible="1" />
                 <field name="name" />
                 <field name="write_date" />
                 <field name="human_size" string="Size" />
@@ -607,7 +593,7 @@
         <field name="search_view_id" ref="search_dms_file_migration" />
         <field
             name="domain"
-        >[('require_migration', '=', True), '|',('active', '=', False), ('active', '!=', False)]
+        >[('require_migration', '=', True), '|', ('active', '=', False), ('active', '!=', False)]
         </field>
         <field name="context">{'search_default_group_storage': 1}</field>
         <field
@@ -623,13 +609,6 @@
             </p>
         </field>
     </record>
-    <menuitem
-        id="menu_dms_file_migration"
-        name="Migration"
-        parent="cat_menu_dms_config_system"
-        action="action_dms_file_migration"
-        sequence="8"
-    />
     <record id="view_dms_file_new_form" model="ir.ui.view">
         <field name="name">dms_file.form</field>
         <field name="model">dms.file</field>
