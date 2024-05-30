@@ -1,0 +1,69 @@
+/**********************************************************************************
+*
+*   Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+*   License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+*
+**********************************************************************************/
+
+.mk_directory_kanban_view,
+.mk_file_kanban_view {
+    .o_kanban_renderer {
+        .o_kanban_details {
+            position: relative;
+            height: 100%;
+        }
+        img:not(.oe_kanban_avatar) {
+            height: 79px;
+        }
+
+        .o_kanban_record_bottom {
+            position: absolute;
+            bottom: var(--KanbanRecord-gap-v);
+            left: var(--KanbanRecord-gap-v);
+            right: var(--KanbanRecord-gap-v);
+
+            .oe_kanban_bottom {
+                &_left,
+                &_right {
+                    position: absolute;
+                    bottom: 0;
+                }
+
+                &_left {
+                    left: 0;
+                }
+
+                &_right {
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    .o_dropdown_kanban {
+        .dropdown-menu {
+            min-width: 22rem;
+
+            .mk_file_kanban_operations {
+                padding-right: 8px;
+            }
+
+            .mk_file_kanban_actions {
+                padding-left: 8px;
+            }
+
+            .fa {
+                min-width: 12px;
+                padding-right: 2px;
+                text-align: center;
+            }
+
+            .oe_kanban_colorpicker {
+                max-width: none;
+                margin: 5px 5px;
+                padding: 10px 0 0 25px;
+                border-top: 1px solid $gray-400;
+            }
+        }
+    }
+}

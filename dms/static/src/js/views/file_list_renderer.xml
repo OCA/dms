@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-    <t
-        t-name="dms.ListRenderer"
-        t-inherit="web.ListRenderer"
-        t-inherit-mode="primary"
-        owl="1"
-    >
+    <t t-name="dms.ListRenderer" t-inherit="web.ListRenderer" t-inherit-mode="primary">
         <xpath expr="//div[hasclass('o_list_renderer')]" position="before">
             <div t-if="dragState.showDragZone" class="o_dropzone">
                 <i class="fa fa-cloud-upload fa-10x" />
@@ -17,7 +12,6 @@
         t-name="dms.ListButtons"
         t-inherit="web.ListView.Buttons"
         t-inherit-mode="primary"
-        owl="1"
     >
         <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
             <button

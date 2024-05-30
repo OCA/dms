@@ -12,16 +12,10 @@ _logger = logging.getLogger(__name__)
 
 
 class Storage(models.Model):
-
     _name = "dms.storage"
     _description = "Storage"
 
-    # ----------------------------------------------------------
-    # Database
-    # ----------------------------------------------------------
-
     name = fields.Char(required=True)
-
     save_type = fields.Selection(
         selection=[
             ("database", _("Database")),
@@ -30,11 +24,10 @@ class Storage(models.Model):
         ],
         default="database",
         required=True,
-        help="""The save type is used to determine how a file is saved by the
-        system. If you change this setting, you can migrate existing files
-        manually by triggering the action.""",
+        help="The save type is used to determine how a file is saved by the system. "
+        "If you change this setting, you can migrate existing files manually by "
+        "triggering the action.",
     )
-
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
@@ -42,13 +35,11 @@ class Storage(models.Model):
         help="If set, directories and files will only be available for "
         "the selected company.",
     )
-
     is_hidden = fields.Boolean(
         string="Storage is Hidden",
         default=False,
         help="Indicates if directories and files are hidden by default.",
     )
-
     root_directory_ids = fields.One2many(
         comodel_name="dms.directory",
         inverse_name="storage_id",
@@ -57,7 +48,6 @@ class Storage(models.Model):
         readonly=False,
         copy=False,
     )
-
     storage_directory_ids = fields.One2many(
         comodel_name="dms.directory",
         inverse_name="storage_id",
@@ -66,7 +56,6 @@ class Storage(models.Model):
         readonly=True,
         copy=False,
     )
-
     storage_file_ids = fields.One2many(
         comodel_name="dms.file",
         inverse_name="storage_id",
@@ -75,22 +64,19 @@ class Storage(models.Model):
         readonly=True,
         copy=False,
     )
-
     count_storage_directories = fields.Integer(
         compute="_compute_count_storage_directories", string="Count Directories"
     )
-
     count_storage_files = fields.Integer(
         compute="_compute_count_storage_files", string="Count Files"
     )
-
     model_ids = fields.Many2many("ir.model", string="Linked Models")
     inherit_access_from_parent_record = fields.Boolean(
         string="Inherit permissions from related record",
         default=False,
         help="Indicate if directories and files access work only with "
         "related model access (for example, if some directories are related "
-        "with any sale, only users with read access to these sale can acess)",
+        "with any sale, only users with read access to these sale can access)",
     )
     include_message_attachments = fields.Boolean(
         string="Create files from message attachments",
@@ -110,10 +96,7 @@ class Storage(models.Model):
             if record.save_type == "attachment":
                 record.inherit_access_from_parent_record = True
 
-    # ----------------------------------------------------------
     # Actions
-    # ----------------------------------------------------------
-
     def action_storage_migrate(self):
         if self.save_type != "attachment":
             if not self.env.user.has_group("dms.group_dms_manager"):
@@ -132,10 +115,7 @@ class Storage(models.Model):
             "documents_onboarding_storage_state"
         )
 
-    # ----------------------------------------------------------
     # Read, View
-    # ----------------------------------------------------------
-
     @api.depends("storage_directory_ids")
     def _compute_count_storage_directories(self):
         for record in self:

@@ -2,9 +2,10 @@
 <!--
 
     Copyright 2017-2019 MuK IT GmbH
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-  -->
+-->
 <odoo>
     <record id="view_dms_tag_search" model="ir.ui.view">
         <field name="name">dms_tag.search</field>
@@ -38,59 +39,61 @@
         <field name="name">dms_tag.kanban</field>
         <field name="model">dms.tag</field>
         <field name="arch" type="xml">
-            <kanban
-                class="o_kanban_small_column o_emphasize_colors"
-                group_create="false"
-            >
+            <kanban class="o_kanban_small_column" group_create="false">
+                <field name="name" />
                 <field name="color" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div
-                            t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click"
-                        >
-                            <div class="o_dropdown_kanban dropdown">
-                                <a
-                                    class="dropdown-toggle o-no-caret btn"
-                                    href="#"
-                                    role="button"
-                                    data-toggle="dropdown"
-                                    aria-label="Dropdown menu"
-                                    title="Dropdown menu"
-                                >
-                                    <span class="fa fa-ellipsis-v" />
-                                </a>
-                                <div class="dropdown-menu" role="menu">
-                                    <a
+                    <t t-name="kanban-menu">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col o_kanban_card_manage_section">
+                                    <h5
                                         role="menuitem"
-                                        type="open"
-                                        class="dropdown-item"
+                                        class="o_kanban_card_manage_title"
                                     >
-                                        <i class="fa fa-external-link" />
-                                        Open
-                                    </a>
-                                    <a
-                                        role="menuitem"
-                                        type="edit"
-                                        class="dropdown-item"
-                                    >
-                                        <i class="fa fa-pencil-square-o" />
-                                        Edit
-                                    </a>
-                                    <a
-                                        role="menuitem"
-                                        type="delete"
-                                        class="dropdown-item"
-                                    >
-                                        <i class="fa fa-trash-o" />
-                                        Delete
-                                    </a>
+                                        <span>Actions</span>
+                                    </h5>
+                                    <div role="menuitem">
+                                        <a type="open">
+                                            <i class="fa fa-external-link" />
+                                            Open
+                                        </a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a type="edit">
+                                            <i class="fa fa-pencil-square-o" />
+                                            Edit
+                                        </a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a type="delete">
+                                            <i class="fa fa-trash-o" />
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_card_manage_settings row">
+                                <div role="menuitem" aria-haspopup="true">
                                     <ul
                                         class="oe_kanban_colorpicker"
                                         data-field="color"
+                                        role="popup"
                                     />
                                 </div>
                             </div>
-                            <field name="name" />
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click oe_kanban_content oe_kanban_card"
+                        >
+                            <div class="o_kanban_details">
+                                <div class="o_kanban_record_title">
+                                    <h2><field name="name" /></h2>
+                                </div>
+                                <div class="o_kanban_record_body" />
+                            </div>
                         </div>
                     </t>
                 </templates>
@@ -104,7 +107,7 @@
             <tree>
                 <field name="name" />
                 <field name="category_id" />
-                <field name="color" widget="color_index" />
+                <field name="color" widget="color_picker" />
             </tree>
         </field>
     </record>
@@ -118,7 +121,7 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <div class="oe_button_box" name="button_box" />
                     <div class="oe_title">
@@ -131,7 +134,7 @@
                     <group>
                         <group>
                             <field name="category_id" />
-                            <field name="color" widget="color_index" />
+                            <field name="color" widget="color_picker" />
                         </group>
                         <group>
                             <field name="count_files" string="Files" />
@@ -164,10 +167,4 @@
             </p>
         </field>
     </record>
-    <menuitem
-        id="menu_dms_tag"
-        name="Tags"
-        parent="cat_menu_dms_config_organizing"
-        action="action_dms_tag"
-    />
 </odoo>

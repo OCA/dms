@@ -16,11 +16,13 @@ class StorageDatabaseTestCase(StorageDatabaseBaseCase):
 
     @users("dms-manager", "dms-user")
     def test_count_storage_directories(self):
-        self.assertTrue(self.storage.count_storage_directories)
+        self.assertTrue(
+            self.storage.count_storage_directories, "Storage should have directories"
+        )
 
     @users("dms-manager", "dms-user")
     def test_count_storage_files(self):
-        self.assertTrue(self.storage.count_storage_files)
+        self.assertTrue(self.storage.count_storage_files, "Storage should have files")
 
     @users("dms-manager")
     @mute_logger("odoo.models.unlink")
@@ -29,33 +31,61 @@ class StorageDatabaseTestCase(StorageDatabaseBaseCase):
             lambda x: x.is_root_directory
         )
         file_01 = self.create_file(directory=root_directory)
-        self.assertEqual(file_01.storage_id, self.storage)
-        self.assertEqual(file_01.storage_id.save_type, "database")
-        self.assertEqual(file_01.save_type, "database")
+        self.assertEqual(
+            file_01.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(
+            file_01.storage_id.save_type, "database", "Storage should be database"
+        )
+        self.assertEqual(
+            file_01.save_type, "database", "File savetype should be database"
+        )
         self.storage.write({"save_type": "file"})
         directory = self.create_directory(storage=self.storage)
         file_02 = self.create_file(directory=directory)
-        self.assertEqual(file_01.storage_id, self.storage)
-        self.assertEqual(file_01.storage_id.save_type, "file")
-        self.assertEqual(file_01.save_type, "database")
-        self.assertEqual(file_02.storage_id, self.storage)
-        self.assertEqual(file_02.storage_id.save_type, "file")
-        self.assertEqual(file_02.save_type, "file")
+        self.assertEqual(
+            file_01.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(file_01.storage_id.save_type, "file", "Storage should be file")
+        self.assertEqual(
+            file_01.save_type, "database", "File savetype should be database"
+        )
+        self.assertEqual(
+            file_02.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(file_02.storage_id.save_type, "file", "Storage should be file")
+        self.assertEqual(file_02.save_type, "file", "File savetype should be file")
         self.storage.action_storage_migrate()
-        self.assertEqual(file_01.storage_id, self.storage)
-        self.assertEqual(file_01.storage_id.save_type, "file")
-        self.assertEqual(file_01.save_type, "file")
-        self.assertEqual(file_02.storage_id, self.storage)
-        self.assertEqual(file_02.storage_id.save_type, "file")
-        self.assertEqual(file_02.save_type, "file")
+        self.assertEqual(
+            file_01.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(file_01.storage_id.save_type, "file", "Storage should be file")
+        self.assertEqual(file_01.save_type, "file", "File savetype should be file")
+        self.assertEqual(
+            file_02.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(file_02.storage_id.save_type, "file", "Storage should be file")
+        self.assertEqual(file_02.save_type, "file", "File savetype should be file")
         self.storage.write({"save_type": "database"})
         self.storage.action_storage_migrate()
-        self.assertEqual(file_01.storage_id, self.storage)
-        self.assertEqual(file_01.storage_id.save_type, "database")
-        self.assertEqual(file_01.save_type, "database")
-        self.assertEqual(file_02.storage_id, self.storage)
-        self.assertEqual(file_02.storage_id.save_type, "database")
-        self.assertEqual(file_02.save_type, "database")
+        self.assertEqual(
+            file_01.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(
+            file_01.storage_id.save_type, "database", "Storage should be database"
+        )
+        self.assertEqual(
+            file_01.save_type, "database", "File savetype should be database"
+        )
+        self.assertEqual(
+            file_02.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(
+            file_02.storage_id.save_type, "database", "Storage should be database"
+        )
+        self.assertEqual(
+            file_02.save_type, "database", "File savetype should be database"
+        )
         self.storage.write({"save_type": "attachment"})
         model_partner = self.env.ref("base.model_res_partner")
         partner = self.partner_model.create({"name": "Test partner"})
@@ -69,16 +99,40 @@ class StorageDatabaseTestCase(StorageDatabaseBaseCase):
             }
         )
         file_03 = self.create_file(directory=directory)
-        self.assertEqual(file_02.storage_id, self.storage)
-        self.assertEqual(file_02.storage_id.save_type, "attachment")
-        self.assertEqual(file_02.save_type, "database")
-        self.assertEqual(file_03.storage_id, self.storage)
-        self.assertEqual(file_03.storage_id.save_type, "attachment")
-        self.assertEqual(file_03.save_type, "database")
+        self.assertEqual(
+            file_02.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(
+            file_02.storage_id.save_type, "attachment", "Storage should be attachment"
+        )
+        self.assertEqual(
+            file_02.save_type, "database", "File savetype should be database"
+        )
+        self.assertEqual(
+            file_03.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(
+            file_03.storage_id.save_type, "attachment", "Storage should be attachment"
+        )
+        self.assertEqual(
+            file_03.save_type, "database", "File savetype should be database"
+        )
         self.storage.action_storage_migrate()
-        self.assertEqual(file_02.storage_id, self.storage)
-        self.assertEqual(file_02.storage_id.save_type, "attachment")
-        self.assertEqual(file_02.save_type, "database")
-        self.assertEqual(file_03.storage_id, self.storage)
-        self.assertEqual(file_03.storage_id.save_type, "attachment")
-        self.assertEqual(file_03.save_type, "database")
+        self.assertEqual(
+            file_02.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(
+            file_02.storage_id.save_type, "attachment", "Storage should be attachment"
+        )
+        self.assertEqual(
+            file_02.save_type, "database", "File savetype should be database"
+        )
+        self.assertEqual(
+            file_03.storage_id, self.storage, "File should be in the storage"
+        )
+        self.assertEqual(
+            file_03.storage_id.save_type, "attachment", "Storage should be attachment"
+        )
+        self.assertEqual(
+            file_03.save_type, "database", "File savetype should be database"
+        )

@@ -3,6 +3,7 @@
 
     Copyright 2017-2019 MuK IT GmbH
     Copyright 2021 Tecnativa - Víctor Martínez
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
@@ -13,7 +14,7 @@
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
             [
-            ("is_hidden", "=", False),
+                ("is_hidden", "=", False),
             ]
         </field>
         <field name="context">
@@ -38,7 +39,7 @@
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
             [
-            ("is_hidden", "=", False),
+                ("is_hidden", "=", False),
             ]
         </field>
         <field name="context">
@@ -62,14 +63,14 @@
         <field name="view_mode">kanban,tree,form</field>
         <field name="domain">
             [
-            ("parent_id", "child_of", active_id),
-            ("is_hidden", "=", False),
-            ("id", "!=", active_id),
+                ("parent_id", "child_of", active_id),
+                ("is_hidden", "=", False),
+                ("id", "!=", active_id),
             ]
         </field>
         <field name="context">
             {
-            'default_parent_id': active_id,
+                'default_parent_id': active_id,
             }
         </field>
         <field name="help" type="html">
@@ -88,13 +89,13 @@
         <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">
             [
-            ("is_hidden", "=", False),
+                ("is_hidden", "=", False),
             ]
         </field>
         <field name="context">
             {
-            'default_directory_id': active_id,
-            'searchpanel_default_directory_id': active_id
+                'default_directory_id': active_id,
+                'searchpanel_default_directory_id': active_id
             }
         </field>
         <field name="help" type="html">
@@ -191,8 +192,8 @@
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <kanban
-                class="mk_directory_kanban_view o_kanban_small_column align-content-start"
-                banner_route="/dms/document_onboarding/directory"
+                class="mk_directory_kanban_view o_kanban_small_column o_kanban_mobile"
+                banner_route="/onboarding/document_onboarding_file"
             >
                 <field name="id" />
                 <field name="tag_ids" />
@@ -211,167 +212,155 @@
                 <field name="count_total_directories" />
                 <field name="count_total_files" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div
-                            t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click"
-                        >
-                            <div class="o_dropdown_kanban dropdown">
-                                <a
-                                    class="dropdown-toggle o-no-caret btn"
-                                    href="#"
-                                    role="button"
-                                    data-toggle="dropdown"
-                                    aria-label="Dropdown menu"
-                                    title="Dropdown menu"
+                    <t t-name="kanban-menu">
+                        <div class="container">
+                            <div class="row">
+                                <div
+                                    class="col-6 mk_directory_kanban_views o_kanban_card_manage_section o_kanban_manage_view"
                                 >
-                                    <span class="fa fa-ellipsis-v" />
-                                </a>
-                                <div class="dropdown-menu" role="menu">
-                                    <div class="row">
-                                        <div class="col-6 mk_directory_kanban_views">
-                                            <h6 class="dropdown-header">Views
-                                            </h6>
-                                            <a
-                                                type="object"
-                                                name="action_dms_directories_all_directory"
-                                                role="menuitem"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-folder-o" />
-                                                Directories
-                                            </a>
-                                            <a
-                                                type="object"
-                                                name="action_dms_files_all_directory"
-                                                role="menuitem"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-file-o" />
-                                                Files
-                                            </a>
-                                        </div>
-                                        <div
-                                            class="col-6 border-left mk_directory_kanban_actions"
-                                        >
-                                            <h6 class="dropdown-header">
-                                                Actions
-                                            </h6>
-                                            <a
-                                                role="menuitem"
-                                                type="open"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-external-link" />
-                                                Open
-                                            </a>
-                                            <a
-                                                t-if="record.permission_write.raw_value"
-                                                role="menuitem"
-                                                type="edit"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-pencil-square-o" />
-                                                Edit
-                                            </a>
-                                            <a
-                                                t-if="record.permission_unlink.raw_value"
-                                                role="menuitem"
-                                                type="delete"
-                                                class="dropdown-item"
-                                            >
-                                                <i class="fa fa-trash-o" />
-                                                Delete
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div
-                                        t-if="record.permission_write.raw_value"
-                                        class="row"
-                                    >
-                                        <div role="menuitem" class="col-12">
-                                            <ul
-                                                class="oe_kanban_colorpicker"
-                                                data-field="color"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="oe_kanban_content">
-                                <div class="mk_directory_kanban_actions">
-                                    <div class="mk_directory_kanban_actions_wrapper">
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >Views</h5>
+                                    <div role="menuitem">
                                         <a
                                             type="object"
                                             name="action_dms_directories_all_directory"
-                                            role="button"
-                                            class="btn btn-sm btn-outline-primary mk_directory_kanban_directories"
-                                            t-att-title="record.count_directories_title.raw_value"
                                         >
-                                            <i class="fa fa-xs fa-folder" />
-                                            <span
-                                                class="total_items"
-                                                t-esc="record.count_total_directories.raw_value"
-                                            />
+                                            <i class="fa fa-folder-o" />
+                                            Directories
                                         </a>
+                                    </div>
+                                    <div role="menuitem">
                                         <a
                                             type="object"
                                             name="action_dms_files_all_directory"
-                                            role="button"
-                                            class="btn btn-sm btn-outline-primary mk_directory_kanban_files"
-                                            t-att-title="record.count_files_title.raw_value"
                                         >
-                                            <i class="fa fa-xs fa-file" />
-                                            <span
-                                                class="total_items"
-                                                t-esc="record.count_total_files.raw_value"
-                                            />
+                                            <i class="fa fa-file-o" />
+                                            Files
                                         </a>
                                     </div>
                                 </div>
-                                <div class="o_kanban_image">
-                                    <div class="o_kanban_image_wrapper">
-                                        <img
-                                            t-att-src="record.icon_url.raw_value"
-                                            alt="Icon"
-                                        />
+                                <div
+                                    class="col-6 border-left mk_directory_kanban_actions o_kanban_card_manage_section"
+                                >
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >Actions</h5>
+                                    <div role="menuitem">
+                                        <a type="open">
+                                            <i class="fa fa-external-link" />
+                                            Open
+                                        </a>
+                                    </div>
+                                    <div
+                                        role="menuitem"
+                                        t-if="record.permission_write.raw_value"
+                                    >
+                                        <a type="edit">
+                                            <i class="fa fa-pencil-square-o" />
+                                            Edit
+                                        </a>
+                                    </div>
+                                    <div
+                                        role="menuitem"
+                                        t-if="record.permission_unlink.raw_value"
+                                    >
+                                        <a type="delete">
+                                            <i class="fa fa-trash-o" />
+                                            Delete
+                                        </a>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="o_kanban_card_manage_settings row">
+                                <div
+                                    t-if="record.permission_write.raw_value"
+                                    role="menuitem"
+                                    aria-haspopup="true"
+                                >
+                                    <ul
+                                        class="oe_kanban_colorpicker"
+                                        data-field="color"
+                                        role="popup"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="#{kanban_color(record.color.raw_value)} o_kanban_wrapper oe_kanban_global_click oe_kanban_content oe_kanban_card row g-0"
+                        >
+                            <div class="col-1 h-100">
+                                <div class="h-50">
+                                    <a
+                                        type="object"
+                                        name="action_dms_directories_all_directory"
+                                        role="button"
+                                        class="btn btn-sm btn-outline-primary o_dms_directory_btn"
+                                        t-att-title="record.count_directories_title.raw_value"
+                                    >
+                                        <i class="fa fa-xs fa-folder" />
+                                            <span
+                                            class="total_items"
+                                            t-esc="record.count_total_directories.raw_value"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="h-50">
+                                    <a
+                                        type="object"
+                                        name="action_dms_files_all_directory"
+                                        role="button"
+                                        class="btn btn-sm btn-outline-primary o_dms_directory_btn"
+                                        t-att-title="record.count_files_title.raw_value"
+                                    >
+                                        <i class="fa fa-xs fa-file" />
+                                            <span
+                                            class="total_items"
+                                            t-esc="record.count_total_files.raw_value"
+                                        />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-3 h-100">
+                                    <img
+                                    t-att-src="record.icon_url.raw_value"
+                                    alt="Icon"
+                                    class="h-100"
+                                />
+                            </div>
+                            <div class="col-8">
                                 <div class="o_kanban_details">
-                                    <div class="o_kanban_details_wrapper">
-                                        <div
-                                            class="o_kanban_record_title o_text_overflow"
-                                        >
-                                            <field name="name" />
-                                        </div>
-                                        <div class="o_kanban_record_body">
-                                            <field
-                                                name="tag_ids"
-                                                widget="many2many_tags"
-                                                options="{'color_field': 'color'}"
+                                    <div class="o_kanban_record_title o_text_overflow">
+                                        <field name="name" />
+                                    </div>
+                                    <div class="o_kanban_record_body">
+                                        <field
+                                            name="tag_ids"
+                                            widget="many2many_tags"
+                                            options="{'color_field': 'color'}"
+                                        />
+                                        <field name="write_date" widget="date" />
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left" />
+                                        <div class="oe_kanban_bottom_right">
+                                            <a
+                                                role="button"
+                                                type="object"
+                                                name="toggle_starred"
+                                                t-attf-class="fa fa-lg fa-star#{record.starred.raw_value ? '  favorite_sign_button_enabled' : '-o'} favorite_sign_button"
+                                                title="Starred"
                                             />
-                                        </div>
-                                        <div class="o_kanban_record_bottom">
-                                            <div class="oe_kanban_bottom_left">
-                                                <field
-                                                    name="write_date"
-                                                    widget="date"
-                                                />
-                                            </div>
-                                            <div class="oe_kanban_bottom_right">
-                                                <a
-                                                    role="button"
-                                                    type="object"
-                                                    name="toggle_starred"
-                                                    t-attf-class="fa fa-lg fa-star#{record.starred.raw_value ? '  favorite_sign_button_enabled' : '-o'} favorite_sign_button"
-                                                    title="Starred"
-                                                />
-                                                <img
-                                                    t-att-src="kanban_image('res.users', 'image_128', record.create_uid.raw_value)"
-                                                    t-att-title="record.create_uid.value"
-                                                    t-att-alt="record.create_uid.value"
-                                                    class="oe_kanban_avatar"
-                                                />
-                                            </div>
+                                            <img
+                                                t-att-src="kanban_image('res.users', 'image_128', record.create_uid.raw_value)"
+                                                t-att-title="record.create_uid.value"
+                                                t-att-alt="record.create_uid.value"
+                                                class="oe_kanban_avatar"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -443,6 +432,7 @@
                             <field name="name" placeholder="My Documents" />
                         </h1>
                         <h4>
+                            <label for="complete_name" class="oe_edit_only" />
                             <field name="complete_name" />
                         </h4>
                     </div>
@@ -460,24 +450,30 @@
                             <field
                                 name="storage_id"
                                 options="{'no_open': True}"
-                                attrs="{'readonly':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
+                                readonly="not is_root_directory"
+                                required="is_root_directory"
                                 force_save="1"
                                 groups="!dms.group_dms_manager"
                             />
                             <field
                                 name="storage_id"
                                 options="{}"
-                                attrs="{'readonly':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
+                                readonly="not is_root_directory"
+                                required="is_root_directory"
                                 force_save="1"
                                 groups="dms.group_dms_manager"
                             />
                         </group>
                         <group>
-                            <field name="inherit_group_ids" />
+                            <field
+                                name="inherit_group_ids"
+                                invisible="is_root_directory"
+                            />
                             <field
                                 name="parent_id"
                                 options="{'no_quick_create': True}"
-                                attrs="{'invisible':[('is_root_directory','=',True)], 'required':[('is_root_directory','=',False)]}"
+                                invisible="is_root_directory"
+                                required="not is_root_directory"
                             />
                         </group>
                     </group>
@@ -510,25 +506,27 @@
                         <field name="allowed_model_ids" invisible="True" />
                         <field
                             name="model_id"
-                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')], 'readonly': [('count_total_files', '>', 0)], 'required': [('storage_id_save_type','=','attachment')]}"
+                            invisible="storage_id_save_type != 'attachment'"
+                            readonly="count_total_files > 0"
+                            required="storage_id_save_type == 'attachment'"
                         />
                         <field name="res_model" invisible="1" force_save="1" />
                         <field
                             name="res_id"
                             readonly="True"
-                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                            invisible="storage_id_save_type != 'attachment'"
                         />
                         <field
                             name="record_ref"
-                            attrs="{'invisible': [('storage_id_save_type', '!=', 'attachment')]}"
+                            invisible="storage_id_save_type != 'attachment'"
                         />
                     </group>
                     <notebook>
                         <page name="page_directories" string="Subdirectories">
                             <field
                                 name="child_directory_ids"
-                                context="{'default_parent_id': active_id, 'mail_create_nolog': True}"
-                                attrs="{'readonly':[('permission_create','=',False)]}"
+                                context="{'default_parent_id': id, 'mail_create_nolog': True}"
+                                readonly="not permission_create"
                             >
                                 <tree limit="10">
                                     <field name="name" />
@@ -544,8 +542,8 @@
                         <page name="page_files" string="Files">
                             <field
                                 name="file_ids"
-                                context="{'default_directory_id': active_id, 'mail_create_nolog': True}"
-                                attrs="{'readonly':[('permission_create','=',False)]}"
+                                context="{'default_directory_id': id, 'mail_create_nolog': True}"
+                                readonly="not permission_create"
                             >
                                 <tree limit="10">
                                     <field name="name" />
@@ -581,7 +579,7 @@
                         </page>
                         <page
                             string="Groups"
-                            attrs="{'invisible':[('storage_id_save_type', '=', 'attachment'),('storage_id_inherit_access_from_parent_record', '=', True)]}"
+                            invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
                         >
                             <field name="group_ids">
                                 <tree>
@@ -594,7 +592,7 @@
                         </page>
                         <page
                             string="Complete Groups"
-                            attrs="{'invisible':[('storage_id_save_type', '=', 'attachment'),('storage_id_inherit_access_from_parent_record', '=', True)]}"
+                            invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
                         >
                             <field name="complete_group_ids">
                                 <tree>
@@ -662,13 +660,6 @@
             </p>
         </field>
     </record>
-    <menuitem
-        id="menu_dms_directory"
-        name="Directories"
-        sequence="30"
-        parent="main_menu_dms"
-        action="action_dms_directory"
-    />
     <record id="view_dms_directory_new_form" model="ir.ui.view">
         <field name="name">dms_directory.form</field>
         <field name="model">dms.directory</field>
@@ -702,7 +693,8 @@
                         <field
                             name="storage_id"
                             options="{'no_quick_create': True}"
-                            attrs="{'readonly':[('is_root_directory','=',False)], 'required':[('is_root_directory','=',True)]}"
+                            readonly="not is_root_directory"
+                            required="is_root_directory"
                             force_save="1"
                         />
                     </group>

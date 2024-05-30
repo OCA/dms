@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
 <templates xml:space="preserve">
     <t
         t-name="dms.KanbanRenderer"
         t-inherit="web.KanbanRenderer"
         t-inherit-mode="primary"
-        owl="1"
     >
         <xpath expr="//div[hasclass('o_kanban_renderer')]" position="before">
             <div t-if="dragState.showDragZone" class="o_dropzone">
@@ -17,19 +20,8 @@
         t-name="dms.KanbanButtons"
         t-inherit="web.KanbanView.Buttons"
         t-inherit-mode="primary"
-        owl="1"
     >
-        <xpath expr="//t[@t-if='canCreate']" position="after">
-            <button
-                type="button"
-                class="d-none d-md-inline btn btn-primary mx-1"
-                t-on-click.prevent="uploadDocument"
-            >
-                Upload
-            </button>
-        </xpath>
-
-        <xpath expr="//t[@t-if='canCreate']" position="before">
+        <xpath expr="//div" position="inside">
             <button
                 type="button"
                 class="d-inline d-md-none btn btn-primary mx-1"
@@ -37,9 +29,6 @@
             >
                 Scan
             </button>
-        </xpath>
-
-        <xpath expr="//div" position="inside">
             <input
                 type="file"
                 name="ufile"
@@ -49,6 +38,13 @@
                 accept="*"
                 t-on-change="onChangeFileInput"
             />
+            <button
+                type="button"
+                class="d-none d-md-inline btn btn-primary mx-1"
+                t-on-click.prevent="uploadDocument"
+            >
+                Upload
+            </button>
         </xpath>
     </t>
 </templates>

@@ -1,5 +1,5 @@
 Return-Path: <123@acm.org>
-To: Manuel Lemos <directory+test@linux.local>
+To: Manuel Lemos <directory+test@dmsTest.com>
 Subject: Testing Manuel Lemos' MIME E-mail composing and sending PHP class: HTML message
 From: mlemos <345@acm.org>
 Reply-To: mlemos <456@acm.org>
@@ -7,7 +7,7 @@ Sender: mlemos@acm.org
 X-Mailer: http://www.phpclasses.org/mimemessage $Revision: 1.63 $ (mail)
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="652b8c4dcb00cdcdda1e16af36781caf"
-Message-ID: <20050430192829.0489.mlemos@acm.org>
+Message-ID: <20050430192829.0489.mlemos@dmsTest.com>
 Date: Sat, 30 Apr 2005 19:28:29 -0300
 
 
