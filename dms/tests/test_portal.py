@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 import odoo.tests
+from odoo.exceptions import AccessError
 from odoo.tests.common import users
 
 from .common import StorageAttachmentBaseCase
@@ -14,10 +15,15 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         super().setUpClass()
         cls.partner = cls.env.ref("base.partner_demo_portal")
         cls.portal_user = cls.partner.user_ids
+        cls.other_portal_user = cls.other_partner.user_ids
         cls.portal_user.login = "portal"
+        cls.other_portal_user.login = "other_portal"
         cls._create_attachment("test.txt")
+        cls._create_attachment("test2.txt", cls.other_partner)
         cls.directory_partner = cls._get_partner_directory()
+        cls.other_directory_partner = cls._get_partner_directory(cls.other_partner)
         cls.file_partner = cls.directory_partner.file_ids[0]
+        cls.other_file_partner = cls.other_directory_partner.file_ids[0]
 
     def test_access_portal(self):
         self.authenticate("portal", "portal")
@@ -25,54 +31,61 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         file_text = self.create_file(directory=self.directory_partner)
         url = "%s&access_token=abc-def" % (file_text.access_url)
         response = self.url_open(url, timeout=20)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(
+            response.status_code, 404, "Can't access file with incorrect access_token"
+        )
         # 200
         response = self.url_open(self.file_partner._get_share_url(), timeout=20)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.status_code, 200, "Can access file with correct access_token"
+        )
         # 200
         response = self.url_open(self.directory_partner._get_share_url(), timeout=20)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.status_code, 200, "Can access directory with correct access_token"
+        )
 
     def test_tour(self):
         for tour in ("dms_portal_mail_tour", "dms_portal_partners_tour"):
             with self.subTest(tour=tour):
-                self.start_tour("/", tour, login="portal")
-
-    def test_permission_flag(self):
-        """Assert portal partner directory and files permissions."""
-        # Superuser can read everything
-        self.assertTrue(self.directory_partner.permission_read)
-        self.assertTrue(self.directory_partner.parent_id.permission_read)
-        self.assertTrue(self.file_partner.permission_read)
-        self.assertEqual(
-            self.directory_partner.parent_id.child_directory_ids, self.directory_partner
-        )
-        # Public user can access only the empty res.partner folder
-        self.directory_partner.with_user(self.public_user).invalidate_recordset()
-        self.assertFalse(
-            self.directory_partner.with_user(self.public_user).permission_read
-        )
-        self.directory_partner.parent_id.with_user(
-            self.public_user
-        ).invalidate_recordset()
-        self.assertTrue(
-            self.directory_partner.parent_id.with_user(self.public_user).permission_read
-        )
-        self.file_partner.with_user(self.public_user).invalidate_recordset()
-        self.assertFalse(self.file_partner.with_user(self.public_user).permission_read)
-        self.assertFalse(
-            self.directory_partner.parent_id.with_user(
-                self.public_user
-            ).child_directory_ids
-        )
+                self.start_tour("/my", tour, login="portal")
 
     @users("portal")
-    def test_permission_flag_portal_user(self):
-        # Portal user can read everything (because it belongs to him)
-        self.assertTrue(self.directory_partner.permission_read)
-        self.assertTrue(self.directory_partner.parent_id.permission_read)
-        self.assertTrue(self.file_partner.permission_read)
-        self.assertEqual(
-            self.directory_partner.parent_id.child_directory_ids,
-            self.directory_partner,
+    def test_permission_portal_user_access_own_attachment(self):
+        """
+        The user can access its own attachments, even if its access group are not set
+        """
+        # Has to manually su=False because the portal user is not a superuser,
+        # but odoo uses somewhere sudo() internally
+        file = self.file_partner.with_user(self.portal_user).with_env(
+            self.env(su=False)
         )
+        directory = self.directory_partner.with_user(self.portal_user).with_env(
+            self.env(su=False)
+        )
+        # Portal user can only read
+        file.check_access_rule("read")
+
+        # Portal user can't do anything else
+        with self.assertRaises(AccessError, msg="Portal user should not have access"):
+            file.check_access_rule("write")
+            file.check_access_rule("unlink")
+            directory.check_access_rule("create")
+
+    @users("portal")
+    def test_permission_portal_user_access_other_attachment(self):
+        """
+        The user can't access other attachments if its access group are not set
+        """
+        # Has to manually su=False because the portal user is not a superuser,
+        # but odoo uses somewhere sudo() internally
+        file = self.other_file_partner.with_user(self.portal_user).with_env(
+            self.env(su=False)
+        )
+        # Portal user can't do anything
+        with self.assertRaises(AccessError, msg="Portal user should not have access"):
+            file.check_access_rule("read")
+        with self.assertRaises(AccessError, msg="Portal user should not have access"):
+            file.check_access_rule("write")
+        with self.assertRaises(AccessError, msg="Portal user should not have access"):
+            file.check_access_rule("unlink")

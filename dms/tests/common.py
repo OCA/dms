@@ -1,6 +1,7 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
 # Copyright 2021-2024 Tecnativa - Víctor Martínez
+# Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 import base64
 import functools
@@ -173,23 +174,38 @@ class StorageAttachmentBaseCase(DocumentsBaseCase):
         cls.partner_model_id = cls.env.ref("base.model_res_partner")
         cls.create_directory(storage=cls.storage, model_id=cls.partner_model_id)
         cls.partner = cls.partner_model.create({"name": "test partner"})
+        cls.other_partner = cls.partner_model.create({"name": "other partner"})
         cls.model_partner = cls.env.ref("base.model_res_partner")
 
     @classmethod
-    def _create_attachment(cls, name):
+    def _create_attachment(cls, name, partner=None):
+        """
+        Create an attachment for the partner model.
+        If no partner is provided, the default partner is used.
+
+        :param str name: The name of the attachment.
+        :param odoo.model.res_partner partner: The partner to attach the document to.
+
+        :return: The created attachment.
+        :rtype: odoo.model.ir.attachment
+        """
+        if not partner:
+            partner = cls.partner
         return cls.create_attachment(
             name=name,
             res_model=cls.partner_model._name,
-            res_id=cls.partner.id,
+            res_id=partner.id,
         )
 
     @classmethod
-    def _get_partner_directory(cls):
+    def _get_partner_directory(cls, partner=False):
+        if not partner:
+            partner = cls.partner
         return cls.directory_model.search(
             [
                 ("storage_id", "=", cls.storage.id),
                 ("res_model", "=", cls.partner_model._name),
-                ("res_id", "=", cls.partner.id),
+                ("res_id", "=", partner.id),
             ]
         )
 

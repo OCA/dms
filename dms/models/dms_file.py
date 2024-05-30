@@ -1,6 +1,7 @@
 # Copyright 2020 Antoni Romera
 # Copyright 2017-2019 MuK IT GmbH
 # Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import base64
@@ -22,7 +23,7 @@ from ..tools import file
 _logger = logging.getLogger(__name__)
 
 
-class File(models.Model):
+class DMSFile(models.Model):
     _name = "dms.file"
     _description = "File"
 
@@ -37,21 +38,17 @@ class File(models.Model):
 
     _order = "name asc"
 
-    # ----------------------------------------------------------
     # Database
-    # ----------------------------------------------------------
-
     active = fields.Boolean(
         string="Archived",
         default=True,
         help="If a file is set to archived, it is not displayed, but still exists.",
     )
-
     directory_id = fields.Many2one(
         comodel_name="dms.directory",
         string="Directory",
         domain="[('permission_create', '=', True)]",
-        context="{'dms_directory_show_path': True}",
+        context={"dms_directory_show_path": True},
         ondelete="restrict",
         auto_join=True,
         required=True,
@@ -59,11 +56,10 @@ class File(models.Model):
         tracking=True,  # Leave log if "moved" to another directory
     )
     root_directory_id = fields.Many2one(related="directory_id.root_directory_id")
-    # Override according to defined in AbstractDmsMixin
+    # Override acording to defined in AbstractDmsMixin
     storage_id = fields.Many2one(
         related="directory_id.storage_id",
         readonly=True,
-        store=True,
         prefetch=False,
     )
 
@@ -115,12 +111,11 @@ class File(models.Model):
 
     checksum = fields.Char(string="Checksum/SHA1", readonly=True, index="btree")
 
-    content_binary = fields.Binary(attachment=False, prefetch=False, invisible=True)
+    content_binary = fields.Binary(attachment=False, prefetch=False)
 
     save_type = fields.Char(
         compute="_compute_save_type",
         string="Current Save Type",
-        invisible=True,
         prefetch=False,
     )
 
@@ -134,8 +129,7 @@ class File(models.Model):
     require_migration = fields.Boolean(
         compute="_compute_migration", store=True, compute_sudo=True
     )
-
-    content_file = fields.Binary(attachment=True, prefetch=False, invisible=True)
+    content_file = fields.Binary(attachment=True, prefetch=False)
 
     # Extend inherited field(s)
     image_1920 = fields.Image(compute="_compute_image_1920", store=True, readonly=False)
@@ -166,30 +160,30 @@ class File(models.Model):
         return res
 
     def check_access_token(self, access_token=False):
-        res = False
-        if access_token:
-            if self.access_token and consteq(self.access_token, access_token):
+        if not access_token:
+            return False
+
+        if self.access_token and consteq(self.access_token, access_token):
+            return True
+
+        items = (
+            self.env["dms.directory"]
+            .sudo()
+            .search([("access_token", "=", access_token)])
+        )
+        if items:
+            item = items[0]
+            if self.directory_id.id == item.id:
                 return True
-            else:
-                items = (
-                    self.env["dms.directory"]
-                    .sudo()
-                    .search([("access_token", "=", access_token)])
-                )
-                if items:
-                    item = items[0]
-                    if self.directory_id.id == item.id:
-                        return True
-                    else:
-                        directory_item = self.directory_id
-                        while directory_item.parent_id:
-                            if directory_item.id == self.directory_id.id:
-                                return True
-                            directory_item = directory_item.parent_id
-                        # Fix last level
-                        if directory_item.id == self.directory_id.id:
-                            return True
-        return res
+            directory_item = self.directory_id
+            while directory_item.parent_id:
+                if directory_item.id == self.directory_id.id:
+                    return True
+                directory_item = directory_item.parent_id
+            # Fix last level
+            if directory_item.id == self.directory_id.id:
+                return True
+        return False
 
     res_model = fields.Char(
         string="Linked attachments model", related="directory_id.res_model"
@@ -201,17 +195,13 @@ class File(models.Model):
         comodel_name="ir.attachment",
         string="Attachment File",
         prefetch=False,
-        invisible=True,
         ondelete="cascade",
     )
 
     def get_human_size(self):
         return human_size(self.size)
 
-    # ----------------------------------------------------------
     # Helper
-    # ----------------------------------------------------------
-
     @api.model
     def _get_checksum(self, binary):
         return hashlib.sha1(binary or b"").hexdigest()
@@ -251,27 +241,28 @@ class File(models.Model):
     def _get_icon_placeholder_name(self):
         return self.extension and "file_%s.svg" % self.extension or ""
 
-    # ----------------------------------------------------------
     # Actions
-    # ----------------------------------------------------------
-
-    def action_migrate(self, logging=True):
+    def action_migrate(self, should_logging=True):
         record_count = len(self)
         index = 1
         for dms_file in self:
-            if logging:
+            if should_logging:
                 _logger.info(
                     _(
-                        "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
+                        "Migrate File %(index)s of %(record_count)s [ %("
+                        "dms_file_migration)s ]",
+                        index=index,
+                        record_count=record_count,
+                        dms_file_migration=dms_file.migration,
                     )
-                    % {
-                        "index": index,
-                        "record_count": record_count,
-                        "dms_file_migration": dms_file.migration,
-                    }
                 )
                 index += 1
-            dms_file.write({"content": dms_file.with_context(**{}).content})
+            dms_file.write(
+                {
+                    "content": dms_file.with_context(**{}).content,
+                    "storage_id": dms_file.directory_id.storage_id.id,
+                }
+            )
 
     def action_save_onboarding_file_step(self):
         self.env.user.company_id.set_onboarding_step_done(
@@ -289,10 +280,7 @@ class File(models.Model):
         result["context"] = dict(self.env.context)
         return result
 
-    # ----------------------------------------------------------
     # SearchPanel
-    # ----------------------------------------------------------
-
     @api.model
     def _search_panel_directory(self, **kwargs):
         search_domain = (kwargs.get("search_domain", []),)
@@ -316,56 +304,61 @@ class File(models.Model):
     def search_panel_select_range(self, field_name, **kwargs):
         """This method is overwritten to make it 'similar' to v13.
         The goal is that the directory searchpanel shows all directories
-        (even if some folders have no files)."""
-        if field_name == "directory_id":
-            domain = [["is_hidden", "=", False]]
-            # If we pass by context something, we filter more about it we filter
-            # the directories of the files or we show all of them
-            if self.env.context.get("active_model", False) == "dms.directory":
-                active_id = self.env.context.get("active_id")
-                # para saber que directorios, buscamos las posibles carpetas que nos interesan
-                files = self.env["dms.file"].search(
-                    [["directory_id", "child_of", active_id]]
-                )
-                all_directories = files.mapped("directory_id")
-                all_directories += files.mapped("directory_id.parent_id")
-                domain.append(["id", "in", all_directories.ids])
-            # Get all possible directories
-            comodel_records = (
-                self.env["dms.directory"]
-                .with_context(directory_short_name=True)
-                .search_read(domain, ["display_name", "parent_id"])
+        (even if some folders have no files).
+        """
+        if field_name != "directory_id":
+            context = {}
+            if field_name == "category_id":
+                context["category_short_name"] = True
+            return super(
+                DMSFile, self.with_context(**context)
+            ).search_panel_select_range(field_name, **kwargs)
+
+        domain = [("is_hidden", "=", False)]
+        # If we pass by context something, we filter more about it we filter
+        # the directories of the files, or we show all of them
+        if self.env.context.get("active_model") == "dms.directory":
+            active_id = self.env.context.get("active_id")
+            files = self.env["dms.file"].search(
+                [("directory_id", "child_of", active_id)]
             )
-            all_record_ids = [rec["id"] for rec in comodel_records]
-            field_range = {}
-            enable_counters = kwargs.get("enable_counters")
-            for record in comodel_records:
-                record_id = record["id"]
-                parent = record["parent_id"]
-                record_values = {
-                    "id": record_id,
-                    "display_name": record["display_name"],
-                    # If the parent directory is not in all the records we should not
-                    # set parent_id because the user does not have access to parent.
-                    "parent_id": (
-                        parent[0] if parent and parent[0] in all_record_ids else False
-                    ),
-                }
-                if enable_counters:
-                    record_values["__count"] = 0
-                field_range[record_id] = record_values
-            if enable_counters:
-                res = super().search_panel_select_range(field_name, **kwargs)
-                for item in res["values"]:
-                    if item["id"] in field_range:
-                        field_range[item["id"]]["__count"] = item["__count"]
-            return {"parent_field": "parent_id", "values": list(field_range.values())}
-        context = {}
-        if field_name == "category_id":
-            context["category_short_name"] = True
-        return super(File, self.with_context(**context)).search_panel_select_range(
-            field_name, **kwargs
+            all_directory_ids = []
+            for file_record in files:
+                directory = file_record.directory_id
+                while directory:
+                    all_directory_ids.append(directory.id)
+                    directory = directory.parent_id
+            domain.append(("id", "in", all_directory_ids))
+        # Get all possible directories
+        comodel_records = (
+            self.env["dms.directory"]
+            .with_context(directory_short_name=True)
+            .search_read(domain, ["display_name", "parent_id"])
         )
+        all_record_ids = [rec["id"] for rec in comodel_records]
+        field_range = {}
+        enable_counters = kwargs.get("enable_counters")
+        for record in comodel_records:
+            record_id = record["id"]
+            parent = record["parent_id"]
+            record_values = {
+                "id": record_id,
+                "display_name": record["display_name"],
+                # If the parent directory is not in all the records we should not
+                # set parent_id because the user does not have access to parent.
+                "parent_id": (
+                    parent[0] if parent and parent[0] in all_record_ids else False
+                ),
+            }
+            if enable_counters:
+                record_values["__count"] = 0
+            field_range[record_id] = record_values
+        if enable_counters:
+            res = super().search_panel_select_range(field_name, **kwargs)
+            for item in res["values"]:
+                if item["id"] in field_range:
+                    field_range[item["id"]]["__count"] = item["__count"]
+        return {"parent_field": "parent_id", "values": list(field_range.values())}
 
     @api.model
     def search_panel_select_multi_range(self, field_name, **kwargs):
@@ -395,18 +388,15 @@ class File(models.Model):
                 "file_ids", operator, directory_id, comodel_domain
             )
             return super(
-                File, self.with_context(directory_short_name=True)
+                DMSFile, self.with_context(directory_short_name=True)
             ).search_panel_select_multi_range(
                 field_name, comodel_domain=directory_comodel_domain, **kwargs
             )
         return super(
-            File, self.with_context(directory_short_name=True)
+            DMSFile, self.with_context(directory_short_name=True)
         ).search_panel_select_multi_range(field_name, **kwargs)
 
-    # ----------------------------------------------------------
     # Read
-    # ----------------------------------------------------------
-
     @api.depends("name", "directory_id", "directory_id.parent_path")
     def _compute_path(self):
         model = self.env["dms.directory"]
@@ -433,7 +423,7 @@ class File(models.Model):
                 current_dir = current_dir.parent_id
             record.update(
                 {
-                    "path_names": "/".join(path_names),
+                    "path_names": "/".join(path_names) if all(path_names) else "",
                     "path_json": json.dumps(path_json),
                 }
             )
@@ -495,23 +485,17 @@ class File(models.Model):
             else:
                 storage_label = selection.get(storage_type)
                 file_label = selection.get(record.save_type)
-                record.migration = "{} > {}".format(file_label, storage_label)
+                record.migration = f"{file_label} > {storage_label}"
                 record.require_migration = True
 
-    # ----------------------------------------------------------
     # View
-    # ----------------------------------------------------------
-
     @api.onchange("category_id")
     def _change_category(self):
         self.tag_ids = self.tag_ids.filtered(
             lambda rec: not rec.category_id or rec.category_id == self.category_id
         )
 
-    # ----------------------------------------------------------
     # Constrains
-    # ----------------------------------------------------------
-
     @api.constrains("storage_id", "res_model", "res_id")
     def _check_storage_id_attachment_res_model(self):
         for record in self:
@@ -527,35 +511,32 @@ class File(models.Model):
         for record in self:
             if not file.check_name(record.name):
                 raise ValidationError(_("The file name is invalid."))
-            files = record.sudo().directory_id.file_ids.name_get()
-            if list(
-                filter(
-                    lambda file: file[1] == record.name and file[0] != record.id, files
-                )
+            files = record.sudo().directory_id.file_ids
+            if files.filtered(
+                lambda file, record=record: file.name == record.name and file != record
             ):
-                raise ValidationError(_("A file with the same name already exists."))
+                raise ValidationError(
+                    _("A file with the same name already exists in this directory.")
+                )
 
     @api.constrains("extension")
     def _check_extension(self):
-        for record in self:
-            if (
-                record.extension
-                and record.extension in self._get_forbidden_extensions()
-            ):
-                raise ValidationError(_("The file has a forbidden file extension."))
+        if self.filtered(
+            lambda rec: rec.extension
+            and rec.extension in self._get_forbidden_extensions()
+        ):
+            raise ValidationError(_("The file has a forbidden file extension."))
 
     @api.constrains("size")
     def _check_size(self):
-        for record in self:
-            if record.size and record.size > self._get_binary_max_size() * 1024 * 1024:
-                raise ValidationError(
-                    _("The maximum upload size is %s MB.") % self._get_binary_max_size()
-                )
+        if self.filtered(
+            lambda rec: rec.size > self._get_binary_max_size() * 1024 * 1024
+        ):
+            raise ValidationError(
+                _("The maximum upload size is %s MB.") % self._get_binary_max_size()
+            )
 
-    # ----------------------------------------------------------
     # Create, Update, Delete
-    # ----------------------------------------------------------
-
     def _inverse_content(self):
         updates = defaultdict(set)
         for record in self:
@@ -563,12 +544,12 @@ class File(models.Model):
             binary = base64.b64decode(record.content or "")
             values = record._update_content_vals(values, binary)
             updates[tools.frozendict(values)].add(record.id)
-        with self.env.norecompute():
-            for vals, ids in updates.items():
-                self.browse(ids).write(dict(vals))
+        for vals, ids in updates.items():
+            self.browse(ids).write(dict(vals))
 
     def _create_model_attachment(self, vals):
         res_vals = vals.copy()
+        directory_id = False
         if "directory_id" in res_vals:
             directory_id = res_vals["directory_id"]
         elif self.env.context.get("active_id"):
@@ -602,14 +583,14 @@ class File(models.Model):
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
+        names = self.sudo().directory_id.file_ids.mapped("name")
         if "directory_id" in default:
-            model = self.env["dms.directory"]
-            directory = model.browse(default["directory_id"])
+            directory = self.env["dms.directory"].browse(
+                default.get("directory_id", False)
+            )
             names = directory.sudo().file_ids.mapped("name")
-        else:
-            names = self.sudo().directory_id.file_ids.mapped("name")
         default.update({"name": file.unique_name(self.name, names, self.extension)})
-        return super(File, self).copy(default)
+        return super().copy(default)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -618,12 +599,10 @@ class File(models.Model):
             if "attachment_id" not in vals:
                 vals = self._create_model_attachment(vals)
             new_vals_list.append(vals)
-        return super(File, self).create(new_vals_list)
+        return super().create(new_vals_list)
 
     # ----------------------------------------------------------
     # Locking fields and functions
-    # ----------------------------------------------------------
-
     locked_by = fields.Many2one(comodel_name="res.users")
 
     is_locked = fields.Boolean(compute="_compute_locked", string="Locked")
@@ -640,10 +619,7 @@ class File(models.Model):
     def unlock(self):
         self.write({"locked_by": None})
 
-    # ----------------------------------------------------------
     # Read, View
-    # ----------------------------------------------------------
-
     @api.depends("locked_by")
     def _compute_locked(self):
         for record in self:
@@ -665,6 +641,7 @@ class File(models.Model):
             "mimetype": attachment.mimetype,
         }
 
+    @api.model
     def get_dms_files_from_attachments(self, attachment_ids=None):
         """Get the dms files from uploaded attachments.
         :return: An Array of dms files.

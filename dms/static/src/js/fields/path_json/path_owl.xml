@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<templates>
-    <t t-name="dms.DmsPathField" owl="1">
-
+<!--
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates xml:space="preserve" id="template">
+    <t t-name="dms.DmsPathField">
         <t t-set="path_length" t-value="data.length - 1" />
         <t t-foreach="data" t-as="elem" t-key="elem_index" style="display: inline">
             <t t-if="elem_index !== path_length">
-                <span style="display: inline">/</span>
+                <span style="display: inline" t-if="elem_index !== 0">/</span>
                 <a
                     class="oe_form_uri"
                     data-model="dms.directory"

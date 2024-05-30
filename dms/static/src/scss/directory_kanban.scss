@@ -1,99 +1,52 @@
 /**********************************************************************************
 *
 *   Copyright 2017-2019 MuK IT GmbH
+*   Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 *   License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 *
 **********************************************************************************/
 
-.mk_directory_kanban_view {
+$o-kanban-image-width: 80px;
 
-     span.total_items {
-            margin-left: 3px;
-            margin-top: 3px;
-        }
+.mk_directory_kanban_view {
+    span.total_items {
+        margin-left: 3px;
+        margin-top: 3px;
+    }
 
     height: 100%;
-    .o_kanban_record {
-        > div:nth-child(1) {
-            padding: 0;
+
+    .o_kanban_wrapper {
+        max-height: $o-kanban-image-width + 1;
+        padding: 0 !important;
+
+        .o_dms_directory_btn {
+            border-style: solid solid none none;
+            border-color: $gray-400;
+            border-width: 1px;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            border-radius: 0;
         }
 
-        padding: 0;
-        max-height: $o-kanban-image-width + 1;
-        .mk_directory_kanban_actions {
-            float: left;
-            border-right: solid 1px $gray-400;
-            .mk_directory_kanban_actions_wrapper {
-                min-height: $o-kanban-image-width;
-                .btn-outline-primary {
-                    display: flex;
-                    border-radius: 0;
-                    align-items: center;
-                    justify-content: center;
-                    border-color: transparent;
-                    min-width: $o-kanban-image-width / 2;
-                    min-height: $o-kanban-image-width / 2;
-                    &.mk_directory_kanban_directories {
-                        border-bottom: solid 1px $gray-400;
-                    }
-                }
+        .o_kanban_details {
+            .o_kanban_record_body .o_kanban_tags {
+                @include o-text-overflow;
             }
-        }
-        .o_kanban_image {
-            width: $o-kanban-image-width + 1;
-            border-right: solid 1px $gray-400;
-            + div {
-                padding-left: $o-kanban-image-width + $o-kanban-inside-hgutter +
-                    $o-kanban-image-width / 2;
-                @include media-breakpoint-down(sm) {
-                    padding-left: $o-kanban-image-width +
-                        $o-kanban-inside-hgutter-mobile + $o-kanban-image-width / 2;
-                }
-            }
-        }
-        .o_kanban_details .o_kanban_details_wrapper {
-            padding: 4px 4px 4px 0;
-            .o_kanban_record_title {
-                font-weight: bold;
-                padding-right: 16px;
-            }
-            .o_kanban_record_body {
-                max-height: 12px;
-                .o_kanban_tags {
-                    @include o-text-overflow;
-                }
-            }
+
             .oe_kanban_avatar {
                 margin-left: 0px;
+                max-width: 20px;
             }
+
             .favorite_sign_button {
                 margin-top: 1px;
                 font-size: 1.5rem;
                 line-height: 20px;
                 margin-right: 6px;
-            }
-        }
-        .o_dropdown_kanban {
-            .dropdown-menu {
-                min-width: 22rem;
-                .mk_directory_kanban_views {
-                    padding-right: 8px;
-                }
-                .mk_directory_kanban_actions {
-                    padding-left: 8px;
-                    border-right: none;
-                }
-                .fa {
-                    min-width: 12px;
-                    padding-right: 2px;
-                    text-align: center;
-                }
-                .oe_kanban_colorpicker {
-                    max-width: none;
-                    margin: 5px 5px;
-                    padding: 10px 0 0 25px;
-                    border-top: 1px solid gray("300");
-                }
             }
         }
     }

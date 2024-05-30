@@ -1,13 +1,16 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
 # Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import ast
 import base64
 import logging
+import os
 from ast import literal_eval
 from collections import defaultdict
+from typing import Literal  # noqa # pylint: disable=unused-import
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
@@ -19,6 +22,7 @@ from odoo.addons.http_routing.models.ir_http import slugify
 from ..tools.file import check_name, unique_name
 
 _logger = logging.getLogger(__name__)
+_path = os.path.dirname(os.path.dirname(__file__))
 
 
 class DmsDirectory(models.Model):
@@ -115,7 +119,7 @@ class DmsDirectory(models.Model):
         inverse_name="parent_id",
         string="Subdirectories",
         auto_join=False,
-        copy=False,
+        copy=True,
     )
 
     tag_ids = fields.Many2many(
@@ -152,7 +156,7 @@ class DmsDirectory(models.Model):
         inverse_name="directory_id",
         string="Files",
         auto_join=False,
-        copy=False,
+        copy=True,
     )
 
     count_directories = fields.Integer(
@@ -248,15 +252,16 @@ class DmsDirectory(models.Model):
                 item = items[0]
                 if item.id == self.id:
                     return True
-                else:
-                    directory_item = self
-                    while directory_item.parent_id:
-                        if directory_item.id == item.id:
-                            return True
-                        directory_item = directory_item.parent_id
-                    # Fix last level
+                # sudo because the user might not usually have access to the record but
+                # now the token is valid.
+                directory_item = self.sudo()
+                while directory_item.parent_id:
                     if directory_item.id == item.id:
                         return True
+                    directory_item = directory_item.parent_id
+                # Fix last level
+                if directory_item.id == item.id:
+                    return True
         return res
 
     @api.model
@@ -332,28 +337,16 @@ class DmsDirectory(models.Model):
         for record in self:
             record.res_model = record.model_id.model
 
-    def name_get(self):
-        if not self.env.context.get("directory_short_name", False):
-            return super().name_get()
-        vals = []
-        for record in self:
-            vals.append(tuple([record.id, record.name]))
-        return vals
-
     def toggle_starred(self):
         updates = defaultdict(set)
         for record in self:
             vals = {"starred": not record.starred}
             updates[tools.frozendict(vals)].add(record.id)
-        with self.env.norecompute():
-            for vals, ids in updates.items():
-                self.browse(ids).write(dict(vals))
+        for vals, ids in updates.items():
+            self.browse(ids).write(dict(vals))
         self.flush_recordset()
 
-    # ----------------------------------------------------------
     # SearchPanel
-    # ----------------------------------------------------------
-
     @api.model
     def search_panel_select_range(self, field_name, **kwargs):
         context = {}
@@ -369,19 +362,13 @@ class DmsDirectory(models.Model):
             DmsDirectory, self.with_context(category_short_name=True)
         ).search_panel_select_multi_range(field_name, **kwargs)
 
-    # ----------------------------------------------------------
     # Actions
-    # ----------------------------------------------------------
-
     def action_save_onboarding_directory_step(self):
         self.env.user.company_id.set_onboarding_step_done(
             "documents_onboarding_directory_state"
         )
 
-    # ----------------------------------------------------------
     # SearchPanel
-    # ----------------------------------------------------------
-
     @api.model
     def _search_panel_directory(self, **kwargs):
         search_domain = (kwargs.get("search_domain", []),)
@@ -391,10 +378,7 @@ class DmsDirectory(models.Model):
                     return domain[1], domain[2]
         return None, None
 
-    # ----------------------------------------------------------
     # Search
-    # ----------------------------------------------------------
-
     @api.model
     def _search_starred(self, operator, operand):
         if operator == "=" and operand:
@@ -443,9 +427,7 @@ class DmsDirectory(models.Model):
     @api.depends("child_directory_ids", "file_ids")
     def _compute_count_elements(self):
         for record in self:
-            elements = record.count_files
-            elements += record.count_directories
-            record.count_elements = elements
+            record.count_elements = record.count_files + record.count_directories
 
     def _compute_count_total_directories(self):
         for record in self:
@@ -466,9 +448,9 @@ class DmsDirectory(models.Model):
 
     def _compute_count_total_elements(self):
         for record in self:
-            total_elements = record.count_total_files
-            total_elements += record.count_total_directories
-            record.count_total_elements = total_elements
+            record.count_total_elements = (
+                record.count_total_files + record.count_total_directories
+            )
 
     def _compute_size(self):
         sudo_model = self.env["dms.file"].sudo()
@@ -502,10 +484,7 @@ class DmsDirectory(models.Model):
                 groups |= one.parent_id.complete_group_ids
             self.complete_group_ids = groups
 
-    # ----------------------------------------------------------
     # View
-    # ----------------------------------------------------------
-
     @api.depends("is_root_directory")
     def _compute_parent_id(self):
         for record in self:
@@ -530,7 +509,8 @@ class DmsDirectory(models.Model):
     def _compute_tags(self):
         for record in self:
             tags = record.tag_ids.filtered(
-                lambda rec: not rec.category_id or rec.category_id == record.category_id
+                lambda rec, record=record: not rec.category_id
+                or rec.category_id == record.category_id
             )
             record.tag_ids = tags
 
@@ -547,10 +527,7 @@ class DmsDirectory(models.Model):
     def _onchange_model_id(self):
         self._inverse_model_id()
 
-    # ----------------------------------------------------------
     # Constrains
-    # ----------------------------------------------------------
-
     @api.constrains("parent_id")
     def _check_directory_recursion(self):
         if not self._check_recursion():
@@ -559,9 +536,9 @@ class DmsDirectory(models.Model):
 
     @api.constrains("storage_id", "model_id")
     def _check_storage_id_attachment_model_id(self):
-        for record in self:
-            if record.storage_id.save_type != "attachment":
-                continue
+        for record in self.filtered(
+            lambda directory: directory.storage_id.save_type == "attachment"
+        ):
             if not record.model_id:
                 raise ValidationError(
                     _("A directory has to have model in attachment storage.")
@@ -593,23 +570,19 @@ class DmsDirectory(models.Model):
             if self.env.context.get("check_name", True) and not check_name(record.name):
                 raise ValidationError(_("The directory name is invalid."))
             if record.is_root_directory:
-                childs = record.sudo().storage_id.root_directory_ids.name_get()
+                children = record.sudo().storage_id.root_directory_ids
             else:
-                childs = record.sudo().parent_id.child_directory_ids.name_get()
-            if list(
-                filter(
-                    lambda child: child[1] == record.name and child[0] != record.id,
-                    childs,
-                )
+                children = record.sudo().parent_id.child_directory_ids
+
+            if children.filtered(
+                lambda child, record=record: child.name == record.name
+                and child != record
             ):
                 raise ValidationError(
                     _("A directory with the same name already exists.")
                 )
 
-    # ----------------------------------------------------------
     # Create, Update, Delete
-    # ----------------------------------------------------------
-
     def _inverse_starred(self):
         starred_records = self.env["dms.directory"].sudo()
         not_starred_records = self.env["dms.directory"].sudo()
@@ -625,19 +598,14 @@ class DmsDirectory(models.Model):
         self.ensure_one()
         default = dict(default or [])
         if "parent_id" in default:
-            parent_directory = self.browse(default["parent_id"])
+            parent_directory = self.browse(default.get("parent_id"))
             names = parent_directory.sudo().child_directory_ids.mapped("name")
         elif self.is_root_directory:
             names = self.sudo().storage_id.root_directory_ids.mapped("name")
         else:
             names = self.sudo().parent_id.child_directory_ids.mapped("name")
         default.update({"name": unique_name(self.name, names)})
-        new = super().copy(default)
-        for record in self.file_ids:
-            record.copy({"directory_id": new.id})
-        for record in self.child_directory_ids:
-            record.copy({"parent_id": new.id})
-        return new
+        return super().copy(default)
 
     def _alias_get_creation_values(self):
         values = super()._alias_get_creation_values()
@@ -652,7 +620,7 @@ class DmsDirectory(models.Model):
     @api.model
     def message_new(self, msg_dict, custom_values=None):
         custom_values = custom_values if custom_values is not None else {}
-        parent_directory_id = custom_values.get("parent_id", None)
+        parent_directory_id = custom_values.get("parent_id")
         parent_directory = self.sudo().browse(parent_directory_id)
         if not parent_directory_id or not parent_directory.exists():
             raise ValueError("No directory could be found!")
@@ -697,11 +665,12 @@ class DmsDirectory(models.Model):
         # Hack to prevent error related to mail_message parent not exists in some cases
         ctx = dict(self.env.context).copy()
         ctx.update({"default_parent_id": False})
+        self.env.registry.clear_cache()
         res = super(DmsDirectory, self.with_context(**ctx)).create(vals_list)
         return res
 
     def write(self, vals):
-        if any([k in vals.keys() for k in ["storage_id", "parent_id"]]):
+        if any(k in vals.keys() for k in ["storage_id", "parent_id"]):
             for item in self:
                 new_storage_id = vals.get("storage_id", item.storage_id.id)
                 new_parent_id = vals.get("parent_id", item.parent_id.id)
@@ -711,17 +680,19 @@ class DmsDirectory(models.Model):
                 if new_parent_id:
                     if old_storage_id != self.browse(new_parent_id).storage_id.id:
                         raise UserError(
-                            _("It is not possible to change parent to other storage.")
+                            _(
+                                "It is not possible to change to a parent "
+                                "with other storage."
+                            )
                         )
                 elif old_storage_id != new_storage_id:
                     raise UserError(_("It is not possible to change the storage."))
         # Groups part
         if any(key in vals for key in ["group_ids", "inherit_group_ids"]):
-            with self.env.norecompute():
-                res = super(DmsDirectory, self).write(vals)
-                domain = [("id", "child_of", self.ids)]
-                records = self.sudo().search(domain)
-                records.modified(["group_ids"])
+            res = super().write(vals)
+            domain = [("id", "child_of", self.ids)]
+            records = self.sudo().search(domain)
+            records.modified(["group_ids"])
             records.flush_recordset()
         else:
             res = super().write(vals)
@@ -736,14 +707,14 @@ class DmsDirectory(models.Model):
         self.file_ids.unlink()
         if self.child_directory_ids:
             self.child_directory_ids.unlink()
-        return super().unlink()
+        return super(DmsDirectory, self.exists()).unlink()
 
     @api.model
     def _search_panel_domain_image(
         self, field_name, domain, set_count=False, limit=False
     ):
         """We need to overwrite function from directories because odoo only return
-        records with childs (very weird for user perspective).
+        records with children (very weird for user perspective).
         All records are returned now.
         """
         if field_name == "parent_id":

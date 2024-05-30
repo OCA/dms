@@ -1,11 +1,12 @@
 # Copyright 2017-2019 MuK IT GmbH.
 # Copyright 2020 Creu Blanca
+# Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 import logging
+import os
 import unittest
 
-from odoo.modules.module import get_module_resource
 from odoo.tests import common, tagged
 from odoo.tools import convert_file
 from odoo.tools.misc import profile
@@ -26,23 +27,15 @@ class BenchmarkTestCase(common.TransactionCase):
 
     @classmethod
     def _clean_existing_records(cls):
-        cls.env["dms.category"].search([]).unlink()
-        cls.env["dms.directory"].search([]).unlink()
-        cls.env["dms.storage"].search([]).unlink()
-        cls.env["dms.tag"].search([]).unlink()
+        cls.env["dms.category"].search([]).sudo().unlink()
+        cls.env["dms.directory"].search([]).sudo().unlink()
+        cls.env["dms.storage"].search([]).sudo().unlink()
+        cls.env["dms.tag"].search([]).sudo().unlink()
 
     @classmethod
     def _load(cls, module, *args):
-        convert_file(
-            cls.cr,
-            "dms",
-            get_module_resource(module, *args),
-            {},
-            "init",
-            False,
-            "test",
-            cls.registry._assertion_report,
-        )
+        path = str(os.path.join(module, *args))
+        convert_file(cls.env, "dms", args[-1], {}, "init", False, "test", path)
 
     @classmethod
     def _setup_benchmark_data(cls):
@@ -57,7 +50,7 @@ class BenchmarkTestCase(common.TransactionCase):
         formt = "{:7}" + "| {:28}" * columns
 
         result = formt.format(*data[0]) + "\n"
-        result += ("-" * 7) + (("+" + ("-") * 29) * columns) + "\n"
+        result += ("-" * 7) + (("+" + "-" * 29) * columns) + "\n"
         for row in data[1:]:
             result += formt.format(*row) + "\n"
         return result
@@ -66,12 +59,13 @@ class BenchmarkTestCase(common.TransactionCase):
         tfunc = track_function(return_tracking=True)(func)
         benchmark = []
         for item in args_list:
-            self.registry.clear_caches()
+            self.registry.clear_all_caches()
             args = item[0] if len(item) > 0 else []
             kwargs = item[1] if len(item) > 1 else {}
             tracking = tuple(tfunc(*args, **kwargs)[1][1:])
             # pylint: disable=too-few-format-args
-            benchmark.append("%sq %.3fs %.3fs %.3fs" % tracking)
+            # pyupgrade: disable=UP030
+            benchmark.append("{}sq {:.3f}s {:.3f}s {:.3f}s".format(*tracking))
         return benchmark
 
     # ----------------------------------------------------------
@@ -93,7 +87,6 @@ class BenchmarkTestCase(common.TransactionCase):
             "is_lock_editor",
             "permission_write",
             "permission_unlink",
-            "__last_update",
         ]
 
     def test_file_search_benchmark(self):
@@ -177,7 +170,7 @@ class BenchmarkTestCase(common.TransactionCase):
         model = self.env["dms.file"].with_context(bin_size=True)
 
         def test_function(model, limit):
-            return model.search([], limit=limit).name_get()
+            return model.search([], limit=limit).mapped("display_name")
 
         model_super = model.sudo()
         model_admin = model.with_user(admin_uid)
@@ -211,7 +204,9 @@ class BenchmarkTestCase(common.TransactionCase):
             test_function, args_demo
         )
 
-        info_message = "\n\nSearching and 'name_get' function with bin_size = True | "
+        info_message = (
+            "\n\nSearching and 'display_name' function with bin_size = True | "
+        )
         info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
         info_message += self._benchmark_table(
             [

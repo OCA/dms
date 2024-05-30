@@ -1,12 +1,18 @@
 # Copyright 2020 Creu Blanca
 # Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 
 from logging import getLogger
 
 from odoo import api, fields, models
-from odoo.osv.expression import FALSE_DOMAIN, NEGATIVE_TERM_OPERATORS, OR, TRUE_DOMAIN
+from odoo.osv.expression import (
+    FALSE_DOMAIN,
+    NEGATIVE_TERM_OPERATORS,
+    OR,
+    TRUE_DOMAIN,
+)
 
 _logger = getLogger(__name__)
 
@@ -60,14 +66,15 @@ class DmsSecurityMixin(models.AbstractModel):
         for record in self:
             record.record_ref = False
             if record.res_model and record.res_id:
-                record.record_ref = "{},{}".format(record.res_model, record.res_id)
+                record.record_ref = f"{record.res_model},{record.res_id}"
 
     def _compute_permissions(self):
-        """Get permissions for the current record.
-
-        ⚠ Not very performant; only display field on form views.
         """
-        # Superuser unrestricted 🦸
+        Get permissions for the current record.
+        """
+
+        # Update according to presence when applying ir.rule
+        self.invalidate_recordset()
         if self.env.su:
             self.update(
                 {
@@ -78,7 +85,7 @@ class DmsSecurityMixin(models.AbstractModel):
                 }
             )
             return
-        # Update according to presence when applying ir.rule
+
         creatable = self._filter_access_rules("create")
         readable = self._filter_access_rules("read")
         unlinkable = self._filter_access_rules("unlink")
@@ -100,10 +107,7 @@ class DmsSecurityMixin(models.AbstractModel):
             return []
         inherited_access_field = "storage_id_inherit_access_from_parent_record"
         if self._name != "dms.directory":
-            inherited_access_field = "{}.{}".format(
-                self._directory_field,
-                inherited_access_field,
-            )
+            inherited_access_field = f"{self._directory_field}.{inherited_access_field}"
         inherited_access_domain = [
             ("storage_id_save_type", "=", "attachment"),
             (inherited_access_field, "=", True),
@@ -119,8 +123,9 @@ class DmsSecurityMixin(models.AbstractModel):
             try:
                 model = self.env[group["res_model"]]
             except KeyError:
-                # Model not registered. This is normal if you are upgrading the
-                # database. Otherwise, you probably have garbage DMS data.
+                # The model might not be registered.
+                # This is normal if you are upgrading the database.
+                # Otherwise, you probably have garbage DMS data.
                 # These records will be accessible by DB users only.
                 domains.append(
                     [
@@ -153,7 +158,7 @@ class DmsSecurityMixin(models.AbstractModel):
             "unlink": "AND dag.perm_inclusive_unlink",
             "write": "AND dag.perm_inclusive_write",
         }[operation]
-        select = """
+        select = f"""
             SELECT
                 dir_group_rel.aid
             FROM
@@ -163,11 +168,9 @@ class DmsSecurityMixin(models.AbstractModel):
                 INNER JOIN dms_access_group_users_rel AS users
                     ON users.gid = dag.id
             WHERE
-                users.uid = %s {}
-            """.format(
-            operation_check
-        )
-        return (select, (self.env.uid,))
+                users.uid = %s {operation_check}
+            """
+        return select, (self.env.uid,)
 
     @api.model
     def _get_domain_by_access_groups(self, operation):
@@ -202,13 +205,14 @@ class DmsSecurityMixin(models.AbstractModel):
         if _self.env.su:
             # You're SUPERUSER_ID
             return TRUE_DOMAIN if positive else FALSE_DOMAIN
-        # Obtain and combine domains
+
         result = OR(
             [
                 _self._get_domain_by_access_groups(operation),
                 _self._get_domain_by_inheritance(operation),
             ]
         )
+
         if not positive:
             result.insert(0, "!")
         return result
@@ -233,7 +237,7 @@ class DmsSecurityMixin(models.AbstractModel):
         # Only kept to not break inheritance; see next comment
         result = super()._filter_access_rules_python(operation)
         # HACK Always fall back to applying rules by SQL.
-        # Upstream `_filter_acccess_rules_python()` doesn't use computed fields
+        # Upstream `_filter_access_rules_python()` doesn't use computed fields
         # search methods. Thus, it will take the `[('permission_{operation}',
         # '=', user.id)]` rule literally. Obviously that will always fail
         # because `self[f"permission_{operation}"]` will always be a `bool`,
@@ -249,7 +253,7 @@ class DmsSecurityMixin(models.AbstractModel):
         # Need to flush now, so all groups are stored in DB and the SELECT used
         # to check access works
         res.flush_recordset()
-        # Go back to original sudo state and check we really had creation permission
+        # Go back to the original sudo state and check we really had creation permission
         res = res.sudo(self.env.su)
         res.check_access_rights("create")
         res.check_access_rule("create")

@@ -20,7 +20,7 @@ class Tag(models.Model):
     )
     category_id = fields.Many2one(
         comodel_name="dms.category",
-        context="{'dms_category_show_path': True}",
+        context={"dms_category_show_path": True},
         string="Category",
         ondelete="set null",
     )
