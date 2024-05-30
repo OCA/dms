@@ -548,8 +548,7 @@ class File(models.Model):
         for record in self:
             if record.size and record.size > self._get_binary_max_size() * 1024 * 1024:
                 raise ValidationError(
-                    _("The maximum upload size is %s MB).")
-                    % self._get_binary_max_size()
+                    _("The maximum upload size is %s MB.") % self._get_binary_max_size()
                 )
 
     # ----------------------------------------------------------
