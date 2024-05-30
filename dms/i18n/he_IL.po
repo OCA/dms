@@ -1991,8 +1991,8 @@ msgstr "שם הקובץ אינו חוקי."
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
-msgid "The maximum upload size is %s MB)."
-msgstr "גודל ההעלאה המקסימלי הוא %s MB)."
+msgid "The maximum upload size is %s MB."
+msgstr "גודל ההעלאה המקסימלי הוא %s MB."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
