@@ -1,24 +1,16 @@
 # Copyright 2024 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo.tests import common, new_test_user
+from odoo.tests import new_test_user
 from odoo.tools import mute_logger
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestHrDmsField(common.TransactionCase):
+
+class TestHrDmsField(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
         cls.template = cls.env.ref("hr_dms_field.field_template_employee")
         cls.storage = cls.template.storage_id
         cls.access_group = cls.template.group_ids
@@ -45,7 +37,9 @@ class TestHrDmsField(common.TransactionCase):
 
     def test_employee_create_01(self):
         employee = self.employee_model.create({"name": "Test employee"})
-        employee.refresh()
+        # Manually refresh, similar to UX
+        # dms_field/static/src/views/dms_list/dms_list_renderer.esm.js#L450
+        employee.invalidate_model()
         directory = employee.dms_directory_ids
         self.assertEqual(len(directory), 1)
         self.assertEqual(directory.storage_id, self.storage)
@@ -63,7 +57,9 @@ class TestHrDmsField(common.TransactionCase):
                 "user_id": self.user.id,
             }
         )
-        employee.refresh()
+        # Manually refresh, similar to UX
+        # dms_field/static/src/views/dms_list/dms_list_renderer.esm.js#L450
+        employee.invalidate_model()
         group_custom = employee.dms_directory_ids.group_ids.filtered("dms_field_ref")
         self.assertIn(self.user, group_custom.explicit_user_ids)
 
@@ -75,7 +71,9 @@ class TestHrDmsField(common.TransactionCase):
                 "user_id": self.user.id,
             }
         )
-        employee.refresh()
+        # Manually refresh, similar to UX
+        # dms_field/static/src/views/dms_list/dms_list_renderer.esm.js#L450
+        employee.invalidate_model()
         directory_0 = employee.dms_directory_ids[0]
         group_custom = directory_0.group_ids.filtered("dms_field_ref")
         self.assertIn(self.user, group_custom.explicit_user_ids)
