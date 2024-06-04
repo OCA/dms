@@ -288,17 +288,8 @@ msgid "A file must have model and resource ID in attachment storage."
 msgstr "Um arquivo deve ter modelo e ID de recurso no armazenamento de anexos."
 
 #. module: dms
-#. odoo-javascript
-#: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
-#, python-format
-msgid "A file with the same name already exists"
-msgstr "Já existe um arquivo com o mesmo nome"
-
-#. module: dms
 #. odoo-python
-#. odoo-javascript
 #: code:addons/dms/models/dms_file.py:0
-#: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 #, python-format
 msgid "A file with the same name already exists."
 msgstr "Já existe um arquivo com o mesmo nome."
@@ -2340,6 +2331,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+
+#, python-format
+#~ msgid "A file with the same name already exists"
+#~ msgstr "Já existe um arquivo com o mesmo nome"
 
 #, python-format
 #~ msgid "Error has not been raised"
