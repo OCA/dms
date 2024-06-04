@@ -6,8 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-05 17:34+0000\n"
-"Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
+"PO-Revision-Date: 2024-06-04 18:36+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -60,12 +61,12 @@ msgstr "%s Sub-diretórios"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 msgid "/dms/static/lib/img/banner/documents_onboarding_directory.png"
-msgstr ""
+msgstr "/dms/static/lib/img/banner/documents_onboarding_directory.png"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "/dms/static/lib/img/banner/documents_onboarding_file.png"
-msgstr ""
+msgstr "/dms/static/lib/img/banner/documents_onboarding_file.png"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -106,6 +107,16 @@ msgid ""
 "change it, the permissions will also change.<br/>\n"
 "                    Make this change at your own risk."
 msgstr ""
+"<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Aviso\"/>\n"
+"                                             <b>ATENÇÃO:</b> Dicas para ter "
+"em mente antes de mover arquivos:<br/>\n"
+"                                             - Esta alteração não pode ser "
+"desfeita.<br/>\n"
+"                                             - Lembre-se que as permissões "
+"dos arquivos são as da pasta que os contém, portanto, é possível que ao "
+"alterá-lo, as permissões também sejam alteradas.<br/>\n"
+"                                            Faça essa alteração por sua "
+"conta e risco."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -469,7 +480,7 @@ msgstr "Arquivos Arquivados"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Are you sure? All files will be moved."
-msgstr ""
+msgstr "Tem certeza? Todos os arquivos serão movidos."
 
 #. module: dms
 #. odoo-python
@@ -537,7 +548,7 @@ msgstr "O nome da categoria já existe!"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__checksum
 msgid "Checksum/SHA1"
-msgstr ""
+msgstr "Checksum/SHA1"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__child_category_ids
@@ -827,7 +838,7 @@ msgstr "Mixin de segurança SGD"
 #. module: dms
 #: model:ir.model,name:dms.model_dms_mixins_thumbnail
 msgid "DMS thumbnail and icon mixin"
-msgstr ""
+msgstr "Miniatura DMS e mix de ícones"
 
 #. module: dms
 #. odoo-python
@@ -1550,12 +1561,12 @@ msgstr "Data Modificação"
 #: model:ir.actions.server,name:dms.action_wizard_dms_file_move
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Move"
-msgstr ""
+msgstr "Mover"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.wizard_dms_file_move_act_window
 msgid "Move files"
-msgstr ""
+msgstr "Mover arquivos"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
@@ -1680,7 +1691,7 @@ msgstr "Somente usuário administrador"
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Only files in the same root directory can be moved."
-msgstr ""
+msgstr "Somente arquivos no mesmo diretório raiz podem ser movidos."
 
 #. module: dms
 #. odoo-python
@@ -1778,7 +1789,7 @@ msgstr "Caminho Json"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_names
 msgid "Path Names"
-msgstr ""
+msgstr "Nomes de caminhos"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_contact
@@ -1834,7 +1845,7 @@ msgstr "Permissão de Leitura"
 #. module: dms
 #: model:ir.model,name:dms.model_dms_access_group
 msgid "Record Access Groups"
-msgstr ""
+msgstr "Gravar grupos de acesso"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__record_ref
@@ -1846,7 +1857,7 @@ msgstr "Registro Referenciado"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
 msgid "Record Thread ID"
-msgstr ""
+msgstr "Registrar ID do tópico"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
@@ -1870,7 +1881,7 @@ msgstr "Diretórios Raiz"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__root_directory_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__root_directory_id
 msgid "Root Directory"
-msgstr ""
+msgstr "Diretório raiz"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_04_demo
@@ -1937,7 +1948,7 @@ msgstr "Tamanho"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__human_size
 #: model:ir.model.fields,field_description:dms.field_dms_file__human_size
 msgid "Size (human readable)"
-msgstr ""
+msgstr "Tamanho (legível por humanos)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__starred
@@ -2183,7 +2194,7 @@ msgstr "Total de Subdiretórios"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Total files"
-msgstr ""
+msgstr "Total de Arquivos"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
@@ -2277,7 +2288,7 @@ msgstr "Histórico de comunicação do Site"
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_file_move
 msgid "Wizard Dms File Move"
-msgstr ""
+msgstr "Assistente de movimentação de arquivo Dms"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
@@ -2299,7 +2310,7 @@ msgstr "Você deve selecionar um diretório primeiro"
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "action_close_documents_onboarding"
-msgstr ""
+msgstr "action_close_documents_onboarding"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
@@ -2314,23 +2325,23 @@ msgstr "exe,msi"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "mail.catchall.domain"
-msgstr ""
+msgstr "mail.catchall.domain"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "o_onboarding_blue"
-msgstr ""
+msgstr "o_onboarding_blue"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 msgid "o_onboarding_orange"
-msgstr ""
+msgstr "o_onboarding_orange"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "res.company"
-msgstr ""
+msgstr "res.company"
 
 #, python-format
 #~ msgid "A file with the same name already exists"
