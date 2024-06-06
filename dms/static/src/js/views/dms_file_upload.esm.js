@@ -1,7 +1,6 @@
 /** @odoo-module */
 
 import {useBus, useService} from "@web/core/utils/hooks";
-import rpc from "web.rpc";
 import {_t} from "web.core";
 
 const {useRef, useEffect, useState} = owl;
@@ -149,26 +148,17 @@ export const FileUpload = {
             });
         });
 
-        rpc.query({
-            model: "dms.file",
-            method: "create",
-            args: [attachments_args],
-            kwargs: {
+        this.orm
+            .call("dms.file", "create", [attachments_args], {
                 context: ctx,
-            },
-        })
+            })
             .then(() => {
                 self.actionService.restore(controllerID);
             })
             .catch((error) => {
-                console.log("##error##: ", error);
-                window.alert(this.env._t("A file with the same name already exists."));
-                self.notification.add(
-                    this.env._t("A file with the same name already exists"),
-                    {
-                        type: "danger",
-                    }
-                );
+                self.notification.add(error.data.message, {
+                    type: "danger",
+                });
                 self.actionService.restore(controllerID);
             });
     },
