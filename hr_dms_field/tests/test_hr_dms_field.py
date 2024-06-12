@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo.tests import common, new_test_user
+from odoo.tools import mute_logger
 
 
 class TestHrDmsField(common.TransactionCase):
@@ -48,9 +49,9 @@ class TestHrDmsField(common.TransactionCase):
         directory = employee.dms_directory_ids
         self.assertEqual(len(directory), 1)
         self.assertEqual(directory.storage_id, self.storage)
-        self.assertIn("Autogenerate group", directory.group_ids.name)
-        self.assertNotIn(self.access_group, directory.group_ids)
-        self.assertNotIn(self.user, directory.group_ids.explicit_user_ids)
+        group_custom = directory.group_ids.filtered("dms_field_ref")
+        self.assertIn(self.access_group, directory.group_ids)
+        self.assertNotIn(self.user, group_custom.explicit_user_ids)
         child_directory_names = directory.mapped("child_directory_ids.name")
         self.assertIn("Payrolls", child_directory_names)
         self.assertIn("Contracts", child_directory_names)
@@ -63,4 +64,25 @@ class TestHrDmsField(common.TransactionCase):
             }
         )
         employee.refresh()
-        self.assertIn(self.user, employee.dms_directory_ids.group_ids.explicit_user_ids)
+        group_custom = employee.dms_directory_ids.group_ids.filtered("dms_field_ref")
+        self.assertIn(self.user, group_custom.explicit_user_ids)
+
+    @mute_logger("odoo.models.unlink")
+    def test_employee_full_process(self):
+        employee = self.employee_model.create(
+            {
+                "name": "Test employee",
+                "user_id": self.user.id,
+            }
+        )
+        employee.refresh()
+        directory_0 = employee.dms_directory_ids[0]
+        group_custom = directory_0.group_ids.filtered("dms_field_ref")
+        self.assertIn(self.user, group_custom.explicit_user_ids)
+        employee.write({"user_id": False})
+        self.assertFalse(group_custom.explicit_user_ids)
+        employee.write({"user_id": self.user.id})
+        self.assertIn(self.user, group_custom.explicit_user_ids)
+        employee.unlink()
+        self.assertFalse(directory_0.exists())
+        self.assertFalse(group_custom.exists())
