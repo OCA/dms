@@ -3,8 +3,9 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests import TransactionCase, new_test_user
+from odoo.tools import mute_logger
 
 
 class TestDmsField(TransactionCase):
@@ -100,12 +101,23 @@ class TestDmsField(TransactionCase):
             )
         )
 
+    def test_dms_access_group_constrains_dms_field_ref(self):
+        group = self.env["dms.access.group"].create(
+            {
+                "name": "Test 1",
+                "dms_field_ref": "%s,%s" % (self.partner._name, self.partner.id),
+            }
+        )
+        with self.assertRaises(UserError):
+            group.copy({"name": "Test 2"})
+
     def test_template_directory(self):
         self.assertTrue(self.template.dms_directory_ids)
         self.assertIn(
             self.template.group_ids, self.template.dms_directory_ids.group_ids
         )
 
+    @mute_logger("odoo.models.unlink")
     def test_creation_process_01(self):
         self.assertFalse(self.partner.dms_directory_ids)
         template = self.env["dms.field.template"].with_context(
@@ -119,9 +131,13 @@ class TestDmsField(TransactionCase):
         self.assertFalse(directory_0.parent_id)
         self.assertTrue(directory_0.is_root_directory)
         self.assertTrue(directory_0.inherit_group_ids)
-        self.assertNotIn(self.template.group_ids, directory_0.group_ids)
+        self.assertIn(self.template.group_ids, directory_0.group_ids)
         self.assertIn(self.group, directory_0.group_ids.group_ids)
-        self.assertEqual(directory_0.group_ids.model_ref, self.partner)
+        self.assertIn(self.partner, directory_0.mapped("group_ids.dms_field_ref"))
+        group_custom = directory_0.group_ids.filtered("dms_field_ref")
+        self.assertTrue(group_custom.perm_create)
+        self.assertTrue(group_custom.perm_write)
+        self.assertTrue(group_custom.perm_unlink)
         self.assertIn(self.user_b, directory_0.group_ids.explicit_user_ids)
         self.assertIn(self.user_a, directory_0.group_ids.users)
         self.assertIn(self.user_b, directory_0.group_ids.users)
@@ -132,9 +148,9 @@ class TestDmsField(TransactionCase):
         # Remove folder: El grupo de acceso todavía existe
         old_groups = directory_0.group_ids
         directory_0.unlink()
-        model_ref_value = "%s,%s" % (self.partner._name, self.partner.id)
+        dms_field_ref_value = "%s,%s" % (self.partner._name, self.partner.id)
         total = self.env["dms.access.group"].search_count(
-            [("model_ref", "=", model_ref_value)]
+            [("dms_field_ref", "=", dms_field_ref_value)]
         )
         self.assertEqual(total, 1)
         # Create directory again (access groups are the same)
@@ -158,7 +174,7 @@ class TestDmsField(TransactionCase):
         self.assertEqual(directory_0.parent_id, self.template.parent_directory_id)
         self.assertFalse(directory_0.is_root_directory)
         self.assertFalse(directory_0.inherit_group_ids)
-        self.assertNotIn(self.template.group_ids, directory_0.group_ids)
+        self.assertIn(self.template.group_ids, directory_0.group_ids)
         self.assertIn(self.group, directory_0.group_ids.group_ids)
         self.assertIn(self.user_b, directory_0.group_ids.explicit_user_ids)
         self.assertIn(self.user_a, directory_0.group_ids.users)
