@@ -102,6 +102,7 @@ class DirectoryTestCase(StorageDatabaseBaseCase):
             )
 
     @users("dms-manager", "dms-user")
+    @mute_logger("odoo.models.unlink")
     def test_unlink_root_directory(self):
         root_directory = self.create_directory(storage=self.storage)
         sub_directory = self.create_directory(directory=root_directory)
@@ -111,6 +112,7 @@ class DirectoryTestCase(StorageDatabaseBaseCase):
         self.assertFalse(sub_files.exists())
 
     @users("dms-manager", "dms-user")
+    @mute_logger("odoo.models.unlink")
     def test_unlink_directory(self):
         root_directory = self.create_directory(storage=self.storage)
         sub_directory = self.create_directory(directory=root_directory)
