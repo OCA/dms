@@ -19,6 +19,7 @@ msgstr ""
 
 #. module: hr_dms_field
 #: model:ir.model.fields,field_description:hr_dms_field.field_dms_field_template__dms_directory_ids
+#: model:ir.model.fields,field_description:hr_dms_field.field_hr_employee__dms_directory_ids
 #: model:ir.model.fields,field_description:hr_dms_field.field_hr_employee_public__dms_directory_ids
 msgid "DMS Directories"
 msgstr "Directorios DMS"
@@ -33,6 +34,11 @@ msgstr "Plantilla de Campo Dms"
 #: model_terms:ir.ui.view,arch_db:hr_dms_field.view_employee_form
 msgid "Documents"
 msgstr "Documentos"
+
+#. module: hr_dms_field
+#: model:ir.model,name:hr_dms_field.model_hr_employee
+msgid "Employee"
+msgstr ""
 
 #. module: hr_dms_field
 #: model:dms.access.group,name:hr_dms_field.read_access_hr_employee_group
