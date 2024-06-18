@@ -32,6 +32,7 @@
         "views/dms_portal_templates.xml",
         # Wizard
         "wizards/wizard_dms_file_move_views.xml",
+        "wizards/wizard_dms_share_views.xml",
     ],
     "assets": {
         "mail.assets_messaging": [
