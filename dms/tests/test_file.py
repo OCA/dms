@@ -8,6 +8,7 @@ import base64
 from odoo.exceptions import UserError
 from odoo.tests import new_test_user
 from odoo.tests.common import users
+from odoo.tools import mute_logger
 
 from .common import StorageFileBaseCase
 
@@ -48,6 +49,7 @@ class FileFilestoreTestCase(StorageFileBaseCase):
         self.assertIn(self.sub_directory_x.id, dms_directories.ids)
 
     @users("dms-manager", "dms-user")
+    @mute_logger("odoo.models.unlink")
     def test_content_file(self):
         lobject_file = self.create_file(directory=self.directory)
         self.assertTrue(lobject_file.content)
