@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="wizard_dms_share_form" model="ir.ui.view">
+        <field name="name">wizard.dms.share.form</field>
+        <field name="model">wizard.dms.share</field>
+        <field name="inherit_id" ref="portal.portal_share_wizard" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <field name="res_model" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+    <record id="wizard_dms_directory_share_action" model="ir.actions.act_window">
+        <field name="name">Share</field>
+        <field name="res_model">wizard.dms.share</field>
+        <field name="binding_model_id" ref="model_dms_directory" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="wizard_dms_file_share_action" model="ir.actions.act_window">
+        <field name="name">Share</field>
+        <field name="res_model">wizard.dms.share</field>
+        <field name="binding_model_id" ref="model_dms_file" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
