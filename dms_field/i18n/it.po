@@ -341,6 +341,7 @@ msgstr "DMS"
 #: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_dms_classification_detail__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_dms_file_move__dms_directory_ids
+#: model:ir.model.fields,field_description:dms_field.field_wizard_dms_share__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_groups_into_role__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_wizard_ir_model_menu_create__dms_directory_ids
 msgid "DMS Directories"
@@ -351,6 +352,11 @@ msgstr "Cartelle DMS"
 #: model:ir.model.fields.selection,name:dms_field.selection__ir_ui_view__type__dms_tree
 msgid "DMS Tree"
 msgstr "Albero DMS"
+
+#. module: dms_field
+#: model:ir.model.fields,field_description:dms_field.field_dms_access_group__dms_field_ref
+msgid "DMS field reference"
+msgstr ""
 
 #. module: dms_field
 #. openerp-web
@@ -591,6 +597,11 @@ msgid "Paste"
 msgstr "Incolla"
 
 #. module: dms_field
+#: model:ir.model,name:dms_field.model_dms_access_group
+msgid "Record Access Groups"
+msgstr ""
+
+#. module: dms_field
 #. openerp-web
 #: code:addons/dms_field/static/src/xml/controls.xml:0
 #, python-format
@@ -659,6 +670,12 @@ msgstr "Sono presenti cartelle non associate ad un record"
 #: code:addons/dms_field/models/dms_field_template.py:0
 #, python-format
 msgid "There is already a linked directory created."
+msgstr ""
+
+#. module: dms_field
+#: code:addons/dms_field/models/dms_access_group.py:0
+#, python-format
+msgid "There is already an access group created for this record."
 msgstr ""
 
 #. module: dms_field
