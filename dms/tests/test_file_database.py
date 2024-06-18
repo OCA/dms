@@ -5,6 +5,7 @@
 
 from odoo.exceptions import UserError
 from odoo.tests.common import users
+from odoo.tools import mute_logger
 
 from .common import StorageDatabaseBaseCase
 
@@ -66,6 +67,7 @@ class FileDatabaseTestCase(StorageDatabaseBaseCase):
             )
 
     @users("dms-manager", "dms-user")
+    @mute_logger("odoo.models.unlink")
     def test_unlink_file(self):
         file = self.create_file(directory=self.directory)
         file.unlink()
