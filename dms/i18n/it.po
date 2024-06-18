@@ -318,6 +318,7 @@ msgstr "Informazioni di accesso"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_warning
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_warning
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__access_warning
 msgid "Access warning"
 msgstr "Avviso accesso"
 
@@ -379,6 +380,11 @@ msgstr "Aggiungi una nuova cartella."
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_storage_migration
 msgid "Add a new File."
 msgstr "Aggiungi un nuovo file."
+
+#. module: dms
+#: model:ir.model.fields,help:dms.field_wizard_dms_share__note
+msgid "Add extra content to display in the email"
+msgstr ""
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_01_demo
@@ -750,6 +756,7 @@ msgstr "Crea file dagli allegati dei messaggi"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__create_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__create_uid
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__create_uid
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__create_uid
 msgid "Created by"
 msgstr "Creato da"
 
@@ -761,6 +768,7 @@ msgstr "Creato da"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__create_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__create_date
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__create_date
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__create_date
 msgid "Created on"
 msgstr "Creato il"
 
@@ -903,6 +911,7 @@ msgstr "Cartella"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__display_name
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__display_name
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
@@ -1145,6 +1154,7 @@ msgstr "Risorse umane"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__id
 #: model:ir.model.fields,field_description:dms.field_dms_tag__id
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__id
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__id
 msgid "ID"
 msgstr "ID"
 
@@ -1380,6 +1390,7 @@ msgstr "Appena fatto"
 #: model:ir.model.fields,field_description:dms.field_dms_storage____last_update
 #: model:ir.model.fields,field_description:dms.field_dms_tag____last_update
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move____last_update
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share____last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
 
@@ -1391,6 +1402,7 @@ msgstr "Ultima modifica il"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_uid
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_uid
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__write_uid
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
 
@@ -1402,6 +1414,7 @@ msgstr "Ultimo aggiornamento di"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__write_date
 #: model:ir.model.fields,field_description:dms.field_dms_tag__write_date
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__write_date
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__write_date
 msgid "Last Updated on"
 msgstr "Ultimo aggiornamento il"
 
@@ -1409,6 +1422,11 @@ msgstr "Ultimo aggiornamento il"
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Last update"
 msgstr "Ultimo aggiornamento"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__share_link
+msgid "Link"
+msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
@@ -1617,6 +1635,11 @@ msgid "Not results"
 msgstr "Nessun risultato"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__note
+msgid "Note"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction_counter
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction_counter
 msgid "Number of Actions"
@@ -1798,6 +1821,11 @@ msgid "Read Access"
 msgstr "Accesso in lettura"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__partner_ids
+msgid "Recipients"
+msgstr ""
+
+#. module: dms
 #: model:ir.model,name:dms.model_dms_access_group
 msgid "Record Access Groups"
 msgstr "Gruppi di accesso al record"
@@ -1813,6 +1841,21 @@ msgstr "Record referenziato"
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_force_thread_id
 msgid "Record Thread ID"
 msgstr "ID thread record"
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__resource_ref
+msgid "Related Document"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__res_id
+msgid "Related Document ID"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_wizard_dms_share__res_model
+msgid "Related Document Model"
+msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
@@ -1871,8 +1914,8 @@ msgid "Settings"
 msgstr "Impostazioni"
 
 #. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
+#: model:ir.actions.act_window,name:dms.wizard_dms_directory_share_action
+#: model:ir.actions.act_window,name:dms.wizard_dms_file_share_action
 msgid "Share"
 msgstr "Condividi"
 
@@ -2234,6 +2277,11 @@ msgstr "Cronologia comunicazioni sito web"
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_file_move
 msgid "Wizard Dms File Move"
+msgstr ""
+
+#. module: dms
+#: model:ir.model,name:dms.model_wizard_dms_share
+msgid "Wizard Dms Share"
 msgstr ""
 
 #. module: dms
