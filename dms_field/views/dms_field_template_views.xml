@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_dms_field_template_tree" model="ir.ui.view">
+        <field name="model">dms.field.template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="storage_id" />
+                <field name="model_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_dms_field_template_form" model="ir.ui.view">
+        <field name="model">dms.field.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" /></h1>
+                    </div>
+                    <group name="main_group">
+                        <field name="company_id" groups="base.group_multi_company" />
+                        <field name="dms_directory_ids" invisible="1" />
+                        <field name="storage_id" required="1" />
+                        <field
+                            name="parent_directory_id"
+                            attrs="{'invisible':[('storage_id', '=', False)]}"
+                        />
+                        <field name="model_id" required="1" />
+                        <field
+                            name="user_field_id"
+                            attrs="{'invisible':[('model_id', '=', False)]}"
+                        />
+                        <field
+                            name="directory_format_name"
+                            attrs="{'invisible':[('model_id', '=', False)]}"
+                            required="1"
+                        />
+                        <field name="group_ids" widget="many2many_tags" />
+                    </group>
+                    <notebook position="inside">
+                        <page
+                            name="dms"
+                            string="Documents"
+                            attrs="{'invisible':['|', ('storage_id', '=', False), ('model_id', '=', False)]}"
+                        >
+                            <field
+                                name="dms_directory_ids"
+                                mode="dms_list"
+                                attrs="{'invisible': [('id', '=', False)]}"
+                            />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_dms_field_template" model="ir.actions.act_window">
+        <field name="name">Embedded DMS templates</field>
+        <field name="res_model">dms.field.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="menu_dms_field_template"
+        name="Embedded DMS templates"
+        parent="dms.cat_menu_dms_config_organizing"
+        sequence="6"
+        action="action_dms_field_template"
+    />
+</odoo>
