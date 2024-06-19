@@ -378,12 +378,6 @@
                         string="Unlock"
                         attrs="{'invisible':['|',('is_locked', '=', False),('is_lock_editor', '=', False)]}"
                     />
-                    <button
-                        name="%(portal.portal_share_action)d"
-                        string="Share"
-                        type="action"
-                        class="oe_highlight oe_read_only"
-                    />
                 </header>
                 <sheet>
                     <widget
