@@ -17,6 +17,7 @@ export class DmsListRenderer extends Component {
         this.nodeSelectedState = useState({data: {}});
         this.messaging = useService("messaging");
         this.notification = useService("notification");
+        this.dialog = useService("dialog");
         this.dragState = useState({
             showDragZone: false,
         });
@@ -382,7 +383,7 @@ export class DmsListRenderer extends Component {
         var context = {
             default_parent_directory_id: node.data.data.id,
         };
-        Component.env.services.dialog.add(FormViewDialog, {
+        this.dialog.add(FormViewDialog, {
             resModel: "dms.directory",
             context: context,
             title: _lt("Add Directory: ") + node.data.data.name,
@@ -415,7 +416,7 @@ export class DmsListRenderer extends Component {
         var context = {
             default_directory_id: node.data.data.id,
         };
-        Component.env.services.dialog.add(FormViewDialog, {
+        this.dialog.add(FormViewDialog, {
             resModel: "dms.file",
             context: context,
             title: _lt("Add File: ") + node.data.data.name,
@@ -451,7 +452,7 @@ export class DmsListRenderer extends Component {
         });
     }
     onDMSOpenRecord(node) {
-        Component.env.services.dialog.add(FormViewDialog, {
+        this.dialog.add(FormViewDialog, {
             resModel: node.data.resModel,
             title: _lt("Open: ") + node.data.data.name,
             resId: node.data.data.id,
