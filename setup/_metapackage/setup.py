@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo-addon-dms>=16.0dev,<16.1dev',
         'odoo-addon-dms_auto_classification>=16.0dev,<16.1dev',
         'odoo-addon-dms_field>=16.0dev,<16.1dev',
+        'odoo-addon-dms_field_auto_classification>=16.0dev,<16.1dev',
         'odoo-addon-dms_storage>=16.0dev,<16.1dev',
         'odoo-addon-dms_user_role>=16.0dev,<16.1dev',
     ],
