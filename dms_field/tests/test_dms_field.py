@@ -155,7 +155,7 @@ class TestDmsField(TransactionCase):
         self.assertEqual(total, 1)
         # Create directory again (access groups are the same)
         template.create_dms_directory()
-        self.partner.refresh()
+        self.partner.invalidate_model()
         directory_0 = self.partner.dms_directory_ids[0]
         self.assertEqual(directory_0.group_ids, old_groups)
 
