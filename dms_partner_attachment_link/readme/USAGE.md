@@ -1,0 +1,1 @@
+Open the partner form view and click the button to see a list of files stored in the attachment stores and related to the current partner.

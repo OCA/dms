@@ -1,0 +1,1 @@
+This module adds a DMS Attachment smart button to the partner form, which opens a view containing a list of all DMS files stored in the attachment storages and related to the Odoo records associated with the selected partner.
