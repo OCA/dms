@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-04 18:36+0000\n"
-"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
-"translation.odoo-community.org>\n"
+"PO-Revision-Date: 2024-07-05 19:47+0000\n"
+"Last-Translator: rodrigosottomaiormacedo "
+"<sottomaiormacedotec@sottomaiormacedo.tech>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -403,7 +403,7 @@ msgstr "Add um novo Arquivo."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_wizard_dms_share__note
 msgid "Add extra content to display in the email"
-msgstr ""
+msgstr "Adicione conteúdo extra para exibir no e-mail"
 
 #. module: dms
 #: model:dms.access.group,name:dms.access_group_01_demo
@@ -1457,7 +1457,7 @@ msgstr "Última Atualização"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__share_link
 msgid "Link"
-msgstr ""
+msgstr "Ligação"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
@@ -1678,7 +1678,7 @@ msgstr "Sem Resultados"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__note
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction_counter
@@ -1868,7 +1868,7 @@ msgstr "Permissão de Leitura"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__partner_ids
 msgid "Recipients"
-msgstr ""
+msgstr "Destinatários"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_access_group
@@ -1890,17 +1890,17 @@ msgstr "Registrar ID do tópico"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__resource_ref
 msgid "Related Document"
-msgstr ""
+msgstr "Documento Relacionado"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__res_id
 msgid "Related Document ID"
-msgstr ""
+msgstr "ID do documento relacionado"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__res_model
 msgid "Related Document Model"
-msgstr ""
+msgstr "Modelo de Documento Relacionado"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__require_migration
@@ -2336,7 +2336,7 @@ msgstr "Assistente de movimentação de arquivo Dms"
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_share
 msgid "Wizard for sharing DMS records"
-msgstr ""
+msgstr "Assistente para compartilhamento de registros DMS"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
