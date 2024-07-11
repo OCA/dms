@@ -100,7 +100,15 @@ class Partner(models.Model):
         """
         self.ensure_one()
         action = self.env.ref("dms.action_dms_file").read()[0]
-        action["domain"] = [
-            ("id", "in", self.dms_file_ids.ids),
-        ]
+        action.update(
+            {
+                "domain": [
+                    ("id", "in", self.dms_file_ids.ids),
+                ],
+                "kanban_view_ref": self.env.ref(
+                    "dms_partner_attachment_link."
+                    "view_dms_file_kanban_inherit_partner_link"
+                ).id,
+            }
+        )
         return action

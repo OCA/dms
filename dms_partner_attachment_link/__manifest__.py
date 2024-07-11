@@ -15,5 +15,6 @@
     "depends": ["dms"],
     "data": [
         "views/res_partner_views.xml",
+        "views/dms_file_views.xml",
     ],
 }
