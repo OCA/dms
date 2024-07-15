@@ -2,16 +2,29 @@
 <odoo>
 
     <record id="view_dms_file_kanban_inherit_partner_link" model="ir.ui.view">
-        <field name="name">dms.file.view.kanban.inherit</field>
+        <field name="name">dms.file.view.kanban.inherit.partner.link</field>
         <field name="model">dms.file</field>
         <field name="inherit_id" ref="dms.view_dms_file_kanban" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <xpath expr="//kanban" position="attributes">
+                <attribute name="js_class" />
                 <attribute
                     name="class"
                 >o_kanban_small_column align-content-start</attribute>
                 <attribute name="banner_route" value="" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_dms_file_tree_inherit_partner_link" model="ir.ui.view">
+        <field name="name">res.partner.view.tree.inherit.partner.link</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="js_class" />
             </xpath>
         </field>
     </record>
