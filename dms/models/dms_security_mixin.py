@@ -134,8 +134,11 @@ class DmsSecurityMixin(models.AbstractModel):
                 continue
             domains.append([("res_model", "=", model._name), ("res_id", "=", False)])
             # Check record access in batch too
-            group_ids = [i for i in group["res_id"] if i]  # Hack to remove None res_id
-            related_ok = model.browse(group_ids)._filter_access_rules_python(operation)
+            res_ids = [i for i in group["res_id"] if i]  # Hack to remove None res_id
+            # Apply exists to skip records that do not exist. (e.g. a res.partner deleted
+            # by database).
+            model_records = model.browse(res_ids).exists()
+            related_ok = model_records._filter_access_rules_python(operation)
             if not related_ok:
                 continue
             domains.append(
