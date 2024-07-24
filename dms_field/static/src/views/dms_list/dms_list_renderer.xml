@@ -58,7 +58,7 @@
                             >
                                 <img
                                     class="h-100 w-100"
-                                    t-attf-src="/web/image/dms.file/{{nodeSelectedState.data.data.id}}/image_256/256x256?crop=1"
+                                    t-att-src="nodeSelectedState.data.data.icon_url"
                                 />
                             </a>
                         </div>
