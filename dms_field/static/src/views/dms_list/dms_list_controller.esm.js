@@ -315,6 +315,7 @@ export const DMSListControllerObject = {
                 file.permission_write && (!file.is_locked || file.is_lock_editor),
             perm_unlink:
                 file.permission_unlink && (!file.is_locked || file.is_lock_editor),
+            icon_url: file.icon_url,
         });
         var dt = this.makeDataPoint({
             data: data,
@@ -413,6 +414,7 @@ export const DMSListControllerObject = {
             "permission_create",
             "permission_write",
             "permission_unlink",
+            "icon_url",
             "name",
             "mimetype",
             "directory_id",
