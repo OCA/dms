@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates id="template" xml:space="preserve">
+    <t
+        t-name="dms.FilePreviewField"
+        t-inherit="web.BinaryField"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//div[hasclass('d-inline-flex')]" position="inside">
+            <t
+                t-set="readable_types"
+                t-value="[
+                    'image/bmp',
+                    'image/gif',
+                    'image/jpeg',
+                    'image/png',
+                    'image/svg+xml',
+                    'image/tiff',
+                    'image/x-icon',
+                    'application/pdf',
+                    'audio/mpeg',
+                    'video/x-matroska',
+                    'video/mp4',
+                    'video/webm'
+                ]"
+            />
+            <t t-if="readable_types.includes(props.record.data.mimetype)">
+                <button
+                    class="btn btn-secondary fa fa-search preview_file"
+                    data-tooltip="Preview"
+                    aria-label="Preview"
+                    t-on-click="onFilePreview"
+                />
+            </t>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<odoo noupdate="1">
+
+    <!--  Steps (has to be fist so that onboarding panel can access it) -->
+    <record id="onboarding_step_document_storage" model="onboarding.onboarding.step">
+        <field name="title">Storage</field>
+        <field name="description">Create a new Document Storage.</field>
+        <field name="button_text">Create Storage</field>
+        <field name="done_text">Document Storage Created!</field>
+        <field
+            name="panel_step_open_action_name"
+        >action_open_documents_onboarding_storage</field>
+        <field
+            name="step_image"
+            type="base64"
+            file="base/static/img/onboarding_default.png"
+        />
+        <field name="step_image_filename">onboarding_default.png</field>
+        <field name="step_image_alt">Onboarding Storage</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="onboarding_step_create_directory" model="onboarding.onboarding.step">
+        <field name="title">Directory</field>
+        <field name="description">Create a new Root Directory.</field>
+        <field name="button_text">Create Directory</field>
+        <field name="done_text">Root Directory Created!</field>
+        <field
+            name="panel_step_open_action_name"
+        >action_open_documents_onboarding_directory</field>
+        <field
+            name="step_image"
+            type="base64"
+            file="base/static/img/onboarding_default.png"
+        />
+        <field name="step_image_filename">onboarding_default.png</field>
+        <field name="step_image_alt">Onboarding Directory</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="onboarding_step_upload_file" model="onboarding.onboarding.step">
+        <field name="title">File</field>
+        <field name="description">Upload your first File.</field>
+        <field name="button_text">Upload File</field>
+        <field name="done_text">First File Uploaded!</field>
+        <field
+            name="panel_step_open_action_name"
+        >action_open_documents_onboarding_file</field>
+        <field
+            name="step_image"
+            type="base64"
+            file="base/static/img/onboarding_default.png"
+        />
+        <field name="step_image_filename">onboarding_default.png</field>
+        <field name="step_image_alt">Onboarding File</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <!--  File Onboarding Panel -->
+    <record id="onboarding_onboarding_dms_file" model="onboarding.onboarding">
+        <field name="name">File Onboarding</field>
+        <field
+            name="step_ids"
+            eval="[
+            Command.link(ref('dms.onboarding_step_document_storage')),
+            Command.link(ref('dms.onboarding_step_create_directory')),
+            Command.link(ref('dms.onboarding_step_upload_file'))
+        ]"
+        />
+        <field name="route_name">document_onboarding_file</field>
+        <field name="panel_close_action_name">action_close_panel_dms_file</field>
+    </record>
+</odoo>

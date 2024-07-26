@@ -1,0 +1,70 @@
+/**********************************************************************************
+*
+*    Copyright (c) 2017-2019 MuK IT GmbH.
+*    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+*    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+*
+**********************************************************************************/
+
+$o-kanban-image-width: 80px;
+
+.mk_file_kanban_view {
+    height: 100%;
+
+    .o_kanban_record {
+        padding: 0;
+        max-height: $o-kanban-image-width + 1;
+
+        > div:nth-child(1) {
+            padding: 0 var(--KanbanRecord-gap-v) !important;
+        }
+
+        .o_kanban_details {
+            height: 100%;
+            padding: var(--KanbanRecord-gap-v) var(--KanbanRecord-gap-v)
+                var(--KanbanRecord-gap-v) 0;
+
+            .o_kanban_record_title {
+                font-weight: bold;
+                padding-right: 16px;
+            }
+
+            .o_kanban_record_body {
+                max-height: 12px;
+
+                .o_kanban_tags {
+                    @include o-text-overflow;
+                }
+            }
+
+            .oe_kanban_avatar {
+                margin-left: 0;
+                max-width: 20px;
+            }
+
+            .o_dms_file_kanban_lock {
+                margin-top: 2px;
+                font-size: 1.2rem;
+                line-height: 20px;
+                margin-right: var(--KanbanRecord-gap-v);
+            }
+        }
+    }
+}
+
+.o_dropzone {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #aaaa;
+    z-index: 2;
+    left: 0;
+    top: 0;
+
+    i {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+}

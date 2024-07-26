@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo noupdate="1">
+    <record id="category_01_demo" model="dms.category">
+        <field name="name">Internal</field>
+    </record>
+    <record id="category_02_demo" model="dms.category">
+        <field name="name">Human Resource</field>
+        <field name="parent_id" ref="dms.category_01_demo" />
+    </record>
+    <record id="category_03_demo" model="dms.category">
+        <field name="name">Contracts</field>
+        <field name="parent_id" ref="dms.category_02_demo" />
+    </record>
+    <record id="category_04_demo" model="dms.category">
+        <field name="name">Traveling</field>
+        <field name="parent_id" ref="dms.category_02_demo" />
+    </record>
+    <record id="category_05_demo" model="dms.category">
+        <field name="name">External</field>
+    </record>
+    <record id="category_06_demo" model="dms.category">
+        <field name="name">News</field>
+        <field name="parent_id" ref="dms.category_05_demo" />
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates xml:space="preserve" id="template">
+    <t t-name="dms.DmsPathField">
+        <t t-set="path_length" t-value="data.length - 1" />
+        <t t-foreach="data" t-as="elem" t-key="elem_index" style="display: inline">
+            <t t-if="elem_index !== path_length">
+                <span style="display: inline" t-if="elem_index !== 0">/</span>
+                <a
+                    class="oe_form_uri"
+                    data-model="dms.directory"
+                    t-att-data-id="elem.id"
+                    href="#"
+                    t-on-click.prevent="(ev) => this._onNodeClicked(ev)"
+                >
+                    <t t-esc="elem.name" />
+                </a>
+            </t>
+            <t t-else="">
+                <span style="display: inline">/</span>
+                <span style="display: inline">
+                    <t t-esc="elem.name" />
+                </span>
+            </t>
+        </t>
+    </t>
+</templates>

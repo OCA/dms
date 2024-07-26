@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright 2017-2019 MuK IT GmbH
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+-->
+<odoo>
+<menuitem
+        id="main_menu_dms"
+        name="Documents"
+        web_icon="dms,static/description/icon.png"
+        groups="group_dms_user"
+    >
+    <menuitem id="menu_dms_file" name="Files" sequence="20" action="action_dms_file" />
+    <menuitem
+            id="menu_dms_directory"
+            name="Directories"
+            sequence="30"
+            action="action_dms_directory"
+        />
+    <menuitem id="cat_menu_dms_config" name="Configuration" sequence="50">
+        <menuitem
+                id="menu_dms_settings_general"
+                name="General Settings"
+                sequence="0"
+                action="action_dms_settings_general"
+                groups="base.group_system"
+            />
+        <menuitem id="cat_menu_dms_config_organizing" name="Organizing" sequence="5">
+            <menuitem id="menu_dms_tag" name="Tags" action="action_dms_tag" />
+            <menuitem
+                    id="menu_dms_category"
+                    name="Categories"
+                    action="action_dms_category"
+                />
+        </menuitem>
+        <menuitem
+                id="cat_menu_dms_config_system"
+                name="System"
+                groups="dms.group_dms_manager"
+                sequence="25"
+            >
+            <menuitem
+                    id="menu_dms_storage"
+                    name="Storages"
+                    action="action_dms_storage"
+                    sequence="5"
+                />
+            <menuitem
+                    id="menu_dms_file_migration"
+                    name="Migration"
+                    action="action_dms_file_migration"
+                    sequence="8"
+                />
+            <menuitem
+                    id="menu_dms_access_groups"
+                    name="Access Groups"
+                    action="action_dms_access_groups"
+                />
+        </menuitem>
+    </menuitem>
+</menuitem>
+</odoo>
