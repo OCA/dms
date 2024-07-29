@@ -262,7 +262,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_field.field_mail_alias_mixin__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_blacklist__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_blacklist_remove__dms_directory_ids
-#: model:ir.model.fields,field_description:dms_field.field_mail_bot__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel_partner__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field.field_mail_channel_rtc_session__dms_directory_ids
