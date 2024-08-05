@@ -218,6 +218,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                     "permission_create",
                     "permission_write",
                     "permission_unlink",
+                    "icon_url",
                     "name",
                     "mimetype",
                     "directory_id",
@@ -463,6 +464,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                     file.permission_write && (!file.is_locked || file.is_lock_editor),
                 perm_unlink:
                     file.permission_unlink && (!file.is_locked || file.is_lock_editor),
+                icon_url: file.icon_url,
             });
             var dt = this._makeDataPoint({
                 data: data,
