@@ -111,6 +111,27 @@ class TestDmsField(TransactionCase):
         with self.assertRaises(UserError):
             group.copy({"name": "Test 2"})
 
+    def test_dms_access_group_company_dms_field_ref_01(self):
+        self.partner.company_id = False
+        group = self.env["dms.access.group"].create(
+            {
+                "name": "Test 1",
+                "dms_field_ref": "%s,%s" % (self.partner._name, self.partner.id),
+            }
+        )
+        self.assertFalse(group.company_id)
+
+    def test_dms_access_group_company_dms_field_ref_02(self):
+        self.company = self.env.company
+        self.partner.company_id = self.company
+        group = self.env["dms.access.group"].create(
+            {
+                "name": "Test 1",
+                "dms_field_ref": "%s,%s" % (self.partner._name, self.partner.id),
+            }
+        )
+        self.assertEqual(group.company_id, self.company)
+
     def test_template_directory(self):
         self.assertTrue(self.template.dms_directory_ids)
         self.assertIn(
