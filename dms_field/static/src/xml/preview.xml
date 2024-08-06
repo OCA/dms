@@ -21,7 +21,7 @@
                             >
                                 <img
                                     class="h-100 w-100"
-                                    t-attf-src="/web/image/dms.file/{{dms_object.data.id}}/image_256/256x256?crop=1"
+                                    t-att-src="dms_object.data.icon_url"
                                 />
                             </a>
                         </div>
