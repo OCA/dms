@@ -11,9 +11,20 @@
                 <div class="o_preview_directory_icon" align="center">
                     <div>
                         <img
+                            t-if="dms_object.model === 'dms.directory'"
                             class="h-100 w-100"
-                            t-att-src="dms_object.data.thumbnail_link"
+                            t-att-src="dms_object.data.icon_url"
                         />
+                        <a
+                            t-if="dms_object.model === 'dms.file'"
+                            class="o_preview_file"
+                            t-att-data-id="dms_object.id"
+                        >
+                            <img
+                                class="h-100 w-100"
+                                t-att-src="dms_object.data.icon_url"
+                            />
+                        </a>
                     </div>
                     <div>
                         <button

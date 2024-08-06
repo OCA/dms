@@ -138,6 +138,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                         "count_files",
                         "name",
                         "parent_id",
+                        "icon_url",
                         "__last_update",
                     ]),
                     domain: this._buildDMSDomain(
@@ -165,6 +166,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                     "count_files",
                     "name",
                     "parent_id",
+                    "icon_url",
                     "__last_update",
                 ]),
                 domain: this._buildDMSDomain(
@@ -187,6 +189,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                     "permission_create",
                     "permission_write",
                     "permission_unlink",
+                    "icon_url",
                     "name",
                     "mimetype",
                     "directory_id",
@@ -383,13 +386,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                 perm_create: directory.permission_create,
                 perm_write: directory.permission_write,
                 perm_unlink: directory.permission_unlink,
-
-                thumbnail_link: session.url("/web/image", {
-                    model: "dms.directory",
-                    field: "thumbnail_medium",
-                    unique: directory.__last_update.replace(/[^0-9]/g, ""),
-                    id: directory.id,
-                }),
+                icon_url: directory.icon_url,
             });
             if (
                 storage &&
@@ -434,12 +431,7 @@ odoo.define("dms.DmsTreeController", function (require) {
                     file.permission_write && (!file.is_locked || file.is_lock_editor),
                 perm_unlink:
                     file.permission_unlink && (!file.is_locked || file.is_lock_editor),
-                thumbnail_link: session.url("/web/image", {
-                    model: "dms.file",
-                    field: "thumbnail_medium",
-                    unique: file.__last_update.replace(/[^0-9]/g, ""),
-                    id: file.id,
-                }),
+                icon_url: file.icon_url,
             });
             var dt = this._makeDataPoint({
                 data: data,
