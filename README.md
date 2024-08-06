@@ -23,7 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [dms](dms/) | 14.0.4.10.2 |  | Document Management System for Odoo
 [dms_action](dms_action/) | 14.0.1.0.0 |  | Allow to add actions on DMS
-[dms_field](dms_field/) | 14.0.1.0.1 |  | Create DMS View and allow to use them inside a record
+[dms_field](dms_field/) | 14.0.1.0.2 |  | Create DMS View and allow to use them inside a record
 [dms_storage](dms_storage/) | 14.0.1.0.1 |  | Integrate DMS with external Storages
 
 [//]: # (end addons)
