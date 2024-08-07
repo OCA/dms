@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-29 21:34+0000\n"
+"PO-Revision-Date: 2024-08-07 23:16+0000\n"
 "Last-Translator: Peter Romão <peterromao@yahoo.co.uk>\n"
 "Language-Team: none\n"
 "Language: pt\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -106,6 +106,14 @@ msgid ""
 "change it, the permissions will also change.<br/>\n"
 "                    Make this change at your own risk."
 msgstr ""
+"<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
+"                    <b>ATENÇÃO:</b> Dicas a ter em conta antes de mover "
+"ficheiros:<br/>\n"
+"                    - Esta alteração não se pode desfazer.<br/>\n"
+"                    - Lembrar que as permissões dos ficheiros são as da "
+"directorias que os contêm, portanto é possível que quando as alterar aí, as "
+"permissões de ficheiro também mudem.<br/>\n"
+"                    Execute esta alteração por sua conta e risco."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -151,7 +159,7 @@ msgid ""
 "                                                Lock"
 msgstr ""
 "<i class=\"fa fa-lock\"/>\n"
-"                                                Trancado"
+"                                                Trancar"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -1479,12 +1487,12 @@ msgstr "Carregando"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Lock"
-msgstr "Bloquear"
+msgstr "Trancar"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_locked
 msgid "Locked"
-msgstr "Bloqueado"
+msgstr "Trancado"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
@@ -2255,7 +2263,7 @@ msgstr "Acesso à Desvinculação"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Unlock"
-msgstr "Desbloquear"
+msgstr "Destrancar"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_process
