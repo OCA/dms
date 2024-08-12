@@ -145,3 +145,9 @@ class Storage(models.Model):
     def _compute_count_storage_files(self):
         for record in self:
             record.count_storage_files = len(record.storage_file_ids)
+
+    def write(self, values):
+        res = super().write(values)
+        if "model_ids" in values:
+            self.env["ir.attachment"].clear_caches()
+        return res

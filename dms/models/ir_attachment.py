@@ -1,6 +1,7 @@
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 from odoo import api, models
+from odoo.tools import ormcache
 
 
 class IrAttachment(models.Model):
@@ -35,9 +36,26 @@ class IrAttachment(models.Model):
                 }
             )
 
+    @ormcache("model")
+    def _dms_operations_from_model(self, model):
+        # Apply sudo to prevent ir.rule from being applied.
+        item = self.env["dms.storage"].sudo().search([("model_ids.model", "=", model)])
+        return bool(item)
+
     def _dms_operations(self):
+        """Perform the operation only if there is a storage with linked models.
+        The directory (dms.directory) linked to the record (if it does not exist)
+        and the file (dms.file) with the linked attachment would be created.
+        """
         for attachment in self:
-            if not attachment.res_model or not attachment.res_id:
+            if (
+                not attachment.res_model
+                or not attachment.res_id
+                or (
+                    attachment.res_model
+                    and not self._dms_operations_from_model(attachment.res_model)
+                )
+            ):
                 continue
             directories = attachment._get_dms_directories(
                 attachment.res_model, attachment.res_id
