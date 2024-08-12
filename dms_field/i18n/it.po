@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-04 17:47+0000\n"
+"PO-Revision-Date: 2024-08-12 08:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_ir_actions_act_window_view
@@ -47,7 +47,7 @@ msgstr "Aggiungi file: "
 #: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "An error occurred during the upload"
-msgstr ""
+msgstr "Si è verificato un errore durante il caricamento"
 
 #. module: dms_field
 #. odoo-python
@@ -65,7 +65,7 @@ msgstr "Azienda"
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: dms_field
 #. odoo-javascript
@@ -120,7 +120,7 @@ msgstr "Albero DMS"
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_access_group__dms_field_ref
 msgid "DMS field reference"
-msgstr ""
+msgstr "Riferimento campo DMS"
 
 #. module: dms_field
 #. odoo-javascript
@@ -224,7 +224,7 @@ msgstr "Ultimo aggiornamento il"
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_dms_field_mixin
 msgid "Mixin to use DMS Field"
-msgstr ""
+msgstr "Mixin per utilizzo campo DMS"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__model_id
@@ -241,7 +241,7 @@ msgstr "Nome modello"
 #: code:addons/dms_field/models/ir_ui_view.py:0
 #, python-format
 msgid "Model not found: %(model)s"
-msgstr ""
+msgstr "Modello non trovato: %(model)s"
 
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__name
@@ -271,7 +271,7 @@ msgstr "Cartella padre"
 #. module: dms_field
 #: model:ir.model.fields,field_description:dms_field.field_dms_field_template__parent_directory_id
 msgid "Parent directory"
-msgstr ""
+msgstr "Cartella padre"
 
 #. module: dms_field
 #. odoo-javascript
@@ -285,12 +285,12 @@ msgstr "Incolla"
 #: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format
 msgid "Preview"
-msgstr ""
+msgstr "Anteprima"
 
 #. module: dms_field
 #: model:ir.model,name:dms_field.model_dms_access_group
 msgid "Record Access Groups"
-msgstr ""
+msgstr "Gruppi di accesso al record"
 
 #. module: dms_field
 #. odoo-javascript
@@ -345,14 +345,14 @@ msgstr "Esiste già una cartella collegata."
 #: code:addons/dms_field/models/dms_field_template.py:0
 #, python-format
 msgid "There is already a template created for this model."
-msgstr ""
+msgstr "Esiste già uno schema creato per questo modello."
 
 #. module: dms_field
 #. odoo-python
 #: code:addons/dms_field/models/dms_access_group.py:0
 #, python-format
 msgid "There is already an access group created for this record."
-msgstr ""
+msgstr "Esiste già un gruppo di accesso creato per questo record."
 
 #. module: dms_field
 #. odoo-python
