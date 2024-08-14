@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-24 07:07+0000\n"
-"PO-Revision-Date: 2024-08-09 08:07+0000\n"
+"PO-Revision-Date: 2024-08-14 08:42+0000\n"
 "Last-Translator: tva-subteno-it <tva@subteno.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -612,7 +612,7 @@ msgstr "Compléter les Groupes"
 #: model:ir.model.fields,field_description:dms.field_dms_category__complete_name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__complete_name
 msgid "Complete Name"
-msgstr "Compléter le Nom"
+msgstr "Nom complet"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__complete_directory_ids
@@ -719,7 +719,7 @@ msgstr "Créer"
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_create
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_create
 msgid "Create Access"
-msgstr "Créer Accès"
+msgstr "Autorisation de création"
 
 #. module: dms
 #: model:onboarding.onboarding.step,button_text:dms.onboarding_step_create_directory
@@ -2242,7 +2242,7 @@ msgstr "Type de l'activité d'exception enregistrée."
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_unlink
 msgid "Unlink Access"
-msgstr "Accès dissocié"
+msgstr "Autorisation de suppression"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
@@ -2322,7 +2322,7 @@ msgstr "Wizard pour partager des enregistrements"
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_write
 msgid "Write Access"
-msgstr "Accès en Ecriture"
+msgstr "Autorisation de modification"
 
 #. module: dms
 #. odoo-javascript
