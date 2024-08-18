@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-08-18 08:58+0000\n"
+"Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -27,20 +29,29 @@ msgid ""
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
+"                چگونگی پردازش ایمیل‌های دریافتی را تعیین کنید: \n"
+"\n"
+"پرونده‌های منفرد: ایمیل به دایرکتوری الصاق شده و \n"
+"تمامی ضمایم به صورت پوشه ایجاد شدند.\n"
+"\n"
+"ساب دایرکتوری: برای هر ایمیل یک ساب دایرکتوری جدید ایجاد شده است\n"
+"و ایمیل به این ساب دایرکتوری الصاق می‌شود. ضمایم \n"
+"به صورت پوشه‌های ساب دایرکتوری ایجاد شدند.\n"
+"                "
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "%s Files"
-msgstr ""
+msgstr "%s پرونده‌ها"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "%s Subdirectories"
-msgstr ""
+msgstr "%s ساب دایرکتوری‌ها"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
@@ -195,6 +206,8 @@ msgid ""
 "A Python dictionary that will be evaluated to provide default values when "
 "creating new records for this alias."
 msgstr ""
+"یک واژه‌نامه پایتون که ارزیابی خواهد شد تا هنگام ایجاد سوابق جدید برای این "
+"نام مستعار، مقادیر پیش فرض ارائه کند."
 
 #. module: dms
 #. odoo-python
@@ -202,48 +215,50 @@ msgstr ""
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr ""
+"یک دایرکتوری نمی‌تواند به خودی خود ریشه باشد بلکه باید یک دایرکتوری والد "
+"داشته باشد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A directory has to have a parent directory."
-msgstr ""
+msgstr "یک دایرکتوری باید یک دایرکتوری والد داشته باشد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A directory has to have model in attachment storage."
-msgstr ""
+msgstr "یک دایرکتوری باید در ذخیره ضمایم یک مدل داشته باشد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A directory with the same name already exists."
-msgstr ""
+msgstr "یک دایرکتوری با نام مشابه وجود دارد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
-msgstr ""
+msgstr "یک پرونده باید یک طرح و یک شناسه منبع در ذخیره ضمایم داشته باشد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file with the same name already exists."
-msgstr ""
+msgstr "یک پرونده با نام مشابه وجود دارد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "A root directory has to have a storage."
-msgstr ""
+msgstr "یک دایرکتوری ریشه باید منبع داشته باشد."
 
 #. module: dms
 #: model:ir.model,name:dms.model_abstract_dms_mixin
@@ -253,55 +268,55 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Accept Emails from"
-msgstr ""
+msgstr "پذیرش ایمیل از"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_access_groups
 #: model:ir.ui.menu,name:dms.menu_dms_access_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "گروه‌های دسترسی"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Access Information"
-msgstr ""
+msgstr "دسترسی به اطلاعات"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_warning
 #: model:ir.model.fields,field_description:dms.field_dms_file__access_warning
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__access_warning
 msgid "Access warning"
-msgstr ""
+msgstr "هشدار دسترسی"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_07_demo
 msgid "Accounting"
-msgstr ""
+msgstr "حسابداری"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "اقدام لازم است"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "Actions"
-msgstr ""
+msgstr "اقدامات"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__active
 #: model:ir.model.fields,field_description:dms.field_dms_tag__active
 msgid "Active"
-msgstr ""
+msgstr "فعال"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "فعالیت‌ها"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_decoration
@@ -1964,27 +1979,28 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_directory__child_directory_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "Subdirectories"
-msgstr ""
+msgstr "ساب دایرکتوری‌ها"
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__dms_directory__alias_process__directory
 msgid "Subdirectory"
-msgstr ""
+msgstr "ساب دایرکتوری"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.cat_menu_dms_config_system
+#, fuzzy
 msgid "System"
-msgstr ""
+msgstr "سیستم"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Tag"
-msgstr ""
+msgstr "برچسب"
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_tag_name_uniq
 msgid "Tag name already exists!"
-msgstr ""
+msgstr "نامی را که از پیش وجود داشته، برچسب بزنید!"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_tag
@@ -1994,76 +2010,80 @@ msgstr ""
 #: model:ir.ui.menu,name:dms.menu_dms_tag
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 msgid "Tags"
-msgstr ""
+msgstr "برچسب‌ها"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
 msgid "Tags are used to categorize Documents."
-msgstr ""
+msgstr "از برچسب‌ها برای دسته‌بندی اسناد استفاده می‌کنیم."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Tags..."
-msgstr ""
+msgstr "برچسب‌ها..."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Technical Information"
-msgstr ""
+msgstr "اطلاعات فنی"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_category__active
 msgid "The active field allows you to hide the category without removing it."
-msgstr ""
+msgstr "فیلد فعال به شما امکان مخفی کردن یک دسته‌بندی بدون حذف آن را می‌دهد."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_tag__active
 msgid "The active field allows you to hide the tag without removing it."
-msgstr ""
+msgstr "فیلد فعال امکان مخفی کردن برچسب بدون حذف آن را می‌دهد."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
 msgid "The configuration is done!"
-msgstr ""
+msgstr "پیکربندی انجام شد!"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "The directory name is invalid."
-msgstr ""
+msgstr "نام دایرکتوری نامعتبر است."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "The file has a forbidden file extension."
-msgstr ""
+msgstr "این پوشه حاوی یک پسوند فایل غیرمجاز است."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "The file name is invalid."
-msgstr ""
+msgstr "نام این پوشه نامعتبر است."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "The maximum upload size is %s MB."
-msgstr ""
+msgstr "حداکثر اندازه آپلود ... مگابایت است."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
+#, fuzzy
 msgid ""
 "The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
 " email that does not reply to an existing record will cause the creation of "
 "a new record of this model (e.g. a Project Task)"
 msgstr ""
+"مدلی که نام مستعار با آن مکاتبه دارد (نوع سند اودوو). هر ایمیل دریاففتی که "
+"به یک سند موجود پاسخ ندهد منجر به ایجاد سند جدیدی از این مدل می‌شود. (برای "
+"مثال یک تسک پروژه)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
@@ -2071,11 +2091,13 @@ msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
 "<jobs@example.odoo.com>"
 msgstr ""
+"برای مثال نام \"jobs\" برای ایمیل مستعار، اگر قصد دریافت ایمیل‌هایی برای "
+"<jobs@example.odoo.com> را دارید"
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_access_group_name_uniq
 msgid "The name of the group must be unique!"
-msgstr ""
+msgstr "نام گروه باید منحصر به فرد باشد!"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_user_id
@@ -2096,64 +2118,69 @@ msgid ""
 "        system. If you change this setting, you can migrate existing files\n"
 "        manually by triggering the action."
 msgstr ""
+"اگر این تنظیمات را تغییر بدهید، \n"
+"می‌توانید فایل‌های موجود را به صورت دستی \n"
+"با اقدام ناگهانی جابه‌جا کنید."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "This directory needs to be associated to a record."
-msgstr ""
+msgstr "این دایرکتوری باید به یک سابقه ثبت شده پیوند داده شود."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_elements
 msgid "Total Elements"
-msgstr ""
+msgstr "تمام اِلِمان‌ها"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_files
 msgid "Total Files"
-msgstr ""
+msgstr "تمام پوشه‌ها"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_directories
 msgid "Total Subdirectories"
-msgstr ""
+msgstr "تمام ساب دایرکتوری‌ها"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Total files"
-msgstr ""
+msgstr "تمام پرونده‌ها"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
 msgid "Traveling"
-msgstr ""
+msgstr "گردش"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__mimetype
 msgid "Type"
-msgstr ""
+msgstr "نوع"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_exception_decoration
 #: model:ir.model.fields,help:dms.field_dms_file__activity_exception_decoration
+#, fuzzy
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "نوع اقدام استثنایی در سابقه."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_unlink
 msgid "Unlink Access"
-msgstr ""
+msgstr "دسترسی مغایر"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Unlock"
-msgstr ""
+msgstr "باز کردن"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_process
+#, fuzzy
 msgid "Unpack Emails as"
-msgstr ""
+msgstr "بازگشایی ایمیل"
 
 #. module: dms
 #. odoo-javascript
@@ -2162,66 +2189,67 @@ msgstr ""
 #: code:addons/dms/static/src/js/views/file_list_renderer.xml:0
 #, python-format
 msgid "Upload"
-msgstr ""
+msgstr "بارگذاری"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload File"
-msgstr ""
+msgstr "بارگذاری فایل"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload your first File."
-msgstr ""
+msgstr "اولین فایل خود را بارگذاری کنید."
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_user
 msgid "User"
-msgstr ""
+msgstr "کاربر"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Users"
-msgstr ""
+msgstr "کاربران"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_09_demo
+#, fuzzy
 msgid "Vendor Bill"
-msgstr ""
+msgstr "قبض فروشنده"
 
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/xml/views.xml:0
-#, python-format
+#, fuzzy, python-format
 msgid "Viewer"
-msgstr ""
+msgstr "بازدیدکننده"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "Views"
-msgstr ""
+msgstr "بازدیدها"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__website_message_ids
 #: model:ir.model.fields,field_description:dms.field_dms_file__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "پیام‌های تارنما"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__website_message_ids
 #: model:ir.model.fields,help:dms.field_dms_file__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "تاریخچه ارتباطات تارنما"
 
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_file_move
 msgid "Wizard Dms File Move"
-msgstr ""
+msgstr "راهنمای گام به گام انتقال فایل DMS"
 
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_share
 msgid "Wizard for sharing DMS records"
-msgstr ""
+msgstr "راهنمای گام به گام اشتراک‌گذاری سوابق DMS"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_write
@@ -2229,7 +2257,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_dms_file__permission_write
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__permission_write
 msgid "Write Access"
-msgstr ""
+msgstr "دسترسی نگارش"
 
 #. module: dms
 #. odoo-javascript
@@ -2237,28 +2265,29 @@ msgstr ""
 #: code:addons/dms/static/src/js/views/many_drop_target.js:0
 #, python-format
 msgid "You must select a directory first"
-msgstr ""
+msgstr "ابتدا باید یک دایرکتوری انتخاب کنید"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
+#, fuzzy
 msgid "action_close_documents_onboarding"
-msgstr ""
+msgstr "اقدام به مسدود کردن ورود اسناد"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "element(s)"
-msgstr ""
+msgstr "اِلمان‌(ها)"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "exe,msi"
-msgstr ""
+msgstr "فایل exe و msi"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "mail.catchall.domain"
-msgstr ""
+msgstr "ایمیل.catchall.دامنه"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
