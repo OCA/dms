@@ -30,6 +30,19 @@ class StorageAttachmentTestCase(StorageAttachmentBaseCase):
         self.assertFalse(directory.exists())
 
     @users("dms-manager")
+    def test_storage_attachment_record_db_unlink(self):
+        self._create_attachment("demo.txt")
+        self.assertTrue(
+            self.storage.storage_file_ids.filtered(lambda x: x.name == "demo.txt")
+        )
+        directory = self._get_partner_directory()
+        self.assertEqual(directory.res_model, self.partner._name)
+        self.assertEqual(directory.res_id, self.partner.id)
+        directory.res_id = -1  # Trick to reference a non-existing record
+        directories = self.env["dms.directory"].search([])
+        self.assertNotIn(directory.id, directories.ids)
+
+    @users("dms-manager")
     def test_storage_attachment_misc(self):
         attachment = self._create_attachment("demo.txt")
         root_directory = self.storage.root_directory_ids.filtered(
