@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-18 14:58+0000\n"
+"PO-Revision-Date: 2024-08-19 08:58+0000\n"
 "Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fa\n"
@@ -32,7 +32,7 @@ msgstr ""
 "                چگونگی پردازش ایمیل‌های دریافتی را تعیین کنید: \n"
 "\n"
 "پرونده‌های منفرد: ایمیل به دایرکتوری الصاق شده و \n"
-"تمامی ضمایم به صورت پوشه ایجاد شدند.\n"
+"تمامی ضمایم به شکل پوشه ایجاد شدند.\n"
 "\n"
 "ساب دایرکتوری: برای هر ایمیل یک ساب دایرکتوری جدید ایجاد شده است\n"
 "و ایمیل به این ساب دایرکتوری الصاق می‌شود. ضمایم \n"
@@ -55,37 +55,49 @@ msgstr "%s ساب دایرکتوری‌ها"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_directory_panel
+#, fuzzy
 msgid "/dms/static/lib/img/banner/documents_onboarding_directory.png"
-msgstr ""
+msgstr "/dms/static/lib/img/banner/پوشه‌ها_همسوسازی_دایرکتوری.png"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.document_onboarding_file_panel
+#, fuzzy
 msgid "/dms/static/lib/img/banner/documents_onboarding_file.png"
-msgstr ""
+msgstr "/dms/static/lib/img/banner/اسناد_همسوسازی_پوشه.png"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-archive\"/>\n"
 "                                                Archive"
 msgstr ""
+"<i class=\"fa fa-بایگانی\"/>\n"
+"                                                بایگانی"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-archive\"/>\n"
 "                                                Unarchive"
 msgstr ""
+"<i class=\"fa fa-بایگانی\"/>\n"
+"                                                بایگانی نشده"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-download\"/>\n"
 "                                                Download"
 msgstr ""
+"<i class=\"fa fa-دانلود\"/>\n"
+"                                                دانلود"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
 "                    <b>ATTENTION:</b> Tips to keep in mind before moving files:<br/>\n"
@@ -93,112 +105,164 @@ msgid ""
 "                    - Remember that the permissions of the files are those of the folder that contains it, therefore, it is possible that when you change it, the permissions will also change.<br/>\n"
 "                    Make this change at your own risk."
 msgstr ""
+"<i class=\"fa fa-تعجب-مثلث mr-3\" title=\"هشدار\"/>\n"
+"                    <b>ATTENTION:</b> پیش از انتقال پوشه‌های این نکات را به "
+"خاطر داشته باشید:<br/>\n"
+"                    - نمی‌توانید این تغییر را ملغی کنید.<br/>\n"
+"                    - به یاد داشته باشید مجوزهای پوشه‌ها مربوط به پوشه‌ای "
+"است که حاوی آن باشد، بنابراین، ممکن است هنگام تغییر آن، مجوزها نیز تغییر "
+"کنند .<br/>\n"
+"                    این تغییر را با مسئولیت خود انجام بدهید."
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-external-link\"/>\n"
 "                                                Open"
 msgstr ""
+"<i class=\"fa fa-لینک-خارجی\"/>\n"
+"                                                بازکردن"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-external-link\"/>\n"
 "                                        Open"
 msgstr ""
+"<i class=\"fa fa-لینک-خارجی\"/>\n"
+"                                        بازکردن"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-file-o\"/>\n"
 "                                                Files"
 msgstr ""
+"<i class=\"fa fa-file-o\"/>\n"
+"                                                پوشه‌ها"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-folder-o\"/>\n"
 "                                                Directories"
 msgstr ""
+"<i class=\"fa fa-پوشه-o\"/>\n"
+"                                                دایرکتوری‌ها"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-lock\"/>\n"
 "                                                Lock"
 msgstr ""
+"<i class=\"fa fa-lock\"/>\n"
+"                                                قفل"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                                Edit"
 msgstr ""
+"<i class=\"fa fa-مداد-مربع-o\"/>\n"
+"                                                ویرایش"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                        Edit"
 msgstr ""
+"<i class=\"fa fa-مداد-مربع-o\"/>\n"
+"                                        ویرایش"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-trash-o\"/>\n"
 "                                                Delete"
 msgstr ""
+"<i class=\"fa fa-زباله-o\"/>\n"
+"                                                پاک کردن"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-trash-o\"/>\n"
 "                                        Delete"
 msgstr ""
+"<i class=\"fa fa-زباله-o\"/>\n"
+"                                        پاک کردن"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-unlock-alt\"/>\n"
 "                                                Unlock"
 msgstr ""
+"<i class=\"fa fa-قفل‌گشایی-alt\"/>\n"
+"                                                قفل‌گشایی"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+#, fuzzy
 msgid ""
 "<span class=\"o_form_label\">\n"
 "                                        Storages\n"
 "                                    </span>"
 msgstr ""
+"<span class=\"o_فرم_برچسب\">\n"
+"                                        ذخایر\n"
+"                                    </span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+#, fuzzy
 msgid ""
 "<span class=\"o_form_label\">File\n"
 "                                        Extensions\n"
 "                                    </span>"
 msgstr ""
+"­<span class=\"o_فرم_برچسب\">File\n"
+"                                        افزونه‌ها\n"
+"                                    </span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
+#, fuzzy
 msgid "<span class=\"o_form_label\">File Size</span>"
-msgstr ""
+msgstr "<span class=\"o_برچسب_فرم\">File Size</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
+#, fuzzy
 msgid ""
 "<span class=\"oe_read_only\">@</span>\n"
 "                                        <span class=\"oe_edit_only\"> @ </span>"
 msgstr ""
+"<span class=\"oe_فقط_خواندنی\">@</span>\n"
+"                                        <span class=\"oe_فقط_ویرایش\"> @ "
+"</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
+#, fuzzy
 msgid "<span>Documents</span>"
-msgstr ""
+msgstr "<span>اسناد</span>"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
@@ -244,14 +308,14 @@ msgstr "یک دایرکتوری با نام مشابه وجود دارد."
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
-msgstr "یک پرونده باید یک طرح و یک شناسه منبع در ذخیره ضمایم داشته باشد."
+msgstr "یک پوشه باید یک طرح و یک شناسه منبع در ذخیره ضمایم داشته باشد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file with the same name already exists."
-msgstr "یک پرونده با نام مشابه وجود دارد."
+msgstr "یک پوشه با نام مشابه وجود دارد."
 
 #. module: dms
 #. odoo-python
@@ -347,7 +411,7 @@ msgstr "یک دایرکتوری جدید بیافزایید."
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_migration
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_storage_migration
 msgid "Add a new File."
-msgstr "یک پرونده جدید بیافزایید"
+msgstr "یک پوشه جدید بیافزایید."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_wizard_dms_share__note
@@ -405,7 +469,7 @@ msgstr "همه"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "All Files"
-msgstr "تمام پرونده‌ها"
+msgstr "تمام پوشه‌ها"
 
 #. module: dms
 #. odoo-javascript
@@ -435,7 +499,7 @@ msgstr "پوشه‌های بایگانی‌شده"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Are you sure? All files will be moved."
-msgstr "آیا مطمئنی؟ تمامی پرونده‌ها جابه‌جا خواهند شد."
+msgstr "آیا مطمئنی؟ تمامی پوشه‌ها جابه‌جا خواهند شد."
 
 #. module: dms
 #. odoo-python
@@ -529,7 +593,7 @@ msgstr "برای افزودن یکی دایرکتوری جدید، کلیک کن
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Click to add a new file."
-msgstr "برای افزودن یک پرونده جدید، کلیک کنید."
+msgstr "برای افزودن یک پوشه جدید، کلیک کنید."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
@@ -724,7 +788,7 @@ msgstr "یک منبع ذخیره جدید ایجاد کنید."
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__include_message_attachments
 msgid "Create files from message attachments"
-msgstr "از ضمایم پیام، پرونده‌ها را ایجاد کنید"
+msgstr "از ضمایم پیام، پوشه‌ها را ایجاد کنید"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__create_uid
@@ -814,7 +878,7 @@ msgstr "مقادیر پیش فرض"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Define forbidden file extensions"
-msgstr "پسوندهای ممنوع پرونده را تعیین کنید"
+msgstr "پسوندهای ممنوع برای پوشه را تعیین کنید"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -829,7 +893,7 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Defines a list of forbidden file extensions. (Example: 'exe,msi')"
 msgstr ""
-"فهرستی از افزونه‌ها ممنوع پرونده‌ها را تعریف کنید. (برای مثال:'exe,msi' )"
+"فهرستی از افزونه‌های ممنوع برای پوشه‌ها را تعریف کنید. (برای مثال:'exe,msi' )"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
@@ -870,7 +934,7 @@ msgid ""
 "Directories can be used to structure and organize\n"
 "                files directly in Odoo."
 msgstr ""
-"از دایرکتوری‌ها می‌توان برای ساختاربندی و سازمان‌دهی پرونده‌ها \n"
+"از دایرکتوری‌ها می‌توان برای ساختاربندی و سازمان‌دهی پوشه‌ها \n"
 "در اودوو استفاده کرد."
 
 #. module: dms
@@ -920,7 +984,7 @@ msgstr "وضعیت همسوسازی دایرکتوری اسناد"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_file_state
 msgid "Documents Onboarding File State"
-msgstr "وضعیت همسوسازی پرونده اسناد"
+msgstr "وضعیت پوشه همسوسازی اسناد"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_state
@@ -1006,12 +1070,12 @@ msgstr "خارجی"
 #: model:ir.model,name:dms.model_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "File"
-msgstr "پوشه/ پرونده"
+msgstr "پوشه"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "File Upload"
-msgstr "بارگذاری فایل"
+msgstr "بارگذاری پوشه"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_file
@@ -1069,9 +1133,8 @@ msgstr "دنبال کنندگان (شرکاء)"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__activity_type_icon
 #: model:ir.model.fields,help:dms.field_dms_file__activity_type_icon
-#, fuzzy
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr "آیکون عالی فونت برای مثال وظایف-فا"
+msgstr "آیکون عالی فونت برای مثال وظایف-fa"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_settings_general
@@ -1175,31 +1238,37 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_needaction
 #: model:ir.model.fields,help:dms.field_dms_file__message_needaction
+#, fuzzy
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "لازم است حواستان به پیام‌های جدید باشد."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_has_error
 #: model:ir.model.fields,help:dms.field_dms_file__message_has_error
+#, fuzzy
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "برخی پیام‌ها حاوی خطای تحویل هستند."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__company_id
 #: model:ir.model.fields,help:dms.field_dms_directory__company_id
 #: model:ir.model.fields,help:dms.field_dms_file__company_id
 #: model:ir.model.fields,help:dms.field_dms_storage__company_id
+#, fuzzy
 msgid ""
 "If set, directories and files will only be available for the selected "
 "company."
-msgstr ""
+msgstr "دایرکتوری‌ها و فایل‌ها فقط در دسترس شرکت‌ منتخب هستند."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_bounced_content
+#, fuzzy
 msgid ""
 "If set, this content will automatically be sent out to unauthorized users "
 "instead of the default message."
 msgstr ""
+"این محتوا به جای پیام پیش فرض، به صورت خودکار برای کاربران غیرمجاز ارسال "
+"خواهد شد."
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__image_1920
@@ -1292,18 +1361,20 @@ msgstr "از سابقه مرتبط مجوزها را به ارث می‌برید
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_create
+#, fuzzy
 msgid "Inherited Create Access"
-msgstr "دسترسی ایجاد به ارث رسیده"
+msgstr "دسترسی ایجاد موروثی"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_unlink
+#, fuzzy
 msgid "Inherited Unlink Access"
-msgstr "دسترسی مجزای به ارث رسیده"
+msgstr "دسترسی لغو پیوند موروثی"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__perm_inclusive_write
 msgid "Inherited Write Access"
-msgstr "دسترسی نگارش به ارث رسیده شده"
+msgstr "دسترسی نگارش موروثی"
 
 #. module: dms
 #: model:dms.category,name:dms.category_01_demo
@@ -1315,44 +1386,44 @@ msgstr "داخلی"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Internal / Human Resource"
-msgstr ""
+msgstr "داخلی/ منابع انسانی"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Invalid attachments!"
-msgstr ""
+msgstr "ضمایم نامعتبر!"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
 msgid "Invoices"
-msgstr ""
+msgstr "فاکتورها"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_is_follower
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "دنبال کننده است"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__is_root_directory
 msgid "Is Root Directory"
-msgstr ""
+msgstr "دایرکتوری ریشه است"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "It is not possible to change parent to other storage."
-msgstr ""
+msgstr "امکان تغییر والد به دیگر منابع ذخیره وجود ندارد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "It is not possible to change the storage."
-msgstr ""
+msgstr "امکان تغییر منبع ذخیره وجود ندارد."
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__just_done
@@ -1360,7 +1431,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__just_done
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__just_done
 msgid "Just done"
-msgstr ""
+msgstr "اندکی پیش انجام شد"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group____last_update
@@ -1372,7 +1443,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move____last_update
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "آخرین بار در ... ویراش شد"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__write_uid
@@ -1384,7 +1455,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__write_uid
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخرین بار توسط ... به روزرسانی شد"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__write_date
@@ -1396,37 +1467,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__write_date
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخرین بار در ... به روزرسانی شد"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
 msgid "Last update"
-msgstr ""
+msgstr "آخرین به روزرسانی"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__share_link
 msgid "Link"
-msgstr ""
+msgstr "لینک"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__allowed_model_ids
 #: model:ir.model.fields,field_description:dms.field_dms_storage__model_ids
 msgid "Linked Models"
-msgstr ""
+msgstr "الگوهای پیوند داده شده"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_model
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_model
 msgid "Linked attachments model"
-msgstr ""
+msgstr "الگوی ضمایم پیونده شده"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_file__res_id
 #: model:ir.model.fields,field_description:dms.field_dms_security_mixin__res_id
 msgid "Linked attachments record ID"
-msgstr ""
+msgstr "شناسه سوابق ضمایم پیوند شده"
 
 #. module: dms
 #. odoo-javascript
@@ -1434,22 +1505,22 @@ msgstr ""
 #: code:addons/dms/static/src/xml/views.xml:0
 #, python-format
 msgid "Loading"
-msgstr ""
+msgstr "در حال بارگیری"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Lock"
-msgstr ""
+msgstr "قفل"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__is_locked
 msgid "Locked"
-msgstr ""
+msgstr "قفل شده"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
 msgid "Locked By"
-msgstr ""
+msgstr "قفل شده توسط"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_main_attachment_id
@@ -1493,21 +1564,20 @@ msgstr "جابه‌جا کردن"
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
 msgstr ""
-"پرونده %(index)s of %(record_count)s [ %(dms_file_migration)s ] را جابه‌جا "
-"کنید"
+"پوشه %(index)s of %(record_count)s [ %(dms_file_migration)s ] را جابه‌جا کنید"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Migrate Files"
-msgstr "پرونده‌ها را جابه‌جا کنید"
+msgstr "پوشه‌ها را جابه‌جا کنید"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.menu_dms_file_migration
 msgid "Migration"
-msgstr "جایه‌جایی"
+msgstr "جابه‌جایی"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__migration
@@ -1535,7 +1605,7 @@ msgstr "منتقل کردن"
 #. module: dms
 #: model:ir.actions.act_window,name:dms.wizard_dms_file_move_act_window
 msgid "Move files"
-msgstr "پرونده‌ها را منتقل کنید"
+msgstr "پوشه‌ها را منتقل کنید"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
@@ -1556,7 +1626,7 @@ msgstr "اسناد من"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "My Files"
-msgstr "پرونده‌های من"
+msgstr "پوشه‌های من"
 
 #. module: dms
 #. odoo-python
@@ -1668,7 +1738,7 @@ msgstr "فقط کاربر ادمین"
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Only files in the same root directory can be moved."
-msgstr "فقط می‌توان پرونده‌ها در دایرکتوری ریشه مشابه را جابه‌جا کرد."
+msgstr "فقط می‌توان پوشه‌ها در دایرکتوری ریشه مشابه را جابه‌جا کرد."
 
 #. module: dms
 #. odoo-python
@@ -1926,7 +1996,7 @@ msgstr "منابع ذخیره را نشان بدهید"
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__dms_directory__alias_process__files
 msgid "Single Files"
-msgstr "پرونده‌های منفرد"
+msgstr "پوشه‌های منفرد"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__size
@@ -2191,7 +2261,7 @@ msgstr "تمام ساب دایرکتوری‌ها"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Total files"
-msgstr "تمام پرونده‌ها"
+msgstr "تمام پوشه‌ها"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
