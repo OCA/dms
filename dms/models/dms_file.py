@@ -125,6 +125,7 @@ class DMSFile(models.Model):
         readonly=True,
         prefetch=False,
         compute_sudo=True,
+        store=True,
     )
     require_migration = fields.Boolean(
         compute="_compute_migration", store=True, compute_sudo=True
