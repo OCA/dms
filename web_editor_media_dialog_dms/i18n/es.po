@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* web_editor_media_dialog_dms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-22 09:04+0000\n"
+"PO-Revision-Date: 2024-08-22 11:05+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
+#, python-format
+msgid "All DMS files have been loaded"
+msgstr "Todos los archivos DMS han sido cargados"
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
+#, python-format
+msgid "Allow open to public users"
+msgstr "Permitir abrir enlace a usuarios públicos"
+
+#. module: web_editor_media_dialog_dms
+#: model:ir.model,name:web_editor_media_dialog_dms.model_dms_file
+msgid "File"
+msgstr "Archivo"
+
+#. module: web_editor_media_dialog_dms
+#: model:ir.model,name:web_editor_media_dialog_dms.model_ir_binary
+msgid "File streaming helper model for controllers"
+msgstr "Modelo de ayuda para la transmisión de archivos para controladores"
+
+#. module: web_editor_media_dialog_dms
+#. odoo-python
+#: code:addons/web_editor_media_dialog_dms/models/dms_file.py:0
+#, python-format
+msgid "Invalid access token"
+msgstr "Token de acceso inválido"
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
+#, python-format
+msgid "Load more..."
+msgstr "Cargar más..."
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
+#, python-format
+msgid "No DMS files found."
+msgstr "No se encontraron archivos DMS."
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.esm.js:0
+#, python-format
+msgid "Search a dms file"
+msgstr "Buscar un archivo DMS"
