@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-20 06:58+0000\n"
+"PO-Revision-Date: 2024-08-27 08:06+0000\n"
 "Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fa\n"
@@ -32,11 +32,11 @@ msgstr ""
 "                چگونگی پردازش ایمیل‌های دریافتی را تعیین کنید: \n"
 "\n"
 "پرونده‌های منفرد: ایمیل به دایرکتوری الصاق شده و \n"
-"تمامی ضمایم به شکل پوشه ایجاد شدند.\n"
+"تمامی ضمایم به شکل پرونده ایجاد شدند.\n"
 "\n"
 "ساب دایرکتوری: برای هر ایمیل یک ساب دایرکتوری جدید ایجاد شده است\n"
 "و ایمیل به این ساب دایرکتوری الصاق می‌شود. ضمایم \n"
-"به صورت پوشه‌های ساب دایرکتوری ایجاد شدند.\n"
+"به صورت پرونده‌های ساب دایرکتوری ایجاد شدند.\n"
 "                "
 
 #. module: dms
@@ -44,7 +44,7 @@ msgstr ""
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "%s Files"
-msgstr "%s پوشه‌ها"
+msgstr "%s پرونده‌ها"
 
 #. module: dms
 #. odoo-python
@@ -102,11 +102,11 @@ msgid ""
 "                    Make this change at your own risk."
 msgstr ""
 "<i class=\"fa fa-exclamation-triangle mr-3\" title=\"هشدار\"/>\n"
-"                    <b>توجه:</b> پیش از انتقال پوشه‌ها این نکات را به خاطر "
+"                    <b>توجه:</b> پیش از انتقال پرونده‌ها این نکات را به خاطر "
 "داشته باشید:<br/>\n"
 "                    - نمی‌توانید این تغییر را ملغی کنید.<br/>\n"
-"                    - به یاد داشته باشید مجوزهای پوشه‌ها مربوط به پوشه‌ای "
-"است که حاوی آن باشد، بنابراین، ممکن است هنگام تغییر آن، مجوزها نیز تغییر "
+"                    - به یاد داشته باشید مجوزهای پرونده‌ها مربوط به پرونده‌"
+"ای است که حاوی آن باشد، بنابراین، ممکن است هنگام تغییر آن، مجوزها نیز تغییر "
 "کنند .<br/>\n"
 "                    این تغییر را با مسئولیت خود انجام بدهید."
 
@@ -131,13 +131,12 @@ msgstr ""
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
-#, fuzzy
 msgid ""
 "<i class=\"fa fa-file-o\"/>\n"
 "                                                Files"
 msgstr ""
 "<i class=\"fa fa-file-o\"/>\n"
-"                                                پوشه‌ها"
+"                                                پرونده‌ها"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -223,14 +222,14 @@ msgid ""
 "                                        Extensions\n"
 "                                    </span>"
 msgstr ""
-"<span class=\"o_form_label\">پوشه\n"
+"<span class=\"o_form_label\">پرونده\n"
 "افزونه‌ها\n"
 "</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">File Size</span>"
-msgstr "<span class=\"o_form_label\">اندازه پوشه</span>"
+msgstr "<span class=\"o_form_label\">اندازه پرونده</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -292,14 +291,14 @@ msgstr "یک دایرکتوری با نام مشابه وجود دارد."
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file must have model and resource ID in attachment storage."
-msgstr "یک پوشه باید یک طرح و یک شناسه منبع در ذخیره ضمایم داشته باشد."
+msgstr "یک پرونده باید یک طرح و یک شناسه منبع در ذخیره ضمایم داشته باشد."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "A file with the same name already exists."
-msgstr "یک پوشه با نام مشابه وجود دارد."
+msgstr "یک پرونده با نام مشابه وجود دارد."
 
 #. module: dms
 #. odoo-python
@@ -395,7 +394,7 @@ msgstr "یک دایرکتوری جدید بیافزایید."
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_migration
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file_storage_migration
 msgid "Add a new File."
-msgstr "یک پوشه جدید بیافزایید."
+msgstr "یک پرونده جدید اضافه کنید."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_wizard_dms_share__note
@@ -453,7 +452,7 @@ msgstr "همه"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "All Files"
-msgstr "تمام پوشه‌ها"
+msgstr "تمام پرونده‌ها"
 
 #. module: dms
 #. odoo-javascript
@@ -478,12 +477,12 @@ msgstr "بایگانی‌شده"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "Archived Files"
-msgstr "پوشه‌های بایگانی‌شده"
+msgstr "پرونده‌های بایگانی‌شده"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Are you sure? All files will be moved."
-msgstr "آیا مطمئنی؟ تمامی پوشه‌ها جابه‌جا خواهند شد."
+msgstr "آیا مطمئن هستید؟ تمام پرونده‌ها جابه‌جا خواهند شد."
 
 #. module: dms
 #. odoo-python
@@ -503,7 +502,7 @@ msgstr "شمارش پیوست"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__attachment_id
 msgid "Attachment File"
-msgstr "فایل ضمیمه"
+msgstr "پرونده ضمیمه"
 
 #. module: dms
 #: model:ir.model,name:dms.model_base
@@ -577,7 +576,7 @@ msgstr "برای افزودن یکی دایرکتوری جدید، کلیک کن
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Click to add a new file."
-msgstr "برای افزودن یک پوشه جدید، کلیک کنید."
+msgstr "برای افزودن یک پرونده جدید، کلیک کنید."
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_tag
@@ -660,7 +659,7 @@ msgstr "محتوای باینری"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__content_file
 msgid "Content File"
-msgstr "پوشه محتوا"
+msgstr "پرونده محتوا"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_11_demo
@@ -692,12 +691,12 @@ msgstr "اِلِمان‌ها را شمارش کنید"
 #: model:ir.model.fields,field_description:dms.field_dms_tag__count_files
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__count_files
 msgid "Count Files"
-msgstr "پوشه‌ها را شمارش کنید"
+msgstr "پرونده‌ها را شمارش کنید"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_files
 msgid "Count Files Title"
-msgstr "تیتر پوشه‌ها را شمارش کنید"
+msgstr "تیتر پرونده‌ها را شمارش کنید"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_categories
@@ -772,7 +771,7 @@ msgstr "یک منبع ذخیره جدید ایجاد کنید."
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_storage__include_message_attachments
 msgid "Create files from message attachments"
-msgstr "از ضمایم پیام، پوشه‌ها را ایجاد کنید"
+msgstr "از ضمایم پیام، پرونده‌ها را ایجاد کنید"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__create_uid
@@ -862,7 +861,7 @@ msgstr "مقادیر پیش فرض"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "Define forbidden file extensions"
-msgstr "پسوندهای ممنوع برای پوشه را تعیین کنید"
+msgstr "پسوندهای ممنوع برای پرونده را تعیین کنید"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -871,13 +870,14 @@ msgid ""
 "                                        file in MB"
 msgstr ""
 "حداثر اندازه بارگذاری یک\n"
-"فایل را به مگابایت تعیین کنید"
+"پرونده را به مگابایت تعیین کنید"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Defines a list of forbidden file extensions. (Example: 'exe,msi')"
 msgstr ""
-"فهرستی از افزونه‌های ممنوع برای پوشه‌ها را تعریف کنید. (برای مثال:'exe,msi' )"
+"فهرستی از افزونه‌های ممنوع برای پرونده‌ها را تعریف کنید. (برای مثال:"
+"'exe,msi' )"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_res_config_settings__documents_binary_max_size
@@ -918,7 +918,7 @@ msgid ""
 "Directories can be used to structure and organize\n"
 "                files directly in Odoo."
 msgstr ""
-"از دایرکتوری‌ها می‌توان برای ساختاربندی و سازمان‌دهی پوشه‌ها \n"
+"از دایرکتوری‌ها می‌توان برای ساختاربندی و سازمان‌دهی پرونده‌ها \n"
 "در اودوو استفاده کرد."
 
 #. module: dms
@@ -968,7 +968,7 @@ msgstr "وضعیت همسوسازی دایرکتوری اسناد"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_file_state
 msgid "Documents Onboarding File State"
-msgstr "وضعیت پوشه همسوسازی اسناد"
+msgstr "وضعیت پرونده همسوسازی اسناد"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_res_company__documents_onboarding_state
@@ -1054,12 +1054,12 @@ msgstr "خارجی"
 #: model:ir.model,name:dms.model_dms_file
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "File"
-msgstr "پوشه"
+msgstr "پرونده"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "File Upload"
-msgstr "بارگذاری پوشه"
+msgstr "بارگذاری پرونده"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_file
@@ -1082,7 +1082,7 @@ msgstr "بارگذاری پوشه"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Files"
-msgstr "پوشه‌ها"
+msgstr "پرونده‌ها"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_file
@@ -1092,7 +1092,7 @@ msgstr "پوشه‌ها"
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:dms.action_dms_files_storage
 msgid "Files are used to save content directly in Odoo."
-msgstr "پوشه‌ها برای ذخیره مستقیم محتوا در اودوو کاربرد دارند."
+msgstr "پرونده‌ها برای ذخیره مستقیم محتوا در اودوو کاربرد دارند."
 
 #. module: dms
 #. odoo-python
@@ -1100,7 +1100,7 @@ msgstr "پوشه‌ها برای ذخیره مستقیم محتوا در اود�
 #: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__file
 #, python-format
 msgid "Filestore"
-msgstr "مخزن پوشه"
+msgstr "مخزن پرونده"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_follower_ids
@@ -1217,8 +1217,8 @@ msgstr "آیکونی که بیانگر یک فعالیت مستثنی است."
 #: model:ir.model.fields,help:dms.field_dms_file__active
 msgid "If a file is set to archived, it is not displayed, but still exists."
 msgstr ""
-"اگر فایلی را تنظیم کردید تا بایگانی شود، نمایش داده نمی‌شود اما همچنان وجود "
-"دارد."
+"اگر پرونده‌ای را تنظیم کردید تا بایگانی شود، نمایش داده نمی‌شود اما همچنان "
+"وجود دارد."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__message_needaction
@@ -1239,11 +1239,10 @@ msgstr "برخی پیام‌ها حاوی خطای تحویل هستند."
 #: model:ir.model.fields,help:dms.field_dms_directory__company_id
 #: model:ir.model.fields,help:dms.field_dms_file__company_id
 #: model:ir.model.fields,help:dms.field_dms_storage__company_id
-#, fuzzy
 msgid ""
 "If set, directories and files will only be available for the selected "
 "company."
-msgstr "دایرکتوری‌ها و فایل‌ها فقط در دسترس شرکت‌ منتخب هستند."
+msgstr "دایرکتوری‌ها و پرونده‌ها فقط در دسترس شرکت‌ منتخب هستند."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_bounced_content
@@ -1298,7 +1297,7 @@ msgid ""
 " (for example, if some directories are related with any sale, only users "
 "with read access to these sale can acess)"
 msgstr ""
-"اگر دسترسی دایرکتوری‌ها و پوشه‌ها فقط با دسترسی الگوی مرتبط کار می‌کند، آن "
+"اگر دسترسی دایرکتوری‌ها و پرونده‌ها فقط با دسترسی الگوی مرتبط کار می‌کند، آن "
 "را ذکر کنید (برای مثال، اگر برخی دایرکتوری‌های با بخش فروش مرتبط هستند، تنها "
 "کاربرانی با دسترسی خوانش به این فروش‌ها امکان دسترسی را خواهند داشت)"
 
@@ -1308,8 +1307,8 @@ msgid ""
 "Indicate if directories and files auto-create in mail composition process "
 "too"
 msgstr ""
-"اگر دایرکتوری‌ها و پوشه‌ها به صورت خودکار در فرآیند ایجاد ایمیل نیز به صورت "
-"خودکار ایجاد می‌شوند، به آن اشاره کنید"
+"اگر دایرکتوری‌ها و پرونده‌ها به صورت خودکار در فرآیند ایجاد ایمیل نیز به "
+"صورت خودکار ایجاد می‌شوند، به آن اشاره کنید"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_abstract_dms_mixin__is_hidden
@@ -1318,7 +1317,7 @@ msgstr ""
 #: model:ir.model.fields,help:dms.field_dms_storage__is_hidden
 msgid "Indicates if directories and files are hidden by default."
 msgstr ""
-"اگر دایرکتوری‌ها و پوشه‌ها به صورت پیش فرض مخفی هستند، به این نکته اشاره "
+"اگر دایرکتوری‌ها و پرونده‌ها به صورت پیش فرض مخفی هستند، به این نکته اشاره "
 "کنید."
 
 #. module: dms
@@ -1549,15 +1548,16 @@ msgstr "جابه‌جا کردن"
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
 msgstr ""
-"پوشه %(index)s of %(record_count)s [ %(dms_file_migration)s ] را جابه‌جا کنید"
+"پرونده %(index)s of %(record_count)s [ %(dms_file_migration)s ] را جابه‌جا "
+"کنید"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_form
 msgid "Migrate Files"
-msgstr "پوشه‌ها را جابه‌جا کنید"
+msgstr "پرونده‌ها را جابه‌جا کنید"
 
 #. module: dms
 #: model:ir.ui.menu,name:dms.menu_dms_file_migration
@@ -1590,7 +1590,7 @@ msgstr "منتقل کردن"
 #. module: dms
 #: model:ir.actions.act_window,name:dms.wizard_dms_file_move_act_window
 msgid "Move files"
-msgstr "پوشه‌ها را منتقل کنید"
+msgstr "پرونده‌ها را منتقل کنید"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__my_activity_date_deadline
@@ -1611,7 +1611,7 @@ msgstr "اسناد من"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "My Files"
-msgstr "پوشه‌های من"
+msgstr "پرونده‌های من"
 
 #. module: dms
 #. odoo-python
@@ -1723,7 +1723,7 @@ msgstr "فقط کاربر ادمین"
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "Only files in the same root directory can be moved."
-msgstr "فقط می‌توان پوشه‌ها در دایرکتوری ریشه مشابه را جابه‌جا کرد."
+msgstr "فقط می‌توان پرونده‌ها در دایرکتوری ریشه مشابه را جابه‌جا کرد."
 
 #. module: dms
 #. odoo-python
@@ -1981,7 +1981,7 @@ msgstr "منابع ذخیره را نشان بدهید"
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__dms_directory__alias_process__files
 msgid "Single Files"
-msgstr "پوشه‌های منفرد"
+msgstr "پرونده‌های منفرد"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__size
@@ -2152,14 +2152,14 @@ msgstr "نام دایرکتوری نامعتبر است."
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "The file has a forbidden file extension."
-msgstr "این پوشه حاوی یک پسوند فایل غیرمجاز است."
+msgstr "این پرونده حاوی یک پسوند پرونده غیرمجاز است."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 #, python-format
 msgid "The file name is invalid."
-msgstr "نام این پوشه نامعتبر است."
+msgstr "نام این پرونده نامعتبر است."
 
 #. module: dms
 #. odoo-python
@@ -2170,15 +2170,14 @@ msgstr "حداکثر اندازه آپلود %s مگابایت است."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
-#, fuzzy
 msgid ""
 "The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
 " email that does not reply to an existing record will cause the creation of "
 "a new record of this model (e.g. a Project Task)"
 msgstr ""
-"مدلی که نام مستعار با آن مکاتبه دارد (نوع سند اودوو). هر ایمیل دریاففتی که "
-"به یک سند موجود پاسخ ندهد منجر به ایجاد سند جدیدی از این مدل می‌شود. (برای "
-"مثال یک تسک پروژه)"
+"مدلی که نام مستعار با آن مکاتبه دارد (نوع سند اودوو). هر ایمیل دریافتی که به "
+"یک سند موجود پاسخ ندهد منجر به ایجاد سند جدیدی از این مدل می‌شود. (برای مثال "
+"یک تسک پروژه)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_name
@@ -2218,7 +2217,7 @@ msgid ""
 "        manually by triggering the action."
 msgstr ""
 "اگر این تنظیمات را تغییر بدهید، \n"
-"می‌توانید فایل‌های موجود را به صورت دستی \n"
+"می‌توانید پرونده‌های موجود را به صورت دستی \n"
 "با اقدام ناگهانی جابه‌جا کنید."
 
 #. module: dms
@@ -2236,7 +2235,7 @@ msgstr "تمام اِلِمان‌ها"
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_files
 msgid "Total Files"
-msgstr "تمام پوشه‌ها"
+msgstr "تمام پرونده‌ها"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__count_total_directories
@@ -2246,7 +2245,7 @@ msgstr "تمام ساب دایرکتوری‌ها"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid "Total files"
-msgstr "تمام پوشه‌ها"
+msgstr "تمام پرونده‌ها"
 
 #. module: dms
 #: model:dms.category,name:dms.category_04_demo
@@ -2293,12 +2292,12 @@ msgstr "بارگذاری"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload File"
-msgstr "بارگذاری فایل"
+msgstr "بارگذاری پرونده"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.onboarding_file_step
 msgid "Upload your first File."
-msgstr "اولین فایل خود را بارگذاری کنید."
+msgstr "اولین پرونده خود را بارگذاری کنید."
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_user
@@ -2342,7 +2341,7 @@ msgstr "تاریخچه ارتباطات تارنما"
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_file_move
 msgid "Wizard Dms File Move"
-msgstr "راهنمای گام به گام انتقال پوشه سیستم مدیریت اسناد"
+msgstr "راهنمای گام به گام انتقال پرونده سیستم مدیریت اسناد"
 
 #. module: dms
 #: model:ir.model,name:dms.model_wizard_dms_share
