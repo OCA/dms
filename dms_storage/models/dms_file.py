@@ -6,7 +6,7 @@ from odoo import api, fields, models
 class DmsFile(models.Model):
     _inherit = "dms.file"
 
-    storage_path = fields.Char(invisible=True, readonly=True)
+    storage_path = fields.Char()
     storage_backend_id = fields.Many2one("fs.storage")
 
     def _update_content_vals(self, vals, binary):

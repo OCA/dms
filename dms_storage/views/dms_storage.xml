@@ -10,7 +10,8 @@
             <group name="save_storage_right" position="inside">
                 <field
                     name="storage_backend_id"
-                    attrs="{'required': [('save_type', '=', 'storage')], 'invisible': [('save_type', '!=', 'storage')]}"
+                    required="save_type == 'storage'"
+                    invisible="save_type != 'storage'"
                 />
             </group>
         </field>
