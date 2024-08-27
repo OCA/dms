@@ -10,7 +10,7 @@ class DmsFile(models.Model):
     storage_backend_id = fields.Many2one("fs.storage")
 
     def _update_content_vals(self, vals, binary):
-        result = super(DmsFile, self)._update_content_vals(vals, binary)
+        result = super()._update_content_vals(vals, binary)
         result.update(
             {
                 "storage_path": False,
@@ -28,7 +28,7 @@ class DmsFile(models.Model):
 
     @api.depends("storage_path")
     def _compute_content(self):
-        res = super(DmsFile, self)._compute_content()
+        res = super()._compute_content()
         for record in self.filtered(lambda r: r.storage_path):
             record.content = self.storage_backend_id.get(
                 record.storage_path, binary=False
