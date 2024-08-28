@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-27 08:06+0000\n"
+"PO-Revision-Date: 2024-08-28 15:06+0000\n"
 "Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fa\n"
@@ -310,7 +310,7 @@ msgstr "یک دایرکتوری ریشه باید منبع داشته باشد."
 #. module: dms
 #: model:ir.model,name:dms.model_abstract_dms_mixin
 msgid "Abstract Dms Mixin"
-msgstr "چکیده سیستم مدیریت اسناد Mixin"
+msgstr "Mixin انتزاعی سامانه مدیریت اسناد"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -549,20 +549,19 @@ msgstr "نام دسته‌بندی موجود است!"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__checksum
-#, fuzzy
 msgid "Checksum/SHA1"
-msgstr "چکیده اعتبارسنجی شا-1"
+msgstr "کدکنترلی/SHA1"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__child_category_ids
 msgid "Child Categories"
-msgstr "دسته‌بندی‌های کودکان"
+msgstr "دسته‌بندی‌های زیرشاخه"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__child_group_ids
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Child Groups"
-msgstr "گروه‌های کودکان"
+msgstr "گروه‌های زیرشاخه"
 
 #. module: dms
 #: model_terms:ir.actions.act_window,help:dms.action_dms_directories_all_directory
