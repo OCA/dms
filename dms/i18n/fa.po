@@ -1767,7 +1767,7 @@ msgstr "شناسه موضوع رکورد والد"
 #: code:addons/dms/models/access_groups.py:0
 #, fuzzy, python-format
 msgid "Parent group '%(parent)s' is child of '%(current)s'."
-msgstr "گروه والد \"%(والد)s\" فرزند \"%(current)s\" است."
+msgstr "%(parent)sگروه والد \" فرزند \"%(current)s\" است."
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
