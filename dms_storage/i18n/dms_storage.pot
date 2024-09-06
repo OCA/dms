@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -43,7 +43,7 @@ msgstr ""
 #. module: dms_storage
 #: model:ir.model.fields,help:dms_storage.field_dms_storage__save_type
 msgid ""
-"The save type is used to determine how a file is saved by the\n"
-"        system. If you change this setting, you can migrate existing files\n"
-"        manually by triggering the action."
+"The save type is used to determine how a file is saved by the system. If you"
+" change this setting, you can migrate existing files manually by triggering "
+"the action."
 msgstr ""
