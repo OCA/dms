@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dms_storage
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-07-29 10:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: dms_storage
+#: model:ir.model,name:dms_storage.model_dms_file
+msgid "File"
+msgstr "File"
+
+#. module: dms_storage
+#: model:ir.model.fields,field_description:dms_storage.field_dms_storage__save_type
+msgid "Save Type"
+msgstr "Tipo salvataggio"
+
+#. module: dms_storage
+#: model:ir.model,name:dms_storage.model_dms_storage
+#: model:ir.model.fields.selection,name:dms_storage.selection__dms_storage__save_type__storage
+msgid "Storage"
+msgstr "Deposito"
+
+#. module: dms_storage
+#: model:ir.model.fields,field_description:dms_storage.field_dms_file__storage_backend_id
+#: model:ir.model.fields,field_description:dms_storage.field_dms_storage__storage_backend_id
+msgid "Storage Backend"
+msgstr "Backend deposito"
+
+#. module: dms_storage
+#: model:ir.model.fields,field_description:dms_storage.field_dms_file__storage_path
+msgid "Storage Path"
+msgstr "Percorso deposito"
+
+#. module: dms_storage
+#: model:ir.model.fields,help:dms_storage.field_dms_storage__save_type
+msgid ""
+"The save type is used to determine how a file is saved by the\n"
+"        system. If you change this setting, you can migrate existing files\n"
+"        manually by triggering the action."
+msgstr ""
+"Il tipo di salvataggio viene utilizzato per determinare come un file viene "
+"salvato dal sistema.\n"
+"          Se si modifica questa impostazione, si può eseguire la migrazione "
+"dei file esistenti\n"
+"         manualmente attivando l'azione."

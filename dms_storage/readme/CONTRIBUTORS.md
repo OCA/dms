@@ -1,0 +1,3 @@
+- Enric Tobella
+- [APSL-Nagarro](<https://apsl.tech>):
+  - Bernat Obrador \<<bobrador@apsl.net>\>
