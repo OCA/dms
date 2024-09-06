@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-dms"
-version = "17.0.20240726.0"
+version = "17.0.20240906.0"
 dependencies = [
     "odoo-addon-dms>=17.0dev,<17.1dev",
+    "odoo-addon-dms_storage>=17.0dev,<17.1dev",
 ]
 classifiers=[
     "Programming Language :: Python",

@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [dms](dms/) | 17.0.1.1.0 |  | Document Management System for Odoo
+[dms_storage](dms_storage/) | 17.0.1.0.0 |  | Integrate DMS with external Storages
 
 [//]: # (end addons)
 
