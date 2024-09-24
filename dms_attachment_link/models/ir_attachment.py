@@ -11,18 +11,9 @@ class IrAttachment(models.Model):
 
     @api.depends("dms_file_id.content")
     def _compute_datas(self):
-        """Get the contents of the attachment directly from the DMS fiel."""
+        """Get the contents of the attachment directly from the DMS file."""
         _self = self.filtered("dms_file_id")
         res = super(IrAttachment, (self - _self))._compute_datas()
         for item in _self:
             item.datas = item.dms_file_id.content
         return res
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        """Create attachments and link them to DMS files."""
-        attachments = super().create(vals_list)
-        for attachment, vals in zip(attachments, vals_list):
-            if "dms_file_id" in vals:
-                attachment.datas = attachment.dms_file_id.content
-        return attachments
