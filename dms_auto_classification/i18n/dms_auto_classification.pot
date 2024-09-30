@@ -105,9 +105,13 @@ msgstr ""
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__data_file
-#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__data_file
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__file_id
 msgid "File"
+msgstr ""
+
+#. module: dms_auto_classification
+#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__data_file
+msgid "File content"
 msgstr ""
 
 #. module: dms_auto_classification

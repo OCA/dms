@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Auto classify documents into DMS",
-    "version": "16.0.1.1.0",
+    "version": "16.0.1.1.1",
     "category": "Document Management",
     "website": "https://github.com/OCA/dms",
     "author": "Tecnativa, Odoo Community Association (OCA)",
