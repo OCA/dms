@@ -78,11 +78,15 @@ msgid "Last Updated on"
 msgstr "Última modificación el"
 
 #. module: dms_field_auto_classification
-#: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__model
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__model_id
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__model_id
 msgid "Model"
 msgstr "Modelo"
+
+#. module: dms_field_auto_classification
+#: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__model
+msgid "Model name"
+msgstr ""
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__parent_id
