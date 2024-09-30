@@ -137,7 +137,7 @@ class WizardDmsClassificationDetail(models.TransientModel):
         string="File name",
     )
     data_file = fields.Binary(
-        string="File",
+        string="File content",
         required=True,
     )
     directory_id = fields.Many2one(
