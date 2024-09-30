@@ -10,7 +10,9 @@ class DmsClassificationTemplate(models.Model):
     model_id = fields.Many2one(
         comodel_name="ir.model", string="Model", domain=[("transient", "=", False)]
     )
-    model = fields.Char(compute="_compute_model", compute_sudo=True)
+    model = fields.Char(
+        compute="_compute_model", string="Model name", compute_sudo=True
+    )
     detail_ids = fields.One2many(
         string="Details",
         comodel_name="dms.classification.template.detail",
