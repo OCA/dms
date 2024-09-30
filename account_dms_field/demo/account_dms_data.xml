@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="read_access_account_move_group" model="dms.access.group">
+        <field name="name">Everyone for Account DMS</field>
+        <field name="group_ids" eval="[(4, ref('account.group_account_invoice'))]" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+
+    <record id="field_template_account" model="dms.field.template">
+        <field name="name">Account</field>
+        <field name="storage_id" ref="dms.storage_demo" />
+        <field name="model_id" ref="account.model_account_move" />
+        <field name="user_field_id" ref="account.field_account_move__user_id" />
+        <field name="group_ids" eval="[(4, ref('read_access_account_move_group'))]" />
+    </record>
+</odoo>
