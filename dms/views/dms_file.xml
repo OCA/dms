@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 
+    Copyright 2024 Silvertouch technologies
     Copyright 2017-2019 MuK IT GmbH
     Copyright 2021 Tecnativa - Víctor Martínez
+    Copyright 2024 Silver Touch Technologies Ltd.
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
   -->
@@ -13,6 +15,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name" filter_domain="[('name','ilike',self)]" />
+                <field name="index_content" filter_domain="[('index_content','ilike',self)]" string="Indexed Content" />
                 <filter
                     string="All Files"
                     name="all"
@@ -414,6 +417,7 @@
                                 mimetype="mimetype"
                                 widget="preview_binary"
                             />
+                            <field name="index_content" invisible="1"/>
                         </group>
                         <group>
                             <field name="extension" />
