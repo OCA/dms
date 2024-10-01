@@ -1,5 +1,6 @@
 # Copyright 2024 Silvertouch technologies
 # Copyright 2017-2019 MuK IT GmbH
+# Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 {
