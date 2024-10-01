@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Add dms field for employees",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "category": "Human Resources",
     "website": "https://github.com/OCA/dms",
     "author": "Tecnativa, Odoo Community Association (OCA)",

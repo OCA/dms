@@ -14,7 +14,4 @@
         <field name="user_field_id" ref="hr.field_hr_employee__user_id" />
         <field name="group_ids" eval="[(4, ref('read_access_hr_employee_group'))]" />
     </record>
-    <function model="dms.field.template" name="_create_dms_directory">
-        <value eval="[ref('field_template_employee')]" />
-    </function>
 </odoo>
