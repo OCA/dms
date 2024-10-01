@@ -1,3 +1,4 @@
+# Copyright 2024 Silvertouch technologies
 # Copyright 2020 Antoni Romera
 # Copyright 2017-2019 MuK IT GmbH
 # Copyright 2021 Tecnativa - Víctor Martínez
@@ -10,6 +11,15 @@ import logging
 from collections import defaultdict
 
 from PIL import Image
+from pypdf import PdfReader
+import pytesseract
+import mimetypes
+from io import BytesIO
+from pdf2image import convert_from_bytes
+import re
+import pandas as pd
+from docx import Document
+
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import ValidationError
@@ -137,6 +147,8 @@ class File(models.Model):
     content_file = fields.Binary(
         attachment=True, string="Content File", prefetch=False, invisible=True
     )
+
+    index_content = fields.Text(string="content")
 
     # Extend inherited field(s)
     image_1920 = fields.Image(compute="_compute_image_1920", store=True, readonly=False)
@@ -513,7 +525,80 @@ class File(models.Model):
             values = self._get_content_inital_vals()
             binary = base64.b64decode(record.content or "")
             values = record._update_content_vals(values, binary)
+            if record.res_mimetype == 'application/pdf':
+                # Extract text from PDF
+                try:
+                    pdf_reader = PdfReader(BytesIO(binary))
+                    text_content = ''
+                    for page in pdf_reader.pages:
+                        page_text = page.extract_text()
+                        # Remove null bytes and other unwanted characters from page text
+                        page_text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\xff]', '', page_text)
+                        text_content += page_text
+                    if text_content:
+                        values['index_content'] = text_content
+                    else:
+                        pdf_data = base64.b64decode(record.content)
+                        images = convert_from_bytes(pdf_data, dpi=300)
+                        extracted_text = []
+                        for image in images:
+                            text = pytesseract.image_to_string(image)
+                            extracted_text.append(text)
+                        full_text = "\n".join(extracted_text)
+
+                        values['index_content'] = full_text
+                except:
+                    values['index_content'] = ''
+
+            elif record.res_mimetype == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                # Extract text from docx
+                try:
+                    doc = Document(BytesIO(binary))
+                    text_content = ''
+                    for paragraph in doc.paragraphs:
+                        text_content += paragraph.text + '\n'
+                    values['index_content'] = text_content
+                except:
+                    values['index_content'] = ''
+
+            elif record.res_mimetype == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                # Extract text from Excel
+                try:
+                    df = pd.read_excel(BytesIO(binary))
+                    data_paragraph = ''
+                    for index, row in df.iterrows():
+                        row_data = ' '.join(f'{column}: {row[column]}' for column in df.columns)
+                        data_paragraph += f'Row {index + 1}: {row_data}\n'
+                    data_paragraph = data_paragraph.strip()
+                    values['index_content'] = data_paragraph
+                except:
+                    values['index_content'] = ''
+
+            elif record.res_mimetype in ['image/png', 'image/jpeg', 'image/jpg', 'image/svg']:
+                # Extract text from Image
+                image_data = base64.b64decode(record.content)
+                image = Image.open(BytesIO(image_data))
+                text = pytesseract.image_to_string(image)
+                values['index_content'] = text
+
+            elif record.res_mimetype == 'application/vnd.ms-excel':
+               #  Reading xls file
+               try:
+                   df = pd.read_excel(BytesIO(binary))
+                   data_paragraph = ''
+                   for index, row in df.iterrows():
+                    row_data = ' '.join(f'{column}: {row[column]}' for column in df.columns)
+                    data_paragraph += f'Row {index + 1}: {row_data}\n'
+                   data_paragraph = data_paragraph.strip()
+                   values['index_content'] = data_paragraph
+               except:
+                   values['index_content'] = ''
+
+            else:
+                values['index_content'] = ''
             updates[tools.frozendict(values)].add(record.id)
+
+
         with self.env.norecompute():
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
