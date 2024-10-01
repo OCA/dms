@@ -1,14 +1,15 @@
 # Copyright 2023 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestDmsAttachmentLink(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.partner = self.env["res.partner"].create({"name": "Test partner"})
-        self.dms_file = self.env.ref("dms.file_01_demo")
+class TestDmsAttachmentLink(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.partner = cls.env["res.partner"].create({"name": "Test partner"})
+        cls.dms_file = cls.env.ref("dms.file_01_demo")
 
     def test_add_url_attachment(self):
         attachment = self.dms_file.with_context(
