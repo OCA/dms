@@ -9,7 +9,7 @@ class IrAttachment(models.Model):
 
     dms_file_id = fields.Many2one(comodel_name="dms.file")
 
-    @api.depends("dms_file_id.content")
+    @api.depends("dms_file_id", "dms_file_id.content")
     def _compute_datas(self):
         """Get the contents of the attachment directly from the DMS file."""
         _self = self.filtered("dms_file_id")
