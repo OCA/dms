@@ -59,6 +59,16 @@ class DmsFieldTemplate(models.Model):
     def _get_template_from_model(self, model):
         return self.search([("model", "=", model)], limit=1)
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Create dms directory automatically in the creation in install mode."""
+        result = super().create(vals_list)
+        if self.env.context.get("install_mode"):
+            for item in result:
+                item_ctx = item.with_context(res_model=item._name, res_id=item.id)
+                item_ctx.create_dms_directory()
+        return result
+
     @api.model
     def create_dms_directory(self):
         """According to the model, create the directory linked to that record
