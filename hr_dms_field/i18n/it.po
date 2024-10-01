@@ -27,11 +27,6 @@ msgid "DMS Directories"
 msgstr "Cartelle DMS"
 
 #. module: hr_dms_field
-#: model:ir.model,name:hr_dms_field.model_dms_field_template
-msgid "Dms Field Template"
-msgstr "Modello campo DMS"
-
-#. module: hr_dms_field
 #: model_terms:ir.ui.view,arch_db:hr_dms_field.hr_employee_public_view_form
 #: model_terms:ir.ui.view,arch_db:hr_dms_field.view_employee_form
 msgid "Documents"
@@ -51,3 +46,6 @@ msgstr "È collegato"
 #: model:ir.model,name:hr_dms_field.model_hr_employee_public
 msgid "Public Employee"
 msgstr "Dipendente pubblico"
+
+#~ msgid "Dms Field Template"
+#~ msgstr "Modello campo DMS"
