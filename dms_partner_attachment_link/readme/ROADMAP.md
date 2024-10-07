@@ -1,0 +1,1 @@
+* Add related folders to the view

@@ -1,0 +1,1 @@
+Sometimes we need to collect all files related to a partner in one place. In OCA DMS, we can collect at least the  files stored in the attachment storages.

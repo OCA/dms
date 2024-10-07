@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_partner_form_inherit_dms" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.dms</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    name="action_open_dms_attachments"
+                    class="oe_stat_button"
+                    icon="fa-files-o"
+                    type="object"
+                >
+                    <field
+                        name="dms_file_count"
+                        string="DMS Attachments"
+                        widget="statinfo"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>
