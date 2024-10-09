@@ -281,7 +281,7 @@
         <field name="arch" type="xml">
             <kanban position="attributes">
                 <attribute name="banner_route" />
-                <attribute name="class">o_kanban_mobile</attribute>
+                <attribute name="class">o_kanban_mobile mk_file_kanban_view</attribute>
             </kanban>
             <xpath expr="//div[hasclass('oe_kanban_bottom_right')]" position="replace">
                 <div class="oe_kanban_bottom_right" />
