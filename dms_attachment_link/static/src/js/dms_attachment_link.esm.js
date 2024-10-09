@@ -1,37 +1,33 @@
 /** @odoo-module **/
 
-import {registerPatch} from "@mail/model/model_core";
+import {Chatter} from "@mail/core/web/chatter";
+import {patch} from "@web/core/utils/patch";
 
-registerPatch({
-    name: "AttachmentBoxView",
-    recordMethods: {
-        _onAddDmsFile() {
-            this.env.services.action.doAction(
-                "dms_attachment_link.action_dms_file_wizard_selector_dms_attachment_link",
-                {
-                    additionalContext: {
-                        active_id: this.chatter.thread.id,
-                        active_ids: [this.chatter.thread.id],
-                        active_model: this.chatter.threadModel,
-                    },
-                    onClose: this._onAddedDmsFile.bind(this),
-                }
-            );
-        },
-        _onAddedDmsFile() {
-            this.chatter.refresh();
-        },
+patch(Chatter.prototype, {
+    _onAddDmsFile() {
+        this.action.doAction(
+            "dms_attachment_link.action_dms_file_wizard_selector_dms_attachment_link",
+            {
+                additionalContext: {
+                    active_id: this.state.thread.id,
+                    active_ids: [this.state.thread.id],
+                    active_model: this.state.thread.model,
+                },
+                onClose: async () => {
+                    await this._onAddedDmsFile();
+                },
+            }
+        );
     },
-});
-
-registerPatch({
-    name: "Chatter",
-    recordMethods: {
-        /**
-         * Handles click on the attach button.
-         */
-        async onClickButtonAddAttachments() {
-            await this.onClickButtonToggleAttachments();
-        },
+    onClickAddAttachments(ev) {
+        ev.stopPropagation();
+        this.state.isAttachmentBoxOpened = !this.state.isAttachmentBoxOpened;
+        if (this.state.isAttachmentBoxOpened) {
+            this.rootRef.el.scrollTop = 0;
+            this.state.thread.scrollTop = "bottom";
+        }
+    },
+    async _onAddedDmsFile() {
+        this.reloadParentView();
     },
 });
