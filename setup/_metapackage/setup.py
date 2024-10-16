@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-dms Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-account_dms_field>=16.0dev,<16.1dev',
         'odoo-addon-dms>=16.0dev,<16.1dev',
         'odoo-addon-dms_attachment_link>=16.0dev,<16.1dev',
         'odoo-addon-dms_auto_classification>=16.0dev,<16.1dev',
