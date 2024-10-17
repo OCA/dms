@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="read_access_sale_order_group" model="dms.access.group">
+        <field name="name">Everyone for Sale DMS</field>
+        <field
+            name="group_ids"
+            eval="[(4, ref('sales_team.group_sale_salesman_all_leads'))]"
+        />
+        <field name="perm_create" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+
+    <record id="field_template_sale" model="dms.field.template">
+        <field name="name">Sale</field>
+        <field name="storage_id" ref="dms.storage_demo" />
+        <field name="model_id" ref="sale.model_sale_order" />
+        <field name="user_field_id" ref="sale.field_sale_order__user_id" />
+        <field name="group_ids" eval="[(4, ref('read_access_sale_order_group'))]" />
+    </record>
+</odoo>

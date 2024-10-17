@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_order_form_inherit_sale_dms_field" model="ir.ui.view">
+        <field name="name">view.order.form.inherit.sale.dms.field</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="documents"
+                    string="Documents"
+                    attrs="{'invisible': [('id', '=', False)]}"
+                >
+                    <field name="dms_directory_ids" mode="dms_list" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
