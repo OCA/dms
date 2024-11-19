@@ -22,6 +22,7 @@ class TestDmsFieldAutoClassification(BaseCommon):
         )
         access_group = cls.env.ref("dms.access_group_01_demo")
         access_group.explicit_user_ids = [(4, cls.user.id)]
+        cls.env.ref("dms_field.field_template_partner").unlink()
         file_template = cls.env["dms.field.template"].create(
             {
                 "name": "Test partner template",
