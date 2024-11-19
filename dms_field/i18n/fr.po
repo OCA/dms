@@ -41,6 +41,11 @@ msgid "Add File: "
 msgstr ""
 
 #. module: dms_field
+#: model:dms.access.group,name:dms_field.access_group_demo
+msgid "Admin (dms_field module)"
+msgstr ""
+
+#. module: dms_field
 #. odoo-javascript
 #: code:addons/dms_field/static/src/views/dms_list/dms_list_renderer.esm.js:0
 #, python-format

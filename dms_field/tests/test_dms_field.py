@@ -27,23 +27,10 @@ class TestDmsField(TransactionCase):
             {"name": "Test group", "users": [(4, cls.user_a.id)]}
         )
         cls.user_b = new_test_user(cls.env, login="test-user-b")
-        cls.template = cls.env["dms.field.template"].create(
-            {
-                "name": "Partner",
-                "storage_id": cls.env.ref("dms.storage_demo").id,
-                "model_id": cls.env.ref("base.model_res_partner").id,
-                "group_ids": [(4, cls.env.ref("dms.access_group_01_demo").id)],
-                "directory_format_name": "{{object.display_name}}",
-            }
-        )
+        cls.template = cls.env.ref("dms_field.field_template_partner")
         cls.template.group_ids.group_ids = [(4, cls.group.id)]
         cls.template.group_ids.explicit_user_ids = [(4, cls.user_b.id)]
         cls.storage = cls.template.storage_id
-        template_ctx = cls.template.with_context(
-            res_model=cls.template._name, res_id=cls.template.id
-        )
-        template_ctx.create_dms_directory()
-        cls.template.invalidate_model()
         cls.directory = cls.template.dms_directory_ids
         cls.subdirectory_1 = cls.env["dms.directory"].create(
             {
