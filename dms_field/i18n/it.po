@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-12 08:58+0000\n"
+"PO-Revision-Date: 2024-11-26 20:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -45,7 +45,7 @@ msgstr "Aggiungi file: "
 #. module: dms_field
 #: model:dms.access.group,name:dms_field.access_group_demo
 msgid "Admin (dms_field module)"
-msgstr ""
+msgstr "Amministratore (modulo dms_field)"
 
 #. module: dms_field
 #. odoo-javascript
