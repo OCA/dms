@@ -3,6 +3,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import api, fields, models
+from odoo.tools import config
 
 
 class DMSFieldMixin(models.AbstractModel):
@@ -30,10 +31,18 @@ class DMSFieldMixin(models.AbstractModel):
 
     @api.model_create_multi
     def create(self, vals_list):
-        """Create a dms directory when creating the record if exist a template."""
+        """Create a dms directory when creating the record if exist a template.
+        We need to avoid applying a template except when testing functionality
+        with dms_field* modules to avoid the error that a directory with the same
+        name already exists (example: create partner).
+        """
         result = super().create(vals_list)
+        test_condition = not config["test_enable"] or self.env.context.get(
+            "test_dms_field"
+        )
         if (
-            not self.env.context.get("skip_track_dms_field_template")
+            test_condition
+            and not self.env.context.get("skip_track_dms_field_template")
             and self._name in self.models_to_track_dms_field_template()
         ):
             template = self.env["dms.field.template"].with_context(res_model=self._name)
