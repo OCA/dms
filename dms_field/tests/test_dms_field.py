@@ -4,24 +4,17 @@
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import TransactionCase, new_test_user
+from odoo.tests import new_test_user
 from odoo.tools import mute_logger
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestDmsField(TransactionCase):
+
+class TestDmsField(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
+        cls.env = cls.env(context=dict(cls.env.context, test_dms_field=True))
         cls.user_a = new_test_user(cls.env, login="test-user-a")
         cls.group = cls.env["res.groups"].create(
             {"name": "Test group", "users": [(4, cls.user_a.id)]}
