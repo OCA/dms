@@ -14,6 +14,7 @@ class TestDmsFieldAutoClassification(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, test_dms_field=True))
         cls.template = cls.env.ref(
             "dms_field_auto_classification.dms_classification_template_partners"
         )
