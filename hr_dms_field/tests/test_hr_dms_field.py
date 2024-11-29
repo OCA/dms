@@ -11,6 +11,7 @@ class TestHrDmsField(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, test_dms_field=True))
         cls.template = cls.env.ref("hr_dms_field.field_template_employee")
         cls.storage = cls.template.storage_id
         cls.access_group = cls.template.group_ids
