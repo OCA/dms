@@ -170,6 +170,9 @@ Known issues / Roadmap
    means. It would be nice to be able to remove that rule at some point.
 -  Searchpanel in files: Highlight items (shading) without records when
    filtering something (by name for example).
+-  Accessing the clipboard (for example copy share link of
+   file/directory) is limited to secure connections. It also happens in
+   any part of Odoo.
 
 Bug Tracker
 ===========
