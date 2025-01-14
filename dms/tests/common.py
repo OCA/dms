@@ -41,12 +41,7 @@ def track_function(
                 perf_t0 = threading.current_thread().perf_t0
                 remaining_time = time.time() - perf_t0 - query_time
                 time_taken = query_time + remaining_time
-                message += " - {} Q {:.3f}s QT {:.3f}s OT {:.3f}s TT".format(
-                    query_count,
-                    query_time,
-                    remaining_time,
-                    time_taken,
-                )
+                message += f" - {query_count} Q {query_time:.3f}s QT {remaining_time:.3f}s OT {time_taken:.3f}s TT"
                 tracking_parameters += [
                     query_count,
                     query_time,
