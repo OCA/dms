@@ -90,7 +90,9 @@
                         >
                             <div class="o_kanban_details">
                                 <div class="o_kanban_record_title">
-                                    <h2><field name="name" /></h2>
+                                    <h2>
+                                        <field name="name" />
+                                    </h2>
                                 </div>
                                 <div class="o_kanban_record_body" />
                             </div>

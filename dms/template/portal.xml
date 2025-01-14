@@ -115,7 +115,7 @@
                                             class="o_portal_contact_img"
                                             t-att-src="dms_file.icon_url + (('&amp;access_token=' + access_token) if access_token else '')"
                                         />
-                                            <span t-esc="dms_file.name" />
+                                        <span t-esc="dms_file.name" />
                                     </a>
                                 </td>
                                 <td>

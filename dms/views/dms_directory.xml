@@ -303,7 +303,7 @@
                                         t-att-title="record.count_directories_title.raw_value"
                                     >
                                         <i class="fa fa-xs fa-folder" />
-                                            <span
+                                        <span
                                             class="total_items"
                                             t-esc="record.count_total_directories.raw_value"
                                         />
@@ -318,7 +318,7 @@
                                         t-att-title="record.count_files_title.raw_value"
                                     >
                                         <i class="fa fa-xs fa-file" />
-                                            <span
+                                        <span
                                             class="total_items"
                                             t-esc="record.count_total_files.raw_value"
                                         />
@@ -326,7 +326,7 @@
                                 </div>
                             </div>
                             <div class="col-3 h-100">
-                                    <img
+                                <img
                                     t-att-src="record.icon_url.raw_value"
                                     alt="Icon"
                                     class="h-100"
@@ -390,8 +390,7 @@
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <form>
-                <header>
-                </header>
+                <header />
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
@@ -548,7 +547,7 @@
                                 <tree limit="10">
                                     <field name="name" />
                                     <field name="mimetype" />
-                                     <field name="human_size" string="Size" />
+                                    <field name="human_size" string="Size" />
                                     <field name="write_date" readonly="1" />
                                 </tree>
                             </field>

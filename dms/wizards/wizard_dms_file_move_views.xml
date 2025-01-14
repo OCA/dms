@@ -12,7 +12,7 @@
                     <b>ATTENTION:</b> Tips to keep in mind before moving files:<br />
                     - This change cannot be undone.<br />
                     - Remember that the permissions of the files are those of the folder that contains it, therefore, it is possible that when you change it, the permissions will also change.<br
-                    />
+                />
                     Make this change at your own risk.
                 </div>
                 <group>

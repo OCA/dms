@@ -4,7 +4,6 @@
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 -->
 <odoo noupdate="1">
-
     <!--  Steps (has to be fist so that onboarding panel can access it) -->
     <record id="onboarding_step_document_storage" model="onboarding.onboarding.step">
         <field name="title">Storage</field>

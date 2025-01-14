@@ -493,10 +493,8 @@
                             groups="dms.group_dms_manager,base.group_no_one"
                         >
                             <group name="technical">
-                                <group name="technical_left">
-                                </group>
-                                <group name="technical_right">
-                                </group>
+                                <group name="technical_left" />
+                                <group name="technical_right" />
                             </group>
                         </page>
                     </notebook>
@@ -652,5 +650,4 @@
             action = model.action_wizard_dms_file_move()
         </field>
     </record>
-
 </odoo>
