@@ -1,4 +1,5 @@
 /** @odoo-module */
+/* global document */
 
 // /** ********************************************************************************
 //     Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).

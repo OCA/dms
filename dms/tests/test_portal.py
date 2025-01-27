@@ -29,7 +29,7 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         self.authenticate("portal", "portal")
         # 404: Incorrect access_token
         file_text = self.create_file(directory=self.directory_partner)
-        url = "%s&access_token=abc-def" % (file_text.access_url)
+        url = f"{file_text.access_url}&access_token=abc-def"
         response = self.url_open(url, timeout=20)
         self.assertEqual(
             response.status_code, 404, "Can't access file with incorrect access_token"
@@ -46,6 +46,7 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         )
 
     def test_tour(self):
+        # self.portal_user.groups_id = self.env.ref("dms.group_dms_user")
         for tour in ("dms_portal_mail_tour", "dms_portal_partners_tour"):
             with self.subTest(tour=tour):
                 self.start_tour("/my", tour, login="portal")
@@ -63,14 +64,13 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         directory = self.directory_partner.with_user(self.portal_user).with_env(
             self.env(su=False)
         )
-        # Portal user can only read
-        file.check_access_rule("read")
-
-        # Portal user can't do anything else
+        # Portal user can read only in portal under sudo permission,
+        # and still can't do anything else
         with self.assertRaises(AccessError, msg="Portal user should not have access"):
-            file.check_access_rule("write")
-            file.check_access_rule("unlink")
-            directory.check_access_rule("create")
+            file.check_access("read")
+            file.check_access("write")
+            file.check_access("unlink")
+            directory.check_access("create")
 
     @users("portal")
     def test_permission_portal_user_access_other_attachment(self):
@@ -82,10 +82,10 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         file = self.other_file_partner.with_user(self.portal_user).with_env(
             self.env(su=False)
         )
-        # Portal user can't do anything
+        # Portal user can't do anything, but can read!
         with self.assertRaises(AccessError, msg="Portal user should not have access"):
-            file.check_access_rule("read")
+            file.check_access("create")
         with self.assertRaises(AccessError, msg="Portal user should not have access"):
-            file.check_access_rule("write")
+            file.check_access("write")
         with self.assertRaises(AccessError, msg="Portal user should not have access"):
-            file.check_access_rule("unlink")
+            file.check_access("unlink")

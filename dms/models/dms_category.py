@@ -40,7 +40,7 @@ class DMSCategory(models.Model):
         comodel_name="dms.category",
         inverse_name="parent_id",
     )
-    parent_path = fields.Char(index="btree", unaccent=False)
+    parent_path = fields.Char(index="btree")
     tag_ids = fields.One2many(
         string="Tags", comodel_name="dms.tag", inverse_name="category_id"
     )
@@ -99,6 +99,6 @@ class DMSCategory(models.Model):
 
     @api.constrains("parent_id")
     def _check_category_recursion(self):
-        if not self._check_recursion():
+        if self._has_cycle():
             raise ValidationError(_("Error! You cannot create recursive categories."))
         return True

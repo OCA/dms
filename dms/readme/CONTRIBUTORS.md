@@ -12,3 +12,5 @@
   - Khanh Bui \<<khanh.bui@mail.elegosoft.com>\>
 - [Subteno](https://www.subteno.com):
   - Timothée Vannier <<tva@subteno.com>>
+- [Kencove](https://www.kencove.com):
+  - Mohamed Alkobrosli <<malkobrosly@kencove.com>>

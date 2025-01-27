@@ -14,7 +14,7 @@ class DmsAccessGroups(models.Model):
     _parent_name = "parent_group_id"
 
     name = fields.Char(string="Group Name", required=True, translate=True)
-    parent_path = fields.Char(index="btree", unaccent=False)
+    parent_path = fields.Char(index="btree")
 
     # Permissions written directly on this group
     perm_create = fields.Boolean(string="Create Access")
@@ -122,9 +122,9 @@ class DmsAccessGroups(models.Model):
         for one in self:
             one.update(
                 {
-                    "perm_inclusive_%s" % perm: (
-                        one["perm_%s" % perm]
-                        or one.parent_group_id["perm_inclusive_%s" % perm]
+                    f"perm_inclusive_{perm}": (
+                        one[f"perm_{perm}"]
+                        or one.parent_group_id[f"perm_inclusive_{perm}"]
                     )
                     for perm in ("create", "unlink", "write")
                 }

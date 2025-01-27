@@ -6,6 +6,7 @@
 //  **********************************************************************************/
 import {Component, onWillUpdateProps} from "@odoo/owl";
 import {registry} from "@web/core/registry";
+import {_t} from "@web/core/l10n/translation";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useService} from "@web/core/utils/hooks";
 
@@ -24,10 +25,11 @@ class DmsPathField extends Component {
 
     _onNodeClicked(event) {
         event.preventDefault();
+        const target = event.currentTarget;
         this.action.doAction({
             type: "ir.actions.act_window",
-            res_model: $(event.currentTarget).data("model"),
-            res_id: $(event.currentTarget).data("id"),
+            res_model: target.getAttribute("data-model"),
+            res_id: Number(target.getAttribute("data-id")),
             views: [[false, "form"]],
             target: "current",
             context: {},
@@ -42,7 +44,7 @@ DmsPathField.props = {
 
 const dmsPathField = {
     component: DmsPathField,
-    display_name: "Dms Path Field",
+    displayName: _t("Dms Path Field"),
     supportedTypes: ["text"],
     extractProps: () => {
         return {};

@@ -150,14 +150,14 @@ class DMSFile(models.Model):
             ):
                 one.image_1920 = one.content
 
-    def check_access_rule(self, operation):
-        self.mapped("directory_id").check_access_rule(operation)
-        return super().check_access_rule(operation)
+    def check_access(self, operation):
+        self.mapped("directory_id").check_access(operation)
+        return super().check_access(operation)
 
     def _compute_access_url(self):
         res = super()._compute_access_url()
         for item in self:
-            item.access_url = "/my/dms/file/%s/download" % (item.id)
+            item.access_url = f"/my/dms/file/{item.id}/download"
         return res
 
     def check_access_token(self, access_token=False):
@@ -240,7 +240,7 @@ class DMSFile(models.Model):
         return [extension.strip() for extension in extensions.split(",")]
 
     def _get_icon_placeholder_name(self):
-        return self.extension and "file_%s.svg" % self.extension or ""
+        return self.extension and f"file_{self.extension}.svg" or ""
 
     # Actions
     def action_migrate(self, should_logging=True):

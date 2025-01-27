@@ -11,7 +11,7 @@
     <record id="action_dms_directories_directory" model="ir.actions.act_window">
         <field name="name">Subdirectories</field>
         <field name="res_model">dms.directory</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">
             [
                 ("is_hidden", "=", False),
@@ -36,7 +36,7 @@
     <record id="action_dms_files_directory" model="ir.actions.act_window">
         <field name="name">Files</field>
         <field name="res_model">dms.file</field>
-        <field name="view_mode">kanban,tree,graph,pivot,form</field>
+        <field name="view_mode">kanban,list,graph,pivot,form</field>
         <field name="domain">
             [
                 ("is_hidden", "=", False),
@@ -60,7 +60,7 @@
     <record id="action_dms_directories_all_directory" model="ir.actions.act_window">
         <field name="name">Subdirectories</field>
         <field name="res_model">dms.directory</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">
             [
                 ("parent_id", "child_of", active_id),
@@ -86,7 +86,7 @@
     <record id="action_dms_files_all_directory" model="ir.actions.act_window">
         <field name="name">Files</field>
         <field name="res_model">dms.file</field>
-        <field name="view_mode">kanban,tree,graph,pivot,form</field>
+        <field name="view_mode">kanban,list,graph,pivot,form</field>
         <field name="domain">
             [
                 ("is_hidden", "=", False),
@@ -289,7 +289,7 @@
                             </div>
                         </div>
                     </t>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div
                             t-attf-class="#{kanban_color(record.color.raw_value)} o_kanban_wrapper oe_kanban_global_click oe_kanban_content oe_kanban_card row g-0"
                         >
@@ -347,6 +347,7 @@
                                     </div>
                                     <div class="o_kanban_record_bottom">
                                         <div class="oe_kanban_bottom_left" />
+
                                         <div class="oe_kanban_bottom_right">
                                             <a
                                                 role="button"
@@ -356,7 +357,7 @@
                                                 title="Starred"
                                             />
                                             <img
-                                                t-att-src="kanban_image('res.users', 'image_128', record.create_uid.raw_value)"
+                                                t-attf-src="/web/image/res.users/#{record.create_uid.raw_value}/avatar_128"
                                                 t-att-title="record.create_uid.value"
                                                 t-att-alt="record.create_uid.value"
                                                 class="oe_kanban_avatar"
@@ -372,17 +373,17 @@
         </field>
     </record>
     <record id="view_dms_directory_tree" model="ir.ui.view">
-        <field name="name">dms_directory.tree</field>
+        <field name="name">dms_directory.list</field>
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
-            <tree default_order="complete_name asc">
+            <list default_order="complete_name asc">
                 <field name="name" />
                 <field name="write_date" />
                 <field name="count_files" string="Files" />
                 <field name="count_directories" string="Directories" />
                 <field name="complete_name" />
                 <field name="storage_id" groups="dms.group_dms_manager" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_dms_directory_form" model="ir.ui.view">
@@ -527,7 +528,7 @@
                                 context="{'default_parent_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
                             >
-                                <tree limit="10">
+                                <list limit="10">
                                     <field name="name" />
                                     <field
                                         name="count_directories"
@@ -535,7 +536,7 @@
                                     />
                                     <field name="count_total_files" string="Files" />
                                     <field name="human_size" string="Size" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="page_files" string="Files">
@@ -544,12 +545,12 @@
                                 context="{'default_directory_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
                             >
-                                <tree limit="10">
+                                <list limit="10">
                                     <field name="name" />
                                     <field name="mimetype" />
                                     <field name="human_size" string="Size" />
                                     <field name="write_date" readonly="1" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="page_meta" string="Meta Information">
@@ -581,12 +582,12 @@
                             invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
                         >
                             <field name="group_ids">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
                                     <field name="perm_unlink" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page
@@ -594,12 +595,12 @@
                             invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
                         >
                             <field name="complete_group_ids">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
                                     <field name="perm_unlink" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="mail_alias" string="Email Alias">
@@ -636,18 +637,14 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
     <record id="action_dms_directory" model="ir.actions.act_window">
         <field name="name">Directories</field>
         <field name="res_model">dms.directory</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">[("is_hidden", "=", False)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

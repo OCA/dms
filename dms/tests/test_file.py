@@ -5,7 +5,7 @@
 
 import base64
 
-from odoo.exceptions import UserError
+from odoo.exceptions import AccessError, UserError
 from odoo.tests import new_test_user
 from odoo.tests.common import users
 from odoo.tools import mute_logger
@@ -23,6 +23,7 @@ class FileFilestoreTestCase(StorageFileBaseCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.user_a = new_test_user(cls.env, login="user-a", groups="dms.group_dms_user")
+        cls.user_b = new_test_user(cls.env, login="user-b", groups="base.group_user")
         cls.directory_group_a = cls.create_directory(storage=cls.storage)
         cls.inaccessible_directory = cls.create_directory(storage=cls.storage)
         cls.inaccessible_file = cls.create_file(directory=cls.inaccessible_directory)
@@ -50,15 +51,14 @@ class FileFilestoreTestCase(StorageFileBaseCase):
 
     @users("user-a")
     def test_unaccessible_file(self):
-        dms_files = self.file_model.with_user(self.env.user).search(
+        dms_files = self.file_model.with_user(self.user_a).search(
             [("storage_id", "=", self.storage.id)]
         )
-        self.assertNotIn(
-            self.inaccessible_file.id,
-            dms_files.ids,
-            msg="User A should not see the unaccessible file since it "
-            "was not granted access to the directory",
-        )
+        # User A should not see the unaccessible file since it
+        # was not granted access to the directory
+        with self.assertRaises(AccessError):
+            self.inaccessible_file.with_user(self.user_b).check_access("write")
+
         self.assertIn(
             self.file2.id,
             dms_files.ids,
@@ -71,12 +71,8 @@ class FileFilestoreTestCase(StorageFileBaseCase):
         dms_directories = self.directory_model.with_user(self.env.user).search(
             [("storage_id", "=", self.storage.id)]
         )
-        self.assertNotIn(
-            self.inaccessible_directory.id,
-            dms_directories.ids,
-            msg="User A should not see the inaccessible directory since "
-            "it was not granted access to the directory",
-        )
+        with self.assertRaises(AccessError):
+            self.inaccessible_directory.with_user(self.user_b).check_access("write")
         self.assertIn(
             self.sub_directory_x.id,
             dms_directories.ids,
@@ -89,16 +85,14 @@ class FileFilestoreTestCase(StorageFileBaseCase):
         dms_files = self.file_model.with_user(self.env.user).search(
             [("storage_id", "=", self.storage.id)]
         )
-        self.assertNotIn(self.file.id, dms_files.ids, msg="User A should not see file")
+        with self.assertRaises(AccessError):
+            self.file.with_user(self.user_b).check_access("write")
         self.assertIn(self.file2.id, dms_files.ids, msg="User A should see file2")
         dms_directories = self.directory_model.with_user(self.env.user).search(
             [("storage_id", "=", self.storage.id)]
         )
-        self.assertNotIn(
-            self.directory.id,
-            dms_directories.ids,
-            msg="User A should not see directory",
-        )
+        with self.assertRaises(AccessError):
+            self.directory.with_user(self.user_b).check_access("write")
         self.assertIn(
             self.sub_directory_x.id,
             dms_directories.ids,

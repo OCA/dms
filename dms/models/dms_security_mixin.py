@@ -6,13 +6,15 @@
 
 from logging import getLogger
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.osv.expression import (
     FALSE_DOMAIN,
     NEGATIVE_TERM_OPERATORS,
     OR,
     TRUE_DOMAIN,
 )
+from odoo.tools import SQL
 
 _logger = getLogger(__name__)
 
@@ -20,6 +22,13 @@ _logger = getLogger(__name__)
 class DmsSecurityMixin(models.AbstractModel):
     _name = "dms.security.mixin"
     _description = "DMS Security Mixin"
+
+    _OPERATION_CONDITIONS = {
+        "create": "AND dag.perm_inclusive_create = TRUE",
+        "read": "",  # No additional condition for 'read'
+        "unlink": "AND dag.perm_inclusive_unlink = TRUE",
+        "write": "AND dag.perm_inclusive_write = TRUE",
+    }
 
     # Submodels must define this field that points to the owner dms.directory
     _directory_field = "directory_id"
@@ -86,10 +95,10 @@ class DmsSecurityMixin(models.AbstractModel):
             )
             return
 
-        creatable = self._filter_access_rules("create")
-        readable = self._filter_access_rules("read")
-        unlinkable = self._filter_access_rules("unlink")
-        writeable = self._filter_access_rules("write")
+        creatable = self._filtered_access("create")
+        readable = self._filtered_access("read")
+        unlinkable = self._filtered_access("unlink")
+        writeable = self._filtered_access("write")
         for one in self:
             one.update(
                 {
@@ -135,7 +144,7 @@ class DmsSecurityMixin(models.AbstractModel):
                 )
                 continue
             # Check model access only once per batch
-            if not model.check_access_rights(operation, raise_exception=False):
+            if not model.check_access(operation):
                 continue
             domains.append([("res_model", "=", model._name), ("res_id", "=", False)])
             # Check record access in batch too
@@ -143,7 +152,7 @@ class DmsSecurityMixin(models.AbstractModel):
             # Apply exists to skip records that do not exist. (e.g. a res.partner
             # deleted by database).
             model_records = model.browse(res_ids).exists()
-            related_ok = model_records._filter_access_rules_python(operation)
+            related_ok = model_records._filtered_access(operation)
             if not related_ok:
                 continue
             domains.append(
@@ -155,39 +164,58 @@ class DmsSecurityMixin(models.AbstractModel):
     @api.model
     def _get_access_groups_query(self, operation):
         """Return the query to select access groups."""
-        operation_check = {
-            "create": "AND dag.perm_inclusive_create",
-            "read": "",
-            "unlink": "AND dag.perm_inclusive_unlink",
-            "write": "AND dag.perm_inclusive_write",
-        }[operation]
-        select = f"""
-            SELECT
-                dir_group_rel.aid
-            FROM
-                dms_directory_complete_groups_rel AS dir_group_rel
-                INNER JOIN dms_access_group AS dag
-                    ON dir_group_rel.gid = dag.id
-                INNER JOIN dms_access_group_users_rel AS users
-                    ON users.gid = dag.id
-            WHERE
-                users.uid = %s {operation_check}
-            """
-        return select, (self.env.uid,)
+        # Strict validation
+        if operation not in self._OPERATION_CONDITIONS:
+            raise ValidationError(_(f"Invalid operation: {operation}"))
+
+        base_sql = """(
+                SELECT
+                    dir_group_rel.aid
+                FROM
+                    dms_directory_complete_groups_rel AS dir_group_rel
+                    INNER JOIN dms_access_group AS dag
+                        ON dir_group_rel.gid = dag.id
+                    INNER JOIN dms_access_group_users_rel AS users
+                        ON users.gid = dag.id
+                WHERE
+                    users.uid = %s
+            )"""
+        if operation == "read":
+            sql = SQL(
+                base_sql,
+                self.env.uid,
+            )
+        else:
+            base_sql = f"""(
+                            SELECT
+                                dir_group_rel.aid
+                            FROM
+                                dms_directory_complete_groups_rel AS dir_group_rel
+                                INNER JOIN dms_access_group AS dag
+                                    ON dir_group_rel.gid = dag.id
+                                INNER JOIN dms_access_group_users_rel AS users
+                                    ON users.gid = dag.id
+                            WHERE
+                                users.uid = %s {self._OPERATION_CONDITIONS[operation]}
+                        )"""
+            sql = SQL(
+                base_sql,
+                self.env.uid,
+            )
+        return sql
 
     @api.model
     def _get_domain_by_access_groups(self, operation):
         """Get domain for records accessible applying DMS access groups."""
         result = [
             (
-                "%s.storage_id_inherit_access_from_parent_record"
-                % self._directory_field,
+                f"{self._directory_field}.storage_id_inherit_access_from_parent_record",
                 "=",
                 False,
             ),
             (
                 self._directory_field,
-                "inselect",
+                "in",
                 self._get_access_groups_query(operation),
             ),
         ]
@@ -236,16 +264,26 @@ class DmsSecurityMixin(models.AbstractModel):
     def _search_permission_write(self, operator, value):
         return self._get_permission_domain(operator, value, "write")
 
-    def _filter_access_rules_python(self, operation):
+    def _filtered_access_no_recursion(self, operation: str):
+        """This method is just the same as _filtered_access
+        but it can not be called withoud super due to
+        recursion error.
+
+        """
+        if self and not self.env.su and (result := self._check_access(operation)):
+            return self - result[0]
+        return self
+
+    def _filtered_access(self, operation):
         # Only kept to not break inheritance; see next comment
-        result = super()._filter_access_rules_python(operation)
+        result = super()._filtered_access(operation)
         # HACK Always fall back to applying rules by SQL.
-        # Upstream `_filter_access_rules_python()` doesn't use computed fields
+        # Upstream `_filtered_access()` doesn't use computed fields
         # search methods. Thus, it will take the `[('permission_{operation}',
         # '=', user.id)]` rule literally. Obviously that will always fail
         # because `self[f"permission_{operation}"]` will always be a `bool`,
         # while `user.id` will always be an `int`.
-        result |= self._filter_access_rules(operation)
+        result |= self._filtered_access_no_recursion(operation)
         return result
 
     @api.model_create_multi
@@ -258,6 +296,5 @@ class DmsSecurityMixin(models.AbstractModel):
         res.flush_recordset()
         # Go back to the original sudo state and check we really had creation permission
         res = res.sudo(self.env.su)
-        res.check_access_rights("create")
-        res.check_access_rule("create")
+        res.check_access("create")
         return res

@@ -9,6 +9,7 @@ import {registry} from "@web/core/registry";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useFileViewer} from "@web/core/file_viewer/file_viewer_hook";
 import {useService} from "@web/core/utils/hooks";
+import {_t} from "@web/core/l10n/translation";
 
 export class PreviewRecordField extends BinaryField {
     setup() {
@@ -37,8 +38,7 @@ PreviewRecordField.props = {
 
 const previewRecordField = {
     component: PreviewRecordField,
-    dependencies: [BinaryField],
-    display_name: "Preview Record",
+    displayName: _t("Preview Record"),
     supportedTypes: ["binary"],
     extractProps: () => {
         return {};

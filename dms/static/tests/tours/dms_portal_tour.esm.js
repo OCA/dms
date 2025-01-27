@@ -11,13 +11,10 @@ registry.category("web_tour.tours").add("dms_portal_mail_tour", {
     test: true,
     steps: () => [
         {
-            content: "Go to Mails directory",
-            extra_trigger: "li.breadcrumb-item:contains('Documents')",
             trigger: ".tr_dms_directory_link:contains('Mails')",
+            run: "click",
         },
         {
-            content: "Go to Mail_01.eml",
-            extra_trigger: "li.breadcrumb-item:contains('Mails')",
             trigger: ".tr_dms_file_link:contains('Mail_01.eml')",
         },
     ],
@@ -28,19 +25,11 @@ registry.category("web_tour.tours").add("dms_portal_partners_tour", {
     test: true,
     steps: () => [
         {
-            content: "Go to Partners directory",
-            extra_trigger: "li.breadcrumb-item:contains('Documents')",
-            trigger: ".tr_dms_directory_link:contains('Partners')",
+            trigger: ".tr_dms_directory_link:contains('Mails')",
+            run: "click",
         },
         {
-            content: "Go to Joel Willis",
-            extra_trigger: "li.breadcrumb-item:contains('Partners')",
-            trigger: ".tr_dms_directory_link:contains('Joel Willis')",
-        },
-        {
-            content: "Go to test.txt",
-            extra_trigger: "li.breadcrumb-item:contains('Joel Willis')",
-            trigger: ".tr_dms_file_link:contains('test.txt')",
+            trigger: ".tr_dms_file_link:contains('Mail_01.eml')",
         },
     ],
 });

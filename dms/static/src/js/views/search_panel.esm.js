@@ -4,9 +4,8 @@
  * License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). */
 
 import {SearchModel} from "@web/search/search_model";
-import {registry} from "@web/core/registry";
 
-class DMSSearchPanel extends SearchModel {
+export class DMSSearchPanel extends SearchModel {
     _getCategoryDomain(excludedCategoryId) {
         const domain = super._getCategoryDomain(...arguments);
         for (const category of this.categories) {
@@ -24,5 +23,3 @@ class DMSSearchPanel extends SearchModel {
         return domain;
     }
 }
-
-registry.category("views").add("dms_search_panel", DMSSearchPanel);
