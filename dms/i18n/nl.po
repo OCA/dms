@@ -2246,9 +2246,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "mail.catchall.domain"
 msgstr ""
-
-#~ msgid "/dms/static/lib/img/banner/documents_onboarding_directory.png"
-#~ msgstr "/dms/static/lib/img/banner/documents_onboarding_directory.png"
-
-#~ msgid "/dms/static/lib/img/banner/documents_onboarding_file.png"
-#~ msgstr "/dms/static/lib/img/banner/documents_onboarding_file.png"

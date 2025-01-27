@@ -11,7 +11,7 @@
     <record id="action_dms_directories_directory" model="ir.actions.act_window">
         <field name="name">Subdirectories</field>
         <field name="res_model">dms.directory</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">
             [
                 ("is_hidden", "=", False),
@@ -36,7 +36,7 @@
     <record id="action_dms_files_directory" model="ir.actions.act_window">
         <field name="name">Files</field>
         <field name="res_model">dms.file</field>
-        <field name="view_mode">kanban,tree,graph,pivot,form</field>
+        <field name="view_mode">kanban,list,graph,pivot,form</field>
         <field name="domain">
             [
                 ("is_hidden", "=", False),
@@ -60,7 +60,7 @@
     <record id="action_dms_directories_all_directory" model="ir.actions.act_window">
         <field name="name">Subdirectories</field>
         <field name="res_model">dms.directory</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">
             [
                 ("parent_id", "child_of", active_id),
@@ -86,7 +86,7 @@
     <record id="action_dms_files_all_directory" model="ir.actions.act_window">
         <field name="name">Files</field>
         <field name="res_model">dms.file</field>
-        <field name="view_mode">kanban,tree,graph,pivot,form</field>
+        <field name="view_mode">kanban,list,graph,pivot,form</field>
         <field name="domain">
             [
                 ("is_hidden", "=", False),
@@ -194,6 +194,7 @@
             <kanban
                 class="mk_directory_kanban_view o_kanban_small_column o_kanban_mobile"
                 banner_route="/onboarding/document_onboarding_file"
+                highlight_color="color"
             >
                 <field name="id" />
                 <field name="tag_ids" />
@@ -212,16 +213,16 @@
                 <field name="count_total_directories" />
                 <field name="count_total_files" />
                 <templates>
-                    <t t-name="kanban-menu">
+                    <t t-name="menu">
                         <div class="container">
                             <div class="row">
-                                <div
-                                    class="col-6 mk_directory_kanban_views o_kanban_card_manage_section o_kanban_manage_view"
-                                >
+                                <div name="card_menu_view" class="col-6">
                                     <h5
                                         role="menuitem"
                                         class="o_kanban_card_manage_title"
-                                    >Views</h5>
+                                    >
+                                        <span>Views</span>
+                                    </h5>
                                     <div role="menuitem">
                                         <a
                                             type="object"
@@ -241,13 +242,13 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div
-                                    class="col-6 border-left mk_directory_kanban_actions o_kanban_card_manage_section"
-                                >
+                                <div class="col-6 o_kanban_manage_actions">
                                     <h5
                                         role="menuitem"
                                         class="o_kanban_card_manage_title"
-                                    >Actions</h5>
+                                    >
+                                        <span>Actions</span>
+                                    </h5>
                                     <div role="menuitem">
                                         <a type="open">
                                             <i class="fa fa-external-link" />
@@ -274,115 +275,110 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="o_kanban_card_manage_settings row">
+                            <div class="o_kanban_card_manage_actions row">
                                 <div
-                                    t-if="record.permission_write.raw_value"
                                     role="menuitem"
                                     aria-haspopup="true"
+                                    class="col-6"
+                                    t-if="record.permission_write.raw_value"
                                 >
-                                    <ul
-                                        class="oe_kanban_colorpicker"
-                                        data-field="color"
-                                        role="popup"
-                                    />
+                                    <field name="color" widget="kanban_color_picker" />
                                 </div>
                             </div>
                         </div>
                     </t>
-                    <t t-name="kanban-box">
-                        <div
-                            t-attf-class="#{kanban_color(record.color.raw_value)} o_kanban_wrapper oe_kanban_global_click oe_kanban_content oe_kanban_card row g-0"
-                        >
-                            <div class="col-1 h-100">
-                                <div class="h-50">
-                                    <a
-                                        type="object"
-                                        name="action_dms_directories_all_directory"
-                                        role="button"
-                                        class="btn btn-sm btn-outline-primary o_dms_directory_btn"
-                                        t-att-title="record.count_directories_title.raw_value"
-                                    >
-                                        <i class="fa fa-xs fa-folder" />
-                                        <span
-                                            class="total_items"
-                                            t-esc="record.count_total_directories.raw_value"
-                                        />
-                                    </a>
+                    <t t-name="card" class="flex-row">
+                        <main>
+                            <div
+                                t-attf-class="oe_kanban_global_click oe_kanban_content row g-0"
+                            >
+                                <div class="col-3 h-100">
+                                    <img
+                                        t-att-src="record.icon_url.raw_value"
+                                        alt="Icon"
+                                        class="img img-fluid object-fit-cover"
+                                    />
                                 </div>
-                                <div class="h-50">
-                                    <a
-                                        type="object"
-                                        name="action_dms_files_all_directory"
-                                        role="button"
-                                        class="btn btn-sm btn-outline-primary o_dms_directory_btn"
-                                        t-att-title="record.count_files_title.raw_value"
-                                    >
-                                        <i class="fa fa-xs fa-file" />
-                                        <span
-                                            class="total_items"
-                                            t-esc="record.count_total_files.raw_value"
-                                        />
-                                    </a>
+                                <div class="col-8">
+                                    <field name="name" class="text-truncate fw-bold" />
+                                    <field
+                                        name="tag_ids"
+                                        widget="many2many_tags"
+                                        options="{'color_field': 'color'}"
+                                    />
+                                    <field name="write_date" widget="date" />
                                 </div>
                             </div>
-                            <div class="col-3 h-100">
-                                <img
-                                    t-att-src="record.icon_url.raw_value"
-                                    alt="Icon"
-                                    class="h-100"
-                                />
-                            </div>
-                            <div class="col-8">
-                                <div class="o_kanban_details">
-                                    <div class="o_kanban_record_title o_text_overflow">
-                                        <field name="name" />
-                                    </div>
-                                    <div class="o_kanban_record_body">
-                                        <field
-                                            name="tag_ids"
-                                            widget="many2many_tags"
-                                            options="{'color_field': 'color'}"
-                                        />
-                                        <field name="write_date" widget="date" />
-                                    </div>
-                                    <div class="o_kanban_record_bottom">
-                                        <div class="oe_kanban_bottom_left" />
-                                        <div class="oe_kanban_bottom_right">
-                                            <a
-                                                role="button"
-                                                type="object"
-                                                name="toggle_starred"
-                                                t-attf-class="fa fa-lg fa-star#{record.starred.raw_value ? '  favorite_sign_button_enabled' : '-o'} favorite_sign_button"
-                                                title="Starred"
+                            <footer class="mt-auto pt-0 ms-1">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-baseline">
+                                        <a
+                                            type="object"
+                                            name="action_dms_directories_all_directory"
+                                            role="button"
+                                            class="me-1"
+                                            t-att-title="record.count_directories_title.raw_value"
+                                        >
+                                            <i class="fa fa-xs fa-folder" />
+                                            <span>&amp;nbsp;</span>
+                                            <span
+                                                class="total_items"
+                                                t-esc="record.count_total_directories.raw_value"
                                             />
-                                            <img
-                                                t-att-src="kanban_image('res.users', 'image_128', record.create_uid.raw_value)"
-                                                t-att-title="record.create_uid.value"
-                                                t-att-alt="record.create_uid.value"
-                                                class="oe_kanban_avatar"
+                                            <span class="ms-1">Directories</span>
+                                        </a>
+                                        <a
+                                            type="object"
+                                            name="action_dms_files_all_directory"
+                                            role="button"
+                                            class="me-1"
+                                            t-att-title="record.count_files_title.raw_value"
+                                        >
+                                            <i class="fa fa-xs fa-file" />
+                                            <span>&amp;nbsp;</span>
+                                            <span
+                                                class="total_items"
+                                                t-esc="record.count_total_files.raw_value"
                                             />
-                                        </div>
+                                            <span class="ms-1">Files</span>
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="d-flex ms-auto">
+                                    <a
+                                        role="button"
+                                        type="object"
+                                        name="toggle_starred"
+                                        t-attf-class="fa fa-lg fa-star#{record.starred.raw_value ? '  favorite_sign_button_enabled' : '-o'} favorite_sign_button"
+                                        title="Starred"
+                                    />
+                                    <img
+                                        t-attf-src="/web/image/res.users/#{record.create_uid.raw_value}/avatar_128"
+                                        t-att-title="record.create_uid.value"
+                                        t-att-alt="record.create_uid.value"
+                                        class="oe_kanban_avatar"
+                                        style="max-width:20px;"
+                                    />
+                                </div>
+                            </footer>
+                        </main>
                     </t>
                 </templates>
             </kanban>
         </field>
     </record>
     <record id="view_dms_directory_tree" model="ir.ui.view">
-        <field name="name">dms_directory.tree</field>
+        <field name="name">dms_directory.list</field>
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
-            <tree default_order="complete_name asc">
+            <list default_order="complete_name asc">
                 <field name="name" />
                 <field name="write_date" />
                 <field name="count_files" string="Files" />
                 <field name="count_directories" string="Directories" />
                 <field name="complete_name" />
                 <field name="storage_id" groups="dms.group_dms_manager" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_dms_directory_form" model="ir.ui.view">
@@ -527,7 +523,7 @@
                                 context="{'default_parent_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
                             >
-                                <tree limit="10">
+                                <list limit="10">
                                     <field name="name" />
                                     <field
                                         name="count_directories"
@@ -535,7 +531,7 @@
                                     />
                                     <field name="count_total_files" string="Files" />
                                     <field name="human_size" string="Size" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="page_files" string="Files">
@@ -544,12 +540,12 @@
                                 context="{'default_directory_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
                             >
-                                <tree limit="10">
+                                <list limit="10">
                                     <field name="name" />
                                     <field name="mimetype" />
                                     <field name="human_size" string="Size" />
                                     <field name="write_date" readonly="1" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="page_meta" string="Meta Information">
@@ -581,12 +577,12 @@
                             invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
                         >
                             <field name="group_ids">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
                                     <field name="perm_unlink" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page
@@ -594,12 +590,12 @@
                             invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
                         >
                             <field name="complete_group_ids">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="perm_create" />
                                     <field name="perm_write" />
                                     <field name="perm_unlink" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="mail_alias" string="Email Alias">
@@ -636,18 +632,14 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
     <record id="action_dms_directory" model="ir.actions.act_window">
         <field name="name">Directories</field>
         <field name="res_model">dms.directory</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">[("is_hidden", "=", False)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

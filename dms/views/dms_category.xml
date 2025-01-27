@@ -25,14 +25,14 @@
         </field>
     </record>
     <record id="view_dms_category_tree" model="ir.ui.view">
-        <field name="name">dms_category.tree</field>
+        <field name="name">dms_category.list</field>
         <field name="model">dms.category</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="parent_id" />
                 <field name="tag_ids" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_dms_category_form" model="ir.ui.view">
@@ -84,7 +84,7 @@
                             <field
                                 name="child_category_ids"
                                 widget="one2many"
-                                mode="tree"
+                                mode="list"
                                 context="{'default_parent_id': id}"
                             />
                         </page>
@@ -96,7 +96,7 @@
     <record id="action_dms_category" model="ir.actions.act_window">
         <field name="name">Categories</field>
         <field name="res_model">dms.category</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{'search_default_all': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

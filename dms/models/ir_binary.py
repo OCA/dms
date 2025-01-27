@@ -8,7 +8,7 @@ from odoo import models
 class IrBinary(models.AbstractModel):
     _inherit = "ir.binary"
 
-    def _find_record_check_access(self, record, access_token):
+    def _find_record_check_access(self, record, access_token, field):
         if record._name in ("dms.file", "dms.directory"):
             if record.sudo().check_access_token(access_token):
                 # sudo because the user might not usually have access to the record but
@@ -16,4 +16,4 @@ class IrBinary(models.AbstractModel):
                 # Used to display the icon in the portal.
                 return record.sudo()
 
-        return super()._find_record_check_access(record, access_token)
+        return super()._find_record_check_access(record, access_token, field)

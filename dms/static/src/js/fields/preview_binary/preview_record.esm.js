@@ -1,10 +1,9 @@
-/** @odoo-module **/
-
 // /** ********************************************************************************
 //     Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 //     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 //  **********************************************************************************/
 import {BinaryField} from "@web/views/fields/binary/binary_field";
+import {_t} from "@web/core/l10n/translation";
 import {registry} from "@web/core/registry";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useFileViewer} from "@web/core/file_viewer/file_viewer_hook";
@@ -37,8 +36,7 @@ PreviewRecordField.props = {
 
 const previewRecordField = {
     component: PreviewRecordField,
-    dependencies: [BinaryField],
-    display_name: "Preview Record",
+    displayName: _t("Preview Record"),
     supportedTypes: ["binary"],
     extractProps: () => {
         return {};

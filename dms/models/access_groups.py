@@ -14,7 +14,7 @@ class DmsAccessGroups(models.Model):
     _parent_name = "parent_group_id"
 
     name = fields.Char(string="Group Name", required=True, translate=True)
-    parent_path = fields.Char(index="btree", unaccent=False)
+    parent_path = fields.Char(index="btree")
 
     # Permissions written directly on this group
     perm_create = fields.Boolean(string="Create Access")
@@ -122,9 +122,9 @@ class DmsAccessGroups(models.Model):
         for one in self:
             one.update(
                 {
-                    "perm_inclusive_%s" % perm: (
-                        one["perm_%s" % perm]
-                        or one.parent_group_id["perm_inclusive_%s" % perm]
+                    f"perm_inclusive_{perm}": (
+                        one[f"perm_{perm}"]
+                        or one.parent_group_id[f"perm_inclusive_{perm}"]
                     )
                     for perm in ("create", "unlink", "write")
                 }
@@ -155,10 +155,11 @@ class DmsAccessGroups(models.Model):
             )
             record.update({"users": users, "count_users": len(users)})
 
-    def copy(self, default=None):
-        default = dict(default or {})
-        default["name"] = _("%s (copy)") % self.name
-        return super().copy(default=default)
+    def copy_data(self, default=None):
+        vals_list = super().copy_data(default)
+        for group, vals in zip(self, vals_list, strict=False):
+            vals["name"] = _("%s (copy)") % group.name
+        return vals_list
 
     @api.constrains("parent_path")
     def _check_parent_recursiveness(self):

@@ -3,17 +3,35 @@
 # Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
+import cProfile
 import logging
 import os
 import unittest
+import warnings
+from functools import wraps
 
 from odoo.tests import common, tagged
 from odoo.tools import convert_file
-from odoo.tools.misc import profile
 
 from .common import track_function
 
 _logger = logging.getLogger(__name__)
+
+
+class profile:
+    def __init__(self, fname=None):
+        warnings.warn("Since 16.0.", DeprecationWarning, stacklevel=2)
+        self.fname = fname
+
+    def __call__(self, f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            profile = cProfile.Profile()
+            result = profile.runcall(f, *args, **kwargs)
+            profile.dump_stats(self.fname or (f"{f.__name__}.cprof"))
+            return result
+
+        return wrapper
 
 
 # This tests will only be executed if --test-tags benchmark is defined

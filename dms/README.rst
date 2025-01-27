@@ -17,13 +17,13 @@ Document Management System
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdms-lightgray.png?logo=github
-    :target: https://github.com/OCA/dms/tree/17.0/dms
+    :target: https://github.com/OCA/dms/tree/18.0/dms
     :alt: OCA/dms
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/dms-17-0/dms-17-0-dms
+    :target: https://translation.odoo-community.org/projects/dms-18-0/dms-18-0-dms
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -68,9 +68,9 @@ To configure this module, you need to:
 2. Create a new document storage. You can choose between three options
    on ``Save Type``:
 
-   - ``Database``: Store the files on the database as a field
-   - ``Attachment``: Store the files as attachments
-   - ``File``: Store the files on the file system
+   -  ``Database``: Store the files on the database as a field
+   -  ``Attachment``: Store the files as attachments
+   -  ``File``: Store the files on the file system
 
 2. Create an access group
 -------------------------
@@ -78,13 +78,13 @@ To configure this module, you need to:
 1. Next, create an administrative access group. Go to *Configuration ->
    Access Groups*.
 
-   - Create a new group, name it appropriately, and turn on all three
-     permissions (Create, Write and Unlink. Read is implied and always
-     enabled).
-   - Add any other top-level administrative users to the group if needed
-     (your user should already be there).
-   - You can create other groups in here later for fine-grained access
-     control.
+   -  Create a new group, name it appropriately, and turn on all three
+      permissions (Create, Write and Unlink. Read is implied and always
+      enabled).
+   -  Add any other top-level administrative users to the group if
+      needed (your user should already be there).
+   -  You can create other groups in here later for fine-grained access
+      control.
 
 3. Create a directory
 ---------------------
@@ -94,18 +94,18 @@ To configure this module, you need to:
 2. Create a new directory, mark it as root and select the previously
    created setting.
 
-   - Select the *Groups* tab and add your administrative group created
-     above. If your directory was already created before the group, you
-     can also add it in the access groups (*Configuration -> Access
-     Groups*).
+   -  Select the *Groups* tab and add your administrative group created
+      above. If your directory was already created before the group, you
+      can also add it in the access groups (*Configuration -> Access
+      Groups*).
 
 3. In the directory settings, you can also add other access groups
    (created above) that will be able to:
 
-   - read
-   - create
-   - write
-   - delete
+   -  read
+   -  create
+   -  write
+   -  delete
 
 Migration
 =========
@@ -151,28 +151,28 @@ access to that resource, no matter if logged or not.
 Known issues / Roadmap
 ======================
 
-- Files preview in portal
-- Allow to download folder in portal and create zip file with all
-  content
-- Save in cache own_root directories and update in every
-  create/write/unlink function
-- Add a migration procedure for converting an storage to attachment one
-  for populating existing records with attachments as folders
-- Add a link from attachment view in chatter to linked documents
-- If Inherit permissions from related record (the
-  inherit_access_from_parent_record field from storage) is changed when
-  directories already exist, inconsistencies may occur because groups
-  defined in the directories and subdirectories will still exist, all
-  groups in these directories should be removed before changing.
-- Since portal users can read ``dms.storage`` records, if your module
-  extends this model to another storage backend that needs using
-  secrets, remember to forbid access to the secrets fields by other
-  means. It would be nice to be able to remove that rule at some point.
-- Searchpanel in files: Highlight items (shading) without records when
-  filtering something (by name for example).
-- Accessing the clipboard (for example copy share link of
-  file/directory) is limited to secure connections. It also happens in
-  any part of Odoo.
+-  Files preview in portal
+-  Allow to download folder in portal and create zip file with all
+   content
+-  Save in cache own_root directories and update in every
+   create/write/unlink function
+-  Add a migration procedure for converting an storage to attachment one
+   for populating existing records with attachments as folders
+-  Add a link from attachment view in chatter to linked documents
+-  If Inherit permissions from related record (the
+   inherit_access_from_parent_record field from storage) is changed when
+   directories already exist, inconsistencies may occur because groups
+   defined in the directories and subdirectories will still exist, all
+   groups in these directories should be removed before changing.
+-  Since portal users can read ``dms.storage`` records, if your module
+   extends this model to another storage backend that needs using
+   secrets, remember to forbid access to the secrets fields by other
+   means. It would be nice to be able to remove that rule at some point.
+-  Searchpanel in files: Highlight items (shading) without records when
+   filtering something (by name for example).
+-  Accessing the clipboard (for example copy share link of
+   file/directory) is limited to secure connections. It also happens in
+   any part of Odoo.
 
 Bug Tracker
 ===========
@@ -180,7 +180,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/dms/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/dms/issues/new?body=module:%20dms%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/dms/issues/new?body=module:%20dms%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -196,36 +196,40 @@ Authors
 Contributors
 ------------
 
-- Mathias Markl <mathias.markl@mukit.at>
-- Enric Tobella <etobella@creublanca.es>
-- Antoni Romera
-- Gelu Boros <gelu.boros@rgbconsulting.com>
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  Mathias Markl <mathias.markl@mukit.at>
+-  Enric Tobella <etobella@creublanca.es>
+-  Antoni Romera
+-  Gelu Boros <gelu.boros@rgbconsulting.com>
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - Víctor Martínez
-  - Pedro M. Baeza
-  - Jairo Llopis
+   -  Víctor Martínez
+   -  Pedro M. Baeza
+   -  Jairo Llopis
 
-- `Elego <https://www.elegosoft.com>`__:
+-  `Elego <https://www.elegosoft.com>`__:
 
-  - Yu Weng <yweng@elegosoft.com>
-  - Philip Witte <phillip.witte@elegosoft.com>
-  - Khanh Bui <khanh.bui@mail.elegosoft.com>
+   -  Yu Weng <yweng@elegosoft.com>
+   -  Philip Witte <phillip.witte@elegosoft.com>
+   -  Khanh Bui <khanh.bui@mail.elegosoft.com>
 
-- `Subteno <https://www.subteno.com>`__:
+-  `Subteno <https://www.subteno.com>`__:
 
-  - Timothée Vannier <tva@subteno.com>
+   -  Timothée Vannier <tva@subteno.com>
+
+-  `Kencove <https://www.kencove.com>`__:
+
+   -  Mohamed Alkobrosli <malkobrosly@kencove.com>
 
 Other credits
 -------------
 
 Some pictures are based on or inspired by:
 
-- `Roundicons <https://www.flaticon.com/authors/roundicons>`__
-- `Smashicons <https://www.flaticon.com/authors/smashicons>`__
-- `EmojiOne <https://github.com/EmojiTwo/emojitwo>`__ : Portal DMS icon
-- `GitHub Octicons <https://github.com/primer/octicons/>`__ : The main
-  DMS icon
+-  `Roundicons <https://www.flaticon.com/authors/roundicons>`__
+-  `Smashicons <https://www.flaticon.com/authors/smashicons>`__
+-  `EmojiOne <https://github.com/EmojiTwo/emojitwo>`__ : Portal DMS icon
+-  `GitHub Octicons <https://github.com/primer/octicons/>`__ : The main
+   DMS icon
 
 Maintainers
 -----------
@@ -240,6 +244,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/17.0/dms>`_ project on GitHub.
+This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/18.0/dms>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

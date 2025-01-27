@@ -1,14 +1,11 @@
-/** @odoo-module */
-
 // /** ********************************************************************************
 //     Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
 //     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 //  **********************************************************************************/
 
 import {useBus, useService} from "@web/core/utils/hooks";
+import {useEffect, useRef, useState} from "@odoo/owl";
 import {_t} from "@web/core/l10n/translation";
-
-const {useRef, useEffect, useState} = owl;
 
 export function createFileDropZoneExtension() {
     return {
@@ -36,7 +33,7 @@ export function createFileDropZoneExtension() {
                         el.removeEventListener("drop", drop);
                     };
                 },
-
+                // eslint-disable-next-line no-undef
                 () => [document.querySelector(".o_content")]
             );
         },

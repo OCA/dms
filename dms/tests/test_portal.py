@@ -1,9 +1,10 @@
-# Copyright 2021-2022 Tecnativa - Víctor Martínez
+# Copyright 2021-2025 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 import odoo.tests
 from odoo.exceptions import AccessError
 from odoo.tests.common import users
+from odoo.tools import mute_logger
 
 from .common import StorageAttachmentBaseCase
 
@@ -15,9 +16,6 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         super().setUpClass()
         cls.partner = cls.env.ref("base.partner_demo_portal")
         cls.portal_user = cls.partner.user_ids
-        cls.other_portal_user = cls.other_partner.user_ids
-        cls.portal_user.login = "portal"
-        cls.other_portal_user.login = "other_portal"
         cls._create_attachment("test.txt")
         cls._create_attachment("test2.txt", cls.other_partner)
         cls.directory_partner = cls._get_partner_directory()
@@ -29,7 +27,7 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         self.authenticate("portal", "portal")
         # 404: Incorrect access_token
         file_text = self.create_file(directory=self.directory_partner)
-        url = "%s&access_token=abc-def" % (file_text.access_url)
+        url = f"{file_text.access_url}&access_token=abc-def"
         response = self.url_open(url, timeout=20)
         self.assertEqual(
             response.status_code, 404, "Can't access file with incorrect access_token"
@@ -51,41 +49,42 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
                 self.start_tour("/my", tour, login="portal")
 
     @users("portal")
+    @mute_logger("odoo.addons.base.models.ir_rule")
     def test_permission_portal_user_access_own_attachment(self):
         """
         The user can access its own attachments, even if its access group are not set
         """
         # Has to manually su=False because the portal user is not a superuser,
         # but odoo uses somewhere sudo() internally
-        file = self.file_partner.with_user(self.portal_user).with_env(
-            self.env(su=False)
-        )
-        directory = self.directory_partner.with_user(self.portal_user).with_env(
+        file = self.file_partner.with_user(self.env.user).with_env(self.env(su=False))
+        directory = self.directory_partner.with_user(self.env.user).with_env(
             self.env(su=False)
         )
         # Portal user can only read
-        file.check_access_rule("read")
+        file.check_access("read")
 
         # Portal user can't do anything else
         with self.assertRaises(AccessError, msg="Portal user should not have access"):
-            file.check_access_rule("write")
-            file.check_access_rule("unlink")
-            directory.check_access_rule("create")
+            file.check_access("write")
+            file.check_access("unlink")
+            directory.check_access("create")
 
     @users("portal")
+    @mute_logger("odoo.addons.base.models.ir_rule")
     def test_permission_portal_user_access_other_attachment(self):
         """
         The user can't access other attachments if its access group are not set
         """
         # Has to manually su=False because the portal user is not a superuser,
         # but odoo uses somewhere sudo() internally
-        file = self.other_file_partner.with_user(self.portal_user).with_env(
+        file = self.other_file_partner.with_user(self.env.user).with_env(
             self.env(su=False)
         )
+        # file.invalidate_recordset()
         # Portal user can't do anything
         with self.assertRaises(AccessError, msg="Portal user should not have access"):
-            file.check_access_rule("read")
+            file.check_access("read")
         with self.assertRaises(AccessError, msg="Portal user should not have access"):
-            file.check_access_rule("write")
+            file.check_access("write")
         with self.assertRaises(AccessError, msg="Portal user should not have access"):
-            file.check_access_rule("unlink")
+            file.check_access("unlink")

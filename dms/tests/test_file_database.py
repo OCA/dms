@@ -52,7 +52,7 @@ class FileDatabaseTestCase(StorageDatabaseBaseCase):
     def test_rename_file(self):
         file = self.create_file(directory=self.directory)
         extension = file.extension
-        file.write({"name": "test-%s.jpg" % self.env.user.login})
+        file.write({"name": f"test-{self.env.user.login}.jpg"})
         self.assertNotEqual(file.extension, extension, "Extension should be different")
 
     @users("dms-manager", "dms-user")

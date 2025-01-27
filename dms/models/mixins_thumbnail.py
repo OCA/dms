@@ -35,7 +35,7 @@ class Thumbnail(models.AbstractModel):
         """Obtain URL to record icon."""
         local_path = self._get_icon_disk_path()
         icon_name = os.path.basename(local_path)
-        return "/dms/static/icons/%s" % icon_name
+        return f"/dms/static/icons/{icon_name}"
 
     @api.depends("image_128")
     def _compute_icon_url(self):

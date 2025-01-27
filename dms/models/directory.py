@@ -17,8 +17,6 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.osv.expression import AND, OR
 from odoo.tools import consteq, human_size
 
-from odoo.addons.http_routing.models.ir_http import slugify
-
 from ..tools.file import check_name, unique_name
 
 _logger = logging.getLogger(__name__)
@@ -46,7 +44,7 @@ class DmsDirectory(models.Model):
     _parent_name = "parent_id"
     _directory_field = _parent_name
 
-    parent_path = fields.Char(index="btree", unaccent=False)
+    parent_path = fields.Char(index="btree")
     is_root_directory = fields.Boolean(
         default=False,
         help="""Indicates if the directory is a root directory.
@@ -216,7 +214,7 @@ class DmsDirectory(models.Model):
         """Special rules for directories."""
         self_filter = [
             ("storage_id_inherit_access_from_parent_record", "=", False),
-            ("id", "inselect", self._get_access_groups_query(operation)),
+            ("id", "in", self._get_access_groups_query(operation)),
         ]
         # Upstream only filters by parent directory
         result = super()._get_domain_by_access_groups(operation)
@@ -237,7 +235,7 @@ class DmsDirectory(models.Model):
     def _compute_access_url(self):
         res = super()._compute_access_url()
         for item in self:
-            item.access_url = "/my/dms/directory/%s" % (item.id)
+            item.access_url = f"/my/dms/directory/{item.id}"
         return res
 
     def check_access_token(self, access_token=False):
@@ -278,7 +276,7 @@ class DmsDirectory(models.Model):
                     and consteq(current_directory.access_token, access_token)
                 )
                 or not access_token
-                and current_directory.check_access_rights("read")
+                and current_directory.check_access("read")
             ):
                 return directories
             current_directory = current_directory.parent_id
@@ -529,7 +527,7 @@ class DmsDirectory(models.Model):
     # Constrains
     @api.constrains("parent_id")
     def _check_directory_recursion(self):
-        if not self._check_recursion():
+        if self._has_cycle():
             raise ValidationError(_("Error! You cannot create recursive directories."))
         return True
 
@@ -593,18 +591,18 @@ class DmsDirectory(models.Model):
         not_starred_records.write({"user_star_ids": [(4, self.env.uid)]})
         starred_records.write({"user_star_ids": [(3, self.env.uid)]})
 
-    def copy(self, default=None):
-        self.ensure_one()
-        default = dict(default or [])
-        if "parent_id" in default:
-            parent_directory = self.browse(default.get("parent_id"))
-            names = parent_directory.sudo().child_directory_ids.mapped("name")
-        elif self.is_root_directory:
-            names = self.sudo().storage_id.root_directory_ids.mapped("name")
-        else:
-            names = self.sudo().parent_id.child_directory_ids.mapped("name")
-        default.update({"name": unique_name(self.name, names)})
-        return super().copy(default)
+    def copy_data(self, default=None):
+        vals_list = super().copy_data(default)
+        for directory, vals in zip(self, vals_list, strict=False):
+            if vals.get("parent_id"):
+                parent_directory = self.browse(vals.get("parent_id"))
+                names = parent_directory.sudo().child_directory_ids.mapped("name")
+            elif directory.is_root_directory:
+                names = self.sudo().storage_id.root_directory_ids.mapped("name")
+            else:
+                names = self.sudo().parent_id.child_directory_ids.mapped("name")
+            vals["name"] = unique_name(directory.name, names)
+        return vals_list
 
     def _alias_get_creation_values(self):
         values = super()._alias_get_creation_values()
@@ -627,7 +625,8 @@ class DmsDirectory(models.Model):
             parent_directory._process_message(msg_dict)
             return parent_directory
         names = parent_directory.child_directory_ids.mapped("name")
-        subject = slugify(msg_dict.get("subject", _("Alias-Mail-Extraction")))
+        slug = self.env["ir.http"]._slug
+        subject = slug(msg_dict.get("subject", _("Alias-Mail-Extraction")))
         defaults = dict(
             {"name": unique_name(subject, names, escape_suffix=True)}, **custom_values
         )

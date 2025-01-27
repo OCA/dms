@@ -150,14 +150,14 @@ class DMSFile(models.Model):
             ):
                 one.image_1920 = one.content
 
-    def check_access_rule(self, operation):
-        self.mapped("directory_id").check_access_rule(operation)
-        return super().check_access_rule(operation)
+    def check_access(self, operation):
+        self.mapped("directory_id").check_access(operation)
+        return super().check_access(operation)
 
     def _compute_access_url(self):
         res = super()._compute_access_url()
         for item in self:
-            item.access_url = "/my/dms/file/%s/download" % (item.id)
+            item.access_url = f"/my/dms/file/{item.id}/download"
         return res
 
     def check_access_token(self, access_token=False):
@@ -240,7 +240,7 @@ class DMSFile(models.Model):
         return [extension.strip() for extension in extensions.split(",")]
 
     def _get_icon_placeholder_name(self):
-        return self.extension and "file_%s.svg" % self.extension or ""
+        return self.extension and f"file_{self.extension}.svg" or ""
 
     # Actions
     def action_migrate(self, should_logging=True):
@@ -581,17 +581,16 @@ class DMSFile(models.Model):
             del res_vals["content"]
         return res_vals
 
-    def copy(self, default=None):
-        self.ensure_one()
-        default = dict(default or [])
-        names = self.sudo().directory_id.file_ids.mapped("name")
-        if "directory_id" in default:
-            directory = self.env["dms.directory"].browse(
-                default.get("directory_id", False)
-            )
-            names = directory.sudo().file_ids.mapped("name")
-        default.update({"name": file.unique_name(self.name, names, self.extension)})
-        return super().copy(default)
+    def copy_data(self, default=None):
+        vals_list = super().copy_data(default)
+        for dms_file, vals in zip(self, vals_list, strict=False):
+            if vals.get("directory_id"):
+                directory = self.env["dms.directory"].browse(vals.get("directory_id"))
+                names = directory.sudo().file_ids.mapped("name")
+            else:
+                names = dms_file.sudo().directory_id.file_ids.mapped("name")
+            vals["name"] = file.unique_name(dms_file.name, names, dms_file.extension)
+        return vals_list
 
     @api.model_create_multi
     def create(self, vals_list):
