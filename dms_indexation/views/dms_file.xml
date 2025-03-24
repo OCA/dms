@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="custom_search_dms_file">
+        <field name="name">custom_dms_file.search</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.search_dms_file"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <separator/>
+                <field name="index_content" filter_domain="[('index_content', 'ilike', self)]"
+                       string="Indexed Content"/>
+            </field>
+        </field>
+    </record>
+</odoo>
