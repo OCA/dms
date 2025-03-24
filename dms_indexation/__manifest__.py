@@ -10,7 +10,7 @@
     "license": "LGPL-3",
     "author": "Silver Touch Technologies Limited",
     "website": "https://www.silvertouch.com/",
-    "depends": ["dms"],
+    "depends": ["dms","attachment_indexation"],
     "data": [
         'views/dms_file.xml',
     ],
