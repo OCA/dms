@@ -386,7 +386,15 @@
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <form>
-                <header />
+                <header>
+                    <button
+                        class="oe_highlight"
+                        name="%(dms.wizard_dms_directory_share_action)d"
+                        type="action"
+                        string="Share"
+                        groups="dms.group_dms_manager"
+                    />
+                </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button

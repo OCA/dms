@@ -44,6 +44,17 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
         )
 
     def test_tour(self):
+        file_id = self.env.ref("dms.file_11_demo")
+        follower = self.env["mail.followers"].create(
+            {
+                "res_model": "dms.file",
+                "res_id": file_id.id,
+                "partner_id": self.portal_user.partner_id.id,
+                "is_active": True,
+            }
+        )
+
+        file_id.message_follower_ids = follower
         for tour in ("dms_portal_mail_tour", "dms_portal_partners_tour"):
             with self.subTest(tour=tour):
                 self.start_tour("/my", tour, login="portal")

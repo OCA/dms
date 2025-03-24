@@ -177,6 +177,11 @@ class CustomerPortal(CustomerPortal):
         file_domain = [
             ("is_hidden", "=", False),
             ("directory_id", "=", dms_directory_id),
+            (
+                "message_partner_ids",
+                "child_of",
+                [request.env.user.commercial_partner_id.id],
+            ),
         ]
         # search
         if search and search_in == "name":
@@ -206,7 +211,15 @@ class CustomerPortal(CustomerPortal):
         :rtype: tuple[odoo.model.dms_directory, bool|odoo.model.dms_directory]
         """
         # domain
-        domain = [("is_hidden", "=", False), ("parent_id", "=", dms_directory_id)]
+        domain = [
+            ("is_hidden", "=", False),
+            ("parent_id", "=", dms_directory_id),
+            (
+                "file_ids.message_partner_ids",
+                "child_of",
+                [request.env.user.commercial_partner_id.id],
+            ),
+        ]
         # search
         if search and search_in:
             domain.append(("name", "ilike", search))
