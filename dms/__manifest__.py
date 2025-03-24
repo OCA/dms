@@ -28,6 +28,9 @@
         "template/portal.xml",
         # Data
         "data/onboarding_data.xml",
+        # Wizard
+        "wizards/wizard_dms_file_move_views.xml",
+        "wizards/wizard_dms_share_views.xml",
         # Views
         "views/dms_tag.xml",
         "views/dms_category.xml",
@@ -37,9 +40,6 @@
         "views/dms_access_groups_views.xml",
         "views/res_config_settings.xml",
         "views/menu.xml",
-        # Wizard
-        "wizards/wizard_dms_file_move_views.xml",
-        "wizards/wizard_dms_share_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

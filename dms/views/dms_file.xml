@@ -350,6 +350,7 @@
                         type="object"
                         string="Lock"
                         invisible="is_locked or not permission_write"
+                        groups="dms.group_dms_manager"
                     />
                     <button
                         class="oe_highlight"
@@ -357,6 +358,14 @@
                         type="object"
                         string="Unlock"
                         invisible="not is_locked or not is_lock_editor"
+                        groups="dms.group_dms_manager"
+                    />
+                    <button
+                        class="oe_highlight"
+                        name="%(dms.wizard_dms_file_share_action)d"
+                        type="action"
+                        string="Share"
+                        groups="dms.group_dms_manager"
                     />
                 </header>
                 <sheet>

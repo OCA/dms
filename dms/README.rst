@@ -148,6 +148,9 @@ and their files. Another possibility is to click on "Share" button
 inside a directory or a file for obtaining a tokenized link for single
 access to that resource, no matter if logged or not.
 
+For any file if you add the portal user or the internal user to
+followers mixin, they can read that file.
+
 Known issues / Roadmap
 ======================
 
