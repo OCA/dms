@@ -56,7 +56,8 @@ class DMSFieldMixin(models.AbstractModel):
         (name and explicit_user_ids).
         """
         res = super().write(vals)
-        for item in self.filtered("dms_directory_ids"):
+        # Apply sudo() in case the user does not have access to the directory
+        for item in self.sudo().filtered("dms_directory_ids"):
             if "user_id" in vals:
                 template = self.env["dms.field.template"]._get_template_from_model(
                     item._name
@@ -69,7 +70,8 @@ class DMSFieldMixin(models.AbstractModel):
         """When deleting a record, we also delete the linked directories and the
         auto-generated access group.
         """
-        for record in self.filtered("dms_directory_ids"):
+        # Apply sudo() in case the user does not have access to the directory
+        for record in self.sudo().filtered("dms_directory_ids"):
             group = (
                 self.env["dms.access.group"].sudo()._get_item_from_dms_field_ref(record)
             )
