@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="exemption_form_view" model="ir.ui.view">
+        <field name="name">res.partner.exemption.form.view</field>
+        <field name="model">res.partner.exemption</field>
+        <field name="type">form</field>
+        <field
+            name="inherit_id"
+            ref="account_avatax_exemption_base.exemption_form_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expiry_date']" position="after">
+                <field name="document_link_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

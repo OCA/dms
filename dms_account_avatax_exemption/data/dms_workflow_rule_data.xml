@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Workflow Rules -->
+    <record id="exemption_rule" model="dms.workflow.rule">
+        <field name="name">Create Exemption</field>
+        <field name="create_model">res.partner.exemption</field>
+        <field name="dms_exemption_folder" ref="dms_exemption_folder" />
+    </record>
+</odoo>

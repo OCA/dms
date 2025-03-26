@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Storage -->
+    <record id="storage_exemption" model="dms.storage">
+        <field name="name">Exemption Documents Storage</field>
+        <field name="save_type">attachment</field>
+        <field name="inherit_access_from_parent_record" eval="True" />
+        <field name="include_message_attachments" eval="True" />
+        <field name="model_ids" eval="[(6, 0, [ref('base.model_res_partner')])]" />
+    </record>
+    <!-- Folder -->
+    <record id="dms_exemption_folder" model="dms.directory">
+        <field name="name">Partner Exemptions</field>
+        <field name="is_root_directory" eval="True" />
+        <field name="parent_id" eval="False" />
+        <field name="color" eval="1" />
+        <field name="storage_id" ref="storage_exemption" />
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="res_model">res.partner</field>
+    </record>
+    <!-- company default setting -->
+    <record id="base.main_company" model="res.company">
+        <field name="dms_exemption_folder" ref="dms_exemption_folder" />
+    </record>
+</odoo>
