@@ -132,9 +132,29 @@
         <field name="perm_unlink" eval="1" />
         <field name="domain_force">[('is_hidden', '=', True)]</field>
     </record>
+    <record id="user_rule_category_computed_read" model="ir.rule">
+        <field name="name">DMS User Categories</field>
+        <field name="model_id" ref="model_dms_category" />
+        <field name="domain_force">[(1 ,'=', 1)]</field>
+        <field name="groups" eval="[Command.link(ref('dms.group_dms_user'))]" />
+        <field name="perm_unlink" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_create" eval="True" />
+    </record>
+    <record id="user_rule_tag_computed_read" model="ir.rule">
+        <field name="name">DMS User Tags</field>
+        <field name="model_id" ref="model_dms_tag" />
+        <field name="domain_force">[(1 ,'=', 1)]</field>
+        <field name="groups" eval="[Command.link(ref('dms.group_dms_user'))]" />
+        <field name="perm_unlink" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_create" eval="True" />
+    </record>
     <!-- Portal/Base Users Access Rules -->
     <record id="portal_rule_directory_computed_read" model="ir.rule">
-        <field name="name">Portal Personal Directories Read</field>
+        <field name="name">Portal/Base User Following Directories Read</field>
         <field name="model_id" ref="model_dms_directory" />
         <field
             name="domain_force"
@@ -150,7 +170,7 @@
     </record>
     <!-- Portal/Base Users Access Rules -->
     <record id="portal_rule_file_computed_read" model="ir.rule">
-        <field name="name">Portal Personal Files Read</field>
+        <field name="name">Portal/Base User Following Files Read</field>
         <field name="model_id" ref="model_dms_file" />
         <field name="global" eval="False" />
         <field
@@ -160,6 +180,37 @@
             name="groups"
             eval="[Command.link(ref('base.group_portal')), Command.link(ref('base.group_user'))]"
         />
+        <field name="perm_unlink" eval="False" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_create" eval="False" />
+    </record>
+    <!-- Base Users Access Rules -->
+    <record id="base_user_rule_category_computed_read" model="ir.rule">
+        <field name="name">Base User Following Categories Read</field>
+        <field name="model_id" ref="model_dms_category" />
+        <field name="global" eval="False" />
+        <field
+            name="domain_force"
+        >[('file_ids.message_partner_ids','child_of',[user.commercial_partner_id.id])]</field>
+        <field name="groups" eval="[Command.link(ref('base.group_user'))]" />
+        <field name="perm_unlink" eval="False" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_create" eval="False" />
+    </record>
+    <!-- Base Users Access Rules -->
+    <record id="base_user_rule_tag_computed_read" model="ir.rule">
+        <field name="name">Base User Following Tags Read</field>
+        <field name="model_id" ref="model_dms_tag" />
+        <field name="global" eval="False" />
+        <field name="domain_force">
+            ['|',
+                ('file_ids.message_partner_ids', 'child_of', [user.commercial_partner_id.id]),
+                ('directory_ids.file_ids.message_partner_ids', 'child_of', [user.commercial_partner_id.id])
+            ]
+        </field>
+        <field name="groups" eval="[Command.link(ref('base.group_user'))]" />
         <field name="perm_unlink" eval="False" />
         <field name="perm_write" eval="False" />
         <field name="perm_read" eval="True" />
