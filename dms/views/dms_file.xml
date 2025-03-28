@@ -141,7 +141,7 @@
                                     </div>
                                     <div
                                         role="menuitem"
-                                        t-if="record.permission_write.raw_value and record.active.raw_value"
+                                        t-if="record.permission_write.raw_value and record.active.raw_value and (!record.is_locked.raw_value or (record.is_locked.raw_value and record.is_lock_editor.raw_value))"
                                     >
                                         <a name="toggle_active" type="object">
                                             <i class="fa fa-archive" />
@@ -150,7 +150,7 @@
                                     </div>
                                     <div
                                         role="menuitem"
-                                        t-if="record.permission_write.raw_value and !record.active.raw_value"
+                                        t-if="record.permission_write.raw_value and !record.active.raw_value and (!record.is_locked.raw_value or (record.is_locked.raw_value and record.is_lock_editor.raw_value))"
                                     >
                                         <a name="toggle_active" type="object">
                                             <i class="fa fa-archive" />
@@ -190,7 +190,7 @@
                                     </div>
                                     <div
                                         role="menuitem"
-                                        t-if="record.permission_unlink.raw_value"
+                                        t-if="record.permission_unlink.raw_value and (!record.is_locked.raw_value or (record.is_locked.raw_value and record.is_lock_editor.raw_value))"
                                     >
                                         <a type="delete">
                                             <i class="fa fa-trash-o" />

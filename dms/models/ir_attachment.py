@@ -1,4 +1,4 @@
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2025 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 from odoo import api, models
 from odoo.tools import ormcache
@@ -99,3 +99,10 @@ class IrAttachment(models.Model):
         ):
             self._dms_operations()
         return res
+
+    def unlink(self):
+        if not self.env.context.get("dms_file"):
+            self.env["dms.file"].search(
+                [("attachment_id", "in", self.ids)]
+            ).with_context(dms_file=True).unlink()
+        return super().unlink()

@@ -197,6 +197,7 @@ class DMSFile(models.Model):
         string="Attachment File",
         prefetch=False,
         ondelete="cascade",
+        index=True,
     )
 
     def get_human_size(self):
@@ -600,6 +601,13 @@ class DMSFile(models.Model):
                 vals = self._create_model_attachment(vals)
             new_vals_list.append(vals)
         return super().create(new_vals_list)
+
+    def unlink(self):
+        attachments = self.mapped("attachment_id")
+        res = super().unlink()
+        if not self.env.context.get("dms_file"):
+            attachments.with_context(dms_file=True).unlink()
+        return res
 
     # ----------------------------------------------------------
     # Locking fields and functions
