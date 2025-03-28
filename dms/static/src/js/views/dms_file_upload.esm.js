@@ -106,7 +106,11 @@ export function createFileUploadExtension() {
         async onUpload(attachments) {
             const self = this;
             const attachmentIds = attachments.map((a) => a.id);
-            const ctx = this.props.context;
+            const ctx = Object.assign(
+                {},
+                this.actionService.currentController.props.context,
+                this.props.context
+            );
             const controllerID = this.actionService.currentController.jsId;
 
             if (!attachmentIds.length) {
@@ -129,7 +133,7 @@ export function createFileUploadExtension() {
                 }
             }
 
-            if (directory_id === false) {
+            if (!directory_id) {
                 self.actionService.restore(controllerID);
                 return self.notification.add(_t("You must select a directory first"), {
                     type: "danger",
