@@ -22,7 +22,11 @@
         <field name="inherit_id" ref="hr.hr_employee_public_view_form" />
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="is_logged" invisible="1" />
+                <field
+                    name="is_logged"
+                    invisible="1"
+                    groups="hr_dms_field.group_hr_public_dms"
+                />
             </field>
             <!-- Show the DMS tab only if the logged-in user is the employee's user. -->
             <notebook position="inside">
@@ -30,6 +34,7 @@
                     name="dms"
                     string="Documents"
                     attrs="{'invisible': [('is_logged', '=', False)]}"
+                    groups="hr_dms_field.group_hr_public_dms"
                 >
                     <field name="dms_directory_ids" mode="dms_list" />
                 </page>
