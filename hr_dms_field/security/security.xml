@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="group_hr_public_dms" model="res.groups">
+            <field name="name">DMS Is accessible publicly on employee profile</field>
+            <field name="category_id" ref="base.module_category_hidden" />
+        </record>
+    </data>
+    <data noupdate="1">
+        <record id="base.group_user" model="res.groups">
+            <field
+                name="implied_ids"
+                eval="[(4, ref('hr_dms_field.group_hr_public_dms'))]"
+            />
+        </record>
+    </data>
+</odoo>
