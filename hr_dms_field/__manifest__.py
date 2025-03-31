@@ -9,7 +9,11 @@
     "license": "AGPL-3",
     "depends": ["hr", "dms_field"],
     "installable": True,
-    "data": ["views/hr_employee_view.xml"],
+    "data": [
+        "security/security.xml",
+        "views/hr_employee_view.xml",
+        "views/res_config_settings_view.xml",
+    ],
     "demo": ["demo/dms_data.xml"],
     "assets": {
         "web.assets_backend": [
