@@ -4,12 +4,13 @@
 import base64
 import uuid
 
-from odoo.tests.common import Form
-from odoo.tools import human_size
+from odoo.tests import Form, tagged
+from odoo.tools import human_size, mute_logger
 
 from odoo.addons.fs_storage.tests.common import TestFSStorageCase
 
 
+@tagged("post_install", "-at_install")
 class TestDmsField(TestFSStorageCase):
     @classmethod
     def setUpClass(cls):
@@ -44,17 +45,21 @@ class TestDmsField(TestFSStorageCase):
             }
         )
 
-    def content_base64(self):
+    @classmethod
+    def content_base64(cls):
         return base64.b64encode(b"\xff data")
 
-    def create_file(self, directory, content=False, sudo=False):
-        model = self.env["dms.file"].sudo() if sudo else self.env["dms.file"]
+    @classmethod
+    @mute_logger("py.warnings")
+    def create_file(cls, directory, content=False, sudo=False):
+        model = cls.env["dms.file"].sudo() if sudo else cls.env["dms.file"]
         record = Form(model)
         record.name = uuid.uuid4().hex
         record.directory_id = directory
-        record.content = content or self.content_base64()
+        record.content = content or cls.content_base64()
         return record.save()
 
+    @mute_logger("py.warnings")
     def test_storage_file_migration(self):
         file = self.create_file(self.directory)
         self.assertTrue(file.storage_backend_id)
@@ -67,6 +72,7 @@ class TestDmsField(TestFSStorageCase):
         self.assertFalse(file.storage_backend_id)
         self.assertFalse(file.storage_path)
 
+    @mute_logger("py.warnings")
     def test_storage_file_move(self):
         file = self.create_file(self.directory)
         self.assertTrue(file.storage_backend_id)

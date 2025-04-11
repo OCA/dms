@@ -28,8 +28,9 @@ class DmsFile(models.Model):
 
     @api.depends("storage_path")
     def _compute_content(self):
-        res = super()._compute_content()
-        for record in self.filtered(lambda r: r.storage_path):
+        records = self.filtered(lambda r: r.storage_path)
+        res = super(DmsFile, self - records)._compute_content()
+        for record in records:
             record.content = self.storage_backend_id.get(
                 record.storage_path, binary=False
             )
