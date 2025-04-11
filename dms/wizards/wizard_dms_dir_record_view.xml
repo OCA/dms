@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="attribute_option_wizard_form_view" model="ir.ui.view">
+        <field name="name">wizard.directory.record</field>
+        <field name="model">wizard.directory.record</field>
+        <field name="arch" type="xml">
+            <form string="Options Wizard">
+                <field name="directory_id" invisible="1" />
+                <group>
+                    <separator string="options_placeholder" />
+                </group>
+                <footer>
+                    <button
+                        name="validate"
+                        string="Validate"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

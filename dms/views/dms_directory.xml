@@ -506,10 +506,20 @@
                             required="storage_id_save_type == 'attachment'"
                         />
                         <field name="res_model" invisible="1" force_save="1" />
+                        <button
+                            name="button_add_res_id"
+                            type="object"
+                            string="Load Linked attachments record ID"
+                            class="btn btn-link p-0"
+                            invisible="not model_id or
+                            storage_id_save_type != 'attachment' or
+                            (model_id and count_total_files > 0)"
+                        />
                         <field
                             name="res_id"
                             readonly="True"
                             invisible="storage_id_save_type != 'attachment'"
+                            required="model_id and not is_root_directory"
                         />
                         <field
                             name="record_ref"

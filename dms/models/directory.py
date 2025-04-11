@@ -540,10 +540,6 @@ class DmsDirectory(models.Model):
                 raise ValidationError(
                     _("A directory has to have model in attachment storage.")
                 )
-            if not record.is_root_directory and not record.res_id:
-                raise ValidationError(
-                    _("This directory needs to be associated to a record.")
-                )
 
     @api.constrains("is_root_directory", "storage_id")
     def _check_directory_storage(self):
@@ -767,3 +763,16 @@ class DmsDirectory(models.Model):
             searchpanel_default_directory_id=self.id,
         )
         return action
+
+    def button_add_res_id(self):
+        self.ensure_one()
+        return {
+            # context since 17.0 will be dropped in views
+            # unless we suffix it's key with _view_ref
+            "context": {"directory_id_view_ref": self.id},
+            "name": _("Linked attachments record ID Wizard"),
+            "view_mode": "form",
+            "res_model": "wizard.directory.record",
+            "type": "ir.actions.act_window",
+            "target": "new",
+        }

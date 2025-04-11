@@ -25,3 +25,5 @@ access_security_access_groups_dms_user,access_security_access_groups_dms_user,mo
 
 access_wizard_dms_file_move,access_wizard_dms_file_move,model_wizard_dms_file_move,group_dms_user,1,1,1,1
 access_wizard_dms_share,access_wizard_dms_share,model_wizard_dms_share,group_dms_manager,1,1,1,0
+access_wizard_directory_record,access_wizard_directory_record,model_wizard_directory_record,group_dms_user,1,1,1,1
+access_record_placeholder,access_record_placeholder,model_record_placeholder,group_dms_user,1,1,1,1
