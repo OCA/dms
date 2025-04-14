@@ -231,7 +231,7 @@
                                     </a>
                                 </div>
                                 <div class="col-9">
-                                    <field name="name" class="text-truncate fw-bold" />
+                                    <field name="name" class="fw-bold" />
                                     <field
                                         name="tag_ids"
                                         widget="many2many_tags"
