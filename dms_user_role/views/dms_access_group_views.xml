@@ -8,10 +8,10 @@
             <page name="groups" position="before">
                 <page name="roles" string="Roles" groups="base.group_erp_manager">
                     <field name="role_ids">
-                        <tree>
+                        <list>
                             <field name="name" />
                             <field name="comment" />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </page>
