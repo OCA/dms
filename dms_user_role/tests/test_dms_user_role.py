@@ -1,6 +1,6 @@
-# Copyright 2024 Tecnativa - Víctor Martínez
+# Copyright 2024-2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
+from odoo import Command
 from odoo.tests import new_test_user
 from odoo.tools import mute_logger
 
@@ -15,7 +15,7 @@ class TestDmsUserRole(BaseCommon):
         cls.user_b = new_test_user(cls.env, login="test_user_b")
         cls.user_c = new_test_user(cls.env, login="test_user_c")
         cls.access_group = cls.env["dms.access.group"].create(
-            {"name": "Test group", "explicit_user_ids": [(4, cls.user_a.id)]}
+            {"name": "Test group", "explicit_user_ids": [Command.link(cls.user_a.id)]}
         )
         cls.user_role = cls.env["res.users.role"].create({"name": "Test user role"})
 
@@ -25,28 +25,28 @@ class TestDmsUserRole(BaseCommon):
         self.assertNotIn(self.user_b, self.access_group.users)
         self.assertNotIn(self.user_c, self.access_group.users)
         # Add User a to user_role: Without changes
-        self.user_role.line_ids = [(0, 0, {"user_id": self.user_a.id})]
+        self.user_role.line_ids = [Command.create({"user_id": self.user_a.id})]
         self.assertIn(self.user_a, self.access_group.users)
         self.assertNotIn(self.user_b, self.access_group.users)
         self.assertNotIn(self.user_c, self.access_group.users)
         # Set role to access group: Without changes
-        self.access_group.role_ids = [(4, self.user_role.id)]
+        self.access_group.role_ids = [Command.link(self.user_role.id)]
         self.assertIn(self.user_a, self.access_group.users)
         self.assertNotIn(self.user_b, self.access_group.users)
         self.assertNotIn(self.user_c, self.access_group.users)
         # Add User b to user_role: User b is added to access groups
-        self.user_role.line_ids = [(0, 0, {"user_id": self.user_b.id})]
+        self.user_role.line_ids = [Command.create({"user_id": self.user_b.id})]
         self.assertIn(self.user_a, self.access_group.users)
         self.assertIn(self.user_b, self.access_group.users)
         self.assertNotIn(self.user_c, self.access_group.users)
         # Add User c to user_role: User c is added to access groups
-        self.user_role.line_ids = [(0, 0, {"user_id": self.user_c.id})]
+        self.user_role.line_ids = [Command.create({"user_id": self.user_c.id})]
         self.assertIn(self.user_a, self.access_group.users)
         self.assertIn(self.user_b, self.access_group.users)
         self.assertIn(self.user_c, self.access_group.users)
         # Remove User c from user role: User c is removed from access group
         line_b = self.user_role.line_ids.filtered(lambda x: x.user_id == self.user_b)
-        self.user_role.line_ids = [(3, line_b.id)]
+        self.user_role.line_ids = [Command.delete(line_b.id)]
         self.assertIn(self.user_a, self.access_group.users)
         self.assertNotIn(self.user_b, self.access_group.users)
         self.assertIn(self.user_c, self.access_group.users)
