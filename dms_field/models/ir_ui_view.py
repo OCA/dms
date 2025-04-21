@@ -7,7 +7,6 @@ from odoo.addons.base.models.ir_ui_view import NameManager
 
 
 class IrUiView(models.Model):
-
     _inherit = "ir.ui.view"
 
     type = fields.Selection(selection_add=[("dms_list", "DMS Tree")])

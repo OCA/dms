@@ -338,9 +338,8 @@ export class DmsListRenderer extends Component {
     }
 
     async loadData(node, callback) {
-        const {result, empty_storages} = await this.props.rendererActions.onDMSLoad(
-            node
-        );
+        const {result, empty_storages} =
+            await this.props.rendererActions.onDMSLoad(node);
         result.then((data) => {
             callback.call(this, data);
             if (empty_storages.length > 0) {

@@ -131,19 +131,19 @@ export const DMSListControllerObject = {
                         if (storage.count_storage_directories > 0) {
                             var directory_loaded = new Deferred();
                             loading_data_parts.push(directory_loaded);
-                            this.loadDirectoriesSingle(storage.id, args).then(function (
-                                directories
-                            ) {
-                                if (directories.length > 0) {
-                                    storages[index].directories = directories;
-                                } else if (
-                                    self.props.resModel !== "dms.directory" &&
-                                    self.props.resModel !== "dms.storage"
-                                ) {
-                                    self.empty_storages.push(storage);
+                            this.loadDirectoriesSingle(storage.id, args).then(
+                                function (directories) {
+                                    if (directories.length > 0) {
+                                        storages[index].directories = directories;
+                                    } else if (
+                                        self.props.resModel !== "dms.directory" &&
+                                        self.props.resModel !== "dms.storage"
+                                    ) {
+                                        self.empty_storages.push(storage);
+                                    }
+                                    directory_loaded.resolve();
                                 }
-                                directory_loaded.resolve();
-                            });
+                            );
                         } else if (
                             self.props.resModel !== "dms.directory" &&
                             self.props.resModel !== "dms.storage"
@@ -250,12 +250,11 @@ export const DMSListControllerObject = {
             } else {
                 files_loaded.resolve([]);
             }
-            $.when(directories_loaded, files_loaded).then(function (
-                directories,
-                files
-            ) {
-                result.resolve(directories.concat(files));
-            });
+            $.when(directories_loaded, files_loaded).then(
+                function (directories, files) {
+                    result.resolve(directories.concat(files));
+                }
+            );
         } else {
             result.resolve([]);
         }
