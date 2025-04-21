@@ -696,6 +696,14 @@ class DmsDirectory(models.Model):
             res = super().write(vals)
         return res
 
+    @api.depends_context("directory_short_name")
+    def _compute_display_name(self):
+        if self.env.context.get("directory_short_name"):
+            for item in self:
+                item.display_name = item.name
+        else:
+            return super()._compute_display_name()
+
     def unlink(self):
         """Custom cascade unlink.
 
