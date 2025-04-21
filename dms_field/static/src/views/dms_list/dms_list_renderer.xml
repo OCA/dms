@@ -69,24 +69,35 @@
                         <t t-esc="nodeSelectedState.data.data.name" />
                     </h3>
                     <t t-if="nodeSelectedState.data.resModel === 'dms.directory'">
-                        <p><b>Subdirectories:</b> <span
+                        <p>
+                            <b>Subdirectories:</b>
+                            <span
                                 t-esc="nodeSelectedState.data.data.count_total_directories"
-                            /></p>
-                        <p><b>Files:</b> <span
+                            />
+                        </p>
+                        <p>
+                            <b>Files:</b>
+                            <span
                                 t-esc="nodeSelectedState.data.data.count_total_files"
-                            /></p>
-                        <p><b>Size:</b> <span
+                            />
+                        </p>
+                        <p>
+                            <b>Size:</b>
+                            <span
                                 t-if="nodeSelectedState.data.data.human_size"
                                 t-esc="nodeSelectedState.data.data.human_size"
-                            /></p>
-                        <p><b>Elements:</b> <span
-                                t-esc="nodeSelectedState.data.data.count_elements"
-                            /></p>
+                            />
+                        </p>
+                        <p>
+                            <b>Elements:</b>
+                            <span t-esc="nodeSelectedState.data.data.count_elements" />
+                        </p>
                     </t>
                     <t t-if="nodeSelectedState.data.resModel === 'dms.file'">
-                        <p><b>Size:</b> <span
-                                t-esc="nodeSelectedState.data.data.human_size"
-                            /></p>
+                        <p>
+                            <b>Size:</b>
+                            <span t-esc="nodeSelectedState.data.data.human_size" />
+                        </p>
                     </t>
                     <div class="bottom_buttons">
                         <a

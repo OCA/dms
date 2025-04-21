@@ -127,18 +127,16 @@ class DmsDirectory(models.Model):
         from_clause, where_clause, where_clause_arguments = query.get_sql()
         parent_where = where_clause and (" WHERE %s" % where_clause) or ""
         parent_query = 'SELECT "%s".id FROM ' % self._table + from_clause + parent_where
-        no_parent_clause = '"{table}"."{field}" IS NULL'.format(
-            table=self._table, field=self._parent_name
+        no_parent_clause = f'"{self._table}"."{self._parent_name}" IS NULL'
+        no_access_clause = (
+            f'"{self._table}"."{self._parent_name}" NOT IN ({parent_query})'
         )
-        no_access_clause = '"{table}"."{field}" NOT IN ({query})'.format(
-            table=self._table, field=self._parent_name, query=parent_query
-        )
-        parent_clause = "({} OR {})".format(no_parent_clause, no_access_clause)
+        parent_clause = f"({no_parent_clause} OR {no_access_clause})"
         order_by = self._generate_order_by(order, query)
         from_clause, where_clause, where_clause_params = query.get_sql()
         where_str = (
             where_clause
-            and (" WHERE {} AND {}".format(where_clause, parent_clause))
+            and (f" WHERE {where_clause} AND {parent_clause}")
             or (" WHERE %s" % parent_clause)
         )
         if count:
