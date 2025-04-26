@@ -12,7 +12,10 @@ export class DMSSearchPanel extends SearchModel {
                 continue;
             }
 
-            if (category.activeValueId) {
+            // Make sure to filter selected category only for DMS hierarchies,
+            // not other Odoo models such as product categories
+            // where child_of could be better than "=" operator
+            if (category.activeValueId && this.resModel.startsWith("dms")) {
                 domain.push([category.fieldName, "=", category.activeValueId]);
             }
             if (domain.length === 0 && this.resModel === "dms.directory") {
