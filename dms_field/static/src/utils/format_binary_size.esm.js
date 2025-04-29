@@ -1,22 +1,16 @@
-/** @odoo-module **/
-import utils from "web.field_utils";
+import {formatFloat} from "@web/views/fields/formatters";
 
-export function formatBinarySize(value, field, options) {
-    var new_options = _.defaults(options || {}, {
-        si: true,
-    });
-    var thresh = new_options.si ? 1000 : 1024;
+export function formatBinarySize(value) {
+    var thresh = 1000;
     if (Math.abs(value) < thresh) {
-        return utils.format.float(value, field, options) + " B";
+        return formatFloat(value) + " B";
     }
-    var units = new_options.si
-        ? ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-        : ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
+    var units = ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     var unit = -1;
     var new_value = value;
     do {
         new_value /= thresh;
         ++unit;
     } while (Math.abs(new_value) >= thresh && unit < units.length - 1);
-    return utils.format.float(new_value, field, new_options) + " " + units[unit];
+    return formatFloat(new_value) + " " + units[unit];
 }

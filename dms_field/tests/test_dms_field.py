@@ -76,7 +76,7 @@ class TestDmsField(BaseCommon):
     def test_js_tree(self):
         self.assertTrue(
             any(
-                r["id"] == "storage_%s" % self.storage.id
+                r["id"] == f"storage_{self.storage.id}"
                 for r in self.storage.get_js_tree_data()
             )
         )
@@ -85,7 +85,7 @@ class TestDmsField(BaseCommon):
         group = self.env["dms.access.group"].create(
             {
                 "name": "Test 1",
-                "dms_field_ref": "%s,%s" % (self.partner._name, self.partner.id),
+                "dms_field_ref": f"{self.partner._name},{self.partner.id}",
             }
         )
         with self.assertRaises(UserError):
@@ -96,7 +96,7 @@ class TestDmsField(BaseCommon):
         group = self.env["dms.access.group"].create(
             {
                 "name": "Test 1",
-                "dms_field_ref": "%s,%s" % (self.partner._name, self.partner.id),
+                "dms_field_ref": f"{self.partner._name},{self.partner.id}",
             }
         )
         self.assertFalse(group.company_id)
@@ -107,7 +107,7 @@ class TestDmsField(BaseCommon):
         group = self.env["dms.access.group"].create(
             {
                 "name": "Test 1",
-                "dms_field_ref": "%s,%s" % (self.partner._name, self.partner.id),
+                "dms_field_ref": f"{self.partner._name},{self.partner.id}",
             }
         )
         self.assertEqual(group.company_id, self.company)
@@ -149,7 +149,7 @@ class TestDmsField(BaseCommon):
         # Remove folder: El grupo de acceso todavía existe
         old_groups = directory_0.group_ids
         directory_0.unlink()
-        dms_field_ref_value = "%s,%s" % (self.partner._name, self.partner.id)
+        dms_field_ref_value = f"{self.partner._name},{self.partner.id}"
         total = self.env["dms.access.group"].search_count(
             [("dms_field_ref", "=", dms_field_ref_value)]
         )
@@ -221,7 +221,7 @@ class TestDmsField(BaseCommon):
         )
         partner_1.invalidate_model()
         self.assertEqual(
-            partner_1.dms_directory_ids.name, "%s-%s" % (partner_1.name, partner_1.ref)
+            partner_1.dms_directory_ids.name, f"{partner_1.name}-{partner_1.ref}"
         )
 
     def test_parents(self):

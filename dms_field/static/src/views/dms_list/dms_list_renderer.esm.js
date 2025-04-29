@@ -1,13 +1,19 @@
-/** @odoo-module */
 /* Copyright 2024 Tecnativa - Carlos Roca
  * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
-
-import {_lt} from "@web/core/l10n/translation";
-import {useService} from "@web/core/utils/hooks";
-import {loadCSS, loadJS} from "@web/core/assets";
-const {Component, onMounted, onWillStart, useEffect, useRef, useState} = owl;
-import {download} from "@web/core/network/download";
+import {
+    Component,
+    onMounted,
+    onWillStart,
+    useEffect,
+    useRef,
+    useState,
+} from "@odoo/owl";
+import {loadBundle, loadCSS, loadJS} from "@web/core/assets";
 import {FormViewDialog} from "@web/views/view_dialogs/form_view_dialog";
+import {_t} from "@web/core/l10n/translation";
+import {download} from "@web/core/network/download";
+import {useFileViewer} from "@web/core/file_viewer/file_viewer_hook";
+import {useService} from "@web/core/utils/hooks";
 
 export class DmsListRenderer extends Component {
     setup() {
@@ -15,7 +21,8 @@ export class DmsListRenderer extends Component {
         this.extra_actions = useRef("extra_actions");
         this.dms_add_directory = useRef("dms_add_directory");
         this.nodeSelectedState = useState({data: {}});
-        this.messaging = useService("messaging");
+        this.store = useService("mail.store");
+        this.fileViewer = useFileViewer();
         this.notification = useService("notification");
         this.dialog = useService("dialog");
         this.dragState = useState({
@@ -44,12 +51,20 @@ export class DmsListRenderer extends Component {
             () => [this.dropZone.el]
         );
         onWillStart(async () => {
+            await loadBundle("web._assets_jquery");
             await loadJS("/dms_field/static/lib/jsTree/jstree.js");
             await loadCSS("/dms_field/static/lib/jsTree/themes/proton/style.css");
             this.config = this.buildTreeConfig();
+            // When loading jQuery, we need to assign it to this.$ in
+            // order to use it within the component, and it is loaded in
+            // the window object. Without excluding it from no-undef,
+            // we would get a linter error, but in this case, it’s not
+            // worth excluding it from the globals.
+            // eslint-disable-next-line no-undef
+            this.$ = window.jQuery;
         });
         onMounted(() => {
-            this.$tree = $(this.js_tree.el);
+            this.$tree = this.$(this.js_tree.el);
             this.$tree.jstree(this.config);
             this.startTreeTriggers();
         });
@@ -143,7 +158,7 @@ export class DmsListRenderer extends Component {
     }
 
     updatePreview(node) {
-        var $buttons = $(this.extra_actions.el);
+        var $buttons = this.$(this.extra_actions.el);
         $buttons.empty();
         if (
             node.data &&
@@ -152,7 +167,7 @@ export class DmsListRenderer extends Component {
             this.nodeSelectedState.data = {};
             this.nodeSelectedState.data = node.data;
             var menu = this.loadContextMenu(node);
-            _.each(menu, (action) => {
+            Object.entries(menu).forEach(([, action]) => {
                 this.generateActionButton(node, action, $buttons);
             });
         }
@@ -179,7 +194,7 @@ export class DmsListRenderer extends Component {
             separator_before: false,
             separator_after: false,
             icon: "fa fa-pencil",
-            label: _lt("Rename"),
+            label: _t("Rename"),
             action: () => {
                 $jstree.edit(node);
             },
@@ -191,14 +206,14 @@ export class DmsListRenderer extends Component {
             separator_before: false,
             separator_after: false,
             icon: "fa fa-bolt",
-            label: _lt("Actions"),
+            label: _t("Actions"),
             action: false,
             submenu: {
                 cut: {
                     separator_before: false,
                     separator_after: false,
                     icon: "fa fa-scissors",
-                    label: _lt("Cut"),
+                    label: _t("Cut"),
                     action: () => {
                         $jstree.cut(node);
                     },
@@ -215,7 +230,7 @@ export class DmsListRenderer extends Component {
             separator_before: false,
             separator_after: false,
             icon: "fa fa-trash-o",
-            label: _lt("Delete"),
+            label: _t("Delete"),
             action: () => {
                 $jstree.delete_node(node);
             },
@@ -227,7 +242,7 @@ export class DmsListRenderer extends Component {
             separator_before: false,
             separator_after: false,
             icon: "fa fa-external-link",
-            label: _lt("Open"),
+            label: _t("Open"),
             action: () => {
                 this.onDMSOpenRecord(node);
             },
@@ -240,7 +255,7 @@ export class DmsListRenderer extends Component {
             separator_before: false,
             separator_after: false,
             icon: "fa fa-folder",
-            label: _lt("Create directory"),
+            label: _t("Create directory"),
             action: () => {
                 this.onDMSAddDirectory(node);
             },
@@ -252,7 +267,7 @@ export class DmsListRenderer extends Component {
             separator_before: false,
             separator_after: true,
             icon: "fa fa-file",
-            label: _lt("Create File"),
+            label: _t("Create File"),
             action: () => {
                 this.onDMSAddFile(node);
             },
@@ -269,7 +284,7 @@ export class DmsListRenderer extends Component {
                 separator_before: false,
                 separator_after: false,
                 icon: "fa fa-clipboard",
-                label: _lt("Paste"),
+                label: _t("Paste"),
                 action: () => {
                     $jstree.paste(node);
                 },
@@ -286,7 +301,7 @@ export class DmsListRenderer extends Component {
             separator_before: false,
             separator_after: false,
             icon: "fa fa-eye",
-            label: _lt("Preview"),
+            label: _t("Preview"),
             action: () => {
                 this.onDMSPreviewFile(node);
             },
@@ -295,7 +310,7 @@ export class DmsListRenderer extends Component {
             separator_before: false,
             separator_after: false,
             icon: "fa fa-download",
-            label: _lt("Download"),
+            label: _t("Download"),
             action: () => {
                 download({
                     url: "/web/content",
@@ -315,7 +330,7 @@ export class DmsListRenderer extends Component {
 
     generateActionButton(node, action, $buttons) {
         if (action.action) {
-            var $button = $("<button>", {
+            var $button = this.$("<button>", {
                 type: "button",
                 class: "btn btn-secondary " + action.icon,
                 "data-toggle": "dropdown",
@@ -331,7 +346,7 @@ export class DmsListRenderer extends Component {
             $buttons.append($button);
         }
         if (action.submenu) {
-            _.each(action.submenu, (sub_action) => {
+            Object.values(action.submenu).forEach((sub_action) => {
                 this.generateActionButton(node, sub_action, $buttons);
             });
         }
@@ -343,7 +358,7 @@ export class DmsListRenderer extends Component {
         result.then((data) => {
             callback.call(this, data);
             if (empty_storages.length > 0) {
-                $(this.dms_add_directory.el).removeClass("o_hidden");
+                this.$(this.dms_add_directory.el).removeClass("o_hidden");
             }
         });
     }
@@ -385,7 +400,7 @@ export class DmsListRenderer extends Component {
         this.dialog.add(FormViewDialog, {
             resModel: "dms.directory",
             context: context,
-            title: _lt("Add Directory: ") + node.data.data.name,
+            title: _t("Add Directory: ") + node.data.data.name,
             onRecordSaved: () => {
                 const selected_id = this.$tree.find(".jstree-clicked").attr("id");
                 const model_data = this.$tree.jstree(true)._model.data;
@@ -418,7 +433,7 @@ export class DmsListRenderer extends Component {
         this.dialog.add(FormViewDialog, {
             resModel: "dms.file",
             context: context,
-            title: _lt("Add File: ") + node.data.data.name,
+            title: _t("Add File: ") + node.data.data.name,
             onRecordSaved: () => {
                 const selected_id = this.$tree.find(".jstree-clicked").attr("id");
                 const model_data = this.$tree.jstree(true)._model.data;
@@ -447,31 +462,25 @@ export class DmsListRenderer extends Component {
     onDMSAddDirectoryRecord() {
         this.props.rendererActions.onDMSCreateEmptyStorages().then(() => {
             this.$tree.jstree(true).refresh();
-            $(this.dms_add_directory.el).addClass("o_hidden");
+            this.$(this.dms_add_directory.el).addClass("o_hidden");
         });
     }
     onDMSOpenRecord(node) {
         this.dialog.add(FormViewDialog, {
             resModel: node.data.resModel,
-            title: _lt("Open: ") + node.data.data.name,
+            title: _t("Open: ") + node.data.data.name,
             resId: node.data.data.id,
         });
     }
     onDMSPreviewFile(node) {
-        this.messaging.get().then((messaging) => {
-            const attachmentList = messaging.models.AttachmentList.insert({
-                selectedAttachment: messaging.models.Attachment.insert({
-                    id: node.data.data.id,
-                    filename: node.data.data.name,
-                    name: node.data.data.name,
-                    mimetype: node.data.data.mimetype,
-                    model_name: node.data.resModel,
-                }),
-            });
-            Component.env.services.dialog = messaging.models.Dialog.insert({
-                attachmentListOwnerAsAttachmentView: attachmentList,
-            });
+        const attachment = this.store.Attachment.insert({
+            id: node.data.data.id,
+            filename: node.data.data.name,
+            name: node.data.data.name,
+            mimetype: node.data.data.mimetype,
+            model_name: node.data.resModel,
         });
+        this.fileViewer.open(attachment);
     }
     get showDragZone() {
         return (
@@ -500,7 +509,7 @@ export class DmsListRenderer extends Component {
                 });
             });
         if (res === "no_attachments") {
-            this.notification.add(_lt("An error occurred during the upload"));
+            this.notification.add(_t("An error occurred during the upload"));
         } else {
             const selected_id = this.$tree.find(".jstree-clicked").attr("id");
             const model_data = this.$tree.jstree(true)._model.data;

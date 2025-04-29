@@ -40,13 +40,13 @@ class DmsAccessGroups(models.Model):
 
     def _get_item_from_dms_field_ref(self, record):
         return self.env["dms.access.group"].search(
-            [("dms_field_ref", "=", "%s,%s" % (record._name, record.id))]
+            [("dms_field_ref", "=", f"{record._name},{record.id}")]
         )
 
     @api.constrains("dms_field_ref")
     def _check_dms_field_ref(self):
         for item in self.filtered("dms_field_ref"):
-            dms_field_ref = "%s,%s" % (item.dms_field_ref._name, item.dms_field_ref.id)
+            dms_field_ref = f"{item.dms_field_ref._name},{item.dms_field_ref.id}"
             if self.search(
                 [("dms_field_ref", "=", dms_field_ref), ("id", "!=", item.id)]
             ):

@@ -46,7 +46,7 @@ class DmsDirectory(models.Model):
     @api.model
     def _build_documents_view_directory(self, directory):
         return {
-            "id": "directory_%s" % directory.id,
+            "id": f"directory_{directory.id}",
             "text": directory.name,
             "icon": "fa fa-folder-o",
             "type": "directory",
@@ -57,7 +57,7 @@ class DmsDirectory(models.Model):
     @api.model
     def _check_parent_field(self):
         if self._parent_name not in self._fields:
-            raise TypeError("The parent (%s) field does not exist." % self._parent_name)
+            raise TypeError(f"The parent ({self._parent_name}) field does not exist.")
 
     @api.model
     def search_read_parents(
@@ -119,25 +119,26 @@ class DmsDirectory(models.Model):
         if not domain:
             domain = []
         self._check_parent_field()
-        self.check_access_rights("read")
+        self.check_access("read")
         if expression.is_false(self, domain):
             return []
         query = self._where_calc(domain)
         self._apply_ir_rules(query, "read")
-        from_clause, where_clause, where_clause_arguments = query.get_sql()
-        parent_where = where_clause and (" WHERE %s" % where_clause) or ""
-        parent_query = 'SELECT "%s".id FROM ' % self._table + from_clause + parent_where
+        from_clause, from_params = query.from_clause
+        where_clause, where_clause_arguments = query.where_clause
+        parent_where = where_clause and (f" WHERE {where_clause}") or ""
+        parent_query = f'SELECT "{self._table}".id FROM ' + from_clause + parent_where
         no_parent_clause = f'"{self._table}"."{self._parent_name}" IS NULL'
         no_access_clause = (
             f'"{self._table}"."{self._parent_name}" NOT IN ({parent_query})'
         )
         parent_clause = f"({no_parent_clause} OR {no_access_clause})"
-        order_by = self._generate_order_by(order, query)
-        from_clause, where_clause, where_clause_params = query.get_sql()
+        order_by = f" ORDER BY {self._order_to_sql(order, self._where_calc([])).code}"
+        where_clause_params = where_clause_arguments
         where_str = (
             where_clause
             and (f" WHERE {where_clause} AND {parent_clause}")
-            or (" WHERE %s" % parent_clause)
+            or (f" WHERE {parent_clause}")
         )
         if count:
             # pylint: disable=sql-injection
@@ -147,7 +148,7 @@ class DmsDirectory(models.Model):
         limit_str = limit and " limit %s" or ""
         offset_str = offset and " offset %s" or ""
         query_str = (
-            'SELECT "%s".id FROM ' % (self._table)
+            f'SELECT "{self._table}".id FROM '
             + from_clause
             + where_str
             + order_by
