@@ -23,7 +23,7 @@ class DmsStorage(models.Model):
         for record in directories:
             storage_directories.append(model._build_documents_view_directory(record))
         return {
-            "id": "storage_%s" % storage.id,
+            "id": f"storage_{storage.id}",
             "text": storage.name,
             "icon": "fa fa-database",
             "type": "storage",

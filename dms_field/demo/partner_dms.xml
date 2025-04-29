@@ -6,11 +6,7 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <notebook position="inside">
-                <page
-                    name="dms"
-                    string="DMS"
-                    attrs="{'invisible': [('id', '=', False)]}"
-                >
+                <page name="dms" string="DMS" invisible="not id">
                     <field name="dms_directory_ids" mode="dms_list" />
                 </page>
             </notebook>

@@ -127,7 +127,7 @@ class DmsFieldTemplate(models.Model):
             "perm_create": True,
             "perm_write": True,
             "perm_unlink": True,
-            "dms_field_ref": "%s,%s" % (record._name, record.id),
+            "dms_field_ref": f"{record._name},{record.id}",
             "explicit_user_ids": [(5, 0)],
         }
         # Apply sudo() because the user may not have permissions to access

@@ -68,17 +68,18 @@ this model.
 Usage
 =====
 
-#. Go to the form view of an existing partner and click on the "DMS" tab
-icon, a hierarchy of folders and files linked to that record will be
-created. #. Create a new partner. A hierarchy of folders and files
-linked to that record will be created.
+1. Go to the form view of an existing partner and click on the "DMS" tab
+   icon, a hierarchy of folders and files linked to that record will be
+   created.
+2. Create a new partner. A hierarchy of folders and files linked to that
+   record will be created.
 
 Known issues / Roadmap
 ======================
 
--  Add drag & drop compatibility to the dms_tree mode
--  Multiple selection support (e.g. cut several files and paste to
-   another folder).
+- Add drag & drop compatibility to the dms_tree mode
+- Multiple selection support (e.g. cut several files and paste to
+  another folder).
 
 Bug Tracker
 ===========
@@ -101,12 +102,12 @@ Authors
 Contributors
 ------------
 
--  Enric Tobella <etobella@creublanca.es>
--  Jaime Arroyo <jaime.arroyo@creublanca.es>
--  `Tecnativa <https://www.tecnativa.com>`__:
+- Enric Tobella <etobella@creublanca.es>
+- Jaime Arroyo <jaime.arroyo@creublanca.es>
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Víctor Martínez
-   -  Carlos Roca
+  - Víctor Martínez
+  - Carlos Roca
 
 Maintainers
 -----------

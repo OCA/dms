@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-    <t t-name="dms_list.Renderer" owl="1">
+    <t t-name="dms_list.Renderer">
         <div class="dms_treeview">
             <div class="container-fluid dms_document_container ">
                 <div class="row o_dms_header btn-group">
@@ -36,7 +36,7 @@
             </div>
         </div>
     </t>
-    <t t-name="dms_list.DocumentTreeViewDirectoryPreview" owl="1">
+    <t t-name="dms_list.DocumentTreeViewDirectoryPreview">
         <div
             class="o_preview_directory"
             t-if="Object.entries(nodeSelectedState.data).length !== 0"
