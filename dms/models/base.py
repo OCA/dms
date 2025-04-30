@@ -15,7 +15,8 @@ class Base(models.AbstractModel):
         models and in the models we want to check."""
         result = super().unlink()
         if (
-            not self._name.startswith("ir.")
+            self.ids
+            and not self._name.startswith("ir.")
             and not self.is_transient()
             and self._name not in ("dms.file", "dms.directory")
         ):
