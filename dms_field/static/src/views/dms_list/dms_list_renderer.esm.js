@@ -60,7 +60,7 @@ export class DmsListRenderer extends Component {
             // the window object. Without excluding it from no-undef,
             // we would get a linter error, but in this case, it’s not
             // worth excluding it from the globals.
-            // eslint-disable-next-line no-undef
+
             this.$ = window.jQuery;
         });
         onMounted(() => {
