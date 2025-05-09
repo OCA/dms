@@ -67,7 +67,9 @@
                     t-on-click="loadMore"
                 >Load more...</button>
                 <div t-if="hasContent and !canLoadMore" class="mt-4 o_load_done_msg">
-                    <span><i>All DMS files have been loaded</i></span>
+                    <span>
+                        <i>All DMS files have been loaded</i>
+                    </span>
                 </div>
             </div>
         </div>
