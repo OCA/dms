@@ -1,10 +1,11 @@
-/** @odoo-module */
-
-import {SearchMedia} from "@web_editor/components/media_dialog/search_media";
+/* Copyright 2025 Carlos Roca - Tecnativa
+ * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
+import {Component, onWillStart, useRef, useState} from "@odoo/owl";
 import {KeepLast} from "@web/core/utils/concurrency";
+import {SearchMedia} from "@web_editor/components/media_dialog/search_media";
+import {_t} from "@web/core/l10n/translation";
 import {useDebounced} from "@web/core/utils/timing";
 import {useService} from "@web/core/utils/hooks";
-import {Component, onWillStart, useRef, useState} from "@odoo/owl";
 
 export class DMSFile extends Component {}
 DMSFile.template = "web_editor_media_dialog_dms.DMSFile";
@@ -22,7 +23,7 @@ export class DMSSelector extends Component {
         });
         this.allowOpenPublic = false;
         this.NUMBER_OF_FILES_TO_DISPLAY = 30;
-        this.searchPlaceholder = this.env._t("Search a dms file");
+        this.searchPlaceholder = _t("Search a dms file");
         onWillStart(async () => {
             this.state.dmsFiles = await this.fetchFiles(
                 this.NUMBER_OF_FILES_TO_DISPLAY,
@@ -74,7 +75,7 @@ export class DMSSelector extends Component {
         if (this.selectInitialMedia()) {
             for (const file of files) {
                 if (
-                    `/web/content/dms.file/${file.id}/content` ===
+                    `/mail/view?model=dms.file&res_id=${file.id}` ===
                     this.props.media.getAttribute("href").replace(/[?].*/, "")
                 ) {
                     this.selectFile(file);
@@ -143,25 +144,20 @@ export class DMSSelector extends Component {
         return Promise.all(
             selectedMedia.map(async (file) => {
                 const linkEl = document.createElement("a");
-                let href = `/web/content/dms.file/${encodeURIComponent(
+                let href = `/mail/view?model=dms.file&res_id=${encodeURIComponent(
                     file.id
-                )}/content`;
+                )}`;
                 // Download svg images because are considered images but are not
                 // visualized correctly on new tab. Other files than pdf or image are
                 // downloaded by default
-                var extra_added = false;
                 if (file.mimetype === "image/svg+xml") {
-                    href += "?download=true";
-                    extra_added = true;
+                    href += "&download=true";
                 }
                 if (file.allowOpenPublic) {
                     const accessToken = await orm.call("dms.file", "get_access_token", [
                         file.id,
                     ]);
-                    href += `${
-                        extra_added ? "&" : "?"
-                    }access_token=${encodeURIComponent(accessToken)}`;
-                    extra_added = true;
+                    href += `&access_token=${encodeURIComponent(accessToken)}`;
                 }
                 linkEl.href = href;
                 linkEl.title = file.name;

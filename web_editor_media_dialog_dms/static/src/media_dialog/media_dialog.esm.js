@@ -1,10 +1,10 @@
-/** @odoo-module **/
-
-import {MediaDialog, TABS} from "@web_editor/components/media_dialog/media_dialog";
+/* Copyright 2025 Carlos Roca - Tecnativa
+ * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
+import {MediaDialog, TABS} from "@html_editor/main/media/media_dialog/media_dialog";
 import {DMSSelector} from "./dms_selector.esm";
 import {patch} from "@web/core/utils/patch";
 
-patch(TABS, "web_editor_media_dialog_dms.TABS", {
+patch(TABS, {
     DMS: {
         id: "DMS",
         title: "DMS",
@@ -12,9 +12,9 @@ patch(TABS, "web_editor_media_dialog_dms.TABS", {
     },
 });
 
-patch(MediaDialog.prototype, "web_editor_media_dialog_dms.MediaDialog", {
+patch(MediaDialog.prototype, {
     get initialActiveTab() {
-        const dmsTab = this.tabs.find((tab) => tab.id === "DMS");
+        const dmsTab = this.tabs.DMS;
         if (
             !this.props.activeTab &&
             dmsTab &&
@@ -23,10 +23,10 @@ patch(MediaDialog.prototype, "web_editor_media_dialog_dms.MediaDialog", {
         ) {
             return dmsTab.id;
         }
-        return this._super(...arguments);
+        return super.initialActiveTab;
     },
-    addTabs() {
-        const res = this._super(...arguments);
+    addDefaultTabs() {
+        const res = super.addDefaultTabs(...arguments);
         const onlyImages =
             this.props.onlyImages ||
             this.props.multiImages ||
