@@ -33,7 +33,7 @@ export function createFileDropZoneExtension() {
                         el.removeEventListener("drop", drop);
                     };
                 },
-                // eslint-disable-next-line no-undef
+
                 () => [document.querySelector(".o_content")]
             );
         },
