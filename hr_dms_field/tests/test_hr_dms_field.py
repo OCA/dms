@@ -29,6 +29,11 @@ class TestHrDmsField(BaseCommon):
                 "storage_id": cls.template.storage_id.id,
             }
         )
+        cls.partner = (
+            cls.env["res.partner"]
+            .with_context(skip_track_dms_field_template=True)
+            .create({"name": "DEMO Partner"})
+        )
         cls.user = new_test_user(cls.env, login="test-user")
         cls.employee_model = cls.env["hr.employee"]
 
@@ -37,7 +42,9 @@ class TestHrDmsField(BaseCommon):
         self.assertEqual(len(employee.dms_directory_ids), 0)
 
     def test_employee_create_01(self):
-        employee = self.employee_model.create({"name": "Test employee"})
+        employee = self.employee_model.create(
+            {"name": "Test employee", "work_contact_id": self.partner.id}
+        )
         # Manually refresh, similar to UX
         # dms_field/static/src/views/dms_list/dms_list_renderer.esm.js#L450
         employee.invalidate_model()
@@ -74,7 +81,9 @@ class TestHrDmsField(BaseCommon):
                 "explicit_user_ids": [(6, 0, self.env.ref("base.user_admin").ids)],
             }
         )
-        employee = self.employee_model.create({"name": "Test employee"})
+        employee = self.employee_model.create(
+            {"name": "Test employee", "work_contact_id": self.partner.id}
+        )
         employee.invalidate_recordset()
         directory = employee.dms_directory_ids
         self.assertEqual(len(directory), 1)

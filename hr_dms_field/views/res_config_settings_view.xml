@@ -7,23 +7,15 @@
         <field name="inherit_id" ref="hr.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//div[@name='employee_rights_setting_container']"
+                expr="//block[@name='employee_rights_setting_container']"
                 position="inside"
             >
-                <div
-                    class="col-12 col-lg-6 o_setting_box"
+                <setting
+                    help="Allow employees to access their DMS Documents."
                     title="Allow employees to access their DMS Documents."
                 >
-                    <div class="o_setting_left_pane">
-                        <field name="group_hr_public_dms" />
-                    </div>
-                    <div class="o_setting_right_pane">
-                        <label for="group_hr_public_dms" />
-                        <div class="text-muted">
-                            Allow employees to access their DMS Documents.
-                        </div>
-                    </div>
-                </div>
+                    <field name="group_hr_public_dms" />
+                </setting>
             </xpath>
         </field>
     </record>
