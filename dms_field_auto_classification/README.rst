@@ -17,19 +17,19 @@ Auto classify files into embedded DMS
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdms-lightgray.png?logo=github
-    :target: https://github.com/OCA/dms/tree/16.0/dms_field_auto_classification
+    :target: https://github.com/OCA/dms/tree/18.0/dms_field_auto_classification
     :alt: OCA/dms
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/dms-16-0/dms-16-0-dms_field_auto_classification
+    :target: https://translation.odoo-community.org/projects/dms-18-0/dms-18-0-dms_field_auto_classification
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Automatically classify files within a .zip file to the corresponding directory(s)
-related to an embedded DMS.
+Automatically classify files within a .zip file to the corresponding
+directory(s) related to an embedded DMS.
 
 **Table of contents**
 
@@ -39,26 +39,34 @@ related to an embedded DMS.
 Configuration
 =============
 
-#. Go to `Documents / Configuration / Classification Templates` and create or edit a template.
-#. You can set a model to which it is linked (res.partner for example).
-#. You can define the details to indicate which field is referenced by the defined filename pattern.
+1. Go to Documents / Configuration / Classification Templates and create
+   or edit a template.
+2. You can set a model to which it is linked (res.partner for example).
+3. You can define the details to indicate which field is referenced by
+   the defined filename pattern.
 
 Full example from res.partner:
 
-Filename pattern: ([0-9]{8}[A-Z]).*.pdf
-Details: VAT (field) and 0 (index)
-Directory Pattern example 1: {0} > This will attempt to add the files to the directory linked to the partner with the VAT name.
-Directory Pattern example 2: {0} / Misc > This will attempt to add the files to the "Misc" subdirectory linked to the partner with the VAT name.
+Filename pattern: ([0-9]{8}[A-Z]).\*.pdf Details: VAT (field) and 0
+(index) Directory Pattern example 1: {0} > This will attempt to add the
+files to the directory linked to the partner with the VAT name.
+Directory Pattern example 2: {0} / Misc > This will attempt to add the
+files to the "Misc" subdirectory linked to the partner with the VAT
+name.
 
 Usage
 =====
 
-#. Go to `Documents / Auto Classification` and select a template and a .zip file.
-#. Press the `Analyze` button
-#. As many lines will be set as the number of files contained in the .zip file and apply the filename pattern.
-#. The record to which they are related (res.partner for example) will be show on the lines.
-#. Press the `Classify` button
-#. The files (dms.file) will be created in the corresponding directories.
+1. Go to Documents / Auto Classification and select a template and a
+   .zip file.
+2. Press the Analyze button
+3. As many lines will be set as the number of files contained in the
+   .zip file and apply the filename pattern.
+4. The record to which they are related (res.partner for example) will
+   be show on the lines.
+5. Press the Classify button
+6. The files (dms.file) will be created in the corresponding
+   directories.
 
 Bug Tracker
 ===========
@@ -66,7 +74,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/dms/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/dms/issues/new?body=module:%20dms_field_auto_classification%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/dms/issues/new?body=module:%20dms_field_auto_classification%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -74,20 +82,20 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Víctor Martínez
-  * Pedro M. Baeza
+   -  Víctor Martínez
+   -  Pedro M. Baeza
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -107,6 +115,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-victoralmau| 
 
-This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/16.0/dms_field_auto_classification>`_ project on GitHub.
+This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/18.0/dms_field_auto_classification>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
