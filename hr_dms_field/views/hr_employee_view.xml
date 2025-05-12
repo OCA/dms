@@ -6,11 +6,7 @@
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="arch" type="xml">
             <notebook position="inside">
-                <page
-                    name="dms"
-                    string="Documents"
-                    attrs="{'invisible': [('id', '=', False)]}"
-                >
+                <page name="dms" string="Documents" invisible="not id">
                     <field name="dms_directory_ids" mode="dms_list" />
                 </page>
             </notebook>
@@ -33,7 +29,7 @@
                 <page
                     name="dms"
                     string="Documents"
-                    attrs="{'invisible': [('is_logged', '=', False)]}"
+                    invisible="not is_logged"
                     groups="hr_dms_field.group_hr_public_dms"
                 >
                     <field name="dms_directory_ids" mode="dms_list" />

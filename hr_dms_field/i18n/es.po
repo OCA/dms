@@ -67,6 +67,3 @@ msgstr "Empleado Público"
 #: model:ir.model.fields,field_description:hr_dms_field.field_res_config_settings__group_hr_public_dms
 msgid "Show DMS Documents to logged employees"
 msgstr "Mostrar documentos DMS a las empleados logeados"
-
-#~ msgid "Dms Field Template"
-#~ msgstr "Plantilla de Campo Dms"

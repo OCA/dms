@@ -13,5 +13,9 @@
         <field name="model_id" ref="hr.model_hr_employee" />
         <field name="user_field_id" ref="hr.field_hr_employee__user_id" />
         <field name="group_ids" eval="[(4, ref('read_access_hr_employee_group'))]" />
+        <!-- We need to define a different directory name because the existing partner
+        template will have caused a partner with the same name to be created when the
+        employee was created. !-->
+        <field name="directory_format_name">{{object.display_name}} (employee)</field>
     </record>
 </odoo>
