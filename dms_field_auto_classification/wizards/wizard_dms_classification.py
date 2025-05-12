@@ -39,9 +39,7 @@ class WizardDmsClassificationDetail(models.TransientModel):
             ):
                 directory = record.directory_id.root_directory_id
             record.record_ref = (
-                "{},{}".format(directory.res_model, directory.res_id)
-                if directory
-                else False
+                f"{directory.res_model},{directory.res_id}" if directory else False
             )
 
     @api.depends("file_name", "template_id.model_id")
