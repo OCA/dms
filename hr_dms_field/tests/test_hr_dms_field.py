@@ -1,6 +1,6 @@
-# Copyright 2024 Tecnativa - Víctor Martínez
+# Copyright 2024-2025 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
-
+from odoo import Command
 from odoo.tests import new_test_user
 from odoo.tools import mute_logger
 
@@ -70,8 +70,8 @@ class TestHrDmsField(BaseCommon):
         )
         read_access_hr_employee_group.write(
             {
-                "group_ids": [(5, 0)],
-                "explicit_user_ids": [(6, 0, self.env.ref("base.user_admin").ids)],
+                "group_ids": [Command.set([])],
+                "explicit_user_ids": [Command.set(self.env.ref("base.user_admin").ids)],
             }
         )
         employee = self.employee_model.create({"name": "Test employee"})
@@ -84,6 +84,7 @@ class TestHrDmsField(BaseCommon):
         # Use the demo user to modify the employee and link the user, it does not
         # have access to the directory.
         demo = self.env.ref("base.user_demo")
+        demo.write({"groups_id": [Command.link(self.env.ref("hr.group_hr_user").id)]})
         employee = employee.with_user(demo)
         employee.invalidate_recordset()
         employee.write({"user_id": self.user.id})
