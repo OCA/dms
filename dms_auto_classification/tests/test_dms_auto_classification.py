@@ -1,9 +1,10 @@
-# Copyright 2024 Tecnativa - Víctor Martínez
+# Copyright 2024-2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from base64 import b64encode
 from os import path
 
+from odoo import Command
 from odoo.tests import Form, new_test_user
 from odoo.tests.common import users
 
@@ -18,8 +19,8 @@ class TestDmsAutoClassification(BaseCommon):
             "dms_auto_classification.dms_classification_template_documents"
         )
         cls.directory = cls.env.ref("dms.directory_01_demo")
-        cls.wizard = cls._create_wizard_dms_classification(cls, cls.template)
-        cls.extra_wizard = cls._create_wizard_dms_classification(cls, cls.template)
+        cls.wizard = cls._create_wizard_dms_classification(cls.template)
+        cls.extra_wizard = cls._create_wizard_dms_classification(cls.template)
         cls.user = new_test_user(
             cls.env, login="test_dms_user", groups="dms.group_dms_user"
         )
@@ -28,12 +29,13 @@ class TestDmsAutoClassification(BaseCommon):
                 "name": "Test access group",
                 "perm_create": True,
                 "perm_write": True,
-                "explicit_user_ids": [(4, cls.user.id)],
+                "explicit_user_ids": [Command.set([cls.user.id])],
             }
         )
-        cls.directory.group_ids = [(4, access_group.id)]
+        cls.directory.group_ids = [Command.set([access_group.id])]
 
-    def _data_file(self, filename, encoding=None):
+    @classmethod
+    def _data_file(cls, filename, encoding=None):
         mode = "rt" if encoding else "rb"
         with open(path.join(path.dirname(__file__), filename), mode) as file:
             data = file.read()
@@ -41,10 +43,11 @@ class TestDmsAutoClassification(BaseCommon):
                 data = data.encode(encoding)
             return b64encode(data)
 
-    def _create_wizard_dms_classification(self, template):
-        wizard_form = Form(self.env["wizard.dms.classification"])
+    @classmethod
+    def _create_wizard_dms_classification(cls, template):
+        wizard_form = Form(cls.env["wizard.dms.classification"])
         wizard_form.template_id = template
-        wizard_form.data_file = self._data_file(self, "data/test.zip")
+        wizard_form.data_file = cls._data_file("data/test.zip")
         return wizard_form.save()
 
     @users("test_dms_user")

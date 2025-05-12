@@ -112,8 +112,8 @@ class WizardDmsClassification(models.TransientModel):
     def action_classify(self):
         self._action_classify()
         action = self.env["ir.actions.act_window"]._for_xml_id("dms.action_dms_file")
-        action["view_mode"] = "tree"
-        action["views"] = [(False, "tree")]
+        action["view_mode"] = "list"
+        action["views"] = [(False, "list")]
         action["domain"] = [("id", "in", self.mapped("detail_ids.file_id").ids)]
         return action
 
@@ -129,7 +129,7 @@ class WizardDmsClassificationDetail(models.TransientModel):
     full_path = fields.Char(
         string="Full path",
         required=True,
-        readonly="True",
+        readonly=True,
     )
     file_name = fields.Char(
         compute="_compute_file_name",
@@ -185,7 +185,7 @@ class WizardDmsClassificationDetail(models.TransientModel):
     def _compute_file_id(self):
         for item in self.filtered(lambda x: x.file_name and x.directory_id):
             files = item.directory_id.file_ids.filtered(
-                lambda x: x.name == item.file_name
+                lambda x, item=item: x.name == item.file_name
             )
             item.file_id = fields.first(files)
 
