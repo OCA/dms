@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -56,11 +56,6 @@ msgstr ""
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__index
 msgid "Index"
-msgstr ""
-
-#. module: dms_field_auto_classification
-#: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: dms_field_auto_classification

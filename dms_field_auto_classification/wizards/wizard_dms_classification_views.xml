@@ -9,7 +9,7 @@
         />
         <field name="arch" type="xml">
             <xpath
-                expr="//field[@name='detail_ids']/tree/field[@name='file_name']"
+                expr="//field[@name='detail_ids']/list/field[@name='file_name']"
                 position="after"
             >
                 <field name="record_ref" />

@@ -112,6 +112,3 @@ msgstr "Plantilla"
 #: model:ir.model,name:dms_field_auto_classification.model_wizard_dms_classification_detail
 msgid "Wizard Dms Classification Detail"
 msgstr "Asistente de Clasificación Dms Detalle"
-
-#~ msgid "DMS Directories"
-#~ msgstr "Directorios DMS"

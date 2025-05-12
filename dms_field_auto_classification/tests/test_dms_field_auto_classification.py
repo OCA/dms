@@ -50,10 +50,11 @@ class TestDmsFieldAutoClassification(BaseCommon):
                 "vat": "58426469Y",
             }
         )
-        cls.wizard = cls._create_wizard_dms_classification(cls, cls.template)
-        cls.extra_wizard = cls._create_wizard_dms_classification(cls, cls.template)
+        cls.wizard = cls._create_wizard_dms_classification(cls.template)
+        cls.extra_wizard = cls._create_wizard_dms_classification(cls.template)
 
-    def _data_file(self, filename, encoding=None):
+    @classmethod
+    def _data_file(cls, filename, encoding=None):
         mode = "rt" if encoding else "rb"
         with open(path.join(path.dirname(__file__), filename), mode) as file:
             data = file.read()
@@ -61,10 +62,11 @@ class TestDmsFieldAutoClassification(BaseCommon):
                 data = data.encode(encoding)
             return b64encode(data)
 
-    def _create_wizard_dms_classification(self, template):
-        wizard_form = Form(self.env["wizard.dms.classification"])
+    @classmethod
+    def _create_wizard_dms_classification(cls, template):
+        wizard_form = Form(cls.env["wizard.dms.classification"])
         wizard_form.template_id = template
-        wizard_form.data_file = self._data_file(self, "data/test.zip")
+        wizard_form.data_file = cls._data_file("data/test.zip")
         return wizard_form.save()
 
     def test_partner_misc(self):
