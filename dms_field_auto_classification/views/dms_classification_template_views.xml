@@ -23,16 +23,13 @@
         <field name="arch" type="xml">
             <field name="filename_pattern" position="after">
                 <field name="model_id" />
-                <field
-                    name="detail_ids"
-                    attrs="{'invisible' : [('model_id', '=', False)]}"
-                >
-                    <tree editable="bottom">
+                <field name="detail_ids" invisible="not model_id">
+                    <list editable="bottom">
                         <field name="sequence" widget="handle" />
-                        <field name="model_id" invisible="1" />
-                        <field name="field_id" required="1" />
+                        <field name="model_id" column_invisible="1" />
+                        <field name="field_id" column_invisible="1" />
                         <field name="index" />
-                    </tree>
+                    </list>
                 </field>
             </field>
         </field>

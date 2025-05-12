@@ -63,7 +63,7 @@ class WizardDmsClassificationDetail(models.TransientModel):
                     for detail in item.template_id.detail_ids:
                         matches_value = matches.groups()[detail.index]
                         # Change directory pattern if index in pattern
-                        expected = "{%s}" % detail.index
+                        expected = f"{{{detail.index}}}"
                         if expected in directory_pattern:
                             directory_pattern = directory_pattern.replace(
                                 expected, matches_value
