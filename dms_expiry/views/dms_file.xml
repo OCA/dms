@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Escodoo, Wesley Oliveira <wesley.oliveira@escodoo.com.br>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_dms_file_form" model="ir.ui.view">
+        <field name="name">dms_file.form (in dms_expiry)</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form" />
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="expiry_date" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_dms_file_tree" model="ir.ui.view">
+        <field name="name">dms_file.tree (in dms_expiry)</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree" />
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="expiry_date" widget="remaining_days" optional="hide" />
+                <field
+                    name="expiry_state"
+                    widget="badge"
+                    optional="hide"
+                    decoration-success="expiry_state == 'valid'"
+                    decoration-warning="expiry_state == 'expiring_soon'"
+                    decoration-danger="expiry_state == 'expired'"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="search_dms_file" model="ir.ui.view">
+        <field name="name">dms_file.search (in dms_expiry)</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.search_dms_file" />
+        <field name="arch" type="xml">
+            <filter name="filter_create" position="before">
+                <filter
+                    string="Document Expired"
+                    name="document_expired"
+                    domain="[('expiry_state', '=', 'expired')]"
+                />
+                <filter
+                    string="Document Expiring Soon"
+                    name="document_expiring_soon"
+                    domain="[('expiry_state', '=', 'expiring_soon')]"
+                />
+                <filter
+                    string="Document Valid"
+                    name="document_valid"
+                    domain="[('expiry_state', '=', 'valid')]"
+                />
+                <separator />
+            </filter>
+        </field>
+    </record>
+
+</odoo>
