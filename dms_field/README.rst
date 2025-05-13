@@ -122,6 +122,14 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
+.. |maintainer-CarlosRoca13| image:: https://github.com/CarlosRoca13.png?size=40px
+    :target: https://github.com/CarlosRoca13
+    :alt: CarlosRoca13
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-CarlosRoca13| 
+
 This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/18.0/dms_field>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

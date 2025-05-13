@@ -30,4 +30,5 @@
         ],
     },
     "demo": ["demo/partner_dms.xml"],
+    "maintainers": ["CarlosRoca13"],
 }
