@@ -62,8 +62,8 @@ export function getDMSListControllerObject() {
             var autocompute_directory = false;
             var show_storage = true;
             if (model === "dms.storage") {
-                if (this.model.root.data && this.model.root.data.id) {
-                    storage_domain = [["id", "=", this.model.root.data.id]];
+                if (this.model.root.resId) {
+                    storage_domain = [["id", "=", this.model.root.resId]];
                 } else {
                     storage_domain = [
                         [
