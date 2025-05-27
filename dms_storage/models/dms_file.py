@@ -24,8 +24,8 @@ class DmsFile(models.Model):
             self.storage_id.storage_backend_id.add(storage_path, binary)
             result["storage_path"] = storage_path
             result["storage_backend_id"] = self.storage_id.storage_backend_id.id
-            result["content_binary"] = self.storage_id.storage_backend_id.id
-            result["content_file"] = self.storage_id.storage_backend_id.id
+            result["content_binary"] = False
+            result["content_file"] = False
         return result
 
     @api.depends("storage_path")
