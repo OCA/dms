@@ -250,7 +250,7 @@ class DmsSecurityMixin(models.AbstractModel):
         The _filtered_access() method is also overwritten to prevent this sudo()
         specific behavior and to be able to access only the appropriate records.
         """
-        if self.env.su:
+        if self.env.su and self.env.context.get("dms_operation") == "read":
             return self
         return super().filtered_domain(domain)
 

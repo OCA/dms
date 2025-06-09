@@ -151,8 +151,12 @@ class DMSFile(models.Model):
                 one.image_1920 = one.content
 
     def check_access(self, operation):
-        self.mapped("directory_id").check_access(operation)
-        return super().check_access(operation)
+        self.mapped("directory_id").with_context(dms_operation=operation).check_access(
+            operation
+        )
+        return super(DMSFile, self.with_context(dms_operation=operation)).check_access(
+            operation
+        )
 
     def _compute_access_url(self):
         res = super()._compute_access_url()
