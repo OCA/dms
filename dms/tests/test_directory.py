@@ -6,7 +6,9 @@
 
 import os
 
-from odoo.exceptions import UserError
+from odoo import Command
+from odoo.exceptions import AccessError, UserError
+from odoo.tests import new_test_user
 from odoo.tests.common import users
 from odoo.tools import mute_logger
 
@@ -265,6 +267,18 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
             self.directory_model.search_panel_select_multi_range("tag_ids"),
             msg="The tag_ids field should be a multi range field",
         )
+
+    def test_directory_unlink_custom(self):
+        user = new_test_user(
+            self.env, login="test-dms-customer-user", groups="dms.group_dms_user"
+        )
+        group = self.access_group_model.create(
+            {"name": "Test read group", "explicit_user_ids": [Command.set(user.ids)]}
+        )
+        root_directory = self.create_directory(storage=self.storage)
+        root_directory.group_ids = [Command.link(group.id)]
+        with self.assertRaises(AccessError):
+            root_directory.with_user(user).unlink()
 
 
 class DirectoryMailTestCase(StorageDatabaseBaseCase):

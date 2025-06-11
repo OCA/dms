@@ -275,6 +275,17 @@ class DmsSecurityMixin(models.AbstractModel):
         result |= self._filtered_access_no_recursion(operation)
         return result
 
+    def _check_access_dms_record(self, operation: str) -> tuple | None:
+        """Specific method "similar" to _check_access() but with a different
+        behavior: check if you do not really have access to any of the records
+        in to avoid performing the corresponding create/write/unlink action."""
+        if any(self._ids) and not self.env.su:
+            Rule = self.env["ir.rule"]
+            domain = Rule._compute_domain(self._name, operation)
+            items = self.search(domain)
+            if any(x_id not in items.ids for x_id in self.ids):
+                raise Rule._make_access_error(operation, (self - items))
+
     @api.model_create_multi
     def create(self, vals_list):
         # Create as sudo to avoid testing creation permissions before DMS security
@@ -285,5 +296,13 @@ class DmsSecurityMixin(models.AbstractModel):
         res.flush_recordset()
         # Go back to the original sudo state and check we really had creation permission
         res = res.sudo(self.env.su)
-        res.check_access("create")
+        res._check_access_dms_record("create")
         return res
+
+    def write(self, vals):
+        self._check_access_dms_record("write")
+        return super().write(vals)
+
+    def unlink(self):
+        self._check_access_dms_record("unlink")
+        return super().unlink()
