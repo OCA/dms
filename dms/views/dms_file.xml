@@ -245,9 +245,7 @@
                                 </div>
                                 <div class="o_kanban_details">
                                     <div class="o_kanban_details_wrapper">
-                                        <div
-                                            class="o_kanban_record_title o_text_overflow"
-                                        >
+                                        <div class="o_kanban_record_title">
                                             <field name="name" />
                                         </div>
                                         <div class="o_kanban_record_body">
@@ -673,5 +671,4 @@
             action = model.action_wizard_dms_file_move()
         </field>
     </record>
-
 </odoo>

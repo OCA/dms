@@ -338,9 +338,7 @@
                                 </div>
                                 <div class="o_kanban_details">
                                     <div class="o_kanban_details_wrapper">
-                                        <div
-                                            class="o_kanban_record_title o_text_overflow"
-                                        >
+                                        <div class="o_kanban_record_title">
                                             <field name="name" />
                                         </div>
                                         <div class="o_kanban_record_body">
@@ -550,7 +548,7 @@
                                 <tree limit="10">
                                     <field name="name" />
                                     <field name="mimetype" />
-                                     <field name="human_size" string="Size" />
+                                    <field name="human_size" string="Size" />
                                     <field name="write_date" readonly="1" />
                                 </tree>
                             </field>

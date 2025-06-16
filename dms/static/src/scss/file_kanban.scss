@@ -23,6 +23,7 @@
             .o_kanban_record_title {
                 font-weight: bold;
                 padding-right: 16px;
+                @include o-text-overflow(block);
             }
             .o_kanban_record_body {
                 max-height: 12px;
