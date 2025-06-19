@@ -48,21 +48,18 @@ msgstr ""
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/access_groups.py:0
-#, python-format
 msgid "%s (copy)"
 msgstr ""
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "%s Files"
 msgstr "%s Archivos"
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "%s Subdirectories"
 msgstr "%s Subcarpetas"
 
@@ -164,6 +161,30 @@ msgid ""
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid ""
+"<i class=\"fa fa-xs fa-file\"/>\n"
+"                                            <span>&amp;nbsp;</span>"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid ""
+"<i class=\"fa fa-xs fa-folder\"/>\n"
+"                                            <span>&amp;nbsp;</span>"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid "<span class=\"ms-1\">Directories</span>"
+msgstr ""
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid "<span class=\"ms-1\">Files</span>"
+msgstr ""
+
+#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid ""
 "<span class=\"oe_read_only\">@</span>\n"
@@ -175,8 +196,8 @@ msgstr ""
 "span>"
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_kanban
 msgid "<span>Actions</span>"
 msgstr ""
 
@@ -191,6 +212,11 @@ msgid "<span>Operations</span>"
 msgstr ""
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
+msgid "<span>Views</span>"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
 msgid ""
 "A Python dictionary that will be evaluated to provide default values when "
@@ -202,21 +228,18 @@ msgstr ""
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "A directory can't be a root and have a parent directory."
 msgstr "Una carpeta no puede ser raíz y tener una carpeta padre."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "A directory has to have a parent directory."
 msgstr "Una carpeta debe tener una carpeta padre."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "A directory has to have model in attachment storage."
 msgstr ""
 "Un directorio debe tener un modelo en el almacenamiento de archivos adjuntos."
@@ -224,14 +247,12 @@ msgstr ""
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "A directory with the same name already exists."
 msgstr "Una carpeta con el mismo nombre ya existe."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "A file must have model and resource ID in attachment storage."
 msgstr ""
 "Un archivo debe tener un ID de modelo y recurso en el almacenamiento de "
@@ -240,14 +261,12 @@ msgstr ""
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "A file with the same name already exists in this directory."
 msgstr ""
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "A root directory has to have a storage."
 msgstr "Un directorio root debe tener un almacenamiento."
 
@@ -290,11 +309,6 @@ msgstr "Contabilidad"
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction
 msgid "Action Needed"
 msgstr "Acción necesaria"
-
-#. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
-msgid "Actions"
-msgstr "Acciones"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_category__active
@@ -396,7 +410,6 @@ msgstr ""
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "Alias-Mail-Extraction"
 msgstr "Extracción de alias de correo"
 
@@ -419,7 +432,6 @@ msgstr "Todos los archivos"
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
-#, python-format
 msgid "An error occurred during the upload"
 msgstr "Se ha producido un error durante la carga"
 
@@ -447,11 +459,8 @@ msgid "Are you sure? All files will be moved."
 msgstr "¿Estás seguro? Todos los archivos se moverán."
 
 #. module: dms
-#. odoo-python
-#: code:addons/dms/models/storage.py:0
 #: model:ir.model,name:dms.model_ir_attachment
 #: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__attachment
-#, python-format
 msgid "Attachment"
 msgstr "Adjunto"
 
@@ -807,10 +816,7 @@ msgid "DMS thumbnail and icon mixin"
 msgstr "Mezcla de iconos y miniaturas de DMS"
 
 #. module: dms
-#. odoo-python
-#: code:addons/dms/models/storage.py:0
 #: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__database
-#, python-format
 msgid "Database"
 msgstr "Base de datos"
 
@@ -898,6 +904,12 @@ msgid "Display Name"
 msgstr "Nombre a mostrar"
 
 #. module: dms
+#. odoo-javascript
+#: code:addons/dms/static/src/js/fields/path_json/path_owl.esm.js:0
+msgid "Dms Path Field"
+msgstr ""
+
+#. module: dms
 #: model:ir.model,name:dms.model_dms_category
 msgid "Document Category"
 msgstr "Categoría del documento"
@@ -978,14 +990,12 @@ msgstr ""
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_category.py:0
-#, python-format
 msgid "Error! You cannot create recursive categories."
 msgstr "¡Error! No puedes crear categorías recursivas."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "Error! You cannot create recursive directories."
 msgstr "¡Error! No puedes crear carpetas recursivas."
 
@@ -1074,10 +1084,7 @@ msgid "Files are used to save content directly in Odoo."
 msgstr "Los archivos se usan para guardar el contenido directamente en Odoo."
 
 #. module: dms
-#. odoo-python
-#: code:addons/dms/models/storage.py:0
 #: model:ir.model.fields.selection,name:dms.selection__dms_storage__save_type__file
-#, python-format
 msgid "Filestore"
 msgstr "Almacenamiento"
 
@@ -1350,7 +1357,6 @@ msgstr "Interno / Recursos humanos"
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "Invalid attachments!"
 msgstr "¡Archivos adjuntos no válidos!"
 
@@ -1373,14 +1379,12 @@ msgstr "Es carpeta raíz"
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "It is not possible to change the storage."
 msgstr "No es posible cambiar el almacenamiento."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "It is not possible to change to a parent with other storage."
 msgstr ""
 
@@ -1503,7 +1507,6 @@ msgstr "Migrar"
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "Migrate File %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
 msgstr ""
 "Migrar archivo %(index)s of %(record_count)s [ %(dms_file_migration)s ]"
@@ -1577,7 +1580,6 @@ msgstr "Mis archivos"
 #: model:ir.model.fields,field_description:dms.field_dms_storage__name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__name
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms
-#, python-format
 msgid "Name"
 msgstr "Nombre"
 
@@ -1618,7 +1620,6 @@ msgstr "Tipo de siguiente actividad"
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "No attachment was provided"
 msgstr "No se proporcionó ningún anexo"
 
@@ -1692,14 +1693,12 @@ msgstr ""
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "Only files in the same root directory can be moved."
 msgstr "Solo los archivos con la misma carpeta raíz se pueden mover."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/storage.py:0
-#, python-format
 msgid "Only managers can execute this action."
 msgstr "Solo los responsables pueden ejecutar esta acción."
 
@@ -1754,7 +1753,6 @@ msgstr "Ruta padre"
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/access_groups.py:0
-#, python-format
 msgid "Parent group '%(parent)s' is child of '%(current)s'."
 msgstr "El grupo parental 'l%(parent)s' es hijo de '%(current)s'."
 
@@ -1814,9 +1812,14 @@ msgstr "URL de acceso al portal"
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/js/fields/preview_binary/preview_record.xml:0
-#, python-format
 msgid "Preview"
 msgstr "Vista Anticipada"
+
+#. module: dms
+#. odoo-javascript
+#: code:addons/dms/static/src/js/fields/preview_binary/preview_record.esm.js:0
+msgid "Preview Record"
+msgstr ""
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_10_demo
@@ -1919,7 +1922,6 @@ msgstr "Tipo guardado"
 #. odoo-javascript
 #: code:addons/dms/static/src/js/views/file_kanban_renderer.xml:0
 #: code:addons/dms/static/src/js/views/file_list_renderer.xml:0
-#, python-format
 msgid "Scan"
 msgstr "Escanear"
 
@@ -2103,28 +2105,24 @@ msgstr "El campo activo le permite ocultar la etiqueta sin quitarla."
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "The directory name is invalid."
 msgstr "El nombre de la carpeta es inválido."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "The file has a forbidden file extension."
 msgstr "El archivo tiene una extensión prohibida."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "The file name is invalid."
 msgstr "El nombre de archivo es inválido."
 
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
-#, python-format
 msgid "The maximum upload size is %s MB."
 msgstr "El tamaño máximo de subida es %s MB."
 
@@ -2168,7 +2166,6 @@ msgstr ""
 #. module: dms
 #. odoo-python
 #: code:addons/dms/models/directory.py:0
-#, python-format
 msgid "This directory needs to be associated to a record."
 msgstr "Este directorio necesita estar asociado a un registro."
 
@@ -2228,7 +2225,6 @@ msgstr "Desempaquetar correos electrónicos como"
 #: code:addons/dms/static/src/js/views/file_kanban_controller.xml:0
 #: code:addons/dms/static/src/js/views/file_kanban_renderer.xml:0
 #: code:addons/dms/static/src/js/views/file_list_renderer.xml:0
-#, python-format
 msgid "Upload"
 msgstr "Subir"
 
@@ -2257,11 +2253,6 @@ msgstr "Usuarios"
 #: model:dms.tag,name:dms.tag_09_demo
 msgid "Vendor Bill"
 msgstr "Factura del proveedor"
-
-#. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
-msgid "Views"
-msgstr "Vistas"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__website_message_ids
@@ -2296,7 +2287,6 @@ msgstr "Acceso de escritura"
 #. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
-#, python-format
 msgid "You must select a directory first"
 msgstr "Debe selecciona una carpeta primero"
 
@@ -2314,3 +2304,9 @@ msgstr "exe,msi"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "mail.catchall.domain"
 msgstr "mail.catchall.domain"
+
+#~ msgid "Actions"
+#~ msgstr "Acciones"
+
+#~ msgid "Views"
+#~ msgstr "Vistas"
