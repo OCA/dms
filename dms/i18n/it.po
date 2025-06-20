@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-06-19 13:26+0000\n"
-"Last-Translator: Lorenzo Battistini <lb@takobi.online>\n"
+"PO-Revision-Date: 2025-06-20 10:25+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -185,6 +185,8 @@ msgid ""
 "<i class=\"fa fa-xs fa-file\"/>\n"
 "                                            <span>&amp;nbsp;</span>"
 msgstr ""
+"<i class=\"fa fa-xs fa-file\"/>\n"
+"                                            <span>&amp;nbsp;</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -192,16 +194,18 @@ msgid ""
 "<i class=\"fa fa-xs fa-folder\"/>\n"
 "                                            <span>&amp;nbsp;</span>"
 msgstr ""
+"<i class=\"fa fa-xs fa-folder\"/>\n"
+"                                            <span>&amp;nbsp;</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "<span class=\"ms-1\">Directories</span>"
-msgstr ""
+msgstr "<span class=\"ms-1\">Cartelle</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "<span class=\"ms-1\">Files</span>"
-msgstr ""
+msgstr "<span class=\"ms-1\">File</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -233,7 +237,7 @@ msgstr "<span>Operazioni</span>"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "<span>Views</span>"
-msgstr ""
+msgstr "<span>Viste</span>"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
@@ -924,7 +928,7 @@ msgstr "Nome visualizzato"
 #. odoo-javascript
 #: code:addons/dms/static/src/js/fields/path_json/path_owl.esm.js:0
 msgid "Dms Path Field"
-msgstr ""
+msgstr "Campo percorso DMS"
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_category
@@ -1840,7 +1844,7 @@ msgstr "Anteprima"
 #. odoo-javascript
 #: code:addons/dms/static/src/js/fields/preview_binary/preview_record.esm.js:0
 msgid "Preview Record"
-msgstr ""
+msgstr "Anteprima record"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_10_demo
