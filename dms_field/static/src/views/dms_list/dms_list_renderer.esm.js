@@ -65,9 +65,18 @@ export class DmsListRenderer extends Component {
         });
         onMounted(() => {
             this.$tree = this.$(this.js_tree.el);
-            this.$tree.jstree(this.config);
-            this.startTreeTriggers();
         });
+        useEffect(
+            () => {
+                this.nodeSelectedState.data = {};
+                this.updatePreview({});
+                this.$tree.jstree("destroy");
+                this.config = this.buildTreeConfig();
+                this.$tree.jstree(this.config);
+                this.startTreeTriggers();
+            },
+            () => [this.props.record]
+        );
     }
     buildTreeConfig() {
         var plugins = [
@@ -359,6 +368,8 @@ export class DmsListRenderer extends Component {
             callback.call(this, data);
             if (empty_storages.length > 0) {
                 this.$(this.dms_add_directory.el).removeClass("o_hidden");
+            } else {
+                this.$(this.dms_add_directory.el).addClass("o_hidden");
             }
         });
     }

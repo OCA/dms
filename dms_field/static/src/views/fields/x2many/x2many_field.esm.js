@@ -16,6 +16,7 @@ patch(X2ManyField.prototype, {
         if (this.props.viewMode === "dms_list") {
             props.readonly = this.props.readonly;
             props.rendererActions = this.rendererActions;
+            props.record = this.props.record;
             return props;
         }
         return super.rendererProps;
