@@ -175,3 +175,16 @@ class DmsAccessGroups(models.Model):
                         "current": one.display_name,
                     }
                 )
+
+    # Prevent deletion of groups that are assigned to directories
+    def unlink(self):
+        for record in self:
+            if record.complete_directory_ids and record.complete_directory_ids.ids:
+                raise ValidationError(
+                    _(
+                        "You cannot delete the group '%(name)s' because it is assigned "
+                        + "to directories."
+                    )
+                    % {"name": record.name}
+                )
+        return super().unlink()
