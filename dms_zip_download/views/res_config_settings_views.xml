@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="res_config_settings_view_form_inherit_dms_zip_download"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.dms_zip_download</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="30" />
+        <field name="inherit_id" ref="dms.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='dms']/block[1]" position="inside">
+                <setting
+                    string="ZIP Download Limit"
+                    help="Set the maximum total size (in MB) for ZIP downloads"
+                >
+                    <field name="dms_zip_download_max_size" class="oe_inline" />
+                    <span> MB</span>
+                    <div class="text-muted">
+                        Set to 0 for no limit
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

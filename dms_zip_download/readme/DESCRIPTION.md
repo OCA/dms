@@ -1,0 +1,1 @@
+This module extends the DMS (Document Management System) functionality by adding the ability to download multiple files as a single ZIP archive.
