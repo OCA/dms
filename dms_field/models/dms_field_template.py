@@ -163,6 +163,11 @@ class DmsFieldTemplate(models.Model):
             "name": template_child_directory.name,
             "is_root_directory": False,
             "parent_id": parent.id,
+            "inherit_group_ids": template_child_directory.inherit_group_ids,
+            "group_ids": [
+                fields.Command.link(group.id)
+                for group in template_child_directory.group_ids
+            ],
         }
 
     def _create_child_directories(self, parent, directory):

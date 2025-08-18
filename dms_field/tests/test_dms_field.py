@@ -244,3 +244,37 @@ class TestDmsField(BaseCommon):
             {"id": directory.id, "name": directory.name},
             directory.search_read_parents(fields=["id", "name"]),
         )
+
+    def test_child_values(self):
+        """Values of the child directory in the template
+        are propagated to the new directories."""
+        # Arrange
+        partner = self.partner
+        access_group = self.env["dms.access.group"].create(
+            {
+                "name": "Test Access group",
+            }
+        )
+        child_dir = self.subdirectory_1
+        child_dir.inherit_group_ids = False
+        child_dir.group_ids = access_group
+
+        # Act
+        self.env["dms.field.template"].with_context(
+            res_model=partner._name,
+            res_id=partner.id,
+        ).create_dms_directory()
+
+        # Assert
+        partner.invalidate_model()
+        new_subdirectory_1 = partner.dms_directory_ids.child_directory_ids.filtered(
+            lambda d, dir_name=child_dir.name: d.name == dir_name
+        )
+        self.assertFalse(new_subdirectory_1.inherit_group_ids)
+        self.assertEqual(new_subdirectory_1.group_ids, access_group)
+
+        new_subdirectory_2 = partner.dms_directory_ids.child_directory_ids.filtered(
+            lambda d, dir_name=self.subdirectory_2.name: d.name == dir_name
+        )
+        self.assertTrue(new_subdirectory_2.inherit_group_ids)
+        self.assertIn(self.group, new_subdirectory_2.complete_group_ids.group_ids)
