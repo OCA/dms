@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =========
 DMS Field
 =========
@@ -17,7 +13,7 @@ DMS Field
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdms-lightgray.png?logo=github
@@ -81,9 +77,9 @@ Usage
 Known issues / Roadmap
 ======================
 
-- Add drag & drop compatibility to the dms_tree mode
-- Multiple selection support (e.g. cut several files and paste to
-  another folder).
+-  Add drag & drop compatibility to the dms_tree mode
+-  Multiple selection support (e.g. cut several files and paste to
+   another folder).
 
 Bug Tracker
 ===========
@@ -106,12 +102,18 @@ Authors
 Contributors
 ------------
 
-- Enric Tobella <etobella@creublanca.es>
-- Jaime Arroyo <jaime.arroyo@creublanca.es>
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  Enric Tobella <etobella@creublanca.es>
 
-  - Víctor Martínez
-  - Carlos Roca
+-  Jaime Arroyo <jaime.arroyo@creublanca.es>
+
+-  `Tecnativa <https://www.tecnativa.com>`__:
+
+   -  Víctor Martínez
+   -  Carlos Roca
+
+-  `PyTech <https://www.pytech.it>`__:
+
+   -  Simone Rubino simone.rubino@pytech.it
 
 Maintainers
 -----------
