@@ -15,10 +15,15 @@ class DMSWorkflowRule(models.Model):
 
     def apply_rule(self, document):
         """Apply workflow rule when a document is added to the folder."""
-        if self.create_model == "res.partner.exemption":
+        if (
+            document
+            and document.record_ref
+            and self.create_model == "res.partner.exemption"
+        ):
             new_obj = self.env[self.create_model].create(
                 {
-                    "partner_id": document.create_uid.partner_id.id,
+                    "name": document.record_ref.name,
+                    "partner_id": document.record_ref.id,
                     "document_link_id": document.id,
                 }
             )

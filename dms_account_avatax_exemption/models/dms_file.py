@@ -11,6 +11,10 @@ class File(models.Model):
         rule = self.env["dms.workflow.rule"].search(
             [("dms_exemption_folder", "=", document.directory_id.parent_id.id)], limit=1
         )
-        if rule:
+        if (
+            rule
+            and rule.dms_exemption_folder == document.root_directory_id
+            and self.env.company.documents_exemption_settings
+        ):
             rule.apply_rule(document)
         return document
