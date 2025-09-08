@@ -247,6 +247,18 @@
                                     </div>
                                     <div class="o_kanban_record_bottom">
                                         <div class="oe_kanban_bottom_right">
+                                            <a type="edit">
+                                                <i class="fa fa-pencil fa-lg" title="Edit"/>
+                                            </a>
+                                            <div t-if="record.permission_unlink.raw_value and (!record.is_locked.raw_value or (record.is_locked.raw_value and record.is_lock_editor.raw_value))"                                   >
+                                                <a type="delete">
+                                                    <i class="fa fa-trash-o fa-lg" title="Delete"/>
+                                                </a>
+                                            </div>
+                                            <a t-attf-href="/web/content?id=#{record.id.raw_value}&amp;field=content&amp;model=dms.file&amp;filename_field=name&amp;download=true"
+                                                >
+                                                <i class="fa fa-download fa-lg" title="Download"/>
+                                            </a>
                                             <span
                                                 t-if="record.is_locked.raw_value"
                                                 class="o_dms_file_kanban_lock"
