@@ -15,7 +15,7 @@ from psycopg2.sql import SQL, Identifier
 
 from odoo import SUPERUSER_ID, Command, api, models
 from odoo.exceptions import UserError
-from odoo.tools import table_exists
+from odoo.tools import sql, table_exists
 from odoo.tools.misc import get_lang, split_every
 
 from odoo.addons.dms.models.dms_file import File
@@ -587,3 +587,33 @@ def post_load_hook():
     if not hasattr(File, "_compute_image_1920_origin"):
         File._compute_image_1920_origin = File._compute_image_1920
     File._compute_image_1920 = _compute_image_1920_new
+
+
+def uninstall_hook(cr, registry):
+    _logger.info("Running uninstall_hook: cleaning up cloned tables...")
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    modules = env["ir.module.module"].search(
+        [
+            ("name", "=", "documents"),
+            ("state", "=", "installed"),
+        ]
+    )
+    if modules:
+        _logger.info("Triggering uninstall for: %s", "documents")
+        constraint_to_drop = [
+            ("documents_document", "documents_document_folder_id_fkey"),
+        ]
+        for table, constraint in constraint_to_drop:
+            definition = sql.constraint_definition(cr, table, constraint)
+            if definition:
+                _logger.info(
+                    "Dropping constraint %s on table %s: %s",
+                    constraint,
+                    table,
+                    definition,
+                )
+                sql.drop_constraint(cr, table, constraint)
+        modules.sudo().button_uninstall()
+    else:
+        _logger.info("No EE 'documents' modules currently installed.")
+    _logger.info("Cleanup after uninstall completed.")

@@ -15,4 +15,5 @@
     "external_dependencies": {"python": ["pathvalidate", "openupgradelib"]},
     "post_init_hook": "post_init_hook",
     "post_load": "post_load_hook",
+    "uninstall_hook": "uninstall_hook",
 }
