@@ -8,7 +8,7 @@ import threading
 from collections import defaultdict
 from random import randint
 
-from openupgradelib import openupgrade
+from openupgradelib import openupgrade, openupgrade_merge_records
 from pathvalidate import sanitize_filename
 from PIL import Image
 from psycopg2.sql import SQL, Identifier
@@ -527,6 +527,44 @@ def migrate_documents_files(cr, env, folder_mapping, tag_mapping, batch_size):
     return created_file_ids, list(unmigrated_files)
 
 
+def merge_record_data(cr, env):
+    xmlid_mapping = [
+        ("dms.category_dms_security", "documents.module_category_documents_management"),
+        ("dms.group_dms_user", "documents.group_documents_user"),
+        ("dms.group_dms_manager", "documents.group_documents_manager"),
+    ]
+    for to_merge_xmlid, target_xmlid in xmlid_mapping:
+        old_record = env.ref(to_merge_xmlid, raise_if_not_found=False)
+        new_record = env.ref(target_xmlid, raise_if_not_found=False)
+        if not old_record:
+            _logger.warning("To merge XMLID not found: %s", to_merge_xmlid)
+            continue
+        if not new_record:
+            _logger.warning("Target XMLID not found: %s", target_xmlid)
+            continue
+        try:
+            openupgrade_merge_records.merge_records(
+                env=env,
+                model_name=new_record._name,
+                record_ids=[old_record.id],
+                target_record_id=new_record.id,
+                method="orm",
+            )
+            openupgrade.rename_xmlids(
+                cr,
+                [
+                    (target_xmlid, to_merge_xmlid),
+                ],
+            )
+        except Exception as e:
+            _logger.warning(
+                "Error merging record from '%s' to '%s': %s",
+                to_merge_xmlid,
+                target_xmlid,
+                e,
+            )
+
+
 def post_init_hook(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {"tracking_disable": True})
     if not openupgrade.is_module_installed(cr, "documents"):
@@ -538,6 +576,7 @@ def post_init_hook(cr, registry):
         _logger.info(
             "Starting migration from 'documents' to 'dms' using lang '%s'", lang
         )
+        merge_record_data(cr, env)
         tag_mapping, _ = migrate_documents_tags(cr, env, lang)
         folder_mapping = migrate_documents_folders(cr, env, lang, tag_mapping)
         BATCH_SIZE = models.INSERT_BATCH_SIZE
