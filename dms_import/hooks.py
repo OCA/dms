@@ -115,6 +115,30 @@ def _batch_fetch_folder_relations(cr, folder_ids):
     return write_groups, read_groups, tags_by_folder
 
 
+def _fetch_folder_and_facet_names(cr, lang):
+    folder_names = {}
+    facet_details = {}
+    # 1. Fetch Folder Names (Workspace)
+    if table_exists(cr, "documents_folder"):
+        cr.execute(
+            SQL("SELECT id, name->>%s AS name FROM documents_folder"),
+            (lang,),
+        )
+        folder_names = {f["id"]: f["name"].strip() for f in cr.dictfetchall()}
+    # 2. Fetch Facet Details (Facet name and parent folder)
+    if table_exists(cr, "documents_facet"):
+        cr.execute(
+            SQL("SELECT id, name->>%s AS name, folder_id FROM documents_facet"),
+            (lang,),
+        )
+        facet_details = {
+            f["id"]: {"name": f["name"].strip(), "folder_id": f["folder_id"]}
+            for f in cr.dictfetchall()
+        }
+
+    return folder_names, facet_details
+
+
 def migrate_documents_tags(cr, env, lang):
     """Migrate tags and facets from documents_tag to dms.tag and dms.category."""
     if not table_exists(cr, "documents_tag"):
@@ -123,51 +147,12 @@ def migrate_documents_tags(cr, env, lang):
 
     _logger.info("Migrating tags from 'documents' to 'dms'...")
 
-    DmsCategory = env["dms.category"]
     DmsTag = env["dms.tag"]
-    tag_mapping, category_mapping = {}, {}
+    tag_mapping = {}
 
-    # 1. Facets → categories
-    if table_exists(cr, "documents_facet"):
-        cr.execute(
-            SQL("SELECT id, name->>%s AS name FROM {}").format(
-                Identifier("documents_facet")
-            ),
-            (lang,),
-        )
-        facets = cr.dictfetchall()
-
-        # Map name -> existing record
-        existing_categories = {
-            _normalize(cat.name): cat for cat in DmsCategory.search([])
-        }
-
-        # Collect new categories only once
-        new_categories = {}
-        for f in facets:
-            norm = _normalize(f["name"])
-            if norm and norm not in existing_categories:
-                new_categories[norm] = {"name": f["name"].strip()}
-
-        if new_categories:
-            DmsCategory.create(new_categories.values())
-            # Refresh map
-            existing_categories = {
-                _normalize(cat.name): cat for cat in DmsCategory.search([])
-            }
-
-        # Build category_mapping
-        for f in facets:
-            norm = _normalize(f["name"])
-            if norm and norm in existing_categories:
-                category_mapping[f["id"]] = existing_categories[norm].id
-
-    # 2. Tags
-    existing_tags = {
-        (_normalize(tag.name), tag.category_id.id or False): tag
-        for tag in DmsTag.search([])
-    }
-
+    # 1. Fetch Folder and Facet context data (Workspace and Facet names)
+    folder_names, facet_details = _fetch_folder_and_facet_names(cr, lang)
+    existing_tags = {_normalize(tag.name): tag for tag in DmsTag.search([])}
     cr.execute(
         SQL("SELECT id, name->>%s AS name, facet_id FROM {}").format(
             Identifier("documents_tag")
@@ -180,47 +165,49 @@ def migrate_documents_tags(cr, env, lang):
     pending_keys = set()
 
     for old in old_tags:
-        norm = _normalize(old["name"])
+        # build the full context name: [Workspace Name] > [Facet Name] > [Tag Name]
+        facet = facet_details.get(old["facet_id"])
+        # check the completeness of the context
+        if (
+            not facet
+            or not facet.get("folder_id")
+            or not folder_names.get(facet["folder_id"])
+        ):
+            # fallback: use tag name only
+            full_name = old["name"].strip()
+        else:
+            folder_name = folder_names[facet["folder_id"]]
+            facet_name = facet["name"]
+            tag_name = old["name"].strip()
+            full_name = f"{folder_name} > {facet_name} > {tag_name}"
+        norm = _normalize(full_name)
         if not norm:
             continue
-        cat_id = category_mapping.get(old["facet_id"]) or False
-        key = (norm, cat_id)
-        if key not in existing_tags and key not in pending_keys:
+        if norm not in existing_tags and norm not in pending_keys:
             tags_to_create.append(
                 {
-                    "name": old["name"].strip(),
-                    "category_id": cat_id,
+                    "name": full_name,
                     "color": _default_color(),
                     "_old_id": old["id"],
                 }
             )
-            pending_keys.add(key)
-
+            pending_keys.add(norm)
+        record = existing_tags.get(norm)
+        if record:
+            tag_mapping[old["id"]] = record.id
     if tags_to_create:
         created = DmsTag.create(
             [
-                {k: v for k, v in vals.items() if k != "_old_id"}
+                {k: v for k, v in vals.items() if k not in ["_old_id", "category_id"]}
                 for vals in tags_to_create
             ]
         )
-        for _, new_tag in zip(tags_to_create, created):
-            key = (_normalize(new_tag.name), new_tag.category_id.id or False)
-            existing_tags[key] = new_tag
-
-    # Final mapping
-    for old in old_tags:
-        norm = _normalize(old["name"])
-        if not norm:
-            continue
-        cat_id = category_mapping.get(old["facet_id"]) or False
-        record = existing_tags.get((norm, cat_id))
-        if record:
-            tag_mapping[old["id"]] = record.id
-
-    _logger.info(
-        "Migrated %d categories and %d tags.", len(category_mapping), len(tag_mapping)
-    )
-    return tag_mapping, category_mapping
+        for vals, new_tag in zip(tags_to_create, created):
+            norm = _normalize(new_tag.name)
+            existing_tags[norm] = new_tag
+            tag_mapping[vals["_old_id"]] = new_tag.id
+    _logger.info("Migrated %d tags with full context.", len(tag_mapping))
+    return tag_mapping, {}
 
 
 def migrate_documents_folders(cr, env, lang, tag_mapping):
