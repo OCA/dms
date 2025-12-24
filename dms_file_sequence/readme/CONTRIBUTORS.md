@@ -1,0 +1,3 @@
+- [APSL-Nagarro](https://apsl.tech)
+  - Miquel Alzanillas \<<miquel.alzanillas@nagarro.com>\>
+  - Antoni Marroig \<<antoni.marroig@nagarro.com>\>
