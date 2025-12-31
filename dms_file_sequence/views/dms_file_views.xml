@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<record id="dms_file_sequence_form_view" model="ir.ui.view">
+    <field name="name">dms.file.sequence.form.view</field>
+    <field name="model">dms.file</field>
+    <field name="priority">1</field>
+    <field name="inherit_id" ref="dms.view_dms_file_form" />
+    <field name="arch" type="xml">
+            <xpath expr="//group[@name='content']/group[1]" position="before">
+                <group>
+                    <field name="sequence_code" />
+                </group>
+            </xpath>
+    </field>
+</record>
+
+<record id="dms_file_sequence_kanban_view" model="ir.ui.view">
+    <field name="name">dms.file.sequence.kanban.view</field>
+    <field name="model">dms.file</field>
+    <field name="priority">1</field>
+    <field name="inherit_id" ref="dms.view_dms_file_kanban" />
+    <field name="arch" type="xml">
+        <xpath expr="//h5[hasclass('o_kanban_record_title')]/field" position="after">
+            <field name="display_name" />
+        </xpath>
+        <xpath
+                expr="//h5[hasclass('o_kanban_record_title')]/field"
+                position="attributes"
+            >
+            <attribute name="invisible">True</attribute>
+        </xpath>
+    </field>
+</record>
+
+<record id="dms_file_sequence_tree_view" model="ir.ui.view">
+    <field name="name">dms.file.sequence.tree.view</field>
+    <field name="model">dms.file</field>
+    <field name="priority">1</field>
+    <field name="inherit_id" ref="dms.view_dms_file_tree" />
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+            <field name="display_name" />
+        </xpath>
+        <xpath expr="//field[@name='name']" position="attributes">
+            <attribute name="column_invisible">True</attribute>
+        </xpath>
+    </field>
+</record>
+
+<record id="dms_file_sequence_search_view" model="ir.ui.view">
+    <field name="name">dms.file.sequence.tree.view</field>
+    <field name="model">dms.file</field>
+    <field name="inherit_id" ref="dms.search_dms_file" />
+    <field name="arch" type="xml">
+        <field name="name" position="attributes">
+            <attribute
+                    name="filter_domain"
+                >['|', ('name', 'ilike', self), ('sequence_code', 'ilike', self)]</attribute>
+        </field>
+    </field>
+</record>
+
+
+</odoo>
