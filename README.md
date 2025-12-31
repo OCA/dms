@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [dms](dms/) | 17.0.1.2.5 |  | Document Management System for Odoo
 [dms_attachment_link](dms_attachment_link/) | 17.0.1.0.1 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Dms Attachment Link
+[dms_file_sequence](dms_file_sequence/) | 17.0.1.0.1 | <a href='https://github.com/miquelalzanillas'><img src='https://github.com/miquelalzanillas.png' width='32' height='32' style='border-radius:50%;' alt='miquelalzanillas'/></a> <a href='https://github.com/peluko00'><img src='https://github.com/peluko00.png' width='32' height='32' style='border-radius:50%;' alt='peluko00'/></a> | Dms File Sequence
 [dms_storage](dms_storage/) | 17.0.1.0.0 |  | Integrate DMS with external Storages
 
 [//]: # (end addons)
