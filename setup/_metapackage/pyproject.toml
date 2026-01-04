@@ -1,0 +1,17 @@
+[project]
+name = "odoo-addons-oca-dms"
+version = "18.0.20250811.0"
+dependencies = [
+    "odoo-addon-dms==18.0.*",
+    "odoo-addon-dms_auto_classification==18.0.*",
+    "odoo-addon-dms_field==18.0.*",
+    "odoo-addon-dms_field_auto_classification==18.0.*",
+    "odoo-addon-dms_user_role==18.0.*",
+    "odoo-addon-hr_dms_field==18.0.*",
+    "odoo-addon-web_editor_media_dialog_dms==18.0.*",
+]
+classifiers=[
+    "Programming Language :: Python",
+    "Framework :: Odoo",
+    "Framework :: Odoo :: 18.0",
+]

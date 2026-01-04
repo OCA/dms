@@ -194,7 +194,7 @@ const config = [{
     },
 
 }, {
-    files: ["**/*.esm.js", "**/*test.js"],
+    files: ["**/*.esm.js"],
 
     languageOptions: {
         ecmaVersion: 2024,

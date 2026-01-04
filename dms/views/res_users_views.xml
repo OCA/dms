@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<odoo>
+    <record id="view_users_form_dms" model="ir.ui.view">
+        <field name="name">res.users.form.dms</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <!-- Add DMS Access Groups tab -->
+            <xpath expr="//page[@name='preferences']" position="after">
+                <page name="dms_access_groups" string="DMS Access" groups="dms.group_dms_manager">
+                    <group string="DMS Security Roles">
+                        <field name="groups_id" widget="many2many_checkboxes" 
+                               domain="[('id', 'in', [ref('dms.group_dms_user'), ref('dms.group_dms_manager')])]"
+                               nolabel="1"/>
+                    </group>
+                    <separator string="DMS Access Groups (Directory Permissions)"/>
+                    <field name="dms_access_group_ids">
+                        <list>
+                            <field name="name" />
+                            <field name="perm_create" />
+                            <field name="perm_write" />
+                            <field name="perm_unlink" />
+                            <field name="count_directories" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
