@@ -16,37 +16,5 @@
         </xpath>
     </t>
 
-    <t
-        t-name="dms.KanbanButtons"
-        t-inherit="web.KanbanView.Buttons"
-        t-inherit-mode="primary"
-    >
-        <xpath expr="//div" position="inside">
-            <t t-if="props.archInfo.activeActions.create">
-                <button
-                    type="button"
-                    class="d-inline d-md-none btn btn-primary mx-1"
-                    t-on-click.prevent="uploadDocument"
-                >
-                    Scan
-                </button>
-                <input
-                    type="file"
-                    name="ufile"
-                    class="d-none"
-                    t-ref="fileInput"
-                    multiple="1"
-                    accept="*"
-                    t-on-change="onChangeFileInput"
-                />
-                <button
-                    type="button"
-                    class="d-none d-md-inline btn btn-primary mx-1"
-                    t-on-click.prevent="uploadDocument"
-                >
-                    Upload
-                </button>
-            </t>
-        </xpath>
-    </t>
+
 </templates>

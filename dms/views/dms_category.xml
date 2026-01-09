@@ -14,7 +14,6 @@
             <search string="Categories">
                 <field
                     name="name"
-                    filter_domain="['|', ('name', 'ilike', self), ('parent_id', 'child_of', raw_value)]"
                 />
                 <filter
                     string="All"

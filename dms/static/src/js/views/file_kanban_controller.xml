@@ -3,9 +3,9 @@
     <t
         t-name="dms.FileKanbanView.Buttons"
         t-inherit="web.KanbanView.Buttons"
-        t-inherit-mode="primary"
+        t-inherit-mode="extension"
     >
-        <div role="toolbar" position="inside">
+        <xpath expr="." position="inside">
             <input
                 type="file"
                 multiple="true"
@@ -20,6 +20,6 @@
             >
                 Upload
             </button>
-        </div>
+        </xpath>
     </t>
 </templates>

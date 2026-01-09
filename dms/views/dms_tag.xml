@@ -12,13 +12,13 @@
         <field name="model">dms.tag</field>
         <field name="arch" type="xml">
             <search string="Categories">
-                <field name="name" filter_domain="[('name', 'ilike', self)]" />
+                <field name="name" />
                 <filter
                     string="All"
                     name="all"
                     domain="['|', ('active', '=', False), ('active', '=', True)]"
                 />
-                <group expand="0" name="group_by" string="Group By">
+                <group name="group_by">
                     <filter
                         name="group_by_category"
                         string="Category"

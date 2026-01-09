@@ -143,13 +143,13 @@ class DmsAccessGroups(models.Model):
         "parent_group_id",
         "parent_group_id.users",
         "group_ids",
-        "group_ids.users",
+        "group_ids.user_ids",
         "explicit_user_ids",
     )
     def _compute_users(self):
         for record in self:
             users = (
-                record.group_ids.users
+                record.group_ids.user_ids
                 | record.explicit_user_ids
                 | record.parent_group_id.users
             )

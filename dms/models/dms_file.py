@@ -197,7 +197,7 @@ class DMSFile(models.Model):
         string="Attachment File",
         prefetch=False,
         ondelete="cascade",
-        index=True,
+        index="btree",
     )
 
     def get_human_size(self):

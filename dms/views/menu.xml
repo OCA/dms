@@ -11,7 +11,7 @@
         id="main_menu_dms"
         name="Documents"
         web_icon="dms,static/description/icon.png"
-        groups="group_dms_user"
+        groups="group_dms_viewer"
     >
         <menuitem
             id="menu_dms_file"

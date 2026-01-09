@@ -21,7 +21,6 @@ FileKanbanRenderer.template = "dms.KanbanRenderer";
 
 export const FileKanbanView = {
     ...kanbanView,
-    buttonTemplate: "dms.KanbanButtons",
     Renderer: FileKanbanRenderer,
 };
 

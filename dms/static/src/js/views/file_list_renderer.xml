@@ -21,6 +21,15 @@
             >
                 Upload
             </button>
+            <input
+                type="file"
+                name="ufile"
+                class="d-none"
+                t-ref="fileInput"
+                multiple="1"
+                accept="*"
+                t-on-change="onChangeFileInput"
+            />
         </xpath>
 
         <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
@@ -31,18 +40,6 @@
             >
                 Scan
             </button>
-        </xpath>
-
-        <xpath expr="//div" position="inside">
-            <input
-                type="file"
-                name="ufile"
-                class="d-none"
-                t-ref="fileInput"
-                multiple="1"
-                accept="*"
-                t-on-change="onChangeFileInput"
-            />
         </xpath>
     </t>
 </templates>

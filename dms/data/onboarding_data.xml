@@ -59,15 +59,14 @@
         <field name="sequence">3</field>
     </record>
 
-    <!--  File Onboarding Panel -->
     <record id="onboarding_onboarding_dms_file" model="onboarding.onboarding">
         <field name="name">File Onboarding</field>
         <field
             name="step_ids"
             eval="[
-            Command.link(ref('dms.onboarding_step_document_storage')),
-            Command.link(ref('dms.onboarding_step_create_directory')),
-            Command.link(ref('dms.onboarding_step_upload_file'))
+            (4, ref('dms.onboarding_step_document_storage')),
+            (4, ref('dms.onboarding_step_create_directory')),
+            (4, ref('dms.onboarding_step_upload_file'))
         ]"
         />
         <field name="route_name">document_onboarding_file</field>

@@ -4,8 +4,8 @@
 
 {
     "name": "Document Management System",
-    "summary": """Document Management System for Odoo""",
-    "version": "18.0.1.0.6",
+    "summary": """Document Management System for Odoo 19 (Migrated)""",
+    "version": "19.0.1.0.6",
     "category": "Document Management",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/dms",
@@ -37,6 +37,7 @@
         "views/dms_access_groups_views.xml",
         "views/res_config_settings.xml",
         "views/menu.xml",
+        "views/res_users.xml",
         # Wizard
         "wizards/wizard_dms_file_move_views.xml",
         "wizards/wizard_dms_share_views.xml",

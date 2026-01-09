@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_users_form_dms" model="ir.ui.view">
+        <field name="name">res.users.form.dms</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//page[@name='access_rights']" position="inside">
+                 <group string="Documents" name="dms">
+                     <field name="dms_role" widget="radio"/>
+                 </group>
+             </xpath>
+        </field>
+    </record>
+</odoo>
