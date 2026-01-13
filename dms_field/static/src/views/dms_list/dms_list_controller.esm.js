@@ -115,8 +115,6 @@ export function getDMSListControllerObject() {
             };
         },
         async onDMSLoad(node) {
-            await this.model.root.load();
-            this.model.notify();
             this.processProps();
             var args = this.buildDMSArgs();
             var result = false;
