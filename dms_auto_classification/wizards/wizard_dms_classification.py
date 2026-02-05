@@ -1,4 +1,4 @@
-# Copyright 2024 Tecnativa - Víctor Martínez
+# Copyright 2024-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 import base64
 import re
@@ -13,6 +13,12 @@ class WizardDmsClassification(models.TransientModel):
     _name = "wizard.dms.classification"
     _description = "Wizard Dms Classification"
 
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        required=True,
+        default=lambda self: self.env.company,
+        string="Company",
+    )
     state = fields.Selection(
         selection=[
             ("draft", "Draft"),
@@ -24,6 +30,7 @@ class WizardDmsClassification(models.TransientModel):
         comodel_name="dms.classification.template",
         string="Template",
         required=True,
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
     )
     data_file = fields.Binary(
         string="File",
@@ -175,7 +182,8 @@ class WizardDmsClassificationDetail(models.TransientModel):
 
     @api.depends("file_name")
     def _compute_directory_id(self):
-        directories = self.env["dms.directory"].sudo().search([])
+        domain = [("company_id", "=", self.parent_id.company_id.id)]
+        directories = self.env["dms.directory"].search(domain)
         for item in self:
             item.directory_id = self.parent_id._get_directory_from_pattern(
                 self.parent_id.template_id.directory_pattern, directories
