@@ -52,6 +52,7 @@ msgstr "Clasificar"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__company_id
+#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__company_id
 msgid "Company"
 msgstr "Compañía"
 
@@ -142,13 +143,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: dms_auto_classification
-#: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template____last_update
-#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification____last_update
-#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
-
-#. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__write_uid
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__write_uid
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__write_uid
@@ -170,7 +164,6 @@ msgstr "Nombre"
 #. module: dms_auto_classification
 #. odoo-python
 #: code:addons/dms_auto_classification/wizards/wizard_dms_classification.py:0
-#, python-format
 msgid "Only .zip files are allowed"
 msgstr "Solo se permiten archivos .zip"
 
@@ -209,3 +202,6 @@ msgstr "Asistente Dms Clasificación"
 #: model:ir.model,name:dms_auto_classification.model_wizard_dms_classification_detail
 msgid "Wizard Dms Classification Detail"
 msgstr "Asistente de Clasificación Dms Detalle"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
