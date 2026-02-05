@@ -1,4 +1,4 @@
-# Copyright 2024 Tecnativa - Víctor Martínez
+# Copyright 2024-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import re
 
@@ -51,9 +51,12 @@ class WizardDmsClassificationDetail(models.TransientModel):
     def _compute_directory_id(self):
         """Overwrite to redefine the directory if the template has a linked model."""
         self_with_model = self.filtered(lambda x: x.template_id.model_id)
-        directory_model = self.env["dms.directory"].sudo()
+        _self = self - self_with_model
+        res = super(WizardDmsClassificationDetail, _self)._compute_directory_id()
+        directory_model = self.env["dms.directory"]
         for item in self_with_model:
             domain = [
+                ("company_id", "=", self.parent_id.company_id.id),
                 ("res_model", "=", item.template_id.model_id.model),
                 ("res_id", ">", 0),
             ]
@@ -77,6 +80,4 @@ class WizardDmsClassificationDetail(models.TransientModel):
                     item.directory_id = self.parent_id._get_directory_from_pattern(
                         directory_pattern, directories
                     )
-        return super(
-            WizardDmsClassificationDetail, (self - self_with_model)
-        )._compute_directory_id()
+        return res
