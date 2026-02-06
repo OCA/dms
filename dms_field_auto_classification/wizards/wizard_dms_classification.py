@@ -34,6 +34,11 @@ class WizardDmsClassificationDetail(models.TransientModel):
             if record.directory_id.res_model and record.directory_id.res_id:
                 directory = record.directory_id
             elif (
+                record.directory_id.parent_id.res_model
+                and record.directory_id.parent_id.res_id
+            ):
+                directory = record.directory_id.parent_id
+            elif (
                 record.directory_id.root_directory_id.res_model
                 and record.directory_id.root_directory_id.res_id
             ):
