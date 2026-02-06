@@ -21,6 +21,24 @@ class DMSFieldMixin(models.AbstractModel):
         auto_join=True,
     )
 
+    def web_save(self, vals, specification, next_id=None):
+        """We need to intercept this method to avoid a dms.directory access error
+        in some cases.
+        Example: A user is modifying an employee field via UX but does NOT have
+        access to the linked directory (due to the corresponding dms.access.group),
+        even if the dms_directory_ids field were invisible, it would show a
+        dms.directory access error when saving.
+        The appropriate solution is usually to define a group for the dms_directory_ids
+        field so that only users who have access to it can see it, but there is no
+        specific group that allows us to know whether or not the user will have access
+        to the directory, which is why this hack is done.
+        """
+        f_name = "dms_directory_ids"
+        if f_name not in vals and f_name in specification and not self[f_name]:
+            del specification[f_name]
+        res = super().web_save(vals, specification, next_id)
+        return res
+
     @api.model
     def models_to_track_dms_field_template(self):
         """Models to be tracked for dms field templates
