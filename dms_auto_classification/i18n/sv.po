@@ -51,6 +51,7 @@ msgstr "Klassificera"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__company_id
+#: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__company_id
 msgid "Company"
 msgstr "Bolag"
 
