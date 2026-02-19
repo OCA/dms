@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-05 08:37+0000\n"
-"PO-Revision-Date: 2024-04-22 16:36+0000\n"
-"Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
+"PO-Revision-Date: 2026-02-19 14:40+0000\n"
+"Last-Translator: herminioelx <herminiojs@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields.selection,name:dms_auto_classification.selection__wizard_dms_classification__state__analyze
@@ -117,7 +117,7 @@ msgstr "Archivo"
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__data_file
 msgid "File content"
-msgstr ""
+msgstr "Contenido del fichero"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__file_name
@@ -133,7 +133,7 @@ msgstr "Patrón de nombre de archivo"
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__full_path
 msgid "Full path"
-msgstr ""
+msgstr "Ruta entera"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__id
