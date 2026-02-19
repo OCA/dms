@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-20 08:48+0000\n"
-"PO-Revision-Date: 2024-05-20 10:49+0200\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-02-19 14:40+0000\n"
+"Last-Translator: herminioelx <herminiojs@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_process
@@ -49,7 +49,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/dms/models/access_groups.py:0
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (copia)"
 
 #. module: dms
 #. odoo-python
@@ -69,6 +69,8 @@ msgid ""
 "<i class=\"fa fa-archive\"/>\n"
 "                                            Archive"
 msgstr ""
+"<i class=\"fa fa-archive\"/>\n"
+"                                            Archivar"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -76,6 +78,8 @@ msgid ""
 "<i class=\"fa fa-archive\"/>\n"
 "                                            Unarchive"
 msgstr ""
+"<i class=\"fa fa-archive\"/>\n"
+"                                            Desarchivar"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -83,6 +87,8 @@ msgid ""
 "<i class=\"fa fa-download\"/>\n"
 "                                            Download"
 msgstr ""
+"<i class=\"fa fa-download\"/>\n"
+"                                            Descargar"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
@@ -113,6 +119,8 @@ msgid ""
 "<i class=\"fa fa-external-link\"/>\n"
 "                                            Open"
 msgstr ""
+"<i class=\"fa fa-external-link\"/>\n"
+"                                            Abrir"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -120,6 +128,8 @@ msgid ""
 "<i class=\"fa fa-file-o\"/>\n"
 "                                            Files"
 msgstr ""
+"<i class=\"fa fa-file-o\"/>\n"
+"                                            Ficheros"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -127,6 +137,8 @@ msgid ""
 "<i class=\"fa fa-folder-o\"/>\n"
 "                                            Directories"
 msgstr ""
+"<i class=\"fa fa-folder-o\"/>\n"
+"                                            Directorios"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -134,6 +146,8 @@ msgid ""
 "<i class=\"fa fa-lock\"/>\n"
 "                                            Lock"
 msgstr ""
+"<i class=\"fa fa-lock\"/>\n"
+"                                            Bloquear"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -143,6 +157,8 @@ msgid ""
 "<i class=\"fa fa-pencil-square-o\"/>\n"
 "                                            Edit"
 msgstr ""
+"<i class=\"fa fa-pencil-square-o\"/>\n"
+"                                            Editar"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -152,6 +168,8 @@ msgid ""
 "<i class=\"fa fa-trash-o\"/>\n"
 "                                            Delete"
 msgstr ""
+"<i class=\"fa fa-trash-o\"/>\n"
+"                                            Eliminar"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
@@ -159,6 +177,8 @@ msgid ""
 "<i class=\"fa fa-unlock-alt\"/>\n"
 "                                            Unlock"
 msgstr ""
+"<i class=\"fa fa-unlock-alt\"/>\n"
+"                                            Desbloquear"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
@@ -177,12 +197,12 @@ msgstr ""
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "<span class=\"ms-1\">Directories</span>"
-msgstr ""
+msgstr "<span class=\"ms-1\">Directorios</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "<span class=\"ms-1\">Files</span>"
-msgstr ""
+msgstr "<span class=\"ms-1\">Ficheros</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
@@ -199,7 +219,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "<span>Actions</span>"
-msgstr ""
+msgstr "<span>Acciones</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
@@ -209,12 +229,12 @@ msgstr "<span>Documentos</span>"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_kanban
 msgid "<span>Operations</span>"
-msgstr ""
+msgstr "<span>Operaciones</span>"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_kanban
 msgid "<span>Views</span>"
-msgstr ""
+msgstr "<span>Visualizaciones</span>"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_defaults
@@ -262,7 +282,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/dms/models/dms_file.py:0
 msgid "A file with the same name already exists in this directory."
-msgstr ""
+msgstr "Ya existe un fichero con el ese nombre en el directorio."
 
 #. module: dms
 #. odoo-python
