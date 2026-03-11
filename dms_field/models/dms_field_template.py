@@ -97,6 +97,7 @@ class DmsFieldTemplate(models.Model):
                 ("parent_id", "=", self.parent_directory_id.id),
                 ("res_model", "=", res_model),
                 ("res_id", "=", res_id),
+                ("storage_id", "=", template.storage_id.id),
             ]
         )
         if total_directories > 0:
