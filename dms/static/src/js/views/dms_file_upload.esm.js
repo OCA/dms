@@ -97,7 +97,15 @@ export function createFileUploadExtension() {
                 throw new Error(attachments.error);
             }
 
-            await this.onUpload(attachments);
+            await this.onUpload(attachments).finally(() => {
+                // Delete the attachments once we're done with them
+                const attachmentIds = attachments.map((a) => a.id);
+                // If the upload failed, don't waste an unlink call
+                if (!attachmentIds.length) {
+                    return;
+                }
+                this.orm.call("ir.attachment", "unlink", [attachmentIds]);
+            });
         },
 
         async onUpload(attachments) {
