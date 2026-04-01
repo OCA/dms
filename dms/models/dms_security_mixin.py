@@ -282,7 +282,7 @@ class DmsSecurityMixin(models.AbstractModel):
         if any(self._ids) and not self.env.su:
             Rule = self.env["ir.rule"]
             domain = Rule._compute_domain(self._name, operation)
-            items = self.search(domain)
+            items = self.with_context(active_test=False).search(domain)
             if any(x_id not in items.ids for x_id in self.ids):
                 raise Rule._make_access_error(operation, (self - items))
 
