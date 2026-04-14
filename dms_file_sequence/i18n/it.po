@@ -6,53 +6,55 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-04-14 12:45+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: dms_file_sequence
 #: model:ir.model,name:dms_file_sequence.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: dms_file_sequence
 #: model:ir.model.fields,field_description:dms_file_sequence.field_res_config_settings__dms_file_display_name_pattern
 msgid "Dms File Display Name Pattern"
-msgstr ""
+msgstr "Schema nome visualizzato file DMS"
 
 #. module: dms_file_sequence
 #: model:ir.model,name:dms_file_sequence.model_dms_file
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #. module: dms_file_sequence
 #: model_terms:ir.ui.view,arch_db:dms_file_sequence.res_config_settings_view_form
 msgid "File Display Name"
-msgstr ""
+msgstr "Nome visualizzato file"
 
 #. module: dms_file_sequence
 #: model:ir.model.constraint,message:dms_file_sequence.constraint_dms_file_name_required
 msgid "File name is required"
-msgstr ""
+msgstr "È richiesto il nome file"
 
 #. module: dms_file_sequence
 #: model:ir.model.fields,field_description:dms_file_sequence.field_dms_file__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: dms_file_sequence
 #: model:ir.model.fields,field_description:dms_file_sequence.field_dms_file__sequence_code
 msgid "Sequence Code"
-msgstr ""
+msgstr "Codice sequenza"
 
 #. module: dms_file_sequence
 #: model:ir.model.constraint,message:dms_file_sequence.constraint_dms_file_sequence_code_unique
 msgid "Sequence code must be unique"
-msgstr ""
+msgstr "Il codice sequenza deve essere univoco"
 
 #. module: dms_file_sequence
 #: model:ir.model.fields,help:dms_file_sequence.field_res_config_settings__dms_file_display_name_pattern
@@ -60,3 +62,5 @@ msgid ""
 "Use %(sequence_code)s and %(name)s to include the sequence code and the name"
 " of the file in the display name."
 msgstr ""
+"Usare %(sequence_code)s e %(name)s per includere il codice sequenza e il "
+"nome del file nel nome visualizzato."
