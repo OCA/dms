@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="dms_storage_form_view">
+        <field name="name">dms.storage.form (in dms_storage)</field>
+        <field name="model">dms.storage</field>
+        <field name="inherit_id" ref="dms.view_dms_storage_form" />
+        <field name="arch" type="xml">
+            <group name="save_storage_right" position="inside">
+                <field
+                    name="storage_backend_id"
+                    required="save_type == 'storage'"
+                    invisible="save_type != 'storage'"
+                />
+            </group>
+        </field>
+    </record>
+</odoo>

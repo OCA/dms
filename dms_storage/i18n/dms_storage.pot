@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dms_storage
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dms_storage
+#: model:ir.model,name:dms_storage.model_dms_file
+msgid "File"
+msgstr ""
+
+#. module: dms_storage
+#: model:ir.model.fields,field_description:dms_storage.field_dms_storage__save_type
+msgid "Save Type"
+msgstr ""
+
+#. module: dms_storage
+#: model:ir.model,name:dms_storage.model_dms_storage
+#: model:ir.model.fields.selection,name:dms_storage.selection__dms_storage__save_type__storage
+msgid "Storage"
+msgstr ""
+
+#. module: dms_storage
+#: model:ir.model.fields,field_description:dms_storage.field_dms_file__storage_backend_id
+#: model:ir.model.fields,field_description:dms_storage.field_dms_storage__storage_backend_id
+msgid "Storage Backend"
+msgstr ""
+
+#. module: dms_storage
+#: model:ir.model.fields,field_description:dms_storage.field_dms_file__storage_path
+msgid "Storage Path"
+msgstr ""
+
+#. module: dms_storage
+#: model:ir.model.fields,help:dms_storage.field_dms_storage__save_type
+msgid ""
+"The save type is used to determine how a file is saved by the system. If you"
+" change this setting, you can migrate existing files manually by triggering "
+"the action."
+msgstr ""
