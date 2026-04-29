@@ -490,40 +490,18 @@ export function getDMSListControllerObject() {
             const params = {
                 csrf_token: odoo.csrf_token,
                 ufile: [...files],
-                model: "dms.file",
-                id: 0,
+                directory_id: directoryId,
             };
             const fileData = await this.http.post(
-                "/web/binary/upload_attachment",
+                "/web/binary/upload_dms_file",
                 params,
                 "text"
             );
-            const attachments = JSON.parse(fileData);
-            if (attachments.error) {
-                throw new Error(attachments.error);
+            const dms_files = JSON.parse(fileData);
+            if (dms_files.error) {
+                throw new Error(dms_files.error);
             }
-            const attachmentIds = attachments.map((a) => a.id);
-            if (!attachmentIds.length) {
-                return "no_attachments";
-            }
-            const attachment_datas = await this.orm.call(
-                "dms.file",
-                "get_dms_files_from_attachments",
-                [],
-                {
-                    attachment_ids: attachmentIds,
-                }
-            );
-            const attachments_args = [];
-            attachment_datas.forEach((attachment_data) => {
-                attachments_args.push({
-                    name: attachment_data.name,
-                    content: attachment_data.datas,
-                    mimetype: attachment_data.mimetype,
-                    directory_id: directoryId,
-                });
-            });
-            return this.orm.call("dms.file", "create", [attachments_args]);
+            return dms_files.map((a) => a.id);
         },
     };
 }
