@@ -1,0 +1,16 @@
+// This code is necessary to avoid an incompatibility with the definition
+// .o_field_widget input, .o_field_widget textarea {color: inherit} added by
+// web_responsive. This causes the text to appear white when editing the name of
+// the selected file/directory on field mode (Example: field added on hr.employee by
+// hr_dms_field), making it impossible to see the content. It is necessary to maintain
+// it in version 16.0, and if migrating to higher versions, check if it remains
+// necessary.
+.jstree-proton .jstree-clicked {
+    color: #000000 !important;
+    i {
+        color: #ffffff;
+    }
+}
+.jstree-proton a.jstree-clicked {
+    color: #ffffff !important;
+}
