@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Assets -->
+    <record id="x2many_field" model="ir.asset">
+        <field name="name">DMS X2Many Field</field>
+        <field name="bundle">web.assets_backend</field>
+        <field
+            name="path"
+        >dms_field/static/src/views/fields/x2many/x2many_field.xml</field>
+        <field name="sequence" eval="99" />
+    </record>
+</odoo>
