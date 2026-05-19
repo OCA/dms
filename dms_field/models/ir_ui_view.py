@@ -18,7 +18,7 @@ class IrUiView(models.Model):
 
     def _postprocess_tag_dms_list(self, node, name_manager, node_info):
         parent = node.getparent()
-        if parent_name := parent and parent.get("name"):
+        if parent is not None and (parent_name := parent.get("name")):
             field = name_manager.model._fields.get(parent_name)
             if field:
                 group_definitions = self.env["res.groups"]._get_group_definitions()
