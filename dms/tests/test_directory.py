@@ -180,7 +180,7 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
             "directory",
         )
         with self.assertRaises(
-            UserError, msg="The storage of the root directory should " "not be changed"
+            UserError, msg="The storage of the root directory should not be changed"
         ):
             root_directory.write({"storage_id": self.new_storage.id})
 

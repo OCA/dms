@@ -4,9 +4,9 @@
 import base64
 from typing import Optional  # noqa # pylint: disable=unused-import
 
-from odoo import _, http
+from odoo import http
+from odoo.fields import Domain
 from odoo.http import content_disposition, request
-from odoo.osv.expression import OR
 
 from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo.addons.web.controllers.utils import ensure_db
@@ -64,12 +64,12 @@ class CustomerPortal(CustomerPortal):
             sortby,
         ) = self._searchbar_data(filterby, sortby)
         # domain
-        domain = [
-            ("id", "in", request.env["dms.directory"]._get_own_root_directories()),
-        ]
+        domain = Domain(
+            [("id", "in", request.env["dms.directory"]._get_own_root_directories())]
+        )
         # search
         if search and search_in == "name":
-            domain += OR([[], [("name", "ilike", search)]])
+            domain = Domain.AND([domain, Domain.OR([[], [("name", "ilike", search)]])])
         # content according to pager and archive selected
         items = request.env["dms.directory"].search(domain, order=sort_order)
         request.session["my_dms_folder_history"] = items.ids
@@ -235,14 +235,16 @@ class CustomerPortal(CustomerPortal):
         sortby
         :rtype: tuple[str, dict, dict, str, str]
         """
-        searchbar_sortings = {"name": {"label": _("Name"), "order": "name asc"}}
+        searchbar_sortings = {
+            "name": {"label": request.env._("Name"), "order": "name asc"}
+        }
         # default sortby
         if not sortby:
             sortby = "name"
         sort_order = searchbar_sortings[sortby]["order"]
         # search
         searchbar_inputs = {
-            "name": {"input": "name", "label": _("Name")},
+            "name": {"input": "name", "label": request.env._("Name")},
         }
         if not filterby:
             filterby = "name"
