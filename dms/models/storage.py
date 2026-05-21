@@ -5,7 +5,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
@@ -44,7 +44,7 @@ class Storage(models.Model):
         comodel_name="dms.directory",
         inverse_name="storage_id",
         string="Root Directories",
-        auto_join=False,
+        bypass_search_access=False,
         readonly=False,
         copy=False,
     )
@@ -52,7 +52,7 @@ class Storage(models.Model):
         comodel_name="dms.directory",
         inverse_name="storage_id",
         string="Directories",
-        auto_join=False,
+        bypass_search_access=False,
         readonly=True,
         copy=False,
     )
@@ -60,7 +60,7 @@ class Storage(models.Model):
         comodel_name="dms.file",
         inverse_name="storage_id",
         string="Files",
-        auto_join=False,
+        bypass_search_access=False,
         readonly=True,
         copy=False,
     )
@@ -100,7 +100,7 @@ class Storage(models.Model):
     def action_storage_migrate(self):
         if self.save_type != "attachment":
             if not self.env.user.has_group("dms.group_dms_manager"):
-                raise AccessError(_("Only managers can execute this action."))
+                raise AccessError(self.env._("Only managers can execute this action."))
             files = self.env["dms.file"].with_context(active_test=False).sudo()
 
             for record in self:

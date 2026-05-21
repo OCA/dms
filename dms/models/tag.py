@@ -16,7 +16,7 @@ class Tag(models.Model):
     name = fields.Char(required=True, translate=True)
     active = fields.Boolean(
         default=True,
-        help="The active field allows you " "to hide the tag without removing it.",
+        help="The active field allows you to hide the tag without removing it.",
     )
     category_id = fields.Many2one(
         comodel_name="dms.category",
@@ -44,9 +44,10 @@ class Tag(models.Model):
     count_directories = fields.Integer(compute="_compute_count_directories")
     count_files = fields.Integer(compute="_compute_count_files")
 
-    _sql_constraints = [
-        ("name_uniq", "unique (name, category_id)", "Tag name already exists!"),
-    ]
+    _name_uniq = models.Constraint(
+        "unique (name, category_id)",
+        "Tag name already exists!",
+    )
 
     @api.depends("directory_ids")
     def _compute_count_directories(self):

@@ -5,7 +5,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -63,9 +63,10 @@ class DMSCategory(models.Model):
     count_directories = fields.Integer(compute="_compute_count_directories")
     count_files = fields.Integer(compute="_compute_count_files")
 
-    _sql_constraints = [
-        ("name_uniq", "unique (name)", "Category name already exists!"),
-    ]
+    _name_uniq = models.Constraint(
+        "unique (name)",
+        "Category name already exists!",
+    )
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
@@ -100,5 +101,7 @@ class DMSCategory(models.Model):
     @api.constrains("parent_id")
     def _check_category_recursion(self):
         if self._has_cycle():
-            raise ValidationError(_("Error! You cannot create recursive categories."))
+            raise ValidationError(
+                self.env._("Error! You cannot create recursive categories.")
+            )
         return True

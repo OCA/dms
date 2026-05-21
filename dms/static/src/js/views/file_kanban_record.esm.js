@@ -44,7 +44,7 @@ export class FileKanbanRecord extends KanbanRecord {
                 mimetype = self.props.record.data.mimetype;
             }
 
-            const attachment = this.store.Attachment.insert({
+            const attachment = this.store["ir.attachment"].insert({
                 id: self.props.record.data.id,
                 filename: self.props.record.data.name,
                 name: self.props.record.data.name,

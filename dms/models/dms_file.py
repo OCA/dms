@@ -12,9 +12,9 @@ from collections import defaultdict
 
 from PIL import Image
 
-from odoo import _, api, fields, models, tools
+from odoo import api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools import consteq, human_size
 from odoo.tools.mimetypes import guess_mimetype
 
@@ -50,7 +50,7 @@ class DMSFile(models.Model):
         domain="[('permission_create', '=', True)]",
         context={"dms_directory_show_path": True},
         ondelete="restrict",
-        auto_join=True,
+        bypass_search_access=True,
         required=True,
         index="btree",
         tracking=True,  # Leave log if "moved" to another directory
@@ -197,7 +197,7 @@ class DMSFile(models.Model):
         string="Attachment File",
         prefetch=False,
         ondelete="cascade",
-        index=True,
+        index="btree",
     )
 
     def get_human_size(self):
@@ -250,7 +250,7 @@ class DMSFile(models.Model):
         for dms_file in self:
             if should_logging:
                 _logger.info(
-                    _(
+                    self.env._(
                         "Migrate File %(index)s of %(record_count)s [ %("
                         "dms_file_migration)s ]",
                         index=index,
@@ -275,7 +275,9 @@ class DMSFile(models.Model):
         items = self.browse(self.env.context.get("active_ids"))
         root_directories = items.mapped("root_directory_id")
         if len(root_directories) > 1:
-            raise UserError(_("Only files in the same root directory can be moved."))
+            raise UserError(
+                self.env._("Only files in the same root directory can be moved.")
+            )
         result = self.env["ir.actions.act_window"]._for_xml_id(
             "dms.wizard_dms_file_move_act_window"
         )
@@ -300,7 +302,7 @@ class DMSFile(models.Model):
         if not comodel_domain:
             comodel_domain = []
         files_ids = self.search([("directory_id", operator, directory_id)]).ids
-        return expression.AND([comodel_domain, [(field, "in", files_ids)]])
+        return Domain.AND([comodel_domain, [(field, "in", files_ids)]])
 
     @api.model
     def search_panel_select_range(self, field_name, **kwargs):
@@ -505,20 +507,24 @@ class DMSFile(models.Model):
                 record.res_model and record.res_id
             ):
                 raise ValidationError(
-                    _("A file must have model and resource ID in attachment storage.")
+                    self.env._(
+                        "A file must have model and resource ID in attachment storage."
+                    )
                 )
 
     @api.constrains("name")
     def _check_name(self):
         for record in self:
             if not file.check_name(record.name):
-                raise ValidationError(_("The file name is invalid."))
+                raise ValidationError(self.env._("The file name is invalid."))
             files = record.sudo().directory_id.file_ids
             if files.filtered(
                 lambda file, record=record: file.name == record.name and file != record
             ):
                 raise ValidationError(
-                    _("A file with the same name already exists in this directory.")
+                    self.env._(
+                        "A file with the same name already exists in this directory."
+                    )
                 )
 
     @api.constrains("extension")
@@ -527,7 +533,9 @@ class DMSFile(models.Model):
             lambda rec: rec.extension
             and rec.extension in self._get_forbidden_extensions()
         ):
-            raise ValidationError(_("The file has a forbidden file extension."))
+            raise ValidationError(
+                self.env._("The file has a forbidden file extension.")
+            )
 
     @api.constrains("size")
     def _check_size(self):
@@ -535,7 +543,9 @@ class DMSFile(models.Model):
             lambda rec: rec.size > self._get_binary_max_size() * 1024 * 1024
         ):
             raise ValidationError(
-                _("The maximum upload size is %s MB.") % self._get_binary_max_size()
+                self.env._(
+                    "The maximum upload size is %s MB.", self._get_binary_max_size()
+                )
             )
 
     # Create, Update, Delete
@@ -655,7 +665,7 @@ class DMSFile(models.Model):
         :return: An Array of dms files.
         """
         if not attachment_ids:
-            raise UserError(_("No attachment was provided"))
+            raise UserError(self.env._("No attachment was provided"))
 
         attachments = self.env["ir.attachment"].browse(attachment_ids)
 
@@ -663,6 +673,6 @@ class DMSFile(models.Model):
             attachment.res_id or attachment.res_model != "dms.file"
             for attachment in attachments
         ):
-            raise UserError(_("Invalid attachments!"))
+            raise UserError(self.env._("Invalid attachments!"))
 
         return [self.get_attachment_object(attachment) for attachment in attachments]

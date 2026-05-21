@@ -16,12 +16,12 @@
         </xpath>
     </t>
 
-    <t
-        t-name="dms.KanbanButtons"
-        t-inherit="web.KanbanView.Buttons"
-        t-inherit-mode="primary"
-    >
-        <xpath expr="//div" position="inside">
+    <t t-name="dms.KanbanButtons">
+        <div
+            class="o_cp_buttons d-empty-none d-flex align-items-baseline gap-1"
+            role="toolbar"
+            aria-label="DMS file actions"
+        >
             <t t-if="props.archInfo.activeActions.create">
                 <button
                     type="button"
@@ -47,6 +47,6 @@
                     Upload
                 </button>
             </t>
-        </xpath>
+        </div>
     </t>
 </templates>

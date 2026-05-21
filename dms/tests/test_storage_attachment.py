@@ -51,8 +51,8 @@ class StorageAttachmentTestCase(StorageAttachmentBaseCase):
     @mute_logger("odoo.models.unlink")
     def test_storage_attachment_unlink_lock_file(self):
         group_partner_manager = self.env.ref("base.group_partner_manager")
-        self.dms_manager_user.write({"groups_id": [(4, group_partner_manager.id)]})
-        self.dms_user.write({"groups_id": [(4, group_partner_manager.id)]})
+        self.dms_manager_user.write({"group_ids": [(4, group_partner_manager.id)]})
+        self.dms_user.write({"group_ids": [(4, group_partner_manager.id)]})
         attachment = self._create_attachment("demo.txt")
         attachment = attachment.with_user(self.dms_manager_user)
         file = self.storage.storage_file_ids.filtered(lambda x: x.name == "demo.txt")

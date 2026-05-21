@@ -41,7 +41,7 @@
                     name="filter_write"
                     date="write_date"
                 />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         name="group_color"
                         string="Color"
@@ -524,7 +524,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name" filter_domain="[('name','ilike',self)]" />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         name="group_storage"
                         string="Storage"
@@ -628,7 +628,7 @@
         <field name="name">Move</field>
         <field name="model_id" ref="dms.model_dms_file" />
         <field name="binding_model_id" ref="dms.model_dms_file" />
-        <field name="groups_id" eval="[(4, ref('dms.group_dms_user'))]" />
+        <field name="group_ids" eval="[(4, ref('dms.group_dms_user'))]" />
         <field name="binding_view_types">list</field>
         <field name="state">code</field>
         <field name="code">

@@ -3,7 +3,7 @@
 # Copyright 2024 Timothée Vannier - Subteno (https://www.subteno.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -47,7 +47,7 @@ class DmsAccessGroups(models.Model):
         string="Directories",
         column1="gid",
         column2="aid",
-        auto_join=True,
+        bypass_search_access=True,
         readonly=True,
     )
     complete_directory_ids = fields.Many2many(
@@ -56,7 +56,7 @@ class DmsAccessGroups(models.Model):
         column1="gid",
         column2="aid",
         string="Complete directories",
-        auto_join=True,
+        bypass_search_access=True,
         readonly=True,
     )
     count_users = fields.Integer(compute="_compute_users", store=True)
@@ -94,7 +94,7 @@ class DmsAccessGroups(models.Model):
         column2="uid",
         string="Group Users",
         compute="_compute_users",
-        auto_join=True,
+        bypass_search_access=True,
         store=True,
         recursive=True,
     )
@@ -104,9 +104,10 @@ class DmsAccessGroups(models.Model):
         for record in self:
             record.count_directories = len(record.directory_ids)
 
-    _sql_constraints = [
-        ("name_uniq", "unique (name)", "The name of the group must be unique!")
-    ]
+    _name_uniq = models.Constraint(
+        "unique (name)",
+        "The name of the group must be unique!",
+    )
 
     @api.depends(
         "parent_group_id.perm_inclusive_create",
@@ -136,20 +137,20 @@ class DmsAccessGroups(models.Model):
         if res.get("explicit_user_ids"):
             res["explicit_user_ids"] = res["explicit_user_ids"] + [self.env.uid]
         else:
-            res["explicit_user_ids"] = [(6, 0, [self.env.uid])]
+            res["explicit_user_ids"] = [Command.set([self.env.uid])]
         return res
 
     @api.depends(
         "parent_group_id",
         "parent_group_id.users",
         "group_ids",
-        "group_ids.users",
+        "group_ids.user_ids",
         "explicit_user_ids",
     )
     def _compute_users(self):
         for record in self:
             users = (
-                record.group_ids.users
+                record.group_ids.user_ids
                 | record.explicit_user_ids
                 | record.parent_group_id.users
             )
@@ -158,7 +159,7 @@ class DmsAccessGroups(models.Model):
     def copy_data(self, default=None):
         vals_list = super().copy_data(default)
         for group, vals in zip(self, vals_list, strict=False):
-            vals["name"] = _("%s (copy)") % group.name
+            vals["name"] = self.env._("%s (copy)", group.name)
         return vals_list
 
     @api.constrains("parent_path")
@@ -169,9 +170,9 @@ class DmsAccessGroups(models.Model):
         for one in self.filtered("parent_group_id"):
             if str(one.id) in one.parent_path.split("/"):
                 raise ValidationError(
-                    _("Parent group '%(parent)s' is child of '%(current)s'.")
-                    % {
-                        "parent": one.parent_group_id.display_name,
-                        "current": one.display_name,
-                    }
+                    self.env._(
+                        "Parent group '%(parent)s' is child of '%(current)s'.",
+                        parent=one.parent_group_id.display_name,
+                        current=one.display_name,
+                    )
                 )

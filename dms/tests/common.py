@@ -8,11 +8,27 @@ import functools
 import logging
 import threading
 import time
+import unittest
 import uuid
 
 from odoo.tests import Form, new_test_user
 
 from odoo.addons.base.tests.common import BaseCommon
+
+
+def require_demo_xmlid(env, xmlid):
+    """Return ``env.ref(xmlid)`` or raise ``unittest.SkipTest``.
+
+    Helper for tests that depend on demo data — in 19.0 the default is
+    ``with_demo=False``, so CI may run with no demo records loaded.
+    Safe to call from ``setUpClass`` (where ``self.skipTest`` is not
+    available and would TypeError).
+    """
+    record = env.ref(xmlid, raise_if_not_found=False)
+    if not record:
+        raise unittest.SkipTest(f"demo data {xmlid!r} is required for these tests")
+    return record
+
 
 _logger = logging.getLogger(__name__)
 

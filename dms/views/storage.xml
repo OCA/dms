@@ -83,7 +83,7 @@
     <field name="arch" type="xml">
         <search>
             <field name="name" />
-            <group expand="0" string="Group By">
+            <group>
                 <filter
                     string="Save Type"
                     name="group_save_type"

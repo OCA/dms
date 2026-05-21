@@ -12,9 +12,9 @@ from ast import literal_eval
 from collections import defaultdict
 from typing import Literal  # noqa # pylint: disable=unused-import
 
-from odoo import _, api, fields, models, tools
+from odoo import api, fields, models, tools
 from odoo.exceptions import UserError, ValidationError
-from odoo.osv.expression import AND, OR
+from odoo.fields import Domain
 from odoo.tools import consteq, human_size
 
 from ..tools.file import check_name, unique_name
@@ -60,7 +60,7 @@ class DmsDirectory(models.Model):
         comodel_name="dms.storage",
         string="Storage",
         ondelete="restrict",
-        auto_join=True,
+        bypass_search_access=True,
         store=True,
     )
     parent_id = fields.Many2one(
@@ -116,7 +116,7 @@ class DmsDirectory(models.Model):
         comodel_name="dms.directory",
         inverse_name="parent_id",
         string="Subdirectories",
-        auto_join=False,
+        bypass_search_access=False,
         copy=True,
     )
 
@@ -153,7 +153,7 @@ class DmsDirectory(models.Model):
         comodel_name="dms.file",
         inverse_name="directory_id",
         string="Files",
-        auto_join=False,
+        bypass_search_access=False,
         copy=True,
     )
 
@@ -221,7 +221,7 @@ class DmsDirectory(models.Model):
         if operation == "create":
             # When creating, I need create access in parent directory, or
             # self-create permission if it's a root directory
-            result = OR(
+            result = Domain.OR(
                 [
                     [("is_root_directory", "=", False)] + result,
                     [("is_root_directory", "=", True)] + self_filter,
@@ -376,10 +376,9 @@ class DmsDirectory(models.Model):
                     return domain[1], domain[2]
         return None, None
 
-    # Search
     @api.model
     def _search_starred(self, operator, operand):
-        if operator == "=" and operand:
+        if operator in ("=", "in") and operand:
             return [("user_star_ids", "in", [self.env.uid])]
         return [("user_star_ids", "not in", [self.env.uid])]
 
@@ -412,14 +411,16 @@ class DmsDirectory(models.Model):
         for record in self:
             directories = len(record.child_directory_ids)
             record.count_directories = directories
-            record.count_directories_title = _("%s Subdirectories") % directories
+            record.count_directories_title = self.env._(
+                "%s Subdirectories", directories
+            )
 
     @api.depends("file_ids")
     def _compute_count_files(self):
         for record in self:
             files = len(record.file_ids)
             record.count_files = files
-            record.count_files_title = _("%s Files") % files
+            record.count_files_title = self.env._("%s Files", files)
 
     @api.depends("child_directory_ids", "file_ids")
     def _compute_count_elements(self):
@@ -528,7 +529,9 @@ class DmsDirectory(models.Model):
     @api.constrains("parent_id")
     def _check_directory_recursion(self):
         if self._has_cycle():
-            raise ValidationError(_("Error! You cannot create recursive directories."))
+            raise ValidationError(
+                self.env._("Error! You cannot create recursive directories.")
+            )
         return True
 
     @api.constrains("storage_id", "model_id")
@@ -538,34 +541,40 @@ class DmsDirectory(models.Model):
         ):
             if not record.model_id:
                 raise ValidationError(
-                    _("A directory has to have model in attachment storage.")
+                    self.env._("A directory has to have model in attachment storage.")
                 )
             if not record.is_root_directory and not record.res_id:
                 raise ValidationError(
-                    _("This directory needs to be associated to a record.")
+                    self.env._("This directory needs to be associated to a record.")
                 )
 
     @api.constrains("is_root_directory", "storage_id")
     def _check_directory_storage(self):
         for record in self:
             if record.is_root_directory and not record.storage_id:
-                raise ValidationError(_("A root directory has to have a storage."))
+                raise ValidationError(
+                    self.env._("A root directory has to have a storage.")
+                )
 
     @api.constrains("is_root_directory", "parent_id")
     def _check_directory_parent(self):
         for record in self:
             if record.is_root_directory and record.parent_id:
                 raise ValidationError(
-                    _("A directory can't be a root and have a parent directory.")
+                    self.env._(
+                        "A directory can't be a root and have a parent directory."
+                    )
                 )
             if not record.is_root_directory and not record.parent_id:
-                raise ValidationError(_("A directory has to have a parent directory."))
+                raise ValidationError(
+                    self.env._("A directory has to have a parent directory.")
+                )
 
     @api.constrains("name")
     def _check_name(self):
         for record in self:
             if self.env.context.get("check_name", True) and not check_name(record.name):
-                raise ValidationError(_("The directory name is invalid."))
+                raise ValidationError(self.env._("The directory name is invalid."))
             if record.is_root_directory:
                 children = record.sudo().storage_id.root_directory_ids
             else:
@@ -576,7 +585,7 @@ class DmsDirectory(models.Model):
                 and child != record
             ):
                 raise ValidationError(
-                    _("A directory with the same name already exists.")
+                    self.env._("A directory with the same name already exists.")
                 )
 
     # Create, Update, Delete
@@ -626,7 +635,7 @@ class DmsDirectory(models.Model):
             return parent_directory
         names = parent_directory.child_directory_ids.mapped("name")
         slug = self.env["ir.http"]._slug
-        subject = slug(msg_dict.get("subject", _("Alias-Mail-Extraction")))
+        subject = slug(msg_dict.get("subject", self.env._("Alias-Mail-Extraction")))
         defaults = dict(
             {"name": unique_name(subject, names, escape_suffix=True)}, **custom_values
         )
@@ -678,13 +687,15 @@ class DmsDirectory(models.Model):
                 if new_parent_id:
                     if old_storage_id != self.browse(new_parent_id).storage_id.id:
                         raise UserError(
-                            _(
+                            self.env._(
                                 "It is not possible to change to a parent "
                                 "with other storage."
                             )
                         )
                 elif old_storage_id != new_storage_id:
-                    raise UserError(_("It is not possible to change the storage."))
+                    raise UserError(
+                        self.env._("It is not possible to change the storage.")
+                    )
         # Groups part
         if any(key in vals for key in ["group_ids", "inherit_group_ids"]):
             res = super().write(vals)
@@ -743,7 +754,7 @@ class DmsDirectory(models.Model):
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "dms.action_dms_directory"
         )
-        domain = AND(
+        domain = Domain.AND(
             [
                 literal_eval(action["domain"].strip()),
                 [("parent_id", "child_of", self.id)],
@@ -761,7 +772,7 @@ class DmsDirectory(models.Model):
     def action_dms_files_all_directory(self):
         self.ensure_one()
         action = self.env["ir.actions.act_window"]._for_xml_id("dms.action_dms_file")
-        domain = AND(
+        domain = Domain.AND(
             [
                 literal_eval(action["domain"].strip()),
                 [("directory_id", "child_of", self.id)],

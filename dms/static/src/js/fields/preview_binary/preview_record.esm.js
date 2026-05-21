@@ -18,7 +18,7 @@ export class PreviewRecordField extends BinaryField {
 
     onFilePreview() {
         const self = this;
-        const attachment = this.store.Attachment.insert({
+        const attachment = this.store["ir.attachment"].insert({
             id: self.props.record.resId,
             filename: self.props.record.data.display_name || "",
             name: self.props.record.data.display_name || "",

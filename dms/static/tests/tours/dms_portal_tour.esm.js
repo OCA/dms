@@ -6,7 +6,6 @@ import {registry} from "@web/core/registry";
 
 registry.category("web_tour.tours").add("dms_portal_mail_tour", {
     url: "/my/dms",
-    test: true,
     steps: () => [
         {
             content: "Go to Mails directory",
@@ -14,15 +13,16 @@ registry.category("web_tour.tours").add("dms_portal_mail_tour", {
             run: "click",
         },
         {
-            content: "Go to Mail_01.eml",
+            content: "Mail_01.eml is reachable",
             trigger: ".tr_dms_file_link:contains('Mail_01.eml')",
+            // eslint-disable-next-line no-empty-function
+            run() {},
         },
     ],
 });
 
 registry.category("web_tour.tours").add("dms_portal_partners_tour", {
     url: "/my/dms",
-    test: true,
     steps: () => [
         {
             content: "Go to Partners directory",
@@ -35,8 +35,10 @@ registry.category("web_tour.tours").add("dms_portal_partners_tour", {
             run: "click",
         },
         {
-            content: "Go to test.txt",
+            content: "test.txt is reachable",
             trigger: ".tr_dms_file_link:contains('test.txt')",
+            // eslint-disable-next-line no-empty-function
+            run() {},
         },
     ],
 });

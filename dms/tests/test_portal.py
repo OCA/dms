@@ -6,7 +6,7 @@ from odoo.exceptions import AccessError
 from odoo.tests.common import users
 from odoo.tools import mute_logger
 
-from .common import StorageAttachmentBaseCase
+from .common import StorageAttachmentBaseCase, require_demo_xmlid
 
 
 @odoo.tests.tagged("post_install", "-at_install")
@@ -14,7 +14,7 @@ class TestDmsPortal(odoo.tests.HttpCase, StorageAttachmentBaseCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.partner = cls.env.ref("base.partner_demo_portal")
+        cls.partner = require_demo_xmlid(cls.env, "base.partner_demo_portal")
         cls.portal_user = cls.partner.user_ids
         cls._create_attachment("test.txt")
         cls._create_attachment("test2.txt", cls.other_partner)
