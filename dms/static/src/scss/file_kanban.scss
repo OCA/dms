@@ -1,0 +1,387 @@
+// Copyright 2026 ledoent — Don Kendall
+// License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+// Denser, mime-aware file kanban card.
+//
+// Density tiers are applied via [data-density] on the kanban view root.
+// Default = "comfortable"; "compact" and "list" are toggled via the bar in
+// the top-right of the kanban area. Selection persists in localStorage.
+
+.mk_file_kanban_view {
+    position: relative;
+
+    // ---- Density toggle bar (floating top-right above the grid) ----
+    .o_kanban_dms_density_toggle {
+        position: absolute;
+        top: 8px;
+        right: 16px;
+        z-index: 2;
+    }
+
+    // ---- Card chrome (applies to every density) ----
+    .o_kanban_dms_card {
+        // Default accent for unknown extensions / no mimetype info.
+        --dms-accent: var(--bs-secondary-color, #6c757d);
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-left: 3px solid var(--dms-accent);
+        transition:
+            transform 140ms ease,
+            box-shadow 140ms ease,
+            border-left-width 140ms ease;
+    }
+
+    // Subtle hover lift — cards feel tactile, the accent thickens to draw
+    // the eye to the hovered card without disturbing density.
+    .o_kanban_record:hover .o_kanban_dms_card {
+        transform: translateY(-1px);
+        box-shadow:
+            0 2px 4px rgba(0, 0, 0, 0.04),
+            0 4px 12px rgba(0, 0, 0, 0.06);
+        border-left-width: 4px;
+    }
+
+    // Empty many2many tags widget renders a wrapper div with no content;
+    // hide it so cards without tags don't carry empty vertical space.
+    .o_kanban_dms_card__body .o_field_many2many_tags:empty,
+    .o_kanban_dms_card__body .o_field_many2many_tags:has(.o_input_dropdown:only-child) {
+        display: none;
+    }
+
+    // The actual card chrome (thumb / body / meta sub-styles below).
+    .o_kanban_dms_card {
+        &__thumb {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bs-tertiary-bg, #f4f5f7);
+            border-radius: 4px;
+            overflow: hidden;
+
+            img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &__lock {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            padding: 2px 5px;
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 3px;
+            font-size: 0.75rem;
+            color: var(--bs-warning-text-emphasis, #997404);
+        }
+
+        // Extension pill — bottom-right of the thumb. Tinted using the
+        // per-extension accent so the pill reinforces the spine without a
+        // second source of truth for colour. Hidden in compact/list densities.
+        &__ext_pill {
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            padding: 0 5px;
+            font-family: var(
+                --bs-font-monospace,
+                ui-monospace,
+                "SFMono-Regular",
+                Menlo,
+                monospace
+            );
+            font-size: 0.62rem;
+            font-weight: 600;
+            line-height: 1.5;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #fff;
+            background-color: var(--dms-accent, var(--bs-secondary, #6c757d));
+            border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+            pointer-events: none;
+        }
+
+        &__body {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0; // allow text-truncate on the name
+        }
+
+        &__name {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        // Directory path subtitle — sits directly under the filename so
+        // duplicate filenames across directories are disambiguated at a
+        // glance. Hidden in compact/list densities.
+        &__subtitle {
+            display: block;
+            font-size: 0.72rem;
+            line-height: 1.2;
+            margin-top: -2px;
+        }
+
+        &__meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 4px;
+            border-top: 1px solid
+                var(--bs-border-color-translucent, rgba(0, 0, 0, 0.075));
+            font-size: 0.75rem;
+            color: var(--bs-secondary-color, #6c757d);
+        }
+
+        &__avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    // Density-aware suppression: the subtitle + ext pill belong to the
+    // comfortable density's "scannable card" composition. Compact + list
+    // densities prioritise row count, so we hide them there.
+    .o_kanban_renderer[data-density="compact"],
+    .o_kanban_renderer[data-density="list"] {
+        .o_kanban_dms_card__subtitle,
+        .o_kanban_dms_card__ext_pill {
+            display: none;
+        }
+    }
+
+    // ---- Comfortable (default): vertical card, denser than Odoo's stock ----
+    // Odoo's `.o_kanban_record` has its own min-height which would let the
+    // thumb stretch to fill (flex-column distributes free space). Override
+    // both the record min-height and pin the thumb to its natural size so
+    // the card sits as tall as the content requires, no more.
+    .o_kanban_renderer[data-density="comfortable"],
+    .o_kanban_renderer:not([data-density]) {
+        .o_kanban_record {
+            min-height: 0;
+        }
+
+        .o_kanban_dms_card {
+            padding: 10px 12px;
+            min-height: 0;
+            gap: 10px;
+
+            // Thumb sized to its content (mime icon or image_128).
+            // Loses the placeholder grey rectangle that dominated the
+            // previous layout and made small icons look stranded.
+            &__thumb {
+                aspect-ratio: auto;
+                flex: 0 0 auto;
+                min-height: 0;
+                padding: 4px 0;
+                background-color: transparent;
+                align-self: flex-start;
+            }
+
+            &__thumb img {
+                width: 56px;
+                height: 56px;
+            }
+
+            // For image files, icon_url returns /web/image/.../image_128 —
+            // those benefit from a wider thumbnail. The dms.mixins.thumbnail
+            // cropping is 128×128 so we can show it square at a larger size.
+            &__thumb img[src*="image_128"] {
+                width: 88px;
+                height: 88px;
+                border-radius: 4px;
+            }
+        }
+    }
+
+    // ---- Compact: row-style with icon + name on a single line ----
+    // Replaces the comfortable card's stacked thumb+body+meta with a
+    // horizontal row inside each card, halving vertical footprint.
+    .o_kanban_renderer[data-density="compact"] {
+        .o_kanban_record {
+            min-height: unset;
+        }
+
+        .o_kanban_dms_card {
+            flex-direction: row;
+            align-items: center;
+            padding: 4px 8px;
+            gap: 10px;
+            min-height: 0;
+
+            &__thumb {
+                flex: 0 0 32px;
+                width: 32px;
+                height: 32px;
+                aspect-ratio: 1;
+                min-height: 0;
+                padding: 0;
+                background-color: transparent;
+            }
+
+            &__thumb img {
+                width: 24px;
+                height: 24px;
+            }
+
+            &__lock {
+                top: 0;
+                right: 0;
+                font-size: 0.65rem;
+            }
+
+            &__body {
+                flex: 1 1 auto;
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+            }
+
+            &__name {
+                flex: 1 1 auto;
+                font-size: 0.85rem;
+            }
+
+            &__meta {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none;
+                flex: 0 0 auto;
+                font-size: 0.7rem;
+            }
+        }
+    }
+
+    // ---- List: horizontal row, icon + meta inline ----
+    .o_kanban_renderer[data-density="list"] {
+        // The renderer IS the flex container — no nested descendant needed.
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .o_kanban_record {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-height: unset;
+            margin: 0;
+        }
+
+        .o_kanban_dms_card {
+            flex-direction: row;
+            align-items: center;
+            padding: 6px 10px;
+            gap: 12px;
+
+            &__thumb {
+                flex: 0 0 32px;
+                width: 32px;
+                height: 32px;
+                aspect-ratio: 1;
+                min-height: 32px;
+            }
+
+            &__thumb img {
+                width: 24px;
+                height: 24px;
+            }
+
+            &__body {
+                flex: 1 1 auto;
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+            }
+
+            &__meta {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none;
+                flex: 0 0 auto;
+            }
+        }
+    }
+
+    // ---- Animated dropzone (drag-over overlay) ----
+    //
+    // Replaces the default static cloud icon with a marching-dashed-border
+    // overlay + pulsing icon + title + hint. Triggered by the renderer's
+    // existing `dragState.showDragZone` state — no JS change.
+    .o_dms_dropzone {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        background:
+            linear-gradient(rgba(113, 75, 103, 0.06), rgba(113, 75, 103, 0.1)),
+            repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 8px,
+                rgba(113, 75, 103, 0.06) 8px,
+                rgba(113, 75, 103, 0.06) 16px
+            );
+        border-radius: 8px;
+        outline: 3px dashed var(--bs-primary, #714b67);
+        outline-offset: -8px;
+        animation: o_dms_dropzone_march 1s linear infinite;
+        z-index: 10;
+
+        &__icon {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: rgba(113, 75, 103, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: o_dms_dropzone_pulse 1.5s ease-in-out infinite;
+
+            i.fa {
+                font-size: 3rem;
+                color: var(--bs-primary, #714b67);
+            }
+        }
+
+        &__title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--bs-primary, #714b67);
+        }
+
+        &__hint {
+            font-size: 0.85rem;
+            color: var(--bs-secondary-color, #6c757d);
+        }
+    }
+}
+
+@keyframes o_dms_dropzone_march {
+    from {
+        outline-offset: -8px;
+    }
+    to {
+        outline-offset: -16px;
+    }
+}
+
+@keyframes o_dms_dropzone_pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+}

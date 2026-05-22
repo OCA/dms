@@ -1,0 +1,158 @@
+// Copyright 2026 ledoent — Don Kendall
+// License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+//
+// Per-extension accent palette — single source of truth.
+//
+// Sets `--dms-accent` (CSS custom property) on any card whose `data-ext`
+// attribute matches a known extension family. The variable cascades to
+// descendant elements (spine, ext pill, mime icon) so each surface that
+// adopts the data-ext attribute pattern automatically inherits the right
+// colour without duplicating the map.
+//
+// This file is loaded in BOTH `web.assets_backend` (kanban / list / form)
+// and `web.assets_frontend` (portal) — see __manifest__.py.
+//
+// To support a new card surface, just give it `data-ext` and include its
+// selector in the per-rule selector list below. The default accent for
+// unknown extensions is set on the card class itself in its own SCSS
+// (e.g. `.o_kanban_dms_card { --dms-accent: var(--bs-secondary-color); }`).
+
+// Documents — crimson
+.o_kanban_dms_card[data-ext="pdf"],
+.o_dms_portal_card--file[data-ext="pdf"] {
+    --dms-accent: #d6336c;
+}
+
+// Word-family — blue
+.o_kanban_dms_card[data-ext="doc"],
+.o_kanban_dms_card[data-ext="docx"],
+.o_kanban_dms_card[data-ext="odt"],
+.o_kanban_dms_card[data-ext="rtf"],
+.o_dms_portal_card--file[data-ext="doc"],
+.o_dms_portal_card--file[data-ext="docx"],
+.o_dms_portal_card--file[data-ext="odt"],
+.o_dms_portal_card--file[data-ext="rtf"] {
+    --dms-accent: #1971c2;
+}
+
+// Spreadsheets — green
+.o_kanban_dms_card[data-ext="xls"],
+.o_kanban_dms_card[data-ext="xlsx"],
+.o_kanban_dms_card[data-ext="ods"],
+.o_kanban_dms_card[data-ext="csv"],
+.o_dms_portal_card--file[data-ext="xls"],
+.o_dms_portal_card--file[data-ext="xlsx"],
+.o_dms_portal_card--file[data-ext="ods"],
+.o_dms_portal_card--file[data-ext="csv"] {
+    --dms-accent: #2f9e44;
+}
+
+// Presentations — orange
+.o_kanban_dms_card[data-ext="ppt"],
+.o_kanban_dms_card[data-ext="pptx"],
+.o_kanban_dms_card[data-ext="odp"],
+.o_dms_portal_card--file[data-ext="ppt"],
+.o_dms_portal_card--file[data-ext="pptx"],
+.o_dms_portal_card--file[data-ext="odp"] {
+    --dms-accent: #e8590c;
+}
+
+// Plain text / markdown — slate
+.o_kanban_dms_card[data-ext="txt"],
+.o_kanban_dms_card[data-ext="md"],
+.o_kanban_dms_card[data-ext="rst"],
+.o_dms_portal_card--file[data-ext="txt"],
+.o_dms_portal_card--file[data-ext="md"],
+.o_dms_portal_card--file[data-ext="rst"] {
+    --dms-accent: #495057;
+}
+
+// Code (compiled / scripted) — teal
+.o_kanban_dms_card[data-ext="py"],
+.o_kanban_dms_card[data-ext="js"],
+.o_kanban_dms_card[data-ext="ts"],
+.o_kanban_dms_card[data-ext="java"],
+.o_kanban_dms_card[data-ext="c"],
+.o_kanban_dms_card[data-ext="cc"],
+.o_kanban_dms_card[data-ext="cpp"],
+.o_kanban_dms_card[data-ext="cs"],
+.o_kanban_dms_card[data-ext="h"],
+.o_kanban_dms_card[data-ext="hpp"],
+.o_kanban_dms_card[data-ext="go"],
+.o_kanban_dms_card[data-ext="rs"],
+.o_kanban_dms_card[data-ext="rb"],
+.o_kanban_dms_card[data-ext="php"],
+.o_kanban_dms_card[data-ext="sh"],
+.o_kanban_dms_card[data-ext="bash"],
+.o_kanban_dms_card[data-ext="aj"],
+.o_kanban_dms_card[data-ext="groovy"],
+.o_kanban_dms_card[data-ext="coffee"],
+.o_kanban_dms_card[data-ext="cbl"],
+.o_kanban_dms_card[data-ext="f"],
+.o_kanban_dms_card[data-ext="f90"] {
+    --dms-accent: #1098ad;
+}
+
+// Web markup / styles — purple
+.o_kanban_dms_card[data-ext="html"],
+.o_kanban_dms_card[data-ext="htm"],
+.o_kanban_dms_card[data-ext="xml"],
+.o_kanban_dms_card[data-ext="css"],
+.o_kanban_dms_card[data-ext="scss"],
+.o_kanban_dms_card[data-ext="sass"],
+.o_kanban_dms_card[data-ext="less"],
+.o_kanban_dms_card[data-ext="json"],
+.o_kanban_dms_card[data-ext="yaml"],
+.o_kanban_dms_card[data-ext="yml"],
+.o_kanban_dms_card[data-ext="toml"] {
+    --dms-accent: #7048e8;
+}
+
+// Archives — violet
+.o_kanban_dms_card[data-ext="zip"],
+.o_kanban_dms_card[data-ext="tar"],
+.o_kanban_dms_card[data-ext="gz"],
+.o_kanban_dms_card[data-ext="rar"],
+.o_dms_portal_card--file[data-ext="zip"],
+.o_dms_portal_card--file[data-ext="tar"],
+.o_dms_portal_card--file[data-ext="gz"],
+.o_dms_portal_card--file[data-ext="rar"] {
+    --dms-accent: #5f3dc4;
+}
+
+// Images — same crimson as PDFs (image previews are visually strong on
+// their own; the accent just adds family identity).
+.o_kanban_dms_card[data-ext="jpg"],
+.o_kanban_dms_card[data-ext="jpeg"],
+.o_kanban_dms_card[data-ext="png"],
+.o_kanban_dms_card[data-ext="gif"],
+.o_kanban_dms_card[data-ext="svg"],
+.o_kanban_dms_card[data-ext="webp"],
+.o_dms_portal_card--file[data-ext="jpg"],
+.o_dms_portal_card--file[data-ext="jpeg"],
+.o_dms_portal_card--file[data-ext="png"],
+.o_dms_portal_card--file[data-ext="gif"],
+.o_dms_portal_card--file[data-ext="svg"],
+.o_dms_portal_card--file[data-ext="webp"] {
+    --dms-accent: #d6336c;
+}
+
+// Media (audio + video) — magenta
+.o_kanban_dms_card[data-ext="mp4"],
+.o_kanban_dms_card[data-ext="mov"],
+.o_kanban_dms_card[data-ext="mkv"],
+.o_kanban_dms_card[data-ext="webm"],
+.o_kanban_dms_card[data-ext="mp3"],
+.o_kanban_dms_card[data-ext="wav"],
+.o_kanban_dms_card[data-ext="flac"],
+.o_kanban_dms_card[data-ext="ogg"],
+.o_dms_portal_card--file[data-ext="mp4"],
+.o_dms_portal_card--file[data-ext="mov"],
+.o_dms_portal_card--file[data-ext="mkv"],
+.o_dms_portal_card--file[data-ext="webm"],
+.o_dms_portal_card--file[data-ext="mp3"],
+.o_dms_portal_card--file[data-ext="wav"],
+.o_dms_portal_card--file[data-ext="flac"],
+.o_dms_portal_card--file[data-ext="ogg"] {
+    --dms-accent: #ae3ec9;
+}

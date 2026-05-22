@@ -192,9 +192,9 @@
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <kanban
+                js_class="dms_directory_kanban"
                 class="mk_directory_kanban_view o_kanban_small_column o_kanban_mobile"
                 banner_route="/onboarding/document_onboarding_file"
-                highlight_color="color"
             >
                 <field name="id" />
                 <field name="tag_ids" />
@@ -292,12 +292,18 @@
                             <div
                                 t-attf-class="oe_kanban_global_click oe_kanban_content row g-0"
                             >
-                                <div class="col-3 h-100">
-                                    <img
-                                        t-att-src="record.icon_url.raw_value"
-                                        alt="Icon"
-                                        class="img img-fluid object-fit-cover"
-                                    />
+                                <div
+                                    class="col-3 h-100 d-flex align-items-center justify-content-center"
+                                >
+                                    <div
+                                        class="o_kanban_dms_dir_chip"
+                                        t-att-data-bucket="record.name.raw_value ? (((record.name.raw_value.charCodeAt(0) || 0) + (record.name.raw_value.charCodeAt(1) || 0)) % 8) + 1 : 1"
+                                        t-att-title="record.name.raw_value"
+                                    >
+                                        <t
+                                            t-esc="record.name.raw_value ? record.name.raw_value.slice(0, 2).toUpperCase() : '?'"
+                                        />
+                                    </div>
                                 </div>
                                 <div class="col-8">
                                     <field name="name" class="text-truncate fw-bold" />
@@ -385,9 +391,19 @@
         <field name="name">dms_directory.form</field>
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
-            <form>
+            <form class="o_dms_form">
                 <header />
                 <sheet>
+                    <!-- Hidden helper fields kept available for the rest of the form. -->
+                    <field name="storage_id_save_type" invisible="1" />
+                    <field
+                        name="storage_id_inherit_access_from_parent_record"
+                        invisible="1"
+                    />
+                    <field name="allowed_model_ids" invisible="1" />
+                    <field name="res_model" invisible="1" force_save="1" />
+
+                    <!-- Stat buttons retained at top-right (form chrome). -->
                     <div class="oe_button_box" name="button_box">
                         <button
                             type="object"
@@ -414,114 +430,93 @@
                             />
                         </button>
                     </div>
-                    <field
-                        name="image_1920"
-                        widget="image"
-                        class="oe_avatar"
-                        nolabel="1"
-                        options="{'image_preview': 'image_128'}"
-                    />
-                    <div class="oe_title">
-                        <label for="name" class="oe_edit_only" />
-                        <h1>
-                            <field name="name" placeholder="My Documents" />
-                        </h1>
-                        <h4>
-                            <label for="complete_name" class="oe_edit_only" />
-                            <field name="complete_name" />
-                        </h4>
+
+                    <!-- Hero block — identity at the top, replaces the
+                         loose-fields layout the upstream form used. -->
+                    <div class="o_dms_form_hero">
+                        <div class="o_dms_form_hero__media">
+                            <field
+                                name="image_1920"
+                                widget="image"
+                                class="o_dms_form_hero__image"
+                                nolabel="1"
+                                options="{'image_preview': 'image_128'}"
+                            />
+                        </div>
+                        <div class="o_dms_form_hero__body">
+                            <div class="o_dms_form_hero__title">
+                                <label for="name" class="oe_edit_only" />
+                                <h1>
+                                    <field name="name" placeholder="My Documents" />
+                                </h1>
+                                <field
+                                    name="starred"
+                                    widget="boolean_favorite"
+                                    nolabel="1"
+                                />
+                            </div>
+                            <div class="o_dms_form_hero__path text-muted small">
+                                <i class="fa fa-folder-open me-1" title="Path" />
+                                <field name="complete_name" />
+                            </div>
+                            <div class="o_dms_form_hero__tags">
+                                <field
+                                    name="tag_ids"
+                                    widget="many2many_tags"
+                                    placeholder="Tags..."
+                                    options="{'color_field': 'color', 'no_create_edit': True}"
+                                />
+                            </div>
+                            <div class="o_dms_form_hero__stats">
+                                <div class="o_dms_form_hero__stat">
+                                    <div class="o_dms_form_hero__stat_value">
+                                        <field name="count_total_files" readonly="1" />
+                                    </div>
+                                    <div class="o_dms_form_hero__stat_label">
+                                        Files
+                                    </div>
+                                </div>
+                                <div class="o_dms_form_hero__stat">
+                                    <div class="o_dms_form_hero__stat_value">
+                                        <field
+                                            name="count_total_directories"
+                                            readonly="1"
+                                        />
+                                    </div>
+                                    <div class="o_dms_form_hero__stat_label">
+                                        Subdirectories
+                                    </div>
+                                </div>
+                                <div class="o_dms_form_hero__stat">
+                                    <div class="o_dms_form_hero__stat_value">
+                                        <field name="human_size" readonly="1" />
+                                    </div>
+                                    <div class="o_dms_form_hero__stat_label">
+                                        Size
+                                    </div>
+                                </div>
+                                <div class="o_dms_form_hero__stat">
+                                    <div class="o_dms_form_hero__stat_value">
+                                        <field name="count_elements" readonly="1" />
+                                    </div>
+                                    <div class="o_dms_form_hero__stat_label">
+                                        Elements
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <group name="settings">
-                        <group>
-                            <field
-                                name="is_root_directory"
-                                readonly="1"
-                                groups="!dms.group_dms_manager"
-                            />
-                            <field
-                                name="is_root_directory"
-                                groups="dms.group_dms_manager"
-                            />
-                            <field
-                                name="storage_id"
-                                options="{'no_open': True}"
-                                readonly="not is_root_directory"
-                                required="is_root_directory"
-                                force_save="1"
-                                groups="!dms.group_dms_manager"
-                            />
-                            <field
-                                name="storage_id"
-                                options="{}"
-                                readonly="not is_root_directory"
-                                required="is_root_directory"
-                                force_save="1"
-                                groups="dms.group_dms_manager"
-                            />
-                        </group>
-                        <group>
-                            <field
-                                name="inherit_group_ids"
-                                invisible="is_root_directory"
-                            />
-                            <field
-                                name="parent_id"
-                                options="{'no_quick_create': True}"
-                                invisible="is_root_directory"
-                                required="not is_root_directory"
-                            />
-                        </group>
-                    </group>
-                    <group name="data">
-                        <group>
-                            <field name="human_size" string="Size" />
-                            <field name="count_elements" string="Elements" />
-                        </group>
-                        <group>
-                            <field
-                                name="category_id"
-                                placeholder="Internal / Human Resource"
-                                options="{'no_open': True, 'no_create': True}"
-                            />
-                            <field
-                                name="tag_ids"
-                                widget="many2many_tags"
-                                placeholder="Tags..."
-                                options="{'color_field': 'color', 'no_create_edit': True}"
-                            />
-                            <field name="starred" widget="boolean_favorite" />
-                        </group>
-                    </group>
-                    <group>
-                        <field name="storage_id_save_type" invisible="True" />
-                        <field
-                            name="storage_id_inherit_access_from_parent_record"
-                            invisible="True"
-                        />
-                        <field name="allowed_model_ids" invisible="True" />
-                        <field
-                            name="model_id"
-                            invisible="storage_id_save_type != 'attachment'"
-                            readonly="count_total_files > 0"
-                            required="storage_id_save_type == 'attachment'"
-                        />
-                        <field name="res_model" invisible="1" force_save="1" />
-                        <field
-                            name="res_id"
-                            readonly="True"
-                            invisible="storage_id_save_type != 'attachment'"
-                        />
-                        <field
-                            name="record_ref"
-                            invisible="storage_id_save_type != 'attachment'"
-                        />
-                    </group>
+
+                    <!-- Condensed notebook — two tabs replace the seven the
+                         upstream form carried. -->
                     <notebook>
-                        <page name="page_directories" string="Subdirectories">
+                        <page name="page_contents" string="Contents">
+                            <separator string="Subdirectories" />
                             <field
                                 name="child_directory_ids"
                                 context="{'default_parent_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
+                                nolabel="1"
                             >
                                 <list limit="10">
                                     <field name="name" />
@@ -533,12 +528,12 @@
                                     <field name="human_size" string="Size" />
                                 </list>
                             </field>
-                        </page>
-                        <page name="page_files" string="Files">
+                            <separator string="Files" />
                             <field
                                 name="file_ids"
                                 context="{'default_directory_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
+                                nolabel="1"
                             >
                                 <list limit="10">
                                     <field name="name" />
@@ -548,20 +543,69 @@
                                 </list>
                             </field>
                         </page>
-                        <page name="page_meta" string="Meta Information">
-                            <group>
-                                <group>
-                                    <field name="create_date" readonly="1" />
-                                    <field name="create_uid" readonly="1" />
+                        <page name="page_settings" string="Settings">
+                            <group name="settings">
+                                <group string="Location">
+                                    <field
+                                        name="is_root_directory"
+                                        readonly="1"
+                                        groups="!dms.group_dms_manager"
+                                    />
+                                    <field
+                                        name="is_root_directory"
+                                        groups="dms.group_dms_manager"
+                                    />
+                                    <field
+                                        name="storage_id"
+                                        options="{'no_open': True}"
+                                        readonly="not is_root_directory"
+                                        required="is_root_directory"
+                                        force_save="1"
+                                        groups="!dms.group_dms_manager"
+                                    />
+                                    <field
+                                        name="storage_id"
+                                        options="{}"
+                                        readonly="not is_root_directory"
+                                        required="is_root_directory"
+                                        force_save="1"
+                                        groups="dms.group_dms_manager"
+                                    />
+                                    <field
+                                        name="inherit_group_ids"
+                                        invisible="is_root_directory"
+                                    />
+                                    <field
+                                        name="parent_id"
+                                        options="{'no_quick_create': True}"
+                                        invisible="is_root_directory"
+                                        required="not is_root_directory"
+                                    />
                                 </group>
-                                <group>
-                                    <field name="write_date" readonly="1" />
-                                    <field name="write_uid" readonly="1" />
+                                <group string="Categorisation">
+                                    <field
+                                        name="category_id"
+                                        placeholder="Internal / Human Resource"
+                                        options="{'no_open': True, 'no_create': True}"
+                                    />
+                                    <field
+                                        name="model_id"
+                                        invisible="storage_id_save_type != 'attachment'"
+                                        readonly="count_total_files > 0"
+                                        required="storage_id_save_type == 'attachment'"
+                                    />
+                                    <field
+                                        name="res_id"
+                                        readonly="True"
+                                        invisible="storage_id_save_type != 'attachment'"
+                                    />
+                                    <field
+                                        name="record_ref"
+                                        invisible="storage_id_save_type != 'attachment'"
+                                    />
                                 </group>
                             </group>
-                        </page>
-                        <page name="page_access" string="Access Information">
-                            <group name="permissions">
+                            <group string="Permissions" name="permissions">
                                 <group>
                                     <field name="permission_read" readonly="1" />
                                     <field name="permission_create" readonly="1" />
@@ -571,35 +615,33 @@
                                     <field name="permission_unlink" readonly="1" />
                                 </group>
                             </group>
-                        </page>
-                        <page
-                            string="Groups"
-                            invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
-                        >
-                            <field name="group_ids">
-                                <list>
-                                    <field name="name" />
-                                    <field name="perm_create" />
-                                    <field name="perm_write" />
-                                    <field name="perm_unlink" />
-                                </list>
-                            </field>
-                        </page>
-                        <page
-                            string="Complete Groups"
-                            invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
-                        >
-                            <field name="complete_group_ids">
-                                <list>
-                                    <field name="name" />
-                                    <field name="perm_create" />
-                                    <field name="perm_write" />
-                                    <field name="perm_unlink" />
-                                </list>
-                            </field>
-                        </page>
-                        <page name="mail_alias" string="Email Alias">
-                            <group>
+                            <group
+                                string="Access Groups"
+                                invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
+                            >
+                                <field name="group_ids" nolabel="1">
+                                    <list>
+                                        <field name="name" />
+                                        <field name="perm_create" />
+                                        <field name="perm_write" />
+                                        <field name="perm_unlink" />
+                                    </list>
+                                </field>
+                            </group>
+                            <group
+                                string="Inherited Access Groups"
+                                invisible="storage_id_save_type == 'attachment' and storage_id_inherit_access_from_parent_record"
+                            >
+                                <field name="complete_group_ids" nolabel="1">
+                                    <list>
+                                        <field name="name" />
+                                        <field name="perm_create" />
+                                        <field name="perm_write" />
+                                        <field name="perm_unlink" />
+                                    </list>
+                                </field>
+                            </group>
+                            <group string="Email Alias" name="mail_alias">
                                 <group>
                                     <field
                                         name="alias_contact"
@@ -627,6 +669,16 @@
                                         groups="base.group_no_one"
                                         string="Alias Setting"
                                     />
+                                </group>
+                            </group>
+                            <group string="Audit">
+                                <group>
+                                    <field name="create_date" readonly="1" />
+                                    <field name="create_uid" readonly="1" />
+                                </group>
+                                <group>
+                                    <field name="write_date" readonly="1" />
+                                    <field name="write_uid" readonly="1" />
                                 </group>
                             </group>
                         </page>
@@ -657,19 +709,24 @@
         <field name="inherit_id" ref="view_dms_directory_form" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
+            <!-- Strip the full form chrome down to a slim creation widget for
+                 the onboarding "New Root Directory" action target=new. -->
             <xpath expr="//header" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
             <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//sheet//group[@name='settings']" position="attributes">
+            <xpath
+                expr="//sheet//div[hasclass('o_dms_form_hero')]"
+                position="attributes"
+            >
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//sheet//group[@name='data']" position="attributes">
+            <xpath expr="//sheet//notebook" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//sheet//group[@name='data']" position="after">
+            <xpath expr="//sheet//notebook" position="before">
                 <group>
                     <group>
                         <field

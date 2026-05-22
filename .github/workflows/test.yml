@@ -8,6 +8,10 @@ on:
     branches:
       - "19.0"
       - "19.0-ocabot-*"
+  # ledoent fork only: allow manual re-trigger when GitHub silently throttles
+  # fork-PR workflow runs after a burst of pushes. Strip before opening an
+  # upstream OCA PR (oca-addons-repo-template owns this file).
+  workflow_dispatch:
 
 jobs:
   unreleased-deps:

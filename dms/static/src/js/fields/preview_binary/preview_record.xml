@@ -21,13 +21,17 @@
                     'image/tiff',
                     'image/x-icon',
                     'application/pdf',
+                    'application/json',
+                    'application/xml',
+                    'application/javascript',
                     'audio/mpeg',
                     'video/x-matroska',
                     'video/mp4',
                     'video/webm'
                 ]"
             />
-            <t t-if="readable_types.includes(props.record.data.mimetype)">
+            <t t-set="mt" t-value="props.record.data.mimetype || ''" />
+            <t t-if="readable_types.includes(mt) or mt.startsWith('text/')">
                 <button
                     class="btn btn-secondary fa fa-search preview_file"
                     data-tooltip="Preview"

@@ -93,15 +93,16 @@
                 js_class="file_kanban"
                 class="mk_file_kanban_view o_kanban_small_column o_kanban_mobile"
                 banner_route="/onboarding/document_onboarding_file"
-                highlight_color="color"
             >
                 <field name="id" />
                 <field name="tag_ids" />
                 <field name="name" />
+                <field name="path_names" />
                 <field name="color" />
                 <field name="active" />
                 <field name="mimetype" />
                 <field name="icon_url" />
+                <field name="human_size" />
                 <field name="create_uid" />
                 <field name="write_date" />
                 <field name="locked_by" />
@@ -211,53 +212,71 @@
                             </div>
                         </div>
                     </t>
-                    <t t-name="card" class="flex-row">
-                        <main>
-                            <div
-                                t-attf-class="oe_kanban_global_click oe_kanban_content row g-0"
-                            >
-                                <div class="col-3">
-                                    <a
-                                        class="h-100 d-block o_kanban_dms_file_preview"
-                                        t-att-data-id="record.id.raw_value"
-                                        t-att-id="record.id.raw_value"
-                                        t-att-name="record.name.raw_value"
-                                    >
-                                        <img
-                                            t-att-src="record.icon_url.raw_value"
-                                            style="height:70px;"
-                                            alt="Icon"
-                                        />
-                                    </a>
-                                </div>
-                                <div class="col-9">
-                                    <field name="name" class="fw-bold" />
-                                    <field
-                                        name="tag_ids"
-                                        widget="many2many_tags"
-                                        options="{'color_field': 'color'}"
+                    <t t-name="card">
+                        <t
+                            t-set="dms_ext"
+                            t-value="record.name.raw_value and record.name.raw_value.includes('.') ? record.name.raw_value.split('.').pop().toLowerCase() : ''"
+                        />
+                        <t
+                            t-set="dms_subtitle"
+                            t-value="record.path_names.raw_value ? record.path_names.raw_value.split('/').slice(0, -1).join('/') : ''"
+                        />
+                        <main
+                            class="o_kanban_dms_card oe_kanban_global_click"
+                            t-att-data-ext="dms_ext"
+                        >
+                            <div class="o_kanban_dms_card__thumb">
+                                <a
+                                    class="d-block o_kanban_dms_file_preview"
+                                    t-att-data-id="record.id.raw_value"
+                                    t-att-id="record.id.raw_value"
+                                    t-att-name="record.name.raw_value"
+                                >
+                                    <img
+                                        t-att-src="record.icon_url.raw_value"
+                                        t-att-alt="record.name.raw_value"
                                     />
-                                    <field name="write_date" widget="date" />
-                                </div>
-                                <footer class="mt-auto pt-0 ms-1">
-                                    <div class="d-flex ms-auto oe_kanban_bottom_right">
-                                        <span
-                                            t-if="record.is_locked.raw_value"
-                                            class="o_dms_file_kanban_lock"
-                                        >
-                                            <i
-                                                t-attf-class="fa #{(record.is_locked.raw_value and !record.is_lock_editor.raw_value) ? 'fa-lock' : ''} #{((record.is_locked.raw_value and record.is_lock_editor.raw_value)) ? 'fa-unlock-alt' : ''}"
-                                                t-att-title="record.locked_by.value"
-                                            />
-                                        </span>
-                                        <img
-                                            t-attf-src="/web/image/res.users/#{record.create_uid.raw_value}/avatar_128"
-                                            t-att-alt="record.create_uid.value"
-                                            class="oe_kanban_avatar"
-                                            style="max-width:20px;"
-                                        />
-                                    </div>
-                                </footer>
+                                </a>
+                                <span
+                                    t-if="dms_ext"
+                                    class="o_kanban_dms_card__ext_pill"
+                                    t-esc="dms_ext"
+                                />
+                                <span
+                                    t-if="record.is_locked.raw_value"
+                                    class="o_kanban_dms_card__lock o_dms_file_kanban_lock"
+                                >
+                                    <i
+                                        t-attf-class="fa #{(record.is_locked.raw_value and !record.is_lock_editor.raw_value) ? 'fa-lock' : ''} #{((record.is_locked.raw_value and record.is_lock_editor.raw_value)) ? 'fa-unlock-alt' : ''}"
+                                        t-att-title="record.locked_by.value"
+                                    />
+                                </span>
+                            </div>
+                            <div class="o_kanban_dms_card__body">
+                                <field
+                                    name="name"
+                                    class="o_kanban_dms_card__name fw-bold"
+                                />
+                                <div
+                                    t-if="dms_subtitle"
+                                    class="o_kanban_dms_card__subtitle text-muted small text-truncate"
+                                    t-att-title="dms_subtitle"
+                                    t-esc="dms_subtitle"
+                                />
+                                <field
+                                    name="tag_ids"
+                                    widget="many2many_tags"
+                                    options="{'color_field': 'color'}"
+                                />
+                            </div>
+                            <div class="o_kanban_dms_card__meta oe_kanban_bottom_right">
+                                <field name="human_size" />
+                                <field name="write_date" widget="date" />
+                                <img
+                                    class="o_kanban_dms_card__avatar oe_kanban_avatar ms-auto"
+                                    t-attf-src="/web/image/res.users/#{record.create_uid.raw_value}/avatar_128"
+                                    t-att-alt="record.create_uid.value"
+                                />
                             </div>
                         </main>
                     </t>
@@ -336,7 +355,7 @@
         <field name="name">dms_file.form</field>
         <field name="model">dms.file</field>
         <field name="arch" type="xml">
-            <form string="Files">
+            <form string="Files" class="o_dms_form">
                 <header>
                     <button
                         class="oe_highlight"
@@ -354,7 +373,8 @@
                     />
                 </header>
                 <sheet>
-                    <!-- locked ribbon first, so that archived ribbon appear above if archived-->
+                    <!-- locked ribbon first, so that archived ribbon appears
+                         above if archived -->
                     <widget
                         name="web_ribbon"
                         title="Locked"
@@ -374,84 +394,137 @@
                         invisible="active"
                     />
                     <div class="oe_button_box" name="button_box" />
-                    <field
-                        name="image_1920"
-                        widget="image"
-                        class="oe_avatar"
-                        nolabel="1"
-                        options="{'image_preview': 'image_128'}"
-                    />
-                    <div class="oe_title">
-                        <label for="name" class="oe_edit_only" />
-                        <h1>
-                            <field name="name" />
-                            <field name="active" invisible="1" />
-                        </h1>
-                        <h4>
+
+                    <!-- Hidden helper fields referenced by conditional
+                         visibility expressions elsewhere in the form. -->
+                    <field name="active" invisible="1" />
+                    <field name="is_lock_editor" invisible="1" />
+                    <field name="is_locked" invisible="1" />
+                    <field name="storage_id_save_type" invisible="1" />
+
+                    <!-- Hero block — mime-aware identity at the top. -->
+                    <div class="o_dms_form_hero">
+                        <div class="o_dms_form_hero__media">
                             <field
-                                name="path_json"
-                                widget="path_json"
-                                options="{'prefix': True, 'suffix': False}"
-                                invisible="not name or not directory_id"
+                                name="image_1920"
+                                widget="image"
+                                class="o_dms_form_hero__image"
+                                nolabel="1"
+                                options="{'image_preview': 'image_128'}"
                             />
-                        </h4>
+                        </div>
+                        <div class="o_dms_form_hero__body">
+                            <div class="o_dms_form_hero__title">
+                                <label for="name" class="oe_edit_only" />
+                                <h1>
+                                    <field name="name" />
+                                </h1>
+                            </div>
+                            <div class="o_dms_form_hero__path text-muted small">
+                                <field
+                                    name="path_json"
+                                    widget="path_json"
+                                    options="{'prefix': True, 'suffix': False}"
+                                    invisible="not name or not directory_id"
+                                />
+                            </div>
+                            <div class="o_dms_form_hero__tags">
+                                <field
+                                    name="tag_ids"
+                                    widget="many2many_tags"
+                                    placeholder="Tags..."
+                                    options="{'color_field': 'color', 'no_create_edit': True}"
+                                />
+                            </div>
+                            <div class="o_dms_form_hero__stats">
+                                <div class="o_dms_form_hero__stat">
+                                    <div class="o_dms_form_hero__stat_value">
+                                        <field name="human_size" readonly="1" />
+                                    </div>
+                                    <div class="o_dms_form_hero__stat_label">
+                                        Size
+                                    </div>
+                                </div>
+                                <div class="o_dms_form_hero__stat">
+                                    <div class="o_dms_form_hero__stat_value">
+                                        <field name="extension" readonly="1" />
+                                    </div>
+                                    <div class="o_dms_form_hero__stat_label">
+                                        Type
+                                    </div>
+                                </div>
+                                <div class="o_dms_form_hero__stat">
+                                    <div class="o_dms_form_hero__stat_value">
+                                        <field name="write_date" readonly="1" />
+                                    </div>
+                                    <div class="o_dms_form_hero__stat_label">
+                                        Modified
+                                    </div>
+                                </div>
+                                <div class="o_dms_form_hero__stat">
+                                    <div class="o_dms_form_hero__stat_value">
+                                        <field name="create_uid" readonly="1" />
+                                    </div>
+                                    <div class="o_dms_form_hero__stat_label">
+                                        Owner
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <group name="content">
-                        <group>
-                            <field name="content" filename="name" />
-                        </group>
-                        <group>
-                            <field name="extension" />
-                            <field name="mimetype" />
-                        </group>
-                    </group>
-                    <group name="settings">
-                        <group>
-                            <field
-                                name="directory_id"
-                                options="{'no_quick_create': True}"
-                            />
-                            <field
-                                name="storage_id"
-                                options="{'no_open': True}"
-                                groups="!dms.group_dms_manager"
-                            />
-                            <field name="storage_id" groups="dms.group_dms_manager" />
-                        </group>
-                        <group>
-                            <field
-                                name="category_id"
-                                placeholder="Internal / Human Resource"
-                                options="{'no_open': True, 'no_create': True}"
-                            />
-                            <field
-                                name="tag_ids"
-                                widget="many2many_tags"
-                                placeholder="Tags..."
-                                options="{'color_field': 'color', 'no_create_edit': True}"
-                            />
-                        </group>
-                    </group>
-                    <group>
-                        <field name="storage_id_save_type" invisible="True" />
-                        <field
-                            name="res_model"
-                            readonly="True"
-                            invisible="storage_id_save_type != 'attachment'"
-                        />
-                        <field
-                            name="res_id"
-                            readonly="True"
-                            invisible="storage_id_save_type != 'attachment'"
-                        />
-                        <field
-                            name="record_ref"
-                            invisible="storage_id_save_type != 'attachment'"
-                        />
-                    </group>
+
+                    <!-- Condensed notebook — Content + Metadata replace the
+                         upstream form's loose-fields + 3-page notebook. -->
                     <notebook>
-                        <page name="page_meta" string="Meta Information">
+                        <page name="page_content" string="Content">
                             <group>
+                                <field name="content" filename="name" nolabel="1" />
+                            </group>
+                            <group
+                                string="Attachment storage"
+                                invisible="storage_id_save_type != 'attachment'"
+                            >
+                                <field name="res_model" readonly="1" />
+                                <field name="res_id" readonly="1" />
+                                <field name="record_ref" />
+                            </group>
+                        </page>
+                        <page name="page_metadata" string="Metadata">
+                            <group>
+                                <group string="Location">
+                                    <field
+                                        name="directory_id"
+                                        options="{'no_quick_create': True}"
+                                    />
+                                    <field
+                                        name="storage_id"
+                                        options="{'no_open': True}"
+                                        groups="!dms.group_dms_manager"
+                                    />
+                                    <field
+                                        name="storage_id"
+                                        groups="dms.group_dms_manager"
+                                    />
+                                    <field name="mimetype" readonly="1" />
+                                </group>
+                                <group string="Categorisation">
+                                    <field
+                                        name="category_id"
+                                        placeholder="Internal / Human Resource"
+                                        options="{'no_open': True, 'no_create': True}"
+                                    />
+                                </group>
+                            </group>
+                            <group string="Permissions">
+                                <group>
+                                    <field name="permission_write" readonly="1" />
+                                    <field name="permission_unlink" readonly="1" />
+                                </group>
+                                <group>
+                                    <field name="locked_by" />
+                                </group>
+                            </group>
+                            <group string="Audit">
                                 <group>
                                     <field name="create_date" readonly="1" />
                                     <field name="create_uid" readonly="1" />
@@ -461,27 +534,12 @@
                                     <field name="write_uid" readonly="1" />
                                 </group>
                             </group>
-                        </page>
-                        <page name="page_access" string="Access Information">
-                            <group>
-                                <group>
-                                    <field name="permission_write" readonly="1" />
-                                    <field name="permission_unlink" readonly="1" />
-                                </group>
-                                <group>
-                                    <field name="is_lock_editor" invisible="1" />
-                                    <field name="is_locked" invisible="1" />
-                                    <field name="locked_by" />
-                                </group>
-                            </group>
-                        </page>
-                        <page
-                            name="page_technical"
-                            string="Technical Information"
-                            invisible="1"
-                            groups="dms.group_dms_manager,base.group_no_one"
-                        >
-                            <group name="technical">
+                            <group
+                                name="technical"
+                                string="Technical"
+                                invisible="1"
+                                groups="dms.group_dms_manager,base.group_no_one"
+                            >
                                 <group name="technical_left" />
                                 <group name="technical_right" />
                             </group>

@@ -10,6 +10,7 @@ import logging
 import os
 from ast import literal_eval
 from collections import defaultdict
+from datetime import timedelta
 from typing import Literal  # noqa # pylint: disable=unused-import
 
 from odoo import api, fields, models, tools
@@ -786,3 +787,86 @@ class DmsDirectory(models.Model):
             searchpanel_default_directory_id=self.id,
         )
         return action
+
+    @api.model
+    def get_dashboard_stats(self):
+        # Global file stats scoped by the current user's ir.rule access.
+        # Stats are global across all readable files; directory-domain
+        # translation is deliberately not applied in this iteration.
+        #
+        # Sparklines + deltas are computed live via _read_group over
+        # create_date (always indexed by Odoo) — no snapshot table required.
+        # The arrays describe *activity* (creations), not state-over-time;
+        # storage_sparkline shows daily bytes-added, not the running total
+        # (which would require a snapshot to be faithful under deletions).
+        File = self.env["dms.file"]
+        now = fields.Datetime.now()
+        files_total = File.search_count([])
+        storage_groups = File._read_group(
+            domain=[], groupby=[], aggregates=["size:sum"]
+        )
+        storage_bytes = int(storage_groups[0][0] or 0) if storage_groups else 0
+        new_today = File.search_count([("create_date", ">=", now - timedelta(days=1))])
+
+        # 30-day daily buckets: (created_count, size_sum) per day.
+        day_start = (now - timedelta(days=29)).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        daily_rows = File._read_group(
+            domain=[("create_date", ">=", day_start)],
+            groupby=["create_date:day"],
+            aggregates=["__count", "size:sum"],
+        )
+        daily_by_key = {}
+        for day_value, count, size_sum in daily_rows:
+            if not day_value:
+                continue
+            key = day_value.date().isoformat()
+            daily_by_key[key] = (int(count or 0), int(size_sum or 0))
+        files_sparkline = []
+        storage_sparkline = []
+        for offset in range(29, -1, -1):
+            day = (now - timedelta(days=offset)).date().isoformat()
+            count, size_sum = daily_by_key.get(day, (0, 0))
+            files_sparkline.append(count)
+            storage_sparkline.append(size_sum)
+
+        # 24 hourly buckets across the past day for the "new today" tile.
+        hour_start = (now - timedelta(hours=23)).replace(
+            minute=0, second=0, microsecond=0
+        )
+        hourly_rows = File._read_group(
+            domain=[("create_date", ">=", hour_start)],
+            groupby=["create_date:hour"],
+            aggregates=["__count"],
+        )
+        hourly_by_key = {}
+        for hour_value, count in hourly_rows:
+            if not hour_value:
+                continue
+            hourly_by_key[hour_value.replace(minute=0, second=0, microsecond=0)] = int(
+                count or 0
+            )
+        new_today_sparkline = []
+        for offset in range(23, -1, -1):
+            slot = (now - timedelta(hours=offset)).replace(
+                minute=0, second=0, microsecond=0
+            )
+            new_today_sparkline.append(hourly_by_key.get(slot, 0))
+
+        files_last_week = sum(files_sparkline[-7:])
+        storage_last_week = sum(storage_sparkline[-7:])
+        avg_per_day = round(sum(files_sparkline[-7:]) / 7.0, 1)
+
+        return {
+            "files_total": files_total,
+            "storage_total_bytes": storage_bytes,
+            "storage_total_human": human_size(storage_bytes),
+            "new_today": new_today,
+            "files_sparkline": files_sparkline,
+            "storage_sparkline": storage_sparkline,
+            "new_today_sparkline": new_today_sparkline,
+            "files_delta_week": files_last_week,
+            "storage_delta_week_human": human_size(storage_last_week),
+            "new_today_avg_per_day": avg_per_day,
+        }

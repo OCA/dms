@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 ledoent — Don Kendall
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates xml:space="preserve">
+    <t t-name="dms.FilePreviewPane">
+        <aside class="o_dms_preview_pane">
+            <header class="o_dms_preview_pane__header">
+                <div class="o_dms_preview_pane__title">
+                    <t t-if="state.file">
+                        <h5
+                            class="mb-0 text-truncate"
+                            t-att-title="state.file.name"
+                            t-esc="state.file.name"
+                        />
+                        <small
+                            class="text-muted"
+                            t-esc="state.file.human_size || state.file.mimetype"
+                        />
+                    </t>
+                    <t t-else="">
+                        <h5 class="mb-0 text-muted">Preview</h5>
+                    </t>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div
+                        t-if="state.file"
+                        class="btn-group btn-group-sm o_dms_preview_pane__actions"
+                        role="group"
+                        aria-label="File actions"
+                    >
+                        <button
+                            type="button"
+                            class="btn btn-primary d-flex align-items-center gap-1"
+                            title="Download this file"
+                            aria-label="Download file"
+                            t-on-click="onDownloadClick"
+                        >
+                            <i class="fa fa-download" />
+                            <span class="d-none d-md-inline">Download</span>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary d-flex align-items-center gap-1"
+                            title="Share this file with users or via link"
+                            aria-label="Share file"
+                            t-on-click="onShareClick"
+                        >
+                            <i class="fa fa-share-alt" />
+                            <span class="d-none d-md-inline">Share</span>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary d-flex align-items-center gap-1"
+                            title="Open the full form view for this file"
+                            aria-label="Open form view"
+                            t-on-click="onOpenFormClick"
+                        >
+                            <i class="fa fa-external-link" />
+                            <span class="d-none d-md-inline">Open</span>
+                        </button>
+                    </div>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-link text-muted"
+                        title="Close preview pane"
+                        aria-label="Close preview"
+                        t-on-click="onCloseClick"
+                    >
+                        <i class="fa fa-times" />
+                    </button>
+                </div>
+            </header>
+
+            <div class="o_dms_preview_pane__body">
+                <t t-if="state.loading">
+                    <div class="o_dms_preview_pane__empty">
+                        <i class="fa fa-spinner fa-spin" />
+                        <span class="ms-2">Loading…</span>
+                    </div>
+                </t>
+                <t t-elif="state.error">
+                    <div
+                        class="o_dms_preview_pane__empty o_dms_preview_pane__empty--error"
+                    >
+                        <i class="fa fa-exclamation-triangle me-2" />
+                        <span t-esc="state.error" />
+                    </div>
+                </t>
+                <t t-elif="!state.file">
+                    <div class="o_dms_preview_pane__empty">
+                        <i class="fa fa-eye" />
+                        <div>
+                            <div class="fw-medium">Click any row to preview.</div>
+                            <small class="text-muted d-block mt-1">Press <kbd
+                            >Esc</kbd> to dismiss this pane.</small>
+                        </div>
+                    </div>
+                </t>
+                <t t-elif="HandlerComponent">
+                    <t t-component="HandlerComponent" file="state.file" />
+                </t>
+            </div>
+        </aside>
+    </t>
+</templates>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 ledoent — Don Kendall
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates xml:space="preserve">
+    <t t-name="dms.StatBar">
+        <div class="o_dms_stat_bar" t-att-data-loading="isLoading">
+            <div
+                class="o_dms_stat_bar__tile"
+                t-foreach="props.tiles"
+                t-as="tile"
+                t-key="tile.key"
+                t-att-data-tint="tile.tint"
+            >
+                <i t-attf-class="fa #{tile.icon} o_dms_stat_bar__icon" />
+                <div class="o_dms_stat_bar__body">
+                    <div class="o_dms_stat_bar__value">
+                        <t t-esc="valueFor(tile)" />
+                    </div>
+                    <div class="o_dms_stat_bar__label">
+                        <t t-esc="tile.label" />
+                    </div>
+                    <div t-if="deltaText(tile)" class="o_dms_stat_bar__delta">
+                        <t t-esc="deltaText(tile)" />
+                    </div>
+                </div>
+                <t t-set="spark" t-value="sparkPath(tile)" />
+                <svg
+                    t-if="spark.hasData"
+                    class="o_dms_stat_bar__spark"
+                    t-att-viewBox="'0 0 ' + sparkWidth() + ' ' + sparkHeight()"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                >
+                    <t t-if="tile.chart === 'bar'">
+                        <rect
+                            t-foreach="spark.bars"
+                            t-as="bar"
+                            t-key="bar_index"
+                            t-att-x="bar.x"
+                            t-att-y="bar.y"
+                            t-att-width="bar.width"
+                            t-att-height="bar.height"
+                            class="o_dms_stat_bar__spark_bar"
+                        />
+                    </t>
+                    <t t-else="">
+                        <polygon
+                            t-att-points="spark.areaPath"
+                            class="o_dms_stat_bar__spark_area"
+                        />
+                        <polyline
+                            t-att-points="spark.linePath"
+                            class="o_dms_stat_bar__spark_line"
+                            fill="none"
+                        />
+                        <circle
+                            t-att-cx="spark.last.x"
+                            t-att-cy="spark.last.y"
+                            r="1.8"
+                            class="o_dms_stat_bar__spark_dot"
+                        />
+                    </t>
+                </svg>
+            </div>
+        </div>
+    </t>
+</templates>

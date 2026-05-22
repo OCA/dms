@@ -1,0 +1,50 @@
+// Copyright 2026 ledoent — Don Kendall
+// License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+// Pill-styled active filter facets — applied scope-locally to DMS surfaces.
+// Odoo 19 already renders facets on the search bar (see core template
+// `web.SearchBar.Facets` in addons/web/static/src/search/search_bar/
+// search_bar.xml). The DOM is:
+//
+//   .o_searchview_facet            outer chip (label half + values half)
+//   .o_searchview_facet_label      primary-coloured icon / title
+//   .o_facet_values                comma-separated value list
+//   .o_facet_remove                × close button
+//
+// The default chrome uses `rounded-2` corners + `bg-200` background. The
+// mockup §7 calls for a fully pill-shaped chip — single visual signature
+// that makes "applied filter" read at a glance. We scope via `:has()` of
+// our DMS view classes so other backends keep their stock facet shape.
+
+.o_action_manager:has(.mk_file_kanban_view),
+.o_action_manager:has(.mk_directory_kanban_view),
+.o_action_manager:has(.o_dms_list_split) {
+    .o_searchview_facet {
+        border-radius: 999px !important;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        margin-right: 4px;
+
+        .o_searchview_facet_label {
+            border-radius: 999px 0 0 999px;
+            padding-left: 10px !important;
+            padding-right: 6px !important;
+        }
+
+        .o_facet_values {
+            padding-right: 4px;
+            padding-left: 10px;
+            font-weight: 500;
+        }
+
+        .o_facet_remove {
+            padding: 0 8px !important;
+            opacity: 0.7;
+            transition: opacity 120ms ease;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}

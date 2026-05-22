@@ -425,12 +425,8 @@ class DMSFile(models.Model):
                     },
                 )
                 current_dir = current_dir.parent_id
-            record.update(
-                {
-                    "path_names": "/".join(path_names) if all(path_names) else "",
-                    "path_json": json.dumps(path_json),
-                }
-            )
+            record.path_names = "/".join(path_names) if all(path_names) else ""
+            record.path_json = json.dumps(path_json)
 
     @api.depends("name", "mimetype", "content")
     def _compute_extension(self):

@@ -1,11 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-    <t t-name="dms.ListRenderer" t-inherit="web.ListRenderer" t-inherit-mode="primary">
+    <t
+        t-name="dms.ListRendererBase"
+        t-inherit="web.ListRenderer"
+        t-inherit-mode="primary"
+    >
         <xpath expr="//div[hasclass('o_list_renderer')]" position="before">
-            <div t-if="dragState.showDragZone" class="o_dropzone">
-                <i class="fa fa-cloud-upload fa-10x" />
+            <div t-if="dragState.showDragZone" class="o_dropzone o_dms_dropzone">
+                <div class="o_dms_dropzone__icon">
+                    <i class="fa fa-cloud-upload" />
+                </div>
+                <div class="o_dms_dropzone__title">Drop files to upload</div>
+                <div class="o_dms_dropzone__hint">
+                    Release to add to the current directory
+                </div>
             </div>
         </xpath>
+    </t>
+
+    <t t-name="dms.ListRenderer">
+        <div
+            class="o_dms_list_split"
+            t-att-data-preview-open="previewState.open ? 'true' : 'false'"
+        >
+            <div class="o_dms_list_split__list">
+                <t t-call="dms.ListRendererBase" />
+            </div>
+            <FilePreviewPane
+                t-if="previewState.open"
+                recordId="previewState.recordId"
+                onClose="() => this.closePreview()"
+            />
+            <button
+                type="button"
+                class="o_dms_list_split__toggle btn btn-sm d-flex align-items-center gap-1"
+                t-att-class="{
+                    'o_dms_list_split__toggle--on': previewState.open,
+                    'o_dms_list_split__toggle--off': !previewState.open,
+                }"
+                t-att-title="previewState.open ? 'Hide preview pane (Esc)' : 'Show side-by-side preview'"
+                t-att-aria-pressed="previewState.open"
+                t-on-click="() => this.togglePreview()"
+            >
+                <i t-attf-class="fa #{previewState.open ? 'fa-times' : 'fa-columns'}" />
+                <span class="d-none d-md-inline">
+                    <t t-if="previewState.open">Hide preview</t>
+                    <t t-else="">Preview pane</t>
+                </span>
+            </button>
+        </div>
     </t>
 
     <t

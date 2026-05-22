@@ -1,0 +1,370 @@
+// Copyright 2026 ledoent — Don Kendall
+// License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+// Side-pane preview layout for the dms file list view.
+//
+// The list view is wrapped in `.o_dms_list_split`. When the preview pane is
+// open (toggled via the discoverable button in the top-right), the wrapper
+// becomes a horizontal flex container with the list on the left and the
+// preview pane (~40% of the width) on the right. The pane animates in from
+// the right; the selected row gets a primary-color accent border.
+
+// Kanban split: same shape as `.o_dms_list_split` so the file kanban can
+// reuse the side-pane registry hook. Card click → preview; pane opens to
+// the right of the kanban grid, toggle anchored top-right.
+.o_dms_kanban_split {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    min-height: 0;
+    width: 100%;
+
+    &__main {
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    &__toggle {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        z-index: 6;
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        border-radius: 999px;
+        transition:
+            background-color 160ms ease,
+            color 160ms ease,
+            transform 160ms ease;
+
+        &:hover {
+            transform: translateY(-1px);
+        }
+
+        &--off {
+            background-color: var(--bs-body-bg, #fff);
+            color: var(--bs-emphasis-color, #212529);
+            border: 1px solid var(--bs-border-color, rgba(0, 0, 0, 0.15));
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+
+        &--on {
+            background-color: var(--bs-primary, #714b67);
+            color: #fff;
+            border: 1px solid var(--bs-primary, #714b67);
+            box-shadow: 0 2px 6px rgba(113, 75, 103, 0.3);
+        }
+    }
+
+    &[data-preview-open="true"] &__toggle {
+        right: calc(40% + 12px);
+    }
+
+    // Make room for the preview toggle pill (top-right of the split).
+    // The density toggle lives inside `__main` at `right: 16px`; shift it
+    // leftward so the two pills don't overlap.
+    .o_kanban_dms_density_toggle {
+        right: 160px;
+    }
+
+    // Hide the density toggle when the pane is open. The density choice is
+    // a "browsing the grid" affordance; while previewing a single file the
+    // toggle just clutters the pane header. Re-appears when the user
+    // dismisses the pane.
+    &[data-preview-open="true"] .o_kanban_dms_density_toggle {
+        display: none;
+    }
+}
+
+.o_dms_list_split {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    min-height: 0;
+
+    &__list {
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+        overflow: auto;
+        transition: flex-basis 240ms ease-out;
+    }
+
+    // ---- Toggle button: always visible, label included on md+ ----
+    &__toggle {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        z-index: 3;
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        border-radius: 999px;
+        transition:
+            background-color 160ms ease,
+            color 160ms ease,
+            transform 160ms ease;
+
+        &:hover {
+            transform: translateY(-1px);
+        }
+
+        &--off {
+            background-color: var(--bs-body-bg, #fff);
+            color: var(--bs-emphasis-color, #212529);
+            border: 1px solid var(--bs-border-color, rgba(0, 0, 0, 0.15));
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+
+        &--on {
+            background-color: var(--bs-primary, #714b67);
+            color: #fff;
+            border: 1px solid var(--bs-primary, #714b67);
+            box-shadow: 0 2px 6px rgba(113, 75, 103, 0.3);
+        }
+    }
+
+    // When pane is open, shift toggle so it doesn't sit on top of the pane.
+    &[data-preview-open="true"] &__toggle {
+        right: calc(40% + 12px);
+    }
+}
+
+// ---- Selected-row accent: vertical primary rail + tint + subtle weight ----
+// All rows get a smooth tint transition so toggling selection feels intentional.
+.o_dms_list_split[data-preview-open="true"] .o_data_row > td {
+    transition: background-color 120ms ease-out;
+}
+
+.o_dms_preview_selected_row {
+    position: relative;
+
+    & > td:first-child::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: var(--bs-primary, #714b67);
+        box-shadow: 0 0 0 1px var(--bs-primary, #714b67);
+    }
+
+    & > td {
+        background-color: rgba(113, 75, 103, 0.08);
+        font-weight: 500;
+    }
+
+    // The first cell after the checkbox needs left padding to avoid the rail.
+    & > td:nth-child(2) {
+        padding-left: 12px;
+    }
+}
+
+// ---- Preview pane ----
+.o_dms_preview_pane {
+    flex: 0 0 40%;
+    max-width: 40%;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--bs-border-color-translucent, rgba(0, 0, 0, 0.075));
+    background-color: var(--bs-body-bg, #fff);
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.04);
+    animation: dms-preview-slide-in 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 12px 16px;
+        border-bottom: 1px solid
+            var(--bs-border-color-translucent, rgba(0, 0, 0, 0.075));
+        background-color: rgba(113, 75, 103, 0.02);
+    }
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 1 1 auto;
+        gap: 2px;
+    }
+
+    // Action toolbar — three primary actions grouped as a btn-group so the
+    // visual weight reads as a single control. The pane itself is 40% of
+    // viewport so even on a wide desktop the inner width is narrow; force
+    // icon-only buttons here (the per-button d-none d-md-inline rule uses
+    // VIEWPORT width, not container width — wrong axis for our case).
+    &__actions {
+        flex: 0 0 auto;
+
+        .btn {
+            padding: 0.25rem 0.55rem;
+            font-size: 0.78rem;
+            line-height: 1.2;
+
+            i.fa {
+                font-size: 0.85rem;
+            }
+
+            // Override the per-button d-md-inline label classes — labels
+            // never fit when the pane is open at any viewport size.
+            span {
+                display: none !important;
+            }
+        }
+    }
+
+    &__body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: auto;
+        padding: 16px;
+    }
+
+    &__empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        gap: 16px;
+        color: var(--bs-secondary-color, #6c757d);
+        text-align: center;
+
+        // The mouse-pointer icon in the empty state — large + soft.
+        i.fa {
+            font-size: 2.5rem;
+            opacity: 0.35;
+        }
+
+        &--error {
+            color: var(--bs-danger, #dc3545);
+
+            i.fa {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@keyframes dms-preview-slide-in {
+    from {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+// ---- Per-handler styles ----
+.o_dms_preview__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+
+    img,
+    video {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 4px;
+    }
+
+    &--audio {
+        flex-direction: column;
+        gap: 12px;
+        padding: 24px;
+
+        audio {
+            width: 100%;
+            max-width: 480px;
+        }
+    }
+}
+
+.o_dms_preview__iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    min-height: 480px;
+    border-radius: 4px;
+}
+
+// ---- Fallback card (office / download) ----
+.o_dms_preview__fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    padding: 32px 24px;
+    height: 100%;
+
+    // The fallback "card" sits inside the pane body — give it a soft visual
+    // boundary so it reads as a distinct block, not raw empty space.
+    background-color: var(--bs-tertiary-bg, #f4f5f7);
+    border-radius: 6px;
+    border: 1px dashed var(--bs-border-color, rgba(0, 0, 0, 0.15));
+}
+
+.o_dms_preview__fallback_icon {
+    font-size: 3rem;
+    color: var(--bs-primary, #714b67);
+    opacity: 0.6;
+}
+
+.o_dms_preview__fallback_msg {
+    margin: 0;
+    color: var(--bs-emphasis-color, #212529);
+    max-width: 360px;
+    line-height: 1.4;
+
+    code {
+        background-color: var(--bs-body-bg, #fff);
+        padding: 1px 5px;
+        border-radius: 3px;
+        font-size: 0.85em;
+        color: var(--bs-primary, #714b67);
+    }
+}
+
+.o_dms_preview__fallback_actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.o_dms_preview__fallback_note {
+    margin: 0;
+    max-width: 360px;
+    line-height: 1.35;
+}
+
+// ---- List row interactions when preview is open ----
+.o_dms_list_split[data-preview-open="true"] {
+    // Communicate that row click = preview (not navigate).
+    .o_list_renderer .o_data_row:hover {
+        cursor: zoom-in;
+    }
+}

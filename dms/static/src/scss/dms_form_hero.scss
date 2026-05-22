@@ -1,0 +1,94 @@
+// Copyright 2026 ledoent — Don Kendall
+// License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+//
+// Condensed form-header layout shared by `dms.directory` and `dms.file`
+// forms — both view arches mark their root with `class="o_dms_form"` and
+// embed a `<div class="o_dms_form_hero">` at the top of the sheet. Rules
+// live here (rather than in dms_directory.scss or file_kanban.scss) so a
+// future maintainer extending the hero on either model finds them in one
+// obvious place.
+
+.o_dms_form .o_dms_form_hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 0 0 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--bs-border-color-translucent, rgba(0, 0, 0, 0.075));
+
+    &__media {
+        flex: 0 0 auto;
+
+        .o_dms_form_hero__image {
+            width: 72px;
+            height: 72px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        // Style the image widget's empty-state placeholder.
+        .o_field_image {
+            margin: 0;
+        }
+    }
+
+    &__body {
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__title {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+    }
+
+    &__path {
+        font-size: 0.85rem;
+    }
+
+    &__tags {
+        margin-top: 0.25rem;
+    }
+
+    &__stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 0.5rem;
+        max-width: 720px;
+    }
+
+    &__stat_value {
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 1.1;
+
+        // Strip the field widget's default chrome (margins, borders) so the
+        // number reads as a hero stat, not a labelled field.
+        .o_field_widget {
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: transparent;
+        }
+    }
+
+    &__stat_label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--bs-secondary-color, #6c757d);
+    }
+}

@@ -1,57 +1,26 @@
 // /** ********************************************************************************
 //     Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+//     Copyright 2026 ledoent — Don Kendall
 //     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 //  **********************************************************************************/
 import {KanbanRecord} from "@web/views/kanban/kanban_record";
-import {useFileViewer} from "@web/core/file_viewer/file_viewer_hook";
-import {useService} from "@web/core/utils/hooks";
-
-const videoReadableTypes = ["x-matroska", "mp4", "webm"];
-const audioReadableTypes = ["mp3", "ogg", "wav", "aac", "mpa", "flac", "m4a"];
 
 export class FileKanbanRecord extends KanbanRecord {
-    setup() {
-        super.setup();
-        this.store = useService("mail.store");
-        this.fileViewer = useFileViewer();
-    }
-
-    isVideo(mimetype) {
-        return videoReadableTypes.includes(mimetype);
-    }
-
-    isAudio(mimetype) {
-        return audioReadableTypes.includes(mimetype);
-    }
-
     /**
      * @override
      *
-     * Override to open the preview upon clicking the image, if compatible.
+     * Every kanban click — including the file icon — routes through the
+     * renderer's side-pane preview state. Previously the icon had its own
+     * branch that opened Odoo's built-in modal `fileViewer`; that detour
+     * was inconsistent with the rest of the card (which already selected
+     * for the side-pane) and meant the registered handler chain in
+     * `dms.preview_handlers` never saw the click.
      */
     onGlobalClick(ev) {
-        const self = this;
-
-        if (ev.target.closest(".o_kanban_dms_file_preview")) {
-            const file_type = self.props.record.data.name.split(".")[1];
-            let mimetype = "";
-
-            if (self.isVideo(file_type)) {
-                mimetype = `video/${file_type}`;
-            } else if (self.isAudio(file_type)) {
-                mimetype = "audio/mpeg";
-            } else {
-                mimetype = self.props.record.data.mimetype;
-            }
-
-            const attachment = this.store["ir.attachment"].insert({
-                id: self.props.record.data.id,
-                filename: self.props.record.data.name,
-                name: self.props.record.data.name,
-                mimetype: mimetype,
-                model_name: self.props.record.resModel,
-            });
-            this.fileViewer.open(attachment);
+        if (this.env.dmsKanbanPreview && this.props.record.resId) {
+            this.env.dmsKanbanPreview.select(this.props.record.resId);
+            ev.preventDefault?.();
+            ev.stopPropagation?.();
             return;
         }
         return super.onGlobalClick(ev);

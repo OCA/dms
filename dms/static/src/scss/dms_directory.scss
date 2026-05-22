@@ -1,0 +1,194 @@
+// Copyright 2026 ledoent — Don Kendall
+// License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+// Directories landing dashboard stat bar. Sits above the kanban grid as a
+// flow-layout block (not absolutely positioned), so it pushes the grid down
+// rather than overlapping it.
+
+// The renderer injects the stat bar as a sibling of the searchpanel + the
+// kanban renderer inside `<main class="o_content o_component_with_search_panel">`,
+// which is `display: flex; flex-direction: row`. Float the bar absolutely
+// above the row + give the parent top padding so the searchpanel + kanban
+// shift down to make room. This keeps the row layout intact (kanban still
+// fills 1220px next to the 220px searchpanel) while showing the bar full
+// width at the top.
+main.o_content.o_component_with_search_panel:has(.o_dms_stat_bar) {
+    position: relative;
+    padding-top: 88px;
+}
+
+.o_dms_stat_bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 10px 16px 14px;
+    background-color: var(--bs-body-bg, #fff);
+    border-bottom: 1px solid var(--bs-border-color-translucent, rgba(0, 0, 0, 0.075));
+
+    @media (max-width: 575.98px) {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    &[data-loading="true"] {
+        opacity: 0.6;
+    }
+
+    &__tile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background-color: var(--bs-body-bg, #fff);
+        border: 1px solid var(--bs-border-color-translucent, rgba(0, 0, 0, 0.075));
+        border-radius: 6px;
+        min-width: 0;
+        position: relative;
+    }
+
+    &__spark {
+        width: 80px;
+        height: 26px;
+        flex: 0 0 80px;
+        margin-left: auto;
+        color: var(--tile-accent, var(--bs-primary, #714b67));
+    }
+
+    &__spark_line {
+        stroke: currentColor;
+        stroke-width: 1.4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    &__spark_area {
+        fill: currentColor;
+        opacity: 0.12;
+    }
+
+    &__spark_dot {
+        fill: currentColor;
+    }
+
+    &__spark_bar {
+        fill: currentColor;
+        opacity: 0.65;
+
+        &:last-of-type {
+            opacity: 1;
+        }
+    }
+
+    &__delta {
+        font-size: 0.7rem;
+        color: var(--bs-secondary-color, #6c757d);
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__icon {
+        flex: 0 0 32px;
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        color: var(--tile-accent, var(--bs-primary, #714b67));
+        background-color: var(--tile-bg, var(--bs-tertiary-bg, #f4f5f7));
+        border-radius: 50%;
+    }
+
+    // Per-tile tint — each semantic gets its own colour family so the bar
+    // reads as 3 distinct facets, not 3 copies of the same icon.
+    &__tile[data-tint="files"] {
+        --tile-accent: #1971c2;
+        --tile-bg: rgba(25, 113, 194, 0.1);
+    }
+    &__tile[data-tint="storage"] {
+        --tile-accent: #2f9e44;
+        --tile-bg: rgba(47, 158, 68, 0.1);
+    }
+    &__tile[data-tint="fresh"] {
+        --tile-accent: #e8590c;
+        --tile-bg: rgba(232, 89, 12, 0.1);
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    &__value {
+        font-size: 1.125rem;
+        font-weight: 600;
+        line-height: 1.25;
+        color: var(--bs-emphasis-color, #212529);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__label {
+        font-size: 0.75rem;
+        color: var(--bs-secondary-color, #6c757d);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+}
+
+// ---- Directory initials chip ----
+//
+// Hash-bucketed coloured circle with the directory's first 2 letters. Stable
+// per-name colour across sorts. Buckets computed at render time via QWeb
+// expression on the kanban card (see view_dms_directory_kanban in
+// views/dms_directory.xml). Eight palette buckets keeps the visual vocabulary
+// small enough to remember.
+.o_kanban_dms_dir_chip {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+    &[data-bucket="1"] {
+        background-color: #4263eb;
+    }
+    &[data-bucket="2"] {
+        background-color: #1098ad;
+    }
+    &[data-bucket="3"] {
+        background-color: #2f9e44;
+    }
+    &[data-bucket="4"] {
+        background-color: #f08c00;
+    }
+    &[data-bucket="5"] {
+        background-color: #d6336c;
+    }
+    &[data-bucket="6"] {
+        background-color: #ae3ec9;
+    }
+    &[data-bucket="7"] {
+        background-color: #5f3dc4;
+    }
+    &[data-bucket="8"] {
+        background-color: #495057;
+    }
+}

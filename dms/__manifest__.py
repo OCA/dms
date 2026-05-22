@@ -5,7 +5,7 @@
 {
     "name": "Document Management System",
     "summary": """Document Management System for Odoo""",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.4.0",
     "category": "Document Management",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/dms",
@@ -47,17 +47,33 @@
             "dms/static/src/models/*.js",
             "dms/static/src/js/fields/path_json/path_owl.esm.js",
             "dms/static/src/js/fields/preview_binary/preview_record.esm.js",
+            "dms/static/src/js/utils/*.esm.js",
+            "dms/static/src/js/components/*.esm.js",
+            "dms/static/src/js/components/preview/*.esm.js",
             "dms/static/src/js/views/*.esm.js",
             # XML
             "dms/static/src/js/fields/path_json/path_owl.xml",
             "dms/static/src/js/fields/preview_binary/preview_record.xml",
+            "dms/static/src/js/components/*.xml",
+            "dms/static/src/js/components/preview/*.xml",
             "dms/static/src/js/views/*.xml",
+            # SCSS
+            "dms/static/src/scss/dms_ext_palette.scss",
+            "dms/static/src/scss/file_kanban.scss",
+            "dms/static/src/scss/dms_directory.scss",
+            "dms/static/src/scss/dms_form_hero.scss",
+            "dms/static/src/scss/file_preview_pane.scss",
+            "dms/static/src/scss/dms_search_facets.scss",
         ],
         "web.assets_frontend": [
+            "dms/static/src/scss/dms_ext_palette.scss",
             "dms/static/src/scss/portal.scss",
         ],
         "web.assets_tests": [
             "dms/static/tests/tours/**/*",
+        ],
+        "web.assets_unit_tests": [
+            "dms/static/tests/**/*.test.js",
         ],
     },
     "demo": [

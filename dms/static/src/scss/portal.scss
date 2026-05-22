@@ -1,12 +1,105 @@
 /**********************************************************************************
 *
 *   Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+*   Copyright 2026 ledoent — Don Kendall
 *   License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 *
 **********************************************************************************/
 
+// Legacy contact-list image style — kept for backwards compatibility with
+// any third-party portal extensions that still reference it.
 .o_portal_contact_img {
     width: 2.3em;
     height: 2.3em;
     object-fit: cover;
+}
+
+// ---- Portal card grid ----
+//
+// Customer-facing mirror of the backend card design. Same per-extension
+// accent vocabulary so the visual identity carries from backend to portal.
+// Per-extension `--dms-accent` rules are duplicated here rather than
+// extracted to a shared Sass partial — Odoo's bundler treats backend and
+// frontend bundles separately, and a small duplication keeps the change
+// self-contained. Extract to `_dms_tokens.scss` later if a third surface
+// needs the same palette.
+
+.o_dms_portal_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 1rem;
+}
+
+.o_dms_portal_card {
+    --dms-accent: var(--bs-secondary-color, #6c757d);
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background-color: var(--bs-body-bg, #fff);
+    border: 1px solid var(--bs-border-color, rgba(0, 0, 0, 0.125));
+    border-left: 3px solid var(--dms-accent);
+    border-radius: 4px;
+    text-decoration: none;
+    color: inherit;
+    transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        border-color 120ms ease;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        color: inherit;
+        text-decoration: none;
+    }
+
+    &__thumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--bs-tertiary-bg, #f4f5f7);
+        border-radius: 3px;
+        padding: 12px 0;
+        min-height: 56px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    &__name {
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        color: var(--bs-secondary-color, #6c757d);
+    }
+
+    &__dot {
+        opacity: 0.5;
+    }
+
+    // Directories use the primary accent — they navigate, not download.
+    &--directory {
+        --dms-accent: var(--bs-primary, #714b67);
+    }
 }
