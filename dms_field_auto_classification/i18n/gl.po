@@ -6,109 +6,111 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 05:08+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado o"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__dms_directory_ids
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_wizard_dms_classification_detail__dms_directory_ids
 msgid "DMS Directories"
-msgstr ""
+msgstr "Directorios DMS"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__detail_ids
 msgid "Details"
-msgstr ""
+msgstr "Detalles"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome a Mostrar"
 
 #. module: dms_field_auto_classification
 #: model:ir.model,name:dms_field_auto_classification.model_dms_classification_template
 msgid "Dms Classification Template"
-msgstr ""
+msgstr "Modelo de clasificación Dms"
 
 #. module: dms_field_auto_classification
 #: model:ir.model,name:dms_field_auto_classification.model_dms_classification_template_detail
 msgid "Dms Classification Template Detail"
-msgstr ""
+msgstr "Modelo de Clasificación Dms Detalle"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__field_id
 msgid "Field"
-msgstr ""
+msgstr "Campo"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__index
 msgid "Index"
-msgstr ""
+msgstr "Índice"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación o"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Actualizado por última vez por"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última modificación o"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__model
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template__model_id
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__model_id
 msgid "Model"
-msgstr ""
+msgstr "Modelo"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__parent_id
 msgid "Parent"
-msgstr ""
+msgstr "Pai"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_wizard_dms_classification_detail__record_ref
 msgid "Record Referenced"
-msgstr ""
+msgstr "Rexistro referenciado"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_dms_classification_template_detail__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Secuencia"
 
 #. module: dms_field_auto_classification
 #: model:ir.model.fields,field_description:dms_field_auto_classification.field_wizard_dms_classification_detail__template_id
 msgid "Template"
-msgstr ""
+msgstr "Modelo"
 
 #. module: dms_field_auto_classification
 #: model:ir.model,name:dms_field_auto_classification.model_wizard_dms_classification_detail
 msgid "Wizard Dms Classification Detail"
-msgstr ""
+msgstr "Asistente de Clasificación Dms Detalle"
