@@ -6,116 +6,118 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 05:08+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields.selection,name:dms_auto_classification.selection__wizard_dms_classification__state__analyze
 #: model_terms:ir.ui.view,arch_db:dms_auto_classification.view_wizard_dms_classification_form
 msgid "Analyze"
-msgstr ""
+msgstr "Analizar"
 
 #. module: dms_auto_classification
 #: model:ir.actions.act_window,name:dms_auto_classification.action_wizard_dms_classification
 #: model:ir.ui.menu,name:dms_auto_classification.menu_wizard_dms_classification
 msgid "Auto Classification"
-msgstr ""
+msgstr "Auto-clasificación"
 
 #. module: dms_auto_classification
 #: model_terms:ir.ui.view,arch_db:dms_auto_classification.view_wizard_dms_classification_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: dms_auto_classification
 #: model:ir.actions.act_window,name:dms_auto_classification.action_dms_classification_template
 #: model:ir.ui.menu,name:dms_auto_classification.menu_dms_classification_template
 msgid "Classification Templates"
-msgstr ""
+msgstr "Modelos de clasificación"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields.selection,name:dms_auto_classification.selection__wizard_dms_classification_detail__state__classified
 msgid "Classified"
-msgstr ""
+msgstr "Clasificado"
 
 #. module: dms_auto_classification
 #: model_terms:ir.ui.view,arch_db:dms_auto_classification.view_wizard_dms_classification_form
 msgid "Classify"
-msgstr ""
+msgstr "Clasificar"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__company_id
 msgid "Company"
-msgstr ""
+msgstr "Compañía"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__create_uid
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__create_uid
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__create_date
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__create_date
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado o"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__detail_ids
 #: model_terms:ir.ui.view,arch_db:dms_auto_classification.view_wizard_dms_classification_form
 msgid "Details"
-msgstr ""
+msgstr "Detalles"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__directory_id
 msgid "Directory"
-msgstr ""
+msgstr "Directorio"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__directory_pattern
 msgid "Directory Pattern"
-msgstr ""
+msgstr "Patrón do directorio"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__display_name
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__display_name
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome a Mostrar"
 
 #. module: dms_auto_classification
 #: model:ir.model,name:dms_auto_classification.model_dms_classification_template
 msgid "Dms Classification Template"
-msgstr ""
+msgstr "Modelo de clasificación Dms"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields.selection,name:dms_auto_classification.selection__wizard_dms_classification__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__data_file
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__data_file
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__file_id
 msgid "File"
-msgstr ""
+msgstr "Arquivo"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__file_name
 #: model_terms:ir.ui.view,arch_db:dms_auto_classification.view_wizard_dms_classification_form
 msgid "File name"
-msgstr ""
+msgstr "Nome de arquivo"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__filename_pattern
 msgid "Filename Pattern"
-msgstr ""
+msgstr "Patrón de nome de arquivo"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__full_path
@@ -127,72 +129,72 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__id
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template____last_update
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification____last_update
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación o"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__write_uid
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__write_uid
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualización por"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__write_date
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__write_date
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización o"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: dms_auto_classification
 #: code:addons/dms_auto_classification/wizards/wizard_dms_classification.py:0
 #, python-format
 msgid "Only .zip files are allowed"
-msgstr ""
+msgstr "Só permítense arquivos .zip"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__parent_id
 msgid "Parent"
-msgstr ""
+msgstr "Pai"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_dms_classification_template__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Secuencia"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__state
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification_detail__state
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields,field_description:dms_auto_classification.field_wizard_dms_classification__template_id
 msgid "Template"
-msgstr ""
+msgstr "Modelo"
 
 #. module: dms_auto_classification
 #: model:ir.model.fields.selection,name:dms_auto_classification.selection__wizard_dms_classification_detail__state__to_classify
 msgid "To classify"
-msgstr ""
+msgstr "A clasificar"
 
 #. module: dms_auto_classification
 #: model:ir.model,name:dms_auto_classification.model_wizard_dms_classification
 msgid "Wizard Dms Classification"
-msgstr ""
+msgstr "Asistente Dms Clasificación"
 
 #. module: dms_auto_classification
 #: model:ir.model,name:dms_auto_classification.model_wizard_dms_classification_detail
 msgid "Wizard Dms Classification Detail"
-msgstr ""
+msgstr "Asistente de Clasificación Dms Detalle"
