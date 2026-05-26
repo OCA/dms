@@ -24,6 +24,11 @@
                     name="filter_user"
                     domain="[('create_uid', '=', uid)]"
                 />
+                <filter
+                    string="Recent (7 days)"
+                    name="filter_recent"
+                    domain="[('write_date', '&gt;=', (context_today() - relativedelta(days=7)).strftime('%Y-%m-%d'))]"
+                />
                 <separator />
                 <filter
                     string="Archived Files"
