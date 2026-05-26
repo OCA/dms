@@ -190,6 +190,16 @@
     flex: 0 0 40%;
     max-width: 40%;
     min-width: 320px;
+
+    // Empty state — collapse to a compact rail so the listing reclaims most
+    // of the screen until the user actually picks a file. The full pane
+    // returns the moment state.file is populated. Matches the macOS Finder
+    // / GNOME Files pattern: invisible until needed.
+    &--empty {
+        flex: 0 0 240px;
+        max-width: 240px;
+        min-width: 240px;
+    }
     display: flex;
     flex-direction: column;
     border-left: 1px solid var(--bs-border-color-translucent, rgba(0, 0, 0, 0.075));
@@ -322,6 +332,10 @@
     border: 0;
     min-height: 480px;
     border-radius: 4px;
+    // White surface for the PDF/Office preview loading paint. Chromium's
+    // built-in PDF viewer shows a dark grey backdrop before render, which
+    // photographs and screen-shares badly. Force a clean white start.
+    background: #fff;
 }
 
 // ---- Fallback card (office / download) ----

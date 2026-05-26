@@ -5,7 +5,10 @@
 -->
 <templates xml:space="preserve">
     <t t-name="dms.FilePreviewPane">
-        <aside class="o_dms_preview_pane">
+        <aside
+            class="o_dms_preview_pane"
+            t-att-class="{'o_dms_preview_pane--empty': !state.file and !state.loading and !state.error}"
+        >
             <header class="o_dms_preview_pane__header">
                 <div class="o_dms_preview_pane__title">
                     <t t-if="state.file">
