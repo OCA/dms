@@ -20,28 +20,6 @@
                     Release to add to the current directory
                 </div>
             </div>
-            <div
-                class="o_kanban_dms_density_toggle btn-group btn-group-sm"
-                role="group"
-                aria-label="Card density"
-            >
-                <button
-                    type="button"
-                    t-foreach="densityOptions"
-                    t-as="opt"
-                    t-key="opt.value"
-                    t-att-class="{
-                        'btn': true,
-                        'btn-secondary': density === opt.value,
-                        'btn-outline-secondary': density !== opt.value,
-                    }"
-                    t-att-title="opt.label"
-                    t-att-aria-pressed="density === opt.value"
-                    t-on-click="() => this.setDensity(opt.value)"
-                >
-                    <i t-attf-class="fa #{opt.icon}" />
-                </button>
-            </div>
         </xpath>
         <xpath expr="//div[hasclass('o_kanban_renderer')]" position="attributes">
             <attribute name="t-att-data-density">density</attribute>
@@ -54,6 +32,54 @@
             t-att-data-preview-open="previewState.open ? 'true' : 'false'"
         >
             <div class="o_dms_kanban_split__main">
+                <div
+                    class="o_dms_view_toolbar"
+                    role="toolbar"
+                    aria-label="View options"
+                >
+                    <div
+                        class="o_kanban_dms_density_toggle btn-group btn-group-sm"
+                        role="group"
+                        aria-label="Card density"
+                    >
+                        <button
+                            type="button"
+                            t-foreach="densityOptions"
+                            t-as="opt"
+                            t-key="opt.value"
+                            t-att-class="{
+                                'btn': true,
+                                'btn-secondary': density === opt.value,
+                                'btn-outline-secondary': density !== opt.value,
+                            }"
+                            t-att-title="opt.label"
+                            t-att-aria-pressed="density === opt.value ? 'true' : 'false'"
+                            t-on-click="() => this.setDensity(opt.value)"
+                        >
+                            <i t-attf-class="fa #{opt.icon}" />
+                        </button>
+                    </div>
+                    <span class="o_dms_view_toolbar__spacer" />
+                    <button
+                        type="button"
+                        class="o_dms_view_toolbar__toggle btn btn-sm d-flex align-items-center gap-1"
+                        t-att-class="{
+                            'o_dms_view_toolbar__toggle--on': previewState.open,
+                            'o_dms_view_toolbar__toggle--off': !previewState.open,
+                        }"
+                        t-att-title="previewState.open ? 'Hide preview pane (Esc)' : 'Show side-by-side preview'"
+                        t-att-aria-pressed="previewState.open ? 'true' : 'false'"
+                        t-on-click="() => this.togglePreview()"
+                    >
+                        <i
+                            t-attf-class="fa #{previewState.open ? 'fa-times' : 'fa-columns'}"
+                        />
+                        <span class="d-none d-md-inline">
+                            <t t-if="previewState.open">Hide preview</t>
+                            <t t-else="">Preview pane</t>
+                        </span>
+                    </button>
+                </div>
                 <t t-call="dms.KanbanRendererBase" />
             </div>
             <FilePreviewPane
@@ -61,23 +87,6 @@
                 recordId="previewState.recordId"
                 onClose="() => this.closePreview()"
             />
-            <button
-                type="button"
-                class="o_dms_kanban_split__toggle btn btn-sm d-flex align-items-center gap-1"
-                t-att-class="{
-                    'o_dms_kanban_split__toggle--on': previewState.open,
-                    'o_dms_kanban_split__toggle--off': !previewState.open,
-                }"
-                t-att-title="previewState.open ? 'Hide preview pane (Esc)' : 'Show side-by-side preview'"
-                t-att-aria-pressed="previewState.open"
-                t-on-click="() => this.togglePreview()"
-            >
-                <i t-attf-class="fa #{previewState.open ? 'fa-times' : 'fa-columns'}" />
-                <span class="d-none d-md-inline">
-                    <t t-if="previewState.open">Hide preview</t>
-                    <t t-else="">Preview pane</t>
-                </span>
-            </button>
         </div>
     </t>
 

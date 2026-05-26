@@ -17,7 +17,6 @@ import {registry} from "@web/core/registry";
 
 patch(FileListRenderer.prototype, createFileDropZoneExtension());
 patch(ListController.prototype, createFileUploadExtension());
-FileListRenderer.template = "dms.ListRenderer";
 
 export const FileListView = {
     ...listView,

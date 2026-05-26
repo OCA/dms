@@ -5,7 +5,7 @@
 -->
 <templates xml:space="preserve">
     <t t-name="dms.StatBar">
-        <div class="o_dms_stat_bar" t-att-data-loading="isLoading">
+        <div class="o_dms_stat_bar" t-att-data-loading="isLoading ? 'true' : 'false'">
             <div
                 class="o_dms_stat_bar__tile"
                 t-foreach="props.tiles"

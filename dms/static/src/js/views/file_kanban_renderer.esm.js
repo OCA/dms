@@ -3,7 +3,7 @@
 //     Copyright 2026 ledoent — Don Kendall
 //     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 //  **********************************************************************************/
-import {onMounted, onWillUnmount, useState, useSubEnv} from "@odoo/owl";
+import {useExternalListener, useState, useSubEnv} from "@odoo/owl";
 import {FileKanbanRecord} from "./file_kanban_record.esm";
 import {FilePreviewPane} from "../components/preview/file_preview_pane.esm";
 import {KanbanRenderer} from "@web/views/kanban/kanban_renderer";
@@ -40,6 +40,13 @@ function _readStoredPreview() {
 }
 
 export class FileKanbanRenderer extends KanbanRenderer {
+    static template = "dms.KanbanRenderer";
+    static components = {
+        ...KanbanRenderer.components,
+        KanbanRecord: FileKanbanRecord,
+        FilePreviewPane,
+    };
+
     setup() {
         super.setup();
         this.densityState = useState({density: _readStoredDensity()});
@@ -56,17 +63,14 @@ export class FileKanbanRenderer extends KanbanRenderer {
                 isOpen: () => this.previewState.open,
             },
         });
-        this._onKeyDown = (ev) => {
+        // Esc dismisses the pane. `useExternalListener` auto-binds + cleans
+        // up on unmount — replaces the prior manual onMounted/onWillUnmount
+        // pair plus an instance-level handler ref. One hook, idiomatic OWL 2.
+        useExternalListener(window, "keydown", (ev) => {
             if (ev.key === "Escape" && this.previewState.open) {
-                if (this.previewState.recordId) {
-                    this.closePreview();
-                } else {
-                    this.togglePreview();
-                }
+                this.closePreview();
             }
-        };
-        onMounted(() => window.addEventListener("keydown", this._onKeyDown));
-        onWillUnmount(() => window.removeEventListener("keydown", this._onKeyDown));
+        });
     }
 
     get density() {
@@ -111,9 +115,3 @@ export class FileKanbanRenderer extends KanbanRenderer {
         writeStored(DMS_KANBAN_PREVIEW_KEY, "1");
     }
 }
-
-FileKanbanRenderer.components = {
-    ...KanbanRenderer.components,
-    KanbanRecord: FileKanbanRecord,
-    FilePreviewPane,
-};

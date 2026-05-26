@@ -24,6 +24,32 @@
             t-att-data-preview-open="previewState.open ? 'true' : 'false'"
         >
             <div class="o_dms_list_split__list">
+                <div
+                    class="o_dms_view_toolbar"
+                    role="toolbar"
+                    aria-label="View options"
+                >
+                    <span class="o_dms_view_toolbar__spacer" />
+                    <button
+                        type="button"
+                        class="o_dms_view_toolbar__toggle btn btn-sm d-flex align-items-center gap-1"
+                        t-att-class="{
+                            'o_dms_view_toolbar__toggle--on': previewState.open,
+                            'o_dms_view_toolbar__toggle--off': !previewState.open,
+                        }"
+                        t-att-title="previewState.open ? 'Hide preview pane (Esc)' : 'Show side-by-side preview'"
+                        t-att-aria-pressed="previewState.open ? 'true' : 'false'"
+                        t-on-click="() => this.togglePreview()"
+                    >
+                        <i
+                            t-attf-class="fa #{previewState.open ? 'fa-times' : 'fa-columns'}"
+                        />
+                        <span class="d-none d-md-inline">
+                            <t t-if="previewState.open">Hide preview</t>
+                            <t t-else="">Preview pane</t>
+                        </span>
+                    </button>
+                </div>
                 <t t-call="dms.ListRendererBase" />
             </div>
             <FilePreviewPane
@@ -31,23 +57,6 @@
                 recordId="previewState.recordId"
                 onClose="() => this.closePreview()"
             />
-            <button
-                type="button"
-                class="o_dms_list_split__toggle btn btn-sm d-flex align-items-center gap-1"
-                t-att-class="{
-                    'o_dms_list_split__toggle--on': previewState.open,
-                    'o_dms_list_split__toggle--off': !previewState.open,
-                }"
-                t-att-title="previewState.open ? 'Hide preview pane (Esc)' : 'Show side-by-side preview'"
-                t-att-aria-pressed="previewState.open"
-                t-on-click="() => this.togglePreview()"
-            >
-                <i t-attf-class="fa #{previewState.open ? 'fa-times' : 'fa-columns'}" />
-                <span class="d-none d-md-inline">
-                    <t t-if="previewState.open">Hide preview</t>
-                    <t t-else="">Preview pane</t>
-                </span>
-            </button>
         </div>
     </t>
 

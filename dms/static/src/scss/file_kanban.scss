@@ -10,14 +10,6 @@
 .mk_file_kanban_view {
     position: relative;
 
-    // ---- Density toggle bar (floating top-right above the grid) ----
-    .o_kanban_dms_density_toggle {
-        position: absolute;
-        top: 8px;
-        right: 16px;
-        z-index: 2;
-    }
-
     // ---- Card chrome (applies to every density) ----
     .o_kanban_dms_card {
         // Default accent for unknown extensions / no mimetype info.

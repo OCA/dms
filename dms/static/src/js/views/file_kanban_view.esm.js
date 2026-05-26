@@ -17,7 +17,6 @@ import {registry} from "@web/core/registry";
 
 patch(FileKanbanRenderer.prototype, createFileDropZoneExtension());
 patch(KanbanController.prototype, createFileUploadExtension());
-FileKanbanRenderer.template = "dms.KanbanRenderer";
 
 export const FileKanbanView = {
     ...kanbanView,

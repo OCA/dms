@@ -9,6 +9,11 @@ import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useService} from "@web/core/utils/hooks";
 
 class DmsPathField extends Component {
+    static template = "dms.DmsPathField";
+    static props = {
+        ...standardFieldProps,
+    };
+
     setup() {
         super.setup();
         this.action = useService("action");
@@ -34,11 +39,6 @@ class DmsPathField extends Component {
         });
     }
 }
-
-DmsPathField.template = "dms.DmsPathField";
-DmsPathField.props = {
-    ...standardFieldProps,
-};
 
 const dmsPathField = {
     component: DmsPathField,

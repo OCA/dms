@@ -1,17 +1,96 @@
 // Copyright 2026 ledoent — Don Kendall
 // License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-// Side-pane preview layout for the dms file list view.
+// Side-pane preview layout for the dms file list + kanban views.
 //
-// The list view is wrapped in `.o_dms_list_split`. When the preview pane is
-// open (toggled via the discoverable button in the top-right), the wrapper
-// becomes a horizontal flex container with the list on the left and the
-// preview pane (~40% of the width) on the right. The pane animates in from
-// the right; the selected row gets a primary-color accent border.
+// The list/kanban view is wrapped in `.o_dms_list_split` / `.o_dms_kanban_split`.
+// When the preview pane is open, the wrapper becomes a horizontal flex
+// container with the list on the left and the preview pane (~40% of the
+// width) on the right. The pane animates in from the right; the selected
+// row gets a primary-color accent rail.
+//
+// View-level toggles (preview, density) live inside `.o_dms_view_toolbar`,
+// a normal in-flow strip rendered above the grid/list — not an overlay.
+// Earlier iterations stacked four absolute-positioned floaters in the
+// top-right corner, which sat on top of the list column headers and forced
+// a `right: calc(40% + 12px)` shift + density-hide hack when the pane
+// opened. In-flow placement removes the entire cascade.
 
-// Kanban split: same shape as `.o_dms_list_split` so the file kanban can
-// reuse the side-pane registry hook. Card click → preview; pane opens to
-// the right of the kanban grid, toggle anchored top-right.
+// ---- View toolbar: shared chrome for list + kanban ----
+//
+// One in-flow row above the renderer body. Kanban populates it with the
+// density btn-group on the left + the preview-pane pill on the right; the
+// `__spacer` between them carries `flex: 1` so the pill always anchors
+// right regardless of how many controls join on the left in future. List
+// view only has the pill, also right-anchored via the spacer.
+.o_dms_view_toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    flex: 0 0 auto;
+    border-bottom: 1px solid var(--bs-border-color-translucent, rgba(0, 0, 0, 0.06));
+    background-color: var(--bs-body-bg, #fff);
+
+    &__spacer {
+        flex: 1 1 auto;
+    }
+
+    &__toggle {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        border-radius: 999px;
+        // Animate background/border/shadow/transform together so the hover
+        // state reads as a deliberate response, not just a 1px nudge.
+        transition:
+            background-color 160ms ease,
+            border-color 160ms ease,
+            color 160ms ease,
+            box-shadow 160ms ease,
+            transform 160ms ease;
+
+        &:hover {
+            transform: translateY(-1px);
+        }
+        &:active {
+            transform: translateY(0);
+        }
+
+        &--off {
+            background-color: var(--bs-body-bg, #fff);
+            color: var(--bs-emphasis-color, #212529);
+            border: 1px solid var(--bs-border-color, rgba(0, 0, 0, 0.15));
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+
+            // Hover on the "Preview pane" (off) state: deepen the tint
+            // toward the primary so the affordance pre-figures the on state.
+            &:hover {
+                background-color: rgba(113, 75, 103, 0.06);
+                border-color: rgba(113, 75, 103, 0.35);
+                color: var(--bs-primary, #714b67);
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        &--on {
+            background-color: var(--bs-primary, #714b67);
+            color: #fff;
+            border: 1px solid var(--bs-primary, #714b67);
+            box-shadow: 0 2px 6px rgba(113, 75, 103, 0.3);
+
+            // Hover on the "Hide preview" (on) state: darken via filter
+            // (works against any primary token value) + lift the shadow so
+            // the button feels tactile when about to dismiss the pane.
+            &:hover {
+                filter: brightness(0.92);
+                box-shadow: 0 3px 10px rgba(113, 75, 103, 0.45);
+            }
+        }
+    }
+}
+
 .o_dms_kanban_split {
     position: relative;
     display: flex;
@@ -28,57 +107,22 @@
         flex-direction: column;
         overflow: hidden;
     }
+}
 
-    &__toggle {
-        position: absolute;
-        top: 8px;
-        right: 12px;
-        z-index: 6;
-        padding: 4px 10px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        letter-spacing: 0.02em;
-        border-radius: 999px;
-        transition:
-            background-color 160ms ease,
-            color 160ms ease,
-            transform 160ms ease;
-
-        &:hover {
-            transform: translateY(-1px);
-        }
-
-        &--off {
-            background-color: var(--bs-body-bg, #fff);
-            color: var(--bs-emphasis-color, #212529);
-            border: 1px solid var(--bs-border-color, rgba(0, 0, 0, 0.15));
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-        }
-
-        &--on {
-            background-color: var(--bs-primary, #714b67);
-            color: #fff;
-            border: 1px solid var(--bs-primary, #714b67);
-            box-shadow: 0 2px 6px rgba(113, 75, 103, 0.3);
+// Responsive collapse: at narrow viewports (Bootstrap `md` and below — the
+// stock backend collapses the searchpanel below this breakpoint too), the
+// 40%/min-320px side-pane squeezes the grid to one cramped column AND
+// overlaps the in-flow toolbar. Hide the pane wholesale below `lg` and
+// suppress the toggle pill so it doesn't promise a feature the viewport
+// can't host. Re-appears at ≥992px, where there's room for both halves.
+@media (max-width: 991.98px) {
+    .o_dms_kanban_split,
+    .o_dms_list_split {
+        .o_dms_preview_pane {
+            display: none;
         }
     }
-
-    &[data-preview-open="true"] &__toggle {
-        right: calc(40% + 12px);
-    }
-
-    // Make room for the preview toggle pill (top-right of the split).
-    // The density toggle lives inside `__main` at `right: 16px`; shift it
-    // leftward so the two pills don't overlap.
-    .o_kanban_dms_density_toggle {
-        right: 160px;
-    }
-
-    // Hide the density toggle when the pane is open. The density choice is
-    // a "browsing the grid" affordance; while previewing a single file the
-    // toggle just clutters the pane header. Re-appears when the user
-    // dismisses the pane.
-    &[data-preview-open="true"] .o_kanban_dms_density_toggle {
+    .o_dms_view_toolbar__toggle {
         display: none;
     }
 }
@@ -94,48 +138,19 @@
         flex: 1 1 auto;
         min-width: 0;
         min-height: 0;
-        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
         transition: flex-basis 240ms ease-out;
-    }
 
-    // ---- Toggle button: always visible, label included on md+ ----
-    &__toggle {
-        position: absolute;
-        top: 8px;
-        right: 12px;
-        z-index: 3;
-        padding: 4px 10px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        letter-spacing: 0.02em;
-        border-radius: 999px;
-        transition:
-            background-color 160ms ease,
-            color 160ms ease,
-            transform 160ms ease;
-
-        &:hover {
-            transform: translateY(-1px);
+        // The list renderer body scrolls inside the column; the toolbar
+        // above stays pinned.
+        > .o_list_renderer,
+        > .o_renderer {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow: auto;
         }
-
-        &--off {
-            background-color: var(--bs-body-bg, #fff);
-            color: var(--bs-emphasis-color, #212529);
-            border: 1px solid var(--bs-border-color, rgba(0, 0, 0, 0.15));
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-        }
-
-        &--on {
-            background-color: var(--bs-primary, #714b67);
-            color: #fff;
-            border: 1px solid var(--bs-primary, #714b67);
-            box-shadow: 0 2px 6px rgba(113, 75, 103, 0.3);
-        }
-    }
-
-    // When pane is open, shift toggle so it doesn't sit on top of the pane.
-    &[data-preview-open="true"] &__toggle {
-        right: calc(40% + 12px);
     }
 }
 

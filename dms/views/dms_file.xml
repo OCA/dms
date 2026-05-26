@@ -271,7 +271,7 @@
                             </div>
                             <div class="o_kanban_dms_card__meta oe_kanban_bottom_right">
                                 <field name="human_size" />
-                                <field name="write_date" widget="date" />
+                                <field name="write_date" />
                                 <img
                                     class="o_kanban_dms_card__avatar oe_kanban_avatar ms-auto"
                                     t-attf-src="/web/image/res.users/#{record.create_uid.raw_value}/avatar_128"

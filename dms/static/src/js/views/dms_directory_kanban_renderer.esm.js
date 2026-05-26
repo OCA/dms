@@ -7,6 +7,12 @@ import {onWillStart, useState} from "@odoo/owl";
 import {useService} from "@web/core/utils/hooks";
 
 export class DmsDirectoryKanbanRenderer extends KanbanRenderer {
+    static template = "dms.DirectoryKanbanRenderer";
+    static components = {
+        ...KanbanRenderer.components,
+        DmsStatBar,
+    };
+
     setup() {
         super.setup();
         this.orm = useService("orm");
@@ -24,9 +30,3 @@ export class DmsDirectoryKanbanRenderer extends KanbanRenderer {
         return this.statsState.stats;
     }
 }
-
-DmsDirectoryKanbanRenderer.components = {
-    ...KanbanRenderer.components,
-    DmsStatBar,
-};
-DmsDirectoryKanbanRenderer.template = "dms.DirectoryKanbanRenderer";

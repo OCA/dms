@@ -6,7 +6,7 @@
 
 import {FilePreviewPane} from "../components/preview/file_preview_pane.esm";
 import {ListRenderer} from "@web/views/list/list_renderer";
-import {onMounted, onWillUnmount, useState} from "@odoo/owl";
+import {useExternalListener, useState} from "@odoo/owl";
 import {readStored, writeStored} from "../utils/storage.esm";
 
 // Side-pane toggle persists in localStorage so it survives navigation.
@@ -19,24 +19,26 @@ function _readStoredPreview() {
 }
 
 export class FileListRenderer extends ListRenderer {
+    static template = "dms.ListRenderer";
+    static components = {
+        ...ListRenderer.components,
+        FilePreviewPane,
+    };
+
     setup() {
         super.setup();
         this.previewState = useState({
             open: _readStoredPreview(),
             recordId: null,
         });
-        // ESC closes the pane — global listener registered on mount.
-        this._onKeyDown = (ev) => {
+        // Esc dismisses the pane. `useExternalListener` auto-binds + cleans
+        // up on unmount — replaces the prior manual onMounted/onWillUnmount
+        // pair. Idiomatic OWL 2.
+        useExternalListener(window, "keydown", (ev) => {
             if (ev.key === "Escape" && this.previewState.open) {
-                if (this.previewState.recordId) {
-                    this.closePreview();
-                } else {
-                    this.togglePreview();
-                }
+                this.closePreview();
             }
-        };
-        onMounted(() => window.addEventListener("keydown", this._onKeyDown));
-        onWillUnmount(() => window.removeEventListener("keydown", this._onKeyDown));
+        });
     }
 
     isPreviewSelected(record) {
@@ -86,8 +88,3 @@ export class FileListRenderer extends ListRenderer {
         return base;
     }
 }
-
-FileListRenderer.components = {
-    ...FileListRenderer.components,
-    FilePreviewPane,
-};

@@ -312,7 +312,7 @@
                                         widget="many2many_tags"
                                         options="{'color_field': 'color'}"
                                     />
-                                    <field name="write_date" widget="date" />
+                                    <field name="write_date" />
                                 </div>
                             </div>
                             <footer class="mt-auto pt-0 ms-1">
