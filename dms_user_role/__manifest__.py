@@ -12,5 +12,5 @@
     "data": [
         "views/dms_access_group_views.xml",
     ],
-    "maintainers": ["victoralmau"],
+    "maintainers": ["victoralmau", "dnplkndll"],
 }
