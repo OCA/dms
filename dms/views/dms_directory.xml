@@ -511,11 +511,20 @@
                          upstream form carried. -->
                     <notebook>
                         <page name="page_contents" string="Contents">
-                            <separator string="Subdirectories" />
+                            <!-- Hide the Subdirectories block on leaf directories
+                                 to reclaim the ~150px the empty table would
+                                 otherwise occupy. The "Subdirectories" stat tile
+                                 in the hero already exposes the "+ Add" affordance
+                                 when the user has create permission. -->
+                            <separator
+                                string="Subdirectories"
+                                invisible="count_directories == 0"
+                            />
                             <field
                                 name="child_directory_ids"
                                 context="{'default_parent_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
+                                invisible="count_directories == 0"
                                 nolabel="1"
                             >
                                 <list limit="10">
@@ -528,11 +537,15 @@
                                     <field name="human_size" string="Size" />
                                 </list>
                             </field>
-                            <separator string="Files" />
+                            <separator
+                                string="Files"
+                                invisible="count_files == 0 and not permission_create"
+                            />
                             <field
                                 name="file_ids"
                                 context="{'default_directory_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
+                                invisible="count_files == 0 and not permission_create"
                                 nolabel="1"
                             >
                                 <list limit="10">

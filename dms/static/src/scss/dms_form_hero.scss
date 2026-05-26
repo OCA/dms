@@ -83,6 +83,13 @@
             border: none;
             background: transparent;
         }
+
+        // Type stat shows the raw extension ("svg", "pdf") — render as the
+        // uppercase pill convention used in the kanban cards.
+        &--uppercase {
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
     }
 
     &__stat_label {

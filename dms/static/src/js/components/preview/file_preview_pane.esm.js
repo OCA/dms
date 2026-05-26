@@ -40,16 +40,22 @@ const _EXTENSION_MIMETYPES = {
     svg: "image/svg+xml",
 };
 
+// Mimetypes generic enough that an extension-derived mapping should win.
+// libmagic returns `text/plain` for .md/.markdown/.json/.xml/.csv (no magic
+// signature distinguishes them from prose), so the registry would route
+// those to TextPreview instead of MarkdownPreview / JSON / etc.
+const _STORED_OVERRIDABLE = new Set([
+    "application/octet-stream",
+    "application/x-binary",
+    "text/plain",
+]);
+
 function _effectiveMimetype(file) {
     const stored = file.mimetype || "";
-    if (
-        stored &&
-        stored !== "application/octet-stream" &&
-        stored !== "application/x-binary"
-    ) {
+    const ext = (file.name || "").split(".").pop().toLowerCase();
+    if (stored && !_STORED_OVERRIDABLE.has(stored)) {
         return stored;
     }
-    const ext = (file.name || "").split(".").pop().toLowerCase();
     return _EXTENSION_MIMETYPES[ext] || stored;
 }
 

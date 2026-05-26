@@ -315,12 +315,20 @@
                 <field name="active" column_invisible="1" />
                 <field name="is_locked" column_invisible="1" />
                 <field name="is_lock_editor" column_invisible="1" />
-                <field name="name" />
+                <field
+                    name="icon_url"
+                    widget="image_url"
+                    string=""
+                    nolabel="1"
+                    options="{'size': [24, 24]}"
+                />
+                <field name="name" width="320" />
+                <field name="extension" string="Type" width="90" />
+                <field name="human_size" string="Size" width="100" />
+                <field name="write_date" string="Modified" width="180" />
                 <field name="directory_id" optional="hide" />
                 <field name="root_directory_id" optional="hide" />
-                <field name="write_date" />
-                <field name="human_size" string="Size" />
-                <field name="mimetype" />
+                <field name="mimetype" optional="hide" />
                 <field name="category_id" column_invisible="1" />
                 <field
                     name="tag_ids"
@@ -446,7 +454,9 @@
                                     </div>
                                 </div>
                                 <div class="o_dms_form_hero__stat">
-                                    <div class="o_dms_form_hero__stat_value">
+                                    <div
+                                        class="o_dms_form_hero__stat_value o_dms_form_hero__stat_value--uppercase"
+                                    >
                                         <field name="extension" readonly="1" />
                                     </div>
                                     <div class="o_dms_form_hero__stat_label">
