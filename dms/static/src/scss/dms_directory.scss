@@ -146,6 +146,17 @@ main.o_content.o_component_with_search_panel:has(.o_dms_stat_bar) {
     }
 }
 
+// Round the creator avatar in the directory kanban footer to match the file
+// card's avatar treatment. Core `oe_kanban_avatar` doesn't include radius in
+// this context, so we enforce it explicitly + match the 20px max-width set
+// inline on the <img>.
+.mk_directory_kanban_view .oe_kanban_avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 // ---- Directory initials chip ----
 //
 // Hash-bucketed coloured circle with the directory's first 2 letters. Stable
