@@ -6,17 +6,11 @@
 
 import {FilePreviewPane} from "../components/preview/file_preview_pane.esm";
 import {ListRenderer} from "@web/views/list/list_renderer";
-import {useExternalListener, useState} from "@odoo/owl";
-import {readStored, writeStored} from "../utils/storage.esm";
+import {useExternalListener} from "@odoo/owl";
+import {useDmsPreviewState} from "../utils/use_stored_state.esm";
 
 // Side-pane toggle persists in localStorage so it survives navigation.
 const DMS_LIST_PREVIEW_KEY = "dms_list_preview_pane";
-
-function _readStoredPreview() {
-    // Default: pane visible. Only the explicit "0" persisted by the user
-    // clicking close keeps it hidden on subsequent loads.
-    return readStored(DMS_LIST_PREVIEW_KEY) !== "0";
-}
 
 export class FileListRenderer extends ListRenderer {
     static template = "dms.ListRenderer";
@@ -27,13 +21,11 @@ export class FileListRenderer extends ListRenderer {
 
     setup() {
         super.setup();
-        this.previewState = useState({
-            open: _readStoredPreview(),
-            recordId: null,
-        });
-        // Esc dismisses the pane. `useExternalListener` auto-binds + cleans
-        // up on unmount — replaces the prior manual onMounted/onWillUnmount
-        // pair. Idiomatic OWL 2.
+        // `useDmsPreviewState` encapsulates the open/recordId/toggle/close/select
+        // machinery shared with the kanban renderer. Templates read .open /
+        // .recordId; methods below shim to .toggle() / .close() so XML doesn't
+        // need to know about the hook.
+        this.previewState = useDmsPreviewState(DMS_LIST_PREVIEW_KEY);
         useExternalListener(window, "keydown", (ev) => {
             if (ev.key === "Escape" && this.previewState.open) {
                 this.closePreview();
@@ -46,20 +38,11 @@ export class FileListRenderer extends ListRenderer {
     }
 
     togglePreview() {
-        this.previewState.open = !this.previewState.open;
-        writeStored(DMS_LIST_PREVIEW_KEY, this.previewState.open ? "1" : "0");
-        if (!this.previewState.open) {
-            this.previewState.recordId = null;
-        }
+        this.previewState.toggle();
     }
 
     closePreview() {
-        // Full dismissal: header X button + Escape both route here and
-        // users expect the pane to go away (not just clear the file).
-        // Persist the closed state so the choice survives navigation.
-        this.previewState.recordId = null;
-        this.previewState.open = false;
-        writeStored(DMS_LIST_PREVIEW_KEY, "0");
+        this.previewState.close();
     }
 
     onCellClicked(record, column, ev) {
@@ -68,9 +51,7 @@ export class FileListRenderer extends ListRenderer {
         // who need the full form view click the "Open form" button in the
         // pane header (rendered by FilePreviewPane).
         if (record.resId) {
-            this.previewState.open = true;
-            this.previewState.recordId = record.resId;
-            writeStored(DMS_LIST_PREVIEW_KEY, "1");
+            this.previewState.select(record.resId);
             ev?.stopPropagation?.();
             ev?.preventDefault?.();
             return;
