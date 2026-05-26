@@ -112,6 +112,26 @@
             white-space: nowrap;
         }
 
+        // Inline rename input (F3). Sits in the same flow slot as the name
+        // span so the card geometry doesn't shift on dblclick. Bootstrap's
+        // form-control-sm sets the height; we strip the rounded chrome to
+        // keep it visually close to the read-mode label.
+        &__name_input {
+            display: block;
+            width: 100%;
+            font-weight: 600;
+            font-size: inherit;
+            padding: 2px 6px;
+            border: 1px solid var(--bs-primary, #714b67);
+            border-radius: 3px;
+            background: var(--bs-body-bg, #fff);
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(113, 75, 103, 0.2);
+            }
+        }
+
         // Directory path subtitle — sits directly under the filename so
         // duplicate filenames across directories are disambiguated at a
         // glance. Hidden in compact/list densities.

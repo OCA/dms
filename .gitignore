@@ -86,3 +86,10 @@ docs/_build/
 
 # OCA rules
 !static/lib/
+
+# Session-local planning + audit artefacts (not for upstream)
+*-PLAN.md
+SESSION-HANDOFF-*.md
+DMS-UX-AUDIT-*.md
+dms-ux-prototype.html
+screenshots/

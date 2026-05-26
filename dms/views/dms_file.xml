@@ -253,10 +253,33 @@
                                 </span>
                             </div>
                             <div class="o_kanban_dms_card__body">
-                                <field
-                                    name="name"
-                                    class="o_kanban_dms_card__name fw-bold"
-                                />
+                                <!-- Display name with double-click → inline
+                                     rename. The `<field>` widget renders as
+                                     read-only on the card; we layer an
+                                     editable input over it when the record
+                                     component flips renameState.active. -->
+                                <t t-if="renameState and renameState.active">
+                                    <input
+                                        type="text"
+                                        class="o_kanban_dms_card__name o_kanban_dms_card__name_input form-control form-control-sm"
+                                        t-att-value="renameState.draft"
+                                        t-on-input="(ev) => this.onRenameInput(ev)"
+                                        t-on-keydown="(ev) => this.onRenameKeydown(ev)"
+                                        t-on-blur="() => this.commitRename()"
+                                        t-on-click.stop=""
+                                        t-on-dblclick.stop=""
+                                        t-ref="renameInput"
+                                        autofocus="autofocus"
+                                    />
+                                </t>
+                                <t t-else="">
+                                    <div
+                                        class="o_kanban_dms_card__name fw-bold text-truncate"
+                                        t-att-title="record.name.raw_value"
+                                        t-esc="record.name.raw_value"
+                                        t-on-dblclick="(ev) => this.startRename(ev)"
+                                    />
+                                </t>
                                 <div
                                     t-if="dms_subtitle"
                                     class="o_kanban_dms_card__subtitle text-muted small text-truncate"
