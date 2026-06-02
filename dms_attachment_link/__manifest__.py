@@ -15,6 +15,7 @@
         "web.assets_backend": [
             "dms_attachment_link/static/src/js/dms_attachment_link.esm.js",
             "dms_attachment_link/static/src/xml/chatter.xml",
+            "dms_attachment_link/static/src/scss/dms_attachment_link.scss",
         ],
     },
     "installable": True,

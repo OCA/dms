@@ -2,8 +2,15 @@
 
 import {Chatter} from "@mail/chatter/web_portal/chatter";
 import {patch} from "@web/core/utils/patch";
+import {useService} from "@web/core/utils/hooks";
 
 patch(Chatter.prototype, {
+    setup() {
+        super.setup();
+        // Odoo 18: Chatter no expone this.action; inyectar el servicio aquí
+        // para que _onAddDmsFile() pueda llamar this.action.doAction(...)
+        this.action = useService("action");
+    },
     _onAddDmsFile() {
         this.action.doAction(
             "dms_attachment_link.action_dms_file_wizard_selector_dms_attachment_link",
