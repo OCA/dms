@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<t t-name="dms_workspace_ui.ContextMenu">
+        <div
+            t-if="menu"
+            class="dropdown-menu show dms_ui_context_menu"
+            t-att-style="menuStyle"
+            t-on-click.stop=""
+            tabindex="0"
+            t-ref="menu"
+            t-on-keydown.stop="onMenuKeydown"
+            t-on-mousemove="onMenuMousemove"
+        >
+            <t t-if="target.active === false">
+                <button
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction(() => this.restore(target))"
+                >
+                    <i class="fa fa-undo me-2" />Restore
+                </button>
+                <div class="dropdown-divider" />
+            </t>
+            <t t-if="target.type === 'file' &amp;&amp; !isMultiSelect">
+                <button
+                    t-if="target.previewable"
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction((transaction) => this.preview(target, {transaction}))"
+                >
+                    <i class="fa fa-eye me-2" />Preview
+                    <span class="dms_ui_shortcut ms-auto">Enter</span>
+                </button>
+                <button
+                    t-if="target.previewable"
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction(() => this.open(target))"
+                >
+                    <i class="fa fa-external-link me-2" />Open in New Tab
+                    <span class="dms_ui_shortcut ms-auto">Ctrl+Enter</span>
+                </button>
+                <button
+                    t-foreach="optionalActions(target)"
+                    t-as="action"
+                    t-key="action.id"
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction(() => this.runOptional(action, target))"
+                >
+                    <img
+                        t-if="action.iconUrl"
+                        t-att-src="action.iconUrl"
+                        class="dms_ui_context_menu_icon me-2"
+                        alt=""
+                    />
+                    <i t-else="" t-att-class="action.icon + ' me-2'" />
+                    <t t-esc="action.label" />
+                    <span
+                        t-if="action.id === 'onlyoffice'"
+                        class="dms_ui_shortcut ms-auto"
+                    >Shift+Enter</span>
+                </button>
+                <button
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction(() => this.download(target))"
+                >
+                    <i class="fa fa-download me-2" />Download
+                    <span class="dms_ui_shortcut ms-auto">Ctrl+Shift+Enter</span>
+                </button>
+                <div class="dropdown-divider" />
+            </t>
+            <t
+                t-if="target.type === 'directory' &amp;&amp; !isMultiSelect &amp;&amp; target.active !== false"
+            >
+                <button
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction((transaction) => this.createFolder(target, {transaction}))"
+                >
+                    <i class="fa fa-folder-o me-2" />New Folder
+                </button>
+                <button
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction((transaction) => this.addFile({transaction}))"
+                >
+                    <i class="fa fa-plus me-2" />Add File
+                </button>
+                <div class="dropdown-divider" />
+            </t>
+            <button
+                class="dropdown-item"
+                t-on-click="() => this.runMenuAction(() => this.setClipboard('cut', target.items))"
+            >
+                <i class="fa fa-scissors me-2" />Cut
+                <span class="dms_ui_shortcut ms-auto">Ctrl+X</span>
+            </button>
+            <button
+                class="dropdown-item"
+                t-on-click="() => this.runMenuAction(() => this.setClipboard('copy', target.items))"
+            >
+                <i class="fa fa-copy me-2" />Copy
+                <span class="dms_ui_shortcut ms-auto">Ctrl+C</span>
+            </button>
+            <button
+                t-if="target.type === 'directory' and clipboard and target.active !== false"
+                class="dropdown-item"
+                t-on-click="() => this.runMenuAction(() => this.paste(target))"
+            >
+                <i class="fa fa-clipboard me-2" />Paste
+                <span class="dms_ui_shortcut ms-auto">Ctrl+V</span>
+            </button>
+            <div t-if="target.type === 'file'" class="dms_ui_context_submenu">
+                <button
+                    class="dropdown-item d-flex align-items-center dms_ui_color_submenu_trigger"
+                >
+                    <i class="fa fa-paint-brush me-2" />Color
+                    <i class="fa fa-caret-right ms-auto" />
+                </button>
+                <div t-att-class="colorSubmenuClass">
+                    <ColorList
+                        colors="colorIds"
+                        forceExpanded="true"
+                        selectedColor="selectedColor"
+                        onColorSelected="(color) => this.setColor(color)"
+                    />
+                </div>
+            </div>
+            <div class="dropdown-divider" />
+            <t t-if="!isMultiSelect">
+                <button
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction((transaction) => this.rename(target, {transaction}))"
+                >
+                    <i class="fa fa-pencil me-2" />Rename
+                    <span class="dms_ui_shortcut ms-auto">F2</span>
+                </button>
+                <button
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction((transaction) => this.share(target, {transaction}))"
+                >
+                    <i class="fa fa-share-alt me-2" />Share
+                </button>
+            </t>
+            <button
+                class="dropdown-item"
+                t-on-click="() => this.runMenuAction((transaction) => this.deleteTarget(target, {transaction}))"
+            >
+                <i class="fa fa-trash-o me-2" />Delete
+                <span class="dms_ui_shortcut ms-auto">Del</span>
+            </button>
+            <t t-if="!isMultiSelect">
+                <div class="dropdown-divider" />
+                <button
+                    class="dropdown-item"
+                    t-on-click="() => this.runMenuAction((transaction) => this.editDetails(target, {transaction}))"
+                >
+                    <i class="fa fa-info-circle me-2" />Properties
+                </button>
+            </t>
+        </div>
+    </t>
+</templates>

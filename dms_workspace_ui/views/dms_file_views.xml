@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_dms_file_tree_workspace_ui" model="ir.ui.view">
+        <field name="name">dms.file.list.ui.custom</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="attributes">
+                <attribute name="js_class">dms_ui_file_list</attribute>
+            </xpath>
+            <xpath expr="//list/field[1]" position="before">
+                <field name="color" column_invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_dms_file_kanban_workspace_ui" model="ir.ui.view">
+        <field name="name">dms.file.kanban.ui.custom</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="js_class">dms_ui_file_kanban</attribute>
+            </xpath>
+            <xpath expr="//kanban/field[@name='name']" position="after">
+                <field name="directory_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="search_dms_file_workspace_ui" model="ir.ui.view">
+        <field name="name">dms.file.search.workspace.ui</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.search_dms_file" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath
+                expr="//searchpanel/field[@name='directory_id']"
+                position="attributes"
+            >
+                <attribute name="enable_counters">0</attribute>
+            </xpath>
+            <xpath expr="//filter[@name='filter_active']" position="attributes">
+                <attribute name="string">Deleted Files</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_dms_ui_file_workspace" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">dms.file</field>
+        <field name="view_mode">kanban,list,graph,pivot,form</field>
+        <field name="domain">[("is_hidden", "=", False)]</field>
+        <field name="context">{"dms_ui_workspace": True}</field>
+        <field name="search_view_id" ref="search_dms_file_workspace_ui" />
+        <field
+            name="view_ids"
+            eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_dms_file_kanban_workspace_ui')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_dms_file_tree_workspace_ui')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('dms.view_dms_file_graph')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('dms.view_dms_file_pivot')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('dms.view_dms_file_form')})
+        ]"
+        />
+    </record>
+
+    <record id="action_dms_ui_open_workspace" model="ir.actions.server">
+        <field name="name">Documents</field>
+        <field name="model_id" ref="base.model_res_users" />
+        <field name="state">code</field>
+        <field name="code">action = env.user.dms_ui_action_documents()</field>
+    </record>
+</odoo>

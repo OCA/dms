@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<t t-name="dms_workspace_ui.CustomBrowser">
+        <div
+            t-att-class="browserClass"
+            t-att-data-color-mode="colorMode"
+            t-att-data-color-scheme="colorScheme"
+            t-att-aria-busy="showLoadingState ? 'true' : 'false'"
+            t-ref="root"
+            t-on-focusin="onFocusIn"
+            t-on-keydown="onKeydown"
+            tabindex="0"
+        >
+            <div t-if="showLoadingState" class="dms_ui_custom_empty">
+                <i class="fa fa-circle-o-notch fa-spin" />
+                <span>Loading documents</span>
+            </div>
+            <div t-elif="!hasItems" class="dms_ui_custom_empty">
+                <i class="fa fa-folder-open-o" />
+                <span>No documents here</span>
+            </div>
+            <div t-elif="displayMode === 'grid'" class="dms_ui_custom_grid">
+                <article
+                    t-foreach="items"
+                    t-as="item"
+                    t-key="item.key"
+                    t-att-class="{
+                        'dms_ui_custom_item': true,
+                        'dms_ui_custom_card': true,
+                        'dms_ui_custom_folder': isDirectoryItem(item),
+                        'dms_ui_parent_directory': isParentDirectoryItem(item),
+                        'dms_ui_selected_record': isSelected(item),
+                    }"
+                    t-att-data-item-key="item.key"
+                    t-att-data-local-id="item.localId"
+                    t-att-data-hotkey="isParentDirectoryItem(item) ? '↑' : false"
+                    tabindex="0"
+                    t-on-click.stop="(ev) => this.selectItem(item, ev)"
+                    t-on-dblclick.stop="(ev) => this.openItem(item, ev)"
+                    t-on-contextmenu="(ev) => this.openContextMenu(ev, item)"
+                >
+                    <div class="dms_ui_custom_preview">
+                        <img
+                            t-if="isImage(item)"
+                            t-att-src="filePreviewUrl(item)"
+                            t-att-alt="item.name"
+                        />
+                        <i t-else="" t-att-class="'fa ' + itemIcon(item)" />
+                    </div>
+                    <div class="dms_ui_custom_card_body">
+                        <strong t-att-title="item.name" t-esc="item.name" />
+                        <span t-esc="itemSubtitle(item)" />
+                    </div>
+                </article>
+            </div>
+            <div t-else="" class="dms_ui_custom_table_wrap">
+                <table class="dms_ui_custom_table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Size</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            t-foreach="items"
+                            t-as="item"
+                            t-key="item.key"
+                            t-att-class="{
+                                'dms_ui_custom_item': true,
+                                'dms_ui_custom_folder': isDirectoryItem(item),
+                                'dms_ui_parent_directory': isParentDirectoryItem(item),
+                                'dms_ui_selected_record': isSelected(item),
+                            }"
+                            t-att-data-item-key="item.key"
+                            t-att-data-local-id="item.localId"
+                            t-att-data-hotkey="isParentDirectoryItem(item) ? '↑' : false"
+                            tabindex="0"
+                            t-on-click.stop="(ev) => this.selectItem(item, ev)"
+                            t-on-dblclick.stop="(ev) => this.openItem(item, ev)"
+                            t-on-contextmenu="(ev) => this.openContextMenu(ev, item)"
+                        >
+                            <td>
+                                <span class="dms_ui_custom_name">
+                                    <i t-att-class="'fa ' + itemIcon(item)" />
+                                    <span t-att-title="item.name" t-esc="item.name" />
+                                </span>
+                            </td>
+                            <td
+                                t-esc="isDirectoryItem(item) ? 'Folder' : (item.mimetype or 'File')"
+                            />
+                            <td
+                                t-esc="isDirectoryItem(item) ? itemSubtitle(item) : (item.humanSize or '-')"
+                            />
+                            <td t-esc="item.writeDate or '-'" />
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="dms_workspace_ui.SearchPanel"
+        t-inherit="web.SearchPanel"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//t[@t-if='env.isSmall']" position="attributes">
+            <attribute
+                name="t-if"
+            >env.isSmall &amp;&amp; !this.dmsUiUsesRegularSearchPanel?.()</attribute>
+        </xpath>
+    </t>
+
+    <t
+        t-name="dms_workspace_ui.SearchPanelContent"
+        t-inherit="web.SearchPanelContent"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//div[hasclass('o_search_panel')]" position="attributes">
+            <attribute
+                name="t-attf-class"
+            >#{env.isSmall &amp;&amp; !this.dmsUiUsesRegularSearchPanel?.() ? 'px-3' : 'pe-1 ps-3'}</attribute>
+        </xpath>
+    </t>
+
+    <t
+        t-name="dms_workspace_ui.SearchPanelCategory"
+        t-inherit="web.SearchPanel.Category"
+        t-inherit-mode="extension"
+    >
+        <xpath
+            expr="//li[hasclass('o_search_panel_category_value')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-att-class"
+            >isChildList ? (env.isSmall &amp;&amp; !this.dmsUiUsesRegularSearchPanel?.() ? '' : 'o_treeEntry') : 'ps-0'</attribute>
+        </xpath>
+        <xpath expr="//header" position="attributes">
+            <attribute
+                name="t-att-class"
+            >{'active text-900 fw-bold': state.active[section.id] === valueId, 'dms_ui_directory_header': env.searchModel.resModel === 'dms.file' &amp;&amp; env.searchModel.globalContext.dms_ui_workspace &amp;&amp; section.fieldName === 'directory_id'}</attribute>
+            <attribute name="t-att-data-directory-id">value.id</attribute>
+            <attribute
+                name="t-att-tabindex"
+            >(env.searchModel.resModel === 'dms.file' &amp;&amp; env.searchModel.globalContext.dms_ui_workspace &amp;&amp; section.fieldName === 'directory_id') ? 0 : undefined</attribute>
+            <attribute
+                name="t-on-keydown"
+            >(ev) => env.searchModel.resModel === 'dms.file' &amp;&amp; env.searchModel.globalContext.dms_ui_workspace &amp;&amp; section.fieldName === 'directory_id' &amp;&amp; this.dmsUiOnFolderKeydown &amp;&amp; this.dmsUiOnFolderKeydown(section, value, ev)</attribute>
+            <attribute
+                name="t-on-contextmenu"
+            >(ev) => env.searchModel.resModel === 'dms.file' &amp;&amp; env.searchModel.globalContext.dms_ui_workspace &amp;&amp; section.fieldName === 'directory_id' &amp;&amp; this.dmsUiOpenFolderContextMenu &amp;&amp; this.dmsUiOpenFolderContextMenu(section, value, ev)</attribute>
+        </xpath>
+        <xpath
+            expr="//span[hasclass('o_search_panel_label_title')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-att-class"
+            >{'fw-bold' : value.bold, 'dms_ui_archived_folder': value.dms_ui_archived}</attribute>
+        </xpath>
+        <xpath expr="//small[hasclass('o_search_panel_counter')]" position="attributes">
+            <attribute
+                name="t-if"
+            >(section.enableCounters || (env.searchModel.resModel === 'dms.file' &amp;&amp; env.searchModel.globalContext.dms_ui_workspace &amp;&amp; section.fieldName === 'directory_id')) &amp;&amp; value.__count &gt; 0</attribute>
+        </xpath>
+    </t>
+</templates>

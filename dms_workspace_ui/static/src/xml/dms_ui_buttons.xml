@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="dms_workspace_ui.ListButtons"
+        t-inherit="dms.ListButtons"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//button[hasclass('d-md-inline')]" position="replace">
+            <button
+                type="button"
+                class="d-none d-md-inline o_button_upload_expense btn btn-primary mx-1"
+                data-hotkey="a"
+                t-on-click.prevent="uploadDocument"
+            >
+                <i class="fa fa-plus me-1" />
+                Add File
+            </button>
+        </xpath>
+        <xpath expr="//button[hasclass('d-md-none')]" position="replace">
+            <button
+                type="button"
+                class="d-inline d-md-none o_button_upload_expense btn btn-primary mx-1"
+                data-hotkey="a"
+                t-on-click.prevent="uploadDocument"
+            >
+                <i class="fa fa-plus me-1" />
+                Add File
+            </button>
+        </xpath>
+        <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
+            <button
+                type="button"
+                class="btn btn-primary mx-1"
+                title="Create a folder in the selected directory"
+                data-hotkey="n"
+                t-on-click.prevent="openDmsUiCreateFolder"
+            >
+                <i class="fa fa-plus me-1" />
+                New Folder
+            </button>
+        </xpath>
+    </t>
+
+    <t
+        t-name="dms_workspace_ui.KanbanButtons"
+        t-inherit="dms.KanbanButtons"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//button[hasclass('d-md-inline')]" position="replace">
+            <button
+                type="button"
+                class="d-none d-md-inline btn btn-primary mx-1"
+                data-hotkey="a"
+                t-on-click.prevent="uploadDocument"
+            >
+                <i class="fa fa-plus me-1" />
+                Add File
+            </button>
+        </xpath>
+        <xpath expr="//button[hasclass('d-md-none')]" position="replace">
+            <button
+                type="button"
+                class="d-inline d-md-none btn btn-primary mx-1"
+                data-hotkey="a"
+                t-on-click.prevent="uploadDocument"
+            >
+                <i class="fa fa-plus me-1" />
+                Add File
+            </button>
+        </xpath>
+        <xpath expr="//div" position="inside">
+            <button
+                type="button"
+                class="btn btn-primary mx-1"
+                title="Create a folder in the selected directory"
+                data-hotkey="n"
+                t-on-click.prevent="openDmsUiCreateFolder"
+            >
+                <i class="fa fa-plus me-1" />
+                New Folder
+            </button>
+        </xpath>
+    </t>
+</templates>

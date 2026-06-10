@@ -1,0 +1,57 @@
+.o_content.o_component_with_search_panel:has(> .dms_ui_workspace) {
+    min-width: 0;
+    overflow: hidden !important;
+}
+
+.o_controller_with_searchpanel .dms_ui_workspace.o_renderer_with_searchpanel,
+.o_component_with_search_panel .dms_ui_workspace.o_renderer_with_searchpanel,
+.dms_ui_workspace {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: stretch;
+    min-height: 0;
+    min-width: 0;
+    max-width: 100%;
+    height: 100%;
+    overflow: hidden !important;
+}
+
+.dms_ui_renderer_pane {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    > .o_list_renderer,
+    > .o_kanban_renderer {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100%;
+        overflow: auto !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .o_component_with_search_panel:has(.dms_ui_workspace),
+    .o_controller_with_searchpanel:has(.dms_ui_workspace) {
+        flex-direction: row;
+        align-items: stretch;
+        overflow-x: auto !important;
+    }
+
+    .o_component_with_search_panel:has(.dms_ui_workspace) > .o_search_panel,
+    .o_controller_with_searchpanel:has(.dms_ui_workspace) > .o_search_panel {
+        min-height: 0;
+        overflow: auto;
+    }
+
+    .o_component_with_search_panel:has(.dms_ui_workspace) .dms_ui_workspace {
+        flex: 1 0 280px;
+        min-width: 280px;
+        max-width: none;
+    }
+}

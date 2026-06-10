@@ -1,0 +1,31 @@
+<odoo>
+    <record id="res_config_settings_view_form_dms_workspace_ui" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.dms.workspace.ui</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="dms.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='dms']" position="inside">
+                <block title="Navigation">
+                    <setting
+                        string="Show Original File/Directories Page"
+                        help="Show the original DMS Files and Directories navigation entries."
+                    >
+                        <field name="show_original_dms_pages" />
+                    </setting>
+                    <setting
+                        string="Show Original Documents Page"
+                        help="Show the original dms_field Documents navigation entry when dms_field is installed."
+                    >
+                        <field name="show_original_dms_field_documents_page" />
+                    </setting>
+                    <setting
+                        string="Bypass delete confirmation"
+                        help="Immediately move items to Deleted Files, or permanently delete items already there, without asking for confirmation."
+                    >
+                        <field name="bypass_delete_confirmation" />
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
