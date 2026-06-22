@@ -84,7 +84,7 @@ class TestHrDmsField(BaseCommon):
         # Use the demo user to modify the employee and link the user, it does not
         # have access to the directory.
         demo = self.env.ref("base.user_demo")
-        demo.write({"groups_id": [Command.link(self.env.ref("hr.group_hr_user").id)]})
+        demo.write({"group_ids": [Command.link(self.env.ref("hr.group_hr_user").id)]})
         employee = employee.with_user(demo)
         employee.invalidate_recordset()
         employee.write({"user_id": self.user.id})
