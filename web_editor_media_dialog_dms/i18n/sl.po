@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-22 09:08+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,49 +15,50 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: web_editor_media_dialog_dms
 #. odoo-javascript
 #: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
 msgid "All DMS files have been loaded"
-msgstr ""
+msgstr "Vse datoteke DMS so naložene"
 
 #. module: web_editor_media_dialog_dms
 #. odoo-javascript
 #: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
 msgid "Allow open to public users"
-msgstr ""
+msgstr "Dovoli odpiranje javnim uporabnikom"
 
 #. module: web_editor_media_dialog_dms
 #: model:ir.model,name:web_editor_media_dialog_dms.model_dms_file
 msgid "File"
-msgstr ""
+msgstr "Datoteka"
 
 #. module: web_editor_media_dialog_dms
 #: model:ir.model,name:web_editor_media_dialog_dms.model_ir_binary
 msgid "File streaming helper model for controllers"
-msgstr ""
+msgstr "Pomožni model za pretakanje datotek za kontrolerje"
 
 #. module: web_editor_media_dialog_dms
 #. odoo-python
 #: code:addons/web_editor_media_dialog_dms/models/dms_file.py:0
 msgid "Invalid access token"
-msgstr ""
+msgstr "Neveljaven dostopni žeton"
 
 #. module: web_editor_media_dialog_dms
 #. odoo-javascript
 #: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
 msgid "Load more..."
-msgstr ""
+msgstr "Naloži več..."
 
 #. module: web_editor_media_dialog_dms
 #. odoo-javascript
 #: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
 msgid "No DMS files found."
-msgstr ""
+msgstr "Ni najdenih DMS datotek."
 
 #. module: web_editor_media_dialog_dms
 #. odoo-javascript
 #: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.esm.js:0
 msgid "Search a dms file"
-msgstr ""
+msgstr "Iskanje DMS datoteke"
