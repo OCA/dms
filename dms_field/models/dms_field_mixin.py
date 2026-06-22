@@ -45,7 +45,15 @@ class DMSFieldMixin(models.AbstractModel):
         :args:
         :returns: list of models
         """
-        return self.env["dms.field.template"].sudo().search([]).mapped("model_id.model")
+        return (
+            self.env["dms.field.template"]
+            .sudo()
+            .search(
+                [],
+                limit=False,  # pylint: disable=no-search-all
+            )
+            .mapped("model_id.model")
+        )
 
     @api.model_create_multi
     def create(self, vals_list):

@@ -2,7 +2,7 @@
 # Copyright 2025 Simone Rubino - PyTech
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.fields import Domain
 
@@ -61,5 +61,7 @@ class DmsAccessGroups(models.Model):
             )
             if self.search(domain):
                 raise UserError(
-                    _("There is already an access group created for this record.")
+                    self.env._(
+                        "There is already an access group created for this record."
+                    )
                 )

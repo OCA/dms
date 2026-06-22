@@ -1,7 +1,7 @@
 # Copyright 2020 Creu Blanca
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 from odoo.addons.base.models.ir_ui_view import NameManager
 
@@ -35,7 +35,10 @@ class IrUiView(models.Model):
                 model_name = field.comodel_name
                 if model_name not in self.env:
                     self._raise_view_error(
-                        _("Model not found: %(model)s", model=model_name), node
+                        self.env._(
+                            "Model not found: %(model)s", model=model_name
+                        ),
+                        node,
                     )
                 model = self.env[model_name]
                 model_groups &= self.env["ir.model.access"]._get_access_groups(

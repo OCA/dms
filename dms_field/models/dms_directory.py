@@ -1,7 +1,7 @@
 # Copyright 2020 Creu Blanca
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.fields import Domain
 
@@ -26,7 +26,9 @@ class DmsDirectory(models.Model):
                 and not directory.res_id
             ):
                 raise ValidationError(
-                    _("Directories of this storage must be related to a record")
+                    self.env._(
+                        "Directories of this storage must be related to a record"
+                    )
                 )
             if not directory.res_id:
                 continue
@@ -40,7 +42,9 @@ class DmsDirectory(models.Model):
                 limit=1,
             ):
                 raise ValidationError(
-                    _("This record is already related in this storage")
+                    self.env._(
+                        "This record is already related in this storage"
+                    )
                 )
 
     @api.model
