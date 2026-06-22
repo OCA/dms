@@ -5,7 +5,7 @@ import re
 import zipfile
 from io import BytesIO
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -54,7 +54,7 @@ class WizardDmsClassification(models.TransientModel):
     def _onchange_data_file(self):
         for item in self.filtered("data_file"):
             if not item._is_zipfile():
-                raise UserError(_("Only .zip files are allowed"))
+                raise UserError(self.env._("Only .zip files are allowed"))
 
     def _return_item(self):
         return {
