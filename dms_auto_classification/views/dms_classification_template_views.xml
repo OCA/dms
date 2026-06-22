@@ -37,7 +37,7 @@
         <field name="name">Classification Templates</field>
         <field name="res_model">dms.classification.template</field>
         <field name="view_mode">list,form</field>
-        <field name="groups_id" eval="[(4, ref('dms.group_dms_manager'))]" />
+        <field name="group_ids" eval="[(4, ref('dms.group_dms_manager'))]" />
     </record>
     <menuitem
         id="menu_dms_classification_template"
