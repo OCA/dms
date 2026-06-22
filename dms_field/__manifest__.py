@@ -5,7 +5,7 @@
     "name": "DMS Field",
     "summary": """
         Create DMS View and allow to use them inside a record""",
-    "version": "18.0.1.2.0",
+    "version": "19.0.1.0.0",
     "license": "LGPL-3",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/dms",

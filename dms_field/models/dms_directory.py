@@ -3,7 +3,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class DmsDirectory(models.Model):
@@ -120,7 +120,7 @@ class DmsDirectory(models.Model):
             domain = []
         self._check_parent_field()
         self.check_access("read")
-        if expression.is_false(self, domain):
+        if Domain(domain) == Domain.FALSE:
             return []
         query = self._where_calc(domain)
         self._apply_ir_rules(query, "read")
@@ -143,8 +143,8 @@ class DmsDirectory(models.Model):
         if count:
             # pylint: disable=sql-injection
             query_str = "SELECT count(1) FROM " + from_clause + where_str
-            self._cr.execute(query_str, where_clause_params)
-            return self._cr.fetchone()[0]
+            self.env.cr.execute(query_str, where_clause_params)
+            return self.env.cr.fetchone()[0]
         limit_str = limit and " limit %s" or ""
         offset_str = offset and " offset %s" or ""
         query_str = (
@@ -161,5 +161,5 @@ class DmsDirectory(models.Model):
         if offset:
             complete_where_clause_params.append(offset)
         # pylint: disable=sql-injection
-        self._cr.execute(query_str, complete_where_clause_params)
-        return list({x[0] for x in self._cr.fetchall()})
+        self.env.cr.execute(query_str, complete_where_clause_params)
+        return list({x[0] for x in self.env.cr.fetchall()})

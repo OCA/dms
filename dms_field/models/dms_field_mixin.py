@@ -18,7 +18,7 @@ class DMSFieldMixin(models.AbstractModel):
             ("res_model", "=", self._name),
             ("storage_id.save_type", "!=", "attachment"),
         ],
-        auto_join=True,
+        bypass_search_access=True,
     )
 
     def web_save(self, vals, specification, next_id=None):
