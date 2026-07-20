@@ -440,7 +440,10 @@ export function getDMSListControllerObject() {
             if (autocompute_directory) {
                 result = Domain.and([
                     result,
-                    new Domain([["res_id", "=", this.model.root.resId]]),
+                    new Domain([
+                        ["res_id", "=", this.model.root.resId],
+                        ["res_model", "=", this.resModel],
+                    ]),
                 ]);
             } else {
                 result = Domain.and([result, new Domain(domain || [])]);
