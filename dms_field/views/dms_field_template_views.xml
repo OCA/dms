@@ -35,7 +35,11 @@
                             invisible="not model_id"
                             required="1"
                         />
-                        <field name="group_ids" widget="many2many_tags" />
+                        <field
+                            name="group_ids"
+                            widget="many2many_tags"
+                            required="not parent_directory_id"
+                        />
                     </group>
                     <notebook position="inside">
                         <page
