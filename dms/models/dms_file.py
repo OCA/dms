@@ -174,15 +174,15 @@ class DMSFile(models.Model):
         )
         if items:
             item = items[0]
-            if self.directory_id.id == item.id:
-                return True
-            directory_item = self.directory_id
+            # sudo because the user might not usually have access to the record but
+            # now the token is valid.
+            directory_item = self.sudo().directory_id
             while directory_item.parent_id:
-                if directory_item.id == self.directory_id.id:
+                if directory_item.id == item.id:
                     return True
                 directory_item = directory_item.parent_id
             # Fix last level
-            if directory_item.id == self.directory_id.id:
+            if directory_item.id == item.id:
                 return True
         return False
 
