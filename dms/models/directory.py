@@ -254,10 +254,15 @@ class DmsDirectory(models.Model):
                     return True
                 # sudo because the user might not usually have access to the record but
                 # now the token is valid.
+                # `seen` bounds the walk: _check_directory_recursion rejects
+                # cycles created through the ORM, but this path is reachable
+                # anonymously and must not hang on corrupted data.
                 directory_item = self.sudo()
-                while directory_item.parent_id:
+                seen = set()
+                while directory_item.parent_id and directory_item.id not in seen:
                     if directory_item.id == item.id:
                         return True
+                    seen.add(directory_item.id)
                     directory_item = directory_item.parent_id
                 # Fix last level
                 if directory_item.id == item.id:
