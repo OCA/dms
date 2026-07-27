@@ -184,7 +184,11 @@ class CustomerPortal(CustomerPortal):
 
         # items
         file_model = request.env["dms.file"]
-        is_access_token_valid = file_model.check_access_token(access_token)
+        # The token belongs to a directory, so it must be validated against the
+        # directory being browsed (or one of its ancestors), never against an
+        # empty dms.file recordset. Same pattern as _get_directories below.
+        directory_to_check = request.env["dms.directory"].browse(dms_directory_id)
+        is_access_token_valid = directory_to_check.check_access_token(access_token)
         file_model = file_model.sudo() if is_access_token_valid else file_model
         dms_file_items = file_model.search(file_domain, order=sort_br)
         request.session["my_dms_file_history"] = dms_file_items.ids
