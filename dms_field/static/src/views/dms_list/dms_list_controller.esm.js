@@ -442,7 +442,7 @@ export function getDMSListControllerObject() {
                     result,
                     new Domain([
                         ["res_id", "=", this.model.root.resId],
-                        ["res_model", "=", this.resModel],
+                        ["res_model", "=", this.sanitizeDMSModel(this.resModel)],
                     ]),
                 ]);
             } else {
