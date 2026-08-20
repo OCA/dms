@@ -117,6 +117,8 @@ class DMSFile(models.Model):
         compute="_compute_save_type",
         string="Current Save Type",
         prefetch=False,
+        readonly=False,
+        store=True,
     )
 
     migration = fields.Char(
@@ -266,6 +268,7 @@ class DMSFile(models.Model):
                 {
                     "content": dms_file.with_context(**{}).content,
                     "storage_id": dms_file.directory_id.storage_id.id,
+                    "save_type": dms_file.directory_id.storage_id.save_type,
                 }
             )
 
