@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<t t-name="dms_workspace_ui.RenameDialog">
+        <Dialog title="'Rename'" size="'md'">
+            <input
+                class="form-control dms_ui_dialog_name_input"
+                t-model="state.name"
+                t-on-keydown="onKeydown"
+                t-ref="nameInput"
+                autocomplete="off"
+                autofocus="autofocus"
+            />
+            <t t-set-slot="footer">
+                <button class="btn btn-secondary" t-on-click="cancel">Cancel</button>
+                <button class="btn btn-primary" t-on-click="save">Rename</button>
+            </t>
+        </Dialog>
+    </t>
+
+    <t t-name="dms_workspace_ui.CreateFolderDialog">
+        <Dialog title="'New Folder'" size="'md'">
+            <input
+                class="form-control dms_ui_dialog_name_input"
+                placeholder="Folder name"
+                t-model="state.name"
+                t-on-keydown="onKeydown"
+                t-ref="nameInput"
+                autocomplete="off"
+                autofocus="autofocus"
+            />
+            <t t-set-slot="footer">
+                <button class="btn btn-secondary" t-on-click="cancel">Cancel</button>
+                <button class="btn btn-primary" t-on-click="save">Create</button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

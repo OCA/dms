@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem
+        id="menu_dms_workspace_ui"
+        name="Documents"
+        parent="dms.main_menu_dms"
+        action="action_dms_ui_open_workspace"
+        sequence="1"
+        groups="dms.group_dms_user"
+    />
+
+    <record id="dms.cat_menu_dms_config" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('dms.group_dms_manager')])]" />
+    </record>
+
+    <function model="res.config.settings" name="_dms_ui_apply_menu_visibility" />
+</odoo>

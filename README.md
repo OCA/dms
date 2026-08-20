@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [dms_field](dms_field/) | 18.0.1.2.3 | <a href='https://github.com/CarlosRoca13'><img src='https://github.com/CarlosRoca13.png' width='32' height='32' style='border-radius:50%;' alt='CarlosRoca13'/></a> | Create DMS View and allow to use them inside a record
 [dms_field_auto_classification](dms_field_auto_classification/) | 18.0.1.0.1 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Auto classify files into embedded DMS
 [dms_user_role](dms_user_role/) | 18.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | DMS User Role
+[dms_workspace_ui](dms_workspace_ui/) | 18.0.1.0.0 | <a href='https://github.com/windweaver828'><img src='https://github.com/windweaver828.png' width='32' height='32' style='border-radius:50%;' alt='windweaver828'/></a> | Modern workspace interface for OCA DMS
 [hr_dms_field](hr_dms_field/) | 18.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Add dms field for employees
 [web_editor_media_dialog_dms](web_editor_media_dialog_dms/) | 18.0.1.0.1 |  | Integrate DMS with media dialog of web editor
 

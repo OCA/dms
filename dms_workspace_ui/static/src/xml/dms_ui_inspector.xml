@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<t t-name="dms_workspace_ui.Inspector">
+        <aside
+            class="dms_ui_inspector"
+            t-att-style="inspectorStyle"
+            t-on-focusin="onFocusIn"
+        >
+            <span
+                class="o_search_panel_resize dms_ui_inspector_resize"
+                t-on-click.stop.prevent=""
+                t-on-pointerdown.stop.prevent="startResize"
+            />
+            <header
+                class="dms_ui_inspector_header"
+                t-att-title="previewTarget ? previewTarget.name : undefined"
+                t-att-data-tooltip="previewTarget ? previewTarget.name : undefined"
+            >
+                <nav
+                    t-if="previewTarget and locationBreadcrumbs.length"
+                    class="dms_ui_inspector_breadcrumb"
+                    aria-label="Location"
+                    t-ref="breadcrumb"
+                >
+                    <span
+                        t-if="hasHiddenBreadcrumbs"
+                        class="dms_ui_inspector_breadcrumb_ellipsis"
+                    >...</span>
+                    <span
+                        t-if="hasHiddenBreadcrumbs and locationBreadcrumbs.length"
+                        class="dms_ui_inspector_breadcrumb_separator"
+                    >/</span>
+                    <t t-foreach="locationBreadcrumbs" t-as="crumb" t-key="crumb.key">
+                        <button
+                            type="button"
+                            class="dms_ui_inspector_breadcrumb_item"
+                            t-att-title="crumb.name"
+                            t-att-disabled="!crumb.clickable"
+                            t-on-click="(ev) => this.openLocationBreadcrumb(crumb, ev)"
+                            t-esc="crumb.name"
+                        />
+                        <span
+                            t-if="!crumb_last"
+                            class="dms_ui_inspector_breadcrumb_separator"
+                        >/</span>
+                    </t>
+                </nav>
+                <strong
+                    t-if="file"
+                    class="dms_ui_inspector_filename text-truncate"
+                    t-att-title="file.name"
+                    t-att-data-tooltip="file.name"
+                    data-tooltip-delay="0"
+                    data-tooltip-position="left"
+                    t-esc="file.name"
+                />
+                <strong
+                    t-elif="folder"
+                    class="dms_ui_inspector_filename text-truncate"
+                    t-att-title="folder.name"
+                    t-att-data-tooltip="folder.name"
+                    data-tooltip-delay="0"
+                    data-tooltip-position="left"
+                    t-esc="folder.name"
+                />
+                <strong t-else="">No item selected</strong>
+            </header>
+            <div class="dms_ui_inspector_body">
+                <t t-if="file">
+                    <dl>
+                        <dt>Type</dt>
+                        <dd t-esc="file.mimetype or '-'" />
+                        <dt>Size</dt>
+                        <dd t-esc="file.humanSize or '-'" />
+                        <dt>Last Updated</dt>
+                        <dd t-esc="file.writeDate or '-'" />
+                    </dl>
+                    <section
+                        t-foreach="inspectorState.sections"
+                        t-as="section"
+                        t-key="section.id"
+                        class="dms_ui_inspector_section"
+                        t-att-data-section-id="section.id"
+                    >
+                        <div class="dms_ui_inspector_section_header">
+                            <h6 t-esc="section.label" />
+                            <div
+                                t-if="section.canEdit"
+                                class="dms_ui_inspector_section_actions"
+                            >
+                                <button
+                                    t-if="!isEditingSection(section)"
+                                    type="button"
+                                    class="btn btn-link btn-sm dms_ui_inspector_section_button dms_ui_inspector_section_button_edit"
+                                    title="Edit description (Ctrl+E)"
+                                    aria-label="Edit description (Ctrl+E)"
+                                    t-on-click="(ev) => this.editSection(section, ev)"
+                                >
+                                    <i class="fa fa-pencil" />
+                                </button>
+                                <t t-else="">
+                                    <button
+                                        type="button"
+                                        class="btn btn-link btn-sm dms_ui_inspector_section_button dms_ui_inspector_section_button_save"
+                                        title="Save description (Ctrl+Enter)"
+                                        aria-label="Save description (Ctrl+Enter)"
+                                        t-att-disabled="isSavingSection(section)"
+                                        t-on-click="(ev) => this.saveSectionEdit(section, ev)"
+                                    >
+                                        <i class="fa fa-check me-1" />
+                                        <span>Save</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-link btn-sm dms_ui_inspector_section_button dms_ui_inspector_section_button_discard"
+                                        title="Discard changes (Escape)"
+                                        aria-label="Discard changes (Escape)"
+                                        t-att-disabled="isSavingSection(section)"
+                                        t-on-click="(ev) => this.cancelSectionEdit(section, ev)"
+                                    >
+                                        <i class="fa fa-times me-1" />
+                                        <span>Discard</span>
+                                    </button>
+                                </t>
+                            </div>
+                        </div>
+                        <textarea
+                            t-if="isEditingSection(section)"
+                            class="form-control dms_ui_inspector_section_editor"
+                            t-att-value="section.draft"
+                            t-att-disabled="isSavingSection(section)"
+                            t-on-input="(ev) => this.updateSectionDraft(section, ev)"
+                        />
+                        <div
+                            t-else=""
+                            class="dms_ui_inspector_section_text"
+                            t-esc="section.text"
+                        />
+                    </section>
+                </t>
+                <t t-elif="folder">
+                    <dl>
+                        <dt>Type</dt>
+                        <dd>Folder</dd>
+                        <dt>Files</dt>
+                        <dd t-esc="fileCountLabel(folder.fileCount)" />
+                        <dt>Folders</dt>
+                        <dd t-esc="folderCountLabel(folder.folderCount)" />
+                        <dt>Last Updated</dt>
+                        <dd t-esc="folder.writeDate or '-'" />
+                    </dl>
+                </t>
+                <p t-else="" class="text-muted mb-0">No item selected</p>
+            </div>
+        </aside>
+    </t>
+</templates>

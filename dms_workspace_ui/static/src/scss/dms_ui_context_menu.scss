@@ -1,0 +1,121 @@
+.dms_ui_color_submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 0;
+    width: max-content;
+    color: inherit;
+    background: var(
+        --dms-ui-context-menu-bg,
+        var(--dropdown-bg, var(--View-background-color, var(--body-bg, #fff)))
+    );
+    border-color: var(
+        --dms-ui-context-menu-border,
+        var(--dropdown-border-color, var(--border-color, #dee2e6))
+    );
+
+    .o_colorlist {
+        display: grid !important;
+        grid-template-columns: repeat(4, 22px);
+    }
+
+    .o_colorlist_item,
+    button,
+    [role="button"] {
+        border-radius: 2px;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .o_colorlist_item:hover,
+    .o_colorlist_item:focus,
+    .o_colorlist_item.dms_ui_keyboard_color_focus,
+    button:hover,
+    button:focus,
+    button.dms_ui_keyboard_color_focus,
+    [role="button"]:hover,
+    [role="button"]:focus,
+    [role="button"].dms_ui_keyboard_color_focus {
+        outline: none !important;
+        box-shadow: none !important;
+        transform: scale(1.08);
+    }
+}
+
+.dms_ui_color_submenu_left {
+    right: 100%;
+    left: auto;
+}
+
+.dms_ui_context_submenu {
+    position: relative;
+
+    > .dms_ui_color_submenu {
+        display: none;
+    }
+
+    &:hover > .dms_ui_color_submenu,
+    &:focus-within > .dms_ui_color_submenu {
+        display: block;
+    }
+}
+
+.dms_ui_context_menu {
+    position: fixed;
+    z-index: 1080;
+    min-width: 224px;
+    max-height: calc(100vh - 16px);
+    overflow: visible;
+    outline: none;
+    --dms-ui-context-menu-bg: var(
+        --dropdown-bg,
+        var(--View-background-color, var(--body-bg, #fff))
+    );
+    --dms-ui-context-menu-border: var(
+        --dropdown-border-color,
+        var(--border-color, #dee2e6)
+    );
+
+    // Keep the tuned dark-mode menu while letting light mode match Odoo's dropdowns.
+    @if lightness($o-view-background-color) < 50% {
+        --dms-ui-context-menu-bg: color-mix(
+            in srgb,
+            var(--View-background-color, var(--body-bg, #fff)) 92%,
+            var(--body-color, #212529)
+        );
+        color: var(--body-color, #212529);
+        background: var(--dms-ui-context-menu-bg);
+        border-color: var(--border-color, #dee2e6);
+
+        .dropdown-item {
+            color: inherit;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            color: inherit;
+            background: var(--gray-200, #e9ecef);
+        }
+    }
+
+    .dropdown-item.text-danger {
+        color: var(--danger, #dc3545);
+    }
+
+    .dropdown-item:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}
+
+.dms_ui_context_menu_icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    vertical-align: -3px;
+}
+
+.dms_ui_shortcut {
+    color: var(--gray-600, #6c757d);
+    font-size: 11px;
+}

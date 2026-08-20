@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_users_form_simple_dms_ui_preferences" model="ir.ui.view">
+        <field name="name">res.users.form.simple.dms.ui.preferences</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <group name="preferences" position="inside">
+                <group string="Documents">
+                    <field name="dms_ui_custom_theme" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

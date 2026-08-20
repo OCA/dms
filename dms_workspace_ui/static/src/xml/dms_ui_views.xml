@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<t t-name="dms_workspace_ui.ListView" t-inherit="web.ListView" t-inherit-mode="primary">
+        <xpath expr="//button[hasclass('o_list_button_add')]" position="replace" />
+        <xpath expr="//t[@t-component='props.Renderer']" position="replace">
+            <div class="dms_ui_workspace o_renderer_with_searchpanel">
+                <div class="dms_ui_renderer_pane">
+                    <t
+                        t-component="props.Renderer"
+                        list="model.root"
+                        activeActions="activeActions"
+                        archInfo="archInfo"
+                        allowSelectors="props.allowSelectors"
+                        editable="editable"
+                        onOpenFormView="onOpenFormView"
+                        hasOpenFormViewButton="hasOpenFormViewButton"
+                        openRecord.bind="openRecord"
+                        noContentHelp="props.info.noContentHelp"
+                        onAdd.bind="createRecord"
+                        optionalActiveFields="optionalActiveFields"
+                    />
+                </div>
+                <DmsInspector />
+            </div>
+        </xpath>
+    </t>
+
+    <t
+        t-name="dms_workspace_ui.KanbanView"
+        t-inherit="web.KanbanView"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//button[hasclass('o-kanban-button-new')]" position="replace" />
+        <xpath expr="//t[@t-component='props.Renderer']" position="replace">
+            <div class="dms_ui_workspace o_renderer_with_searchpanel">
+                <div class="dms_ui_renderer_pane">
+                    <t
+                        t-component="props.Renderer"
+                        list="model.root"
+                        archInfo="props.archInfo"
+                        Compiler="props.Compiler"
+                        readonly="true"
+                        forceGlobalClick="props.forceGlobalClick"
+                        deleteRecord.bind="deleteRecord"
+                        openRecord.bind="openRecord"
+                        noContentHelp="props.info.noContentHelp"
+                        scrollTop.bind="scrollTop"
+                        canQuickCreate="canQuickCreate"
+                        quickCreateState="quickCreateState"
+                        progressBarState="progressBarState"
+                    />
+                </div>
+                <DmsInspector />
+            </div>
+        </xpath>
+    </t>
+</templates>
