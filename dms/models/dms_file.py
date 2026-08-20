@@ -167,23 +167,26 @@ class DMSFile(models.Model):
         if self.access_token and consteq(self.access_token, access_token):
             return True
 
-        items = (
+        token_directory = (
             self.env["dms.directory"]
             .sudo()
-            .search([("access_token", "=", access_token)])
+            .search([("access_token", "=", access_token)], limit=1)
         )
-        if items:
-            item = items[0]
-            if self.directory_id.id == item.id:
-                return True
-            directory_item = self.directory_id
-            while directory_item.parent_id:
-                if directory_item.id == self.directory_id.id:
+        if token_directory:
+            # The token is known to belong to some directory, but it is not yet
+            # valid for this file: it only is when that directory is the file's
+            # own directory or one of its ancestors. sudo() so the walk can
+            # traverse ancestors the caller is not allowed to read.
+            # `seen` bounds the walk: _check_directory_recursion rejects cycles
+            # created through the ORM, but this path is reachable anonymously
+            # and must not hang on corrupted data.
+            directory = self.sudo().directory_id
+            seen = set()
+            while directory and directory.id not in seen:
+                if directory.id == token_directory.id:
                     return True
-                directory_item = directory_item.parent_id
-            # Fix last level
-            if directory_item.id == self.directory_id.id:
-                return True
+                seen.add(directory.id)
+                directory = directory.parent_id
         return False
 
     res_model = fields.Char(
