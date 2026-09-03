@@ -6,6 +6,7 @@
   - Víctor Martínez
   - Pedro M. Baeza
   - Jairo Llopis
+  - Adasat Torres
 - [Elego](https://www.elegosoft.com):
   - Yu Weng \<<yweng@elegosoft.com>\>
   - Philip Witte \<<phillip.witte@elegosoft.com>\>

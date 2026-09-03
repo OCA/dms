@@ -75,4 +75,5 @@
     ],
     "icon": "/dms/static/description/icon.png",
     "application": True,
+    "post_init_hook": "post_init_hook",
 }
