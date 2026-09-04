@@ -15,7 +15,7 @@ class DmsAccessGroup(models.Model):
         string="Roles",
     )
 
-    @api.depends("role_ids", "role_ids.users")
+    @api.depends("role_ids", "role_ids.users", "role_ids.users.active")
     def _compute_users(self):
         """Add the corresponding depends and the users of the roles."""
         res = super()._compute_users()
