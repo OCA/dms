@@ -1,0 +1,3 @@
+# DO NOT MERGE — temporary pin until OCA/dms#483 lands.
+# dms_preview_pane: OCA/dms#483
+odoo-addon-dms_preview_pane @ git+https://github.com/ledoent/dms.git@19.0-add-dms_preview_pane#subdirectory=dms_preview_pane
