@@ -82,6 +82,7 @@ class DmsAccessGroups(models.Model):
     )
     explicit_user_ids = fields.Many2many(
         comodel_name="res.users",
+        context={"active_test": False},
         relation="dms_access_group_explicit_users_rel",
         column1="gid",
         column2="uid",
@@ -89,6 +90,7 @@ class DmsAccessGroups(models.Model):
     )
     users = fields.Many2many(
         comodel_name="res.users",
+        context={"active_test": False},
         relation="dms_access_group_users_rel",
         column1="gid",
         column2="uid",
@@ -142,8 +144,10 @@ class DmsAccessGroups(models.Model):
     @api.depends(
         "parent_group_id",
         "parent_group_id.users",
+        "parent_group_id.users.active",
         "group_ids",
         "group_ids.users",
+        "group_ids.users.active",
         "explicit_user_ids",
     )
     def _compute_users(self):
