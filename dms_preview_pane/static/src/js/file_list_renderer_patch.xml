@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 ledoent - Don Kendall
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates xml:space="preserve">
+    <!--
+        Split-layout wrapper around the dms list renderer. We t-call the
+        original `dms.ListRenderer` (the actual list + dropzone defined by the
+        dms module) so this stays a pure extension — no dms templates are
+        modified. The pane shows/hides via an edge chevron toggle that mirrors
+        the chatter's collapse affordance.
+    -->
+    <t t-name="dms_preview_pane.ListRenderer">
+        <div
+            class="o_dms_split o_dms_list_split"
+            t-att-data-preview-open="previewState.open ? 'true' : 'false'"
+        >
+            <div class="o_dms_split__main">
+                <t t-call="dms.ListRenderer" />
+            </div>
+            <div class="o_dms_preview_toggle_wrapper">
+                <button
+                    type="button"
+                    class="o_dms_preview_toggle_btn btn"
+                    t-att-aria-label="previewState.open ? 'Hide preview pane' : 'Show preview pane'"
+                    t-att-aria-pressed="previewState.open ? 'true' : 'false'"
+                    t-att-title="previewState.open ? 'Hide preview (Esc)' : 'Show preview'"
+                    t-on-click.prevent="() => this.togglePreview()"
+                >
+                    <i
+                        t-attf-class="fa {{ previewState.open ? 'fa-angle-right' : 'fa-angle-left' }}"
+                    />
+                </button>
+            </div>
+            <FilePreviewPane
+                t-if="previewState.open"
+                recordId="previewState.recordId"
+                reloadToken="previewState.reloadToken"
+                onClose="() => this.closePreview()"
+            />
+        </div>
+    </t>
+</templates>
