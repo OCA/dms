@@ -1,0 +1,19 @@
+.dms_document_preview > .o_dms_document_preview_description {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border-top: 1px solid var(--border-color, #dee2e6);
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.o_dms_document_preview_description_title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-muted, #6c757d);
+    margin-bottom: 0.25rem;
+}
+
+.o_dms_document_preview_description_text {
+    white-space: pre-wrap;
+    line-height: 1.35;
+}

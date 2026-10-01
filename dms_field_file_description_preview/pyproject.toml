@@ -1,0 +1,6 @@
+[project]
+name = "odoo-addon-dms-field-file-description-preview"
+
+[build-system]
+requires = ["whool"]
+build-backend = "whool.buildapi"

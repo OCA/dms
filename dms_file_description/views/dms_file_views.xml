@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="search_dms_file_description" model="ir.ui.view">
+        <field name="name">dms.file.search.description</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.search_dms_file" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="description" string="Description" />
+            </xpath>
+            <xpath expr="//filter[@name='filter_active']" position="after">
+                <separator />
+                <filter
+                    name="has_description"
+                    string="Has Description"
+                    domain="[('description', '!=', False)]"
+                />
+                <filter
+                    name="missing_description"
+                    string="Missing Description"
+                    domain="[('description', '=', False)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_dms_file_kanban_description" model="ir.ui.view">
+        <field name="name">dms.file.kanban.description</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban/templates" position="before">
+                <field name="description" />
+                <field name="description_short" />
+            </xpath>
+            <xpath expr="//templates//field[@name='name']" position="after">
+                <div
+                    t-if="record.description_short.raw_value"
+                    class="o_dms_file_description_kanban text-muted mt-1 small"
+                    t-att-title="record.description.raw_value"
+                >
+                    <i class="fa fa-align-left me-1" role="img" title="Description" />
+                    <span t-esc="record.description_short.raw_value" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_dms_file_tree_description" model="ir.ui.view">
+        <field name="name">dms.file.list.description</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="description" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_dms_file_form_description" model="ir.ui.view">
+        <field name="name">dms.file.form.description</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]/h1" position="after">
+                <div class="o_dms_file_description_title mt-2">
+                    <field name="description" nolabel="1" placeholder="Description" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
