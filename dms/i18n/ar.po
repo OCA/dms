@@ -22,11 +22,14 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -89,9 +92,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid ""
 "<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
-"                    <b>ATTENTION:</b> Tips to keep in mind before moving files:<br/>\n"
+"                    <b>ATTENTION:</b> Tips to keep in mind before moving "
+"files:<br/>\n"
 "                    - This change cannot be undone.<br/>\n"
-"                    - Remember that the permissions of the files are those of the folder that contains it, therefore, it is possible that when you change it, the permissions will also change.<br/>\n"
+"                    - Remember that the permissions of the files are those "
+"of the folder that contains it, therefore, it is possible that when you "
+"change it, the permissions will also change.<br/>\n"
 "                    Make this change at your own risk."
 msgstr ""
 "<i class=\"fa fa-exclamation-triangle mr-3\" title=\"تحذير\"/>\n"
@@ -202,7 +208,8 @@ msgstr "<span class=\"ms-1\">ملفات</span>"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ </span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 msgstr ""
 "<span class=\"oe_read_only\">@</span>\n"
 "                                        <span class=\"oe_edit_only\"> @ </"
@@ -310,11 +317,6 @@ msgid "Access warning"
 msgstr "تحذير الوصول"
 
 #. module: dms
-#: model:dms.tag,name:dms.tag_07_demo
-msgid "Accounting"
-msgstr "محاسبة"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__message_needaction
 #: model:ir.model.fields,field_description:dms.field_dms_file__message_needaction
 msgid "Action Needed"
@@ -366,11 +368,6 @@ msgstr "إضافة ملف جديد."
 #: model:ir.model.fields,help:dms.field_wizard_dms_share__note
 msgid "Add extra content to display in the email"
 msgstr "إضافة محتوى إضافي لعرضه في البريد"
-
-#. module: dms
-#: model:dms.access.group,name:dms.access_group_01_demo
-msgid "Admin"
-msgstr "مسؤول"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__alias_id
@@ -438,17 +435,6 @@ msgstr "الكل"
 #: model_terms:ir.ui.view,arch_db:dms.search_dms_file
 msgid "All Files"
 msgstr "جميع الملفات"
-
-#. module: dms
-#. odoo-javascript
-#: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
-msgid "An error occurred during the upload"
-msgstr "حدث خطأ أثناء الرفع"
-
-#. module: dms
-#: model:dms.tag,name:dms.tag_06_demo
-msgid "Apps"
-msgstr "تطبيقات"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__active
@@ -642,16 +628,6 @@ msgid "Content File"
 msgstr "ملف المحتوى"
 
 #. module: dms
-#: model:dms.tag,name:dms.tag_11_demo
-msgid "Contract"
-msgstr "عقود"
-
-#. module: dms
-#: model:dms.category,name:dms.category_03_demo
-msgid "Contracts"
-msgstr "عقود"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__count_directories
 #: model:ir.model.fields,field_description:dms.field_dms_category__count_directories
 #: model:ir.model.fields,field_description:dms.field_dms_storage__count_storage_directories
@@ -794,15 +770,9 @@ msgid "Custom Bounced Message"
 msgstr "رسالة ارتداد مخصصة"
 
 #. module: dms
-#: model:dms.tag,name:dms.tag_01_demo
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_form
 msgid "Customer"
 msgstr "عميل"
-
-#. module: dms
-#: model:dms.tag,name:dms.tag_08_demo
-msgid "Customer Invoice"
-msgstr "فاتورة عميل"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__access_url
@@ -819,6 +789,12 @@ msgstr "نظام إدارة المستندات"
 #: model:ir.model,name:dms.model_dms_security_mixin
 msgid "DMS Security Mixin"
 msgstr "خليط أمان نظام إدارة المستندات"
+
+#. module: dms
+#. odoo-javascript
+#: code:addons/dms/static/src/js/views/file_kanban_renderer.xml:0
+msgid "DMS file actions"
+msgstr ""
 
 #. module: dms
 #: model:ir.model,name:dms.model_dms_mixins_thumbnail
@@ -901,12 +877,21 @@ msgid "Directory"
 msgstr "مجلد"
 
 #. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_category__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_directory__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_file__display_name
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__display_name
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_storage__display_name
 #: model:ir.model.fields,field_description:dms.field_dms_tag__display_name
+#: model:ir.model.fields,field_description:dms.field_ir_attachment__display_name
+#: model:ir.model.fields,field_description:dms.field_mail_thread__display_name
+#: model:ir.model.fields,field_description:dms.field_onboarding_onboarding__display_name
+#: model:ir.model.fields,field_description:dms.field_onboarding_onboarding_step__display_name
+#: model:ir.model.fields,field_description:dms.field_res_company__display_name
+#: model:ir.model.fields,field_description:dms.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__display_name
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__display_name
 msgid "Display Name"
@@ -936,6 +921,7 @@ msgstr "وسم المستند"
 #. module: dms
 #: model:ir.module.category,name:dms.category_dms_security
 #: model:ir.ui.menu,name:dms.main_menu_dms
+#: model:res.groups.privilege,name:dms.res_groups_privilege_dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_dms_breadcrumbs
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
@@ -1025,11 +1011,6 @@ msgid "Extensions"
 msgstr "الامتدادات"
 
 #. module: dms
-#: model:dms.category,name:dms.category_05_demo
-msgid "External"
-msgstr "خارجي"
-
-#. module: dms
 #: model:ir.model,name:dms.model_dms_file
 #: model:onboarding.onboarding.step,title:dms.onboarding_step_upload_file
 msgid "File"
@@ -1054,11 +1035,6 @@ msgstr "حجم الملف"
 #: model_terms:ir.ui.view,arch_db:dms.res_config_settings_view_form
 msgid "File Upload"
 msgstr "رفع الملف"
-
-#. module: dms
-#: model:ir.model,name:dms.model_ir_binary
-msgid "File streaming helper model for controllers"
-msgstr "نموذج مساعد لبث الملفات في واجهات التحكم"
 
 #. module: dms
 #: model:ir.actions.act_window,name:dms.action_dms_file
@@ -1132,15 +1108,6 @@ msgid "Group"
 msgstr "مجموعة"
 
 #. module: dms
-#: model_terms:ir.ui.view,arch_db:dms.search_dms_directory
-#: model_terms:ir.ui.view,arch_db:dms.search_dms_file
-#: model_terms:ir.ui.view,arch_db:dms.search_dms_file_migration
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_storage_search
-#: model_terms:ir.ui.view,arch_db:dms.view_dms_tag_search
-msgid "Group By"
-msgstr "تجميع حسب"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__name
 msgid "Group Name"
 msgstr "اسم المجموعة"
@@ -1165,17 +1132,21 @@ msgid "Has Message"
 msgstr "يحتوي على رسالة"
 
 #. module: dms
-#: model:dms.category,name:dms.category_02_demo
-msgid "Human Resource"
-msgstr "الموارد البشرية"
-
-#. module: dms
+#: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__id
 #: model:ir.model.fields,field_description:dms.field_dms_access_group__id
 #: model:ir.model.fields,field_description:dms.field_dms_category__id
 #: model:ir.model.fields,field_description:dms.field_dms_directory__id
 #: model:ir.model.fields,field_description:dms.field_dms_file__id
+#: model:ir.model.fields,field_description:dms.field_dms_mixins_thumbnail__id
+#: model:ir.model.fields,field_description:dms.field_dms_security_mixin__id
 #: model:ir.model.fields,field_description:dms.field_dms_storage__id
 #: model:ir.model.fields,field_description:dms.field_dms_tag__id
+#: model:ir.model.fields,field_description:dms.field_ir_attachment__id
+#: model:ir.model.fields,field_description:dms.field_mail_thread__id
+#: model:ir.model.fields,field_description:dms.field_onboarding_onboarding__id
+#: model:ir.model.fields,field_description:dms.field_onboarding_onboarding_step__id
+#: model:ir.model.fields,field_description:dms.field_res_company__id
+#: model:ir.model.fields,field_description:dms.field_res_config_settings__id
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__id
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_share__id
 msgid "ID"
@@ -1184,11 +1155,11 @@ msgstr "المعرّف"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
-"معرّف السجل الأب الذي يحمل الاسم المستعار (مثال: مشروع يحمل اسم المستعار لإنشاء "
-"المهمة)"
+"معرّف السجل الأب الذي يحمل الاسم المستعار (مثال: مشروع يحمل اسم المستعار "
+"لإنشاء المهمة)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_icon
@@ -1286,9 +1257,9 @@ msgstr "صورة 512"
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
-"Indicate if directories and files access work only with related model access"
-" (for example, if some directories are related with any sale, only users "
-"with read access to these sale can access)"
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can access)"
 msgstr ""
 "يحدد ما إذا كان وصول المجلدات والملفات يعمل فقط وفق صلاحيات النموذج المرتبط "
 "(على سبيل المثال، إذا رُبطت مجلدات بعملية بيع، يمكن للمستخدمين الذين لديهم حق "
@@ -1297,8 +1268,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid ""
-"Indicate if directories and files auto-create in mail composition process "
-"too"
+"Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 "يحدد ما إذا كانت المجلدات والملفات تُنشأ تلقائياً في عملية إنشاء البريد أيضاً"
 
@@ -1314,7 +1284,8 @@ msgstr "يشير إلى ما إذا كانت المجلدات والملفات �
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 "يشير إلى ما إذا كان المجلد جذرياً.\n"
@@ -1348,22 +1319,11 @@ msgid "Inherited Write Access"
 msgstr "صلاحية كتابة موروثة"
 
 #. module: dms
-#: model:dms.category,name:dms.category_01_demo
-msgid "Internal"
-msgstr "داخلي"
-
-#. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_file_form
 msgid "Internal / Human Resource"
 msgstr "داخلي / الموارد البشرية"
-
-#. module: dms
-#. odoo-python
-#: code:addons/dms/models/dms_file.py:0
-msgid "Invalid attachments!"
-msgstr "مرفقات غير صالحة!"
 
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_category_form
@@ -1475,6 +1435,11 @@ msgstr "مقفل"
 #: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
 msgid "Locked By"
 msgstr "قفل بواسطة"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
+msgid "Manage your documents"
+msgstr ""
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_manager
@@ -1599,11 +1564,6 @@ msgid "New Storage"
 msgstr "تخزين جديد"
 
 #. module: dms
-#: model:dms.category,name:dms.category_06_demo
-msgid "News"
-msgstr "اخبار"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_date_deadline
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_date_deadline
 msgid "Next Activity Deadline"
@@ -1620,12 +1580,6 @@ msgstr "ملخص النشاط التالي"
 #: model:ir.model.fields,field_description:dms.field_dms_file__activity_type_id
 msgid "Next Activity Type"
 msgstr "نوع النشاط التالي"
-
-#. module: dms
-#. odoo-python
-#: code:addons/dms/models/dms_file.py:0
-msgid "No attachment was provided"
-msgstr "لم يُقدَّم أي مرفق"
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__not_done
@@ -1762,18 +1716,13 @@ msgstr "المجموعة الأب '%(parent)s' فرعية لـ '%(current)s'."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
 "النموذج الأب الذي يحمل الاسم المستعار. النموذج الذي يحمل مرجع الاسم المستعار "
 "ليس بالضرورة النموذج المعطى في alias_model_id (مثال: مشروع (parent_model) "
 "ومهمة (model))"
-
-#. module: dms
-#: model:dms.tag,name:dms.tag_02_demo
-msgid "Partner"
-msgstr "شريك"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__path_json
@@ -1791,18 +1740,13 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 "سياسة نشر رسالة على المستند عبر بوابة البريد.\n"
 "- الجميع: يمكن للجميع النشر\n"
 "- الشركاء: الشركاء المصدَّقون فقط\n"
 "- المتابعون: متابعو المستند المرتبط أو أعضاء القنوات التالية فقط\n"
-
-#. module: dms
-#: model:dms.access.group,name:dms.access_group_02_demo
-#: model:dms.tag,name:dms.tag_05_demo
-msgid "Portal"
-msgstr "بوابة"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__access_url
@@ -1821,16 +1765,6 @@ msgstr "معاينة"
 #: code:addons/dms/static/src/js/fields/preview_binary/preview_record.esm.js:0
 msgid "Preview Record"
 msgstr "معاينة السجل"
-
-#. module: dms
-#: model:dms.tag,name:dms.tag_10_demo
-msgid "Product"
-msgstr "منتج"
-
-#. module: dms
-#: model:dms.tag,name:dms.tag_03_demo
-msgid "Project"
-msgstr "مشروع"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__permission_read
@@ -1906,11 +1840,6 @@ msgid "Root Directory Created!"
 msgstr "تم إنشاء المجلد الجذري!"
 
 #. module: dms
-#: model:dms.tag,name:dms.tag_04_demo
-msgid "Sales"
-msgstr "مبيعات"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_directory__storage_id_save_type
 #: model:ir.model.fields,field_description:dms.field_dms_file__storage_id_save_type
@@ -1970,6 +1899,12 @@ msgstr "الحجم"
 #: model:ir.model.fields,field_description:dms.field_dms_file__human_size
 msgid "Size (human readable)"
 msgstr "الحجم (قابل للقراءة)"
+
+#. module: dms
+#. odoo-python
+#: code:addons/dms/controllers/main.py:0
+msgid "Something horrible happened"
+msgstr ""
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__starred
@@ -2130,9 +2065,9 @@ msgstr "الحد الأقصى لحجم الرفع هو %s ميغابايت."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 "النموذج (نوع مستند أودو) الذي يتوافق معه هذا الاسم المستعار. أي بريد وارد لا "
 "يرد على سجل قائم سيؤدي إلى إنشاء سجل جديد من هذا النموذج (مثل مهمة مشروع)"
@@ -2157,8 +2092,8 @@ msgstr "يجب أن يكون اسم المجموعة فريداً!"
 #: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_storage__save_type
 msgid ""
-"The save type is used to determine how a file is saved by the system. If you"
-" change this setting, you can migrate existing files manually by triggering "
+"The save type is used to determine how a file is saved by the system. If you "
+"change this setting, you can migrate existing files manually by triggering "
 "the action."
 msgstr ""
 "يُستخدم نوع الحفظ لتحديد كيفية حفظ الملف في النظام. عند تغيير هذا الإعداد، "
@@ -2191,11 +2126,6 @@ msgid "Total files"
 msgstr "إجمالي الملفات"
 
 #. module: dms
-#: model:dms.category,name:dms.category_04_demo
-msgid "Traveling"
-msgstr "السفر"
-
-#. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_file__mimetype
 msgid "Type"
 msgstr "النوع"
@@ -2223,7 +2153,6 @@ msgstr "فك رسائل البريد كـ"
 
 #. module: dms
 #. odoo-javascript
-#: code:addons/dms/static/src/js/views/file_kanban_controller.xml:0
 #: code:addons/dms/static/src/js/views/file_kanban_renderer.xml:0
 #: code:addons/dms/static/src/js/views/file_list_renderer.xml:0
 msgid "Upload"
@@ -2240,7 +2169,6 @@ msgid "Upload your first File."
 msgstr "قُم برفع أوّل ملف."
 
 #. module: dms
-#: model:dms.access.group,name:dms.access_group_03_demo
 #: model:res.groups,name:dms.group_dms_user
 msgid "User"
 msgstr "مستخدم"
@@ -2249,11 +2177,6 @@ msgstr "مستخدم"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_access_groups_form
 msgid "Users"
 msgstr "مستخدمون"
-
-#. module: dms
-#: model:dms.tag,name:dms.tag_09_demo
-msgid "Vendor Bill"
-msgstr "فاتورة المورد"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__website_message_ids
@@ -2286,6 +2209,12 @@ msgid "Write Access"
 msgstr "صلاحية الكتابة"
 
 #. module: dms
+#. odoo-python
+#: code:addons/dms/controllers/main.py:0
+msgid "You are not allowed to upload a file here."
+msgstr ""
+
+#. module: dms
 #. odoo-javascript
 #: code:addons/dms/static/src/js/views/dms_file_upload.esm.js:0
 msgid "You must select a directory first"
@@ -2305,3 +2234,69 @@ msgstr "exe,msi"
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid "mail.catchall.domain"
 msgstr "mail.catchall.domain"
+
+#~ msgid "Accounting"
+#~ msgstr "محاسبة"
+
+#~ msgid "Admin"
+#~ msgstr "مسؤول"
+
+#~ msgid "An error occurred during the upload"
+#~ msgstr "حدث خطأ أثناء الرفع"
+
+#~ msgid "Apps"
+#~ msgstr "تطبيقات"
+
+#~ msgid "Contract"
+#~ msgstr "عقود"
+
+#~ msgid "Contracts"
+#~ msgstr "عقود"
+
+#~ msgid "Customer Invoice"
+#~ msgstr "فاتورة عميل"
+
+#~ msgid "External"
+#~ msgstr "خارجي"
+
+#~ msgid "File streaming helper model for controllers"
+#~ msgstr "نموذج مساعد لبث الملفات في واجهات التحكم"
+
+#~ msgid "Group By"
+#~ msgstr "تجميع حسب"
+
+#~ msgid "Human Resource"
+#~ msgstr "الموارد البشرية"
+
+#~ msgid "Internal"
+#~ msgstr "داخلي"
+
+#~ msgid "Invalid attachments!"
+#~ msgstr "مرفقات غير صالحة!"
+
+#~ msgid "News"
+#~ msgstr "اخبار"
+
+#~ msgid "No attachment was provided"
+#~ msgstr "لم يُقدَّم أي مرفق"
+
+#~ msgid "Partner"
+#~ msgstr "شريك"
+
+#~ msgid "Portal"
+#~ msgstr "بوابة"
+
+#~ msgid "Product"
+#~ msgstr "منتج"
+
+#~ msgid "Project"
+#~ msgstr "مشروع"
+
+#~ msgid "Sales"
+#~ msgstr "مبيعات"
+
+#~ msgid "Traveling"
+#~ msgstr "السفر"
+
+#~ msgid "Vendor Bill"
+#~ msgstr "فاتورة المورد"
