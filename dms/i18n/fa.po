@@ -21,11 +21,14 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -90,18 +93,21 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid ""
 "<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
-"                    <b>ATTENTION:</b> Tips to keep in mind before moving files:<br/>\n"
+"                    <b>ATTENTION:</b> Tips to keep in mind before moving "
+"files:<br/>\n"
 "                    - This change cannot be undone.<br/>\n"
-"                    - Remember that the permissions of the files are those of the folder that contains it, therefore, it is possible that when you change it, the permissions will also change.<br/>\n"
+"                    - Remember that the permissions of the files are those "
+"of the folder that contains it, therefore, it is possible that when you "
+"change it, the permissions will also change.<br/>\n"
 "                    Make this change at your own risk."
 msgstr ""
 "<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
-"<b> توجه </b> نکاتی که باید پیش از جابه‌جایی پرونده‌های در نظر داشته باشید: <"
-"br/>\n"
+"<b> توجه </b> نکاتی که باید پیش از جابه‌جایی پرونده‌های در نظر داشته باشید: "
+"<br/>\n"
 "نمی‌توانید این تغییر را لغو کنید.<br/>\n"
-"به یاد داشته باشید که مجوزهای پرونده‌ها تحت تاثیر مجوزهای پوشه‌هایی است که "
-"آن پرونده‌ها در آن قرار دارند، بنابراین، اگر آنها را تغییر دهید، ممکن است "
-"مجوزها نیز تغییر کنند.<br/>\n"
+"به یاد داشته باشید که مجوزهای پرونده‌ها تحت تاثیر مجوزهای پوشه‌هایی است که آن "
+"پرونده‌ها در آن قرار دارند، بنابراین، اگر آنها را تغییر دهید، ممکن است مجوزها "
+"نیز تغییر کنند.<br/>\n"
 "این تغییر را با مسئولیت خودتان انجام دهید."
 
 #. module: dms
@@ -177,7 +183,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ </span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 msgstr ""
 "<span class=\"oe_read_only\">@</span>\n"
 "<span class=\"oe_edit_only\">@</span>"
@@ -1172,11 +1179,11 @@ msgstr "شناسه"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
-"شناسه رکورد والد که دارای نام مستعار است (به عنوان مثال: پروژه‌ای که حاوی "
-"نام مستعار ایجاد وظیفه است)"
+"شناسه رکورد والد که دارای نام مستعار است (به عنوان مثال: پروژه‌ای که حاوی نام "
+"مستعار ایجاد وظیفه است)"
 
 #. module: dms
 #: model:ir.model.fields,field_description:dms.field_dms_directory__activity_exception_icon
@@ -1278,20 +1285,19 @@ msgstr "تصویر 512"
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
-"Indicate if directories and files access work only with related model access"
-" (for example, if some directories are related with any sale, only users "
-"with read access to these sale can access)"
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can access)"
 msgstr ""
-"مشخص کنید که آیا دسترسی به دایرکتوری‌ها و پرونده‌ها تنها با دسترسی به مدل‌"
-"های مربوطه کار می‌کند (برای مثال، اگر برخی دایرکتوری‌ها به فروش خاصی مرتبط "
-"باشند، تنها کاربرانی که به آن فروش دسترسی خواندنی دارند، می‌توانند به این "
+"مشخص کنید که آیا دسترسی به دایرکتوری‌ها و پرونده‌ها تنها با دسترسی به مدل‌های "
+"مربوطه کار می‌کند (برای مثال، اگر برخی دایرکتوری‌ها به فروش خاصی مرتبط باشند، "
+"تنها کاربرانی که به آن فروش دسترسی خواندنی دارند، می‌توانند به این "
 "دایرکتوری‌ها دسترسی پیدا کنند)"
 
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid ""
-"Indicate if directories and files auto-create in mail composition process "
-"too"
+"Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 "مشخص کنید آیا دایرکتوری‌ها و پرونده‌ها به صورت خودکار فرآیند ایجاد ایمیل را "
 "نیز ایجاد کنند"
@@ -1308,7 +1314,8 @@ msgstr "مشخص کنید آیا دایرکتوری‌ها و پرونده‌ه�
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 "مشخص کنید آیا دایرکتوری یک دایرکتوری ریشه است.\n"
@@ -1475,6 +1482,11 @@ msgid "Locked By"
 msgstr "قفل شده توسط"
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
+msgid "Manage your documents"
+msgstr ""
+
+#. module: dms
 #: model:res.groups,name:dms.group_dms_manager
 msgid "Manager"
 msgstr "مدیر/رئیس"
@@ -1575,7 +1587,6 @@ msgstr "پرونده‌های من"
 
 #. module: dms
 #. odoo-python
-#: code:addons/dms/controllers/portal.py:0
 #: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__name
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
@@ -1772,13 +1783,13 @@ msgstr "%(parent)sگروه والد \" فرزند \"%(current)s\" است."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
-"مدل والد دارای نام مستعار. مدلی که مرجع نام مستعار را نگه می دارد لزوماً "
-"مدلی نیست که توسط alias_model_id (مثال: پروژه (parent_model) و task (model) "
-"ارائه شده است))"
+"مدل والد دارای نام مستعار. مدلی که مرجع نام مستعار را نگه می دارد لزوماً مدلی "
+"نیست که توسط alias_model_id (مثال: پروژه (parent_model) و task (model) ارائه "
+"شده است))"
 
 #. module: dms
 #: model:dms.tag,name:dms.tag_02_demo
@@ -1801,7 +1812,8 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 "خط مشی ارسال پیام در سند با استفاده ازدرگاه پستی.\n"
 "- همه: همه می توانند پست کنند\n"
@@ -1823,7 +1835,6 @@ msgstr "URL دسترسی به پورتال"
 
 #. module: dms
 #. odoo-javascript
-#: code:addons/dms/static/src/js/fields/preview_binary/preview_record.xml:0
 #: code:addons/dms/static/src/js/fields/preview_binary/preview_record.xml:0
 #, python-format
 msgid "Preview"
@@ -2148,9 +2159,9 @@ msgstr "حداکثر اندازه آپلود %s مگابایت است."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 "مدل (نوع سند در اودوو) که این آدرس معادل آن است. هر ایمیل ورودی که به رکورد "
 "موجودی پاسخ ندهد، باعث ایجاد یک رکورد جدید از این مدل خواهد شد (برای مثال، "
@@ -2162,8 +2173,8 @@ msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
 "<jobs@example.odoo.com>"
 msgstr ""
-"نام آدرس ایمیل معادل، مانند 'jobs' اگر می‌خواهید ایمیل‌ها را برای< jobs@"
-"example.odoo.com > دریافت کنید"
+"نام آدرس ایمیل معادل، مانند 'jobs' اگر می‌خواهید ایمیل‌ها را برای< "
+"jobs@example.odoo.com > دریافت کنید"
 
 #. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_access_group_name_uniq
@@ -2176,13 +2187,13 @@ msgstr "نام گروه باید منحصر به فرد باشد!"
 #: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_storage__save_type
 msgid ""
-"The save type is used to determine how a file is saved by the system. If you"
-" change this setting, you can migrate existing files manually by triggering "
+"The save type is used to determine how a file is saved by the system. If you "
+"change this setting, you can migrate existing files manually by triggering "
 "the action."
 msgstr ""
 "نوع ذخیره برای تعیین نحوه ذخیره یک پرونده توسط سیستم استفاده می شود. اگر این "
-"تنظیم را تغییر دهید، می‌توانید پرونده های موجود را به‌صورت دستی با راه‌"
-"اندازی این عمل انتقال دهید."
+"تنظیم را تغییر دهید، می‌توانید پرونده های موجود را به‌صورت دستی با راه‌اندازی "
+"این عمل انتقال دهید."
 
 #. module: dms
 #. odoo-python

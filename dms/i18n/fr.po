@@ -1407,7 +1407,8 @@ msgstr "Il n'est pas possible de modifier le stockage."
 #: code:addons/dms/models/directory.py:0
 #, python-format
 msgid "It is not possible to change to a parent with other storage."
-msgstr "Il n'est pas possible de changer vers un parent avec un autre stockage."
+msgstr ""
+"Il n'est pas possible de changer vers un parent avec un autre stockage."
 
 #. module: dms
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_directory_state__just_done
@@ -1491,6 +1492,11 @@ msgstr "Verrouillé"
 #: model:ir.model.fields,field_description:dms.field_dms_file__locked_by
 msgid "Locked By"
 msgstr "Verrouillé par"
+
+#. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
+msgid "Manage your documents"
+msgstr ""
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_manager

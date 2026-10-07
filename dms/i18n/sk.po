@@ -21,11 +21,14 @@ msgstr ""
 msgid ""
 "                Define how incoming emails are processed:\n"
 "\n"
-"                - Single Files: The email gets attached to the directory and\n"
+"                - Single Files: The email gets attached to the directory "
+"and\n"
 "                all attachments are created as files.\n"
 "\n"
-"                - Subdirectory: A new subdirectory is created for each email\n"
-"                and the mail is attached to this subdirectory. The attachments\n"
+"                - Subdirectory: A new subdirectory is created for each "
+"email\n"
+"                and the mail is attached to this subdirectory. The "
+"attachments\n"
 "                are created as files of the subdirectory.\n"
 "                "
 msgstr ""
@@ -92,9 +95,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.wizard_dms_file_move_form_view
 msgid ""
 "<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
-"                    <b>ATTENTION:</b> Tips to keep in mind before moving files:<br/>\n"
+"                    <b>ATTENTION:</b> Tips to keep in mind before moving "
+"files:<br/>\n"
 "                    - This change cannot be undone.<br/>\n"
-"                    - Remember that the permissions of the files are those of the folder that contains it, therefore, it is possible that when you change it, the permissions will also change.<br/>\n"
+"                    - Remember that the permissions of the files are those "
+"of the folder that contains it, therefore, it is possible that when you "
+"change it, the permissions will also change.<br/>\n"
 "                    Make this change at your own risk."
 msgstr ""
 "<i class=\"fa fa-exclamation-triangle mr-3\" title=\"Warning\"/>\n"
@@ -179,7 +185,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:dms.view_dms_directory_form
 msgid ""
 "<span class=\"oe_read_only\">@</span>\n"
-"                                        <span class=\"oe_edit_only\"> @ </span>"
+"                                        <span class=\"oe_edit_only\"> @ </"
+"span>"
 msgstr ""
 "<span class=\"oe_read_only\">@</span>\n"
 "                                        <span class=\"oe_edit_only\"> @ </"
@@ -1175,8 +1182,8 @@ msgstr "ID"
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_thread_id
 msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
+"ID of the parent record holding the alias (example: project holding the task "
+"creation alias)"
 msgstr ""
 "ID nadradeného záznamu, ktorý drží alias (napríklad projekt držiaci alias na "
 "vytvorenie úlohy)"
@@ -1279,9 +1286,9 @@ msgstr "Obrázok 512"
 #: model:ir.model.fields,help:dms.field_dms_directory__storage_id_inherit_access_from_parent_record
 #: model:ir.model.fields,help:dms.field_dms_storage__inherit_access_from_parent_record
 msgid ""
-"Indicate if directories and files access work only with related model access"
-" (for example, if some directories are related with any sale, only users "
-"with read access to these sale can access)"
+"Indicate if directories and files access work only with related model access "
+"(for example, if some directories are related with any sale, only users with "
+"read access to these sale can access)"
 msgstr ""
 "Označuje, či prístup k priečinkom a súborom funguje len cez prístup k "
 "súvisiacemu modelu (napríklad ak niektoré priečinky súvisia s nejakým "
@@ -1291,8 +1298,7 @@ msgstr ""
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_storage__include_message_attachments
 msgid ""
-"Indicate if directories and files auto-create in mail composition process "
-"too"
+"Indicate if directories and files auto-create in mail composition process too"
 msgstr ""
 "Označuje, či sa priečinky a súbory automaticky vytvárajú aj pri procese "
 "tvorby e-mailu"
@@ -1309,7 +1315,8 @@ msgstr "Označuje, či sú priečinky a súbory predvolene skryté."
 #: model:ir.model.fields,help:dms.field_dms_directory__is_root_directory
 msgid ""
 "Indicates if the directory is a root directory.\n"
-"        A root directory has a settings object, while a directory with a set\n"
+"        A root directory has a settings object, while a directory with a "
+"set\n"
 "        parent inherits the settings form its parent."
 msgstr ""
 "Označuje, či je priečinok koreňový.\n"
@@ -1476,6 +1483,11 @@ msgid "Locked By"
 msgstr "Zamkol"
 
 #. module: dms
+#: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
+msgid "Manage your documents"
+msgstr ""
+
+#. module: dms
 #: model:res.groups,name:dms.group_dms_manager
 msgid "Manager"
 msgstr "Manažér"
@@ -1576,7 +1588,6 @@ msgstr "Moje súbory"
 
 #. module: dms
 #. odoo-python
-#: code:addons/dms/controllers/portal.py:0
 #: code:addons/dms/controllers/portal.py:0
 #: model:ir.model.fields,field_description:dms.field_abstract_dms_mixin__name
 #: model:ir.model.fields,field_description:dms.field_dms_category__name
@@ -1769,8 +1780,8 @@ msgstr "Nadradená skupina '%(parent)s' je podriadená skupine '%(current)s'."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_parent_model_id
 msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
+"Parent model holding the alias. The model holding the alias reference is not "
+"necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
 "Nadradený model, ktorý drží alias. Model, ktorý drží referenciu aliasu, "
@@ -1798,7 +1809,8 @@ msgid ""
 "Policy to post a message on the document using the mailgateway.\n"
 "- everyone: everyone can post\n"
 "- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
+"- followers: only followers of the related document or members of following "
+"channels\n"
 msgstr ""
 "Zásady pre uverejnenie správy v dokumente pomocou mailgateway.\n"
 "- everyone: môže uverejniť každý\n"
@@ -1820,7 +1832,6 @@ msgstr "URL prístupu do portálu"
 
 #. module: dms
 #. odoo-javascript
-#: code:addons/dms/static/src/js/fields/preview_binary/preview_record.xml:0
 #: code:addons/dms/static/src/js/fields/preview_binary/preview_record.xml:0
 #, python-format
 msgid "Preview"
@@ -2139,9 +2150,9 @@ msgstr "Maximálna veľkosť nahrávania je %s MB."
 #. module: dms
 #: model:ir.model.fields,help:dms.field_dms_directory__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"email that does not reply to an existing record will cause the creation of a "
+"new record of this model (e.g. a Project Task)"
 msgstr ""
 "Model (Odoo Document Kind), ktorému tento alias zodpovedá. Každý "
 "prichádzajúci e-mail, ktorý nie je odpoveďou na existujúci záznam, spôsobí "
@@ -2167,8 +2178,8 @@ msgstr "Názov skupiny musí byť jedinečný!"
 #: model:ir.model.fields,help:dms.field_dms_file__storage_id_save_type
 #: model:ir.model.fields,help:dms.field_dms_storage__save_type
 msgid ""
-"The save type is used to determine how a file is saved by the system. If you"
-" change this setting, you can migrate existing files manually by triggering "
+"The save type is used to determine how a file is saved by the system. If you "
+"change this setting, you can migrate existing files manually by triggering "
 "the action."
 msgstr ""
 "Typ uloženia sa používa na určenie spôsobu, akým systém ukladá súbor. Ak "
