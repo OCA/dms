@@ -14,7 +14,7 @@
             <div class="o_portal_category row g-2 mt-3" id="portal_dms_category">
                 <t t-call="portal.portal_docs_entry">
                     <t t-set="title">Documents</t>
-                    <t t-set="text" t-value="'Manage your documents'" />
+                    <t t-set="text">Manage your documents</t>
                     <t t-set="url" t-value="'/my/dms'" />
                     <t
                         t-set="icon"
