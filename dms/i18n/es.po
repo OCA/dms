@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-20 08:48+0000\n"
-"PO-Revision-Date: 2026-05-24 20:46+0000\n"
-"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
+"PO-Revision-Date: 2026-10-07 10:46+0000\n"
+"Last-Translator: Pilar Vargas <pilar.vargas@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -1491,7 +1491,7 @@ msgstr "Bloqueado por"
 #. module: dms
 #: model_terms:ir.ui.view,arch_db:dms.portal_my_home_dms
 msgid "Manage your documents"
-msgstr ""
+msgstr "Gestiona tus documentos"
 
 #. module: dms
 #: model:res.groups,name:dms.group_dms_manager
