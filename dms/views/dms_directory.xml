@@ -467,8 +467,8 @@
                             <field
                                 name="parent_id"
                                 options="{'no_quick_create': True}"
-                                invisible="is_root_directory"
-                                required="not is_root_directory"
+                                invisible="is_root_directory or context.get('default_parent_id')"
+                                required="not is_root_directory and not context.get('default_parent_id')"
                             />
                         </group>
                     </group>
