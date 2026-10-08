@@ -79,6 +79,27 @@ class DmsFieldTemplate(models.Model):
         record = self.env[res_model].browse(res_id)
         directory_model = self.env["dms.directory"].sudo()
         if res_model == "dms.field.template":
+            existing_directory = directory_model.search(
+                [
+                    ("storage_id", "=", record.storage_id.id),
+                    ("res_id", "=", record.id),
+                    ("res_model", "=", record._name),
+                    ("is_root_directory", "=", True),
+                ],
+                limit=1,
+            )
+            if existing_directory:
+                missing_groups = record.group_ids - existing_directory.group_ids
+                if missing_groups:
+                    existing_directory.write(
+                        {
+                            "group_ids": [
+                                fields.Command.link(group.id)
+                                for group in missing_groups
+                            ],
+                        }
+                    )
+                return existing_directory
             return directory_model.create(
                 {
                     "storage_id": record.storage_id.id,
@@ -86,7 +107,9 @@ class DmsFieldTemplate(models.Model):
                     "res_model": record._name,
                     "is_root_directory": True,
                     "name": record.display_name,
-                    "group_ids": record.group_ids.ids,
+                    "group_ids": [
+                        fields.Command.link(group.id) for group in record.group_ids
+                    ],
                 }
             )
         template = self._get_template_from_model(res_model).sudo()
