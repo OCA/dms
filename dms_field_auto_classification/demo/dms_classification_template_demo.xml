@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="dms_classification_template_partners"
+        model="dms.classification.template"
+    >
+        <field name="name">Partners template</field>
+        <field name="filename_pattern">([0-9]{8}[A-Z]).*.pdf</field>
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="directory_pattern">{0}</field>
+    </record>
+    <record
+        id="dms_classification_template_partners_detail_0"
+        model="dms.classification.template.detail"
+    >
+        <field name="parent_id" ref="dms_classification_template_partners" />
+        <field name="field_id" ref="base.field_res_partner__vat" />
+        <field name="index">0</field>
+    </record>
+</odoo>
