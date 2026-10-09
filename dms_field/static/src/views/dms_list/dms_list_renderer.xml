@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="dms_list.Renderer">
+        <div class="dms_treeview">
+            <div class="container-fluid dms_document_container ">
+                <div class="row o_dms_header btn-group">
+                    <button
+                        class="btn btn-secondary o_dms_add_directory fa fa-database o_hidden"
+                        t-ref="dms_add_directory"
+                        t-on-click="onDMSAddDirectoryRecord"
+                    />
+                    <div class="o_dms_extra_actions btn-group" t-ref="extra_actions" />
+                </div>
+                <div
+                    t-attf-class="row dms_document_row #{env.isSmall ? 'dms_document_mobile' : 'dms_document_desktop'}"
+                >
+                    <div class="dms_document_col dms_document_col_tree">
+                        <div class="dms_document_tree">
+                            <div class="dms_content">
+                                <div class="dms_tree" t-ref="jstree" />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="dms_document_col dms_document_col_preview"
+                        t-ref="dropZone"
+                    >
+                        <div t-if="showDragZone" class="o_dropzone">
+                            <i class="fa fa-cloud-upload fa-10x" />
+                        </div>
+                        <div class="dms_document_preview">
+                            <t t-call="dms_list.DocumentTreeViewDirectoryPreview" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="dms_list.DocumentTreeViewDirectoryPreview">
+        <div
+            class="o_preview_directory"
+            t-if="Object.entries(nodeSelectedState.data).length !== 0"
+            t-att-data-directory-id="nodeSelectedState.data.resModel === 'dms.directory' ? nodeSelectedState.data.res_id : ''"
+        >
+            <div class="top_info row">
+                <div class="left_info col-4">
+                    <div class="o_preview_directory_icon" align="center">
+                        <div>
+                            <img
+                                t-if="nodeSelectedState.data.resModel === 'dms.directory'"
+                                class="h-100 w-100"
+                                t-att-src="nodeSelectedState.data.data.icon_url"
+                            />
+                            <a
+                                t-if="nodeSelectedState.data.resModel === 'dms.file'"
+                                class="o_preview_file"
+                                t-att-data-id="nodeSelectedState.data.id"
+                            >
+                                <img
+                                    class="h-100 w-100"
+                                    t-att-src="nodeSelectedState.data.data.icon_url"
+                                />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="right_info col-8">
+                    <h3>
+                        <t t-esc="nodeSelectedState.data.data.name" />
+                    </h3>
+                    <t t-if="nodeSelectedState.data.resModel === 'dms.directory'">
+                        <p>
+                            <b>Subdirectories:</b>
+                            <span
+                                t-esc="nodeSelectedState.data.data.count_total_directories"
+                            />
+                        </p>
+                        <p>
+                            <b>Files:</b>
+                            <span
+                                t-esc="nodeSelectedState.data.data.count_total_files"
+                            />
+                        </p>
+                        <p>
+                            <b>Size:</b>
+                            <span
+                                t-if="nodeSelectedState.data.data.human_size"
+                                t-esc="nodeSelectedState.data.data.human_size"
+                            />
+                        </p>
+                        <p>
+                            <b>Elements:</b>
+                            <span t-esc="nodeSelectedState.data.data.count_elements" />
+                        </p>
+                    </t>
+                    <t t-if="nodeSelectedState.data.resModel === 'dms.file'">
+                        <p>
+                            <b>Size:</b>
+                            <span t-esc="nodeSelectedState.data.data.human_size" />
+                        </p>
+                    </t>
+                    <div class="bottom_buttons">
+                        <a
+                            t-if="nodeSelectedState.data.resModel === 'dms.file'"
+                            class="btn btn-primary"
+                            t-attf-href="/web/content?id=#{nodeSelectedState.data.data.id}&amp;field=content&amp;model=dms.file&amp;filename_field=name&amp;download=true"
+                        >
+                            <i class="fa fa-download" />
+                            Download
+                        </a>
+                        <button
+                            class="btn btn-primary o_preview_file"
+                            t-if="nodeSelectedState.data.resModel === 'dms.file'"
+                            t-on-click="() => this.onDMSPreviewFile(nodeSelectedState)"
+                        >
+                            Open
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
