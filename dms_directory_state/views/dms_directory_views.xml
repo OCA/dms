@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<!--
+    ~ Copyright 2026 Simone Rubino - PyTech
+    ~ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_dms_directory_form" model="ir.ui.view">
+        <field name="name">Add DMS Directory State fields to Directory form view</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <field name="state" widget="statusbar" options="{'clickable': True}" />
+            </header>
+            <xpath expr="//field[@name='group_ids']/list" position="inside">
+                <field
+                    name="perm_change_state"
+                    readonly="not perm_write"
+                    string="Change State"
+                />
+            </xpath>
+            <xpath expr="//field[@name='complete_group_ids']/list" position="inside">
+                <field
+                    name="perm_change_state"
+                    readonly="not perm_write"
+                    string="Change State"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="search_dms_directory" model="ir.ui.view">
+        <field
+            name="name"
+        >Add DMS Directory State fields to Directory search view</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.search_dms_directory" />
+        <field name="arch" type="xml">
+            <search position="inside">
+                <filter
+                    name="state_not_obsolete"
+                    domain="[
+                        ('state','!=', 'obsolete'),
+                    ]"
+                    string="Not Obsolete"
+                />
+            </search>
+            <group position="inside">
+                <filter
+                    name="group_state"
+                    string="State"
+                    domain="[]"
+                    context="{
+                        'group_by': 'state',
+                    }"
+                />
+            </group>
+        </field>
+    </record>
+</odoo>
