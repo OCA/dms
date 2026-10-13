@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_dms_directory_form" model="ir.ui.view">
+        <field name="name">Add DMS Field Product fields to Directory form view</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="dms_field_products" string="Products">
+                    <field name="product_template_ids" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
