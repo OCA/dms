@@ -109,6 +109,7 @@ class DmsDirectory(models.Model):
         compute_sudo=True,
         recursive=True,
     )
+    code = fields.Char()
     complete_name = fields.Char(
         compute="_compute_complete_name", store=True, recursive=True
     )
@@ -208,6 +209,10 @@ class DmsDirectory(models.Model):
                 are created as files of the subdirectory.
                 """,
     )
+
+    _sql_constraints = [
+        ("code_uniq", "unique (code)", "Directory code already exists!"),
+    ]
 
     @api.model
     def _get_domain_by_access_groups(self, operation):
@@ -382,15 +387,18 @@ class DmsDirectory(models.Model):
             return [("user_star_ids", "in", [self.env.uid])]
         return [("user_star_ids", "not in", [self.env.uid])]
 
-    @api.depends("name", "parent_id.complete_name")
+    @api.depends("code", "name", "parent_id.complete_name")
     def _compute_complete_name(self):
-        for category in self:
-            if category.parent_id:
-                category.complete_name = (
-                    f"{category.parent_id.complete_name} / {category.name}"
+        for directory in self:
+            name = directory.name
+            if code := directory.code:
+                name = f"[{code}] {name}"
+            if directory.parent_id:
+                directory.complete_name = (
+                    f"{directory.parent_id.complete_name} / {name}"
                 )
             else:
-                category.complete_name = category.name
+                directory.complete_name = name
 
     @api.depends("parent_id")
     def _compute_storage_id(self):
@@ -592,7 +600,10 @@ class DmsDirectory(models.Model):
 
     def copy_data(self, default=None):
         vals_list = super().copy_data(default)
+        default_code = (default or {}).get("code")
         for directory, vals in zip(self, vals_list, strict=False):
+            if not default_code and (code := directory.code):
+                vals["code"] = directory.env._("%(dir_code)s (Copy)", dir_code=code)
             if vals.get("parent_id"):
                 parent_directory = self.browse(vals.get("parent_id"))
                 names = parent_directory.sudo().child_directory_ids.mapped("name")

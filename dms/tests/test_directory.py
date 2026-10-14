@@ -237,6 +237,15 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         )
 
     @users("dms-manager", "dms-user")
+    def test_code(self):
+        self.directory.code = code = "TESTCODE"
+        self.assertIn(code, self.directory.display_name)
+        copied_directory = self.directory.copy()
+        self.assertIn(code, copied_directory.code)
+        # Cleanup for next user
+        copied_directory.unlink()
+
+    @users("dms-manager", "dms-user")
     def test_size(self):
         self.assertTrue(self.directory.size, msg="The directory should have a size")
 
