@@ -136,3 +136,11 @@ class StorageDatabaseTestCase(StorageDatabaseBaseCase):
         self.assertEqual(
             file_03.save_type, "database", "File savetype should be database"
         )
+
+    def test_root_directories(self):
+        root_directory = self.create_directory(storage=self.storage)
+        no_root_directory = self.create_directory(
+            storage=self.storage, directory=root_directory
+        )
+        self.assertIn(root_directory, self.storage.root_directory_ids)
+        self.assertNotIn(no_root_directory, self.storage.root_directory_ids)
