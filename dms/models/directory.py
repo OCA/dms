@@ -600,7 +600,9 @@ class DmsDirectory(models.Model):
 
     def copy_data(self, default=None):
         vals_list = super().copy_data(default)
-        default_code = (default or {}).get("code")
+        default = default or {}
+        default_code = default.get("code")
+        default_name = default.get("name")
         for directory, vals in zip(self, vals_list, strict=False):
             if not default_code and (code := directory.code):
                 vals["code"] = directory.env._("%(dir_code)s (Copy)", dir_code=code)
@@ -611,7 +613,7 @@ class DmsDirectory(models.Model):
                 names = self.sudo().storage_id.root_directory_ids.mapped("name")
             else:
                 names = self.sudo().parent_id.child_directory_ids.mapped("name")
-            vals["name"] = unique_name(directory.name, names)
+            vals["name"] = unique_name(default_name or directory.name, names)
         return vals_list
 
     def _alias_get_creation_values(self):

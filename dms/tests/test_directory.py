@@ -87,6 +87,14 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         )
 
     @users("dms-manager", "dms-user")
+    def test_copy_default_name(self):
+        default_name = "Test Default Name"
+        copied_directory = self.directory.copy(default={"name": default_name})
+        self.assertEqual(default_name, copied_directory.name)
+        # Cleanup for next user
+        copied_directory.unlink()
+
+    @users("dms-manager", "dms-user")
     def test_rename_directory(self):
         path_names = self.subdirectory.complete_name
         self.directory.write({"name": f"New Test Name {self.env.user.login}"})
