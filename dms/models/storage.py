@@ -43,6 +43,9 @@ class Storage(models.Model):
     root_directory_ids = fields.One2many(
         comodel_name="dms.directory",
         inverse_name="storage_id",
+        domain=[
+            ("is_root_directory", "=", True),
+        ],
         string="Root Directories",
         auto_join=False,
         readonly=False,
