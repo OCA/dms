@@ -1,6 +1,7 @@
 # Copyright 2017-2019 MuK IT GmbH
 # Copyright 2026 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+import base64
 import json
 import unicodedata
 
@@ -45,7 +46,7 @@ class OnboardingController(http.Controller):
                     {
                         "directory_id": directory_id,
                         "name": filename,
-                        "content_binary": ufile.read(),
+                        "content": base64.b64encode(ufile.read()),
                     }
                 )
             except AccessError:
