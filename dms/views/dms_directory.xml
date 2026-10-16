@@ -520,7 +520,7 @@
                         <page name="page_directories" string="Subdirectories">
                             <field
                                 name="child_directory_ids"
-                                context="{'default_parent_id': id, 'mail_create_nolog': True}"
+                                context="{'active_model': 'dms.directory', 'active_id': id, 'mail_create_nolog': True}"
                                 readonly="not permission_create"
                             >
                                 <list limit="10">
