@@ -241,6 +241,15 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         self.assertTrue(self.directory.size, msg="The directory should have a size")
 
     @users("dms-manager", "dms-user")
+    def test_check_name_root_sub(self):
+        """A sub-directory and a root directory can have the same name."""
+        new_sub_directory = self.create_directory(directory=self.directory)
+        generated_name = new_sub_directory.name
+        new_root_directory = self.create_directory(storage=self.storage)
+        new_root_directory.name = generated_name
+        self.assertEqual(new_root_directory.name, new_sub_directory.name)
+
+    @users("dms-manager", "dms-user")
     def test_name_get(self):
         directory = self.subdirectory.with_context(dms_directory_show_path=True)
         self.assertTrue(
