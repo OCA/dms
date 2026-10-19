@@ -488,9 +488,8 @@ class DmsDirectory(models.Model):
         for record in self:
             if record.is_root_directory:
                 record.parent_id = None
-            else:
-                # HACK: Not needed in v14 due to odoo/odoo#64359
-                record.parent_id = record.parent_id
+            elif not record.parent_id:
+                record.parent_id = record.default_get(["parent_id"])["parent_id"]
 
     @api.depends("is_root_directory", "parent_id")
     def _compute_root_id(self):
@@ -763,7 +762,6 @@ class DmsDirectory(models.Model):
         action["domain"] = domain
         action["context"] = dict(
             self.env.context,
-            default_parent_id=self.id,
             searchpanel_default_parent_id=self.id,
         )
         return action
