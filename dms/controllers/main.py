@@ -6,7 +6,7 @@ import json
 import unicodedata
 
 from odoo import http
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, ValidationError
 from odoo.http import request
 
 from odoo.addons.web.controllers.binary import clean
@@ -42,13 +42,15 @@ class OnboardingController(http.Controller):
                 # we need to send it the same stuff, otherwise it'll fail
                 filename = unicodedata.normalize("NFD", ufile.filename)
             try:
-                dms_file = Model.create(
-                    {
-                        "directory_id": directory_id,
-                        "name": filename,
-                        "content": base64.b64encode(ufile.read()),
-                    }
-                )
+                with request.env.cr.savepoint():
+                    dms_file = Model.create(
+                        {
+                            "directory_id": directory_id,
+                            "name": filename,
+                            "content": base64.b64encode(ufile.read()),
+                        }
+                    )
+                    dms_file.flush_recordset()
             except AccessError:
                 args.append(
                     {
@@ -57,6 +59,8 @@ class OnboardingController(http.Controller):
                         )
                     }
                 )
+            except ValidationError as error:
+                args.append({"error": error.args[0]})
             except Exception:
                 args.append({"error": request.env._("Something horrible happened")})
             else:

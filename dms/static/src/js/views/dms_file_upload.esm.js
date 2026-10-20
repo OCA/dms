@@ -116,8 +116,13 @@ export function createFileUploadExtension() {
                 "text"
             );
             const result = JSON.parse(fileData);
-            if (result.error) {
-                throw new Error(result.error);
+            for (const result_item of result) {
+                if (result_item.error) {
+                    this.notification.add(result_item.error, {
+                        type: "danger",
+                        sticky: true,
+                    });
+                }
             }
             self.actionService.restore(controllerID);
         },
