@@ -87,6 +87,14 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         )
 
     @users("dms-manager", "dms-user")
+    def test_copy_default_name(self):
+        default_name = "Test Default Name"
+        copied_directory = self.directory.copy(default={"name": default_name})
+        self.assertEqual(default_name, copied_directory.name)
+        # Cleanup for next user
+        copied_directory.unlink()
+
+    @users("dms-manager", "dms-user")
     def test_rename_directory(self):
         path_names = self.subdirectory.complete_name
         self.directory.write({"name": f"New Test Name {self.env.user.login}"})
@@ -235,6 +243,15 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
             self.directory.count_total_elements,
             msg="The directory should have subdirectories and files",
         )
+
+    @users("dms-manager", "dms-user")
+    def test_code(self):
+        self.directory.code = code = "TESTCODE"
+        self.assertIn(code, self.directory.display_name)
+        copied_directory = self.directory.copy()
+        self.assertIn(code, copied_directory.code)
+        # Cleanup for next user
+        copied_directory.unlink()
 
     @users("dms-manager", "dms-user")
     def test_size(self):
