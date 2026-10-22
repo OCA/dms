@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 ledoent — Don Kendall
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates xml:space="preserve">
+    <t t-name="dms.preview.Image">
+        <div class="o_dms_preview__media">
+            <img t-att-src="src" t-att-alt="props.file.name" />
+        </div>
+    </t>
+
+    <t t-name="dms.preview.Pdf">
+        <iframe
+            class="o_dms_preview__iframe"
+            t-att-src="src"
+            t-att-title="props.file.name"
+        />
+    </t>
+
+    <t t-name="dms.preview.Text">
+        <iframe
+            class="o_dms_preview__iframe o_dms_preview__text"
+            t-att-src="src"
+            t-att-title="props.file.name"
+        />
+    </t>
+
+    <t t-name="dms.preview.Code">
+        <div t-if="aceMode" class="o_dms_preview__code">
+            <div
+                t-if="state.error"
+                class="o_dms_preview_pane__empty o_dms_preview_pane__empty--error"
+            >
+                <i class="fa fa-exclamation-triangle me-2" />
+                <span t-out="state.error" />
+            </div>
+            <CodeEditor
+                t-else=""
+                value="state.content"
+                mode="aceMode"
+                readonly="true"
+            />
+        </div>
+        <iframe
+            t-else=""
+            class="o_dms_preview__iframe o_dms_preview__text"
+            t-att-src="src"
+            t-att-title="props.file.name"
+        />
+    </t>
+
+    <t t-name="dms.preview.Markdown">
+        <iframe
+            class="o_dms_preview__iframe o_dms_preview__markdown"
+            sandbox=""
+            t-att-srcdoc="srcdoc"
+            t-att-title="props.file.name"
+        />
+    </t>
+
+    <t t-name="dms.preview.Eml">
+        <iframe
+            class="o_dms_preview__iframe o_dms_preview__eml"
+            sandbox=""
+            t-att-srcdoc="srcdoc"
+            t-att-title="props.file.name"
+        />
+    </t>
+
+    <t t-name="dms.preview.Audio">
+        <div class="o_dms_preview__media o_dms_preview__media--audio">
+            <audio controls="controls" t-att-src="src" />
+        </div>
+    </t>
+
+    <t t-name="dms.preview.Video">
+        <div class="o_dms_preview__media">
+            <video controls="controls" t-att-src="src" />
+        </div>
+    </t>
+
+    <t t-name="dms.preview.OfficeFallback">
+        <div class="o_dms_preview__fallback">
+            <i class="fa fa-file-text-o o_dms_preview__fallback_icon" />
+            <p class="o_dms_preview__fallback_msg">
+                In-browser preview for office formats requires an extra module
+                — e.g. <code>dms_onlyoffice</code> for live editing, or a
+                server-side LibreOffice converter that renders the file to PDF
+                so the standard PDF preview takes over.
+            </p>
+            <div class="o_dms_preview__fallback_actions">
+                <a
+                    t-att-href="downloadHref"
+                    class="btn btn-primary"
+                    download="download"
+                >
+                    <i class="fa fa-download me-1" />Download
+                </a>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="dms.preview.DownloadFallback">
+        <div class="o_dms_preview__fallback">
+            <i class="fa fa-file-o o_dms_preview__fallback_icon" />
+            <p class="o_dms_preview__fallback_msg">
+                No in-browser preview available for this file type.
+            </p>
+            <a t-att-href="downloadHref" class="btn btn-primary" download="download">
+                <i class="fa fa-download me-1" />Download
+            </a>
+        </div>
+    </t>
+</templates>
