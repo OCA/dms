@@ -1,0 +1,69 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* web_editor_media_dialog_dms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-08-29 13:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
+#, python-format
+msgid "All DMS files have been loaded"
+msgstr "Tutti i file DMS sono stati caricati"
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
+#, python-format
+msgid "Allow open to public users"
+msgstr "Consenti l'apertura a utenti pubblici"
+
+#. module: web_editor_media_dialog_dms
+#: model:ir.model,name:web_editor_media_dialog_dms.model_dms_file
+msgid "File"
+msgstr "File"
+
+#. module: web_editor_media_dialog_dms
+#: model:ir.model,name:web_editor_media_dialog_dms.model_ir_binary
+msgid "File streaming helper model for controllers"
+msgstr "Modello aiuto streaming file per controller"
+
+#. module: web_editor_media_dialog_dms
+#. odoo-python
+#: code:addons/web_editor_media_dialog_dms/models/dms_file.py:0
+#, python-format
+msgid "Invalid access token"
+msgstr "Token accesso non valido"
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
+#, python-format
+msgid "Load more..."
+msgstr "Carica altri..."
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.xml:0
+#, python-format
+msgid "No DMS files found."
+msgstr "Nessun file DMS trovato."
+
+#. module: web_editor_media_dialog_dms
+#. odoo-javascript
+#: code:addons/web_editor_media_dialog_dms/static/src/media_dialog/dms_selector.esm.js:0
+#, python-format
+msgid "Search a dms file"
+msgstr "Cerca un file DMS"
