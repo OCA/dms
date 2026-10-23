@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    ~ Copyright 2026 Simone Rubino - PyTech
+    ~ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_dms_access_groups_form" model="ir.ui.view">
+        <field
+            name="name"
+        >Add DMS Directory State fields to Access Group form view</field>
+        <field name="model">dms.access.group</field>
+        <field name="inherit_id" ref="dms.view_dms_access_groups_form" />
+        <field name="arch" type="xml">
+            <field name="perm_unlink" position="after">
+                <field name="perm_change_state" invisible="not perm_write" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_dms_access_groups_tree" model="ir.ui.view">
+        <field
+            name="name"
+        >Add DMS Directory State fields to Access Group list view</field>
+        <field name="model">dms.access.group</field>
+        <field name="inherit_id" ref="dms.view_dms_access_groups_tree" />
+        <field name="arch" type="xml">
+            <field name="perm_unlink" position="after">
+                <field
+                    name="perm_change_state"
+                    readonly="not perm_write"
+                    string="Change State"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
