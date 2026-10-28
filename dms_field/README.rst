@@ -21,13 +21,13 @@ DMS Field
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdms-lightgray.png?logo=github
-    :target: https://github.com/OCA/dms/tree/18.0/dms_field
+    :target: https://github.com/OCA/dms/tree/20.0/dms_field
     :alt: OCA/dms
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/dms-18-0/dms-18-0-dms_field
+    :target: https://translation.odoo-community.org/projects/dms-20-0/dms-20-0-dms_field
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=18.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=20.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -78,12 +78,29 @@ Usage
 2. Create a new partner. A hierarchy of folders and files linked to that
    record will be created.
 
+In the documents tree:
+
+-  Click a folder or a file to see its details and the available actions
+   in the toolbar. The same actions are shown with a right click on any
+   element (create, rename, cut, paste, delete, open, preview and
+   download).
+-  Double click the name of a folder or a file to rename it. The
+   extension of the files is kept.
+-  Drag a folder or a file and drop it over another folder (or over any
+   element inside it) to move it there. Hovering a closed folder while
+   dragging opens it.
+-  Drop files on the details panel of a folder to upload them into it.
+-  Use the keyboard to browse the tree: up and down arrows move between
+   elements, right and left arrows expand and collapse folders, Enter
+   selects the element, F2 renames it, Delete deletes it and Shift+F10
+   (or the context menu key) opens the actions menu.
+
 Known issues / Roadmap
 ======================
 
-- Add drag & drop compatibility to the dms_tree mode
-- Multiple selection support (e.g. cut several files and paste to
-  another folder).
+-  Add drag & drop compatibility to the dms_tree mode
+-  Multiple selection support (e.g. cut several files and paste to
+   another folder).
 
 Bug Tracker
 ===========
@@ -91,7 +108,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/dms/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/dms/issues/new?body=module:%20dms_field%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/dms/issues/new?body=module:%20dms_field%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -106,18 +123,18 @@ Authors
 Contributors
 ------------
 
-- Enric Tobella <etobella@creublanca.es>
+-  Enric Tobella <etobella@creublanca.es>
 
-- Jaime Arroyo <jaime.arroyo@creublanca.es>
+-  Jaime Arroyo <jaime.arroyo@creublanca.es>
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - Víctor Martínez
-  - Carlos Roca
+   -  Víctor Martínez
+   -  Carlos Roca
 
-- `PyTech <https://www.pytech.it>`__:
+-  `PyTech <https://www.pytech.it>`__:
 
-  - Simone Rubino simone.rubino@pytech.it
+   -  Simone Rubino simone.rubino@pytech.it
 
 Maintainers
 -----------
@@ -140,6 +157,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-CarlosRoca13| 
 
-This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/18.0/dms_field>`_ project on GitHub.
+This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/20.0/dms_field>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

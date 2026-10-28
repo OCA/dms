@@ -2,28 +2,32 @@
 # Copyright 2024 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import new_test_user
 from odoo.tools import mute_logger
 
 from odoo.addons.base.tests.common import BaseCommon
 
+from .common import DmsFieldTestMixin
 
-class TestDmsField(BaseCommon):
+
+class TestDmsField(DmsFieldTestMixin, BaseCommon):
+    # Keep running the tests as superuser, tests switch users explicitly
+    _test_user_groups = ()
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, test_dms_field=True))
         cls.user_a = new_test_user(cls.env, login="test-user-a")
         cls.group = cls.env["res.groups"].create(
-            {"name": "Test group", "users": [(4, cls.user_a.id)]}
+            {"name": "Test group", "user_ids": [(4, cls.user_a.id)]}
         )
         cls.user_b = new_test_user(cls.env, login="test-user-b")
-        cls.template = cls.env.ref("dms_field.field_template_partner")
+        cls.template = cls._create_partner_template()
+        cls._create_partner_dms_view()
         cls.template.group_ids.group_ids = [(4, cls.group.id)]
         cls.template.group_ids.explicit_user_ids = [(4, cls.user_b.id)]
-        cls.storage = cls.template.storage_id
         cls.directory = cls.template.dms_directory_ids
         cls.subdirectory_1 = cls.env["dms.directory"].create(
             {
@@ -162,9 +166,9 @@ class TestDmsField(BaseCommon):
 
     def test_creation_process_01_with_parent(self):
         self.assertFalse(self.partner.dms_directory_ids)
-        self.template.parent_directory_id = fields.first(
-            self.template.storage_id.root_directory_ids
-        )
+        self.template.parent_directory_id = (
+            self.storage.root_directory_ids - self.template.dms_directory_ids
+        )[:1]
         template = self.env["dms.field.template"].with_context(
             res_model=self.partner._name, res_id=self.partner.id
         )
@@ -197,9 +201,9 @@ class TestDmsField(BaseCommon):
         self.assertFalse(partner_2.dms_directory_ids)
 
     def test_creation_process_02_with_parent(self):
-        self.template.parent_directory_id = fields.first(
-            self.template.storage_id.root_directory_ids
-        )
+        self.template.parent_directory_id = (
+            self.storage.root_directory_ids - self.template.dms_directory_ids
+        )[:1]
         partner_1 = self.env["res.partner"].create({"name": "Test partner 1"})
         partner_1.invalidate_model()
         directory_1 = partner_1.dms_directory_ids[0]
@@ -278,3 +282,10 @@ class TestDmsField(BaseCommon):
         )
         self.assertTrue(new_subdirectory_2.inherit_group_ids)
         self.assertIn(self.group, new_subdirectory_2.complete_group_ids.group_ids)
+
+    def test_partner_form_view_with_dms_list(self):
+        """The form view embedding a dms_list x2many field can be generated."""
+        views = self.env["res.partner"].get_views([(False, "form")])
+        arch = views["views"]["form"]["arch"]
+        self.assertIn('mode="dms_list"', arch)
+        self.assertIn("<dms_list", arch)

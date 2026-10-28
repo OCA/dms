@@ -1,12 +1,16 @@
-var mapping = [
-    ["file-image-o", /^image\//],
-    ["file-audio-o", /^audio\//],
-    ["file-video-o", /^video\//],
-    ["file-pdf-o", "application/pdf"],
-    ["file-text-o", "text/plain"],
-    ["file-code-o", ["text/html", "text/javascript", "application/javascript"]],
+/* Copyright 2024 Tecnativa - Carlos Roca
+ * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
+
+// Material Symbols icon names (available in the web.icons_fonts subset)
+const MAPPING = [
+    ["image", /^image\//],
+    ["audio_file", /^audio\//],
+    ["video_file", /^video\//],
+    ["picture_as_pdf", "application/pdf"],
+    ["article", "text/plain"],
+    ["code", ["text/html", "text/javascript", "application/javascript"]],
     [
-        "file-archive-o",
+        "folder_zip",
         [
             /^application\/x-(g?tar|xz|compress|bzip2|g?zip)$/,
             /^application\/x-(7z|rar|zip)-compressed$/,
@@ -14,7 +18,7 @@ var mapping = [
         ],
     ],
     [
-        "file-word-o",
+        "description",
         [
             /ms-?word/,
             "application/vnd.oasis.opendocument.text",
@@ -22,58 +26,45 @@ var mapping = [
         ],
     ],
     [
-        "file-powerpoint-o",
+        "slideshow",
         [
             /ms-?powerpoint/,
             "application/vnd.openxmlformats-officedocument.presentationml.presentation",
         ],
     ],
     [
-        "file-excel-o",
+        "table_chart",
         [
             /ms-?excel/,
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         ],
     ],
-    ["file-o"],
 ];
+const DEFAULT_ICON = "description";
 
 function match(mimetype, cond) {
     if (Array.isArray(cond)) {
-        return cond.reduce(function (v, c) {
-            return v || match(mimetype, c);
-        }, false);
+        return cond.some((c) => match(mimetype, c));
     } else if (cond instanceof RegExp) {
         return cond.test(mimetype);
-    } else if (cond === undefined) {
-        return true;
     }
     return mimetype === cond;
 }
 
-var cache = {};
-function resolve(mimetype) {
-    if (cache[mimetype]) {
-        return cache[mimetype];
-    }
-    for (var i = 0; i < mapping.length; i++) {
-        if (match(mimetype, mapping[i][1])) {
-            cache[mimetype] = mapping[i][0];
-            return mapping[i][0];
-        }
-    }
-}
+const cache = new Map();
 
-export function mimetype2fa(mimetype, options) {
-    if (typeof mimetype === "object") {
-        var new_options = mimetype;
-        return function (new_mimetype) {
-            return mimetype2fa(new_mimetype, new_options);
-        };
+/**
+ * @param {String} mimetype
+ * @returns {String} Material Symbols icon name, to be used as
+ *  `<i class="oi" data-icon="..."/>`
+ */
+export function mimetype2icon(mimetype) {
+    if (!mimetype) {
+        return DEFAULT_ICON;
     }
-    var icon = resolve(mimetype);
-    if (icon && options && options.prefix) {
-        return options.prefix + icon;
+    if (!cache.has(mimetype)) {
+        const entry = MAPPING.find(([, cond]) => match(mimetype, cond));
+        cache.set(mimetype, entry ? entry[0] : DEFAULT_ICON);
     }
-    return icon;
+    return cache.get(mimetype);
 }

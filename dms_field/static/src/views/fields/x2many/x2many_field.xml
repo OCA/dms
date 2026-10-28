@@ -8,8 +8,8 @@
     >
         <xpath expr="//ListRenderer" position="after">
             <DmsListRenderer
-                t-elif="props.viewMode == 'dms_list'"
-                t-props="rendererProps"
+                t-elif="this.props.viewMode === 'dms_list'"
+                t-props="this.rendererProps"
             />
         </xpath>
     </t>

@@ -1,490 +1,362 @@
 /* Copyright 2024 Tecnativa - Carlos Roca
  * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
-import {
-    Component,
-    onMounted,
-    onWillStart,
-    useEffect,
-    useRef,
-    useState,
-} from "@odoo/owl";
-import {loadBundle, loadCSS, loadJS} from "@web/core/assets";
+import {Component, proxy, signal, t, useOnChange, useProps} from "@odoo/owl";
+import {ConfirmationDialog} from "@web/core/confirmation_dialog/confirmation_dialog";
+import {DmsContextMenu} from "../../components/dms_context_menu/dms_context_menu.esm";
+import {DmsTree} from "../../components/dms_tree/dms_tree.esm";
+import {DmsTreeModel} from "../../components/dms_tree/dms_tree_model.esm";
 import {FormViewDialog} from "@web/views/view_dialogs/form_view_dialog";
 import {_t} from "@web/core/l10n/translation";
 import {download} from "@web/core/network/download";
+import {useDropzone} from "@web/core/dropzone/dropzone_hook";
 import {useFileViewer} from "@web/core/file_viewer/file_viewer_hook";
+import {usePopover} from "@web/core/popover/popover_hook";
 import {useService} from "@web/core/utils/hooks";
 
 export class DmsListRenderer extends Component {
+    static template = "dms_list.Renderer";
+    static components = {DmsTree};
+
+    props = useProps({
+        rendererActions: t.object(),
+        record: t.object().optional(),
+        readonly: t.boolean().optional(),
+        // Only allow selecting files
+        filesOnly: t.boolean().optional(false),
+    });
+
+    dropZone = signal.ref();
+
     setup() {
-        this.js_tree = useRef("jstree");
-        this.extra_actions = useRef("extra_actions");
-        this.dms_add_directory = useRef("dms_add_directory");
-        this.nodeSelectedState = useState({data: {}});
         this.store = useService("mail.store");
         this.fileViewer = useFileViewer();
         this.notification = useService("notification");
         this.dialog = useService("dialog");
-        this.dragState = useState({
-            showDragZone: false,
+        this.ui = useService("ui");
+        this.state = proxy({
+            // Data of the selected node: {resModel, data}
+            selected: {},
+            hasEmptyStorages: false,
         });
-        this.dropZone = useRef("dropZone");
-
-        useEffect(
-            (el) => {
-                if (!el) {
-                    return;
-                }
-                const highlight = this.highlight.bind(this);
-                const unhighlight = this.unhighlight.bind(this);
-                const drop = this.onDrop.bind(this);
-                el.addEventListener("dragover", highlight);
-                el.addEventListener("dragleave", unhighlight);
-                el.addEventListener("drop", drop);
-                return () => {
-                    el.removeEventListener("dragover", highlight);
-                    el.removeEventListener("dragleave", unhighlight);
-                    el.removeEventListener("drop", drop);
-                };
-            },
-
-            () => [this.dropZone.el]
+        this.tree = proxy(
+            new DmsTreeModel({
+                loadNodes: (node) => this.loadNodes(node),
+                canSelect: (node) => this.checkSelect(node),
+                onSelect: (node) => this.updatePreview(node),
+                onRename: (node, text) =>
+                    this.props.rendererActions.onDMSRenameNode(node, text),
+                onMove: (node, parent) =>
+                    this.props.rendererActions.onDMSMoveNode(node, parent),
+                // Same rules as the "Cut" and "Paste" actions
+                canDrag: (node) => this.canMoveNode(node),
+                canDrop: (node, parent) => Boolean(parent.data.data?.perm_create),
+            })
         );
-        onWillStart(async () => {
-            await loadBundle("web._assets_jquery");
-            await loadJS("/dms_field/static/lib/jsTree/jstree.js");
-            await loadCSS("/dms_field/static/lib/jsTree/themes/proton/style.css");
-            this.config = this.buildTreeConfig();
-            // When loading jQuery, we need to assign it to this.$ in
-            // order to use it within the component, and it is loaded in
-            // the window object. Without excluding it from no-undef,
-            // we would get a linter error, but in this case, it’s not
-            // worth excluding it from the globals.
+        this.contextMenu = usePopover(DmsContextMenu, {
+            position: "bottom-start",
+            popoverClass: "o-dropdown--menu dropdown-menu mx-0 py-0",
+            animation: false,
+            arrow: false,
+        });
 
-            this.$ = window.jQuery;
-        });
-        onMounted(() => {
-            this.$tree = this.$(this.js_tree.el);
-        });
-        useEffect(
-            () => {
-                this.nodeSelectedState.data = {};
-                this.updatePreview({});
-                this.$tree.jstree("destroy");
-                this.config = this.buildTreeConfig();
-                this.$tree.jstree(this.config);
-                this.startTreeTriggers();
-            },
-            () => [this.props.record]
+        // Upload the files dropped on the details of the selected folder
+        useDropzone(
+            this.dropZone,
+            (ev) => this.onDrop(ev),
+            "o_dms_dropzone",
+            () => this.state.selected.resModel === "dms.directory"
+        );
+
+        // Load the tree again when the related record changes (e.g. when
+        // navigating between records of a form view).
+        useOnChange(
+            () => [this.props.record?.resId],
+            () => this.tree.load()
         );
     }
-    buildTreeConfig() {
-        var plugins = [
-            "conditionalselect",
-            "massload",
-            "wholerow",
-            "state",
-            "sort",
-            "search",
-            "types",
-            "contextmenu",
-        ];
-        return {
-            core: {
-                widget: this,
-                animation: 0,
-                multiple: false,
-                check_callback: this.checkCallback.bind(this),
-                themes: {
-                    name: "proton",
-                    responsive: true,
-                },
-                data: this.loadData.bind(this),
-            },
-            contextmenu: {
-                items: this.loadContextMenu.bind(this),
-            },
-            state: {
-                key: "documents",
-            },
-            conditionalselect: this.checkSelect.bind(this),
-            plugins: plugins,
-            sort: function (a, b) {
-                // Correctly sort the records according to the type of element
-                // (folder or file).
-                // Do not use node.icon because they may have (or will have) a
-                // different icon for each file according to its extension.
-                var node_a = this.get_node(a);
-                var node_b = this.get_node(b);
-                if (node_a.data.resModel === node_b.data.resModel) {
-                    return node_a.text > node_b.text ? 1 : -1;
-                }
-                return node_a.data.resModel > node_b.data.resModel ? 1 : -1;
-            },
-        };
-    }
-    startTreeTriggers() {
-        this.$tree.on("open_node.jstree", (e, data) => {
-            if (data.node.data && data.node.data.resModel === "dms.directory") {
-                data.instance.set_icon(data.node, "fa fa-folder-open-o");
-            }
-        });
-        this.$tree.on("close_node.jstree", (e, data) => {
-            if (data.node.data && data.node.data.resModel === "dms.directory") {
-                data.instance.set_icon(data.node, "fa fa-folder-o");
-            }
-        });
-        this.$tree.on("changed.jstree", (e, data) => {
-            this.treeChanged(data);
-        });
-        this.$tree.on("move_node.jstree", (e, data) => {
-            var jstree = this.$tree.jstree(true);
-            this.props.rendererActions.onDMSMoveNode(
-                data.node,
-                jstree.get_node(data.parent)
-            );
-        });
-        this.$tree.on("rename_node.jstree", (e, data) => {
-            this.props.rendererActions.onDMSRenameNode(data.node, data.text);
-            this.updatePreview(data.node);
-        });
-        this.$tree.on("delete_node.jstree", (e, data) => {
-            this.props.rendererActions.onDMSDeleteNode(data.node);
-        });
-        this.$tree.on("loaded.jstree", () => {
-            this.$tree.jstree("open_all");
-        });
-    }
 
-    treeChanged(data) {
-        if (
-            data.action === "select_node" &&
-            data.selected &&
-            data.selected.length === 1
-        ) {
-            this.updatePreview(data.node);
-        }
-    }
+    // -------------------------------------------------------------------------
+    // Data
+    // -------------------------------------------------------------------------
 
-    updatePreview(node) {
-        var $buttons = this.$(this.extra_actions.el);
-        $buttons.empty();
-        if (
-            node.data &&
-            ["dms.directory", "dms.file"].indexOf(node.data.resModel) !== -1
-        ) {
-            this.nodeSelectedState.data = {};
-            this.nodeSelectedState.data = node.data;
-            var menu = this.loadContextMenu(node);
-            Object.entries(menu).forEach(([, action]) => {
-                this.generateActionButton(node, action, $buttons);
-            });
-        }
-    }
-
-    loadContextMenu(node) {
-        var menu = {};
-        var jstree = this.$tree.jstree(true);
-        if (node.data) {
-            if (node.data.resModel === "dms.directory") {
-                menu = this.loadContextMenuDirectoryBefore(jstree, node, menu);
-                menu = this.loadContextMenuBasic(jstree, node, menu);
-                menu = this.loadContextMenuDirectory(jstree, node, menu);
-            } else if (node.data.resModel === "dms.file") {
-                menu = this.loadContextMenuBasic(jstree, node, menu);
-                menu = this.loadContextMenuFile(jstree, node, menu);
-            }
-        }
-        return menu;
-    }
-
-    loadContextMenuBasic($jstree, node, menu) {
-        menu.rename = {
-            separator_before: false,
-            separator_after: false,
-            icon: "fa fa-pencil",
-            label: _t("Rename"),
-            action: () => {
-                $jstree.edit(node);
-            },
-            _disabled: () => {
-                return !node.data.data.perm_write || node.data.data.storage;
-            },
-        };
-        menu.action = {
-            separator_before: false,
-            separator_after: false,
-            icon: "fa fa-bolt",
-            label: _t("Actions"),
-            action: false,
-            submenu: {
-                cut: {
-                    separator_before: false,
-                    separator_after: false,
-                    icon: "fa fa-scissors",
-                    label: _t("Cut"),
-                    action: () => {
-                        $jstree.cut(node);
-                    },
-                    _disabled: () => {
-                        return !node.data.data.perm_read || node.data.data.storage;
-                    },
-                },
-            },
-            _disabled: () => {
-                return !node.data.data.perm_read;
-            },
-        };
-        menu.delete = {
-            separator_before: false,
-            separator_after: false,
-            icon: "fa fa-trash-o",
-            label: _t("Delete"),
-            action: () => {
-                $jstree.delete_node(node);
-            },
-            _disabled: () => {
-                return !node.data.data.perm_unlink || node.data.data.storage;
-            },
-        };
-        menu.open = {
-            separator_before: false,
-            separator_after: false,
-            icon: "fa fa-external-link",
-            label: _t("Open"),
-            action: () => {
-                this.onDMSOpenRecord(node);
-            },
-        };
-        return menu;
-    }
-
-    loadContextMenuDirectoryBefore($jstree, node, menu) {
-        menu.add_directory = {
-            separator_before: false,
-            separator_after: false,
-            icon: "fa fa-folder",
-            label: _t("Create directory"),
-            action: () => {
-                this.onDMSAddDirectory(node);
-            },
-            _disabled: () => {
-                return !node.data.data.perm_create;
-            },
-        };
-        menu.add_file = {
-            separator_before: false,
-            separator_after: true,
-            icon: "fa fa-file",
-            label: _t("Create File"),
-            action: () => {
-                this.onDMSAddFile(node);
-            },
-            _disabled: () => {
-                return !node.data.data.perm_create;
-            },
-        };
-        return menu;
-    }
-
-    loadContextMenuDirectory($jstree, node, menu) {
-        if (menu.action && menu.action.submenu) {
-            menu.action.submenu.paste = {
-                separator_before: false,
-                separator_after: false,
-                icon: "fa fa-clipboard",
-                label: _t("Paste"),
-                action: () => {
-                    $jstree.paste(node);
-                },
-                _disabled: () => {
-                    return !$jstree.can_paste() && !node.data.data.perm_create;
-                },
-            };
-        }
-        return menu;
-    }
-
-    loadContextMenuFile($jstree, node, menu) {
-        menu.preview = {
-            separator_before: false,
-            separator_after: false,
-            icon: "fa fa-eye",
-            label: _t("Preview"),
-            action: () => {
-                this.onDMSPreviewFile(node);
-            },
-        };
-        menu.download = {
-            separator_before: false,
-            separator_after: false,
-            icon: "fa fa-download",
-            label: _t("Download"),
-            action: () => {
-                download({
-                    url: "/web/content",
-                    data: {
-                        id: node.data.data.id,
-                        download: true,
-                        field: "content",
-                        model: "dms.file",
-                        filename_field: "name",
-                        filename: node.data.data.filename,
-                    },
-                });
-            },
-        };
-        return menu;
-    }
-
-    generateActionButton(node, action, $buttons) {
-        if (action.action) {
-            var $button = this.$("<button>", {
-                type: "button",
-                class: "btn btn-secondary " + action.icon,
-                "data-toggle": "dropdown",
-                title: action.label,
-            }).on("click", (event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                if (action._disabled && action._disabled()) {
-                    return;
-                }
-                action.action();
-            });
-            $buttons.append($button);
-        }
-        if (action.submenu) {
-            Object.values(action.submenu).forEach((sub_action) => {
-                this.generateActionButton(node, sub_action, $buttons);
-            });
-        }
-    }
-
-    async loadData(node, callback) {
+    /**
+     * @param {import("../../components/dms_tree/dms_tree_model.esm").DmsTreeNode|null} node
+     * @returns {Promise<Object[]>}
+     */
+    async loadNodes(node) {
         const {result, empty_storages} =
             await this.props.rendererActions.onDMSLoad(node);
-        result.then((data) => {
-            callback.call(this, data);
-            if (empty_storages.length > 0) {
-                this.$(this.dms_add_directory.el).removeClass("o_hidden");
-            } else {
-                this.$(this.dms_add_directory.el).addClass("o_hidden");
-            }
-        });
+        if (!node) {
+            this.state.hasEmptyStorages = empty_storages.length > 0;
+        }
+        return result;
     }
 
-    /*
-        This is used to check that the operation is allowed
-    */
-    checkCallback(operation, node, parent) {
-        if (operation === "copy_node" || operation === "move_node") {
-            // Prevent moving a root node
-            if (node.parent === "#") {
-                return false;
-            }
-            // Prevent moving a child above or below the root
-            if (parent.id === "#") {
-                return false;
-            }
-            // Prevent moving a child to a settings object
-            if (parent.data && parent.data.resModel === "dms.storage") {
-                return false;
-            }
-            // Prevent moving a child to a file
-            if (parent.data && parent.data.resModel === "dms.file") {
-                return false;
-            }
-        }
-        return true;
-    }
+    // -------------------------------------------------------------------------
+    // Selection / preview
+    // -------------------------------------------------------------------------
+
+    /**
+     * @param {import("../../components/dms_tree/dms_tree_model.esm").DmsTreeNode} node
+     * @returns {Boolean}
+     */
     checkSelect(node) {
         if (this.props.filesOnly && node.data.resModel !== "dms.file") {
             return false;
         }
-        return !(node.parent === "#" && node.data.resModel === "dms.storage");
+        return !(!node.parentId && node.data.resModel === "dms.storage");
     }
-    onDMSAddDirectory(node) {
-        var context = {
-            default_parent_directory_id: node.data.data.id,
+
+    /**
+     * @param {import("../../components/dms_tree/dms_tree_model.esm").DmsTreeNode} node
+     * @returns {Boolean} whether the node can be cut or dragged
+     */
+    canMoveNode(node) {
+        const values = node.data?.data;
+        return (
+            ["dms.directory", "dms.file"].includes(node.data?.resModel) &&
+            Boolean(values?.perm_read) &&
+            !values.storage
+        );
+    }
+
+    updatePreview(node) {
+        if (node?.data && ["dms.directory", "dms.file"].includes(node.data.resModel)) {
+            this.state.selected = node.data;
+        } else {
+            this.state.selected = {};
+        }
+    }
+
+    get selectedNode() {
+        return this.tree.selectedNode;
+    }
+
+    /**
+     * @returns {Array} actions of the selected node, shown as buttons
+     */
+    get selectedActions() {
+        const node = this.selectedNode;
+        if (!node || !this.state.selected.resModel) {
+            return [];
+        }
+        return this.getNodeActions(node);
+    }
+
+    // -------------------------------------------------------------------------
+    // Actions
+    // -------------------------------------------------------------------------
+
+    /**
+     * The actions available for a node, in the order they are shown. Each
+     * action is {key, label, icon, separatorBefore, disabled, run}.
+     *
+     * @param {import("../../components/dms_tree/dms_tree_model.esm").DmsTreeNode} node
+     * @returns {Array}
+     */
+    getNodeActions(node) {
+        const menu = this.loadContextMenu(node);
+        return Object.entries(menu).map(([key, action]) => ({
+            key,
+            label: action.label,
+            icon: action.icon,
+            separatorBefore: Boolean(action.separator_before),
+            disabled: Boolean(action._disabled && action._disabled()),
+            run: action.action,
+        }));
+    }
+
+    /**
+     * Kept with the same structure as the former jsTree context menu, so that
+     * other modules can add or alter entries.
+     *
+     * @param {Object} node
+     * @returns {Object} {key: {label, icon, action, _disabled, separator_before}}
+     */
+    loadContextMenu(node) {
+        let menu = {};
+        if (node?.data?.resModel === "dms.directory") {
+            menu = this.loadContextMenuDirectoryBefore(node, menu);
+            menu = this.loadContextMenuBasic(node, menu);
+            menu = this.loadContextMenuDirectory(node, menu);
+        } else if (node?.data?.resModel === "dms.file") {
+            menu = this.loadContextMenuBasic(node, menu);
+            menu = this.loadContextMenuFile(node, menu);
+        }
+        return menu;
+    }
+
+    loadContextMenuDirectoryBefore(node, menu) {
+        menu.add_directory = {
+            icon: "folder",
+            label: _t("Create directory"),
+            action: () => this.onDMSAddDirectory(node),
+            _disabled: () => !node.data.data.perm_create,
         };
+        menu.add_file = {
+            icon: "description",
+            label: _t("Create File"),
+            action: () => this.onDMSAddFile(node),
+            _disabled: () => !node.data.data.perm_create,
+        };
+        return menu;
+    }
+
+    loadContextMenuBasic(node, menu) {
+        menu.rename = {
+            icon: "edit",
+            label: _t("Rename"),
+            separator_before: true,
+            action: () => this.tree.startRename(node),
+            _disabled: () => !node.data.data.perm_write || node.data.data.storage,
+        };
+        menu.cut = {
+            icon: "content_cut",
+            label: _t("Cut"),
+            action: () => this.tree.cut(node),
+            _disabled: () => !this.canMoveNode(node),
+        };
+        menu.delete = {
+            icon: "delete",
+            label: _t("Delete"),
+            action: () => this.onDMSDeleteNode(node),
+            _disabled: () => !node.data.data.perm_unlink || node.data.data.storage,
+        };
+        menu.open = {
+            icon: "open_in_new",
+            label: _t("Open"),
+            action: () => this.onDMSOpenRecord(node),
+        };
+        return menu;
+    }
+
+    loadContextMenuDirectory(node, menu) {
+        const entries = Object.entries(menu);
+        const cutIndex = entries.findIndex(([key]) => key === "cut");
+        // Show "Paste" right after "Cut"
+        entries.splice(cutIndex + 1, 0, [
+            "paste",
+            {
+                icon: "content_paste",
+                label: _t("Paste"),
+                action: () => this.tree.paste(node),
+                _disabled: () =>
+                    !node.data.data.perm_create || !this.tree.canPaste(node),
+            },
+        ]);
+        return Object.fromEntries(entries);
+    }
+
+    loadContextMenuFile(node, menu) {
+        menu.preview = {
+            icon: "visibility",
+            label: _t("Preview"),
+            separator_before: true,
+            action: () => this.onDMSPreviewFile(node),
+        };
+        menu.download = {
+            icon: "download",
+            label: _t("Download"),
+            action: () => this.onDMSDownloadFile(node),
+        };
+        return menu;
+    }
+
+    /**
+     * Run an action of the node if it is available. Used by the keyboard
+     * shortcuts of the tree.
+     *
+     * @param {String} key
+     * @param {Object} node
+     * @returns {Boolean} whether the action has been run
+     */
+    runNodeAction(key, node) {
+        const action = this.getNodeActions(node).find((a) => a.key === key);
+        if (!action || action.disabled) {
+            return false;
+        }
+        action.run();
+        return true;
+    }
+
+    /**
+     * @param {Object} node
+     * @param {HTMLElement} target
+     */
+    openContextMenu(node, target) {
+        const actions = this.getNodeActions(node);
+        if (!actions.length || !target) {
+            return;
+        }
+        this.contextMenu.open(target, {actions});
+    }
+
+    onClickAction(action) {
+        if (!action.disabled) {
+            action.run();
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Handlers
+    // -------------------------------------------------------------------------
+
+    onDMSAddDirectory(node) {
         this.dialog.add(FormViewDialog, {
             resModel: "dms.directory",
-            context: context,
-            title: _t("Add Directory: ") + node.data.data.name,
-            onRecordSaved: () => {
-                const selected_id = this.$tree.find(".jstree-clicked").attr("id");
-                const model_data = this.$tree.jstree(true)._model.data;
-                const state = this.$tree.jstree(true).get_state();
-                const open_res_ids = state.core.open.map(
-                    (id) => model_data[id].data.data.id
-                );
-                this.$tree.on("refresh_node.jstree", () => {
-                    const model_data_entries = Object.entries(model_data);
-                    const ids = model_data_entries
-                        .filter(
-                            ([, value]) =>
-                                value.data &&
-                                open_res_ids.includes(value.data.data.id) &&
-                                value.data.resModel === "dms.directory"
-                        )
-                        .map((tuple) => tuple[0]);
-                    for (var id of ids) {
-                        this.$tree.jstree(true).open_node(id);
-                    }
-                });
-                this.$tree.jstree(true).refresh_node(selected_id);
+            context: {
+                default_parent_directory_id: node.data.data.id,
             },
+            title: _t("Add Directory: %s", node.data.data.name),
+            onRecordSaved: () => this.tree.reload(node),
         });
     }
+
     onDMSAddFile(node) {
-        var context = {
-            default_directory_id: node.data.data.id,
-        };
         this.dialog.add(FormViewDialog, {
             resModel: "dms.file",
-            context: context,
-            title: _t("Add File: ") + node.data.data.name,
-            onRecordSaved: () => {
-                const selected_id = this.$tree.find(".jstree-clicked").attr("id");
-                const model_data = this.$tree.jstree(true)._model.data;
-                const state = this.$tree.jstree(true).get_state();
-                const open_res_ids = state.core.open.map(
-                    (id) => model_data[id].data.data.id
-                );
-                this.$tree.on("refresh_node.jstree", () => {
-                    const model_data_entries = Object.entries(model_data);
-                    const ids = model_data_entries
-                        .filter(
-                            ([, value]) =>
-                                value.data &&
-                                open_res_ids.includes(value.data.data.id) &&
-                                value.data.model === "dms.directory"
-                        )
-                        .map((tuple) => tuple[0]);
-                    for (var id of ids) {
-                        this.$tree.jstree(true).open_node(id);
-                    }
-                });
-                this.$tree.jstree(true).refresh_node(selected_id);
+            context: {
+                default_directory_id: node.data.data.id,
             },
+            title: _t("Add File: %s", node.data.data.name),
+            onRecordSaved: () => this.tree.reload(node),
         });
     }
-    onDMSAddDirectoryRecord() {
-        this.props.rendererActions.onDMSCreateEmptyStorages().then(() => {
-            this.$tree.jstree(true).refresh();
-            this.$(this.dms_add_directory.el).addClass("o_hidden");
+
+    onDMSDeleteNode(node) {
+        this.dialog.add(ConfirmationDialog, {
+            title: _t("Delete"),
+            body: _t("Are you sure you want to delete “%s”?", node.text),
+            confirmLabel: _t("Delete"),
+            confirm: async () => {
+                await this.props.rendererActions.onDMSDeleteNode(node);
+                this.tree.remove(node);
+            },
+            cancel: () => undefined,
         });
     }
+
+    async onDMSAddDirectoryRecord() {
+        await this.props.rendererActions.onDMSCreateEmptyStorages();
+        await this.tree.load({keepState: true});
+    }
+
     onDMSOpenRecord(node) {
         this.dialog.add(FormViewDialog, {
             resModel: node.data.resModel,
-            title: _t("Open: ") + node.data.data.name,
+            title: _t("Open: %s", node.data.data.name),
             resId: node.data.data.id,
+            onRecordSaved: () => {
+                const parent = this.tree.getParent(node);
+                return parent
+                    ? this.tree.reload(parent)
+                    : this.tree.load({keepState: true});
+            },
         });
     }
+
     onDMSPreviewFile(node) {
-        const attachment = this.store.Attachment.insert({
+        const attachment = this.store["ir.attachment"].insert({
             id: node.data.data.id,
             filename: node.data.data.name,
             name: node.data.data.name,
@@ -493,59 +365,49 @@ export class DmsListRenderer extends Component {
         });
         this.fileViewer.open(attachment);
     }
-    get showDragZone() {
-        return (
-            this.nodeSelectedState.data.resModel === "dms.directory" &&
-            this.dragState.showDragZone
-        );
+
+    onDMSDownloadFile(node) {
+        return download({
+            url: "/web/content",
+            data: {
+                id: node.data.data.id,
+                download: true,
+                field: "content",
+                model: "dms.file",
+                filename_field: "name",
+                filename: node.data.data.filename,
+            },
+        });
     }
-    highlight(ev) {
-        ev.stopPropagation();
-        ev.preventDefault();
-        this.dragState.showDragZone = true;
-    }
-    unhighlight(ev) {
-        ev.stopPropagation();
-        ev.preventDefault();
-        this.dragState.showDragZone = false;
-    }
+
+    // -------------------------------------------------------------------------
+    // Drag and drop of files to upload
+    // -------------------------------------------------------------------------
+
     async onDrop(ev) {
         ev.preventDefault();
-        const directoryId = this.nodeSelectedState.data.data.id;
-        const res = await this.props.rendererActions
-            .onDMSDroppedFile(directoryId, ev.dataTransfer.files)
-            .catch((error) => {
-                this.notification.add(error.data.message, {
-                    type: "danger",
-                });
-            });
-        if (res === "no_attachments") {
-            this.notification.add(_t("An error occurred during the upload"));
-        } else {
-            const selected_id = this.$tree.find(".jstree-clicked").attr("id");
-            const model_data = this.$tree.jstree(true)._model.data;
-            const state = this.$tree.jstree(true).get_state();
-            const open_res_ids = state.core.open.map(
-                (id) => model_data[id].data.data.id
-            );
-            this.$tree.on("refresh_node.jstree", () => {
-                const model_data_entries = Object.entries(model_data);
-                const ids = model_data_entries
-                    .filter(
-                        ([, value]) =>
-                            value.data &&
-                            open_res_ids.includes(value.data.data.id) &&
-                            value.data.model === "dms.directory"
-                    )
-                    .map((tuple) => tuple[0]);
-                for (var id of ids) {
-                    this.$tree.jstree(true).open_node(id);
-                }
-            });
-            this.$tree.jstree(true).refresh_node(selected_id);
+        const node = this.selectedNode;
+        if (node?.data.resModel !== "dms.directory") {
+            return;
         }
-        this.unhighlight(ev);
+        const files = ev.dataTransfer?.files;
+        if (!files?.length) {
+            return;
+        }
+        const {ids, errors} = await this.props.rendererActions.onDMSDroppedFile(
+            node.data.data.id,
+            files
+        );
+        for (const error of errors) {
+            this.notification.add(error, {type: "danger", sticky: true});
+        }
+        if (!ids.length && !errors.length) {
+            this.notification.add(_t("An error occurred during the upload"), {
+                type: "danger",
+            });
+        }
+        if (ids.length) {
+            await this.tree.reload(node);
+        }
     }
 }
-
-DmsListRenderer.template = "dms_list.Renderer";

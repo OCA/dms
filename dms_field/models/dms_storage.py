@@ -2,7 +2,7 @@
 # Copyright 2024 Tecnativa - Víctor Martínez
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -40,6 +40,8 @@ class DmsStorage(models.Model):
         for storage in self:
             if storage.save_type == "attachment":
                 continue
+            if not storage.model_ids:
+                continue
             if self.env["dms.directory"].search(
                 [
                     ("storage_id", "=", storage.id),
@@ -52,7 +54,9 @@ class DmsStorage(models.Model):
                 ]
             ):
                 raise ValidationError(
-                    _("Some directories are inconsistent with the storage models")
+                    self.env._(
+                        "Some directories are inconsistent with the storage models"
+                    )
                 )
             if storage.model_ids and self.env["dms.directory"].search(
                 [
@@ -62,5 +66,5 @@ class DmsStorage(models.Model):
                 ]
             ):
                 raise ValidationError(
-                    _("There are directories not associated to a record")
+                    self.env._("There are directories not associated to a record")
                 )

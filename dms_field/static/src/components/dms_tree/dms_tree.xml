@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Tecnativa - Carlos Roca
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<templates xml:space="preserve">
+
+    <t t-name="dms_field.DmsTree">
+        <div
+            class="o_dms_tree"
+            role="tree"
+            aria-label="Documents"
+            t-ref="this.rootRef"
+            t-on-keydown="this.onKeydown"
+            t-on-dragleave="this.onDragLeave"
+        >
+            <div
+                t-if="this.model.isLoading and !this.model.roots.length"
+                class="o_dms_tree_loading text-muted p-2"
+            >
+                <i class="oi oi-spin" data-icon="progress_activity" />
+            </div>
+            <ul class="o_dms_tree_list list-unstyled m-0">
+                <t t-foreach="this.model.roots" t-as="node" t-key="node.id">
+                    <DmsTreeNode node="node" tree="this" />
+                </t>
+            </ul>
+        </div>
+    </t>
+
+    <t t-name="dms_field.DmsTreeNode">
+        <li
+            class="o_dms_tree_node"
+            role="treeitem"
+            t-ref="this.rootRef"
+            t-att-data-node-id="this.node.id"
+            t-att-data-res-model="this.node.data?.resModel"
+            t-att-tabindex="this.isFocused ? 0 : -1"
+            t-att-aria-level="this.level"
+            t-att-aria-selected="this.isSelected ? 'true' : 'false'"
+            t-att-aria-expanded="this.node.hasChildren ? (this.node.isOpen ? 'true' : 'false') : undefined"
+            t-att-aria-busy="this.node.isLoading ? 'true' : undefined"
+            t-on-focus="this.onFocus"
+        >
+            <div
+                class="o_dms_tree_row d-flex align-items-center gap-1"
+                t-att-class="{
+                    'o_dms_tree_row_selected': this.isSelected,
+                    'o_dms_tree_row_cut': this.isCut,
+                    'o_dms_tree_row_unselectable': !this.model.canSelect(this.node),
+                    'o_dms_tree_row_dragging': this.isDragging,
+                    'o_dms_tree_row_drop_target': this.isDropTarget,
+                }"
+                t-attf-style="--dms-tree-level: {{ this.level - 1 }};"
+                t-att-draggable="this.isDraggable ? 'true' : 'false'"
+                t-on-dragstart="this.onDragStart"
+                t-on-dragover="this.onDragOver"
+                t-on-drop="this.onDrop"
+                t-on-dragend="this.onDragEnd"
+                t-on-click="this.onClickRow"
+                t-on-dblclick="this.onDblClickRow"
+                t-on-contextmenu="this.onContextMenu"
+            >
+                <span
+                    class="o_dms_tree_toggle d-inline-flex justify-content-center flex-shrink-0"
+                    t-att-title="this.node.hasChildren ? this.toggleTitle : undefined"
+                    t-on-click.stop="this.onClickToggle"
+                >
+                    <i
+                        t-if="this.node.isLoading"
+                        class="oi oi-spin"
+                        data-icon="progress_activity"
+                    />
+                    <i
+                        t-elif="this.node.hasChildren"
+                        class="oi"
+                        t-att-data-icon="this.node.isOpen ? 'expand_more' : 'chevron_right'"
+                    />
+                </span>
+                <i
+                    class="oi oi-fw o_dms_tree_icon flex-shrink-0"
+                    t-att-data-icon="this.icon"
+                />
+                <t t-if="this.isRenaming">
+                    <input
+                        t-ref="this.inputRef"
+                        type="text"
+                        class="o_dms_tree_rename form-control form-control-sm py-0"
+                        t-att-value="this.editableName.base"
+                        aria-label="Name"
+                        t-on-click.stop="() => {}"
+                        t-on-dblclick.stop="() => {}"
+                        t-on-keydown="this.onRenameKeydown"
+                        t-on-blur="this.onRenameBlur"
+                    />
+                    <span
+                        t-if="this.editableName.extension"
+                        class="o_dms_tree_rename_extension text-muted flex-shrink-0"
+                        t-out="this.editableName.extension"
+                    />
+                </t>
+                <span
+                    t-else=""
+                    class="o_dms_tree_label text-truncate"
+                    t-att-title="this.node.text"
+                    t-out="this.node.text"
+                    t-on-dblclick.stop="this.onDblClickLabel"
+                />
+            </div>
+            <ul
+                t-if="this.node.isOpen"
+                class="o_dms_tree_list list-unstyled m-0"
+                role="group"
+            >
+                <t t-foreach="this.node.children" t-as="child" t-key="child.id">
+                    <DmsTreeNode node="child" tree="this.props.tree" />
+                </t>
+            </ul>
+        </li>
+    </t>
+
+</templates>

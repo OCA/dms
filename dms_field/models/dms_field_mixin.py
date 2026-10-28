@@ -18,7 +18,7 @@ class DMSFieldMixin(models.AbstractModel):
             ("res_model", "=", self._name),
             ("storage_id.save_type", "!=", "attachment"),
         ],
-        auto_join=True,
+        bypass_search_access=True,
     )
 
     def web_save(self, vals, specification, next_id=None):
@@ -45,7 +45,12 @@ class DMSFieldMixin(models.AbstractModel):
         :args:
         :returns: list of models
         """
-        return self.env["dms.field.template"].sudo().search([]).mapped("model_id.model")
+        return (
+            self.env["dms.field.template"]
+            .sudo()
+            .search([("model_id", "!=", False)])
+            .mapped("model_id.model")
+        )
 
     @api.model_create_multi
     def create(self, vals_list):

@@ -1,18 +1,59 @@
 /* Copyright 2024 Tecnativa - Carlos Roca
  * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
 
-import {Component, onRendered} from "@odoo/owl";
-import {Deferred} from "@web/core/utils/concurrency";
+import {Component, t, useProps} from "@odoo/owl";
+import {DEFAULT_MAX_FILE_SIZE} from "@web/core/utils/files";
 import {Domain} from "@web/core/domain";
 import {Layout} from "@web/search/layout";
+import {_t} from "@web/core/l10n/translation";
 import {extractFieldsFromArchInfo} from "@web/model/relational_model/utils";
 import {formatBinarySize} from "../../utils/format_binary_size.esm";
-import {mimetype2fa} from "../../utils/mimetype.esm";
 import {patch} from "@web/core/utils/patch";
 import {session} from "@web/session";
+import {standardViewProps} from "@web/views/standard_view_props";
 import {useModelWithSampleData} from "@web/model/model";
 import {useService} from "@web/core/utils/hooks";
+import {user} from "@web/core/user";
 
+const DIRECTORY_FIELDS = [
+    "permission_read",
+    "permission_create",
+    "permission_write",
+    "permission_unlink",
+    "count_directories",
+    "count_files",
+    "name",
+    "parent_id",
+    "icon_url",
+    "count_total_directories",
+    "count_total_files",
+    "human_size",
+    "count_elements",
+    "write_date",
+];
+
+const FILE_FIELDS = [
+    "permission_read",
+    "permission_create",
+    "permission_write",
+    "permission_unlink",
+    "icon_url",
+    "name",
+    "mimetype",
+    "directory_id",
+    "human_size",
+    "is_locked",
+    "is_lock_editor",
+    "extension",
+    "write_date",
+];
+
+/**
+ * Logic shared by the dms_list view controller and the x2many field (used with
+ * mode="dms_list"). It loads the DMS records and builds the nodes of the tree.
+ *
+ * @returns {Object} object to patch the component prototype with
+ */
 export function getDMSListControllerObject() {
     return {
         setup() {
@@ -20,11 +61,11 @@ export function getDMSListControllerObject() {
             this.orm = useService("orm");
             this.actionService = useService("action");
             this.http = useService("http");
-            this.duplicateId = false;
             this.model =
                 (this.props.record && this.props.record.model) ||
                 useModelWithSampleData(this.props.Model, this.modelParams());
             this.resModel = this.props.resModel || this.props.record.resModel;
+            this.empty_storages = [];
             this.rendererActions = {
                 onDMSCreateEmptyStorages: this.onDMSCreateEmptyStorages.bind(this),
                 onDMSLoad: this.onDMSLoad.bind(this),
@@ -33,9 +74,6 @@ export function getDMSListControllerObject() {
                 onDMSDeleteNode: this.onDMSDeleteNode.bind(this),
                 onDMSDroppedFile: this.onDMSDroppedFile.bind(this),
             };
-            onRendered(() => {
-                this.processProps();
-            });
         },
         modelParams() {
             const {activeFields, fields} = extractFieldsFromArchInfo(
@@ -57,10 +95,10 @@ export function getDMSListControllerObject() {
         },
         processProps() {
             const model = this.sanitizeDMSModel(this.resModel);
-            var storage_domain = [];
-            var directory_domain = [];
-            var autocompute_directory = false;
-            var show_storage = true;
+            let storage_domain = [];
+            let directory_domain = [];
+            let autocompute_directory = false;
+            let show_storage = true;
             if (model === "dms.storage") {
                 if (this.model.root.resId) {
                     storage_domain = [["id", "=", this.model.root.resId]];
@@ -69,16 +107,13 @@ export function getDMSListControllerObject() {
                         [
                             "id",
                             "in",
-                            this.model.root.records.map((record) => {
-                                return record.resId;
-                            }),
+                            this.model.root.records.map((record) => record.resId),
                         ],
                     ];
                 }
-                directory_domain = [];
             } else if (model === "dms.field.template") {
                 if (this.model.root.resId) {
-                    storage_domain = [["id", "=", this.model.root.data.storage_id[0]]];
+                    storage_domain = [["id", "=", this.model.root.data.storage_id.id]];
                 } else {
                     storage_domain = [["id", "=", 0]];
                 }
@@ -86,9 +121,9 @@ export function getDMSListControllerObject() {
                     [
                         "root_directory_id",
                         "in",
-                        this.model.root.data.dms_directory_ids.records.map((record) => {
-                            return record.resId;
-                        }),
+                        this.model.root.data.dms_directory_ids.records.map(
+                            (record) => record.resId
+                        ),
                     ],
                 ];
             } else {
@@ -99,148 +134,105 @@ export function getDMSListControllerObject() {
             this.params = {
                 storage: {
                     domain: storage_domain,
-                    context: session.user_context,
+                    context: user.context,
                     show: show_storage,
                 },
                 directory: {
                     domain: directory_domain,
-                    context: session.user_context,
+                    context: user.context,
                     autocompute_directory: autocompute_directory,
                 },
                 file: {
                     domain: [],
-                    context: session.user_context,
+                    context: user.context,
                     show: true,
                 },
             };
         },
+        /**
+         * @param {Object|null} node the node to load the children of, or null
+         *  to load the root nodes.
+         * @returns {Promise<{result: Object[], empty_storages: Object[]}>}
+         */
         async onDMSLoad(node) {
             this.processProps();
-            var args = this.buildDMSArgs();
-            var result = false;
+            const args = this.buildDMSArgs();
+            let result = [];
             if (!node || node.id === "#") {
-                result = this.loadInitialData(args);
+                result = await this.loadInitialData(args);
             } else {
-                result = this.loadNode(node, args);
+                result = await this.loadNode(node, args);
             }
             return {result, empty_storages: this.empty_storages};
         },
-        loadInitialData(args) {
-            var self = this;
-            var data_loaded = new Deferred();
+        async loadInitialData(args) {
+            const storages = await this.loadStorages(args);
+            const isRecordView =
+                this.resModel !== "dms.directory" && this.resModel !== "dms.storage";
             this.empty_storages = [];
-            this.loadStorages(args).then((storages) => {
-                var loading_data_parts = [];
-                storages.forEach((storage, index) => {
+            await Promise.all(
+                storages.map(async (storage) => {
                     if (storage.count_storage_directories > 0) {
-                        const directory_loaded = new Deferred();
-                        loading_data_parts.push(directory_loaded);
-                        this.loadDirectoriesSingle(storage.id, args).then(
-                            (directories) => {
-                                if (directories.length > 0) {
-                                    storages[index].directories = directories;
-                                } else if (
-                                    self.props.resModel !== "dms.directory" &&
-                                    self.props.resModel !== "dms.storage"
-                                ) {
-                                    self.empty_storages.push(storage);
-                                }
-                                directory_loaded.resolve();
-                            }
+                        const directories = await this.loadDirectoriesSingle(
+                            storage.id,
+                            args
                         );
-                    } else if (
-                        self.props.resModel !== "dms.directory" &&
-                        self.props.resModel !== "dms.storage"
-                    ) {
-                        self.empty_storages.push(storage);
+                        if (directories.length > 0) {
+                            storage.directories = directories;
+                            return;
+                        }
                     }
-                });
-                Promise.all(loading_data_parts).then(() => {
-                    if (args.storage.show) {
-                        const result = storages
-                            .map((storage) => {
-                                if (!storage.directories) return undefined;
-
-                                const children = (storage.directories || []).map(
-                                    (directory) =>
-                                        this.makeNodeDirectory(
-                                            directory,
-                                            args.file.show
-                                        )
-                                );
-
-                                return this.makeNodeStorage(storage, children);
-                            })
-                            .filter((node) => node !== undefined);
-
-                        data_loaded.resolve(result);
-                    } else {
-                        const nodes = [];
-
-                        storages.forEach((storage) => {
-                            (storage.directories || []).forEach((directory) => {
-                                nodes.push(
-                                    this.makeNodeDirectory(
-                                        directory,
-                                        args.file.show,
-                                        storage
-                                    )
-                                );
-                            });
-                        });
-
-                        data_loaded.resolve(nodes);
+                    if (isRecordView) {
+                        this.empty_storages.push(storage);
                     }
-                });
-            });
-            return data_loaded;
-        },
-        loadNode(node, args) {
-            var result = new Deferred();
-            if (node.data && node.data.resModel === "dms.storage") {
-                this.loadDirectoriesSingle(node.data.data.id, args).then(
-                    function (directories) {
-                        var directory_nodes = directories.map((directory) =>
-                            this.makeNodeDirectory(directory, args.file.show)
-                        );
-                        result.resolve(directory_nodes);
-                    }.bind(this)
-                );
-            } else if (node.data && node.data.resModel === "dms.directory") {
-                var files_loaded = new Deferred();
-                var directories_loaded = new Deferred();
-                this.loadSubdirectoriesSingle(node.data.data.id, args).then(
-                    function (directories) {
-                        var directory_nodes = directories.map((directory) =>
-                            this.makeNodeDirectory(directory, args.file.show)
-                        );
-                        directories_loaded.resolve(directory_nodes);
-                    }.bind(this)
-                );
-                if (args.file.show) {
-                    this.loadFilesSingle(node.data.data.id, args).then(
-                        function (files) {
-                            var file_nodes = files.map((file) =>
-                                this.makeNodeFile(file)
-                            );
-                            files_loaded.resolve(file_nodes);
-                        }.bind(this)
+                })
+            );
+            if (args.storage.show) {
+                return storages
+                    .filter((storage) => storage.directories)
+                    .map((storage) =>
+                        this.makeNodeStorage(
+                            storage,
+                            storage.directories.map((directory) =>
+                                this.makeNodeDirectory(directory, args.file.show)
+                            )
+                        )
                     );
-                } else {
-                    files_loaded.resolve([]);
-                }
-                Promise.all([directories_loaded, files_loaded]).then(
-                    ([directories, files]) => {
-                        result.resolve(directories.concat(files));
-                    }
-                );
-            } else {
-                result.resolve([]);
             }
-            return result;
+            return storages.flatMap((storage) =>
+                (storage.directories || []).map((directory) =>
+                    this.makeNodeDirectory(directory, args.file.show, storage)
+                )
+            );
+        },
+        async loadNode(node, args) {
+            const resModel = node.data?.resModel;
+            if (resModel === "dms.storage") {
+                const directories = await this.loadDirectoriesSingle(
+                    node.data.data.id,
+                    args
+                );
+                return directories.map((directory) =>
+                    this.makeNodeDirectory(directory, args.file.show)
+                );
+            } else if (resModel === "dms.directory") {
+                const [directories, files] = await Promise.all([
+                    this.loadSubdirectoriesSingle(node.data.data.id, args),
+                    args.file.show
+                        ? this.loadFilesSingle(node.data.data.id, args)
+                        : Promise.resolve([]),
+                ]);
+                return [
+                    ...directories.map((directory) =>
+                        this.makeNodeDirectory(directory, args.file.show)
+                    ),
+                    ...files.map((file) => this.makeNodeFile(file)),
+                ];
+            }
+            return [];
         },
         makeNodeDirectory(directory, showFiles, storage) {
-            var data = Object.assign(directory, {
+            const data = Object.assign(directory, {
                 name: directory.name,
                 perm_read: directory.permission_read,
                 perm_create: directory.permission_create,
@@ -252,6 +244,7 @@ export function getDMSListControllerObject() {
                 human_size: directory.human_size,
                 count_elements: directory.count_elements,
             });
+            let text = directory.name;
             if (
                 storage &&
                 this.resModel !== "dms.directory" &&
@@ -260,97 +253,60 @@ export function getDMSListControllerObject() {
                 // We are assuming this is a record directory, so disabling actions
                 data.name = storage.name;
                 data.storage = true;
+                text = storage.name;
             }
-            var dt = {
-                data: data,
-                resModel: "dms.directory",
-            };
-            dt.parent = directory.parent_id
-                ? "directory_" + directory.parent_id[0]
-                : "#";
-            var directoryNode = {
-                id: dt.id,
-                text: directory.name,
-                icon: "fa fa-folder-o",
+            const count = showFiles
+                ? directory.count_directories + directory.count_files
+                : directory.count_directories;
+            return {
+                id: `dms.directory_${directory.id}`,
+                text,
                 type: "directory",
-                data: dt,
+                data: {data, resModel: "dms.directory"},
+                children: count > 0,
             };
-            if (showFiles) {
-                directoryNode.children =
-                    directory.count_directories + directory.count_files > 0;
-            } else {
-                directoryNode.children = directory.count_directories > 0;
-            }
-            return directoryNode;
         },
         makeNodeFile(file) {
-            var data = {
+            const canEdit = !file.is_locked || file.is_lock_editor;
+            const data = {
                 ...file,
                 filename: file.name,
                 display_name: file.name,
                 binary_size: formatBinarySize(file.size),
                 perm_read: file.permission_read,
-                perm_create:
-                    file.permission_create && (!file.is_locked || file.is_lock_editor),
-                perm_write:
-                    file.permission_write && (!file.is_locked || file.is_lock_editor),
-                perm_unlink:
-                    file.permission_unlink && (!file.is_locked || file.is_lock_editor),
+                perm_create: file.permission_create && canEdit,
+                perm_write: file.permission_write && canEdit,
+                perm_unlink: file.permission_unlink && canEdit,
                 icon_url: file.icon_url,
             };
-            var dt = {
-                data: data,
-                resModel: "dms.file",
-            };
             return {
-                id: dt.id,
-                text: dt.data.display_name,
-                icon: mimetype2fa(dt.data.mimetype, {prefix: "fa fa-"}),
+                id: `dms.file_${file.id}`,
+                text: data.display_name,
                 type: "file",
-                data: dt,
+                data: {data, resModel: "dms.file"},
+                children: false,
             };
         },
         makeNodeStorage(storage, children) {
-            var dt = {
-                data: storage,
-                resModel: "dms.storage",
-            };
             return {
-                id: "storage_" + storage.id,
+                id: `dms.storage_${storage.id}`,
                 text: storage.name,
-                icon: "fa fa-database",
                 type: "storage",
-                data: dt,
-                children: children,
+                data: {data: storage, resModel: "dms.storage"},
+                children,
             };
         },
         loadDirectories(operator, value, args) {
             return this.orm.call("dms.directory", "search_read_parents", [], {
                 fields: [
-                    ...new Set([
-                        ...(args.directory.fields || []),
-                        "permission_read",
-                        "permission_create",
-                        "permission_write",
-                        "permission_unlink",
-                        "count_directories",
-                        "count_files",
-                        "name",
-                        "parent_id",
-                        "icon_url",
-                        "count_total_directories",
-                        "count_total_files",
-                        "human_size",
-                        "count_elements",
-                        "write_date",
-                    ]),
+                    ...new Set([...(args.directory.fields || []), ...DIRECTORY_FIELDS]),
                 ],
                 domain: this.buildDMSDomain(
                     [["storage_id", operator, value]],
                     args.directory.domain,
                     args.directory.autocompute_directory
                 ),
-                context: args.directory.context || session.user_context,
+                context: args.directory.context || user.context,
             });
         },
         loadDirectoriesSingle(storage_id, args) {
@@ -363,26 +319,10 @@ export function getDMSListControllerObject() {
                 false
             );
             const fields = [
-                ...new Set([
-                    ...(args.directory.fields || []),
-                    "permission_read",
-                    "permission_create",
-                    "permission_write",
-                    "permission_unlink",
-                    "count_directories",
-                    "count_files",
-                    "name",
-                    "parent_id",
-                    "icon_url",
-                    "count_total_directories",
-                    "count_total_files",
-                    "human_size",
-                    "count_elements",
-                    "write_date",
-                ]),
+                ...new Set([...(args.directory.fields || []), ...DIRECTORY_FIELDS]),
             ];
             return this.orm.searchRead("dms.directory", domain, fields, {
-                context: args.file.context || session.user_context,
+                context: args.directory.context || user.context,
             });
         },
         loadSubdirectoriesSingle(directory_id, args) {
@@ -393,26 +333,9 @@ export function getDMSListControllerObject() {
                 [["directory_id", operator, value]],
                 args.file.domain
             );
-            const fields = [
-                ...new Set([
-                    ...(args.file.fields || []),
-                    "permission_read",
-                    "permission_create",
-                    "permission_write",
-                    "permission_unlink",
-                    "icon_url",
-                    "name",
-                    "mimetype",
-                    "directory_id",
-                    "human_size",
-                    "is_locked",
-                    "is_lock_editor",
-                    "extension",
-                    "write_date",
-                ]),
-            ];
+            const fields = [...new Set([...(args.file.fields || []), ...FILE_FIELDS])];
             return this.orm.searchRead("dms.file", domain, fields, {
-                context: args.file.context || session.user_context,
+                context: args.file.context || user.context,
             });
         },
         loadFilesSingle(directory_id, args) {
@@ -431,12 +354,12 @@ export function getDMSListControllerObject() {
                 args.storage.domain || [],
                 fields,
                 {
-                    context: args.storage.context || session.user_context,
+                    context: args.storage.context || user.context,
                 }
             );
         },
         buildDMSDomain(base, domain, autocompute_directory) {
-            var result = new Domain(base);
+            let result = new Domain(base);
             if (autocompute_directory) {
                 result = Domain.and([
                     result,
@@ -459,15 +382,10 @@ export function getDMSListControllerObject() {
             };
         },
         onDMSCreateEmptyStorages() {
-            var data = {
-                model: this.sanitizeDMSModel(this.resModel),
-                empty_storages: this.empty_storages,
-                res_id: this.props.record.resId,
-            };
             return this.orm.call("dms.field.template", "create_dms_directory", [], {
                 context: {
-                    res_id: data.res_id,
-                    res_model: data.model,
+                    res_id: this.props.record.resId,
+                    res_model: this.sanitizeDMSModel(this.resModel),
                 },
             });
         },
@@ -478,7 +396,7 @@ export function getDMSListControllerObject() {
             });
         },
         onDMSMoveNode(node, newParent) {
-            var data = {};
+            const data = {};
             if (node.data.resModel === "dms.file") {
                 data.directory_id = newParent.data.data.id;
             } else if (node.data.resModel === "dms.directory") {
@@ -489,27 +407,84 @@ export function getDMSListControllerObject() {
         onDMSDeleteNode(node) {
             return this.orm.unlink(node.data.resModel, [node.data.data.id]);
         },
+        /**
+         * @param {Number} directoryId
+         * @param {FileList} files
+         * @returns {Promise<{ids: Number[], errors: String[]}>} the ids of the
+         *  created dms.file records and the errors of the failed uploads.
+         */
         async onDMSDroppedFile(directoryId, files) {
-            const params = {
-                csrf_token: odoo.csrf_token,
-                ufile: [...files],
-                directory_id: directoryId,
-            };
+            const maxSize = session.max_file_upload_size || DEFAULT_MAX_FILE_SIZE;
+            const ids = [];
+            const errors = [];
+            // One request per file, as the size limit of the server applies to
+            // the whole request
+            const tooLargeError = (file) =>
+                _t(
+                    "The file “%(name)s” is too large to be uploaded. The maximum allowed size is %(maxSize)s.",
+                    {name: file.name, maxSize: formatBinarySize(maxSize)}
+                );
+            for (const file of files) {
+                if (file.size > maxSize) {
+                    errors.push(tooLargeError(file));
+                    continue;
+                }
+                let results = [];
+                try {
+                    results = await this.uploadDMSFile(directoryId, file);
+                } catch (error) {
+                    // The request (file and form data) exceeds the server limit
+                    if (error.message === "Content too large") {
+                        errors.push(tooLargeError(file));
+                    } else {
+                        errors.push(
+                            _t("The file “%(name)s” could not be uploaded: %(error)s", {
+                                name: file.name,
+                                error: error.message,
+                            })
+                        );
+                    }
+                    continue;
+                }
+                for (const result of results) {
+                    if (result.id) {
+                        ids.push(result.id);
+                    } else if (result.error) {
+                        errors.push(result.error);
+                    }
+                }
+            }
+            return {ids, errors};
+        },
+        /**
+         * @param {Number} directoryId
+         * @param {File} file
+         * @returns {Promise<Object[]>} [{id}] or [{error}]
+         */
+        async uploadDMSFile(directoryId, file) {
             const fileData = await this.http.post(
                 "/web/binary/upload_dms_file",
-                params,
+                {
+                    csrf_token: odoo.csrf_token,
+                    ufile: [file],
+                    directory_id: directoryId,
+                },
                 "text"
             );
-            const dms_files = JSON.parse(fileData);
-            if (dms_files.error) {
-                throw new Error(dms_files.error);
-            }
-            return dms_files.map((a) => a.id);
+            return JSON.parse(fileData);
         },
     };
 }
 
-export class DmsListController extends Component {}
+export class DmsListController extends Component {
+    static template = "dms_field.View";
+    static components = {Layout};
+
+    props = useProps({
+        ...standardViewProps,
+        Model: t.function(),
+        Renderer: t.function(),
+        archInfo: t.object(),
+    });
+}
 patch(DmsListController.prototype, getDMSListControllerObject());
-DmsListController.template = "dms_field.View";
-DmsListController.components = {Layout};

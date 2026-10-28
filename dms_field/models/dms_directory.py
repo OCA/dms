@@ -1,9 +1,9 @@
 # Copyright 2020 Creu Blanca
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class DmsDirectory(models.Model):
@@ -26,7 +26,9 @@ class DmsDirectory(models.Model):
                 and not directory.res_id
             ):
                 raise ValidationError(
-                    _("Directories of this storage must be related to a record")
+                    self.env._(
+                        "Directories of this storage must be related to a record"
+                    )
                 )
             if not directory.res_id:
                 continue
@@ -40,7 +42,7 @@ class DmsDirectory(models.Model):
                 limit=1,
             ):
                 raise ValidationError(
-                    _("This record is already related in this storage")
+                    self.env._("This record is already related in this storage")
                 )
 
     @api.model
@@ -116,50 +118,17 @@ class DmsDirectory(models.Model):
     def _search_parents(
         self, domain=False, offset=0, limit=None, order=None, count=False
     ):
-        if not domain:
-            domain = []
+        """Search the records matching ``domain`` whose parent does not match it
+        (or is not readable), i.e. the top level elements of the hierarchy."""
         self._check_parent_field()
-        self.check_access("read")
-        if expression.is_false(self, domain):
-            return []
-        query = self._where_calc(domain)
-        self._apply_ir_rules(query, "read")
-        from_clause, from_params = query.from_clause
-        where_clause, where_clause_arguments = query.where_clause
-        parent_where = where_clause and (f" WHERE {where_clause}") or ""
-        parent_query = f'SELECT "{self._table}".id FROM ' + from_clause + parent_where
-        no_parent_clause = f'"{self._table}"."{self._parent_name}" IS NULL'
-        no_access_clause = (
-            f'"{self._table}"."{self._parent_name}" NOT IN ({parent_query})'
-        )
-        parent_clause = f"({no_parent_clause} OR {no_access_clause})"
-        order_by = f" ORDER BY {self._order_to_sql(order, self._where_calc([])).code}"
-        where_clause_params = where_clause_arguments
-        where_str = (
-            where_clause
-            and (f" WHERE {where_clause} AND {parent_clause}")
-            or (f" WHERE {parent_clause}")
+        domain = Domain(domain or [])
+        if domain.is_false():
+            return 0 if count else []
+        parent_name = self._parent_name
+        parents_domain = domain & (
+            Domain(parent_name, "=", False)
+            | Domain(parent_name, "not in", self._search(domain))
         )
         if count:
-            # pylint: disable=sql-injection
-            query_str = "SELECT count(1) FROM " + from_clause + where_str
-            self._cr.execute(query_str, where_clause_params)
-            return self._cr.fetchone()[0]
-        limit_str = limit and " limit %s" or ""
-        offset_str = offset and " offset %s" or ""
-        query_str = (
-            f'SELECT "{self._table}".id FROM '
-            + from_clause
-            + where_str
-            + order_by
-            + limit_str
-            + offset_str
-        )
-        complete_where_clause_params = where_clause_params + where_clause_arguments
-        if limit:
-            complete_where_clause_params.append(limit)
-        if offset:
-            complete_where_clause_params.append(offset)
-        # pylint: disable=sql-injection
-        self._cr.execute(query_str, complete_where_clause_params)
-        return list({x[0] for x in self._cr.fetchall()})
+            return self.search_count(parents_domain)
+        return self.search(parents_domain, offset=offset, limit=limit, order=order).ids

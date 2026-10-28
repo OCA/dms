@@ -8,16 +8,12 @@ import {patch} from "@web/core/utils/patch";
 patch(X2ManyField.prototype, getDMSListControllerObject());
 patch(X2ManyField.prototype, {
     get rendererProps() {
-        const props = {
-            archInfo: this.archInfo,
-            list: this.list,
-            openRecord: this.openRecord.bind(this),
-        };
         if (this.props.viewMode === "dms_list") {
-            props.readonly = this.props.readonly;
-            props.rendererActions = this.rendererActions;
-            props.record = this.props.record;
-            return props;
+            return {
+                readonly: this.props.readonly,
+                rendererActions: this.rendererActions,
+                record: this.props.record,
+            };
         }
         return super.rendererProps;
     },
