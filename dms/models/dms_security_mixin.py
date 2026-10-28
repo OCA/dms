@@ -1,6 +1,7 @@
 # Copyright 2020 Creu Blanca
 # Copyright 2021-2025 Tecnativa - Víctor Martínez
 # Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+# Copyright 2026 Simone Rubino - PyTech
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 
@@ -9,6 +10,7 @@ from logging import getLogger
 from odoo import api, fields, models
 from odoo.exceptions import AccessError
 from odoo.osv.expression import (
+    AND,
     FALSE_DOMAIN,
     NEGATIVE_TERM_OPERATORS,
     OR,
@@ -243,37 +245,27 @@ class DmsSecurityMixin(models.AbstractModel):
         return self._get_permission_domain(operator, value, "write")
 
     def filtered_domain(self, domain):
-        """This method is needed to inhibit the behavior when called from the
-        _check_access() method with sudo() https://github.com/odoo/odoo/blob/fc737a147b9aefbd6ae5d111835ce3f4f7b4240a/odoo/models.py#L4465.
-        It would cause the error that multiple records are not accessed to be
-        displayed.
-        The _filtered_access() method is also overwritten to prevent this sudo()
-        specific behavior and to be able to access only the appropriate records.
-        """
-        if self.env.su:
-            return self
-        return super().filtered_domain(domain)
-
-    def _filtered_access_no_recursion(self, operation: str):
-        """This method is just the same as _filtered_access
-        but it can not be called withoud super due to
-        recursion error.
-        """
-        if self and not self.env.su and (result := self._check_access(operation)):
-            return self - result[0]
-        return self
-
-    def _filtered_access(self, operation):
-        # Only kept to not break inheritance; see next comment
-        result = super()._filtered_access(operation)
-        # HACK Always fall back to applying rules by SQL.
-        # Upstream `_filtered_access()` doesn't use computed fields
-        # search methods. Thus, it will take the `[('permission_{operation}',
-        # '=', user.id)]` rule literally. Obviously that will always fail
+        # HACK When a "permission_*" field is present,
+        # fall back to applying domain using SQL.
+        # Upstream `filtered_domain()` doesn't use computed fields search methods.
+        # Thus, it will take the
+        # `[('permission_{operation}', '=', user.id)]` rule literally.
+        # Obviously that will always fail
         # because `self[f"permission_{operation}"]` will always be a `bool`,
         # while `user.id` will always be an `int`.
-        result |= self._filtered_access_no_recursion(operation)
-        return result
+        current_user_id = self.env.uid
+        permission_fields = (
+            "permission_create",
+            "permission_read",
+            "permission_unlink",
+            "permission_write",
+        )
+        for leaf in domain:
+            if leaf[0] in permission_fields and leaf[2] == current_user_id:
+                filtered_records = self.search(AND((domain, [("id", "in", self.ids)])))
+                domain = [("id", "in", filtered_records.ids)]
+                break
+        return super().filtered_domain(domain)
 
     def _check_access_dms_record(self, operation: str) -> tuple | None:
         """Specific method "similar" to _check_access() but with a different
