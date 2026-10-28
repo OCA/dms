@@ -14,3 +14,5 @@
   - Timothée Vannier <<tva@subteno.com>>
 - [Kencove](https://www.kencove.com):
   - Mohamed Alkobrosli <<malkobrosly@kencove.com>>
+- [PyTech](https://www.pytech.it):
+  - Simone Rubino \<<simone.rubino@pytech.it>\>
