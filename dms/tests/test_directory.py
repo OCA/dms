@@ -2,6 +2,7 @@
 # Copyright 2020 Creu Blanca
 # Copyright 2021-2022 Tecnativa - Víctor Martínez
 # Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+# Copyright 2026 Simone Rubino - PyTech
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 import base64
 import os
@@ -288,6 +289,17 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         root_directory.group_ids = [Command.link(group.id)]
         with self.assertRaises(AccessError):
             root_directory.with_user(user).unlink()
+
+    def test_user_no_permission(self):
+        """When a user has no access to a directory,
+        they can perform no CRUD."""
+        user = self.user
+        self.assertNotIn(user, self.directory.group_ids.users)
+        directory = self.directory.with_user(user)
+        self.assertFalse(directory.permission_create)
+        self.assertFalse(directory.permission_read)
+        self.assertFalse(directory.permission_unlink)
+        self.assertFalse(directory.permission_write)
 
 
 class DirectoryMailTestCase(StorageDatabaseBaseCase):
