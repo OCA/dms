@@ -3,7 +3,6 @@
     <data>
         <record id="group_hr_public_dms" model="res.groups">
             <field name="name">DMS Is accessible publicly on employee profile</field>
-            <field name="category_id" ref="base.module_category_hidden" />
         </record>
     </data>
     <data noupdate="1">
