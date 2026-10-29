@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
     <t t-name="web_editor_media_dialog_dms.DMSFile" owl="1">
         <div
@@ -30,10 +30,10 @@
                         t-on-change="handleChangeAllowOpenPublic"
                     >
                         <input
+                            id="o_we_open_public_switch"
                             class="o_we_open_public form-check-input"
                             type="checkbox"
                             t-att-checked="allowOpenPublic"
-                            id="o_we_open_public_switch"
                         />
                         <label class="form-check-label" for="o_we_open_public_switch">
                             Allow open to public users
