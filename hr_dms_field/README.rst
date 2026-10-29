@@ -84,11 +84,11 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - Víctor Martínez
-  - Pedro M. Baeza
-  - Carlos Roca
+   -  Víctor Martínez
+   -  Pedro M. Baeza
+   -  Carlos Roca
 
 Maintainers
 -----------
