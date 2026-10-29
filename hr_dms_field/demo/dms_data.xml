@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="read_access_hr_employee_group" model="dms.access.group">
         <field name="name">Everyone for Employee DMS</field>
