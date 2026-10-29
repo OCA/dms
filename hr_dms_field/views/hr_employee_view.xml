@@ -17,13 +17,6 @@
         <field name="model">hr.employee.public</field>
         <field name="inherit_id" ref="hr.hr_employee_public_view_form" />
         <field name="arch" type="xml">
-            <field name="user_id" position="after">
-                <field
-                    name="is_logged"
-                    invisible="1"
-                    groups="hr_dms_field.group_hr_public_dms"
-                />
-            </field>
             <!-- Show the DMS tab only if the logged-in user is the employee's user. -->
             <notebook position="inside">
                 <page

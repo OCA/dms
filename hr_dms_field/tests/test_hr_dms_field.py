@@ -1,4 +1,5 @@
 # Copyright 2024-2025 Tecnativa - Víctor Martínez
+# Copyright 2026 Tecnativa - Carlos Roca
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 from odoo import Command
 from odoo.tests import new_test_user
@@ -6,13 +7,18 @@ from odoo.tools import mute_logger
 
 from odoo.addons.base.tests.common import BaseCommon
 
+from .common import HrDmsFieldTestMixin
 
-class TestHrDmsField(BaseCommon):
+
+class TestHrDmsField(HrDmsFieldTestMixin, BaseCommon):
+    # Keep running the tests as superuser, tests switch users explicitly
+    _test_user_groups = ()
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, test_dms_field=True))
-        cls.template = cls.env.ref("hr_dms_field.field_template_employee")
+        cls.template = cls._create_employee_template()
         cls.storage = cls.template.storage_id
         cls.access_group = cls.template.group_ids
         cls.env["dms.directory"].create(
@@ -65,10 +71,7 @@ class TestHrDmsField(BaseCommon):
         self.assertIn(self.user, group_custom.explicit_user_ids)
 
     def test_employee_write_custom(self):
-        read_access_hr_employee_group = self.env.ref(
-            "hr_dms_field.read_access_hr_employee_group"
-        )
-        read_access_hr_employee_group.write(
+        self.access_group.write(
             {
                 "group_ids": [Command.set([])],
                 "explicit_user_ids": [Command.set(self.env.ref("base.user_admin").ids)],
@@ -81,11 +84,12 @@ class TestHrDmsField(BaseCommon):
         directory_0 = employee.dms_directory_ids[0]
         group_custom = directory_0.group_ids.filtered("dms_field_ref")
         self.assertFalse(group_custom.explicit_user_ids)
-        # Use the demo user to modify the employee and link the user, it does not
+        # Use an HR officer to modify the employee and link the user, it does not
         # have access to the directory.
-        demo = self.env.ref("base.user_demo")
-        demo.write({"groups_id": [Command.link(self.env.ref("hr.group_hr_user").id)]})
-        employee = employee.with_user(demo)
+        hr_user = new_test_user(
+            self.env, login="test-hr-user", groups="base.group_user,hr.group_hr_user"
+        )
+        employee = employee.with_user(hr_user)
         employee.invalidate_recordset()
         employee.write({"user_id": self.user.id})
         self.assertIn(self.user, group_custom.explicit_user_ids)
@@ -111,3 +115,19 @@ class TestHrDmsField(BaseCommon):
         employee.unlink()
         self.assertFalse(directory_0.exists())
         self.assertFalse(group_custom.exists())
+
+    def test_employee_form_view_with_dms_list(self):
+        """The employee form views embedding a dms_list field can be generated."""
+        for model in ("hr.employee", "hr.employee.public"):
+            views = self.env[model].get_views([(False, "form")])
+            arch = views["views"]["form"]["arch"]
+            self.assertIn('mode="dms_list"', arch)
+            self.assertIn("<dms_list", arch)
+
+    def test_employee_public_is_logged(self):
+        employee = self.employee_model.create(
+            {"name": "Test employee", "user_id": self.user.id}
+        )
+        public_model = self.env["hr.employee.public"]
+        self.assertTrue(public_model.with_user(self.user).browse(employee.id).is_logged)
+        self.assertFalse(public_model.browse(employee.id).is_logged)
