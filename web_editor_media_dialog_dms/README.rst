@@ -21,13 +21,13 @@ Web Editor Media Dialog DMS
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fdms-lightgray.png?logo=github
-    :target: https://github.com/OCA/dms/tree/18.0/web_editor_media_dialog_dms
+    :target: https://github.com/OCA/dms/tree/20.0/web_editor_media_dialog_dms
     :alt: OCA/dms
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/dms-18-0/dms-18-0-web_editor_media_dialog_dms
+    :target: https://translation.odoo-community.org/projects/dms-20-0/dms-20-0-web_editor_media_dialog_dms
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=18.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=20.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -47,12 +47,12 @@ To use this module, we need:
 
 1. Navigate to a model that has an HTML field
 2. Edit the field
-3. Type /image to open the media dialog
+3. Type /media (or directly /dms) to open the media dialog
 4. Select the DMS tab
 5. Select the DMS file to be added
 
-You can also edit the selected file making a double click on the image
-added to web editor.
+The selected file is added to the web editor as a file box, with a link
+to open/download the linked file.
 
 If you want to share the file to a public user, you can do it by
 selecting the option **Allow open to public users** which is located on
@@ -64,7 +64,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/dms/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/dms/issues/new?body=module:%20web_editor_media_dialog_dms%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/dms/issues/new?body=module:%20web_editor_media_dialog_dms%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -97,6 +97,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/18.0/web_editor_media_dialog_dms>`_ project on GitHub.
+This module is part of the `OCA/dms <https://github.com/OCA/dms/tree/20.0/web_editor_media_dialog_dms>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

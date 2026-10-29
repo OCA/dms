@@ -4,11 +4,11 @@
 {
     "name": "Web Editor Media Dialog DMS",
     "summary": "Integrate DMS with media dialog of web editor",
-    "version": "18.0.1.0.1",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/dms",
-    "depends": ["dms", "web_editor"],
+    "depends": ["dms", "html_editor"],
     "assets": {
         "html_editor.assets_media_dialog": [
             "web_editor_media_dialog_dms/static/src/media_dialog/*",

@@ -1,16 +1,17 @@
 /* Copyright 2025 Carlos Roca - Tecnativa
  * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
-import {MediaDialog, TABS} from "@html_editor/main/media/media_dialog/media_dialog";
 import {DMSSelector} from "./dms_selector.esm";
+import {MediaDialog} from "@html_editor/main/media/media_dialog/media_dialog";
+import {TABS} from "@html_editor/main/media/media_dialog/media_dialog_utils";
+import {_t} from "@web/core/l10n/translation";
 import {patch} from "@web/core/utils/patch";
 
-patch(TABS, {
-    DMS: {
-        id: "DMS",
-        title: "DMS",
-        Component: DMSSelector,
-    },
-});
+TABS.DMS = {
+    id: "DMS",
+    title: _t("DMS"),
+    Component: DMSSelector,
+    sequence: 40,
+};
 
 patch(MediaDialog.prototype, {
     get initialActiveTab() {
@@ -25,8 +26,8 @@ patch(MediaDialog.prototype, {
         }
         return super.initialActiveTab;
     },
-    addDefaultTabs() {
-        const res = super.addDefaultTabs(...arguments);
+    addTabs() {
+        const res = super.addTabs(...arguments);
         const onlyImages =
             this.props.onlyImages ||
             this.props.multiImages ||

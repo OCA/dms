@@ -1,27 +1,56 @@
 /* Copyright 2025 Carlos Roca - Tecnativa
  * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). */
-import {Component, onWillStart, useRef, useState} from "@odoo/owl";
+import {Component, onWillStart, proxy, signal, t, useProps} from "@odoo/owl";
 import {KeepLast} from "@web/core/utils/concurrency";
-import {SearchMedia} from "@web_editor/components/media_dialog/search_media";
+import {SearchMedia} from "@html_editor/main/media/media_dialog/search_media";
 import {_t} from "@web/core/l10n/translation";
+import {renderToElement} from "@web/core/utils/render";
 import {useDebounced} from "@web/core/utils/timing";
 import {useService} from "@web/core/utils/hooks";
 
-export class DMSFile extends Component {}
-DMSFile.template = "web_editor_media_dialog_dms.DMSFile";
+export class DMSFile extends Component {
+    static template = "web_editor_media_dialog_dms.DMSFile";
+
+    props = useProps({
+        id: t.number(),
+        name: t.string(),
+        mimetype: t.or([t.string(), t.literal(false)]).optional(),
+        selected: t.boolean().optional(),
+        selectFile: t.function(),
+    });
+}
 
 export class DMSSelector extends Component {
+    static template = "web_editor_media_dialog_dms.DMSSelector";
+    static mediaSpecificClasses = ["o_file_box", "o_dms_file"];
+    static mediaSpecificStyles = [];
+    static mediaExtraClasses = [];
+    static tagNames = ["SPAN"];
+    static components = {
+        DMSFile,
+        SearchMedia,
+    };
+
+    props = useProps({
+        id: t.string(),
+        media: t.any().optional(),
+        save: t.function(),
+        selectedMedia: t.object(),
+        selectMedia: t.function(),
+    });
+
+    loadMoreButtonRef = signal.ref();
+
     setup() {
         this.orm = useService("orm");
         this.keepLast = new KeepLast();
-        this.loadMoreButtonRef = useRef("load-more-button");
-        this.state = useState({
+        this.state = proxy({
             dmsFiles: [],
             canLoadMoreFiles: true,
             isFetchingFiles: false,
             needle: "",
+            allowOpenPublic: false,
         });
-        this.allowOpenPublic = false;
         this.NUMBER_OF_FILES_TO_DISPLAY = 30;
         this.searchPlaceholder = _t("Search a dms file");
         onWillStart(async () => {
@@ -73,17 +102,14 @@ export class DMSSelector extends Component {
         this.state.canLoadMoreFiles = files.length >= this.NUMBER_OF_FILES_TO_DISPLAY;
         this.state.isFetchingFiles = false;
         if (this.selectInitialMedia()) {
-            for (const file of files) {
-                if (
-                    `/mail/view?model=dms.file&res_id=${file.id}` ===
-                    this.props.media.getAttribute("href").replace(/[?].*/, "")
-                ) {
-                    this.selectFile(file);
-                }
+            const initialFileId = Number(this.props.media.dataset.dmsFileId);
+            const initialFile = files.find((file) => file.id === initialFileId);
+            if (initialFile) {
+                this.selectFile(initialFile);
             }
         }
         for (const file of files) {
-            file.allowOpenPublic = this.allowOpenPublic;
+            file.allowOpenPublic = this.state.allowOpenPublic;
         }
         return files;
     }
@@ -123,11 +149,13 @@ export class DMSSelector extends Component {
     }
 
     scrollToLoadMoreButton() {
+        const loadMoreButtonEl = this.loadMoreButtonRef();
         if (
-            this.state.needle ||
-            this.state.dmsFiles.length > this.NUMBER_OF_FILES_TO_DISPLAY
+            loadMoreButtonEl &&
+            (this.state.needle ||
+                this.state.dmsFiles.length > this.NUMBER_OF_FILES_TO_DISPLAY)
         ) {
-            this.loadMoreButtonRef.el.scrollIntoView({
+            loadMoreButtonEl.scrollIntoView({
                 block: "end",
                 inline: "nearest",
                 behavior: "smooth",
@@ -136,35 +164,59 @@ export class DMSSelector extends Component {
     }
 
     async onClickFile(file) {
-        this.props.selectMedia({...file, mediaType: "dms"});
+        this.selectFile(file);
         await this.props.save();
     }
 
-    static async createElements(selectedMedia, {orm}) {
+    /**
+     * Utility method used by the MediaDialog component.
+     */
+    static async createElements(selectedMedia, {orm, document = window.document}) {
         return Promise.all(
             selectedMedia.map(async (file) => {
-                const linkEl = document.createElement("a");
-                let href = `/mail/view?model=dms.file&res_id=${encodeURIComponent(
+                let url = `/mail/view?model=dms.file&res_id=${encodeURIComponent(
                     file.id
                 )}`;
                 // Download svg images because are considered images but are not
                 // visualized correctly on new tab. Other files than pdf or image are
                 // downloaded by default
                 if (file.mimetype === "image/svg+xml") {
-                    href += "&download=true";
+                    url += "&download=true";
                 }
                 if (file.allowOpenPublic) {
                     const accessToken = await orm.call("dms.file", "get_access_token", [
                         file.id,
                     ]);
-                    href += `&access_token=${encodeURIComponent(accessToken)}`;
+                    url += `&access_token=${encodeURIComponent(accessToken)}`;
                 }
-                linkEl.href = href;
-                linkEl.title = file.name;
-                linkEl.dataset.mimetype = file.mimetype;
-                return linkEl;
+                return this.renderFileElement(file, url, document);
             })
         );
+    }
+
+    /**
+     * Render the file the same way the core renders the documents
+     * (see renderStaticFileBox), so that the editor handles it as a media.
+     */
+    static renderFileElement(file, url, document) {
+        const rootSpan = document.createElement("span");
+        rootSpan.classList.add("o_file_box", "o_dms_file", "o-contenteditable-false");
+        rootSpan.contentEditable = false;
+        rootSpan.dataset.dmsFileId = file.id;
+        const parts = file.name.split(".");
+        rootSpan.dataset.extension = parts.length > 1 ? parts.pop() : "";
+        const bannerElement = renderToElement(
+            "web_editor_media_dialog_dms.DMSFileBox",
+            {
+                fileModel: {
+                    filename: file.name,
+                    mimetype: file.mimetype,
+                    url,
+                },
+            }
+        );
+        rootSpan.append(document.importNode(bannerElement, true));
+        return rootSpan;
     }
 
     selectFile(file) {
@@ -175,6 +227,7 @@ export class DMSSelector extends Component {
         return (
             this.props.media &&
             this.constructor.tagNames.includes(this.props.media.tagName) &&
+            this.props.media.classList.contains("o_dms_file") &&
             !this.selectedFileIds.length
         );
     }
@@ -185,21 +238,19 @@ export class DMSSelector extends Component {
     }
 
     changeAllowOpenPublic() {
-        this.allowOpenPublic = !this.allowOpenPublic;
+        this.state.allowOpenPublic = !this.state.allowOpenPublic;
         return this.keepLast
-            .add(this.fetchFiles(this.state.dmsFiles.length, 0))
+            .add(
+                this.fetchFiles(
+                    Math.max(
+                        this.state.dmsFiles.length,
+                        this.NUMBER_OF_FILES_TO_DISPLAY
+                    ),
+                    0
+                )
+            )
             .then((files) => {
                 this.state.dmsFiles = files;
             });
     }
 }
-
-DMSSelector.template = "web_editor_media_dialog_dms.DMSSelector";
-DMSSelector.mediaSpecificClasses = ["o_image", "o_dms_file"];
-DMSSelector.mediaSpecificStyles = [];
-DMSSelector.mediaExtraClasses = [];
-DMSSelector.tagNames = ["A"];
-DMSSelector.components = {
-    DMSFile,
-    SearchMedia,
-};

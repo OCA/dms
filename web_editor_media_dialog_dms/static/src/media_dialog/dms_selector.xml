@@ -1,39 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates id="template" xml:space="preserve">
-    <t t-name="web_editor_media_dialog_dms.DMSFile" owl="1">
+    <t t-name="web_editor_media_dialog_dms.DMSFile">
         <div
             class="o_existing_attachment_cell o_we_attachment_highlight card col-2 position-relative mb-2 p-2 opacity-trigger-hover cursor-pointer"
-            t-att-class="{ o_we_attachment_selected: props.selected }"
-            t-on-click="props.selectFile"
+            t-att-class="{ o_we_attachment_selected: this.props.selected }"
+            t-on-click="this.props.selectFile"
         >
             <div
                 role="img"
-                t-att-aria-label="props.name"
-                t-att-title="props.name"
-                t-att-data-mimetype="props.mimetype"
+                t-att-aria-label="this.props.name"
+                t-att-title="this.props.name"
+                t-att-data-mimetype="this.props.mimetype"
                 class="o_image d-flex align-items-center justify-content-center"
             />
-            <small class="o_file_name d-block text-truncate" t-esc="props.name" />
+            <small class="o_file_name d-block text-truncate" t-out="this.props.name" />
         </div>
     </t>
-    <t t-name="web_editor_media_dialog_dms.DMSSelector" owl="1">
-        <div>
-            <div class="d-flex gap-2 align-items-center py-4">
+    <!-- Same as html_editor.StaticFileBox without the o_file_image class, used
+         by the core to preview ir.attachment records -->
+    <t t-name="web_editor_media_dialog_dms.DMSFileBox">
+        <span class="d-flex flex-grow-1 align-items-center alert alert-info">
+            <span
+                class="d-flex o_image user-select-none"
+                t-att-title="this.fileModel.filename"
+                t-att-data-mimetype="this.fileModel.mimetype"
+            />
+            <span class="o_file_name_container mx-2 d-flex flex-grow-1">
+                <a
+                    class="o_link_readonly w-100"
+                    t-att-href="this.fileModel.url"
+                    t-out="this.fileModel.filename"
+                    contenteditable="false"
+                />
+            </span>
+        </span>
+    </t>
+    <t t-name="web_editor_media_dialog_dms.DMSSelector">
+        <div class="o_we_dms_selector px-3">
+            <div class="d-flex flex-wrap gap-2 align-items-center py-3">
                 <SearchMedia
-                    searchPlaceholder="searchPlaceholder"
-                    search.bind="this.search"
-                    needle="state.needle"
+                    searchPlaceholder="this.searchPlaceholder"
+                    search="(needle) => this.handleSearch(needle)"
+                    needle="this.state.needle"
                 />
                 <div class="d-flex gap-3 justify-content-start align-items-center">
                     <div
                         class="flex-shrink-0 form-check form-switch align-items-center"
-                        t-on-change="handleChangeAllowOpenPublic"
                     >
                         <input
                             id="o_we_open_public_switch"
                             class="o_we_open_public form-check-input"
                             type="checkbox"
-                            t-att-checked="allowOpenPublic"
+                            t-att-checked="this.state.allowOpenPublic"
+                            t-on-change="this.handleChangeAllowOpenPublic"
                         />
                         <label class="form-check-label" for="o_we_open_public_switch">
                             Allow open to public users
@@ -41,11 +60,11 @@
                     </div>
                 </div>
             </div>
-            <div t-if="!hasContent" class="o_nocontent_help">
+            <div t-if="!this.hasContent" class="o_nocontent_help">
                 <p class="o_empty_folder_image">No DMS files found.</p>
             </div>
             <div t-else="" class="d-flex flex-wrap gap-2">
-                <t t-foreach="state.dmsFiles" t-as="file" t-key="file.id">
+                <t t-foreach="this.state.dmsFiles" t-as="file" t-key="file.id">
                     <DMSFile
                         name="file.name"
                         mimetype="file.mimetype"
@@ -57,16 +76,16 @@
             </div>
             <div
                 name="load_more_files"
-                class="mt-4 text-center mx-auto o_we_load_more"
-                t-ref="load-more-button"
+                class="pt-3 pb-1 text-center mx-auto o_we_load_more"
+                t-ref="this.loadMoreButtonRef"
             >
                 <button
-                    t-if="canLoadMore"
-                    class="btn btn-odoo o_load_more"
+                    t-if="this.canLoadMore"
+                    class="btn btn-primary o_load_more"
                     type="button"
-                    t-on-click="loadMore"
+                    t-on-click="this.handleLoadMore"
                 >Load more...</button>
-                <div t-if="hasContent and !canLoadMore" class="mt-4 o_load_done_msg">
+                <div t-elif="this.hasContent" class="mt-2 o_load_done_msg">
                     <span>
                         <i>All DMS files have been loaded</i>
                     </span>
