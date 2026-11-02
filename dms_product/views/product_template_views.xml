@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    ~ Copyright 2026 Simone Rubino - PyTech
+    ~ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">Add DMS fields to Product form view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page
+                    name="dms"
+                    string="Documents"
+                    invisible="not id"
+                    groups="dms.group_dms_user"
+                >
+                    <group>
+                        <field name="dms_directory_ids" />
+                        <field name="dms_file_ids" />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
