@@ -87,6 +87,14 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         )
 
     @users("dms-manager", "dms-user")
+    def test_copy_default_name(self):
+        default_name = "Test Default Name"
+        copied_directory = self.directory.copy(default={"name": default_name})
+        self.assertEqual(default_name, copied_directory.name)
+        # Cleanup for next user
+        copied_directory.unlink()
+
+    @users("dms-manager", "dms-user")
     def test_rename_directory(self):
         path_names = self.subdirectory.complete_name
         self.directory.write({"name": f"New Test Name {self.env.user.login}"})
@@ -237,6 +245,15 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         )
 
     @users("dms-manager", "dms-user")
+    def test_code(self):
+        self.directory.code = code = "TESTCODE"
+        self.assertIn(code, self.directory.display_name)
+        copied_directory = self.directory.copy()
+        self.assertIn(code, copied_directory.code)
+        # Cleanup for next user
+        copied_directory.unlink()
+
+    @users("dms-manager", "dms-user")
     def test_size(self):
         self.assertTrue(self.directory.size, msg="The directory should have a size")
 
@@ -248,6 +265,17 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         new_root_directory = self.create_directory(storage=self.storage)
         new_root_directory.name = generated_name
         self.assertEqual(new_root_directory.name, new_sub_directory.name)
+
+    @users("dms-manager", "dms-user")
+    def test_check_name_different_code(self):
+        """Sibling Directories with different code can have the same name."""
+        sub_directory = self.create_directory(directory=self.directory)
+        sub_directory.code = f"Code for User {self.env.uid}"
+        other_sub_directory = self.create_directory(directory=self.directory)
+        other_sub_directory.code = f"Other Code for User {self.env.uid}"
+        other_sub_directory.name = sub_directory.name
+        self.assertNotEqual(sub_directory.code, other_sub_directory.code)
+        self.assertEqual(sub_directory.name, other_sub_directory.name)
 
     @users("dms-manager", "dms-user")
     def test_name_get(self):
