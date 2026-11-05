@@ -14,7 +14,7 @@
                         name="web_ribbon"
                         text="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <field name="active" invisible="1" />
                     <div class="oe_button_box" name="button_box" />
@@ -22,13 +22,20 @@
                         <field name="name" />
                         <field name="kind" />
                         <field name="icon" />
+                        <field name="dms_directory_ids" widget="many2many_tags" />
+                        <field name="group_ids" widget="many2many_tags" />
                         <field
                             name="action_id"
-                            attrs="{'invisible': [('kind', '!=', 'server_action')], 'required': [('kind', '=', 'server_action')]}"
+                            invisible="kind != 'server_action'"
+                            required="kind == 'server_action'"
                         />
                     </group>
                 </sheet>
-                <div class="oe_chatter" />
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
             </form>
         </field>
     </record>

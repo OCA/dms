@@ -28,7 +28,13 @@ Dms Action
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Allow to add actions on DMS Documents selected on a directory.
+This module allows you to run server actions on DMS files directly from
+the form action menu or the kanban card menu.
+
+Configure each DMS action with its server action, directories and
+optional allowed groups. Only active actions assigned to the file's
+directory and available to the current user are displayed. Group and
+directory restrictions are also checked on the server before execution.
 
 **Table of contents**
 
@@ -38,16 +44,35 @@ Allow to add actions on DMS Documents selected on a directory.
 Configuration
 =============
 
-1. Create some server actions over a dms.file
-2. Create a DMS action on DMS > Configuration > Actions using the server
-   action
-3. On a DMS Folder add the action
+1. Create a server action for the **DMS File** (``dms.file``) model.
+2. Go to **DMS > Configuration > Actions** and create a DMS action.
+3. Enter a name, select **Server Action** as the kind and choose the
+   server action to execute. Optionally, set a Font Awesome icon, such
+   as ``fa-play``.
+4. Select the **Directories** where the action should be available.
+   Actions apply to files directly in those directories; subdirectories
+   do not inherit them automatically.
+5. Optionally, select **Allowed Groups**. Users must belong to at least
+   one of the selected groups to see and execute the action. Leave this
+   field empty to allow all DMS users who have access to the file and
+   action.
+
+Archive a DMS action to hide it from the menus and prevent its
+execution.
 
 Usage
 =====
 
-On DMS Files a new botton appear that allows us to Play the action.
-Press it and select one of actions.
+Open a file in one of the configured directories.
+
+- In the form view, open the standard action menu (gear icon) and select
+  an action from the **DMS Actions** section.
+- In the kanban view, open the card menu and select an action from the
+  **DMS Actions** section.
+
+The selected server action runs on that file. The view refreshes
+afterwards to reflect changes. The DMS section is only displayed when
+actions are available for the current file and user.
 
 Bug Tracker
 ===========
@@ -71,6 +96,9 @@ Contributors
 ------------
 
 - Enric Tobella
+- `Tecnativa <https://www.tecnativa.com>`__
+
+  - Adasat Torres
 
 Maintainers
 -----------

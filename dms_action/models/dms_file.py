@@ -12,18 +12,34 @@ class DmsFile(models.Model):
     with_actions = fields.Boolean(compute="_compute_action_button")
 
     @api.depends("directory_id")
+    @api.depends_context("uid")
     def _compute_action_button(self):
+        actions = self.env["dms.action"].search(
+            [("dms_directory_ids", "in", self.directory_id.ids)]
+            + self.env["dms.action"]._get_available_domain()
+        )
+        actions_by_directory = {}
+        for action in actions:
+            for directory in action.dms_directory_ids:
+                actions_by_directory.setdefault(directory.id, {})[
+                    action.id
+                ] = action._get_json_data()
         for record in self:
-            record.action_button = {
-                action.id: action._get_json_data()
-                for action in record.directory_id.dms_action_ids
-            }
-            record.with_actions = len(record.action_button)
+            record.action_button = actions_by_directory.get(record.directory_id.id, {})
+            record.with_actions = bool(record.action_button)
 
     def execute_action(self, kwargs=False):
         if not kwargs:
             return
-        action = self.env["dms.action"].browse(kwargs["action_id"])
-        if self.directory_id not in action.dms_directory_ids:
+        self.ensure_one()
+        action = self.env["dms.action"].search(
+            [
+                ("id", "=", kwargs["action_id"]),
+                ("dms_directory_ids", "in", self.directory_id.ids),
+            ]
+            + self.env["dms.action"]._get_available_domain(),
+            limit=1,
+        )
+        if not action:
             raise ValidationError(_("Action is not allowed"))
         return action._execute_action(self)
