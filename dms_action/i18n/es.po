@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-01 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -15,11 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.17\n"
-
-#. module: dms_action
-#: model_terms:ir.ui.view,arch_db:dms_action.dms_file_form_view
-msgid "<span>Some actions can be executed: </span>"
-msgstr "<span>Se pueden ejecutar algunas acciones: </span>"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__action_id
@@ -32,6 +27,12 @@ msgid "Action Button"
 msgstr "Botón de acción"
 
 #. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: dms_action
+#. odoo-python
 #: code:addons/dms_action/models/dms_file.py:0
 #, python-format
 msgid "Action is not allowed"
@@ -40,7 +41,6 @@ msgstr "La acción no está permitida"
 #. module: dms_action
 #: model:ir.actions.act_window,name:dms_action.dms_action_act_window
 #: model:ir.ui.menu,name:dms_action.dms_action_menu
-#: model_terms:ir.ui.view,arch_db:dms_action.dms_directory_form_view
 msgid "Actions"
 msgstr "Acciones"
 
@@ -48,6 +48,36 @@ msgstr "Acciones"
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__active
 msgid "Active"
 msgstr "Activo"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoración de excepción de actividad"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icono del tipo de actividad"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__group_ids
+msgid "Allowed Groups"
+msgstr "Grupos permitidos"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_attachment_count
+msgid "Attachment Count"
+msgstr "Número de archivos adjuntos"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__create_uid
@@ -65,26 +95,36 @@ msgid "DMS Action"
 msgstr "Acción DMS"
 
 #. module: dms_action
-#: model:ir.model,name:dms_action.model_dms_directory
-msgid "Directory"
-msgstr "Directorio"
-
-#. module: dms_action
-#: model:ir.model.fields,field_description:dms_action.field_dms_action__display_name
-#: model:ir.model.fields,field_description:dms_action.field_dms_directory__display_name
-#: model:ir.model.fields,field_description:dms_action.field_dms_file__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: dms_action
-#: model:ir.model.fields,field_description:dms_action.field_dms_directory__dms_action_ids
-msgid "Dms Action"
-msgstr "Acción Dms"
+#. odoo-javascript
+#: code:addons/dms_action/static/src/js/dms_action_menu.esm.js:0
+#: code:addons/dms_action/static/src/xml/dms_action_widget.xml:0
+#: code:addons/dms_action/static/src/xml/dms_action_widget.xml:0
+#: code:addons/dms_action/static/src/xml/dms_action_widget.xml:0
+#, python-format
+msgid "DMS Actions"
+msgstr "Acciones DMS"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__dms_directory_ids
-msgid "Dms Directory"
-msgstr "Directorio Dms"
+msgid "Directories"
+msgstr "Directorios"
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__dms_directory_ids
+msgid ""
+"Directories whose files can use this action. The action is also available "
+"recursively in all their subdirectories, without having to select each "
+"subdirectory individually. Allowed group restrictions still apply."
+msgstr ""
+"Directorios cuyos archivos pueden utilizar esta acción. La acción también "
+"está disponible de forma recursiva en todos sus subdirectorios, sin necesidad "
+"de seleccionar cada subdirectorio individualmente. Las restricciones de los "
+"grupos permitidos siguen aplicándose."
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
 
 #. module: dms_action
 #: model:ir.model,name:dms_action.model_dms_file
@@ -94,41 +134,95 @@ msgstr "Archivo"
 #. module: dms_action
 #: model:ir.actions.server,name:dms_action.ir_actions_server_demo
 msgid "File DEMO action"
-msgstr "Archivo de la Acción DEMO"
+msgstr "Acción DEMO de archivo"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (contactos)"
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icono de Font Awesome, p. ej., fa-tasks"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__has_message
+msgid "Has Message"
+msgstr "Tiene mensajes"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__id
-#: model:ir.model.fields,field_description:dms_action.field_dms_directory__id
-#: model:ir.model.fields,field_description:dms_action.field_dms_file__id
 msgid "ID"
 msgstr "ID"
 
 #. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_exception_icon
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__icon
 msgid "Icon"
 msgstr "Icono"
 
 #. module: dms_action
-#: model:ir.model.fields,field_description:dms_action.field_dms_action__kind
-msgid "Kind"
-msgstr "Amable"
+#: model:ir.model.fields,help:dms_action.field_dms_action__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad con excepción."
 
 #. module: dms_action
-#: model:ir.model.fields,field_description:dms_action.field_dms_action____last_update
-#: model:ir.model.fields,field_description:dms_action.field_dms_directory____last_update
-#: model:ir.model.fields,field_description:dms_action.field_dms_file____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
+#: model:ir.model.fields,help:dms_action.field_dms_action__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay mensajes nuevos que requieren su atención."
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__kind
+msgid "Kind"
+msgstr "Tipo"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__write_uid
 msgid "Last Updated by"
-msgstr "Última Actualización por"
+msgstr "Última actualización por"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__write_date
 msgid "Last Updated on"
-msgstr "Última Actualización el"
+msgstr "Última actualización el"
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__group_ids
+msgid ""
+"Leave empty to allow all DMS users. Otherwise, users must belong to at least"
+" one of these groups to see and execute the action."
+msgstr "Déjelo vacío para permitir el acceso a todos los usuarios de DMS. De lo contrario, los usuarios deben pertenecer al menos a uno de estos grupos para ver y ejecutar la acción."
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega de mensajes"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Fecha límite de mi actividad"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__name
@@ -136,11 +230,75 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Fecha límite de la próxima actividad"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la próxima actividad"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo de la próxima actividad"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+
+#. module: dms_action
 #: model:ir.model.fields.selection,name:dms_action.selection__dms_action__kind__server_action
 msgid "Server Action"
-msgstr "Acción de Servidor"
+msgstr "Acción de servidor"
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr "Estado basado en las actividades\nVencida: la fecha límite ya ha pasado\nHoy: la fecha de la actividad es hoy\nPlanificada: actividades futuras."
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de actividad con excepción del registro."
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes del sitio web"
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicaciones del sitio web"
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_file__with_actions
 msgid "With Actions"
-msgstr "Con Acciones"
+msgstr "Con acciones"
