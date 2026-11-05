@@ -370,7 +370,12 @@ ul.auto-toc {
 !! source digest: sha256:5c5fa35668dd9bb4f39b089db4f9b2ef03989c3b26fb7f1d104465764e8f2a5c
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/dms/tree/17.0/dms_action"><img alt="OCA/dms" src="https://img.shields.io/badge/github-OCA%2Fdms-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/dms-17-0/dms-17-0-dms_action"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/dms&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>Allow to add actions on DMS Documents selected on a directory.</p>
+<p>This module allows you to run server actions on DMS files directly from
+the form action menu or the kanban card menu.</p>
+<p>Configure each DMS action with its server action, directories and
+optional allowed groups. Only active actions assigned to the file’s
+directory and available to the current user are displayed. Group and
+directory restrictions are also checked on the server before execution.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -388,16 +393,34 @@ ul.auto-toc {
 <div class="section" id="configuration">
 <h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
 <ol class="arabic simple">
-<li>Create some server actions over a dms.file</li>
-<li>Create a DMS action on DMS &gt; Configuration &gt; Actions using the server
-action</li>
-<li>On a DMS Folder add the action</li>
+<li>Create a server action for the <strong>DMS File</strong> (<tt class="docutils literal">dms.file</tt>) model.</li>
+<li>Go to <strong>DMS &gt; Configuration &gt; Actions</strong> and create a DMS action.</li>
+<li>Enter a name, select <strong>Server Action</strong> as the kind and choose the
+server action to execute. Optionally, set a Font Awesome icon, such
+as <tt class="docutils literal"><span class="pre">fa-play</span></tt>.</li>
+<li>Select the <strong>Directories</strong> where the action should be available.
+Actions apply to files directly in those directories; subdirectories
+do not inherit them automatically.</li>
+<li>Optionally, select <strong>Allowed Groups</strong>. Users must belong to at least
+one of the selected groups to see and execute the action. Leave this
+field empty to allow all DMS users who have access to the file and
+action.</li>
 </ol>
+<p>Archive a DMS action to hide it from the menus and prevent its
+execution.</p>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
-<p>On DMS Files a new botton appear that allows us to Play the action.
-Press it and select one of actions.</p>
+<p>Open a file in one of the configured directories.</p>
+<ul class="simple">
+<li>In the form view, open the standard action menu (gear icon) and select
+an action from the <strong>DMS Actions</strong> section.</li>
+<li>In the kanban view, open the card menu and select an action from the
+<strong>DMS Actions</strong> section.</li>
+</ul>
+<p>The selected server action runs on that file. The view refreshes
+afterwards to reflect changes. The DMS section is only displayed when
+actions are available for the current file and user.</p>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-3">Bug Tracker</a></h1>
@@ -419,6 +442,10 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <h2><a class="toc-backref" href="#toc-entry-6">Contributors</a></h2>
 <ul class="simple">
 <li>Enric Tobella</li>
+<li><a class="reference external" href="https://www.tecnativa.com">Tecnativa</a><ul>
+<li>Adasat Torres</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="maintainers">

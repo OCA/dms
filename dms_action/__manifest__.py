@@ -5,7 +5,7 @@
     "name": "Dms Action",
     "summary": """
         Allow to add actions on DMS""",
-    "version": "14.0.1.0.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "CreuBlanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/dms",
@@ -13,11 +13,19 @@
     "data": [
         "security/ir.model.access.csv",
         "views/dms_file.xml",
-        "views/dms_directory.xml",
         "views/dms_action.xml",
-        "template/assets.xml",
     ],
-    "qweb": ["static/src/xml/dms_action_widget.xml"],
+    "assets": {
+        "web.assets_tests": [
+            "dms_action/static/tests/tours/dms_action_tour.esm.js",
+        ],
+        "web.assets_backend": [
+            "dms_action/static/src/js/dms_action_widget.esm.js",
+            "dms_action/static/src/js/dms_action_menu.esm.js",
+            "dms_action/static/src/js/dms_action_button_widget.esm.js",
+            "dms_action/static/src/xml/dms_action_widget.xml",
+        ],
+    },
     "demo": [
         "demo/dms_action.xml",
     ],

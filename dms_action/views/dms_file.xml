@@ -8,27 +8,26 @@
         <field name="model">dms.file</field>
         <field name="inherit_id" ref="dms.view_dms_file_form" />
         <field name="arch" type="xml">
-            <header position="after">
-                <div
-                    class="alert alert-info"
-                    role="alert"
-                    style="margin-bottom:0px;"
-                    attrs="{'invisible': [('with_actions', '=', False)]}"
-                >
-                    <span>Some actions can be executed: </span>
-                    <field name="action_button" widget="dms_action" />
-                    <field name="with_actions" invisible="1" />
-                </div>
+            <header position="inside">
+                <field name="with_actions" invisible="1" />
+                <field name="action_button" invisible="1" />
             </header>
         </field>
     </record>
     <record model="ir.ui.view" id="view_dms_file_kanban">
-        <field name="name">dms.file.form (in dms_action)</field>
+        <field name="name">dms.file.kanban (in dms_action)</field>
         <field name="model">dms.file</field>
         <field name="inherit_id" ref="dms.view_dms_file_kanban" />
         <field name="arch" type="xml">
-            <xpath expr="//a[@name='lock']" position="after">
-                <field name="action_button" widget="dms_action_button" />
+            <xpath
+                expr="//t[@t-name='kanban-menu']//div[hasclass('row')]"
+                position="inside"
+            >
+                <field
+                    name="action_button"
+                    widget="dms_action_button"
+                    class="col-12 mb-0"
+                />
             </xpath>
         </field>
     </record>

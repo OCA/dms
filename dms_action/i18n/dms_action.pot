@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-17 00:00+0000\n"
+"PO-Revision-Date: 2026-11-17 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -14,12 +16,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: dms_action
-#: model_terms:ir.ui.view,arch_db:dms_action.dms_file_form_view
-msgid "<span>Some actions can be executed: </span>"
-msgstr ""
-
-#. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__action_id
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__action
 msgid "Action"
 msgstr ""
 
@@ -29,6 +27,12 @@ msgid "Action Button"
 msgstr ""
 
 #. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: dms_action
+#. odoo-python
 #: code:addons/dms_action/models/dms_file.py:0
 #, python-format
 msgid "Action is not allowed"
@@ -37,7 +41,6 @@ msgstr ""
 #. module: dms_action
 #: model:ir.actions.act_window,name:dms_action.dms_action_act_window
 #: model:ir.ui.menu,name:dms_action.dms_action_menu
-#: model_terms:ir.ui.view,arch_db:dms_action.dms_directory_form_view
 msgid "Actions"
 msgstr ""
 
@@ -47,12 +50,59 @@ msgid "Active"
 msgstr ""
 
 #. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields.selection,name:dms_action.selection__dms_action_tag_action__action__add
+msgid "Add"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__group_ids
+msgid "Allowed Groups"
+msgstr ""
+
+#. module: dms_action
+#: model_terms:ir.ui.view,arch_db:dms_action.dms_action_form_view
+msgid "Archived"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__category_id
+msgid "Category"
+msgstr ""
+
+#. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__create_uid
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__create_date
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__create_date
 msgid "Created on"
 msgstr ""
 
@@ -62,25 +112,42 @@ msgid "DMS Action"
 msgstr ""
 
 #. module: dms_action
-#: model:ir.model,name:dms_action.model_dms_directory
-msgid "Directory"
+#: model:ir.model,name:dms_action.model_dms_action_tag_action
+msgid "DMS Action Tags Action"
 msgstr ""
 
 #. module: dms_action
-#: model:ir.model.fields,field_description:dms_action.field_dms_action__display_name
-#: model:ir.model.fields,field_description:dms_action.field_dms_directory__display_name
-#: model:ir.model.fields,field_description:dms_action.field_dms_file__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: dms_action
-#: model:ir.model.fields,field_description:dms_action.field_dms_directory__dms_action_ids
-msgid "Dms Action"
+#. odoo-javascript
+#: code:addons/dms_action/static/src/js/dms_action_menu.esm.js:0
+#: code:addons/dms_action/static/src/xml/dms_action_widget.xml:0
+#: code:addons/dms_action/static/src/xml/dms_action_widget.xml:0
+#: code:addons/dms_action/static/src/xml/dms_action_widget.xml:0
+#, python-format
+msgid "DMS Actions"
 msgstr ""
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__dms_directory_ids
-msgid "Dms Directory"
+msgid "Directories"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__dms_directory_ids
+msgid ""
+"Directories whose files can use this action. The action is also available "
+"recursively in all their subdirectories, without having to select each "
+"subdirectory individually. Allowed group restrictions still apply."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__display_name
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__dms_action_id
+msgid "Dms Action"
 msgstr ""
 
 #. module: dms_action
@@ -94,15 +161,55 @@ msgid "File DEMO action"
 msgstr ""
 
 #. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__id
-#: model:ir.model.fields,field_description:dms_action.field_dms_directory__id
-#: model:ir.model.fields,field_description:dms_action.field_dms_file__id
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__id
 msgid "ID"
 msgstr ""
 
 #. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_exception_icon
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__icon
 msgid "Icon"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_is_follower
+msgid "Is Follower"
 msgstr ""
 
 #. module: dms_action
@@ -111,20 +218,37 @@ msgid "Kind"
 msgstr ""
 
 #. module: dms_action
-#: model:ir.model.fields,field_description:dms_action.field_dms_action____last_update
-#: model:ir.model.fields,field_description:dms_action.field_dms_directory____last_update
-#: model:ir.model.fields,field_description:dms_action.field_dms_file____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__write_uid
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__write_date
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__group_ids
+msgid ""
+"Leave empty to allow all DMS users. Otherwise, users must belong to at least"
+" one of these groups to see and execute the action."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__my_activity_date_deadline
+msgid "My Activity Deadline"
 msgstr ""
 
 #. module: dms_action
@@ -133,8 +257,114 @@ msgid "Name"
 msgstr ""
 
 #. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields.selection,name:dms_action.selection__dms_action_tag_action__action__remove
+msgid "Remove"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields.selection,name:dms_action.selection__dms_action_tag_action__action__replace
+msgid "Replace"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: dms_action
 #: model:ir.model.fields.selection,name:dms_action.selection__dms_action__kind__server_action
 msgid "Server Action"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__action_id
+msgid "Server action to execute when this action is triggered. Only server actions that are configured to run on the model 'DMS File' are available for selection."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action_tag_action__tag_id
+msgid "Tag"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__tags_action_ids
+msgid "Tags Actions"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.constraint,message:dms_action.constraint_dms_action_tag_action_dms_action_id_category_id_tag_id_uniq
+msgid "The combination of action, category and tag must be unique."
+msgstr ""
+
+#. module: dms_action
+#. odoo-python
+#: code:addons/dms_action/models/dms_action.py:0
+#, python-format
+msgid "The selected tag does not belong to the specified category."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,field_description:dms_action.field_dms_action__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: dms_action
+#: model:ir.model.fields,help:dms_action.field_dms_action__website_message_ids
+msgid "Website communication history"
 msgstr ""
 
 #. module: dms_action
