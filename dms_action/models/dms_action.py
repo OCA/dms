@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class DmsAction(models.Model):
-
     _name = "dms.action"
     _description = "DMS Action"
 
