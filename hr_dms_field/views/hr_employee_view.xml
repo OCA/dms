@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="dms" string="Documents" invisible="not id">
+                    <field name="dms_directory_ids" mode="dms_list" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="hr_employee_public_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.public.form</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr.hr_employee_public_view_form" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field
+                    name="is_logged"
+                    invisible="1"
+                    groups="hr_dms_field.group_hr_public_dms"
+                />
+            </field>
+            <!-- Show the DMS tab only if the logged-in user is the employee's user. -->
+            <notebook position="inside">
+                <page
+                    name="dms"
+                    string="Documents"
+                    invisible="not is_logged"
+                    groups="hr_dms_field.group_hr_public_dms"
+                >
+                    <field name="dms_directory_ids" mode="dms_list" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="read_access_hr_employee_group" model="dms.access.group">
+        <field name="name">Everyone for Employee DMS</field>
+        <field name="group_ids" eval="[(4, ref('hr.group_hr_user'))]" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+    <record id="field_template_employee" model="dms.field.template">
+        <field name="name">Employee</field>
+        <field name="storage_id" ref="dms.storage_demo" />
+        <field name="model_id" ref="hr.model_hr_employee" />
+        <field name="user_field_id" ref="hr.field_hr_employee__user_id" />
+        <field name="group_ids" eval="[(4, ref('read_access_hr_employee_group'))]" />
+        <!-- We need to define a different directory name because the existing partner
+        template will have caused a partner with the same name to be created when the
+        employee was created. !-->
+        <field name="directory_format_name">{{object.display_name}} (employee)</field>
+    </record>
+</odoo>
