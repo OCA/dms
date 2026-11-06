@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="dms_action.ActionMenu">
+        <h6 class="dropdown-header">DMS Actions</h6>
+        <t t-foreach="actions" t-as="actionId" t-key="actionId">
+            <t t-set="action" t-value="actions[actionId]" />
+            <DropdownItem onSelected="() => this.onClickDMSPlayAction(actionId)">
+                <i
+                    t-att-class="'fa fa-fw me-1 ' + (action.icon || 'fa-play-circle-o')"
+                />
+                <t t-esc="action.name" />
+            </DropdownItem>
+        </t>
+    </t>
+    <t t-name="dms_action.FieldDMSAction">
+        <Dropdown class="'o_dms_action'" togglerClass="'btn btn-secondary'">
+            <t t-set-slot="toggler">
+                <i class="fa fa-cog me-1" />
+                <span>DMS Actions</span>
+            </t>
+            <t t-foreach="actions" t-as="actionId" t-key="actionId">
+                <t t-set="action" t-value="actions[actionId]" />
+                <DropdownItem onSelected="() => this.onClickDMSPlayAction(actionId)">
+                    <i t-if="action.icon" t-att-class="'fa me-1 ' + action.icon" />
+                    <t t-esc="action.name" />
+                </DropdownItem>
+            </t>
+        </Dropdown>
+    </t>
+    <t t-name="dms_action.FieldDMSActionButton">
+        <div t-if="Object.keys(actions).length" class="border-top mt-2 pt-2">
+            <h5 class="o_kanban_card_manage_title">DMS Actions</h5>
+            <t t-foreach="actions" t-as="actionId" t-key="actionId">
+                <t t-set="action" t-value="actions[actionId]" />
+                <a
+                    role="menuitem"
+                    href="#"
+                    class="dropdown-item d-flex align-items-center gap-2 rounded p-2"
+                    t-on-click.stop.prevent="() => this.onClickDMSPlayAction(actionId)"
+                >
+                    <i
+                        t-att-class="'fa fa-fw text-muted flex-shrink-0 ' + (action.icon || 'fa-play-circle-o')"
+                    />
+                    <span class="text-wrap"><t t-esc="action.name" /></span>
+                </a>
+            </t>
+        </div>
+    </t>
+</templates>
