@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 ledoent — Don Kendall
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates xml:space="preserve">
+    <t t-name="dms.FilePreviewPane">
+        <aside
+            class="o_dms_preview_pane"
+            t-att-class="{'o_dms_preview_pane--empty': !state.file and !state.loading and !state.error}"
+        >
+            <header class="o_dms_preview_pane__header">
+                <div class="o_dms_preview_pane__title">
+                    <t t-if="state.file">
+                        <h5
+                            class="mb-0 text-truncate"
+                            t-att-title="state.file.name"
+                            t-out="state.file.name"
+                        />
+                        <small
+                            class="text-muted"
+                            t-out="state.file.human_size || state.file.mimetype"
+                        />
+                    </t>
+                    <t t-else="">
+                        <h5 class="mb-0 text-muted">Preview</h5>
+                    </t>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div
+                        t-if="state.file"
+                        class="btn-group btn-group-sm o_dms_preview_pane__actions"
+                        role="group"
+                        aria-label="File actions"
+                    >
+                        <button
+                            type="button"
+                            class="btn btn-primary d-flex align-items-center gap-1"
+                            title="Download this file"
+                            aria-label="Download file"
+                            t-on-click="this.onDownloadClick"
+                        >
+                            <i class="fa fa-download" />
+                            <span class="d-none d-md-inline">Download</span>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary d-flex align-items-center gap-1"
+                            title="Share this file with users or via link"
+                            aria-label="Share file"
+                            t-on-click="this.onShareClick"
+                        >
+                            <i class="fa fa-share-alt" />
+                            <span class="d-none d-md-inline">Share</span>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary d-flex align-items-center gap-1"
+                            title="Open the full form view for this file"
+                            aria-label="Open form view"
+                            t-on-click="this.onOpenFormClick"
+                        >
+                            <i class="fa fa-external-link" />
+                            <span class="d-none d-md-inline">Open</span>
+                        </button>
+                    </div>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-link text-muted"
+                        title="Close preview pane"
+                        aria-label="Close preview"
+                        t-on-click="this.onCloseClick"
+                    >
+                        <i class="fa fa-times" />
+                    </button>
+                </div>
+            </header>
+
+            <nav
+                t-if="state.file"
+                class="o_dms_preview_pane__tabs"
+                aria-label="Preview tabs"
+            >
+                <button
+                    type="button"
+                    class="o_dms_preview_pane__tab"
+                    t-att-class="{'o_dms_preview_pane__tab--active': state.tab === 'preview'}"
+                    t-att-aria-pressed="state.tab === 'preview' ? 'true' : 'false'"
+                    t-on-click="() => this.setTab('preview')"
+                >
+                    Preview
+                </button>
+                <button
+                    type="button"
+                    class="o_dms_preview_pane__tab"
+                    t-att-class="{'o_dms_preview_pane__tab--active': state.tab === 'details'}"
+                    t-att-aria-pressed="state.tab === 'details' ? 'true' : 'false'"
+                    t-on-click="() => this.setTab('details')"
+                >
+                    Details
+                </button>
+                <button
+                    type="button"
+                    class="o_dms_preview_pane__tab"
+                    t-att-class="{'o_dms_preview_pane__tab--active': state.tab === 'activity'}"
+                    t-att-aria-pressed="state.tab === 'activity' ? 'true' : 'false'"
+                    t-on-click="() => this.setTab('activity')"
+                >
+                    Activity
+                </button>
+            </nav>
+
+            <div class="o_dms_preview_pane__body">
+                <t t-if="state.loading">
+                    <div class="o_dms_preview_pane__empty">
+                        <i class="fa fa-spinner fa-spin" />
+                        <span class="ms-2">Loading…</span>
+                    </div>
+                </t>
+                <t t-elif="state.error">
+                    <div
+                        class="o_dms_preview_pane__empty o_dms_preview_pane__empty--error"
+                    >
+                        <i class="fa fa-exclamation-triangle me-2" />
+                        <span t-out="state.error" />
+                    </div>
+                </t>
+                <t t-elif="!state.file">
+                    <div class="o_dms_preview_pane__empty">
+                        <i class="fa fa-eye" />
+                        <div>
+                            <div class="fw-medium">Click any row to preview.</div>
+                            <small class="text-muted d-block mt-1">Press <kbd
+                            >Esc</kbd> to dismiss this pane.</small>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <t t-if="state.tab === 'details'">
+                        <div class="o_dms_preview_pane__details">
+                            <div class="o_dms_preview_pane__details_head">
+                                <img
+                                    t-if="state.file.icon_url"
+                                    class="o_dms_preview_pane__details_icon"
+                                    t-att-src="state.file.icon_url"
+                                    t-att-alt="state.file.name"
+                                />
+                                <span
+                                    class="o_dms_preview_pane__details_name text-truncate"
+                                    t-att-title="state.file.name"
+                                    t-out="state.file.name"
+                                />
+                            </div>
+                            <dl class="o_dms_preview_pane__meta">
+                                <t t-foreach="detailRows" t-as="row" t-key="row.label">
+                                    <dt t-out="row.label" />
+                                    <dd t-att-title="row.value" t-out="row.value" />
+                                </t>
+                            </dl>
+                            <div
+                                t-if="state.tags.length"
+                                class="o_dms_preview_pane__tags"
+                            >
+                                <span class="o_dms_preview_pane__tags_label">Tags</span>
+                                <div class="o_dms_preview_pane__tag_pills">
+                                    <span
+                                        t-foreach="state.tags"
+                                        t-as="tag"
+                                        t-key="tag.id"
+                                        class="o_dms_preview_pane__tag"
+                                        t-out="tag.name"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-elif="state.tab === 'activity'">
+                        <div class="o_dms_preview_pane__chatter">
+                            <div class="o_dms_preview_pane__chatter_toolbar">
+                                <button
+                                    type="button"
+                                    class="o_dms_preview_pane__chatter_toggle btn btn-light"
+                                    t-att-aria-label="chatterState.isVisible ? 'Hide chatter' : 'Show chatter'"
+                                    t-on-click="onToggleChatter"
+                                >
+                                    <i
+                                        t-attf-class="fa {{ chatterState.isVisible ? 'fa-angle-down' : 'fa-angle-right' }}"
+                                    />
+                                </button>
+                            </div>
+                            <div
+                                class="o_dms_preview_pane__chatter_body"
+                                t-att-class="{'o_dms_preview_pane__chatter_collapsed': !chatterState.isVisible}"
+                            >
+                                <Chatter
+                                    threadModel="'dms.file'"
+                                    threadId="state.file.id"
+                                />
+                            </div>
+                        </div>
+                    </t>
+                    <t t-elif="HandlerComponent">
+                        <t t-component="HandlerComponent" file="state.file" />
+                    </t>
+                </t>
+            </div>
+        </aside>
+    </t>
+</templates>
