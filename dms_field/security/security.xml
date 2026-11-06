@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="rule_multi_company_dms_field_template" model="ir.rule">
+        <field name="name">DMS Field Template multi-company</field>
+        <field name="model_id" ref="model_dms_field_template" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
+    </record>
+    <record id="rule_multi_company_dms_access_group" model="ir.rule">
+        <field name="name">DMS Access Group multi-company</field>
+        <field name="model_id" ref="model_dms_access_group" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
+    </record>
+</odoo>
