@@ -3,6 +3,8 @@
 from odoo import api, models
 from odoo.tools import ormcache
 
+from ..tools.file import unique_name
+
 
 class IrAttachment(models.Model):
     _inherit = "ir.attachment"
@@ -26,7 +28,12 @@ class IrAttachment(models.Model):
             )
             self.env["dms.directory"].sudo().with_context(check_name=False).create(
                 {
-                    "name": model_item.display_name,
+                    # Two records may share a display name (e.g. two partners
+                    # called the same): siblings must keep unique names.
+                    "name": unique_name(
+                        model_item.display_name,
+                        item.sudo().child_directory_ids.mapped("name"),
+                    ),
                     "model_id": ir_model_item.id,
                     "res_model": self.res_model,
                     "res_id": self.res_id,
