@@ -1,0 +1,11 @@
+[project]
+name = "odoo-addons-oca-dms"
+version = "20.0.20261110.0"
+dependencies = [
+    "odoo-addon-dms==20.0.*",
+]
+classifiers=[
+    "Programming Language :: Python",
+    "Framework :: Odoo",
+    "Framework :: Odoo :: 20.0",
+]
