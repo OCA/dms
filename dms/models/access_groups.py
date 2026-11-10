@@ -63,7 +63,6 @@ class DmsAccessGroups(models.Model):
     count_directories = fields.Integer(compute="_compute_count_directories")
     parent_group_id = fields.Many2one(
         comodel_name="dms.access.group",
-        string="Parent Group",
         ondelete="cascade",
         index="btree",
     )

@@ -9,9 +9,7 @@ class WizardDmsFileMove(models.TransientModel):
     _description = "Wizard Dms File Move"
 
     count_files = fields.Integer(readonly=True)
-    directory_id = fields.Many2one(
-        comodel_name="dms.directory", required=True, string="Directory"
-    )
+    directory_id = fields.Many2one(comodel_name="dms.directory", required=True)
 
     @api.model
     def default_get(self, fields):

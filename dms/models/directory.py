@@ -58,7 +58,6 @@ class DmsDirectory(models.Model):
         compute_sudo=True,
         readonly=False,
         comodel_name="dms.storage",
-        string="Storage",
         ondelete="restrict",
         bypass_search_access=True,
         store=True,
@@ -80,7 +79,7 @@ class DmsDirectory(models.Model):
     )
 
     root_directory_id = fields.Many2one(
-        "dms.directory", "Root Directory", compute="_compute_root_id", store=True
+        "dms.directory", compute="_compute_root_id", store=True
     )
 
     def _default_parent_id(self):
@@ -304,7 +303,6 @@ class DmsDirectory(models.Model):
         domain="[('id', 'in', allowed_model_ids)]",
         compute="_compute_model_id",
         inverse="_inverse_model_id",
-        string="Model",
         store=True,
     )
     storage_id_save_type = fields.Selection(

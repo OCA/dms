@@ -46,7 +46,6 @@ class DMSFile(models.Model):
     )
     directory_id = fields.Many2one(
         comodel_name="dms.directory",
-        string="Directory",
         domain="[('permission_create', '=', True)]",
         context={"dms_directory_show_path": True},
         ondelete="restrict",
