@@ -1,0 +1,31 @@
+id,name,model_id,group_id/id,operation,domain
+access_dms_tag_user,dms_tag_user,dms.tag,dms.group_dms_user,crud,
+access_dms_category_user,dms_category_user,dms.category,dms.group_dms_user,crud,
+access_dms_storage_base_user,Internal users can read visible storages,dms.storage,base.group_user,r,"[('is_hidden', '=', False)]"
+access_dms_storage_portal,Portal users can read visible storages,dms.storage,base.group_portal,r,"[('is_hidden', '=', False)]"
+access_dms_storage_manager,Managers can manage all storages,dms.storage,dms.group_dms_manager,crud,
+rule_multi_company_storage,DMS Storage multi-company,dms.storage,,crud,"['|',('company_id','=',False),('company_id','in',company_ids)]"
+access_dms_directory_portal,dms_directory_portal,dms.directory,base.group_portal,r,
+access_dms_directory_base_user,dms_directory_base_user,dms.directory,base.group_user,r,
+access_dms_directory_user,dms_directory_user,dms.directory,dms.group_dms_user,crud,
+rule_multi_company_directory,DMS Directory multi-company,dms.directory,,crud,"['|',('company_id','=',False),('company_id','in',company_ids)]"
+rule_directory_computed_create,Apply computed create permissions.,dms.directory,,c,"[('permission_create', '=', True)]"
+rule_directory_computed_read,Apply computed read permissions.,dms.directory,,r,"[('permission_read', '=', True)]"
+rule_directory_computed_unlink,Apply computed unlink permissions.,dms.directory,,d,"[('permission_unlink', '=', True)]"
+rule_directory_computed_write,Apply computed write permissions.,dms.directory,,u,"[('permission_write', '=', True)]"
+access_dms_file_portal,dms_file_portal,dms.file,base.group_portal,r,
+access_dms_file_base_user,dms_file_base_user,dms.file,base.group_user,r,
+rule_file_locked,Locked files are only modified by locker user.,dms.file,dms.group_dms_user,cud,"['|', ('locked_by', '=', False), ('locked_by', '=', user.id)]"
+rule_multi_company_file,File multi-company,dms.file,,crud,"['|',('company_id','=',False),('company_id','in',company_ids)]"
+rule_file_computed_create,Apply computed create permissions.,dms.file,,c,"[('permission_create', '=', True)]"
+rule_file_computed_read,Apply computed read permissions.,dms.file,,r,"[('permission_read', '=', True)]"
+rule_file_computed_unlink,Apply computed unlink permissions.,dms.file,,d,"[('permission_unlink', '=', True)]"
+rule_file_computed_write,Apply computed write permissions.,dms.file,,u,"[('permission_write', '=', True)]"
+access_dms_access_group_public,access_dms_access_group_public,dms.access.group,base.group_public,r,
+access_dms_access_group_portal,access_dms_access_group_portal,dms.access.group,base.group_portal,r,
+access_security_access_groups_user,access_security_access_groups_user,dms.access.group,base.group_user,r,
+access_security_access_groups_dms_user,access_security_access_groups_dms_user,dms.access.group,dms.group_dms_user,cr,
+rule_security_groups_user,DMS users can only edit and delete their own groups.,dms.access.group,dms.group_dms_user,ud,"[('create_uid','=',user.id)]"
+rule_security_groups_manager,DMS Managers can edit and delete all groups.,dms.access.group,dms.group_dms_manager,ud,
+access_wizard_dms_file_move,access_wizard_dms_file_move,wizard.dms.file.move,dms.group_dms_user,crud,
+access_wizard_dms_share,access_wizard_dms_share,wizard.dms.share,dms.group_dms_manager,cru,

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2024 Subteno - Timothée Vannier (https://www.subteno.com).
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+-->
+<templates xml:space="preserve">
+    <t
+        t-name="dms.KanbanRenderer"
+        t-inherit="web.KanbanRenderer"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//div[hasclass('o_kanban_renderer')]" position="before">
+            <div t-if="this.dragState.showDragZone" class="o_dropzone">
+                <i class="oi oi-10x" data-icon="cloud_upload" />
+            </div>
+        </xpath>
+    </t>
+
+    <t
+        t-name="dms.KanbanButtons"
+        t-inherit="web.KanbanView.Buttons"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="." position="inside">
+            <div
+                class="o_cp_buttons d-empty-none d-flex align-items-baseline gap-1"
+                role="toolbar"
+                aria-label="DMS file actions"
+            >
+                <t t-if="this.props.archInfo.activeActions.create">
+                    <button
+                        type="button"
+                        class="d-inline d-md-none btn btn-primary mx-1"
+                        t-on-click.prevent="this.uploadDocument"
+                    >
+                        Scan
+                    </button>
+                    <input
+                        type="file"
+                        name="ufile"
+                        class="d-none"
+                        t-ref="this.fileInput"
+                        multiple="1"
+                        accept="*"
+                        t-on-change="this.onChangeFileInput"
+                    />
+                    <button
+                        type="button"
+                        class="d-none d-md-inline btn btn-primary mx-1"
+                        t-on-click.prevent="this.uploadDocument"
+                    >
+                        Upload
+                    </button>
+                </t>
+            </div>
+        </xpath>
+    </t>
+</templates>
