@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-dms"
-version = "20.0.20261110.0"
+version = "20.0.20261110.1"
 dependencies = [
     "odoo-addon-dms==20.0.*",
+    "odoo-addon-web_editor_media_dialog_dms==20.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",

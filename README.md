@@ -23,6 +23,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [dms](dms/) | 20.0.1.0.0 |  | Document Management System for Odoo
+[web_editor_media_dialog_dms](web_editor_media_dialog_dms/) | 20.0.1.0.0 |  | Integrate DMS with media dialog of web editor
 
 [//]: # (end addons)
 
