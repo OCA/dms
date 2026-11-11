@@ -146,14 +146,17 @@ class DmsAccessGroups(models.Model):
         "parent_group_id.users",
         "parent_group_id.users.active",
         "group_ids",
-        "group_ids.user_ids",
-        "group_ids.user_ids.active",
+        "group_ids.all_user_ids",
+        "group_ids.all_user_ids.active",
         "explicit_user_ids",
     )
     def _compute_users(self):
         for record in self:
+            # Since 19.0, res.groups.user_ids only holds the users explicitly in
+            # the group; all_user_ids adds those who get it through another
+            # group (e.g. DMS managers, who imply DMS users).
             users = (
-                record.group_ids.user_ids
+                record.group_ids.all_user_ids
                 | record.explicit_user_ids
                 | record.parent_group_id.users
             )
