@@ -1,0 +1,4 @@
+- Template library: pre-built spreadsheet templates selectable from the creation wizard.
+- Import XLSX: convert an uploaded Excel file to an OCA spreadsheet in-place.
+- Thumbnail preview: render a small image of the spreadsheet content as the DMS file thumbnail.
+- Collaborative editing: expose the OCA collaborative-revision WebSocket endpoint for DMS files.

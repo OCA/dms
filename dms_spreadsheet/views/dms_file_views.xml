@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Add handler field + Open Spreadsheet button to file form -->
+    <record id="view_dms_file_form_spreadsheet" model="ir.ui.view">
+        <field name="name">dms.file.form.spreadsheet</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="open_spreadsheet"
+                    string="Open Spreadsheet"
+                    type="object"
+                    class="btn-primary"
+                    invisible="handler != 'spreadsheet'"
+                />
+            </xpath>
+            <xpath expr="//field[@name='mimetype']" position="after">
+                <field name="handler" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Server action: "New Spreadsheet" in the Files ⚙ action menu -->
+    <record id="action_server_new_spreadsheet" model="ir.actions.server">
+        <field name="name">New Spreadsheet</field>
+        <field name="model_id" ref="dms.model_dms_file" />
+        <field name="binding_model_id" ref="dms.model_dms_file" />
+        <field name="binding_view_types">list,kanban</field>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_new_spreadsheet()</field>
+    </record>
+
+    <!-- Add spreadsheet filter to file search view -->
+    <record id="view_dms_file_search_spreadsheet" model="ir.ui.view">
+        <field name="name">dms.file.search.spreadsheet</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.search_dms_file" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[last()]" position="after">
+                <separator />
+                <filter
+                    string="Spreadsheets"
+                    name="filter_spreadsheets"
+                    domain="[('handler', '=', 'spreadsheet')]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
