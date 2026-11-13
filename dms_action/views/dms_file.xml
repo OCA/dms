@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="dms_file_form_view">
+        <field name="name">dms.file.form (in dms_action)</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <field name="with_actions" invisible="1" />
+                <field name="action_button" invisible="1" />
+            </header>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_dms_file_kanban">
+        <field name="name">dms.file.kanban (in dms_action)</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//t[@t-name='kanban-menu']//div[hasclass('row')]"
+                position="inside"
+            >
+                <field
+                    name="action_button"
+                    widget="dms_action_button"
+                    class="col-12 mb-0"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
