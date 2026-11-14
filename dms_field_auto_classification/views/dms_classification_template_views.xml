@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_dms_classification_template_tree" model="ir.ui.view">
+        <field name="name">dms.classification.template tree</field>
+        <field name="model">dms.classification.template</field>
+        <field
+            name="inherit_id"
+            ref="dms_auto_classification.view_dms_classification_template_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="model_id" />
+            </field>
+        </field>
+    </record>
+    <record id="view_dms_classification_template_form" model="ir.ui.view">
+        <field name="name">dms.classification.template form</field>
+        <field name="model">dms.classification.template</field>
+        <field
+            name="inherit_id"
+            ref="dms_auto_classification.view_dms_classification_template_form"
+        />
+        <field name="arch" type="xml">
+            <field name="filename_pattern" position="after">
+                <field name="model_id" />
+                <field name="detail_ids" invisible="not model_id">
+                    <list editable="bottom">
+                        <field name="sequence" widget="handle" />
+                        <field name="model_id" column_invisible="1" />
+                        <field name="field_id" column_invisible="1" />
+                        <field name="index" />
+                    </list>
+                </field>
+            </field>
+        </field>
+    </record>
+</odoo>
