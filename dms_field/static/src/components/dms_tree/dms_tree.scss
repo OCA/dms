@@ -1,0 +1,71 @@
+// Copyright 2026 Tecnativa - Carlos Roca
+// License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+.o_dms_tree {
+    --dms-tree-indent: 1.25rem;
+    --dms-tree-row-height: 1.875rem;
+    user-select: none;
+
+    .o_dms_tree_node {
+        outline: none;
+
+        &:focus-visible > .o_dms_tree_row {
+            box-shadow: inset 0 0 0 2px $primary;
+        }
+    }
+
+    // The whole row is highlighted, like the jsTree "wholerow" plugin did
+    .o_dms_tree_row {
+        min-height: var(--dms-tree-row-height);
+        padding-left: calc(var(--dms-tree-level, 0) * var(--dms-tree-indent) + 0.25rem);
+        padding-right: 0.5rem;
+        cursor: pointer;
+        border-radius: $border-radius-sm;
+
+        &:hover {
+            background-color: rgba($primary, 0.06);
+        }
+
+        &.o_dms_tree_row_selected {
+            background-color: rgba($primary, 0.16);
+            font-weight: $font-weight-bold;
+        }
+
+        &.o_dms_tree_row_cut {
+            opacity: 0.5;
+        }
+
+        &.o_dms_tree_row_unselectable {
+            cursor: default;
+        }
+
+        &.o_dms_tree_row_dragging {
+            opacity: 0.5;
+        }
+
+        &.o_dms_tree_row_drop_target {
+            background-color: rgba($primary, 0.16);
+            box-shadow: inset 0 0 0 1px $primary;
+        }
+    }
+
+    .o_dms_tree_toggle {
+        width: 1.25rem;
+        color: $text-muted;
+    }
+
+    .o_dms_tree_icon {
+        color: $text-muted;
+    }
+
+    .o_dms_tree_node[data-res-model="dms.directory"]
+        > .o_dms_tree_row
+        .o_dms_tree_icon {
+        color: $warning;
+    }
+
+    .o_dms_tree_rename {
+        min-width: 8rem;
+        max-width: 20rem;
+    }
+}

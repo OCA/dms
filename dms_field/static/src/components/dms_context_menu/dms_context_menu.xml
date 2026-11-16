@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Tecnativa - Carlos Roca
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<templates xml:space="preserve">
+
+    <t t-name="dms_field.DmsContextMenu">
+        <div
+            class="o_dms_context_menu py-1"
+            role="menu"
+            t-ref="this.rootRef"
+            t-on-keydown="this.onKeydown"
+        >
+            <t t-foreach="this.props.actions" t-as="action" t-key="action.key">
+                <div
+                    t-if="action.separatorBefore and !action_first"
+                    class="dropdown-divider"
+                    role="separator"
+                />
+                <button
+                    type="button"
+                    role="menuitem"
+                    class="dropdown-item d-flex align-items-center gap-2"
+                    t-att-data-action="action.key"
+                    t-att-disabled="action.disabled"
+                    t-on-click="() => this.onClickAction(action)"
+                >
+                    <i class="oi oi-fw" t-att-data-icon="action.icon" />
+                    <span t-out="action.label" />
+                </button>
+            </t>
+        </div>
+    </t>
+
+</templates>

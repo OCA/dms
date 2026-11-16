@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="dms" string="DMS" invisible="not id">
+                    <field name="dms_directory_ids" mode="dms_list" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+    <record id="access_group_demo" model="dms.access.group">
+        <field name="name">Admin (dms_field module)</field>
+        <field name="perm_create">True</field>
+        <field name="perm_write">True</field>
+        <field name="perm_unlink">True</field>
+        <field
+            name="explicit_user_ids"
+            eval="[(6, 0, [ref('base.user_admin'), ref('base.user_demo')])]"
+        />
+    </record>
+    <record id="field_template_partner" model="dms.field.template">
+        <field name="name">Partner</field>
+        <field name="storage_id" ref="dms.storage_demo" />
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="group_ids" eval="[(6, 0, [ref('dms_field.access_group_demo')])]" />
+    </record>
+</odoo>
