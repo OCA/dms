@@ -33,6 +33,24 @@ msgstr ""
 
 #. module: dms
 #. odoo-python
+#: code:addons/dms/models/dms_category.py:0
+msgid "%(categ_code)s (Copy)"
+msgstr ""
+
+#. module: dms
+#. odoo-python
+#: code:addons/dms/models/dms_category.py:0
+msgid "%(categ_name)s (Copy)"
+msgstr ""
+
+#. module: dms
+#. odoo-python
+#: code:addons/dms/models/directory.py:0
+msgid "%(dir_code)s (Copy)"
+msgstr ""
+
+#. module: dms
+#. odoo-python
 #: code:addons/dms/models/access_groups.py:0
 msgid "%s (copy)"
 msgstr ""
@@ -478,6 +496,11 @@ msgid "Category"
 msgstr ""
 
 #. module: dms
+#: model:ir.model.constraint,message:dms.constraint_dms_category_code_uniq
+msgid "Category code already exists!"
+msgstr ""
+
+#. module: dms
 #: model:ir.model.constraint,message:dms.constraint_dms_category_name_uniq
 msgid "Category name already exists!"
 msgstr ""
@@ -523,6 +546,12 @@ msgstr ""
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_state__closed
 #: model:ir.model.fields.selection,name:dms.selection__res_company__documents_onboarding_storage_state__closed
 msgid "Closed"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.fields,field_description:dms.field_dms_category__code
+#: model:ir.model.fields,field_description:dms.field_dms_directory__code
+msgid "Code"
 msgstr ""
 
 #. module: dms
@@ -850,6 +879,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:dms.field_wizard_dms_file_move__directory_id
 #: model:onboarding.onboarding.step,title:dms.onboarding_step_create_directory
 msgid "Directory"
+msgstr ""
+
+#. module: dms
+#: model:ir.model.constraint,message:dms.constraint_dms_directory_code_uniq
+msgid "Directory code already exists!"
 msgstr ""
 
 #. module: dms
