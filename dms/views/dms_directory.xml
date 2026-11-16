@@ -372,6 +372,7 @@
         <field name="model">dms.directory</field>
         <field name="arch" type="xml">
             <list default_order="complete_name asc">
+                <field name="code" optional="show" />
                 <field name="name" />
                 <field name="write_date" />
                 <field name="count_files" string="Files" />
@@ -426,6 +427,10 @@
                         <h1>
                             <field name="name" placeholder="My Documents" />
                         </h1>
+                        <label for="code" class="oe_edit_only" />
+                        <h3>
+                            <field name="code" />
+                        </h3>
                         <h4>
                             <label for="complete_name" class="oe_edit_only" />
                             <field name="complete_name" />
@@ -525,6 +530,7 @@
                             >
                                 <list limit="10">
                                     <field name="name" />
+                                    <field name="code" optional="show" />
                                     <field
                                         name="count_directories"
                                         string="Directories"

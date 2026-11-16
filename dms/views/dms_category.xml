@@ -12,10 +12,7 @@
         <field name="model">dms.category</field>
         <field name="arch" type="xml">
             <search string="Categories">
-                <field
-                    name="name"
-                    filter_domain="['|', ('name', 'ilike', self), ('parent_id', 'child_of', raw_value)]"
-                />
+                <field name="complete_name" />
                 <filter
                     string="All"
                     name="all"
@@ -29,6 +26,7 @@
         <field name="model">dms.category</field>
         <field name="arch" type="xml">
             <list>
+                <field name="code" optional="show" />
                 <field name="name" />
                 <field name="parent_id" />
                 <field name="tag_ids" />
@@ -54,6 +52,10 @@
                             <field name="name" placeholder="Invoices" />
                             <field name="active" invisible="1" />
                         </h1>
+                        <label for="code" class="oe_edit_only" />
+                        <h3>
+                            <field name="code" />
+                        </h3>
                     </div>
                     <group>
                         <group>
