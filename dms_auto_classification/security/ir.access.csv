@@ -1,0 +1,7 @@
+id,name,model_id,group_id/id,operation,domain
+access_dms_classification_template_user,dms_classification_template_user,dms.classification.template,dms.group_dms_user,r,
+access_dms_classification_template_manager,dms_classification_template_manager,dms.classification.template,dms.group_dms_manager,crud,
+access_wizard_dms_classification_manager,wizard_dms_classification_manager,wizard.dms.classification,dms.group_dms_user,crud,
+access_wizard_dms_classification_detail_user,wizard_dms_classification_detail_user,dms.classification.template,dms.group_dms_user,cru,
+access_wizard_dms_classification_detail_manager,wizard_dms_classification_detail_manager,wizard.dms.classification.detail,dms.group_dms_user,crud,
+rule_multi_company_dms_classification_template,DMS Classification Template multi-company,dms.classification.template,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"

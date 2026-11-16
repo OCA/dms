@@ -13,7 +13,6 @@ class DmsClassificationTemplate(models.Model):
     sequence = fields.Integer(required=True, default=10)
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         store=True,
         index=True,
     )

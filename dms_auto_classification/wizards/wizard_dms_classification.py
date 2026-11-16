@@ -1,12 +1,12 @@
 # Copyright 2024-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-import base64
 import re
 import zipfile
 from io import BytesIO
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools.binary import BinaryBytes
 
 
 class WizardDmsClassification(models.TransientModel):
@@ -17,7 +17,6 @@ class WizardDmsClassification(models.TransientModel):
         comodel_name="res.company",
         required=True,
         default=lambda self: self.env.company,
-        string="Company",
     )
     state = fields.Selection(
         selection=[
@@ -28,7 +27,6 @@ class WizardDmsClassification(models.TransientModel):
     )
     template_id = fields.Many2one(
         comodel_name="dms.classification.template",
-        string="Template",
         required=True,
         domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
     )
@@ -45,7 +43,7 @@ class WizardDmsClassification(models.TransientModel):
 
     def _is_zipfile(self):
         try:
-            zipfile.ZipFile(BytesIO(base64.b64decode(self.data_file)))
+            zipfile.ZipFile(BytesIO(self.data_file.content))
             return True
         except (zipfile.BadZipFile, ValueError):
             return False
@@ -54,7 +52,7 @@ class WizardDmsClassification(models.TransientModel):
     def _onchange_data_file(self):
         for item in self.filtered("data_file"):
             if not item._is_zipfile():
-                raise UserError(_("Only .zip files are allowed"))
+                raise UserError(self.env._("Only .zip files are allowed"))
 
     def _return_item(self):
         return {
@@ -87,7 +85,7 @@ class WizardDmsClassification(models.TransientModel):
         """Method that gets the files from .zip and if it apply the filename pattern
         it will set it as detail with the corresponding values."""
         details = []
-        zip_file = zipfile.ZipFile(BytesIO(base64.b64decode(self.data_file)))
+        zip_file = zipfile.ZipFile(BytesIO(self.data_file.content))
         filename_pattern = self.template_id.filename_pattern
         for zip_info in zip_file.infolist():
             if zip_info.is_dir():
@@ -95,7 +93,7 @@ class WizardDmsClassification(models.TransientModel):
             filename = zip_info.filename
             if re.search(filename_pattern, filename):
                 file_content = zip_file.read(filename)
-                data_file = base64.b64encode(file_content)
+                data_file = BinaryBytes(file_content)
                 details.append(self._prepare_detail_vals(filename, data_file))
         return details
 
@@ -131,7 +129,6 @@ class WizardDmsClassificationDetail(models.TransientModel):
 
     parent_id = fields.Many2one(
         comodel_name="wizard.dms.classification",
-        string="Parent",
     )
     full_path = fields.Char(
         string="Full path",
@@ -149,14 +146,12 @@ class WizardDmsClassificationDetail(models.TransientModel):
     )
     directory_id = fields.Many2one(
         comodel_name="dms.directory",
-        string="Directory",
         compute="_compute_directory_id",
         store=True,
         readonly=False,
     )
     file_id = fields.Many2one(
         comodel_name="dms.file",
-        string="File",
         compute="_compute_file_id",
         store=True,
         readonly=True,
@@ -195,7 +190,7 @@ class WizardDmsClassificationDetail(models.TransientModel):
             files = item.directory_id.file_ids.filtered(
                 lambda x, item=item: x.name == item.file_name
             )
-            item.file_id = fields.first(files)
+            item.file_id = files[:1]
 
     @api.depends("file_id")
     def _compute_state(self):

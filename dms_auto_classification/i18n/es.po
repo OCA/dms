@@ -202,6 +202,3 @@ msgstr "Asistente Dms Clasificación"
 #: model:ir.model,name:dms_auto_classification.model_wizard_dms_classification_detail
 msgid "Wizard Dms Classification Detail"
 msgstr "Asistente de Clasificación Dms Detalle"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Última Modificación el"

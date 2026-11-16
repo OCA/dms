@@ -1,24 +1,29 @@
-# Copyright 2024-2025 Tecnativa - Víctor Martínez
+# Copyright 2024-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from base64 import b64encode
 from os import path
 
 from odoo import Command
 from odoo.tests import Form, new_test_user
 from odoo.tests.common import users
+from odoo.tools import BinaryBytes
 
 from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestDmsAutoClassification(BaseCommon):
+    _test_user_groups = None
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.template = cls.env.ref(
-            "dms_auto_classification.dms_classification_template_documents"
+        cls.template = cls.env["dms.classification.template"].create(
+            {
+                "name": "Documents template",
+                "filename_pattern": ".txt$",
+                "directory_pattern": "Documents",
+            }
         )
-        cls.directory = cls.env.ref("dms.directory_01_demo")
         cls.wizard = cls._create_wizard_dms_classification(cls.template)
         cls.extra_wizard = cls._create_wizard_dms_classification(cls.template)
         cls.user = new_test_user(
@@ -32,16 +37,27 @@ class TestDmsAutoClassification(BaseCommon):
                 "explicit_user_ids": [Command.set([cls.user.id])],
             }
         )
-        cls.directory.group_ids = [Command.set([access_group.id])]
+        storage = cls.env["dms.storage"].create(
+            {
+                "name": "Documents Storage",
+                "save_type": "database",
+            }
+        )
+        cls.directory = cls.env["dms.directory"].create(
+            {
+                "name": "Documents",
+                "is_root_directory": True,
+                "parent_id": False,
+                "storage_id": storage.id,
+                "group_ids": [Command.set([access_group.id])],
+            }
+        )
 
     @classmethod
     def _data_file(cls, filename, encoding=None):
         mode = "rt" if encoding else "rb"
         with open(path.join(path.dirname(__file__), filename), mode) as file:
-            data = file.read()
-            if encoding:
-                data = data.encode(encoding)
-            return b64encode(data)
+            return BinaryBytes(file.read())
 
     @classmethod
     def _create_wizard_dms_classification(cls, template):

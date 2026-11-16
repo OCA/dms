@@ -201,6 +201,3 @@ msgstr "Procedura guidata classificazione DMS"
 #: model:ir.model,name:dms_auto_classification.model_wizard_dms_classification_detail
 msgid "Wizard Dms Classification Detail"
 msgstr "Procedura guidata dettagli classificazione DMS"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Ultima modifica il"
