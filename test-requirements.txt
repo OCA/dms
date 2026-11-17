@@ -1,0 +1,1 @@
+odoo-addon-dms_action @ git+https://github.com/OCA/dms.git@refs/pull/538/head#subdirectory=dms_action
