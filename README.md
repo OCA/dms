@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [dms](dms/) | 20.0.1.0.0 |  | Document Management System for Odoo
 [dms_field](dms_field/) | 20.0.1.0.0 | <a href='https://github.com/CarlosRoca13'><img src='https://github.com/CarlosRoca13.png' width='32' height='32' style='border-radius:50%;' alt='CarlosRoca13'/></a> | Create DMS View and allow to use them inside a record
+[hr_dms_field](hr_dms_field/) | 20.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Add dms field for employees
 [web_editor_media_dialog_dms](web_editor_media_dialog_dms/) | 20.0.1.0.0 |  | Integrate DMS with media dialog of web editor
 
 [//]: # (end addons)
