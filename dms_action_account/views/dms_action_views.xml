@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Tecnativa - Adasat Torres
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="dms_action_form_view" model="ir.ui.view">
+        <field name="name">dms.action.form.inherit.invoicing</field>
+        <field name="model">dms.action</field>
+        <field name="inherit_id" ref="dms_action.dms_action_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='kind']" position="after">
+                <field
+                    name="move_type"
+                    invisible="kind != 'create_invoice'"
+                    required="kind == 'create_invoice'"
+                />
+                <field
+                    name="journal_id"
+                    invisible="kind != 'create_invoice'"
+                    required="kind == 'create_invoice'"
+                />
+                <field name="partner_id" invisible="kind != 'create_invoice'" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
