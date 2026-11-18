@@ -7,7 +7,7 @@
 import os
 
 from odoo.exceptions import UserError
-from odoo.tests.common import users
+from odoo.tests.common import tagged, users
 from odoo.tools import mute_logger
 
 from .common import StorageDatabaseBaseCase
@@ -267,6 +267,7 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         )
 
 
+@tagged("post_install", "-at_install")
 class DirectoryMailTestCase(StorageDatabaseBaseCase):
     @classmethod
     def setUpClass(cls):
