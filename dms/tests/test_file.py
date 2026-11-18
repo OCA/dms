@@ -5,7 +5,7 @@
 
 import base64
 
-from odoo.exceptions import AccessError, UserError
+from odoo.exceptions import AccessError, UserError, ValidationError
 from odoo.tests import new_test_user
 from odoo.tests.common import users
 from odoo.tools import mute_logger
@@ -306,3 +306,22 @@ class FileFilestoreTestCase(StorageFileBaseCase):
         self.assertEqual(
             file3.directory_id, self.directory, msg="File3 has a new directory"
         )
+
+    def test_binary_max_size_zero_is_default(self):
+        """Settings saved before the parameter existed stored 0: uploads must
+        not be refused, the default limit applies."""
+        params = self.env["ir.config_parameter"].sudo()
+        self.assertEqual(
+            self.env["res.config.settings"].create({}).documents_binary_max_size, 25
+        )
+        for value in (0, -3):
+            params.set_int("dms.binary_max_size", value)
+            self.assertEqual(self.file_model._get_binary_max_size(), 25)
+            self.create_file(directory=self.sub_directory_x)
+        params.set_int("dms.binary_max_size", 1)
+        self.assertEqual(self.file_model._get_binary_max_size(), 1)
+        with self.assertRaises(ValidationError):
+            self.create_file(
+                directory=self.sub_directory_x,
+                content=base64.b64encode(b"x" * (1024 * 1024 + 1)).decode(),
+            )
