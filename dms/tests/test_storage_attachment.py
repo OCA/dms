@@ -149,3 +149,21 @@ class StorageAttachmentTestCase(StorageAttachmentBaseCase):
         attachment = self._create_attachment("Test file")
         self.assertEqual(attachment.name, "Test file")
         self.assertTrue(self._get_partner_directory())
+
+    def test_storage_attachment_same_record_name(self):
+        """Two records with the same display name each get their own directory."""
+        twin = self.partner.copy({"name": self.partner.name})
+        self._create_attachment("demo.txt")
+        self.create_attachment("demo2.txt", self.partner_model._name, twin.id)
+        directory = self._get_partner_directory()
+        twin_directory = self.directory_model.search(
+            [
+                ("storage_id", "=", self.storage.id),
+                ("res_model", "=", self.partner_model._name),
+                ("res_id", "=", twin.id),
+            ]
+        )
+        self.assertTrue(directory and twin_directory)
+        self.assertEqual(directory.name, self.partner.display_name)
+        self.assertNotEqual(twin_directory.name, directory.name)
+        self.assertEqual(twin_directory.file_ids.name, "demo2.txt")
