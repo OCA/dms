@@ -8,6 +8,9 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestDmsUserRole(BaseCommon):
+    # Keep running the tests as superuser, tests switch users explicitly
+    _test_user_groups = ()
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

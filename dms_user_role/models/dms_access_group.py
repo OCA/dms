@@ -15,12 +15,12 @@ class DmsAccessGroup(models.Model):
         string="Roles",
     )
 
-    @api.depends("role_ids", "role_ids.users", "role_ids.users.active")
+    @api.depends("role_ids", "role_ids.all_user_ids", "role_ids.all_user_ids.active")
     def _compute_users(self):
         """Add the corresponding depends and the users of the roles."""
         res = super()._compute_users()
         for record in self.filtered("role_ids"):
             users = record.users
-            users |= record.mapped("role_ids.users")
+            users |= record.mapped("role_ids.all_user_ids")
             record.update({"users": users, "count_users": len(users)})
         return res
