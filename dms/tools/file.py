@@ -96,8 +96,8 @@ def guess_extension(filename=None, mimetype=None, binary=None):
     """
     extension = filename and os.path.splitext(filename)[1][1:].strip().lower()
     if not extension and mimetype and mimetype != "application/x-empty":
-        extension = mimetypes.guess_extension(mimetype)[1:].strip().lower()
+        extension = (mimetypes.guess_extension(mimetype) or "")[1:].strip().lower()
     if not extension and binary:
         mimetype = guess_mimetype(binary, default="")
-        extension = mimetypes.guess_extension(mimetype)[1:].strip().lower()
+        extension = (mimetypes.guess_extension(mimetype) or "")[1:].strip().lower()
     return extension

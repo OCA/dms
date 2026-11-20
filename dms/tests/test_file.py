@@ -10,6 +10,7 @@ from odoo.tests import new_test_user
 from odoo.tests.common import users
 from odoo.tools import mute_logger
 
+from ..tools.file import guess_extension
 from .common import StorageFileBaseCase, read_test_asset
 
 try:
@@ -232,6 +233,16 @@ class FileFilestoreTestCase(StorageFileBaseCase):
         )
         file_pdf.name = "Document_05.pdf"
         self.assertEqual(file_pdf.extension, "pdf", msg="PDF extension with extension")
+
+    def test_content_file_extension_unknown_mimetype(self):
+        self.assertEqual(guess_extension("deploy", "text/x-shellscript"), "")
+        if not magic:
+            self.skipTest("Without python-magic library installed")
+        file_sh = self.create_file(
+            directory=self.directory, content=base64.b64encode(b"#!/bin/sh\necho\n")
+        )
+        self.assertEqual(file_sh.mimetype, "text/x-shellscript")
+        self.assertEqual(file_sh.extension, "")
 
     def test_wizard_dms_file_move(self):
         file3 = self.create_file(directory=self.sub_directory_x)
