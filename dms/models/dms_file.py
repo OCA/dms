@@ -436,9 +436,9 @@ class DMSFile(models.Model):
 
     @api.depends("name", "mimetype", "content")
     def _compute_extension(self):
-        for record in self:
+        for record in self.filtered("content"):
             record.extension = file.guess_extension(
-                record.name, record.mimetype, record.content
+                record.name, record.mimetype, base64.b64decode(record.content)
             )
 
     @api.depends("content")
