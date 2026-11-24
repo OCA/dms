@@ -27,7 +27,7 @@
                     <list editable="bottom">
                         <field name="sequence" widget="handle" />
                         <field name="model_id" column_invisible="1" />
-                        <field name="field_id" column_invisible="1" />
+                        <field name="field_id" required="1" />
                         <field name="index" />
                     </list>
                 </field>
