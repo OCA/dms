@@ -1,33 +1,65 @@
-# Copyright 2024 Tecnativa - Víctor Martínez
+# Copyright 2024-2026 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from base64 import b64encode
 from os import path
 
+from odoo import Command
 from odoo.tests import Form, new_test_user
 from odoo.tests.common import users
+from odoo.tools import BinaryBytes
 
 from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestDmsFieldAutoClassification(BaseCommon):
+    _test_user_groups = None
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, test_dms_field=True))
-        cls.template = cls.env.ref(
-            "dms_field_auto_classification.dms_classification_template_partners"
+        cls.template = cls.env["dms.classification.template"].create(
+            {
+                "name": "Partners template",
+                "filename_pattern": "([0-9]{8}[A-Z]).*.pdf",
+                "model_id": cls.env.ref("base.model_res_partner").id,
+                "directory_pattern": "{0}",
+                "detail_ids": [
+                    Command.create(
+                        {
+                            "field_id": cls.env.ref("base.field_res_partner__vat").id,
+                            "index": 0,
+                        }
+                    )
+                ],
+            }
         )
         cls.user = new_test_user(
             cls.env, login="test_dms_manager_user", groups="dms.group_dms_manager"
         )
-        access_group = cls.env.ref("dms.access_group_01_demo")
-        access_group.explicit_user_ids = [(4, cls.user.id)]
-        cls.env.ref("dms_field.field_template_partner").unlink()
+        access_group = cls.env["dms.access.group"].create(
+            {
+                "name": "Test access group",
+                "perm_create": True,
+                "perm_write": True,
+                "explicit_user_ids": [Command.set([cls.user.id])],
+            }
+        )
+        field_template_partner = cls.env.ref(
+            "dms_field.field_template_partner", raise_if_not_found=False
+        )
+        if field_template_partner:
+            field_template_partner.unlink()
+        storage = cls.env["dms.storage"].create(
+            {
+                "name": "Documents Storage",
+                "save_type": "database",
+            }
+        )
         file_template = cls.env["dms.field.template"].create(
             {
                 "name": "Test partner template",
-                "storage_id": cls.env.ref("dms.storage_demo").id,
+                "storage_id": storage.id,
                 "model_id": cls.env.ref("base.model_res_partner").id,
                 "group_ids": [(4, access_group.id)],
                 "directory_format_name": "{{object.vat}}",
@@ -57,10 +89,7 @@ class TestDmsFieldAutoClassification(BaseCommon):
     def _data_file(cls, filename, encoding=None):
         mode = "rt" if encoding else "rb"
         with open(path.join(path.dirname(__file__), filename), mode) as file:
-            data = file.read()
-            if encoding:
-                data = data.encode(encoding)
-            return b64encode(data)
+            return BinaryBytes(file.read())
 
     @classmethod
     def _create_wizard_dms_classification(cls, template):

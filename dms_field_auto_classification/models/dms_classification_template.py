@@ -8,7 +8,7 @@ class DmsClassificationTemplate(models.Model):
     _inherit = "dms.classification.template"
 
     model_id = fields.Many2one(
-        comodel_name="ir.model", string="Model", domain=[("transient", "=", False)]
+        comodel_name="ir.model", domain=[("transient", "=", False)]
     )
     model = fields.Char(
         compute="_compute_model", string="Model name", compute_sudo=True
@@ -32,7 +32,6 @@ class DmsClassificationTemplateDetail(models.Model):
 
     parent_id = fields.Many2one(
         comodel_name="dms.classification.template",
-        string="Parent",
     )
     model_id = fields.Many2one(
         related="parent_id.model_id",
@@ -40,7 +39,6 @@ class DmsClassificationTemplateDetail(models.Model):
     field_id = fields.Many2one(
         comodel_name="ir.model.fields",
         domain="[('model_id', '=', model_id)]",
-        string="Field",
     )
     index = fields.Integer(required=True, default=0)
     sequence = fields.Integer(required=True, default=10)

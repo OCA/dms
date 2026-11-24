@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Auto classify files into embedded DMS",
-    "version": "18.0.1.0.1",
+    "version": "20.0.1.0.0",
     "category": "Document Management",
     "website": "https://github.com/OCA/dms",
     "author": "Tecnativa, Odoo Community Association (OCA)",
@@ -10,7 +10,7 @@
     "depends": ["dms_auto_classification", "dms_field"],
     "installable": True,
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/dms_classification_template_views.xml",
         "wizards/wizard_dms_classification_views.xml",
     ],
