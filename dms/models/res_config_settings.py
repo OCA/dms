@@ -12,6 +12,7 @@ class ResConfigSettings(models.TransientModel):
         string="Size",
         help="Defines the maximum upload size in MB. Default (25MB)",
         config_parameter="dms.binary_max_size",
+        default=25,
     )
 
     documents_forbidden_extensions = fields.Char(

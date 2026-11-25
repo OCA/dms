@@ -226,7 +226,10 @@ class DMSFile(models.Model):
 
     @api.model
     def _get_binary_max_size(self):
-        return self.env["ir.config_parameter"].sudo().get_int("dms.binary_max_size", 25)
+        """Maximum upload size in MB. A zero or negative value is not a limit
+        anyone wants (every upload would be refused): fall back to 25 MB."""
+        size = self.env["ir.config_parameter"].sudo().get_int("dms.binary_max_size", 25)
+        return size if size > 0 else 25
 
     @api.model
     def _get_forbidden_extensions(self):
