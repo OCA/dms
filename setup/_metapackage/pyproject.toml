@@ -1,10 +1,11 @@
 [project]
 name = "odoo-addons-oca-dms"
-version = "20.0.20261124.0"
+version = "20.0.20261125.0"
 dependencies = [
     "odoo-addon-dms==20.0.*",
     "odoo-addon-dms_auto_classification==20.0.*",
     "odoo-addon-dms_field==20.0.*",
+    "odoo-addon-dms_field_auto_classification==20.0.*",
     "odoo-addon-hr_dms_field==20.0.*",
     "odoo-addon-web_editor_media_dialog_dms==20.0.*",
 ]
