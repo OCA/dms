@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 00:00+0000\n"
-"PO-Revision-Date: 2026-11-17 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -77,11 +75,6 @@ msgstr ""
 #. module: dms_action
 #: model:ir.model.fields,field_description:dms_action.field_dms_action__group_ids
 msgid "Allowed Groups"
-msgstr ""
-
-#. module: dms_action
-#: model_terms:ir.ui.view,arch_db:dms_action.dms_action_form_view
-msgid "Archived"
 msgstr ""
 
 #. module: dms_action
@@ -318,7 +311,10 @@ msgstr ""
 
 #. module: dms_action
 #: model:ir.model.fields,help:dms_action.field_dms_action__action_id
-msgid "Server action to execute when this action is triggered. Only server actions that are configured to run on the model 'DMS File' are available for selection."
+msgid ""
+"Server action to execute when this action is triggered. Only server actions "
+"that are configured to run on the model 'DMS File' are available for "
+"selection."
 msgstr ""
 
 #. module: dms_action
