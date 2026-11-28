@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Add "New Spreadsheet" to directory kanban card action menu -->
+    <record id="view_dms_directory_kanban_spreadsheet" model="ir.ui.view">
+        <field name="name">dms.directory.kanban.spreadsheet</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_kanban" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//t[@t-name='menu']//div[hasclass('o_kanban_manage_actions')]/div[last()]"
+                position="after"
+            >
+                <div role="menuitem" t-if="record.permission_write.raw_value">
+                    <a type="object" name="action_new_spreadsheet">
+                        <i class="fa fa-table" />
+                        New Spreadsheet
+                    </a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <!-- Add "New Spreadsheet" button to directory form view header -->
+    <record id="view_dms_directory_form_spreadsheet" model="ir.ui.view">
+        <field name="name">dms.directory.form.spreadsheet</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    string="New Spreadsheet"
+                    name="action_new_spreadsheet"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="not permission_create"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
