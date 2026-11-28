@@ -78,19 +78,22 @@ export function getDMSListControllerObject() {
                 directory_domain = [];
             } else if (model === "dms.field.template") {
                 if (this.model.root.resId) {
-                    storage_domain = [["id", "=", this.model.root.data.storage_id[0]]];
-                } else {
-                    storage_domain = [["id", "=", 0]];
-                }
-                directory_domain = [
-                    [
-                        "root_directory_id",
-                        "in",
+                    const rootDirectoryIds =
                         this.model.root.data.dms_directory_ids.records.map((record) => {
                             return record.resId;
-                        }),
-                    ],
-                ];
+                        });
+                    storage_domain = [["id", "=", this.model.root.data.storage_id[0]]];
+                    directory_domain = Domain.or([
+                        new Domain([["root_directory_id", "in", rootDirectoryIds]]),
+                        new Domain([
+                            ["res_model", "=", model],
+                            ["res_id", "=", this.model.root.resId],
+                        ]),
+                    ]).toList();
+                } else {
+                    storage_domain = [["id", "=", 0]];
+                    directory_domain = [["id", "=", 0]];
+                }
             } else {
                 storage_domain = [["field_template_ids.model", "=", model]];
                 autocompute_directory = true;

@@ -118,6 +118,47 @@ class TestDmsField(BaseCommon):
             self.template.group_ids, self.template.dms_directory_ids.group_ids
         )
 
+    def test_template_directory_creation(self):
+        template = self.env["dms.field.template"].create(
+            {
+                "name": "Users template",
+                "storage_id": self.storage.id,
+                "model_id": self.env.ref("base.model_res_users").id,
+                "group_ids": [fields.Command.link(self.template.group_ids.id)],
+            }
+        )
+        directory = template.with_context(
+            res_model=template._name,
+            res_id=template.id,
+        ).create_dms_directory()
+
+        self.assertEqual(directory.storage_id, template.storage_id)
+        self.assertEqual(directory.res_model, template._name)
+        self.assertEqual(directory.res_id, template.id)
+        self.assertTrue(directory.is_root_directory)
+        self.assertIn(template.group_ids, directory.group_ids)
+        second_directory = template.with_context(
+            res_model=template._name,
+            res_id=template.id,
+        ).create_dms_directory()
+        self.assertEqual(second_directory, directory)
+
+    def test_template_directory_creation_is_idempotent(self):
+        directory = self.template.dms_directory_ids
+        directory.group_ids = [fields.Command.clear()]
+        self.assertFalse(directory.group_ids)
+
+        template = self.env["dms.field.template"].with_context(
+            res_model=self.template._name,
+            res_id=self.template.id,
+        )
+        first_directory = template.create_dms_directory()
+        second_directory = template.create_dms_directory()
+
+        self.assertEqual(first_directory, directory)
+        self.assertEqual(second_directory, directory)
+        self.assertIn(self.template.group_ids, directory.group_ids)
+
     @mute_logger("odoo.models.unlink")
     def test_creation_process_01(self):
         self.assertFalse(self.partner.dms_directory_ids)
