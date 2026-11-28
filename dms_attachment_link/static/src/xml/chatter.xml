@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2023-2024 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates id="template" xml:space="preserve">
+    <t t-inherit="mail.Chatter" t-inherit-mode="extension">
+        <xpath expr="//FileUploader//button" position="after">
+            <button
+                class="o_add_dms_file_button btn btn-link"
+                type="button"
+                t-on-click.stop.prevent="_onAddDmsFile"
+            >
+                <i class="fa fa-plus-square" />
+                Add DMS File
+            </button>
+        </xpath>
+    </t>
+</templates>

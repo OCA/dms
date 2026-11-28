@@ -1,0 +1,15 @@
+// Fix: el selector de ficheros DMS ("Añadir archivo DMS") se abre en un modal.
+// Dentro del diálogo, el contenedor .o_content obtiene su altura por flex (no
+// explícita), por lo que el min-height:100% por defecto del .o_kanban_renderer
+// no resuelve y el panel derecho colapsa a ~17px (queda una franja estrecha).
+// Anclamos una altura de viewport para el renderer dentro del diálogo.
+// Scopeado a .o_dialog para no alterar la vista DMS a pantalla completa.
+.o_dialog .o_file_kanban_view {
+    .o_content {
+        align-items: stretch;
+    }
+
+    .o_kanban_renderer {
+        min-height: 55vh;
+    }
+}

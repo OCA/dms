@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_dms_file_kanban_wizard_selection" model="ir.ui.view">
+        <field name="name">dms_file.kanban.wizard.selection.attachment.link</field>
+        <field name="model">dms.file</field>
+        <field name="priority">9999</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban_wizard_selection" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_kanban_bottom_right')]" position="inside">
+                <a
+                    type="object"
+                    name="action_create_attachment_from_record"
+                    class="btn btn-primary"
+                    role="button"
+                >
+                    Add
+                </a>
+            </xpath>
+        </field>
+    </record>
+    <record
+        id="action_dms_file_wizard_selector_dms_attachment_link"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Files</field>
+        <field name="res_model">dms.file</field>
+        <field name="target">new</field>
+        <field name="view_mode">kanban</field>
+        <field name="context">{'create': False}</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),(0, 0, {'view_mode': 'kanban', 'view_id': ref('view_dms_file_kanban_wizard_selection')})]"
+        />
+    </record>
+</odoo>
